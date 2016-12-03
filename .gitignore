@@ -1,0 +1,5 @@
+certoscale/build/*
+build/*
+library/build/*
+*.o
+*.d

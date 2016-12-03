@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  Strings for possible PreferenceActivity Back/Next buttons -->
+    <string name="back_button_label">Back</string>
+    <string name="next_button_label">Next</string>
+
+    <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
+    <string name="skip_button_label">Skip</string>
+    
+    <string name="app_name">certoscale</string>
+    <string name="hello_world">Hello world!</string>
+    <string-array name="navigationbar_entries">
+        <item>Weighing</item>
+        <item>Part Counting</item>
+        <item>Percent Weighing</item>
+        <item>Check Weighing</item>
+        <item>Animal Weighing</item>
+        <item>Filling</item>
+        <item>Totalization</item>
+        <item>Formulation</item>
+        <item>Differential Weighing</item>
+        <item>Density Determination</item>
+        <item>Peak Hold</item>
+        <item>Ingredient Costing</item>
+        <item>Pipette Adjustment</item>
+        <item>Statistical Quality Control</item>    
+    </string-array>
+    
+    <string-array name="navigationbar_bib_entries">
+        <item>Library</item> 
+    </string-array>
+    
+    <string-array name="preferences_counting_modes">
+        <item>Standard Counting</item>
+        <item>Check Counting</item>
+        <item>Fill Counting</item>   
+    </string-array>
+  
+    <string-array name="preferences_statistics">
+        <item>Off</item>
+        <item>Manual</item>
+        <item>Auto</item>   
+    </string-array>
+    
+    
+</resources>

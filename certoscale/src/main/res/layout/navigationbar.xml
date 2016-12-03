@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp" >
+
+ <Button 
+     android:id="@+id/naviagationbar_button_home"
+     android:text="HOME"
+     android:layout_width="80dp"
+     android:textSize="18sp"
+     android:textColor="@android:color/black"
+     android:layout_height="match_parent"
+     android:layout_alignParentLeft="true"
+     android:layout_margin="2dp"
+     android:background="@drawable/btn_white_shadow_clickable"  
+     />
+ <TextView 
+     android:id="@+id/naviagationbar_text_title"
+     android:text="TITLE"
+     android:layout_margin="2dp"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:gravity="center"
+     android:textSize="18sp"
+     android:capitalize="characters"
+     android:layout_toRightOf="@+id/naviagationbar_button_home"
+     android:layout_toLeftOf="@+id/naviagationbar_button_settings"
+     android:background="@drawable/btn_white_shadow"/>
+ <LinearLayout 
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:layout_toRightOf="@+id/naviagationbar_button_home"
+     android:layout_toLeftOf="@+id/naviagationbar_button_settings"
+     android:orientation="horizontal">
+     
+     
+     
+ <Spinner 
+     android:id="@+id/naviagationbar_spinner_mode"
+     android:entries="@array/navigationbar_entries"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:layout_weight="1"
+     android:layout_margin="2dp"
+     android:background="@drawable/btn_white_shadow_clickable"
+     />
+ 
+  <Spinner 
+     android:id="@+id/naviagationbar_spinner_lib"
+     android:layout_marginLeft="2dp"
+     android:entries="@array/navigationbar_entries"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:layout_weight="1"
+     android:layout_margin="2dp"
+      android:background="@drawable/btn_white_shadow_clickable"
+     />
+ </LinearLayout>
+
+   <Button 
+     android:id="@+id/naviagationbar_button_settings"
+     android:text="..."
+     android:layout_width="80dp"
+     android:textSize="18sp"
+     android:textColor="@android:color/black"
+     android:layout_height="match_parent"
+     android:layout_alignParentRight="true"
+     android:background="@drawable/btn_white_shadow_clickable"  
+     android:layout_margin="2dp"
+     />
+
+</RelativeLayout>

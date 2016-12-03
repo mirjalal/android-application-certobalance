@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80dp" >
+
+
+ <LinearLayout 
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:layout_toRightOf="@+id/naviagationbar_button_home"
+     android:layout_toLeftOf="@+id/naviagationbar_button_settings"
+     android:orientation="horizontal">
+     
+     
+     
+   <Button 
+     android:id="@+id/actionbar_button_left"
+     android:text="TARA"
+     android:layout_width="match_parent"
+     android:textSize="18sp"
+     android:textColor="@android:color/black"
+     android:layout_height="match_parent"
+     android:layout_weight="1"
+     android:background="@drawable/btn_white_shadow_clickable"  
+     android:layout_marginRight="5dp"
+     />
+    <Button 
+     android:id="@+id/actionbar_button_middle"
+     android:text="PRINT"
+     android:layout_width="match_parent"
+     android:textSize="18sp"
+     android:textColor="@android:color/black"
+     android:layout_height="match_parent"
+     android:layout_weight="1"
+     android:background="@drawable/btn_white_shadow_clickable"  
+     />
+   <Button 
+     android:id="@+id/actionbar_button_right"
+     android:text="CAL"
+     android:layout_width="match_parent"
+     android:textSize="18sp"
+     android:textColor="@android:color/black"
+     android:layout_height="match_parent"
+     android:layout_weight="1"
+     android:background="@drawable/btn_white_shadow_clickable"  
+     android:layout_marginLeft="5dp"
+     />
+ </LinearLayout>
+
+
+
+</RelativeLayout>

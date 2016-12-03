@@ -1,0 +1,82 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        
+
+    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_activated"
+	    	android:defaultValue="@bool/preferences_weigh_activated_default"
+	    	android:title="Activated"
+	    	android:summary="Turn the application on/off"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>
+  
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_minimum"
+	    	android:defaultValue="@bool/preferences_weigh_minimum"
+	    	android:title="Minimum weight"
+	    	android:summary="Turn the minimum weight on/off"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>
+    		
+ 
+   </PreferenceCategory>
+   
+   <PreferenceCategory android:title="VISIBILITY" >
+   
+   		<CheckBoxPreference
+	    	android:key="preferences_weigh_secondary_visible"
+	    	android:defaultValue="@bool/preferences_weigh_secondary_visible"
+	    	android:title="Secondary unit"
+	    	android:summary="Turn the secondary display line visible/invisible"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>
+ 
+   		
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_minimum_visible"
+	    	android:defaultValue="@bool/preferences_weigh_minimum_visible"
+	    	android:title="Minimum weight"
+	    	android:summary="Turn the minimum weight visible/invisible"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>	
+ 
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_brutto_visible"
+	    	android:defaultValue="@bool/preferences_weigh_brutto_visible"
+	    	android:title="Brutto"
+	    	android:summary="Turn the brutto weight visible/invisible"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>	
+    
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_netto_visible"
+	    	android:defaultValue="@bool/preferences_weigh_netto_visible"
+	    	android:title="Netto"
+	    	android:summary="Turn the netto weight visible/invisible"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>	
+    		
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_tara_visible"
+	    	android:defaultValue="@bool/preferences_weigh_tara_visible"
+	    	android:title="Tara"
+	    	android:summary="Turn the tara weight visible/invisible"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>	
+    			
+</PreferenceCategory>
+
+<PreferenceCategory android:title="PRINTER OPTIONS" >
+		<CheckBoxPreference
+	    	android:key="preferences_weigh_print_min"
+	    	android:defaultValue="@bool/preferences_weigh_print_min"
+	    	android:title="Print Minimum Weight"
+	    	android:summary="Print the minimum weight yes/no"
+	    	android:icon="@drawable/ic_launcher" >
+    	</CheckBoxPreference>
+    	
+</PreferenceCategory>
+
+
+</PreferenceScreen>
