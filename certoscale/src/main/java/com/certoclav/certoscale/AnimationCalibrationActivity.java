@@ -2,11 +2,9 @@ package com.certoclav.certoscale;
 
 
 import android.app.Activity;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -83,8 +81,16 @@ public class AnimationCalibrationActivity extends Activity {
 		myThread.start();
 		super.onResume();
 	}
-	
-	
+
+
+	/**
+	 * By overriding this function, its possible to block (disable) the hardware BACK-button or to do alterntave action instead of navigate to previous activity or home screen.
+	 */
+	@Override
+	public void onBackPressed() {
+		//do nothing
+	}
+
 }
 
 

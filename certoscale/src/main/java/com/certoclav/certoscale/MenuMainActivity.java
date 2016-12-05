@@ -144,7 +144,7 @@ protected void onPause() {
 		
 		if(buttonId == ActionButtonbar.BUTTON_CAL){
 			//send command for calibration to the scale
-			if(Scale.getInstance().getScaleValue() <= 0){
+			if(Scale.getInstance().getScaleValue() <= 5){
 			
 				Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
 				
