@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <include 
+        android:id="@+id/navigationbar"
+        layout="@layout/navigationbar"/>
+    
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/actionbar"
+        android:layout_alignParentBottom="true"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/navigationbar"
+        android:layout_above="@+id/actionbar">
+
+      <LinearLayout
+          android:id="@+id/menu_application_container_display"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:orientation="vertical"
+          android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/menu_application_container_table"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"/>
+
+</LinearLayout>
+</RelativeLayout>

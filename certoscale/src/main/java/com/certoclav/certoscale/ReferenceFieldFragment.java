@@ -25,7 +25,8 @@ public class ReferenceFieldFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+
         return null;//inflater.inflate(R.layout.article_view, container, false);
     }
 	

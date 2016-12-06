@@ -43,7 +43,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 		navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
 		navigationbar.getButtonSettings().setVisibility(View.GONE);
-		navigationbar.getTextTitle().setText("Settings");
+		navigationbar.getTextTitle().setText("Application settings".toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		
 

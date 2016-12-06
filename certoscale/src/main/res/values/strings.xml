@@ -26,7 +26,23 @@
         <item>Pipette Adjustment</item>
         <item>Statistical Quality Control</item>    
     </string-array>
-    
+    <string-array name="array_menu_main">
+        <item>Calibration</item>
+        <item>User Settings</item>
+        <item>Balance Setup</item>
+        <item>Application Modes</item>
+        <item>Weighing Units</item>
+        <item>GLP and GMP Data</item>
+        <item>Communication</item>
+        <item>Library</item>
+        <item>Diagnostics</item>
+        <item>Factory Reset</item>
+        <item>Lockout</item>
+        <item>I/O Settings</item>
+        <item>Information</item>
+    </string-array>
+
+
     <string-array name="navigationbar_bib_entries">
         <item>Library</item> 
     </string-array>
