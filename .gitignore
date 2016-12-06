@@ -1,7 +1,11 @@
 certoscale/build/*
 build/*
 library/build/*
+.*
+!/.gitignore
+gradle/*
 *.o
 *.d
 .idea/vcs.xml
 CertoBalance.iml
+android-application-certobalance-androidstudio.iml
