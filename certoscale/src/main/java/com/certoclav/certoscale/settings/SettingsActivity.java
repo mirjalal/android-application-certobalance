@@ -89,10 +89,35 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, new SettingsWeighing()).commit(); 	
 		}else if(id == 1){
 			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingsCounting()).commit();
+		}else if(id == 2){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingsPercentWeighing()).commit();
+		}else if(id == 3){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingsCheckWeighing()).commit();
+		}else if(id == 4){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingAnimalWeighing()).commit();
+		}else if(id == 5){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingFilling()).commit();
+		}else if(id == 6){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingTotalization()).commit();
+		}else if(id == 7){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingFormulation()).commit();
+		}else if(id == 8){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingDifferentialWeighing()).commit();
+		}else if(id == 9){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingDensityDetermination()).commit();
+		}else if(id == 10){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingPeakHold()).commit();
+		}else if(id == 11){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingIngredientCosting()).commit();
+		}else if(id == 12){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingPipetteAdjustment()).commit();
+		}else if(id == 13){
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingStatisticalQualityControl()).commit();
 		}
 
 
-		
+
+
 	}
 
 

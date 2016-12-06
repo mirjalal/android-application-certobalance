@@ -7,22 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d5d809c-7e58-4611-a3e0-895177893720" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ScaleState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/StateMachine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/certoscale.iml" afterPath="$PROJECT_DIR$/certoscale/certoscale.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/AnimationCalibrationActivity.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/AnimationCalibrationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/MenuMainActivity.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/MenuMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
     </list>
     <ignored path="android-application-certobalance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,11 +41,23 @@
     <favorites_list name="android-application-certobalance" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SettingAnimalWeighing.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingAnimalWeighing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="resourceFile" />
         <option value="ASClass" />
       </list>
     </option>
@@ -72,12 +71,16 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="android-application-certobalance-androidstudio" />
+              <option name="name" value="CertoBalance" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
+              <ExternalProjectPojo>
+                <option name="name" value="CertoBalance" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value=":certoscale" />
                 <option name="path" value="$PROJECT_DIR$/certoscale" />
@@ -85,10 +88,6 @@
               <ExternalProjectPojo>
                 <option name="name" value=":library" />
                 <option name="path" value="$PROJECT_DIR$/library" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
-                <option name="name" value="android-application-certobalance-androidstudio" />
-                <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -105,7 +104,7 @@
                 <option name="name" value="mergeDebugProguardFiles" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'android-application-certobalance-androidstudio'." />
+                <option name="description" value="Displays the sub-projects of root project 'CertoBalance'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -153,6 +152,11 @@
                 <option name="name" value="lintDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare CertoBalance:library:unspecified" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareCertoBalanceLibraryUnspecifiedLibrary" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Assembles a bundle containing the library in release." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="bundleRelease" />
@@ -162,7 +166,7 @@
                 <option name="name" value="assembleDebugUnitTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'android-application-certobalance-androidstudio'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'CertoBalance'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -172,7 +176,7 @@
                 <option name="name" value="mockableAndroidJar" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'android-application-certobalance-androidstudio' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'CertoBalance' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -203,7 +207,7 @@
                 <option name="name" value="deviceCheck" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'android-application-certobalance-androidstudio'." />
+                <option name="description" value="Displays all dependencies declared in root project 'CertoBalance'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -271,7 +275,7 @@
                 <option name="name" value="compileDebugAndroidTestJavaWithJavac" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'android-application-certobalance-androidstudio'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'CertoBalance'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
@@ -397,7 +401,7 @@
                 <option name="name" value="uninstallDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'android-application-certobalance-androidstudio'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'CertoBalance'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -638,10 +642,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNative_libsWithStripDebugSymbolForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileReleaseSources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -675,7 +675,7 @@
                 <option name="name" value="generateDebugAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'android-application-certobalance-androidstudio'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'CertoBalance'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -718,21 +718,12 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNative_libsWithStripDebugSymbolForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateReleaseResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on just the fatal issues in the release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="lintVitalRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare android-application-certobalance-androidstudio:library:unspecified" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="prepareAndroidApplicationCertobalanceAndroidstudioLibraryUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Debug build." />
@@ -800,7 +791,7 @@
                 <option name="name" value="generateReleaseResValues" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'android-application-certobalance-androidstudio'." />
+                <option name="description" value="Displays the properties of root project 'CertoBalance'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -844,6 +835,11 @@
                 <option name="description" value="Runs lint on the Debug build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
                 <option name="name" value="lintDebug" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare CertoBalance:library:unspecified" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
+                <option name="name" value="prepareCertoBalanceLibraryUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
@@ -1274,10 +1270,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
-                <option name="name" value="transformNative_libsWithStripDebugSymbolForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
                 <option name="name" value="compileReleaseSources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1350,21 +1342,12 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
-                <option name="name" value="transformNative_libsWithStripDebugSymbolForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
                 <option name="name" value="generateReleaseResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on just the fatal issues in the release build." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
                 <option name="name" value="lintVitalRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="description" value="Prepare android-application-certobalance-androidstudio:library:unspecified" />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/certoscale" />
-                <option name="name" value="prepareAndroidApplicationCertobalanceAndroidstudioLibraryUnspecifiedLibrary" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Uninstalls the Debug build." />
@@ -2070,6 +2053,7 @@
     </option>
     <option name="modificationStamps">
       <map>
+        <entry key="C:\Users\Enrico\Desktop\CertoBalance" value="5923512811265" />
         <entry key="C:\Users\Michael\Documents\android-application-certobalance-androidstudio" value="5923032618888" />
       </map>
     </option>
@@ -2337,7 +2321,7 @@
                   </entry>
                 </map>
               </option>
-              <option name="name" value="certoscale" />
+              <option name="name" value="CertoBalance" />
               <option name="projectBuildClasspath">
                 <list>
                   <option value="$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1/lib/ant-1.9.6.jar" />
@@ -2436,6 +2420,34 @@
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ScaleState.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/StateMachine.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsWeighing.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsPercentWeighing.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsCheckWeighing.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/test.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingFilling.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingTotalization.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingFormulation.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingDifferentialWeighing.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingDensityDetermination.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPeakHold.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingIngredientCosting.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPipetteAdjustment.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/Setting_statistical_quality_control.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingStatisticalQualityControl.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingAnimalWeighing.java" />
       </list>
     </option>
   </component>
@@ -2470,11 +2482,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane />
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2811,40 +2823,40 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23162584" sideWeight="0.48294243" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23162584" sideWeight="0.5170576" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23162584" sideWeight="0.52771854" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23162584" sideWeight="0.47228146" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.4936034" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2859,50 +2871,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/drawable-hdpi/send0.png" />
-    <entry file="file://$PROJECT_DIR$/certoscale/build/intermediates/exploded-aar/android-application-certobalance-androidstudio/library/unspecified/res/drawable-mdpi-v4/btn_white_shadow_clickable.xml" />
-    <entry file="file://$PROJECT_DIR$/import-summary.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/res/drawable-mdpi/quickaction_slider_btn_pressed_n.9.png" />
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/certoclav/library/bluetooth/BluetoothService.java" />
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/certoclav/library/bluetooth/chooser/BluetoothDeviceListFragment.java" />
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/LineGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="80" column="68" selection-start-line="80" selection-start-column="68" selection-end-line="80" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/ProfileGraph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="82" column="43" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/com/certoclav/library/util/UpdateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="290" column="80" selection-start-line="290" selection-start-column="80" selection-end-line="290" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest">
         <state />
@@ -2915,16 +2889,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/res/drawable-mdpi/btn_white_shadow_clickable.xml" />
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_animation_calibration_activity.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/drawable-hdpi/animation_calibration.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2999,8 +2963,814 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/MenuMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="146" column="55" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+        <state relative-caret-position="-408">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <marker date="1481036877958" expanded="false" signature="43:788" ph="..." />
+            <marker date="1481036877958" expanded="true" signature="1350:1574" ph="{...}" />
+            <marker date="1481036877958" expanded="true" signature="1613:1789" ph="{...}" />
+            <marker date="1481036877958" expanded="true" signature="1856:3789" ph="{...}" />
+            <marker date="1481036877958" expanded="true" signature="3862:5196" ph="{...}" />
+            <marker date="1481036877958" expanded="true" signature="4242:4368" ph="//..." />
+            <marker date="1481036877958" expanded="true" signature="5286:6616" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="30" />
+          <folding>
+            <marker date="1480878202838" expanded="true" signature="49:1521" ph="..." />
+            <marker date="1480878202838" expanded="true" signature="504:1046" ph="..." />
+            <marker date="1480878202838" expanded="true" signature="1103:1153" ph="..." />
+            <marker date="1480878202838" expanded="true" signature="1211:1344" ph="..." />
+            <marker date="1480878202838" expanded="true" signature="1396:1498" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/preference_list_fragment.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-844">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202816" expanded="true" signature="43:659" ph="..." />
+            <marker date="1480878202816" expanded="true" signature="736:3208" ph="..." />
+            <marker date="1480878202816" expanded="true" signature="948:1585" ph="..." />
+            <marker date="1480878202816" expanded="false" signature="1126:1169" ph="&quot;0dp&quot;" />
+            <marker date="1480878202816" expanded="false" signature="1198:1239" ph="&quot;16dp&quot;" />
+            <marker date="1480878202816" expanded="false" signature="1269:1310" ph="&quot;16dp&quot;" />
+            <marker date="1480878202816" expanded="false" signature="1342:1387" ph="&quot;0x02000000&quot;" />
+            <marker date="1480878202816" expanded="true" signature="1632:1854" ph="..." />
+            <marker date="1480878202816" expanded="false" signature="1744:1785" ph="&quot;16dp&quot;" />
+            <marker date="1480878202816" expanded="true" signature="1905:3192" ph="..." />
+            <marker date="1480878202816" expanded="true" signature="2109:2354" ph="..." />
+            <marker date="1480878202816" expanded="false" signature="2317:2344" ph="&quot;Back&quot;" />
+            <marker date="1480878202816" expanded="true" signature="2377:3170" ph="..." />
+            <marker date="1480878202816" expanded="true" signature="2622:2879" ph="..." />
+            <marker date="1480878202816" expanded="false" signature="2796:2823" ph="&quot;Skip&quot;" />
+            <marker date="1480878202816" expanded="true" signature="2931:3146" ph="..." />
+            <marker date="1480878202816" expanded="true" signature="3105:3132" ph="&quot;Next&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/settings_list_item.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202825" expanded="true" signature="43:663" ph="..." />
+            <marker date="1480878202825" expanded="true" signature="735:991" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/settings_activity.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202821" expanded="true" signature="76:1591" ph="..." />
+            <marker date="1480878202821" expanded="true" signature="318:1472" ph="..." />
+            <marker date="1480878202821" expanded="true" signature="510:1447" ph="..." />
+            <marker date="1480878202821" expanded="true" signature="843:1203" ph="..." />
+            <marker date="1480878202821" expanded="true" signature="1234:1418" ph="..." />
+            <marker date="1480878202821" expanded="true" signature="1522:1572" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_animation_calibration_activity.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202808" expanded="true" signature="76:1595" ph="..." />
+            <marker date="1480878202808" expanded="true" signature="313:1571" ph="..." />
+            <marker date="1480878202808" expanded="true" signature="465:757" ph="..." />
+            <marker date="1480878202808" expanded="true" signature="773:1210" ph="..." />
+            <marker date="1480878202808" expanded="true" signature="1227:1548" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_main_fragment_reference.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202811" expanded="true" signature="72:729" ph="..." />
+            <marker date="1480878202811" expanded="true" signature="267:452" ph="..." />
+            <marker date="1480878202811" expanded="true" signature="529:712" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202843" expanded="true" signature="17:5592" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="161:1129" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="185:422" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="448:712" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="742:899" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="934:1090" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="1188:3863" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="1216:1488" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="1526:1746" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="1777:2028" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="2054:2290" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="2319:2559" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="2590:2865" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="2895:3186" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="3218:3509" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="3539:3834" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="3917:5570" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="3941:4163" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="4192:4446" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="4475:4709" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="4738:4988" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="5015:5265" ph="..." />
+            <marker date="1480878202843" expanded="true" signature="5294:5548" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/ItemListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1789">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <marker date="1480878202661" expanded="false" signature="51:326" ph="..." />
+            <marker date="1480878202661" expanded="true" signature="330:697" ph="/**...*/" />
+            <marker date="1480878202661" expanded="false" signature="792:800" ph="&lt;~&gt;" />
+            <marker date="1480878202661" expanded="true" signature="839:971" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1052:1147" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1199:1270" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1334:1504" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1533:1638" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="1537:1596" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1641:1795" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="1856:1916" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="1920:2057" ph="/**...*/" />
+            <marker date="1480878202661" expanded="true" signature="2151:2440" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="2201:2436" ph="//..." />
+            <marker date="1480878202661" expanded="true" signature="2518:3133" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="3187:3467" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="3504:3632" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="3730:3954" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="3790:3918" ph="//..." />
+            <marker date="1480878202661" expanded="true" signature="4017:4244" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="4297:4506" ph="{...}" />
+            <marker date="1480878202661" expanded="true" signature="4548:4602" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042007225" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042007225" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1480878202848" expanded="true" signature="17:2884" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="161:789" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="185:459" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="485:755" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="844:2475" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="875:1184" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="1215:1512" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="1538:1824" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="1853:2135" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="2166:2444" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="2529:2862" ph="..." />
+            <marker date="1480878202848" expanded="true" signature="2553:2834" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042170091" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042170091" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042549983" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042549983" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042634743" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042634743" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042892546" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042892546" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding>
+            <marker date="1481042749293" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042749293" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042753166" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042753166" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042812673" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042812673" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042866063" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042866063" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <marker date="1481042888856" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042888856" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingFormulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+          <folding>
+            <marker date="1481044008595" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008595" expanded="true" signature="239:358" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPeakHold.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
+          <folding>
+            <marker date="1481044008582" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008582" expanded="true" signature="236:353" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="105" selection-end-column="19" />
+          <folding>
+            <marker date="1481042796106" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481042796106" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding>
+            <marker date="1481043522162" expanded="true" signature="17:4225" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="149:847" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="179:486" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="516:819" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="900:3059" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="931:1259" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="1290:1628" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="1658:2000" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="2030:2346" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="2376:2691" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="2721:3032" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="3117:4203" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="3147:3459" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="3489:3803" ph="..." />
+            <marker date="1481043522162" expanded="true" signature="3833:4176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/Setting_statistical_quality_control.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingDensityDetermination.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008626" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008626" expanded="true" signature="248:377" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/PreferenceManagerCompat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+          <folding>
+            <marker date="1480878202677" expanded="false" signature="0:619" ph="/.../" />
+            <marker date="1480878202677" expanded="false" signature="672:1088" ph="..." />
+            <marker date="1480878202677" expanded="true" signature="1219:1396" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="1441:1927" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="1451:1824" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="2012:2340" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="2344:2398" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="2483:2503" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="2509:2721" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="2841:3811" ph="{...}" />
+            <marker date="1480878202677" expanded="false" signature="3225:3322" ph="(proxy, method, args) → {" />
+            <marker date="1480878202677" expanded="false" signature="3545:3553" ph="}" />
+            <marker date="1480878202677" expanded="true" signature="3815:4493" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="4604:5039" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="5043:5540" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="5668:6128" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="6132:6316" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="6389:6720" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="6724:6816" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="6926:7289" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="7293:7395" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="7457:7749" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="7753:7858" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="7923:8188" ph="{...}" />
+            <marker date="1480878202677" expanded="true" signature="8191:8445" ph="/**...*/" />
+            <marker date="1480878202677" expanded="true" signature="8529:8843" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/PreferenceFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <folding>
+            <marker date="1480878202670" expanded="false" signature="0:619" ph="/.../" />
+            <marker date="1480878202670" expanded="false" signature="672:1362" ph="..." />
+            <marker date="1480878202670" expanded="true" signature="1713:1792" ph="/**...*/" />
+            <marker date="1480878202670" expanded="false" signature="1935:2017" ph="handleMessage(msg) → {" />
+            <marker date="1480878202670" expanded="false" signature="2178:2189" ph="}" />
+            <marker date="1480878202670" expanded="false" signature="2235:2279" ph="() → {" />
+            <marker date="1480878202670" expanded="false" signature="2333:2344" ph="}" />
+            <marker date="1480878202670" expanded="true" signature="2351:2534" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="2590:2943" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="2600:2850" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="3002:3197" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="3325:3429" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="3510:4065" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="4111:4235" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="4277:4453" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="4502:4639" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="4684:4780" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="4853:5194" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="5290:5461" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="5471:5596" ph="/**...*/" />
+            <marker date="1480878202670" expanded="false" signature="5648:5659" ph=" { " />
+            <marker date="1480878202670" expanded="false" signature="5685:5691" ph=" }" />
+            <marker date="1480878202670" expanded="true" signature="5701:5893" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="5965:6215" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="6225:6428" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="6479:6566" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="6576:6732" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="6789:6956" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="6966:7164" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="7230:7434" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="7444:7476" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="7588:7901" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="7908:8153" ph="/**...*/" />
+            <marker date="1480878202670" expanded="true" signature="8209:8348" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="8398:8544" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="8586:8726" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="8767:10447" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="9031:9198" ph="//..." />
+            <marker date="1480878202670" expanded="false" signature="9248:9412" ph="(parent, view, position, id) → {" />
+            <marker date="1480878202670" expanded="false" signature="10410:10429" ph="}" />
+            <marker date="1480878202670" expanded="true" signature="10483:10534" ph="{...}" />
+            <marker date="1480878202670" expanded="true" signature="10566:11409" ph="{...}" />
+            <marker date="1480878202670" expanded="false" signature="11458:11566" ph="(v, keyCode, event) → {" />
+            <marker date="1480878202670" expanded="false" signature="11696:11723" ph="/unused/" />
+            <marker date="1480878202670" expanded="true" signature="11789:11888" ph="//..." />
+            <marker date="1480878202670" expanded="false" signature="11963:11975" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingDifferentialWeighing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008638" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008638" expanded="true" signature="248:377" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingFilling.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481043149349" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481043149349" expanded="true" signature="235:350" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingIngredientCosting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008570" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008570" expanded="true" signature="245:371" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPipetteAdjustment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008607" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008607" expanded="true" signature="245:371" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsCheckWeighing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481042419753" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481042419753" expanded="true" signature="242:364" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsCounting.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1480878202689" expanded="false" signature="53:107" ph="..." />
+            <marker date="1480878202689" expanded="true" signature="242:380" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsPercentWeighing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <marker date="1481038702820" expanded="true" signature="50:104" ph="..." />
+            <marker date="1481038702820" expanded="true" signature="106:149" ph="/**...*/" />
+            <marker date="1481038702820" expanded="true" signature="285:407" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingStatisticalQualityControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008546" expanded="true" signature="58:120" ph="..." />
+            <marker date="1481044008546" expanded="true" signature="122:165" ph="/**...*/" />
+            <marker date="1481044008546" expanded="true" signature="310:432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsWeighing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1480878202693" expanded="true" signature="53:107" ph="..." />
+            <marker date="1480878202693" expanded="true" signature="242:390" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingTotalization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008525" expanded="false" signature="53:107" ph="..." />
+            <marker date="1481044008525" expanded="true" signature="240:360" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1097">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <marker date="1481044008652" expanded="false" signature="51:294" ph="..." />
+            <marker date="1481044008652" expanded="true" signature="296:992" ph="/**...*/" />
+            <marker date="1481044008652" expanded="true" signature="1167:1265" ph="/**...*/" />
+            <marker date="1481044008652" expanded="true" signature="1376:1919" ph="{...}" />
+            <marker date="1481044008652" expanded="true" signature="1963:2037" ph="{...}" />
+            <marker date="1481044008652" expanded="true" signature="2080:2291" ph="{...}" />
+            <marker date="1481044008652" expanded="true" signature="2297:2426" ph="/**...*/" />
+            <marker date="1481044008652" expanded="true" signature="2475:4550" ph="{...}" />
+            <marker date="1481044008652" expanded="true" signature="4641:4710" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingAnimalWeighing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
           <folding />
         </state>
       </provider>
