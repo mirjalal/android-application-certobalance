@@ -1,4 +1,4 @@
-package com.certoclav.certoscale;
+package com.certoclav.certoscale.menu;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -56,6 +58,7 @@ public class HomeActivity extends Activity implements ButtonEventListener {
             }
         });
 
+        ApplicationManager.getInstance();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();

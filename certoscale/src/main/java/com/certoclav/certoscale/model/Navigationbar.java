@@ -1,12 +1,12 @@
 package com.certoclav.certoscale.model;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -16,6 +16,7 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.settings.SettingsActivity;
 
+import java.util.ArrayList;
 
 
 public class Navigationbar {
@@ -94,6 +95,21 @@ public void onCreate(){
 	            mActivity, R.array.navigationbar_entries, R.layout.spinner);
 	spinnerModeAdapter.setDropDownViewResource(R.layout.spinner);
 	spinnerMode.setAdapter(spinnerModeAdapter);
+
+
+	spinnerMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+			Log.e("Navigationbar", "setScaleAppl.: " + ScaleApplication.values()[position]);
+			Scale.getInstance().setScaleApplication(ScaleApplication.values()[position]);
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+
+		}
+	});
+
 	
 	spinnerLib= (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
 	ArrayAdapter<CharSequence> spinnerLibAdapter = ArrayAdapter.createFromResource(

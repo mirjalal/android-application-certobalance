@@ -1,4 +1,4 @@
-package com.certoclav.certoscale;
+package com.certoclav.certoscale.menu;
 
 
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
+
+import com.certoclav.certoscale.R;
 
 
 /**
@@ -42,7 +44,7 @@ public class AnimationCalibrationActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.menu_animation_calibration_activity); 
+		setContentView(R.layout.menu_animation_calibration_activity);
 
 		textProgress = (TextView) findViewById(R.id.menu_save_eeprom_text_progress);
 

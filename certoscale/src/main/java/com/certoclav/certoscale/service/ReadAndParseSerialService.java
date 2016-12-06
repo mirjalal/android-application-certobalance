@@ -3,11 +3,11 @@ package com.certoclav.certoscale.service;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android_serialport_api.MessageReceivedListener;
-import android_serialport_api.SerialService;
 
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
+
+import android_serialport_api.MessageReceivedListener;
 
 
 
@@ -47,11 +47,11 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	}
 
 	public ReadAndParseSerialService() {
-		Log.e("ReadAndParseSerialService", "constructor");
+		Log.e("ReadAndParseSerialServ", "constructor");
 	}
 	
 	public void startParseSerialThread(){
-		if(AppConstants.isIoSimulated == false){
+
 			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 			
@@ -61,20 +61,25 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 				@Override
 			    public void run() {
 			    	while(true) {
-			    		try { 
-				    		if(isSendEnabled){
-				    			if(isSendCalibrationCommand == true){
-				    				Scale.getInstance().getSerialsServiceScale().sendMessage("C\r\n");
-				    				isSendCalibrationCommand = false;
-				    			}else{
-				    				Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
-				    			}
-				    		}
-				                
-			            } catch (Exception e) {
-			            	e.printStackTrace();
-			            }
-			    	
+			    		if(AppConstants.IS_IO_SIMULATED == true){
+							simulateMessage();
+						}else {
+
+
+							try {
+								if (isSendEnabled) {
+									if (isSendCalibrationCommand == true) {
+										Scale.getInstance().getSerialsServiceScale().sendMessage("C\r\n");
+										isSendCalibrationCommand = false;
+									} else {
+										Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
+									}
+								}
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
 			    		
 			    		
 			    		try {
@@ -89,10 +94,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 			thread.start();
 			
-		}else{
-			
 
-		}
 		
 	}
 
@@ -107,7 +109,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 				try{
 					value = Float.parseFloat(arg);
 				}catch(Exception e){
-					Log.e("ReadAndParseSerialService", "Error parsing float");
+					Log.e("ReadAndParseSerialServ", "Error parsing float");
 				}
 				handler.sendEmptyMessage(0);
 			}
@@ -122,14 +124,14 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	}
 	
 	private void simulateMessage(){
-		
+		   counter++;
 
- 
-	    
-			value = (float) (60 + (30.0* Math.sin(((double)counter)*0.02)));
-			
+
+
+			value = (float) (30 + (30.0* Math.sin(((double)counter)*0.02)));
+
 		    handler.sendEmptyMessage(0);
-		    
+
 	}
 
 	public void sendCalibrationCommand() {

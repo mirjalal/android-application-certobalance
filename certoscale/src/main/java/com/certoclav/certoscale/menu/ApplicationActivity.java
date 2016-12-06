@@ -1,4 +1,4 @@
-package com.certoclav.certoscale;
+package com.certoclav.certoscale.menu;
 
 
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbar;
 import com.certoclav.certoscale.model.Navigationbar;
@@ -73,12 +74,12 @@ protected void onPause() {
 	
 		if(buttonId == ActionButtonbar.BUTTON_TARA){
 			//Tara the measured scale value
-			Scale.getInstance().setTara(Scale.getInstance().getScaleValue());
+			Scale.getInstance().setTara(Scale.getInstance().getScaleValueRaw());
 		}
 		
 		if(buttonId == ActionButtonbar.BUTTON_CAL){
 			//send command for calibration to the scale
-			if(Scale.getInstance().getScaleValue() <= 5){
+			if(Scale.getInstance().getScaleValueRaw() <= 5){
 			
 				Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
 				
@@ -90,8 +91,8 @@ protected void onPause() {
 		}
 		
 		if(buttonId == ActionButtonbar.BUTTON_PRINT){
-			Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getScaleValue()) + " g", Toast.LENGTH_LONG).show();
-			LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getScaleValue()) + " g",1);
+			Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g", Toast.LENGTH_LONG).show();
+			LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g",1);
 		}
 		
 		if(buttonId == Navigationbar.BUTTON_SETTINGS){

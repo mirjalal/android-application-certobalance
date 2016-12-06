@@ -1,15 +1,13 @@
-package com.certoclav.certoscale;
+package com.certoclav.certoscale.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.SensorDataListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
@@ -86,10 +84,10 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
         listReferenceFields.get(0).getTextValue().setText((String.format("%.4f",Scale.getInstance().getTara()) + " g"));
 
         listReferenceFields.get(1).getTextName().setText("SUM");
-        listReferenceFields.get(1).getTextValue().setText(String.format("%.4f",Scale.getInstance().getScaleValue()) + " g");
+        listReferenceFields.get(1).getTextValue().setText(String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g");
 
         listReferenceFields.get(2).getTextName().setText("LOAD");
-        listReferenceFields.get(2).getTextValue().setText(String.format("%d", Math.round(Scale.getInstance().getScaleValue())) + " %");
+        listReferenceFields.get(2).getTextValue().setText(String.format("%d", Math.round(Scale.getInstance().getScaleValueRaw())) + " %");
 
 
     }

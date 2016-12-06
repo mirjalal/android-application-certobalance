@@ -1,4 +1,4 @@
-package com.certoclav.certoscale;
+package com.certoclav.certoscale.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.SensorDataListener;
+import com.certoclav.certoscale.listener.ValueTransformedListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
 
@@ -22,7 +24,7 @@ import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ApplicationFragmentWeight extends Fragment implements SensorDataListener {
+public class ApplicationFragmentWeight extends Fragment implements ValueTransformedListener{
     private FrameLayout barload = null;
     private TextView textInstruction = null;
     private TextView textSum = null;
@@ -45,17 +47,20 @@ public class ApplicationFragmentWeight extends Fragment implements SensorDataLis
     @Override
     public void onResume() {
         super.onResume();
-        Scale.getInstance().setOnSensorDataListener(this);
+        Scale.getInstance().setOnValueTransformedListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Scale.getInstance().removeOnSensorDataListener(this);
+        Scale.getInstance().removeOnValueTransformedListener(this);
     }
+
+
+
     @Override
-    public void onSensorDataChange(Float value, String unit) {
-        textValue.setText(String.format("%.4f", value - Scale.getInstance().getTara()) + " " + unit);
+    public void onValueTransformedChanged(Float value) {
+        textValue.setText(String.format("%.4f", value - Scale.getInstance().getTara()) + " " + Scale.getInstance().getUnitTransformed());
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
         int width = (int) (value*7.0);
         if(width<0){
@@ -70,13 +75,13 @@ public class ApplicationFragmentWeight extends Fragment implements SensorDataLis
             //todo color bar red
         }
 
-        if(Scale.getInstance().getScaleValue() - Scale.getInstance().getTara() == 0){
+        if(Scale.getInstance().getScaleValueRaw() - Scale.getInstance().getTara() == 0){
             textInstruction.setText("Please place item");
         }else{
             textInstruction.setText("");
         }
-        textSum.setText("SUM: " + String.format("%.4f",Scale.getInstance().getScaleValue()) + " g");
+
+        textSum.setText("SUM: " + String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " "+ Scale.getInstance().getUnitTransformed());
+
     }
-
-
 }
