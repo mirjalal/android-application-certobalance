@@ -11,9 +11,6 @@ import java.util.Observable;
 import android_serialport_api.SerialService;
 
 
-
-
-
 /**
  * This class is the Autoclave class model. It is a singleton class. 
  * 
@@ -50,11 +47,42 @@ public class Scale extends Observable {
 
 	private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
 	private ScaleState state = ScaleState.READY; //default init state is READY_AND_WAITING_FOR_LOGIN
-	
+
+	public Float getWeightMultiplier() {
+		return weightMultiplier;
+	}
+
+	public void setWeightMultiplier(Float weightMultiplier) {
+		this.weightMultiplier = weightMultiplier;
+	}
+
+	private Float weightMultiplier = (float)1.0 ;
 	private Float scaleValueRaw = (float) 0;
 
 	public Float getScaleValueTransformed() {
 		return scaleValueTransformed;
+	}
+
+
+	public String getTaraAsStringWithUnit() {
+		switch (getScaleApplication()){
+			case PART_COUNTING:
+				return String.format("%d", Math.round(getTara())) + " "+ Scale.getInstance().getUnitTransformed();
+			default:
+				return String.format("%.4f",getTara()) + " "+ Scale.getInstance().getUnitTransformed();
+		}
+	}
+
+
+	public String getScaleValueTransformedAsStringWithUnit() {
+
+		switch (getScaleApplication()){
+			case PART_COUNTING:
+				return String.format("%d", Math.round(Scale.getInstance().getScaleValueTransformed())) + " "+ Scale.getInstance().getUnitTransformed();
+			default:
+				return String.format("%.4f",Scale.getInstance().getScaleValueTransformed()) + " "+ Scale.getInstance().getUnitTransformed();
+		}
+
 	}
 
 	public void setScaleValueTransformed(Float scaleValueTransformed) {
@@ -182,6 +210,7 @@ public class Scale extends Observable {
 			listener.onApplicationChange(scaleApplication);
 		}
 	}
+
 
 }
 

@@ -81,10 +81,10 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
         //TODO: show only data which is enabled in settings menu
 
         listReferenceFields.get(0).getTextName().setText("TARA");
-        listReferenceFields.get(0).getTextValue().setText((String.format("%.4f",Scale.getInstance().getTara()) + " g"));
+        listReferenceFields.get(0).getTextValue().setText(Scale.getInstance().getTaraAsStringWithUnit());
 
         listReferenceFields.get(1).getTextName().setText("SUM");
-        listReferenceFields.get(1).getTextValue().setText(String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g");
+        listReferenceFields.get(1).getTextValue().setText(Scale.getInstance().getScaleValueTransformedAsStringWithUnit());
 
         listReferenceFields.get(2).getTextName().setText("LOAD");
         listReferenceFields.get(2).getTextValue().setText(String.format("%d", Math.round(Scale.getInstance().getScaleValueRaw())) + " %");

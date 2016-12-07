@@ -60,7 +60,7 @@ public class ApplicationFragmentWeight extends Fragment implements ValueTransfor
 
     @Override
     public void onValueTransformedChanged(Float value) {
-        textValue.setText(String.format("%.4f", value - Scale.getInstance().getTara()) + " " + Scale.getInstance().getUnitTransformed());
+        textValue.setText(Scale.getInstance().getScaleValueTransformedAsStringWithUnit());
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
         int width = (int) (value*7.0);
         if(width<0){
@@ -81,7 +81,7 @@ public class ApplicationFragmentWeight extends Fragment implements ValueTransfor
             textInstruction.setText("");
         }
 
-        textSum.setText("SUM: " + String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " "+ Scale.getInstance().getUnitTransformed());
+        textSum.setText("SUM: " + Scale.getInstance().getScaleValueTransformedAsStringWithUnit());
 
     }
 }
