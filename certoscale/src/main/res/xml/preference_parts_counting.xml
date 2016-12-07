@@ -20,6 +20,7 @@
     		
    		<ListPreference
 	        android:key="preferences_counting_mode"
+			android:defaultValue="Standard Counting"
 	        android:entries="@array/preferences_counting_modes"
 	        android:title="Counting Mode" 
    		/>
