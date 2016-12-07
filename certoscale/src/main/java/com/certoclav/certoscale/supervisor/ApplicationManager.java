@@ -58,7 +58,7 @@ public class ApplicationManager implements SensorDataListener, ScaleApplicationL
         //For example:
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING:
-                Scale.getInstance().setWeightMeasured((float) ((int)(value*Scale.getInstance().getWeightMultiplier()))); //example if one piece weights 3 grams
+                Scale.getInstance().setWeightMeasured((float) ((int)(value/Scale.getInstance().getAveragePieceWeight()))); //example if one piece weights 3 grams
                 break;
             default:
                 Scale.getInstance().setWeightMeasured(value);

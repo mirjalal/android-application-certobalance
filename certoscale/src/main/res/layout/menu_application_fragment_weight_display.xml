@@ -62,6 +62,7 @@ android:text="SUM: 0.2323 g"/>
 android:id="@+id/menu_main_bar"
 android:layout_width="700dp"
 android:layout_height="5dp"
+    android:layout_gravity="center_horizontal"
 android:layout_centerHorizontal="true"
 android:layout_below="@+id/menu_main_text_information">
 

@@ -20,6 +20,7 @@ public class ApplicationActivity extends FragmentActivity implements  ButtonEven
 
 private Navigationbar navigationbar = new Navigationbar(this);
 private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
+	private boolean appSettingsVisible = false;
 
 
 
@@ -76,7 +77,34 @@ protected void onPause() {
 			//Tara the measured scale value
 			Scale.getInstance().setWeightTara(Scale.getInstance().getWeightRaw());
 		}
-		
+
+		if(buttonId == ActionButtonbar.BUTTON_APP_SETTINGS){
+			if(appSettingsVisible == true) {
+				getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+				actionButtonbar.getButtonAppSettings().setText("SETTINGS");
+				appSettingsVisible = false;
+			}else{
+				switch (Scale.getInstance().getScaleApplication()){
+					case PART_COUNTING:
+						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
+						actionButtonbar.getButtonAppSettings().setText("RESULTS");
+						appSettingsVisible = true;
+						break;
+					case WEIGHING:
+						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
+						actionButtonbar.getButtonAppSettings().setText("RESULTS");
+						appSettingsVisible = true;
+						break;
+					default:
+						Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
+				}
+
+
+
+			}
+		}
+
+
 		if(buttonId == ActionButtonbar.BUTTON_CAL){
 			//send command for calibration to the scale
 			if(Scale.getInstance().getWeightRaw() <= 5){
@@ -101,4 +129,5 @@ protected void onPause() {
 			startActivity(intent);
 		}
 	}
+
 }

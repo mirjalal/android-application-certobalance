@@ -80,6 +80,7 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
         //TODO: define fixed indexes instead of hardcoding index positions.
         //TODO: show only data which is enabled in settings menu
 
+        //standard result fields
         listReferenceFields.get(0).getTextName().setText("TARA");
         listReferenceFields.get(0).getTextValue().setText(Scale.getInstance().getTaraAsStringWithUnit());
 
@@ -88,6 +89,19 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
 
         listReferenceFields.get(2).getTextName().setText("LOAD");
         listReferenceFields.get(2).getTextValue().setText(String.format("%d", Math.round(Scale.getInstance().getWeightRaw())) + " %");
+
+        switch (Scale.getInstance().getScaleApplication()){
+            case WEIGHING:
+
+                break;
+            case PART_COUNTING:
+                listReferenceFields.get(3).getTextName().setText("PIECE WEIGHT");
+                listReferenceFields.get(3).getTextValue().setText(String.format("%.4f",Scale.getInstance().getAveragePieceWeight()) + " g" );
+
+
+                break;
+        }
+
 
 
     }

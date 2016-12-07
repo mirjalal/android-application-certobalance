@@ -47,17 +47,17 @@ public class Scale extends Observable {
 
 	private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
 	private ScaleState state = ScaleState.READY; //default init state is READY_AND_WAITING_FOR_LOGIN
-	private Float weightMultiplier = (float)1.0 ; //multiplier for part counting. For example: multiplier == 1 => Weight of 1 part is 1 gram
+	private Float averagePieceWeight = (float)1.0 ; //divider for part counting application
 	private Float weightRaw = (float) 0; //raw value reiceived from Serial port of the balance
 	private Float weightMeasured = (float) 0; //measured weight
 	private Float weightTara = (float) 0; //tara
 
-	public Float getWeightMultiplier() {
-		return weightMultiplier;
+	public Float getAveragePieceWeight() {
+		return averagePieceWeight;
 	}
 
-	public void setWeightMultiplier(Float weightMultiplier) {
-		this.weightMultiplier = weightMultiplier;
+	public void setAveragePieceWeight(Float averagePieceWeight) {
+		this.averagePieceWeight = averagePieceWeight;
 	}
 	
 	public Float getWeightMeasured() {
