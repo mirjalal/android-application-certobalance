@@ -9,7 +9,7 @@ package com.certoclav.certoscale.constants;
  */
 public class AppConstants {
 
-	public static final Boolean IS_IO_SIMULATED = false;
+	public static final Boolean IS_IO_SIMULATED = true;
 	public static final Boolean APPLICATION_DEBUGGING_MODE = false;
 	
 	public static final String DOWNLOAD_LINK = "http://lvps46-163-113-210.dedicated.hosteurope.de:80/files/public-docs/certoscale/lilliput/update.zip";
@@ -35,15 +35,14 @@ public class AppConstants {
 	public final static String REST_API_GET_PROFILES = "/api/programs/";// programs.getAll);
 	public final static String REST_API_POST_PROFILE = "/api/programs/";// programs.create);
 	public final static String REST_API_DELETE_PROFILE = "/api/programs/:id";// programs.delete);
-
 	public final static String REST_POST_SUPPORT = "/api/support";// support.send);
 
 	/**
 	 * Routes that can be accessed only by admin users
 	 */
 	public final static String REST_POST_CREATE_DEVICE = "/api/admin/devices/";// devices.createAdmin);
-	
     public final static String PREFERENCE_KEY_STATISTICS = "preferences_weigh_statistic";
+
 
 
 

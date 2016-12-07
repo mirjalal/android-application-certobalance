@@ -74,12 +74,12 @@ protected void onPause() {
 	
 		if(buttonId == ActionButtonbar.BUTTON_TARA){
 			//Tara the measured scale value
-			Scale.getInstance().setTara(Scale.getInstance().getScaleValueRaw());
+			Scale.getInstance().setWeightTara(Scale.getInstance().getWeightRaw());
 		}
 		
 		if(buttonId == ActionButtonbar.BUTTON_CAL){
 			//send command for calibration to the scale
-			if(Scale.getInstance().getScaleValueRaw() <= 5){
+			if(Scale.getInstance().getWeightRaw() <= 5){
 			
 				Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
 				
@@ -91,8 +91,8 @@ protected void onPause() {
 		}
 		
 		if(buttonId == ActionButtonbar.BUTTON_PRINT){
-			Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g", Toast.LENGTH_LONG).show();
-			LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getScaleValueRaw()) + " g",1);
+			Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getWeightRaw()) + " g", Toast.LENGTH_LONG).show();
+			LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getWeightRaw()) + " g",1);
 		}
 		
 		if(buttonId == Navigationbar.BUTTON_SETTINGS){

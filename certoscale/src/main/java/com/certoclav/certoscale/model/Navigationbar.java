@@ -96,7 +96,6 @@ public void onCreate(){
 	spinnerModeAdapter.setDropDownViewResource(R.layout.spinner);
 	spinnerMode.setAdapter(spinnerModeAdapter);
 
-
 	spinnerMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

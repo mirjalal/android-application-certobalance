@@ -9,8 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.listener.SensorDataListener;
-import com.certoclav.certoscale.listener.ValueTransformedListener;
+import com.certoclav.certoscale.listener.WeightMeasuredListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
 
@@ -24,7 +23,7 @@ import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ApplicationFragmentWeight extends Fragment implements ValueTransformedListener{
+public class ApplicationFragmentWeight extends Fragment implements WeightMeasuredListener {
     private FrameLayout barload = null;
     private TextView textInstruction = null;
     private TextView textSum = null;
@@ -47,20 +46,27 @@ public class ApplicationFragmentWeight extends Fragment implements ValueTransfor
     @Override
     public void onResume() {
         super.onResume();
-        Scale.getInstance().setOnValueTransformedListener(this);
+        Scale.getInstance().setOnWeightMeasuredListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Scale.getInstance().removeOnValueTransformedListener(this);
+        Scale.getInstance().removeOnWeightMeasuredListener(this);
     }
 
 
 
     @Override
-    public void onValueTransformedChanged(Float value) {
-        textValue.setText(Scale.getInstance().getScaleValueTransformedAsStringWithUnit());
+    public void onWeightMeasuredChanged(Float value) {
+
+        //Show weight to the user in respect to the TARA weight
+        textValue.setText(Scale.getInstance().getRelativeWeightAsStringWithUnit());
+
+        //Show measured total weight to the user
+        textSum.setText("SUM: " + Scale.getInstance().getTotalWeightAsStringWithUnit());
+
+        //Update Loading bar
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
         int width = (int) (value*7.0);
         if(width<0){
@@ -75,13 +81,13 @@ public class ApplicationFragmentWeight extends Fragment implements ValueTransfor
             //todo color bar red
         }
 
-        if(Scale.getInstance().getScaleValueRaw() - Scale.getInstance().getTara() == 0){
+        if(Scale.getInstance().getWeightRaw() - Scale.getInstance().getWeightTara() == 0){
             textInstruction.setText("Please place item");
         }else{
             textInstruction.setText("");
         }
 
-        textSum.setText("SUM: " + Scale.getInstance().getScaleValueTransformedAsStringWithUnit());
+
 
     }
 }

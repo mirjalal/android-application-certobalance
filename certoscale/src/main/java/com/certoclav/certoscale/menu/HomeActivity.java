@@ -46,7 +46,7 @@ public class HomeActivity extends Activity implements ButtonEventListener {
         navigationbar.getTextTitle().setText("Main menu");
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_list);
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.array_menu_main));
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_item_menu, getResources().getStringArray(R.array.array_menu_main));
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

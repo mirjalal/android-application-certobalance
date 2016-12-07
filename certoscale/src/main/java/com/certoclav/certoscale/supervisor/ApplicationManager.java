@@ -30,7 +30,7 @@ public class ApplicationManager implements SensorDataListener, ScaleApplicationL
     @Override
     public void onApplicationChange(ScaleApplication application) {
 
-        Scale.getInstance().setTara((float) 0);
+        Scale.getInstance().setWeightTara((float) 0);
 
         switch (application){
 
@@ -58,10 +58,10 @@ public class ApplicationManager implements SensorDataListener, ScaleApplicationL
         //For example:
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING:
-                Scale.getInstance().setScaleValueTransformed((float) ((int)(value/3))); //example if one piece weights 3 grams
+                Scale.getInstance().setWeightMeasured((float) ((int)(value*Scale.getInstance().getWeightMultiplier()))); //example if one piece weights 3 grams
                 break;
             default:
-                Scale.getInstance().setScaleValueTransformed(value);
+                Scale.getInstance().setWeightMeasured(value);
         }
 
     }
