@@ -1,23 +1,42 @@
+
+
+
+
+
+
+
+
+
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_weigh_activated"
-            android:defaultValue="@bool/preferences_weigh_activated_default"
+            android:key="preferences_check_activated"
+            android:defaultValue="@bool/preferences_check_activated"
             android:title="Activated"
             android:summary="Turn the application on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_minimum"
-            android:defaultValue="@bool/preferences_weigh_minimum"
-            android:title="Minimum weight"
-            android:summary="Turn the minimum weight on/off"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
+        <ListPreference
+            android:key="preferences_check_limitmode"
+            android:title="Limit Mode"
+            android:summary="Select Limit Settings"
+            />
+
+        <ListPreference
+            android:key="preferences_check_statistics"
+            android:title="Statistics"
+            android:summary="Select statistics "
+            />
+
+        <ListPreference
+            android:key="preferences_check_displayoptions"
+            android:title="Display Options"
+            android:summary="Select statistics "
+            />
 
 
     </PreferenceCategory>
@@ -25,51 +44,67 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_weigh_secondary_visible"
-            android:defaultValue="@bool/preferences_weigh_secondary_visible"
-            android:title="Reference Weight"
-            android:summary="The reference weight is displayed"
+            android:key="preferences_check_over_visible"
+            android:defaultValue="@bool/preferences_check_over_visible"
+            android:title="Over Limit"
+            android:summary="Turn upper limitvisible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
 
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum_visible"
-            android:defaultValue="@bool/preferences_weigh_minimum_visible"
-            android:title="Difference Weight"
-            android:summary="Display the difference to the reference Weight"
+            android:key="preferences_check_under_visible"
+            android:defaultValue="@bool/preferences_check_under_visible"
+            android:title="Under Limit"
+            android:summary="Turn lower limit visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_brutto_visible"
-            android:defaultValue="@bool/preferences_weigh_brutto_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the Difference in Percent visible/invisible"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
+            android:key="preferences_check_brutto_visible"
+            android:defaultValue="@bool/preferences_check_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
+            android:key="preferences_check_netto_visible"
+            android:defaultValue="@bool/preferences_check_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_tara_visible"
-            android:defaultValue="@bool/preferences_weigh_tara_visible"
+            android:key="preferences_check_tara_visible"
+            android:defaultValue="@bool/preferences_check_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_check_target_visible"
+            android:defaultValue="@bool/preferences_check_target_visible"
+            android:title="Target"
+            android:summary="Turn the target weight visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_check_overtolerance_visible"
+            android:defaultValue="@bool/preferences_check_overtolerance_visible"
+            android:title="Over Tolerance"
+            android:summary="Turn Over Tolerance visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_check_undertolerance_visible"
+            android:defaultValue="@bool/preferences_check_undertolerance_visible"
+            android:title="Under Tolerance"
+            android:summary="Turn Under Tolerance visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
@@ -77,28 +112,48 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Reference Weight"
-            android:summary="Print the reference weight yes/no"
+            android:key="preferences_check_print_target"
+            android:defaultValue="@bool/preferences_check_print_target"
+            android:title="Target"
+            android:summary="Print the target weight on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:key="preferences_check_print_overtolerance"
+            android:defaultValue="@bool/preferences_check_print_overtolerance"
+            android:title="Over Tolerance"
+            android:summary="Print Over Tolerance on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight in Percent"
-            android:summary="Print the difference weight in percent weight yes/no"
+            android:key="preferences_check_print_undertolerance"
+            android:defaultValue="@bool/preferences_check_print_undertolerance"
+            android:title="Under Tolerance"
+            android:summary="Print Under Tolerance on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="preferences_check_print_overlimit"
+            android:defaultValue="@bool/preferences_check_print_overlimit"
+            android:title="Over Limit"
+            android:summary="Print upper limit on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="preferences_check_print_underlimit"
+            android:defaultValue="@bool/preferences_check_print_underlimit"
+            android:title="Under Limit"
+            android:summary="Print lower limit on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
 
     </PreferenceCategory>
 

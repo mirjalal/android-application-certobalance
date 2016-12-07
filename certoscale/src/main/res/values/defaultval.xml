@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //Weighing app
     <bool name="preferences_weigh_activated_default">true</bool>
     <bool name="preferences_weigh_minimum">true</bool>
     <bool name="preferences_weigh_secondary_visible">true</bool>
@@ -9,7 +10,8 @@
     <bool name="preferences_weigh_netto_visible">true</bool>
     <bool name="preferences_weigh_tara_visible">true</bool>
     <bool name="preferences_weigh_print_min">true</bool>
-  
+
+    //Part counting app
     <bool name="preferences_counting_activated_default">true</bool>
     <bool name="preferences_counting_auto_optimization">true</bool>
     <bool name="preferences_counting_secondary_visible">true</bool>
@@ -28,4 +30,39 @@
     <bool name="preferences_counting_print_difference">true</bool>
     <bool name="preferences_counting_print_over_limit">true</bool>
     <bool name="preferences_counting_print_under_limit">true</bool>
+
+    //Percent Weighing app
+    <bool name="preferences_percent_activated_default">true</bool>
+
+    <bool name="preferences_percent_reference_visible">true</bool>
+    <bool name="preferences_percent_difference_visible">true</bool>
+    <bool name="preferences_percent_difference_percent_visible">true</bool>
+    <bool name="preferences_percent_brutto_visible">true</bool>
+    <bool name="preferences_percent_netto_visible">true</bool>
+    <bool name="preferences_percent_tara_visible">true</bool>
+
+
+    <bool name="preferences_percent_print_reference">true</bool>
+    <bool name="preferences_percent_print_difference">true</bool>
+    <bool name="preferences_percent_print_difference_percent">true</bool>
+
+    //Percent Check Weighing app
+    <bool name="preferences_check_activated">true</bool>
+
+    <bool name="preferences_check_over_visible">true</bool>
+    <bool name="preferences_check_under_visible">true</bool>
+    <bool name="preferences_check_brutto_visible">true</bool>
+    <bool name="preferences_check_netto_visible">true</bool>
+    <bool name="preferences_check_tara_visible">true</bool>
+    <bool name="preferences_check_target_visible">true</bool>
+    <bool name="preferences_check_overtolerance_visible">true</bool>
+    <bool name="preferences_check_undertolerance_visible">true</bool>
+
+
+    <bool name="preferences_check_print_target">true</bool>
+    <bool name="preferences_check_print_overtolerance">true</bool>
+    <bool name="preferences_check_print_undertolerance">true</bool>
+    <bool name="preferences_check_print_overlimit">true</bool>
+    <bool name="preferences_check_print_underlimit">true</bool>
+
 </resources>
