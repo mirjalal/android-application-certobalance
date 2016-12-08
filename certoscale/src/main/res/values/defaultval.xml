@@ -147,6 +147,8 @@
     <bool name="preferences_formulation_total_visible">true</bool>
     <bool name="preferences_formulation_brutto_visible">true</bool>
     <bool name="preferences_formulation_netto_visible">true</bool>
+    <bool name="preferences_formulation_tara_visible">true</bool>
+
     <bool name="preferences_formulation_target_visible">true</bool>
     <bool name="preferences_formulation_differencew_visible">true</bool>
     <bool name="preferences_formulation_differencep_visible">true</bool>

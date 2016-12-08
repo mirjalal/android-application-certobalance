@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_density_activated"
+            android:key="@string/preferences_density_activated"
             android:defaultValue="@bool/preferences_density_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,18 +12,18 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_density_mode"
+            android:key="@string/preferences_density_mode"
             android:title="Density mode"
             android:summary="Select between solid and liquid"
             />
         <ListPreference
-            android:key="preferences_density_mode"
+            android:key="@string/preferences_density_liquidtyp"
             android:title="Liquid Type"
             android:summary="Select between water and ohter"
             />
 
         <CheckBoxPreference
-        android:key="preferences_density_porous"
+        android:key="@string/preferences_density_porous"
         android:defaultValue="@bool/preferences_density_porous"
         android:title="Porous"
         android:summary="Turn porous material on/off"
@@ -31,7 +31,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_autoprint"
+            android:key="@string/preferences_density_autoprint"
             android:defaultValue="@bool/preferences_density_autoprint"
             android:title="Print result"
             android:summary="Turn automatical result printing on/off"
@@ -39,7 +39,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_autosample"
+            android:key="@string/preferences_density_autosample"
             android:defaultValue="@bool/preferences_density_autosample"
             android:title="Auto Sample Mode"
             android:summary="Turn auto sample mode on/off"
@@ -53,7 +53,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_denisty_Liquid_visible"
+            android:key="@string/preferences_denisty_Liquid_visible"
             android:defaultValue="@bool/preferences_denisty_Liquid_visible"
             android:title="Liquid Density"
             android:summary="Turn the liqiud density visible/invisible"
@@ -62,7 +62,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_density_watertemp_visible"
+            android:key="@string/preferences_density_watertemp_visible"
             android:defaultValue="@bool/preferences_density_watertemp_visible"
             android:title="Water Temperature"
             android:summary="Turn the water temperature visible/invisible"
@@ -70,7 +70,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_oildensity_visible"
+            android:key="@string/preferences_density_oildensity_visible"
             android:defaultValue="@bool/preferences_density_oildensity_visible"
             android:title="Oil Density"
             android:summary="Turn the oil density visible/invisible"
@@ -79,7 +79,7 @@
 
 
             <CheckBoxPreference
-            android:key="preferences_density_weightair_visible"
+            android:key="@string/preferences_density_weightair_visible"
             android:defaultValue="@bool/preferences_density_weightair_visible"
             android:title="Weight in Air"
             android:summary="Turn weight in air visible/invisible"
@@ -87,7 +87,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-        android:key="preferences_density_oiledweight_visible"
+        android:key="@string/preferences_density_oiledweight_visible"
         android:defaultValue="@bool/preferences_density_oiledweight_visible"
         android:title="Oiled Weight"
         android:summary="Turn oiled weight visible/invisible"
@@ -95,7 +95,7 @@
     </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_weightliquid_visible"
+            android:key="@string/preferences_density_weightliquid_visible"
             android:defaultValue="@bool/preferences_density_weightliquid_visible"
             android:title="Weight in Liquid"
             android:summary="Turn weight in liquid visible/invisible"
@@ -104,7 +104,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_density_sinkervolume_visible"
+            android:key="@string/preferences_density_sinkervolume_visible"
             android:defaultValue="@bool/preferences_density_sinkervolume_visible"
             android:title="Sinker Volume"
             android:summary="Turn the sinker volume visible/invisible"
@@ -116,7 +116,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_density_porous_print"
+            android:key="@string/preferences_density_porous_print"
             android:defaultValue="@bool/preferences_density_porous_print"
             android:title="Porous"
             android:summary="Print porous material on/off"
@@ -124,7 +124,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_liquidtype_print"
+            android:key="@string/preferences_density_liquidtype_print"
             android:defaultValue="@bool/preferences_density_liquidtype_print"
             android:title="Liquid Type"
             android:summary="Print liquid type material on/off"
@@ -132,7 +132,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_liquiddensity_print"
+            android:key="@string/preferences_density_liquiddensity_print"
             android:defaultValue="@bool/preferences_density_liquiddensity_print"
             android:title="Liquid density"
             android:summary="Print liquid density material on/off"
@@ -140,7 +140,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_watertemp_print"
+            android:key="@string/preferences_density_watertemp_print"
             android:defaultValue="@bool/preferences_density_watertemp_print"
             android:title="Water Temperature"
             android:summary="Print water temperature on/off"
@@ -148,7 +148,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_weightair_print"
+            android:key="@string/preferences_density_weightair_print"
             android:defaultValue="@bool/preferences_density_weightair_print"
             android:title="Weight in Air"
             android:summary="Print weight in air on/off"
@@ -156,7 +156,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_density_weightinliquid_print"
+            android:key="@string/preferences_density_weightinliquid_print"
             android:defaultValue="@bool/preferences_density_weightinliquid_print"
             android:title="Weight in Liquid"
             android:summary="Print weight in liquid on/off"

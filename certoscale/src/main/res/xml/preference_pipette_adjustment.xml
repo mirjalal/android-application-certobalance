@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_pipette_activated"
+            android:key="@string/preferences_pipette_activated"
             android:defaultValue="@bool/preferences_pipette_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,7 +12,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_pipette_autosamplemode"
+            android:key="@string/preferences_pipette_autosamplemode"
             android:defaultValue="@bool/preferences_pipette_autosamplemode"
             android:title="Auto Sample Mode"
             android:summary="Turn auto sample modeon/off"
@@ -20,25 +20,25 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_pipette_liquidtype"
+            android:key="@string/preferences_pipette_liquidtype"
             android:title="Liquid Type"
             android:summary="Select the liquid type"
             />
 
         <ListPreference
-            android:key="preferences_pipette_numberofsample"
+            android:key="@string/preferences_pipette_numberofsample"
             android:title="Number of Samples"
             android:summary="Select the number of Samples"
             />
 
         <ListPreference
-            android:key="preferences_pipette_presureunit"
+            android:key="@string/preferences_pipette_presureunit"
             android:title="Pressure unit"
             android:summary="Select the pressure unit"
             />
 
         <ListPreference
-            android:key="preferences_pipette_volumeunit"
+            android:key="@string/preferences_pipette_volumeunit"
             android:title="Volume unit"
             android:summary="Select the Volume unit"
             />
@@ -48,7 +48,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_pipette_secondary_visible"
+            android:key="@string/preferences_pipette_secondary_visible"
             android:defaultValue="@bool/preferences_pipette_secondary_visible"
             android:title="Secondary unit"
             android:summary="Turn the secondary display line visible/invisible"
@@ -57,7 +57,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_nominal_visible"
+            android:key="@string/preferences_pipette_nominal_visible"
             android:defaultValue="@bool/preferences_pipette_nominal_visible"
             android:title="Nominal Volume"
             android:summary="Turn the nominal volume visible/invisible"
@@ -66,7 +66,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_inacc_visible"
+            android:key="@string/preferences_pipette_inacc_visible"
             android:defaultValue="@bool/preferences_pipette_inacc_visible"
             android:title="Inaccuracy"
             android:summary="Turn the inaccuracy visible/invisible"
@@ -74,7 +74,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_pipette_imprec_visible"
+            android:key="@string/preferences_pipette_imprec_visible"
             android:defaultValue="@bool/preferences_pipette_imprec_visible"
             android:title="Imprecision"
             android:summary="Turn the Imprecision visible/invisible"
@@ -82,7 +82,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-        android:key="preferences_pipette_liquiddensity_visible"
+        android:key="@string/preferences_pipette_liquiddensity_visible"
         android:defaultValue="@bool/preferences_pipette_liquiddensity_visible"
         android:title="Liquid Denisty"
         android:summary="Turn the liquid density visible/invisible"
@@ -91,7 +91,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_barounit_visible"
+            android:key="@string/preferences_pipette_barounit_visible"
             android:defaultValue="@bool/preferences_pipette_barounit_visible"
             android:title="Barometric Unit"
             android:summary="Turn the barometric unit visible/invisible"
@@ -100,7 +100,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_watertemp_visible"
+            android:key="@string/preferences_pipette_watertemp_visible"
             android:defaultValue="@bool/preferences_pipette_watertemp_visible"
             android:title="Water Temperature"
             android:summary="Turn the water temperature visible/invisible"
@@ -114,7 +114,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_pipette_nominal_print"
+            android:key="@string/preferences_pipette_nominal_print"
             android:defaultValue="@bool/preferences_pipette_nominal_print"
             android:title="Nominal Volume"
             android:summary="Print nominal volume on/off"
@@ -123,7 +123,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_inacc_print"
+            android:key="@string/preferences_pipette_inacc_print"
             android:defaultValue="@bool/preferences_pipette_inacc_print"
             android:title="Inaccuracy"
             android:summary="Prin the inaccuracy on/off"
@@ -131,7 +131,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_pipette_imprec_print"
+            android:key="@string/preferences_pipette_imprec_print"
             android:defaultValue="@bool/preferences_pipette_imprec_print"
             android:title="Imprecision"
             android:summary="Print the Imprecision on/off"
@@ -139,7 +139,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_pipette_liquiddensity_print"
+            android:key="@string/preferences_pipette_liquiddensity_print"
             android:defaultValue="@bool/preferences_pipette_liquiddensity_print"
             android:title="Liquid Denisty"
             android:summary="Print the liquid density on/off"
@@ -148,7 +148,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_barounit_print"
+            android:key="@string/preferences_pipette_barounit_print"
             android:defaultValue="@bool/preferences_pipette_barounit_print"
             android:title="Barometric Unit"
             android:summary="Print barometric unit on/off"
@@ -157,7 +157,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_pipette_watertemp_print"
+            android:key="@string/preferences_pipette_watertemp_print"
             android:defaultValue="@bool/preferences_pipette_watertemp_print"
             android:title="Water Temperature"
             android:summary="Print water temperature on/off"

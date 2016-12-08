@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_differential_activated"
+            android:key="@string/preferences_differential_activated"
             android:defaultValue="@bool/preferences_differential_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,7 +12,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_autoMode"
+            android:key="@string/preferences_differential_autoMode"
             android:defaultValue="@bool/preferences_differential_autoMode"
             android:title="Auto processing Mode"
             android:summary="Turn auto processing mode on/off"
@@ -25,7 +25,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_differential_initial_visible"
+            android:key="@string/preferences_differential_initial_visible"
             android:defaultValue="@bool/preferences_differential_initial_visible"
             android:title="Initial weight"
             android:summary="Turn the initial weight visible/invisible"
@@ -34,7 +34,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_differential_final_visible"
+            android:key="@string/preferences_differential_final_visible"
             android:defaultValue="@bool/preferences_differential_final_visible"
             android:title="Final weight"
             android:summary="Turn the final weight visible/invisible"
@@ -42,7 +42,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_differencew_visible"
+            android:key="@string/preferences_differential_differencew_visible"
             android:defaultValue="@bool/preferences_differential_differencew_visible"
             android:title="Difference"
             android:summary="Turn the difference weight visible/invisible"
@@ -50,7 +50,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_differencep_visible"
+            android:key="@string/preferences_differential_differencep_visible"
             android:defaultValue="@bool/preferences_differential_differencep_visible"
             android:title="Difference in Percent"
             android:summary="Turn the Difference in Percent visible/invisible"
@@ -58,7 +58,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_brutto_visible"
+            android:key="@string/preferences_differential_brutto_visible"
             android:defaultValue="@bool/preferences_differential_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
@@ -66,7 +66,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_netto_visible"
+            android:key="@string/preferences_differential_netto_visible"
             android:defaultValue="@bool/preferences_differential_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
@@ -74,7 +74,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_tara_visible"
+            android:key="@string/preferences_differential_tara_visible"
             android:defaultValue="@bool/preferences_differential_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
@@ -85,7 +85,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_differential_print_initial"
+            android:key="@string/preferences_differential_print_initial"
             android:defaultValue="@bool/preferences_differential_print_initial"
             android:title="Initial"
             android:summary="Print the initial weight yes/no"
@@ -93,7 +93,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_print_final"
+            android:key="@string/preferences_differential_print_final"
             android:defaultValue="@bool/preferences_differential_print_final"
             android:title="Final"
             android:summary="Print final weight yes/no"
@@ -101,7 +101,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_print_differencew"
+            android:key="@string/preferences_differential_print_differencew"
             android:defaultValue="@bool/preferences_differential_print_differencew"
             android:title="Difference"
             android:summary="Print the difference weight yes/no"
@@ -109,7 +109,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_differential_print_differencep"
+            android:key="@string/preferences_differential_print_differencep"
             android:defaultValue="@bool/preferences_differential_print_differencep"
             android:title="Difference in Percent"
             android:summary="Print the difference in percent yes/no"

@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_statistic_activated"
+            android:key="@string/preferences_statistic_activated"
             android:defaultValue="@bool/preferences_statistic_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,13 +12,13 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_statistic_numberofsample"
+            android:key="@string/preferences_statistic_numberofsample"
             android:title="Number of Samples"
             android:summary="Select the number of Samples"
             />
 
         <ListPreference
-            android:key="preferences_statistic_liquidtype"
+            android:key="@string/preferences_statistic_liquidtype"
             android:title="Tolerance"
             android:summary="Tolerance used during measurements"
             />
@@ -29,7 +29,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_statistic_numbatches_visible"
+            android:key="@string/preferences_statistic_numbatches_visible"
             android:defaultValue="@bool/preferences_statistic_numbatches_visible"
             android:title="Number of Batches"
             android:summary="Turn number of batches visible/invisible"
@@ -37,7 +37,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_numsamples_visible"
+            android:key="@string/preferences_statistic_numsamples_visible"
             android:defaultValue="@bool/preferences_statistic_numsamples_visible"
             android:title="Number of Samples"
             android:summary="Turn number of samples visible/invisible"
@@ -45,7 +45,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_average_visible"
+            android:key="@string/preferences_statistic_average_visible"
             android:defaultValue="@bool/preferences_statistic_average_visible"
             android:title="Average"
             android:summary="Turn average value visible/invisible"
@@ -53,7 +53,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_total_visible"
+            android:key="@string/preferences_statistic_total_visible"
             android:defaultValue="@bool/preferences_statistic_total_visible"
             android:title="Total"
             android:summary="Turn total value visible/invisible"
@@ -61,7 +61,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_minimum_visible"
+            android:key="@string/preferences_statistic_minimum_visible"
             android:defaultValue="@bool/preferences_statistic_minimum_visible"
             android:title="Minimum"
             android:summary="Turn minimum value visible/invisible"
@@ -69,7 +69,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-        android:key="preferences_statistic_maximum_visible"
+        android:key="@string/preferences_statistic_maximum_visible"
         android:defaultValue="@bool/preferences_statistic_maximum_visible"
         android:title="Maximum"
         android:summary="Turn maximum value visible/invisible"
@@ -77,7 +77,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_range_visible"
+            android:key="@string/preferences_statistic_range_visible"
             android:defaultValue="@bool/preferences_statistic_range_visible"
             android:title="Range"
             android:summary="Turn range value visible/invisible"
@@ -89,7 +89,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_statistic_numbatches_print"
+            android:key="@string/preferences_statistic_numbatches_print"
             android:defaultValue="@bool/preferences_statistic_numbatches_print"
             android:title="Number of Batches"
             android:summary="Print number of batches on/off"
@@ -97,7 +97,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_numsamples_print"
+            android:key="@string/preferences_statistic_numsamples_print"
             android:defaultValue="@bool/preferences_statistic_numsamples_print"
             android:title="Number of Samples"
             android:summary="Print number of samples on/off"
@@ -105,7 +105,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_average_print"
+            android:key="@string/preferences_statistic_average_print"
             android:defaultValue="@bool/preferences_statistic_average_print"
             android:title="Average"
             android:summary="Print average value on/off"
@@ -113,7 +113,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_total_print"
+            android:key="@string/preferences_statistic_total_print"
             android:defaultValue="@bool/preferences_statistic_total_print"
             android:title="Total"
             android:summary="Print total value on/off"
@@ -121,7 +121,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_minimum_print"
+            android:key="@string/preferences_statistic_minimum_print"
             android:defaultValue="@bool/preferences_statistic_minimum_print"
             android:title="Minimum"
             android:summary="Print minimum value on/off"
@@ -129,7 +129,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_maximum_print"
+            android:key="@string/preferences_statistic_maximum_print"
             android:defaultValue="@bool/preferences_statistic_maximum_print"
             android:title="Maximum"
             android:summary="Print maximum value on/off"
@@ -137,7 +137,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_statistic_range_print"
+            android:key="@string/preferences_statistic_range_print"
             android:defaultValue="@bool/preferences_statistic_range_print"
             android:title="Range"
             android:summary="Print range on/off"

@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_animal_activated"
+            android:key="@string/preferences_animal_activated"
             android:defaultValue="@bool/preferences_animal_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,7 +12,7 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_check_limitmode"
+            android:key="@string/preferences_check_limitmode"
             android:title="Auto Sample Weighing Mode"
             />
         <ListPreference
@@ -26,14 +26,14 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_animal_secondary_visible"
+            android:key="@string/preferences_animal_secondary_visible"
             android:defaultValue="@bool/preferences_animal_secondary_visible"
             android:title="Secondary Unit"
             android:summary="Turn the secondary display line visible/invisible" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_animal_measuringtime_visible"
+            android:key="@string/preferences_animal_measuringtime_visible"
             android:defaultValue="@bool/preferences_animal_measuringtime_visible"
             android:title="Measuring Time"
             android:summary="Turn measuring time visible/invisible"
@@ -44,7 +44,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_animal_brutto_visible"
+            android:key="@string/preferences_animal_brutto_visible"
             android:defaultValue="@bool/preferences_animal_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
@@ -52,7 +52,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_animal_netto_visible"
+            android:key="@string/preferences_animal_netto_visible"
             android:defaultValue="@bool/preferences_animal_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
@@ -60,7 +60,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_animal_tara_visible"
+            android:key="@string/preferences_animal_tara_visible"
             android:defaultValue="@bool/preferences_animal_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
@@ -71,7 +71,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_animal_print_measuring"
+            android:key="@string/preferences_animal_print_measuring"
             android:defaultValue="@bool/preferences_animal_print_measuring"
             android:title="Measuring Time"
             android:summary="Print the measuring time yes/no"

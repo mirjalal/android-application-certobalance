@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_peak_activated"
+            android:key="@string/preferences_peak_activated"
             android:defaultValue="@bool/preferences_peak_activated"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,13 +12,13 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_peak_mode"
+            android:key="@string/preferences_peak_mode"
             android:title="Auto Sample Mode"
             android:summary="Select operation mode"
             />
 
         <CheckBoxPreference
-            android:key="preferences_peak_stableonly"
+            android:key="@string/preferences_peak_stableonly"
             android:defaultValue="@bool/preferences_peak_stableonly"
             android:title="Only Stable Weight"
             android:summary="Turn stable weight only on/off"
@@ -33,7 +33,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_peak_secondary_visible"
+            android:key="@string/preferences_peak_secondary_visible"
             android:defaultValue="@bool/preferences_peak_secondary_visible"
             android:title="Secondary Unit"
             android:summary="Turn the secondary display line visible/invisible" >
@@ -41,7 +41,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_peak_brutto_visible"
+            android:key="@string/preferences_peak_brutto_visible"
             android:defaultValue="@bool/preferences_peak_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the brutto weight visible/invisible"
@@ -49,7 +49,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_peak_netto_visible"
+            android:key="@string/preferences_peak_netto_visible"
             android:defaultValue="@bool/preferences_peak_netto_visible"
             android:title="Brutto"
             android:summary="Turn the netto weight visible/invisible"
@@ -57,7 +57,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_peak_tara_visible"
+            android:key="@string/preferences_peak_tara_visible"
             android:defaultValue="@bool/preferences_peak_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
@@ -69,7 +69,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_peak_print_stableonly"
+            android:key="@string/preferences_peak_print_stableonly"
             android:defaultValue="@bool/preferences_peak_print_stableonly"
             android:title="Stable Weight only"
             android:summary="Print only the stable weightyes/no"

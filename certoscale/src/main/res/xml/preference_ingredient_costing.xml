@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_ingrediant_activated"
+            android:key="@string/preferences_ingrediant_activated"
             android:defaultValue="@bool/preferences_ingrediant_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -12,7 +12,7 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_ingrediant_mode"
+            android:key="@string/preferences_ingrediant_mode"
             android:title="Currency Label"
             android:summary="Select the currency label"
             />
@@ -23,7 +23,7 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_unitcost_visible"
+            android:key="@string/preferences_ingrediant_unitcost_visible"
             android:defaultValue="@bool/preferences_ingrediant_unitcost_visible"
             android:title="Unit Cost"
             android:summary="Turn the unit cost visible/invisible"
@@ -31,7 +31,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_totalweight_visible"
+            android:key="@string/preferences_ingrediant_totalweight_visible"
             android:defaultValue="@bool/preferences_ingrediant_totalweight_visible"
             android:title="Total Weight"
             android:summary="Turn the total weight visible/invisible"
@@ -39,7 +39,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_totalcost_visible"
+            android:key="@string/preferences_ingrediant_totalcost_visible"
             android:defaultValue="@bool/preferences_ingrediant_totalcost_visible"
             android:title="Total Cost"
             android:summary="Turn total cost visible/invisible"
@@ -48,7 +48,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_brutto_visible"
+            android:key="@string/preferences_ingrediant_brutto_visible"
             android:defaultValue="@bool/preferences_ingrediant_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
@@ -56,7 +56,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_netto_visible"
+            android:key="@string/preferences_ingrediant_netto_visible"
             android:defaultValue="@bool/preferences_ingrediant_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
@@ -64,7 +64,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_tara_visible"
+            android:key="@string/preferences_ingrediant_tara_visible"
             android:defaultValue="@bool/preferences_ingrediant_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
@@ -75,7 +75,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_ingrediant_print_totalweight"
+            android:key="@string/preferences_ingrediant_print_totalweight"
             android:defaultValue="@bool/preferences_ingrediant_print_totalweight"
             android:title="Total Weight"
             android:summary="Print the total weight yes/no"
@@ -83,7 +83,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_ingrediant_print_totalcost"
+            android:key="@string/preferences_ingrediant_print_totalcost"
             android:defaultValue="@bool/preferences_ingrediant_print_totalcost"
             android:title="Total cost"
             android:summary="Print the total cost yes/no"
