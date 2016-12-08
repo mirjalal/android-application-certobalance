@@ -18,6 +18,13 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
+            android:key="preferences_percent_secondary_visible"
+            android:defaultValue="@bool/preferences_percent_secondary_visible"
+            android:title="Secondary Unit"
+            android:summary="Turn the secondary display line visible/invisible" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="preferences_percent_reference_visible"
             android:defaultValue="@bool/preferences_percent_reference_visible"
             android:title="Reference Weight"

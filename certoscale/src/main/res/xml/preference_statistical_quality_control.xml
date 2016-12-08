@@ -4,20 +4,24 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_weigh_activated"
-            android:defaultValue="@bool/preferences_weigh_activated_default"
+            android:key="preferences_statistic_activated"
+            android:defaultValue="@bool/preferences_statistic_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_minimum"
-            android:defaultValue="@bool/preferences_weigh_minimum"
-            android:title="Minimum weight"
-            android:summary="Turn the minimum weight on/off"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
+        <ListPreference
+            android:key="preferences_statistic_numberofsample"
+            android:title="Number of Samples"
+            android:summary="Select the number of Samples"
+            />
+
+        <ListPreference
+            android:key="preferences_statistic_liquidtype"
+            android:title="Tolerance"
+            android:summary="Tolerance used during measurements"
+            />
 
 
     </PreferenceCategory>
@@ -25,78 +29,118 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_weigh_secondary_visible"
-            android:defaultValue="@bool/preferences_weigh_secondary_visible"
-            android:title="Reference Weight"
-            android:summary="The reference weight is displayed"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
-
-
-        <CheckBoxPreference
-            android:key="preferences_weigh_minimum_visible"
-            android:defaultValue="@bool/preferences_weigh_minimum_visible"
-            android:title="Difference Weight"
-            android:summary="Display the difference to the reference Weight"
+            android:key="preferences_statistic_numbatches_visible"
+            android:defaultValue="@bool/preferences_statistic_numbatches_visible"
+            android:title="Number of Batches"
+            android:summary="Turn number of batches visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_brutto_visible"
-            android:defaultValue="@bool/preferences_weigh_brutto_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the Difference in Percent visible/invisible"
+            android:key="preferences_statistic_numsamples_visible"
+            android:defaultValue="@bool/preferences_statistic_numsamples_visible"
+            android:title="Number of Samples"
+            android:summary="Turn number of samples visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+            android:key="preferences_statistic_average_visible"
+            android:defaultValue="@bool/preferences_statistic_average_visible"
+            android:title="Average"
+            android:summary="Turn average value visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:key="preferences_statistic_total_visible"
+            android:defaultValue="@bool/preferences_statistic_total_visible"
+            android:title="Total"
+            android:summary="Turn total value visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_tara_visible"
-            android:defaultValue="@bool/preferences_weigh_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:key="preferences_statistic_minimum_visible"
+            android:defaultValue="@bool/preferences_statistic_minimum_visible"
+            android:title="Minimum"
+            android:summary="Turn minimum value visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
+
+        <CheckBoxPreference
+        android:key="preferences_statistic_maximum_visible"
+        android:defaultValue="@bool/preferences_statistic_maximum_visible"
+        android:title="Maximum"
+        android:summary="Turn maximum value visible/invisible"
+        android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_statistic_range_visible"
+            android:defaultValue="@bool/preferences_statistic_range_visible"
+            android:title="Range"
+            android:summary="Turn range value visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Reference Weight"
-            android:summary="Print the reference weight yes/no"
+            android:key="preferences_statistic_numbatches_print"
+            android:defaultValue="@bool/preferences_statistic_numbatches_print"
+            android:title="Number of Batches"
+            android:summary="Print number of batches on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:key="preferences_statistic_numsamples_print"
+            android:defaultValue="@bool/preferences_statistic_numsamples_print"
+            android:title="Number of Samples"
+            android:summary="Print number of samples on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight in Percent"
-            android:summary="Print the difference weight in percent weight yes/no"
+            android:key="preferences_statistic_average_print"
+            android:defaultValue="@bool/preferences_statistic_average_print"
+            android:title="Average"
+            android:summary="Print average value on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_statistic_total_print"
+            android:defaultValue="@bool/preferences_statistic_total_print"
+            android:title="Total"
+            android:summary="Print total value on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_statistic_minimum_print"
+            android:defaultValue="@bool/preferences_statistic_minimum_print"
+            android:title="Minimum"
+            android:summary="Print minimum value on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_statistic_maximum_print"
+            android:defaultValue="@bool/preferences_statistic_maximum_print"
+            android:title="Maximum"
+            android:summary="Print maximum value on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_statistic_range_print"
+            android:defaultValue="@bool/preferences_statistic_range_print"
+            android:title="Range"
+            android:summary="Print range on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 

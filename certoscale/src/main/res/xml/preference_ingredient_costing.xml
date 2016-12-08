@@ -4,20 +4,18 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_weigh_activated"
-            android:defaultValue="@bool/preferences_weigh_activated_default"
+            android:key="preferences_ingrediant_activated"
+            android:defaultValue="@bool/preferences_ingrediant_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_minimum"
-            android:defaultValue="@bool/preferences_weigh_minimum"
-            android:title="Minimum weight"
-            android:summary="Turn the minimum weight on/off"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
+        <ListPreference
+            android:key="preferences_ingrediant_mode"
+            android:title="Currency Label"
+            android:summary="Select the currency label"
+            />
 
 
     </PreferenceCategory>
@@ -25,49 +23,49 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_weigh_secondary_visible"
-            android:defaultValue="@bool/preferences_weigh_secondary_visible"
-            android:title="Reference Weight"
-            android:summary="The reference weight is displayed"
+            android:key="preferences_ingrediant_unitcost_visible"
+            android:defaultValue="@bool/preferences_ingrediant_unitcost_visible"
+            android:title="Unit Cost"
+            android:summary="Turn the unit cost visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_ingrediant_totalweight_visible"
+            android:defaultValue="@bool/preferences_ingrediant_totalweight_visible"
+            android:title="Total Weight"
+            android:summary="Turn the total weight visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="preferences_ingrediant_totalcost_visible"
+            android:defaultValue="@bool/preferences_ingrediant_totalcost_visible"
+            android:title="Total Cost"
+            android:summary="Turn total cost visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
 
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum_visible"
-            android:defaultValue="@bool/preferences_weigh_minimum_visible"
-            android:title="Difference Weight"
-            android:summary="Display the difference to the reference Weight"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="preferences_weigh_brutto_visible"
-            android:defaultValue="@bool/preferences_weigh_brutto_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the Difference in Percent visible/invisible"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
-
-        <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
+            android:key="preferences_ingrediant_brutto_visible"
+            android:defaultValue="@bool/preferences_ingrediant_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
+            android:key="preferences_ingrediant_netto_visible"
+            android:defaultValue="@bool/preferences_ingrediant_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_tara_visible"
-            android:defaultValue="@bool/preferences_weigh_tara_visible"
+            android:key="preferences_ingrediant_tara_visible"
+            android:defaultValue="@bool/preferences_ingrediant_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
             android:icon="@drawable/ic_launcher" >
@@ -77,28 +75,22 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Reference Weight"
-            android:summary="Print the reference weight yes/no"
+            android:key="preferences_ingrediant_print_totalweight"
+            android:defaultValue="@bool/preferences_ingrediant_print_totalweight"
+            android:title="Total Weight"
+            android:summary="Print the total weight yes/no"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:key="preferences_ingrediant_print_totalcost"
+            android:defaultValue="@bool/preferences_ingrediant_print_totalcost"
+            android:title="Total cost"
+            android:summary="Print the total cost yes/no"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight in Percent"
-            android:summary="Print the difference weight in percent weight yes/no"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
+
 
     </PreferenceCategory>
 
