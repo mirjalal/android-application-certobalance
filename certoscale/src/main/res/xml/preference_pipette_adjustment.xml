@@ -4,99 +4,163 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_weigh_activated"
-            android:defaultValue="@bool/preferences_weigh_activated_default"
+            android:key="@string/preferences_pipette_activated"
+            android:defaultValue="@bool/preferences_pipette_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum"
-            android:defaultValue="@bool/preferences_weigh_minimum"
-            android:title="Minimum weight"
-            android:summary="Turn the minimum weight on/off"
+            android:key="@string/preferences_pipette_autosamplemode"
+            android:defaultValue="@bool/preferences_pipette_autosamplemode"
+            android:title="Auto Sample Mode"
+            android:summary="Turn auto sample modeon/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <ListPreference
+            android:key="@string/preferences_pipette_liquidtype"
+            android:title="Liquid Type"
+            android:summary="Select the liquid type"
+            />
+
+        <ListPreference
+            android:key="@string/preferences_pipette_numberofsample"
+            android:title="Number of Samples"
+            android:summary="Select the number of Samples"
+            />
+
+        <ListPreference
+            android:key="@string/preferences_pipette_presureunit"
+            android:title="Pressure unit"
+            android:summary="Select the pressure unit"
+            />
+
+        <ListPreference
+            android:key="@string/preferences_pipette_volumeunit"
+            android:title="Volume unit"
+            android:summary="Select the Volume unit"
+            />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_weigh_secondary_visible"
-            android:defaultValue="@bool/preferences_weigh_secondary_visible"
-            android:title="Reference Weight"
-            android:summary="The reference weight is displayed"
+            android:key="@string/preferences_pipette_secondary_visible"
+            android:defaultValue="@bool/preferences_pipette_secondary_visible"
+            android:title="Secondary unit"
+            android:summary="Turn the secondary display line visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
 
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum_visible"
-            android:defaultValue="@bool/preferences_weigh_minimum_visible"
-            android:title="Difference Weight"
-            android:summary="Display the difference to the reference Weight"
+            android:key="@string/preferences_pipette_nominal_visible"
+            android:defaultValue="@bool/preferences_pipette_nominal_visible"
+            android:title="Nominal Volume"
+            android:summary="Turn the nominal volume visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="@string/preferences_pipette_inacc_visible"
+            android:defaultValue="@bool/preferences_pipette_inacc_visible"
+            android:title="Inaccuracy"
+            android:summary="Turn the inaccuracy visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_brutto_visible"
-            android:defaultValue="@bool/preferences_weigh_brutto_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the Difference in Percent visible/invisible"
+            android:key="@string/preferences_pipette_imprec_visible"
+            android:defaultValue="@bool/preferences_pipette_imprec_visible"
+            android:title="Imprecision"
+            android:summary="Turn the Imprecision visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+        android:key="@string/preferences_pipette_liquiddensity_visible"
+        android:defaultValue="@bool/preferences_pipette_liquiddensity_visible"
+        android:title="Liquid Denisty"
+        android:summary="Turn the liquid density visible/invisible"
+        android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="@string/preferences_pipette_barounit_visible"
+            android:defaultValue="@bool/preferences_pipette_barounit_visible"
+            android:title="Barometric Unit"
+            android:summary="Turn the barometric unit visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:key="@string/preferences_pipette_watertemp_visible"
+            android:defaultValue="@bool/preferences_pipette_watertemp_visible"
+            android:title="Water Temperature"
+            android:summary="Turn the water temperature visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_tara_visible"
-            android:defaultValue="@bool/preferences_weigh_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
+
+
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Reference Weight"
-            android:summary="Print the reference weight yes/no"
+            android:key="@string/preferences_pipette_nominal_print"
+            android:defaultValue="@bool/preferences_pipette_nominal_print"
+            android:title="Nominal Volume"
+            android:summary="Print nominal volume on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="@string/preferences_pipette_inacc_print"
+            android:defaultValue="@bool/preferences_pipette_inacc_print"
+            android:title="Inaccuracy"
+            android:summary="Prin the inaccuracy on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:key="@string/preferences_pipette_imprec_print"
+            android:defaultValue="@bool/preferences_pipette_imprec_print"
+            android:title="Imprecision"
+            android:summary="Print the Imprecision on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight in Percent"
-            android:summary="Print the difference weight in percent weight yes/no"
+            android:key="@string/preferences_pipette_liquiddensity_print"
+            android:defaultValue="@bool/preferences_pipette_liquiddensity_print"
+            android:title="Liquid Denisty"
+            android:summary="Print the liquid density on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="@string/preferences_pipette_barounit_print"
+            android:defaultValue="@bool/preferences_pipette_barounit_print"
+            android:title="Barometric Unit"
+            android:summary="Print barometric unit on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+        <CheckBoxPreference
+            android:key="@string/preferences_pipette_watertemp_print"
+            android:defaultValue="@bool/preferences_pipette_watertemp_print"
+            android:title="Water Temperature"
+            android:summary="Print water temperature on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 

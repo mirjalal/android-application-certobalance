@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_percent_activated"
+            android:key="@string/preferences_percent_activated"
             android:defaultValue="@bool/preferences_percent_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
@@ -18,7 +18,14 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_percent_reference_visible"
+            android:key="@string/preferences_percent_secondary_visible"
+            android:defaultValue="@bool/preferences_percent_secondary_visible"
+            android:title="Secondary Unit"
+            android:summary="Turn the secondary display line visible/invisible" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_percent_reference_visible"
             android:defaultValue="@bool/preferences_percent_reference_visible"
             android:title="Reference Weight"
             android:summary="The reference weight is displayed"
@@ -27,7 +34,7 @@
 
 
         <CheckBoxPreference
-            android:key="preferences_percent_difference_visible"
+            android:key="@string/preferences_percent_difference_visible"
             android:defaultValue="@bool/preferences_percent_difference_visible"
             android:title="Difference Weight"
             android:summary="Display the difference to the reference Weight"
@@ -35,7 +42,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_difference_percent_visible"
+            android:key="@string/preferences_percent_difference_percent_visible"
             android:defaultValue="@bool/preferences_percent_difference_percent_visible"
             android:title="Difference in Percent"
             android:summary="Turn the Difference in Percent visible/invisible"
@@ -43,7 +50,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_brutto_visible"
+            android:key="@string/preferences_percent_brutto_visible"
             android:defaultValue="@bool/preferences_percent_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
@@ -51,7 +58,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_netto_visible"
+            android:key="@string/preferences_percent_netto_visible"
             android:defaultValue="@bool/preferences_percent_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
@@ -59,7 +66,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_tara_visible"
+            android:key="@string/preferences_percent_tara_visible"
             android:defaultValue="@bool/preferences_percent_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
@@ -70,7 +77,7 @@
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_percent_print_reference"
+            android:key="@string/preferences_percent_print_reference"
             android:defaultValue="@bool/preferences_percent_print_reference"
             android:title="Reference Weight"
             android:summary="Print the reference weight yes/no"
@@ -78,7 +85,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_print_difference"
+            android:key="@string/preferences_percent_print_difference"
             android:defaultValue="@bool/preferences_percent_print_difference"
             android:title="Difference Weight"
             android:summary="Print the difference weight yes/no"
@@ -86,7 +93,7 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_percent_print_difference_percent"
+            android:key="@string/preferences_percent_print_difference_percent"
             android:defaultValue="@bool/preferences_percent_print_difference_percent"
             android:title="Difference Weight in Percent"
             android:summary="Print the difference weight in percent weight yes/no"

@@ -50,7 +50,7 @@
     	</CheckBoxPreference>	
     
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_netto_visible"
+	    	android:key="@string/preferences_weigh_netto_visible"
 	    	android:defaultValue="@bool/preferences_weigh_netto_visible"
 	    	android:title="Netto"
 	    	android:summary="Turn the netto weight visible/invisible"
@@ -58,7 +58,7 @@
     	</CheckBoxPreference>	
     		
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_tara_visible"
+	    	android:key="@string/preferences_weigh_tara_visible"
 	    	android:defaultValue="@bool/preferences_weigh_tara_visible"
 	    	android:title="Tara"
 	    	android:summary="Turn the tara weight visible/invisible"
@@ -69,7 +69,7 @@
 
 <PreferenceCategory android:title="PRINTER OPTIONS" >
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_print_min"
+	    	android:key="@string/preferences_weigh_print_min"
 	    	android:defaultValue="@bool/preferences_weigh_print_min"
 	    	android:title="Print Minimum Weight"
 	    	android:summary="Print the minimum weight yes/no"

@@ -4,14 +4,14 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
 		<CheckBoxPreference
-	    	android:key="preferences_counting_activated"
+	    	android:key="@string/preferences_counting_activated"
 	    	android:defaultValue="@bool/preferences_counting_activated_default"
 	    	android:title="Activated"
 	    	android:summary="Turn the application on/off" >
     	</CheckBoxPreference>
   
 		<CheckBoxPreference
-	    	android:key="preferences_counting_auto_optimization"
+	    	android:key="@string/preferences_counting_auto_optimization"
 	    	android:defaultValue="@bool/preferences_counting_auto_optimization"
 	    	android:title="Auto Optimization"
 	    	android:summary="Turn the automatic optimization on/off" >
@@ -19,7 +19,7 @@
 
     		
    		<ListPreference
-	        android:key="preferences_counting_mode"
+	        android:key="@string/preferences_counting_mode"
 			android:defaultValue="Standard Counting"
 	        android:entries="@array/preferences_counting_modes"
 	        android:title="Counting Mode" 
@@ -38,7 +38,7 @@
    <PreferenceCategory android:title="VISIBLE FIELDS" >
 
    		<CheckBoxPreference
-	    	android:key="preferences_counting_secondary_visible"
+	    	android:key="@string/preferences_counting_secondary_visible"
 	    	android:defaultValue="@bool/preferences_counting_secondary_visible"
 	    	android:title="Secondary Unit"
 	    	android:summary="Turn the secondary display line visible/invisible" >
@@ -46,7 +46,7 @@
     	
    		
    		<CheckBoxPreference
-	    	android:key="preferences_counting_apw_visible"
+	    	android:key="@string/preferences_counting_apw_visible"
 	    	android:defaultValue="@bool/preferences_counting_apw_visible"
 	    	android:title="APW"
 	    	android:summary="APW visible/invisible">
@@ -54,49 +54,49 @@
  
    		
 		<CheckBoxPreference
-	    	android:key="preferences_counting_gross_visible"
+	    	android:key="@string/preferences_counting_gross_visible"
 	    	android:defaultValue="@bool/preferences_counting_gross_visible"
 	    	android:title="Gross Weight"
 	    	android:summary="Turn the gross weight visible/invisible">
     	</CheckBoxPreference>	
  
 		<CheckBoxPreference
-	    	android:key="preferences_counting_net_visible"
+	    	android:key="@string/preferences_counting_net_visible"
 	    	android:defaultValue="@bool/preferences_counting_net_visible"
 	    	android:title="Net"
 	    	android:summary="Turn the net weight visible/invisible">
     	</CheckBoxPreference>	
     
 		<CheckBoxPreference
-	    	android:key="preferences_counting_tare_visible"
+	    	android:key="@string/preferences_counting_tare_visible"
 	    	android:defaultValue="@bool/preferences_counting_tare_visible"
 	    	android:title="Tare"
 	    	android:summary="Turn the tare weight visible/invisible">
     	</CheckBoxPreference>	
     		
 		<CheckBoxPreference
-	    	android:key="preferences_counting_target_visible"
+	    	android:key="@string/preferences_counting_target_visible"
 	    	android:defaultValue="@bool/preferences_counting_target_visible"
 	    	android:title="Target"
 	    	android:summary="Turn the target weight visible/invisible - Used for Check-Fill only">
     	</CheckBoxPreference>	
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_difference_visible"
+	    	android:key="@string/preferences_counting_difference_visible"
 	    	android:defaultValue="@bool/preferences_counting_difference_visible"
 	    	android:title="Difference"
 	    	android:summary="Turn the difference weight visible/invisible - Used for Check-Fill only">
     	</CheckBoxPreference>	
     			
 		<CheckBoxPreference
-	    	android:key="preferences_counting_over limit_visible"
+	    	android:key="@string/preferences_counting_over_limit_visible"
 	    	android:defaultValue="@bool/preferences_counting_over_limit_visible"
 	    	android:title="Over Limit"
 	    	android:summary="Turn the over limit weight visible/invisible - Used for Check-Fill only">
     	</CheckBoxPreference>	
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_under limit_visible"
+	    	android:key="@string/preferences_counting_under_limit_visible"
 	    	android:defaultValue="@bool/preferences_counting_under_limit_visible"
 	    	android:title="Under Limit"
 	    	android:summary="Turn the under limit weight visible/invisible - Used for Check-Fill only">
@@ -106,42 +106,42 @@
 
 <PreferenceCategory android:title="PRINTER OPTIONS" >
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_apw"
+	    	android:key="@string/preferences_counting_print_apw"
 	    	android:defaultValue="@bool/preferences_counting_print_apw"
 	    	android:title="Print APW"
 	    	android:summary="Print the APW yes/no" >
     	</CheckBoxPreference>
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_sample_size"
+	    	android:key="@string/preferences_counting_print_sample_size"
 	    	android:defaultValue="@bool/preferences_counting_print_sample_size"
 	    	android:title="Print Sample Size"
 	    	android:summary="Print the sample size yes/no" >
     	</CheckBoxPreference>
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_target"
+	    	android:key="@string/preferences_counting_print_target"
 	    	android:defaultValue="@bool/preferences_counting_print_target"
 	    	android:title="Print Target"
 	    	android:summary="Print the target yes/no" >
     	</CheckBoxPreference>
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_difference"
+	    	android:key="@string/preferences_counting_print_difference"
 	    	android:defaultValue="@bool/preferences_counting_print_difference"
 	    	android:title="Print Difference"
 	    	android:summary="Print the difference yes/no" >
     	</CheckBoxPreference>
    
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_over_limit"
+	    	android:key="@string/preferences_counting_print_over_limit"
 	    	android:defaultValue="@bool/preferences_counting_print_over_limit"
 	    	android:title="Print Over Limit"
 	    	android:summary="Print the over limit yes/no" >
     	</CheckBoxPreference>
     	
 		<CheckBoxPreference
-	    	android:key="preferences_counting_print_under_limit"
+	    	android:key="@string/preferences_counting_print_under_limit"
 	    	android:defaultValue="@bool/preferences_counting_print_under_limit"
 	    	android:title="Print Under Limit"
 	    	android:summary="Print the under limit yes/no" >

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //Statistical Quality Control App
+    <bool name="preferences_statistic_activated_default">true</bool>
+
+    <bool name="preferences_statistic_numbatches_visible">true</bool>
+    <bool name="preferences_statistic_numsamples_visible">true</bool>
+    <bool name="preferences_statistic_average_visible">true</bool>
+    <bool name="preferences_statistic_total_visible">true</bool>
+    <bool name="preferences_statistic_minimum_visible">true</bool>
+    <bool name="preferences_statistic_maximum_visible">true</bool>
+    <bool name="preferences_statistic_range_visible">true</bool>
+
+    <bool name="preferences_statistic_numbatches_print">true</bool>
+    <bool name="preferences_statistic_numsamples_print">true</bool>
+    <bool name="preferences_statistic_average_print">true</bool>
+    <bool name="preferences_statistic_total_print">true</bool>
+    <bool name="preferences_statistic_minimum_print">true</bool>
+    <bool name="preferences_statistic_maximum_print">true</bool>
+    <bool name="preferences_statistic_range_print">true</bool>
+
+
+
+
     //Weighing app
     <bool name="preferences_weigh_activated_default">true</bool>
     <bool name="preferences_weigh_minimum">true</bool>
@@ -34,6 +56,8 @@
     //Percent Weighing app
     <bool name="preferences_percent_activated_default">true</bool>
 
+
+    <bool name="preferences_percent_secondary_visible">true</bool>
     <bool name="preferences_percent_reference_visible">true</bool>
     <bool name="preferences_percent_difference_visible">true</bool>
     <bool name="preferences_percent_difference_percent_visible">true</bool>
@@ -49,6 +73,7 @@
     //Percent Check Weighing app
     <bool name="preferences_check_activated">true</bool>
 
+    <bool name="preferences_check_secondary_visible">true</bool>
     <bool name="preferences_check_over_visible">true</bool>
     <bool name="preferences_check_under_visible">true</bool>
     <bool name="preferences_check_brutto_visible">true</bool>
@@ -64,5 +89,164 @@
     <bool name="preferences_check_print_undertolerance">true</bool>
     <bool name="preferences_check_print_overlimit">true</bool>
     <bool name="preferences_check_print_underlimit">true</bool>
+
+    //Animal Weighing app
+    <bool name="preferences_animal_activated_default">true</bool>
+
+    <bool name="preferences_animal_secondary_visible">true</bool>
+    <bool name="preferences_animal_measuringtime_visible">true</bool>
+    <bool name="preferences_animal_brutto_visible">true</bool>
+    <bool name="preferences_animal_netto_visible">true</bool>
+    <bool name="preferences_animal_tara_visible">true</bool>
+
+
+    <bool name="preferences_animal_print_measuring">true</bool>
+
+
+    //Filling app
+    <bool name="preferences_filling_activated_default">true</bool>
+
+    <bool name="preferences_filling_secondary_visible">true</bool>
+    <bool name="preferences_filling_target_visible">true</bool>
+    <bool name="preferences_filling_differencew_visible">true</bool>
+    <bool name="preferences_filling_differencep_visible">true</bool>
+    <bool name="preferences_filling_brutto_visible">true</bool>
+    <bool name="preferences_filling_netto_visible">true</bool>
+    <bool name="preferences_filling_tara_visible">true</bool>
+
+    <bool name="preferences_filling_print_target">true</bool>
+    <bool name="preferences_filling_print_differencew">true</bool>
+    <bool name="preferences_filling_print_differencep">true</bool>
+
+    //Totalization App
+    <bool name="preferences_totalization_activated_default">true</bool>
+    <bool name="preferences_totalization_AutoSampleMode">true</bool>
+
+
+    <bool name="preferences_totalizaion_NumberofSamples">true</bool>
+    <bool name="preferences_totalization_average_visible">true</bool>
+    <bool name="preferences_totalization_standarddeviation_visible">true</bool>
+    <bool name="preferences_totalization_minimum_visible">true</bool>
+    <bool name="preferences_totalization_maximum_visible">true</bool>
+    <bool name="preferences_totalization_range_visible">true</bool>
+    <bool name="preferences_totalization_brutto_visible">true</bool>
+    <bool name="preferences_totalization_netto_visible">true</bool>
+    <bool name="preferences_totalization_tara_visible">true</bool>
+
+    <bool name="preferences_totalization_print_samples">true</bool>
+    <bool name="preferences_totalization_print_average">true</bool>
+    <bool name="preferences_totalization_print_standard">true</bool>
+    <bool name="preferences_totalization_print_minimum">true</bool>
+    <bool name="preferences_totalization_print_maximum">true</bool>
+
+    //Formulation App
+    <bool name="preferences_formulation_activated_default">true</bool>
+    <bool name="preferences_formulation_filter">true</bool>
+
+    <bool name="preferences_formulation_secondary_visible">true</bool>
+    <bool name="preferences_formulation_total_visible">true</bool>
+    <bool name="preferences_formulation_brutto_visible">true</bool>
+    <bool name="preferences_formulation_netto_visible">true</bool>
+    <bool name="preferences_formulation_tara_visible">true</bool>
+
+    <bool name="preferences_formulation_target_visible">true</bool>
+    <bool name="preferences_formulation_differencew_visible">true</bool>
+    <bool name="preferences_formulation_differencep_visible">true</bool>
+
+    <bool name="preferences_formulation_print_total">true</bool>
+    <bool name="preferences_formulation_print_target">true</bool>
+    <bool name="preferences_formulation_print_differencew">true</bool>
+    <bool name="preferences_formulation_print_differencep">true</bool>
+
+    //Differential Weighing App
+    <bool name="preferences_differential_activated_default">true</bool>
+    <bool name="preferences_differential_autoMode">true</bool>
+
+    <bool name="preferences_differential_initial_visible">true</bool>
+    <bool name="preferences_differential_final_visible">true</bool>
+    <bool name="preferences_differential_differencew_visible">true</bool>
+    <bool name="preferences_differential_differencep_visible">true</bool>
+    <bool name="preferences_differential_brutto_visible">true</bool>
+    <bool name="preferences_differential_netto_visible">true</bool>
+    <bool name="preferences_differential_tara_visible">true</bool>
+
+    <bool name="preferences_differential_print_initial">true</bool>
+    <bool name="preferences_differential_print_final">true</bool>
+    <bool name="preferences_differential_print_differencew">true</bool>
+    <bool name="preferences_differential_print_differencep">true</bool>
+
+
+    //Density Determination app
+    <bool name="preferences_density_activated_default">true</bool>
+    <bool name="preferences_density_porous">true</bool>
+    <bool name="preferences_density_autoprint">true</bool>
+    <bool name="preferences_density_autosample">true</bool>
+
+    <bool name="preferences_denisty_Liquid_visible">true</bool>
+    <bool name="preferences_density_watertemp_visible">true</bool>
+    <bool name="preferences_density_oildensity_visible">true</bool>
+    <bool name="preferences_density_weightair_visible">true</bool>
+    <bool name="preferences_density_oiledweight_visible">true</bool>
+    <bool name="preferences_density_weightliquid_visible">true</bool>
+    <bool name="preferences_density_sinkervolume_visible">true</bool>
+
+    <bool name="preferences_density_porous_print">true</bool>
+    <bool name="preferences_density_liquidtype_print">true</bool>
+    <bool name="preferences_density_liquiddensity_print">true</bool>
+    <bool name="preferences_density_watertemp_print">true</bool>
+    <bool name="preferences_density_weightair_print">true</bool>
+    <bool name="preferences_density_weightinliquid_print">true</bool>
+
+
+    //Peak Hold App
+    <bool name="preferences_peak_activated">true</bool>
+    <bool name="preferences_peak_stableonly">true</bool>
+
+    <bool name="preferences_peak_secondary_visible">true</bool>
+    <bool name="preferences_peak_brutto_visible">true</bool>
+    <bool name="preferences_peak_netto_visible">true</bool>
+    <bool name="preferences_peak_tara_visible">true</bool>
+
+    <bool name="preferences_peak_print_stableonly">true</bool>
+
+
+
+    //Ingrediant Costing App
+    <bool name="preferences_ingrediant_activated_default">true</bool>
+
+    <bool name="preferences_ingrediant_unitcost_visible">true</bool>
+    <bool name="preferences_ingrediant_totalweight_visible">true</bool>
+    <bool name="preferences_ingrediant_totalcost_visible">true</bool>
+    <bool name="preferences_ingrediant_brutto_visible">true</bool>
+    <bool name="preferences_ingrediant_tara_visible">true</bool>
+    <bool name="preferences_ingrediant_netto_visible">true</bool>
+
+
+    <bool name="preferences_ingrediant_print_totalweight">true</bool>
+    <bool name="preferences_ingrediant_print_totalcost">true</bool>
+
+
+    //Pipette Adjustment App
+    <bool name="preferences_pipette_activated_default">true</bool>
+    <bool name="preferences_pipette_autosamplemode">true</bool>
+
+
+    <bool name="preferences_pipette_secondary_visible">true</bool>
+    <bool name="preferences_pipette_nominal_visible">true</bool>
+    <bool name="preferences_pipette_inacc_visible">true</bool>
+    <bool name="preferences_pipette_imprec_visible">true</bool>
+    <bool name="preferences_pipette_liquiddensity_visible">true</bool>
+    <bool name="preferences_pipette_barounit_visible">true</bool>
+    <bool name="preferences_pipette_watertemp_visible">true</bool>
+
+    <bool name="preferences_pipette_nominal_print">true</bool>
+    <bool name="preferences_pipette_inacc_print">true</bool>
+    <bool name="preferences_pipette_imprec_print">true</bool>
+    <bool name="preferences_pipette_liquiddensity_print">true</bool>
+    <bool name="preferences_pipette_barounit_print">true</bool>
+    <bool name="preferences_pipette_watertemp_print">true</bool>
+
+
+
 
 </resources>

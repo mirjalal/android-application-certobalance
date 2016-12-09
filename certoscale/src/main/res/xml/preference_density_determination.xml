@@ -4,20 +4,48 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="preferences_weigh_activated"
-            android:defaultValue="@bool/preferences_weigh_activated_default"
+            android:key="@string/preferences_density_activated"
+            android:defaultValue="@bool/preferences_density_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <ListPreference
+            android:key="@string/preferences_density_mode"
+            android:title="Density mode"
+            android:summary="Select between solid and liquid"
+            />
+        <ListPreference
+            android:key="@string/preferences_density_liquidtyp"
+            android:title="Liquid Type"
+            android:summary="Select between water and ohter"
+            />
+
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum"
-            android:defaultValue="@bool/preferences_weigh_minimum"
-            android:title="Minimum weight"
-            android:summary="Turn the minimum weight on/off"
+        android:key="@string/preferences_density_porous"
+        android:defaultValue="@bool/preferences_density_porous"
+        android:title="Porous"
+        android:summary="Turn porous material on/off"
+        android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_autoprint"
+            android:defaultValue="@bool/preferences_density_autoprint"
+            android:title="Print result"
+            android:summary="Turn automatical result printing on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_autosample"
+            android:defaultValue="@bool/preferences_density_autosample"
+            android:title="Auto Sample Mode"
+            android:summary="Turn auto sample mode on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
 
 
     </PreferenceCategory>
@@ -25,80 +53,117 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="preferences_weigh_secondary_visible"
-            android:defaultValue="@bool/preferences_weigh_secondary_visible"
-            android:title="Reference Weight"
-            android:summary="The reference weight is displayed"
+            android:key="@string/preferences_denisty_Liquid_visible"
+            android:defaultValue="@bool/preferences_denisty_Liquid_visible"
+            android:title="Liquid Density"
+            android:summary="Turn the liqiud density visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
 
         <CheckBoxPreference
-            android:key="preferences_weigh_minimum_visible"
-            android:defaultValue="@bool/preferences_weigh_minimum_visible"
-            android:title="Difference Weight"
-            android:summary="Display the difference to the reference Weight"
+            android:key="@string/preferences_density_watertemp_visible"
+            android:defaultValue="@bool/preferences_density_watertemp_visible"
+            android:title="Water Temperature"
+            android:summary="Turn the water temperature visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_brutto_visible"
-            android:defaultValue="@bool/preferences_weigh_brutto_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the Difference in Percent visible/invisible"
+            android:key="@string/preferences_density_oildensity_visible"
+            android:defaultValue="@bool/preferences_density_oildensity_visible"
+            android:title="Oil Density"
+            android:summary="Turn the oil density visible/invisible"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
+            <CheckBoxPreference
+            android:key="@string/preferences_density_weightair_visible"
+            android:defaultValue="@bool/preferences_density_weightair_visible"
+            android:title="Weight in Air"
+            android:summary="Turn weight in air visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+        android:key="@string/preferences_density_oiledweight_visible"
+        android:defaultValue="@bool/preferences_density_oiledweight_visible"
+        android:title="Oiled Weight"
+        android:summary="Turn oiled weight visible/invisible"
+        android:icon="@drawable/ic_launcher" >
+    </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_weightliquid_visible"
+            android:defaultValue="@bool/preferences_density_weightliquid_visible"
+            android:title="Weight in Liquid"
+            android:summary="Turn weight in liquid visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+
         <CheckBoxPreference
-            android:key="preferences_weigh_netto_visible"
-            android:defaultValue="@bool/preferences_weigh_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:key="@string/preferences_density_sinkervolume_visible"
+            android:defaultValue="@bool/preferences_density_sinkervolume_visible"
+            android:title="Sinker Volume"
+            android:summary="Turn the sinker volume visible/invisible"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
-        <CheckBoxPreference
-            android:key="preferences_weigh_tara_visible"
-            android:defaultValue="@bool/preferences_weigh_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
-        </CheckBoxPreference>
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Reference Weight"
-            android:summary="Print the reference weight yes/no"
+            android:key="@string/preferences_density_porous_print"
+            android:defaultValue="@bool/preferences_density_porous_print"
+            android:title="Porous"
+            android:summary="Print porous material on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:key="@string/preferences_density_liquidtype_print"
+            android:defaultValue="@bool/preferences_density_liquidtype_print"
+            android:title="Liquid Type"
+            android:summary="Print liquid type material on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="preferences_weigh_print_min"
-            android:defaultValue="@bool/preferences_weigh_print_min"
-            android:title="Difference Weight in Percent"
-            android:summary="Print the difference weight in percent weight yes/no"
+            android:key="@string/preferences_density_liquiddensity_print"
+            android:defaultValue="@bool/preferences_density_liquiddensity_print"
+            android:title="Liquid density"
+            android:summary="Print liquid density material on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_watertemp_print"
+            android:defaultValue="@bool/preferences_density_watertemp_print"
+            android:title="Water Temperature"
+            android:summary="Print water temperature on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_weightair_print"
+            android:defaultValue="@bool/preferences_density_weightair_print"
+            android:title="Weight in Air"
+            android:summary="Print weight in air on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_density_weightinliquid_print"
+            android:defaultValue="@bool/preferences_density_weightinliquid_print"
+            android:title="Weight in Liquid"
+            android:summary="Print weight in liquid on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+
 
     </PreferenceCategory>
 
