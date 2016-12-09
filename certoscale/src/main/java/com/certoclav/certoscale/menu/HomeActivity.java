@@ -1,18 +1,25 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -34,6 +41,8 @@ public class HomeActivity extends Activity implements ButtonEventListener {
     private GoogleApiClient client;
 
     private final int INDEX_APPLICATIONS = 3;
+    private final int INDEX_FACTORY_RESET = 9;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +60,61 @@ public class HomeActivity extends Activity implements ButtonEventListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               // On click applications, open the ApplicationActivity
                 if(position == INDEX_APPLICATIONS){
                     Intent intent = new Intent(HomeActivity.this, ApplicationActivity.class);
                     startActivity(intent);
+                }
+
+                // On click factory reset,
+                if(position == INDEX_FACTORY_RESET){
+
+                    try{
+                                final Dialog dialog = new Dialog(HomeActivity.this);
+                                dialog.setContentView(R.layout.dialog_yes_no);
+                                dialog.setTitle(R.string.factory_reset);
+
+                                // set the custom dialog components - text, image and button
+                                TextView text = (TextView) dialog.findViewById(R.id.text);
+                                text.setText("WARNING:" + " "+ getString(R.string.do_you_really_want_to) +" "+ getString(R.string.delete_all_data_));
+                                ImageView image = (ImageView) dialog.findViewById(R.id.dialog_image);
+                                image.setVisibility(View.GONE);
+                                Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                                dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                                // if button is clicked, close the custom dialog
+                                dialogButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                        dialog.dismiss();
+
+                                        // closing Entire Application
+                                        SharedPreferences.Editor editor = getSharedPreferences("clear_cache", Context.MODE_PRIVATE).edit();
+                                        editor.clear();
+                                        editor.commit();
+                                        ApplicationController.getInstance().clearApplicationData();
+                                        android.os.Process.killProcess(android.os.Process.myPid());
+
+
+                                    }
+                                });
+
+                                dialog.show();
+
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+
                 }
             }
         });

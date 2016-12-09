@@ -41,12 +41,11 @@ public class AppConstants {
 	 * Routes that can be accessed only by admin users
 	 */
 	public final static String REST_POST_CREATE_DEVICE = "/api/admin/devices/";// devices.createAdmin);
+
     public final static String PREFERENCE_KEY_STATISTICS = "preferences_weigh_statistic";
+	public final static String PREFERENCE_KEY_WEIGHNING_ACTIVIATED = "preference_weigh_activated";
 
 
-
-
-	
-
-
+	public static final String PREFERENCE_KEY_ONLINE_MODE = "preference_key_online_mode";
+	public static final String INTENT_EXTRA_USER_ID = "user_id";
 }

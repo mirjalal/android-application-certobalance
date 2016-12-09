@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
@@ -28,10 +29,11 @@ private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
 protected void onResume() {
 
 
-		navigationbar.onCreate();
+
 		navigationbar.setButtonEventListener(this);
-		actionButtonbar.onCreate();
 		actionButtonbar.setButtonEventListener(this);
+		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
+		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
 
 
 
@@ -54,7 +56,8 @@ protected void onPause() {
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.menu_application_activity);
 		super.onCreate(savedInstanceState);
-		
+		navigationbar.onCreate();
+		actionButtonbar.onCreate();
 
 		//start parse serial data output every second. TODO: This function call should be moved into a State Machine class
 	    Scale.getInstance().getReadAndParseSerialService().startParseSerialThread();

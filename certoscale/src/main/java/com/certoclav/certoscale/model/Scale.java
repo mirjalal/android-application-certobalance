@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.model;
 
+import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.SensorDataListener;
 import com.certoclav.certoscale.listener.WeightMeasuredListener;
@@ -51,6 +52,16 @@ public class Scale extends Observable {
 	private Float weightRaw = (float) 0; //raw value reiceived from Serial port of the balance
 	private Float weightMeasured = (float) 0; //measured weight
 	private Float weightTara = (float) 0; //tara
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	private User user = null;
 
 	public Float getAveragePieceWeight() {
 		return averagePieceWeight;
@@ -223,6 +234,8 @@ public class Scale extends Observable {
 	}
 
 
-
+	public String getSafetyKey() {
+		return "01234567891234567";
+	}
 }
 

@@ -4,7 +4,7 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_activated"
+	    	android:key="@string/preferences_weigh_activated"
 	    	android:defaultValue="@bool/preferences_weigh_activated_default"
 	    	android:title="Activated"
 	    	android:summary="Turn the application on/off"
@@ -12,7 +12,7 @@
     	</CheckBoxPreference>
   
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_minimum"
+	    	android:key="@string/preferences_weigh_minimum"
 	    	android:defaultValue="@bool/preferences_weigh_minimum"
 	    	android:title="Minimum weight"
 	    	android:summary="Turn the minimum weight on/off"
@@ -25,7 +25,7 @@
    <PreferenceCategory android:title="VISIBILITY" >
    
    		<CheckBoxPreference
-	    	android:key="preferences_weigh_secondary_visible"
+	    	android:key="@string/preferences_weigh_secondary_visible"
 	    	android:defaultValue="@bool/preferences_weigh_secondary_visible"
 	    	android:title="Secondary unit"
 	    	android:summary="Turn the secondary display line visible/invisible"
@@ -34,7 +34,7 @@
  
    		
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_minimum_visible"
+	    	android:key="@string/preferences_weigh_minimum_visible"
 	    	android:defaultValue="@bool/preferences_weigh_minimum_visible"
 	    	android:title="Minimum weight"
 	    	android:summary="Turn the minimum weight visible/invisible"
@@ -42,7 +42,7 @@
     	</CheckBoxPreference>	
  
 		<CheckBoxPreference
-	    	android:key="preferences_weigh_brutto_visible"
+	    	android:key="@string/preferences_weigh_brutto_visible"
 	    	android:defaultValue="@bool/preferences_weigh_brutto_visible"
 	    	android:title="Brutto"
 	    	android:summary="Turn the brutto weight visible/invisible"

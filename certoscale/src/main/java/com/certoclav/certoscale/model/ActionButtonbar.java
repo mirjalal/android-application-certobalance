@@ -97,7 +97,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 public void onCreate(){
-	
+
+
 	buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print);
 	buttonPrint.setOnClickListener(new OnClickListener() {
 		

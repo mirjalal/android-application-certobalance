@@ -1,0 +1,304 @@
+package com.certoclav.certoscale.database;
+
+import android.content.Context;
+import android.database.SQLException;
+import android.util.Log;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.UpdateBuilder;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+import java.util.List;
+
+/**
+ * CertoClavDatabase class is responsible for the communication of the
+ * application with the sqlite database.
+ * 
+ * @author Iulia Rasinar <iulia.rasinar@nordlogic.com>
+ */
+public class DatabaseService {
+	private final String TAG = getClass().getSimpleName();
+	private final Context mContext;
+
+
+	Dao<User, Integer> userDao;
+
+	Dao<Message, Integer> messageDao;
+
+
+	private DatabaseHelper mDatabaseHelper;
+	
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 *            the context of calling application
+	 */
+	public DatabaseService(final Context context) {
+		this.mContext = context;
+		mDatabaseHelper = getHelper();
+	
+
+		userDao = getHelper().getUserDao();
+
+		messageDao = getHelper().getMessageDao();
+
+
+	}
+
+	/**
+	 * Releases the helper when done.
+	 */
+	public void close() {
+		if (mDatabaseHelper != null) {
+			OpenHelperManager.releaseHelper();
+			mDatabaseHelper = null;
+		}
+	}
+	public void resetDatabase() {
+
+		ConnectionSource connectionSource = mDatabaseHelper.getConnectionSource();
+		try {
+			
+			Log.i("DatabaseService", "dropTables");		
+		    TableUtils.dropTable(connectionSource, User.class, true );
+			TableUtils.dropTable(connectionSource, Message.class, true );
+
+			Log.i("DatabaseService", "createTables");
+			TableUtils.createTable(connectionSource, User.class);
+			TableUtils.createTable(connectionSource, Message.class);
+			
+		} catch (java.sql.SQLException e) {
+			Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
+			throw new RuntimeException(e);
+		}
+		
+	}
+
+	
+	public List<Message> getMessages() {
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return messageDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+	
+	
+	public int insertMessage(Message message) {
+
+		try {
+
+			int x =messageDao.create(message);
+
+
+
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+	
+	public int deleteMessage(final Message message) {
+		try {
+
+			return messageDao.delete(message);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+	
+
+	
+
+	public List<User> getUsers() { // f�r gro�e Datenmengen ist for (User user :
+									// userDao) { ... } besser da die objekte
+									// nicht alle auf einmal in eine liste
+									// geladen werden m�ssen
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return userDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			
+			Log.e(TAG, "Database exception", e);
+			
+		}
+
+		return null;
+	}
+	
+	public User getUserById(int userId) {
+		try {
+
+			return userDao.queryForId(userId);
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+	
+	public List<User> getUserByCloudId(String userId) {
+		try {
+			return userDao.queryBuilder().where().eq(User.FIELD_USER_CLOUD_ID, userId).query();
+			
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+	public int insertUser(User user) {
+
+		try {
+			return userDao.create(user);
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+	/*
+	public int deleteUser(final User user) {
+		try {
+
+			return userDao.delete(user);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return -1;
+	}
+*/
+
+	/**
+	 * Get the helper from the manager once per class.
+	 */
+	private DatabaseHelper getHelper() {
+		if (mDatabaseHelper == null) {
+			mDatabaseHelper = OpenHelperManager.getHelper(mContext,
+					DatabaseHelper.class);
+		}
+		return mDatabaseHelper;
+	}
+
+	public int updateUserVisibility(String email, boolean isVisible) {
+		try {
+			UpdateBuilder<User, Integer> updateBuilder = userDao
+					.updateBuilder();
+		
+				updateBuilder.where().eq("email", email);
+
+			/** query for object in the database with id equal profileId */
+			updateBuilder.updateColumnValue("is_visible", isVisible);
+
+			int r = updateBuilder.update();
+			return r;
+			} catch (java.sql.SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return -1;
+	}
+
+	public int updateUserIsLocal(String email_user_id, boolean isLocal) {
+		try {
+			UpdateBuilder<User, Integer> updateBuilder = userDao
+					.updateBuilder();
+		
+				updateBuilder.where().eq("email", email_user_id);
+
+			/** query for object in the database with id equal profileId */
+			updateBuilder.updateColumnValue(User.FIELD_USER_LOCAL, isLocal);
+
+			int r = updateBuilder.update();
+			return r;
+			} catch (java.sql.SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return -1;
+	}
+	
+	public int deleteUser(User user) {
+		
+		try {
+			return userDao.delete(user);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return -1;
+	}
+	
+
+	public List<User> getUsersWhereVisible() {
+		try {
+
+			return userDao.queryBuilder().where().eq("is_visible", true).query();
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+
+		return null;
+
+
+	}
+
+	public int updateUserPassword(String email_user_id, String newPassword) {
+		try {
+			UpdateBuilder<User, Integer> updateBuilder = userDao
+					.updateBuilder();
+		
+				updateBuilder.where().eq("email", email_user_id);
+
+			/** query for object in the database with id equal profileId */
+			updateBuilder.updateColumnValue("password", newPassword);
+
+			int r = updateBuilder.update();
+			return r;
+			} catch (java.sql.SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return -1;
+		
+	}
+
+
+	
+	
+
+
+
+		
+	
+	
+
+}

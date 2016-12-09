@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    >
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/navigationbar"
+        android:id="@+id/login_content"
+        >
+    
+        <TextView 
+            android:id="@+id/login_text_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#696969"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/login_notification_offline"
+            android:textColor="@android:color/white"
+            />
+<LinearLayout 
+    android:id="@+id/login_container_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="100dp"
+    android:layout_marginRight="100dp"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    >
+
+
+      
+
+    <Spinner
+        android:id="@+id/login_spinner"
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:layout_height="60dp" 
+        android:layout_margin="5dp"
+        android:background="@drawable/spinner"/>
+
+   <EditText
+        android:id="@+id/loginEditTextPassword"
+        android:hint="@string/password"
+        android:layout_height="60dp" 
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:inputType="textPassword"
+        android:background="@drawable/textfield"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/loginButtonLogin"
+        android:maxWidth="600dp"
+        android:layout_height="60dp" 
+        android:layout_width="match_parent"
+        android:text="@string/login"
+        android:textStyle="bold"
+        android:background="@drawable/btn_blue_dark"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+                android:layout_margin="5dp"
+         />
+
+
+
+</LinearLayout>
+
+<ProgressBar android:id="@+id/login_progressbar" 
+    style="?android:attr/progressBarStyleLarge" 
+    android:layout_alignBottom="@+id/login_container_login"
+    android:layout_alignRight="@+id/login_container_login"
+    android:layout_width="60dp" 
+    android:layout_height="60dp"
+    android:layout_margin="5dp" 
+    android:visibility="visible"/>
+
+</RelativeLayout>
+
+    <include layout="@layout/navigationbar"
+        android:id="@+id/navigationbar"/>
+
+
+</RelativeLayout>
+
+
+

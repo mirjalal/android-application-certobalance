@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class Navigationbar {
 
-	public TextView getTextTitle() {
+		public TextView getTextTitle() {
 		return textTitle;
 	}
 
@@ -36,8 +36,21 @@ public class Navigationbar {
 
 	public static final int BUTTON_HOME = 1;
 	public static final int BUTTON_SETTINGS = 2;
+	public static final int BUTTON_ADD = 13;
+	public static final int BUTTON_BACK = 14;
 	
 	private Button buttonHome = null;
+
+	public Button getButtonBack() {
+		return buttonBack;
+	}
+
+	public void setButtonBack(Button buttonBack) {
+		this.buttonBack = buttonBack;
+	}
+
+	private Button buttonBack = null;
+
 	public Button getButtonHome() {
 		return buttonHome;
 	}
@@ -76,6 +89,16 @@ public class Navigationbar {
 	private Spinner spinnerLib = null;
 	private TextView textTitle = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
+
+	public Button getButtonAdd() {
+		return buttonAdd;
+	}
+
+	public void setButtonAdd(Button buttonAdd) {
+		this.buttonAdd = buttonAdd;
+	}
+
+	private Button buttonAdd = null;
 
 public void setButtonEventListener (ButtonEventListener listener){
 	this.navigationbarListeners.add(listener);
@@ -125,7 +148,32 @@ public void onCreate(){
 			
 		}
 	});
-	
+
+	buttonAdd = (Button) mActivity.findViewById(R.id.naviagationbar_button_add);
+	buttonAdd.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_ADD,false);
+			}
+		}
+	});
+
+	buttonBack = (Button) mActivity.findViewById(R.id.naviagationbar_button_back);
+	buttonBack.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_BACK,false);
+			}
+			//if(navigationbarListeners.isEmpty()){
+				mActivity.finish();
+			//}
+		}
+	});
+
 	buttonHome = (Button) mActivity.findViewById(R.id.naviagationbar_button_home);
 	buttonHome.setOnClickListener(new OnClickListener() {
 		

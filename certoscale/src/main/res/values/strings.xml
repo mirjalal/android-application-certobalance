@@ -10,6 +10,11 @@
     
     <string name="app_name">certoscale</string>
     <string name="hello_world">Hello world!</string>
+    <string name="preferences_weigh_activated">preferences_weigh_activated</string>
+    <string name="preferences_weigh_minimum">preferences_weigh_minimum</string>
+    <string name="preferences_weigh_secondary_visible">preferences_weigh_secondary_visible</string>
+    <string name="preferences_weigh_minimum_visible">preferences_weigh_minimum_visible</string>
+    <string name="preferences_weigh_brutto_visible">preferences_weigh_brutto_visible</string>
     <string-array name="navigationbar_entries">
         <item>Weighing</item>
         <item>Part Counting</item>
