@@ -1,7 +1,20 @@
 package com.certoclav.certoscale.supervisor;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
+import java.util.ArrayList;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -9,12 +22,21 @@ import com.certoclav.certoscale.model.Scale;
 
 public class ApplicationManager {
 
+    private ArrayList<Float> statisticsArray = new ArrayList<Float>();
     public float getAwpCalcSampleSize() {
         return awpCalcSampleSize;
     }
 
     public String getAwpCalcSampleSizeAsString(){
         return String.format("%.6f", getAwpCalcSampleSize()) + " g";
+    }
+
+    public ArrayList<Float> getStatisticsArray() {
+        return statisticsArray;
+    }
+
+    public void setStatisticsArray(ArrayList<Float> statisticsArray) {
+        this.statisticsArray = statisticsArray;
     }
 
     public void setAwpCalcSampleSize(float awpCalcSampleSize) {
@@ -140,5 +162,73 @@ public class ApplicationManager {
 
     public String getTaredValueAsStringInGram() {
         return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
+    }
+
+    public void accumulateStatistics() {
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING:
+                statisticsArray.add((float)(getSumInPieces()-getTareInPieces()));
+            break;
+            default:
+                statisticsArray.add(getTaredValueInGram());
+                break;
+        }
+
+    }
+    public void clearStatistics(){
+        statisticsArray.clear();
+    }
+
+    public void showStatisticsNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try{
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_statistics);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Statistics");
+            SummaryStatistics statistic = new SummaryStatistics();
+            for(Float value : statisticsArray){
+                statistic.addValue(value);
+            }
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText(""+ statistic.getN());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f",statistic.getMean()) + " "+getUnitAsString());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f",statistic.getMax())  + " "+getUnitAsString());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f",statistic.getMin())  + " "+getUnitAsString());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f",statistic.getVariance())  + " "+getUnitAsString());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f",statistic.getStandardDeviation()) +   " "+getUnitAsString());
+            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f",statistic.getSum()) +  " "+getUnitAsString());
+
+            // set the custom dialog components - text, image and button
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_statistics_button_clear);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    clearStatistics();
+                    dialog.dismiss();
+                }
+            });
+            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_button_print);
+            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(eContext,"Todo: Send statistics to COM port",Toast.LENGTH_LONG).show();
+                }
+            });
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

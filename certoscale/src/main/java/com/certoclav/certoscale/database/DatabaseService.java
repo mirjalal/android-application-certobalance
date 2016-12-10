@@ -27,6 +27,8 @@ public class DatabaseService {
 
 	Dao<Message, Integer> messageDao;
 
+	Dao<Library,Integer> libraryDao;
+
 
 	private DatabaseHelper mDatabaseHelper;
 	
@@ -45,6 +47,7 @@ public class DatabaseService {
 		userDao = getHelper().getUserDao();
 
 		messageDao = getHelper().getMessageDao();
+		libraryDao = getHelper().getLibraryDao();
 
 
 	}
@@ -66,10 +69,12 @@ public class DatabaseService {
 			Log.i("DatabaseService", "dropTables");		
 		    TableUtils.dropTable(connectionSource, User.class, true );
 			TableUtils.dropTable(connectionSource, Message.class, true );
+			TableUtils.dropTable(connectionSource, Library.class, true);
 
 			Log.i("DatabaseService", "createTables");
 			TableUtils.createTable(connectionSource, User.class);
 			TableUtils.createTable(connectionSource, Message.class);
+			TableUtils.createTable(connectionSource, Library.class);
 			
 		} catch (java.sql.SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
@@ -78,7 +83,21 @@ public class DatabaseService {
 		
 	}
 
-	
+	public List<Library> getLibraries() {
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return libraryDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
 	public List<Message> getMessages() {
 		try {
 
@@ -92,8 +111,42 @@ public class DatabaseService {
 
 		return null;
 	}
-	
-	
+
+
+
+	public int insertLibrary(Library library) {
+
+		try {
+
+			int x =libraryDao.create(library);
+
+
+
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+
+	public int deleteLibrary(final Library library) {
+		try {
+
+			return libraryDao.delete(library);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+
+
+
 	public int insertMessage(Message message) {
 
 		try {

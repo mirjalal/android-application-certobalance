@@ -12,7 +12,6 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import java.util.ArrayList;
 
 
-
 public class ActionButtonbar {
 
 	public ActionButtonbar(Activity activity){
@@ -26,10 +25,31 @@ public class ActionButtonbar {
 	public static final int BUTTON_CAL = 4;
 	public static final int BUTTON_PRINT = 5;
 	public static final int BUTTON_APP_SETTINGS = 6;
+	public static final int BUTTON_STATISTICS = 15;
+	public static final int BUTTON_ACCUMULATE = 16;
 	
 	private Button buttonTara = null;
 	private Button buttonCal = null;
 	private Button buttonPrint= null;
+
+	public Button getButtonStatistics() {
+		return buttonStatistics;
+	}
+
+	public void setButtonStatistics(Button buttonStatistics) {
+		this.buttonStatistics = buttonStatistics;
+	}
+
+	public Button getButtonAccumulate() {
+		return buttonAccumulate;
+	}
+
+	public void setButtonAccumulate(Button buttonAccumulate) {
+		this.buttonAccumulate = buttonAccumulate;
+	}
+
+	private Button buttonStatistics = null;
+	private Button buttonAccumulate = null;
 
 	public Button getButtonTara() {
 		return buttonTara;
@@ -110,7 +130,31 @@ public void onCreate(){
 			
 		}
 	});
-	
+
+
+	buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics);
+	buttonStatistics.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
+			}
+
+		}
+	});
+
+	buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate);
+	buttonAccumulate.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
+			}
+
+		}
+	});
 	buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal);
 	buttonCal.setOnClickListener(new OnClickListener() {
 		

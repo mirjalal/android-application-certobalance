@@ -25,4 +25,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile files('libs/ormlite-core-4.48.jar')
     compile files('libs/ormlite-android-4.48.jar')
+    compile files('libs/commons-math3-3.6.1.jar')
 }

@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,15 +11,17 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.model.ActionButtonbar;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 
 
-public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener {
+public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
 private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
@@ -35,9 +38,6 @@ protected void onResume() {
 		actionButtonbar.setButtonEventListener(this);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
-
-
-
 
 		super.onResume();
 }
@@ -80,6 +80,19 @@ protected void onPause() {
 		if(buttonId == ActionButtonbar.BUTTON_TARA){
 			ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 		}
+		if(buttonId == ActionButtonbar.BUTTON_STATISTICS){
+			ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+				}
+			});
+
+		}
+		if(buttonId == ActionButtonbar.BUTTON_ACCUMULATE){
+			ApplicationManager.getInstance().accumulateStatistics();
+			actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+		}
 
 		if(buttonId == ActionButtonbar.BUTTON_APP_SETTINGS){
 			if(appSettingsVisible == true) {
@@ -88,10 +101,14 @@ protected void onPause() {
 				actionButtonbar.getButtonCal().setEnabled(true);
 				actionButtonbar.getButtonPrint().setEnabled(true);
 				actionButtonbar.getButtonTara().setEnabled(true);
+				actionButtonbar.getButtonStatistics().setEnabled(true);
+				actionButtonbar.getButtonAccumulate().setEnabled(true);
 				appSettingsVisible = false;
 			}else{
 				actionButtonbar.getButtonCal().setEnabled(false);
 				actionButtonbar.getButtonPrint().setEnabled(false);
+				actionButtonbar.getButtonStatistics().setEnabled(false);
+				actionButtonbar.getButtonAccumulate().setEnabled(false);
 				//actionButtonbar.getButtonTara().setEnabled(false);
 				switch (Scale.getInstance().getScaleApplication()){
 					case PART_COUNTING:
@@ -139,4 +156,9 @@ protected void onPause() {
 		}
 	}
 
+	@Override
+	public void onApplicationChange(ScaleApplication application) {
+		ApplicationManager.getInstance().clearStatistics();
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+	}
 }
