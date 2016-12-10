@@ -2,8 +2,7 @@ package com.certoclav.certoscale.model;
 
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
-import com.certoclav.certoscale.listener.SensorDataListener;
-import com.certoclav.certoscale.listener.WeightMeasuredListener;
+import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 
 import java.util.ArrayList;
@@ -19,39 +18,17 @@ import android_serialport_api.SerialService;
 public class Scale extends Observable {
 
 
-	ArrayList<SensorDataListener> sensorDataListeners = new ArrayList<SensorDataListener>();
+	ArrayList<WeightListener> weightListeners = new ArrayList<WeightListener>();
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
-	ArrayList<WeightMeasuredListener> weightMesuredListeners = new ArrayList<WeightMeasuredListener>();
 
 	private SerialService serialServiceScale = null;
 	private SerialService serialServicePrinter = null;
 
-	public String getUnitRaw() {
-		return unitRaw;
-	}
-
-	public void setUnitRaw(String unitRaw) {
-		this.unitRaw = unitRaw;
-	}
-
-	public String getUnitTransformed() {
-		return unitTransformed;
-	}
-
-	public void setUnitTransformed(String unitTransformed) {
-		this.unitTransformed = unitTransformed;
-	}
-
-	private String unitRaw = "g";
-	private String unitTransformed = "g";
-
-
 	private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
 	private ScaleState state = ScaleState.READY; //default init state is READY_AND_WAITING_FOR_LOGIN
-	private Float averagePieceWeight = (float)1.0 ; //divider for part counting application
-	private Float weightRaw = (float) 0; //raw value reiceived from Serial port of the balance
-	private Float weightMeasured = (float) 0; //measured weight
-	private Float weightTara = (float) 0; //tara
+
+	private Float weightInGram = (float) 0; //raw value reiceived from Serial port of the balance
+
 
 	public User getUser() {
 		return user;
@@ -63,57 +40,9 @@ public class Scale extends Observable {
 
 	private User user = null;
 
-	public Float getAveragePieceWeight() {
-		return averagePieceWeight;
-	}
-
-	public void setAveragePieceWeight(Float averagePieceWeight) {
-		this.averagePieceWeight = averagePieceWeight;
-	}
-	
-	public Float getWeightMeasured() {
-		return weightMeasured;
-	}
 
 
-	public String getTaraAsStringWithUnit() {
-		switch (getScaleApplication()){
-			case PART_COUNTING:
-				return String.format("%d", Math.round(getWeightTara())) + " "+ Scale.getInstance().getUnitTransformed();
-			default:
-				return String.format("%.4f", getWeightTara()) + " "+ Scale.getInstance().getUnitTransformed();
-		}
-	}
 
-
-	public String getTotalWeightAsStringWithUnit() {
-
-		switch (getScaleApplication()){
-			case PART_COUNTING:
-				return String.format("%d", Math.round(getWeightMeasured())) + " "+ Scale.getInstance().getUnitTransformed();
-			default:
-				return String.format("%.4f", getWeightMeasured()) + " "+ Scale.getInstance().getUnitTransformed();
-		}
-
-	}
-
-	public String getRelativeWeightAsStringWithUnit() {
-
-		switch (getScaleApplication()){
-			case PART_COUNTING:
-				return String.format("%d", Math.round( getWeightMeasured() - getWeightTara() )) + " "+ Scale.getInstance().getUnitTransformed();
-			default:
-				return String.format("%.4f", getWeightMeasured() - getWeightTara()) + " "+ Scale.getInstance().getUnitTransformed();
-		}
-		
-	}
-	
-	public void setWeightMeasured(Float weightMeasured) {
-		this.weightMeasured = weightMeasured;
-		for(WeightMeasuredListener listener: weightMesuredListeners){
-			listener.onWeightMeasuredChanged(weightMeasured);
-		}
-	}
 
 
 
@@ -152,17 +81,11 @@ public class Scale extends Observable {
 		this.microcontrollerReachable = microcontrollerReachable;
 	}
 
-	public void setOnWeightMeasuredListener(WeightMeasuredListener listener){
-		this.weightMesuredListeners.add(listener);
-	}
-	public void removeOnWeightMeasuredListener(WeightMeasuredListener listener){
-		this.weightMesuredListeners.remove(listener);
-	}
-	public void setOnSensorDataListener (SensorDataListener listener){
-		this.sensorDataListeners.add(listener);
+	public void setOnWeightListener(WeightListener listener){
+		this.weightListeners.add(listener);
 	}	
-	public void removeOnSensorDataListener (SensorDataListener listener){
-		this.sensorDataListeners.remove(listener);
+	public void removeOnWeightListener(WeightListener listener){
+		this.weightListeners.remove(listener);
 	}
 	public void setOnApplicationListener (ScaleApplicationListener listener){
 		this.applicationListeners.add(listener);
@@ -186,30 +109,24 @@ public class Scale extends Observable {
 		}
 	
 	public void setValue(Float value) {
-		setWeightRaw(value);
+		setWeightInGram(value);
 		
 		
-		for(SensorDataListener listener : sensorDataListeners){
-			listener.onSensorDataChange(value, "g");
+		for(WeightListener listener : weightListeners){
+			listener.onWeightChanged(value, "g");
 		}
 		
 	}
 
-	public Float getWeightRaw() {
-		return weightRaw;
+	public Float getWeightInGram() {
+		return weightInGram;
 	}
 
-	public void setWeightRaw(Float weightRaw) {
-		this.weightRaw = weightRaw;
+	public void setWeightInGram(Float weightInGram) {
+		this.weightInGram = weightInGram;
 	}
 
-	public Float getWeightTara() {
-		return weightTara;
-	}
 
-	public void setWeightTara(Float weightTara) {
-		this.weightTara = weightTara;
-	}
 
 	public ReadAndParseSerialService getReadAndParseSerialService() {
 		if(readAndParseSerialService == null){

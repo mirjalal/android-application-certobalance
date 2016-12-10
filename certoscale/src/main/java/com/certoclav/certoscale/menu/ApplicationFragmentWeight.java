@@ -9,9 +9,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.listener.WeightMeasuredListener;
+import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+
+import static android.R.attr.value;
 
 
 /**
@@ -23,7 +26,7 @@ import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ApplicationFragmentWeight extends Fragment implements WeightMeasuredListener {
+public class ApplicationFragmentWeight extends Fragment implements WeightListener {
     private FrameLayout barload = null;
     private TextView textInstruction = null;
     private TextView textSum = null;
@@ -46,29 +49,31 @@ public class ApplicationFragmentWeight extends Fragment implements WeightMeasure
     @Override
     public void onResume() {
         super.onResume();
-        Scale.getInstance().setOnWeightMeasuredListener(this);
+        Scale.getInstance().setOnWeightListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Scale.getInstance().removeOnWeightMeasuredListener(this);
+        Scale.getInstance().removeOnWeightListener(this);
     }
 
 
 
+
+
     @Override
-    public void onWeightMeasuredChanged(Float value) {
+    public void onWeightChanged(Float weight, String unit) {
 
         //Show weight to the user in respect to the TARA weight
-        textValue.setText(Scale.getInstance().getRelativeWeightAsStringWithUnit());
+        textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
         //Show measured total weight to the user
-        textSum.setText("SUM: " + Scale.getInstance().getTotalWeightAsStringWithUnit());
+        textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
         //Update Loading bar
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
-        int width = (int) (value*7.0);
+        int width = (int) (Scale.getInstance().getWeightInGram()*7.0);
         if(width<0){
             width = 0;
         }
@@ -81,12 +86,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightMeasure
             //todo color bar red
         }
 
-        if(Scale.getInstance().getWeightRaw() - Scale.getInstance().getWeightTara() == 0){
+        if(Scale.getInstance().getWeightInGram()  == 0){
             textInstruction.setText("Please place item");
         }else{
             textInstruction.setText("");
         }
-
 
 
     }

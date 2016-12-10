@@ -1,24 +1,112 @@
 package com.certoclav.certoscale.supervisor;
 
-import android.util.Log;
-
-import com.certoclav.certoscale.listener.ScaleApplicationListener;
-import com.certoclav.certoscale.listener.SensorDataListener;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleApplication;
 
 /**
  * Created by Michael on 12/6/2016.
  */
 
-public class ApplicationManager implements SensorDataListener, ScaleApplicationListener {
+public class ApplicationManager {
 
+
+    private static final int UNIT_GRAM = 1;
+    private static final int UNIT_PIECES = 2;
 
     private static ApplicationManager instance = new ApplicationManager();
+    private float averagePieceWeight = 1;
 
+    public void setTareInGram(float tareInGram) {
+        this.tareInGram = tareInGram;
+    }
+
+    public float getAveragePieceWeightInGram() {
+        return averagePieceWeight;
+    }
+
+    public void setAveragePieceWeightInGram(float averagePieceWeight) {
+        this.averagePieceWeight = averagePieceWeight;
+    }
+
+    public int getUnit() {
+        return unit;
+    }
+
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    private float tareInGram = 0;
+    private int unit = UNIT_GRAM;
+
+    public String getUnitAsString(){
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING:
+                return "pcs";
+
+            case PERCENT_WEIGHING:
+                return "%";
+
+            default:
+                return "g";
+        }
+    }
+
+
+    public float getSumInGram(){
+        return Scale.getInstance().getWeightInGram();
+    }
+
+    public int getSumInPieces(){
+       return Math.round(Scale.getInstance().getWeightInGram()/averagePieceWeight);
+    }
+
+    public float getTareInGram(){
+        return tareInGram;
+    }
+
+    public int getTareInPieces(){
+        return Math.round(tareInGram/averagePieceWeight);
+    }
+
+    public int getLoadInPercent(){
+        return (int) Math.round((Scale.getInstance().getWeightInGram()/AppConstants.WEIGHT_MAX)*100.0);
+    }
+
+
+    public String getSumAsStringWithUnit() {
+
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING:
+                return String.format("%d", getSumInPieces()) + " "+ getUnitAsString();
+            default:
+                return String.format("%.4f", getSumInGram()) + " "+ getUnitAsString();
+        }
+
+    }
+
+    public String getTaredValueAsStringWithUnit() {
+
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING:
+                return String.format("%d", getSumInPieces() - getTareInPieces() ) + " "+ getUnitAsString();
+            default:
+                return String.format("%.4f", getSumInGram() - getTareInGram()) + " "+ getUnitAsString();
+        }
+
+    }
+
+
+    public String getTareAsStringWithUnit() {
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING:
+                return String.format("%d", getTareInPieces()) + " "+ getUnitAsString();
+            default:
+                return String.format("%.4f", getTareInGram()) + " "+ getUnitAsString();
+        }
+    }
     private ApplicationManager(){
-        Scale.getInstance().setOnApplicationListener(this);
-        Scale.getInstance().setOnSensorDataListener(this);
+
     }
 
     public static synchronized ApplicationManager getInstance(){
@@ -26,43 +114,7 @@ public class ApplicationManager implements SensorDataListener, ScaleApplicationL
 
     }
 
-
-    @Override
-    public void onApplicationChange(ScaleApplication application) {
-
-        Scale.getInstance().setWeightTara((float) 0);
-
-        switch (application){
-
-            case WEIGHING:
-                Scale.getInstance().setUnitTransformed("g");
-                break;
-            case PART_COUNTING:
-                Log.e("ApplicationFragmentW", "change unit to pieces");
-                Scale.getInstance().setUnitTransformed("pieces");
-                break;
-            case PERCENT_WEIGHING:
-                Scale.getInstance().setUnitTransformed("%");
-                break;
-            default:
-                Scale.getInstance().setUnitTransformed("g");
-
-        }
-    }
-
-    @Override
-    public void onSensorDataChange(Float value, String unit) {
-
-        //TODO: Do calculations here depending on current ScaleApplication
-
-        //For example:
-        switch (Scale.getInstance().getScaleApplication()){
-            case PART_COUNTING:
-                Scale.getInstance().setWeightMeasured((float) ((int)(value/Scale.getInstance().getAveragePieceWeight()))); //example if one piece weights 3 grams
-                break;
-            default:
-                Scale.getInstance().setWeightMeasured(value);
-        }
-
+    public String getLoadInGramAsStringWithUnit() {
+        return String.format("%.4f", getSumInGram()) + " g";
     }
 }

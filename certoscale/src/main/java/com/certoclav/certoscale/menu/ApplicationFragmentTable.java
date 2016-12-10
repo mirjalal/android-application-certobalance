@@ -8,25 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.listener.SensorDataListener;
+import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.value;
 
-/**
- * A list fragment representing a list of Items. This fragment also supports
- * tablet devices by allowing list items to be given an 'activated' state upon
- * selection. This helps indicate which item is currently being viewed in a
- * {@link ItemDetailFragment}.
- * <p>
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
- */
-public class ApplicationFragmentTable extends Fragment implements SensorDataListener {
+
+
+public class ApplicationFragmentTable extends Fragment implements WeightListener {
 
 
     private float tara = 0;
@@ -36,13 +30,13 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
     @Override
     public void onResume() {
         super.onResume();
-        Scale.getInstance().setOnSensorDataListener(this);
+        Scale.getInstance().setOnWeightListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Scale.getInstance().removeOnSensorDataListener(this);
+        Scale.getInstance().removeOnWeightListener(this);
     }
 
     @Override
@@ -68,9 +62,9 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
         return rootView;
     }
 
-    @Override
-    public void onSensorDataChange(Float value, String unit) {
 
+    @Override
+    public void onWeightChanged(Float weight, String unit) {
 
 
         if(value > 100){
@@ -82,27 +76,28 @@ public class ApplicationFragmentTable extends Fragment implements SensorDataList
 
         //standard result fields
         listReferenceFields.get(0).getTextName().setText("TARA");
-        listReferenceFields.get(0).getTextValue().setText(Scale.getInstance().getTaraAsStringWithUnit());
+        listReferenceFields.get(0).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
 
         listReferenceFields.get(1).getTextName().setText("SUM");
-        listReferenceFields.get(1).getTextValue().setText(Scale.getInstance().getTotalWeightAsStringWithUnit());
+        listReferenceFields.get(1).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
 
-        listReferenceFields.get(2).getTextName().setText("LOAD");
-        listReferenceFields.get(2).getTextValue().setText(String.format("%d", Math.round(Scale.getInstance().getWeightRaw())) + " %");
+        listReferenceFields.get(2).getTextName().setText("LOAD [%]");
+        listReferenceFields.get(2).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
+
+        listReferenceFields.get(3).getTextName().setText("LOAD [g]");
+        listReferenceFields.get(3).getTextValue().setText(ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
 
         switch (Scale.getInstance().getScaleApplication()){
             case WEIGHING:
 
                 break;
             case PART_COUNTING:
-                listReferenceFields.get(3).getTextName().setText("PIECE WEIGHT");
-                listReferenceFields.get(3).getTextValue().setText(String.format("%.4f",Scale.getInstance().getAveragePieceWeight()) + " g" );
+                listReferenceFields.get(4).getTextName().setText("PIECE WEIGHT");
+                listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightInGram() + " g");
 
 
                 break;
         }
-
-
 
     }
 }

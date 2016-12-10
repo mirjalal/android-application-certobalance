@@ -28,10 +28,10 @@
 
 
     <Button
+        android:id="@+id/settings_partcounting_button_awp"
         android:text="Set average piece weight"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/button2"
         android:background="@drawable/btn_white_shadow_clickable"
         android:layout_weight="1" />
 
@@ -44,10 +44,11 @@
         android:layout_weight="1" />
 
     <Button
+
         android:text="Set number of samples"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/button3"
+        android:id="@+id/settings_partcounting_button_sample_size"
         android:background="@drawable/btn_white_shadow_clickable"
         android:layout_weight="1" />
 </LinearLayout>
