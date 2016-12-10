@@ -11,10 +11,12 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import static android.R.attr.value;
+import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 
 
 /**
@@ -65,11 +67,19 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     @Override
     public void onWeightChanged(Float weight, String unit) {
 
-        //Show weight to the user in respect to the TARA weight
-        textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+        switch (Scale.getInstance().getScaleApplication()){
+            case PART_COUNTING_CALC_AWP:
+                textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
+                textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                break;
+            default:
+                //Show weight to the user in respect to the TARA weight
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
-        //Show measured total weight to the user
-        textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                //Show measured total weight to the user
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+            break;
+        }
 
         //Update Loading bar
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();

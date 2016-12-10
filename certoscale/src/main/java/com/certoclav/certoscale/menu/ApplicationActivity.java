@@ -85,8 +85,14 @@ protected void onPause() {
 			if(appSettingsVisible == true) {
 				getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
 				actionButtonbar.getButtonAppSettings().setText("SETTINGS");
+				actionButtonbar.getButtonCal().setEnabled(true);
+				actionButtonbar.getButtonPrint().setEnabled(true);
+				actionButtonbar.getButtonTara().setEnabled(true);
 				appSettingsVisible = false;
 			}else{
+				actionButtonbar.getButtonCal().setEnabled(false);
+				actionButtonbar.getButtonPrint().setEnabled(false);
+				//actionButtonbar.getButtonTara().setEnabled(false);
 				switch (Scale.getInstance().getScaleApplication()){
 					case PART_COUNTING:
 						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();

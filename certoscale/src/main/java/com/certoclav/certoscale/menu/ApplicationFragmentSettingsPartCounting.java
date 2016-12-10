@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 
@@ -20,13 +22,25 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
 
     private Button buttonEditAveragePieceWeight = null;
     private Button buttonEditSampleSize = null;
+    private Button buttonCalculateAwp = null;
+    private TextView textInstruction = null;
+    private Button buttonOK = null;
+    private Button buttonCancel = null;
+
     private LinearLayout containerSettingsButtons = null;
-    private int sampleSize = 10;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_partcounting,container, false);
+        buttonOK = (Button) rootView.findViewById(R.id.settings_partcounting_button_ok);
+        buttonOK.setVisibility(View.INVISIBLE);
+        buttonCancel = (Button) rootView.findViewById(R.id.settings_partcounting_button_cancel);
+        buttonCancel.setVisibility(View.INVISIBLE);
+        textInstruction = (TextView) rootView.findViewById(R.id.settings_partcounting_text_instruction);
+        textInstruction.setVisibility(View.INVISIBLE);
+        buttonCalculateAwp = (Button) rootView.findViewById(R.id.settings_partcounting_button_calc_awp);
         buttonEditAveragePieceWeight = (Button) rootView.findViewById(R.id.settings_partcounting_button_awp);
         buttonEditAveragePieceWeight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +110,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            sampleSize =Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             dialog.dismiss();
                             onResume();
 
@@ -114,6 +128,49 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 }
             }
         });
+
+        buttonCalculateAwp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING_CALC_AWP);
+                buttonEditSampleSize.setEnabled(false);
+                buttonEditAveragePieceWeight.setEnabled(false);
+                buttonCalculateAwp.setEnabled(false);
+                textInstruction.setText("Pleace place " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + "onto the pan");
+                textInstruction.setVisibility(View.VISIBLE);
+                buttonOK.setVisibility(View.VISIBLE);
+                buttonOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ApplicationManager.getInstance().setAveragePieceWeightInGram(ApplicationManager.getInstance().getTaredValueInGram()/(float)ApplicationManager.getInstance().getAwpCalcSampleSize());
+                        buttonOK.setVisibility(View.INVISIBLE);
+                        buttonCancel.setVisibility(View.INVISIBLE);
+                        textInstruction.setVisibility(View.INVISIBLE);
+                        buttonEditSampleSize.setEnabled(true);
+                        buttonEditAveragePieceWeight.setEnabled(true);
+                        buttonCalculateAwp.setEnabled(true);
+                        Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
+                        onResume();
+                    }
+                });
+                buttonCancel.setVisibility(View.VISIBLE);
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        buttonOK.setVisibility(View.INVISIBLE);
+                        buttonCancel.setVisibility(View.INVISIBLE);
+                        textInstruction.setVisibility(View.INVISIBLE);
+                        buttonEditSampleSize.setEnabled(true);
+                        buttonEditAveragePieceWeight.setEnabled(true);
+                        buttonCalculateAwp.setEnabled(true);
+                        Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
+                        onResume();
+                    }
+                });
+
+
+            }
+        });
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
@@ -122,7 +179,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     public void onResume() {
         super.onResume();
         buttonEditAveragePieceWeight.setText("Average piece weight\n" + ApplicationManager.getInstance().getAveragePieceWeightInGram() + " g");
-        buttonEditSampleSize.setText("Sample size:\n" + sampleSize + " pieces");
+        buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pieces");
 
 
 
@@ -130,6 +187,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
 
     @Override
     public void onPause() {
+        Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
         super.onPause();
 
     }

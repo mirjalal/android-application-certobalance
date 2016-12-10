@@ -9,7 +9,19 @@ import com.certoclav.certoscale.model.Scale;
 
 public class ApplicationManager {
 
+    public float getAwpCalcSampleSize() {
+        return awpCalcSampleSize;
+    }
 
+    public String getAwpCalcSampleSizeAsString(){
+        return String.format("%.6f", getAwpCalcSampleSize()) + " g";
+    }
+
+    public void setAwpCalcSampleSize(float awpCalcSampleSize) {
+        this.awpCalcSampleSize = awpCalcSampleSize;
+    }
+
+    private float awpCalcSampleSize = 10;
     private static final int UNIT_GRAM = 1;
     private static final int UNIT_PIECES = 2;
 
@@ -116,5 +128,17 @@ public class ApplicationManager {
 
     public String getLoadInGramAsStringWithUnit() {
         return String.format("%.4f", getSumInGram()) + " g";
+    }
+
+    public float getTaredValueInGram() {
+        return getSumInGram() - getTareInGram();
+    }
+
+    public String getSumAsStringInGram() {
+        return String.format("%.4f", getSumInGram()) + " g";
+    }
+
+    public String getTaredValueAsStringInGram() {
+        return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
     }
 }

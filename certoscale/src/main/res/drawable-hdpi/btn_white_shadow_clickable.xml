@@ -25,6 +25,8 @@
         android:drawable="@drawable/quickaction_slider_btn_pressed_n" />
     <item android:state_focused="true"
         android:drawable="@drawable/btn_white_shadow" />
+    <item android:state_enabled="false"
+        android:drawable="@drawable/btn_blue_dark_disabled"/>
     <item
         android:drawable="@drawable/btn_white_shadow" />
 
