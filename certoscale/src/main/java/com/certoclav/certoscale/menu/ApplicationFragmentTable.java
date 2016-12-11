@@ -64,7 +64,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
     @Override
-    public void onWeightChanged(Float weight, String unit) {
+    public void onWeightChanged(Double weight, String unit) {
 
 
         if(value > 100){
@@ -93,7 +93,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PART_COUNTING:
                 listReferenceFields.get(4).getTextName().setText("PIECE WEIGHT");
-                listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightInGram() + " g");
+                listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
 
 
                 break;

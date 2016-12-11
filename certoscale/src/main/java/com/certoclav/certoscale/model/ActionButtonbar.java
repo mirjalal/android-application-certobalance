@@ -3,6 +3,7 @@ package com.certoclav.certoscale.model;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -31,6 +32,8 @@ public class ActionButtonbar {
 	private Button buttonTara = null;
 	private Button buttonCal = null;
 	private Button buttonPrint= null;
+
+
 
 	public Button getButtonStatistics() {
 		return buttonStatistics;
@@ -83,26 +86,9 @@ public class ActionButtonbar {
 		this.buttonAppSettings = buttonAppSettings;
 	}
 
-	public Spinner getSpinnerMode() {
-		return spinnerMode;
-	}
-
-	public void setSpinnerMode(Spinner spinnerMode) {
-		this.spinnerMode = spinnerMode;
-	}
-
-	public Spinner getSpinnerLib() {
-		return spinnerLib;
-	}
-
-	public void setSpinnerLib(Spinner spinnerLib) {
-		this.spinnerLib = spinnerLib;
-	}
 
 	private Button buttonAppSettings = null;
-	private Activity mActivity = null;	
-	private Spinner spinnerMode = null;
-	private Spinner spinnerLib = null;
+	private Activity mActivity = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
 
 public void setButtonEventListener (ButtonEventListener listener){
@@ -190,6 +176,8 @@ public void onCreate(){
 
 		}
 	});
+
+
 
 }
 

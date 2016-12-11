@@ -17,7 +17,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 	
-    Float value = (float) 0;
+    Double value = 0d;
     String unit = "";
 
 	private Handler handler = new Handler() {
@@ -107,9 +107,9 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		for(String arg : arguments){
 			if(arg.length()>2 && arg.contains(".")){
 				try{
-					value = Float.parseFloat(arg);
+					value = Double.parseDouble(arg);
 				}catch(Exception e){
-					Log.e("ReadAndParseSerialServ", "Error parsing float");
+					Log.e("ReadAndParseSerialServ", "Error parsing Double");
 				}
 				handler.sendEmptyMessage(0);
 			}
@@ -128,7 +128,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 
-			value = (float) (30 + (30.0* Math.sin(((double)counter)*0.02)));
+			value = (Double) (30 + (30.0* Math.sin(((double)counter)*0.02)));
 
 		    handler.sendEmptyMessage(0);
 

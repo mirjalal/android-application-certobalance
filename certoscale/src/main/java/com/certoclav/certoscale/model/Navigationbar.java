@@ -13,8 +13,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.settings.SettingsActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
 
@@ -38,8 +41,19 @@ public class Navigationbar {
 	public static final int BUTTON_SETTINGS = 2;
 	public static final int BUTTON_ADD = 13;
 	public static final int BUTTON_BACK = 14;
+	public static final int SPINNER_LIBRARY = 20;
 	
 	private Button buttonHome = null;
+
+	public ArrayAdapter<String> getArrayAdapterLibrary() {
+		return arrayAdapterLibrary;
+	}
+
+	public void setArrayAdapterLibrary(ArrayAdapter<String> arrayAdapterLibrary) {
+		this.arrayAdapterLibrary = arrayAdapterLibrary;
+	}
+
+	private ArrayAdapter<String> arrayAdapterLibrary = null;
 
 	public Button getButtonBack() {
 		return buttonBack;
@@ -112,7 +126,9 @@ public void removeNavigationbarListener(ButtonEventListener listener) {
 
 
 public void onCreate(){
-	
+
+
+
 	spinnerMode= (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_mode);
 	ArrayAdapter<CharSequence> spinnerModeAdapter = ArrayAdapter.createFromResource(
 	            mActivity, R.array.navigationbar_entries, R.layout.spinner);
@@ -134,10 +150,34 @@ public void onCreate(){
 
 	
 	spinnerLib= (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
-	ArrayAdapter<CharSequence> spinnerLibAdapter = ArrayAdapter.createFromResource(
-	            mActivity, R.array.navigationbar_bib_entries, R.layout.spinner);
-	spinnerLibAdapter.setDropDownViewResource(R.layout.spinner);
-	spinnerLib.setAdapter(spinnerLibAdapter);
+
+	arrayAdapterLibrary = new ArrayAdapter<String>(mActivity,R.layout.spinner,new ArrayList<String>());
+	arrayAdapterLibrary.add("test");
+	spinnerLib.setAdapter(arrayAdapterLibrary);
+
+	spinnerLib.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+			DatabaseService db = new DatabaseService(mActivity);
+			for(Library library : db.getLibraries()){
+				if(library.getName().equals(arrayAdapterLibrary.getItem(position))){
+					ApplicationManager.getInstance().setCurrentLibrary(library);
+				}
+			}
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(SPINNER_LIBRARY,false);
+			}
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+
+		}
+
+
+	});
+
+
 	buttonSettings = (Button) mActivity.findViewById(R.id.naviagationbar_button_settings);
 	buttonSettings.setOnClickListener(new OnClickListener() {
 		
@@ -197,6 +237,8 @@ public void onCreate(){
 	});
 	textTitle = (TextView) mActivity.findViewById(R.id.naviagationbar_text_title);
 	textTitle.setVisibility(View.GONE);
+
+
 }
 
 

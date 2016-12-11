@@ -27,7 +27,7 @@ public class Scale extends Observable {
 	private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
 	private ScaleState state = ScaleState.READY; //default init state is READY_AND_WAITING_FOR_LOGIN
 
-	private Float weightInGram = (float) 0; //raw value reiceived from Serial port of the balance
+	private Double weightInGram = 0d; //raw value reiceived from Serial port of the balance
 
 
 	public User getUser() {
@@ -108,7 +108,7 @@ public class Scale extends Observable {
 		return serialServicePrinter;
 		}
 	
-	public void setValue(Float value) {
+	public void setValue(Double value) {
 		setWeightInGram(value);
 		
 		
@@ -118,11 +118,11 @@ public class Scale extends Observable {
 		
 	}
 
-	public Float getWeightInGram() {
+	public Double getWeightInGram() {
 		return weightInGram;
 	}
 
-	public void setWeightInGram(Float weightInGram) {
+	public void setWeightInGram(Double weightInGram) {
 		this.weightInGram = weightInGram;
 	}
 

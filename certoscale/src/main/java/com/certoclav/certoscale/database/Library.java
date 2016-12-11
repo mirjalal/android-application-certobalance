@@ -38,6 +38,17 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_CLOUD_ID)
 	private String cloudId;
 
+	public double getAveragePieceWeight() {
+		return averagePieceWeight;
+	}
+
+	public void setAveragePieceWeight(double averagePieceWeight) {
+		this.averagePieceWeight = averagePieceWeight;
+	}
+
+	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGE_PIECE_WEIGHT)
+	private double averagePieceWeight;
+
 	public String getUserEmail() {
 		return userEmail;
 	}
@@ -50,7 +61,7 @@ public class Library {
 	private String userEmail;
 
 
-	public Library(String userEmail, int application, String cloudId, int version, String name, float tara, float target, float sampleSize, float underLimit, float overLimit, float level, int mode, Date date, Boolean isLocal) {
+	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double overLimit, double level, int mode, Date date, Boolean isLocal) {
 		this.userEmail = userEmail;
 		this.application = application;
 		this.cloudId = cloudId;
@@ -59,6 +70,7 @@ public class Library {
 		this.tara = tara;
 		this.target = target;
 		this.sampleSize = sampleSize;
+		this.averagePieceWeight = averagePieceWeight;
 		this.underLimit = underLimit;
 		this.overLimit = overLimit;
 		this.level = level;
@@ -107,51 +119,51 @@ public class Library {
 		this.name = name;
 	}
 
-	public float getTara() {
+	public double getTara() {
 		return tara;
 	}
 
-	public void setTara(float tara) {
+	public void setTara(double tara) {
 		this.tara = tara;
 	}
 
-	public float getTarget() {
+	public double getTarget() {
 		return target;
 	}
 
-	public void setTarget(float target) {
+	public void setTarget(double target) {
 		this.target = target;
 	}
 
-	public float getSampleSize() {
+	public double getSampleSize() {
 		return sampleSize;
 	}
 
-	public void setSampleSize(float sampleSize) {
+	public void setSampleSize(double sampleSize) {
 		this.sampleSize = sampleSize;
 	}
 
-	public float getUnderLimit() {
+	public double getUnderLimit() {
 		return underLimit;
 	}
 
-	public void setUnderLimit(float underLimit) {
+	public void setUnderLimit(double underLimit) {
 		this.underLimit = underLimit;
 	}
 
-	public float getOverLimit() {
+	public double getOverLimit() {
 		return overLimit;
 	}
 
-	public void setOverLimit(float overLimit) {
+	public void setOverLimit(double overLimit) {
 		this.overLimit = overLimit;
 	}
 
-	public float getLevel() {
+	public double getLevel() {
 		return level;
 	}
 
-	public void setLevel(float level) {
+	public void setLevel(double level) {
 		this.level = level;
 	}
 
@@ -186,22 +198,22 @@ public class Library {
 	private String name;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_TARA)
-	private float tara;
+	private double tara;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_TARGET)
-	private float target;
+	private double target;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_SAMPLE_SIZE)
-	private float sampleSize;
+	private double sampleSize;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
-	private float underLimit;
+	private double underLimit;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER)
-	private float overLimit;
+	private double overLimit;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LEVEL)
-	private float level;
+	private double level;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_MODE)
 	private int mode;

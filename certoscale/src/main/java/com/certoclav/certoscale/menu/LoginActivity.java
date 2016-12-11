@@ -32,10 +32,12 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UserDropdownAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -337,6 +339,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		progressBar.setVisibility(View.INVISIBLE);
 		Scale.getInstance();
 		editTextPassword.setText("");
+		if(AppConstants.IS_IO_SIMULATED){
+			fillDatabaseIfEmpty();
+		}
 
 		refreshUI();
 
@@ -406,10 +411,11 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			}
 
 			User user1 = new User("Michael", "", "Dirix","michaeldirix@mytum.de", "mobile", "landline", "Certoclav","companyphone", "companyWebsite", BCrypt.hashpw("1234",BCrypt.gensalt()), new Date(), true,true);
-
+			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Example library", 10.0f, 20.0f,5,1,1,30,0,0,new Date(),true);
 
 			// Max regierstriert sich
 			int result = databaseService.insertUser(user1);
+			result = databaseService.insertLibrary(library);
 			Log.e("return of insertUser: ", Integer.toString(result));
 
 		} catch (Exception e) {

@@ -10,11 +10,14 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -22,44 +25,69 @@ import java.util.ArrayList;
 
 public class ApplicationManager {
 
-    private ArrayList<Float> statisticsArray = new ArrayList<Float>();
-    public float getAwpCalcSampleSize() {
-        return awpCalcSampleSize;
+    public Library getCurrentLibrary() {
+        return currentLibrary;
+    }
+
+    public void setCurrentLibrary(Library currentLibrary) {
+        this.currentLibrary = currentLibrary;
+    }
+
+    private Library currentLibrary = new Library(
+            "admin",
+            ScaleApplication.WEIGHING.ordinal(),
+            "",
+            0,
+            "default library",
+            0f,
+            10f,
+            10f,
+            1f,
+            0f,
+            20f,
+            0f,
+            0,
+            new Date(),
+            true
+    );
+
+    private ArrayList<Double> statisticsArray = new ArrayList<Double>();
+    public Double getAwpCalcSampleSize() {
+        return currentLibrary.getSampleSize();
     }
 
     public String getAwpCalcSampleSizeAsString(){
         return String.format("%.6f", getAwpCalcSampleSize()) + " g";
     }
 
-    public ArrayList<Float> getStatisticsArray() {
+    public ArrayList<Double> getStatisticsArray() {
         return statisticsArray;
     }
 
-    public void setStatisticsArray(ArrayList<Float> statisticsArray) {
+    public void setStatisticsArray(ArrayList<Double> statisticsArray) {
         this.statisticsArray = statisticsArray;
     }
 
-    public void setAwpCalcSampleSize(float awpCalcSampleSize) {
-        this.awpCalcSampleSize = awpCalcSampleSize;
+    public void setAwpCalcSampleSize(int awpCalcSampleSize) {
+        currentLibrary.setSampleSize(awpCalcSampleSize);
     }
 
-    private float awpCalcSampleSize = 10;
+
     private static final int UNIT_GRAM = 1;
     private static final int UNIT_PIECES = 2;
 
     private static ApplicationManager instance = new ApplicationManager();
-    private float averagePieceWeight = 1;
 
-    public void setTareInGram(float tareInGram) {
+    public void setTareInGram(Double tareInGram) {
         this.tareInGram = tareInGram;
     }
 
-    public float getAveragePieceWeightInGram() {
-        return averagePieceWeight;
+    public Double getAveragePieceWeightInGram() {
+        return currentLibrary.getAveragePieceWeight();
     }
 
-    public void setAveragePieceWeightInGram(float averagePieceWeight) {
-        this.averagePieceWeight = averagePieceWeight;
+    public void setAveragePieceWeightInGram(Double averagePieceWeight) {
+        currentLibrary.setAveragePieceWeight(averagePieceWeight);
     }
 
     public int getUnit() {
@@ -70,7 +98,7 @@ public class ApplicationManager {
         this.unit = unit;
     }
 
-    private float tareInGram = 0;
+    private Double tareInGram = 0d;
     private int unit = UNIT_GRAM;
 
     public String getUnitAsString(){
@@ -87,20 +115,20 @@ public class ApplicationManager {
     }
 
 
-    public float getSumInGram(){
+    public Double getSumInGram(){
         return Scale.getInstance().getWeightInGram();
     }
 
     public int getSumInPieces(){
-       return Math.round(Scale.getInstance().getWeightInGram()/averagePieceWeight);
+       return (int) Math.round(Scale.getInstance().getWeightInGram()/currentLibrary.getAveragePieceWeight());
     }
 
-    public float getTareInGram(){
+    public Double getTareInGram(){
         return tareInGram;
     }
 
     public int getTareInPieces(){
-        return Math.round(tareInGram/averagePieceWeight);
+        return (int) Math.round(tareInGram/currentLibrary.getAveragePieceWeight());
     }
 
     public int getLoadInPercent(){
@@ -152,7 +180,7 @@ public class ApplicationManager {
         return String.format("%.4f", getSumInGram()) + " g";
     }
 
-    public float getTaredValueInGram() {
+    public Double getTaredValueInGram() {
         return getSumInGram() - getTareInGram();
     }
 
@@ -167,7 +195,7 @@ public class ApplicationManager {
     public void accumulateStatistics() {
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING:
-                statisticsArray.add((float)(getSumInPieces()-getTareInPieces()));
+                statisticsArray.add((double) (getSumInPieces()-getTareInPieces()));
             break;
             default:
                 statisticsArray.add(getTaredValueInGram());
@@ -186,7 +214,7 @@ public class ApplicationManager {
             dialog.setOnDismissListener(listener);
             dialog.setTitle("Statistics");
             SummaryStatistics statistic = new SummaryStatistics();
-            for(Float value : statisticsArray){
+            for(Double value : statisticsArray){
                 statistic.addValue(value);
             }
             ((TextView)dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText(""+ statistic.getN());
@@ -230,5 +258,9 @@ public class ApplicationManager {
         {
             e.printStackTrace();
         }
+    }
+
+    public String getAveragePieceWeightAsStringInGram() {
+        return String.format("%.5f",currentLibrary.getAveragePieceWeight());
     }
 }

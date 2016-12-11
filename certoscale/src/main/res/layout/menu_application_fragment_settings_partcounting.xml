@@ -95,5 +95,15 @@
         android:background="@drawable/btn_white_shadow_clickable"
         android:layout_weight="1" />
 
+
+        <Button
+
+            android:text="Save to library"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_partcounting_button_save"
+            android:background="@drawable/btn_white_shadow_clickable"
+            android:layout_weight="1" />
+
     </LinearLayout>
 </LinearLayout>

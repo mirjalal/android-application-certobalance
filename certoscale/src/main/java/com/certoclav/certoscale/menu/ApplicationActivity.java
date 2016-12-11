@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.model.ActionButtonbar;
@@ -19,6 +21,8 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
+
+import java.util.List;
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener{
@@ -38,6 +42,7 @@ protected void onResume() {
 		actionButtonbar.setButtonEventListener(this);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
+		Scale.getInstance().setOnApplicationListener(this);
 
 		super.onResume();
 }
@@ -48,6 +53,7 @@ protected void onResume() {
 protected void onPause() {
 	navigationbar.removeNavigationbarListener(this);
 	actionButtonbar.removeButtonEventListener(this);
+	Scale.getInstance().removeOnApplicationListener(this);
 	super.onPause();
 }
 
@@ -154,11 +160,29 @@ protected void onPause() {
 			intent.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU, navigationbar.getSpinnerMode().getSelectedItemPosition());
 			startActivity(intent);
 		}
+		if(buttonId == Navigationbar.SPINNER_LIBRARY){
+
+		}
 	}
 
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
 		ApplicationManager.getInstance().clearStatistics();
 		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+
+		try {
+			DatabaseService db = new DatabaseService(ApplicationActivity.this);
+			List<Library> libraries = db.getLibraries();
+			navigationbar.getArrayAdapterLibrary().clear();
+			if (libraries.size() == 0) {
+				navigationbar.getArrayAdapterLibrary().add("empty");
+			}
+			for (Library library : libraries) {
+				navigationbar.getArrayAdapterLibrary().add(library.getName());
+			}
+			navigationbar.getArrayAdapterLibrary().notifyDataSetChanged();
+		}catch (Exception e){
+			Log.e("ApplicationActivity", e.toString());
+		}
 	}
 }

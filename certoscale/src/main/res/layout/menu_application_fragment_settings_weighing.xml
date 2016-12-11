@@ -31,7 +31,7 @@
         android:text="Change minimum weight"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/button2"
+        android:id="@+id/application_settings_weighing_button_minimum"
         android:background="@drawable/btn_white_shadow_clickable"
         android:layout_weight="1" />
 

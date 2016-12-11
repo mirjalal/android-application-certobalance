@@ -65,7 +65,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
     @Override
-    public void onWeightChanged(Float weight, String unit) {
+    public void onWeightChanged(Double weight, String unit) {
 
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING_CALC_AWP:
