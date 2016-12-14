@@ -14,7 +14,7 @@ public class SettingStatisticalQualityControl extends PreferenceFragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preference_percent_weighing);
+        addPreferencesFromResource(R.xml.preference_statistical_quality_control);
     }
 
 

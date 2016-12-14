@@ -9,3 +9,10 @@ gradle/*
 .idea/vcs.xml
 CertoBalance.iml
 android-application-certobalance-androidstudio.iml
+local.properties
+*.iml
+.gradle
+/.idea/workspace.xml
+/.idea/modules.xml
+/.idea/libaries/support_v4_23_0_0.xml
+/.idea/libaries/support_annotations_23..xml

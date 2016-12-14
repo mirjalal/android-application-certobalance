@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.menu;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -92,8 +93,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         }
         params.width = width;
         barload.setLayoutParams(params);
-        if(value > 100){
-            //todo color bar red
+
+        if(ApplicationManager.getInstance().getSumInGram() > 40){
+            barload.setBackgroundColor(Color.RED);
+
+        }else{
+
+            barload.setBackgroundColor(Color.GREEN);
         }
 
         if(Scale.getInstance().getWeightInGram()  == 0){

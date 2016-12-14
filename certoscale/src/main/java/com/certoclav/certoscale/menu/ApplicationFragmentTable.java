@@ -1,6 +1,9 @@
 package com.certoclav.certoscale.menu;
 
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,13 +69,20 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     @Override
     public void onWeightChanged(Double weight, String unit) {
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        if(value > 100){
-            //todo color bar red
-        }
 
         //TODO: define fixed indexes instead of hardcoding index positions.
         //TODO: show only data which is enabled in settings menu
+
+        //Clear listReferenceFields
+        if (listReferenceFields.isEmpty()==false){
+            for(ReferenceField refField : listReferenceFields){
+                refField.getTextName().setText("");
+                refField.getTextValue().setText("");
+            }
+        }
+
 
         //standard result fields
         listReferenceFields.get(0).getTextName().setText("TARA");
@@ -89,6 +99,10 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
         switch (Scale.getInstance().getScaleApplication()){
             case WEIGHING:
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum_visible),getResources().getBoolean(R.bool.preferences_weigh_minimum_visible))==true) {
+                    listReferenceFields.get(4).getTextName().setText("MINIMUM WEIGHT");
+                    listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g");
+                }
 
                 break;
             case PART_COUNTING:

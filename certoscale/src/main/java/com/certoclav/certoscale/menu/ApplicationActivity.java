@@ -3,13 +3,16 @@ package com.certoclav.certoscale.menu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -21,11 +24,12 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.List;
 
 
-public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener{
+public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
 private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
@@ -37,13 +41,58 @@ private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
 protected void onResume() {
 
 
-
+		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
 		navigationbar.setButtonEventListener(this);
 		actionButtonbar.setButtonEventListener(this);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
 		Scale.getInstance().setOnApplicationListener(this);
 
+		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
+
+        navigationbar.getArrayAdapterMode().clear();
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
+		if (prefs.getBoolean(getString(R.string.preferences_weigh_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_counting_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PART_COUNTING);
+		}if (prefs.getBoolean(getString(R.string.preferences_percent_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PERCENT_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_check_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.CHECK_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_animal_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.ANIMAL_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_filling_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.FILLING);
+		}if (prefs.getBoolean(getString(R.string.preferences_totalization_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.TOTALIZATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_formulation_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.FORMULATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
+		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
+		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+		}
+
+
+
+
+		else{
+			//do nothing
+		}
+
+
+
+		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
 		super.onResume();
 }
 
@@ -51,6 +100,7 @@ protected void onResume() {
 
 @Override
 protected void onPause() {
+	PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).unregisterOnSharedPreferenceChangeListener(this);
 	navigationbar.removeNavigationbarListener(this);
 	actionButtonbar.removeButtonEventListener(this);
 	Scale.getInstance().removeOnApplicationListener(this);
@@ -185,4 +235,45 @@ protected void onPause() {
 			Log.e("ApplicationActivity", e.toString());
 		}
 	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		Log.e("<Navigationbar", "INFO: CALLBACK FUNCTION HAS BEEN CALLED");
+		navigationbar.getArrayAdapterMode().clear();
+		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
+		if (prefs.getBoolean(getString(R.string.preferences_weigh_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_counting_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PART_COUNTING);
+		}if (prefs.getBoolean(getString(R.string.preferences_percent_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PERCENT_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_check_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.CHECK_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_animal_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.ANIMAL_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_filling_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.FILLING);
+		}if (prefs.getBoolean(getString(R.string.preferences_totalization_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.TOTALIZATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_formulation_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.FORMULATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
+		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
+		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
+		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
+		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+		}
+
+		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
+	}
+
 }

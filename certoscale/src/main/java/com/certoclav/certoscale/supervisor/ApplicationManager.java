@@ -263,4 +263,9 @@ public class ApplicationManager {
     public String getAveragePieceWeightAsStringInGram() {
         return String.format("%.5f",currentLibrary.getAveragePieceWeight());
     }
+
+    public String getUnderLimitAsStringInGram(){
+        return String.format("%.5f",currentLibrary.getUnderLimit());
+    }
+
 }

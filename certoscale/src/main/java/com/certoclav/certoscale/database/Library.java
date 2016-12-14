@@ -9,6 +9,7 @@ import java.util.Date;
 
 /**
  * A simple demonstration object we are creating and persisting to the database.
+ * implemented according to OHAUS user manual
  */
 @DatabaseTable(tableName = "library")
 public class Library {
@@ -48,6 +49,8 @@ public class Library {
 
 	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGE_PIECE_WEIGHT)
 	private double averagePieceWeight;
+
+
 
 	public String getUserEmail() {
 		return userEmail;
