@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.menu;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,16 +69,30 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
     @Override
     public void onWeightChanged(Double weight, String unit) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING_CALC_AWP:
+                textValue.setTextColor(Color.BLACK);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
                 textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
+
                 break;
+            case WEIGHING:
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.BLACK);
+                if (ApplicationManager.getInstance().getTaredValueInGram()<ApplicationManager.getInstance().getUnderLimitValueInGram() ) {
+                    if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum), getResources().getBoolean(R.bool.preferences_weigh_minimum)) == true) {
+                        textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                        textValue.setTextColor(Color.YELLOW);
+                    }
+                }
+
+
+
             default:
                 //Show weight to the user in respect to the TARA weight
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-
                 //Show measured total weight to the user
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
             break;

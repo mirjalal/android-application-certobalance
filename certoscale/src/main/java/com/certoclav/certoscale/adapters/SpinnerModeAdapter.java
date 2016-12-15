@@ -57,7 +57,7 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 
 		switch (getItem(position)){
 			case WEIGHING:
-				textMail.setText("Weiging");
+				textMail.setText("Weighing");
 				break;
 			case PART_COUNTING:
 				textMail.setText("Part Counting");

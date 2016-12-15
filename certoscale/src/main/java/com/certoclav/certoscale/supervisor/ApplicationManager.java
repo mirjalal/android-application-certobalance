@@ -189,7 +189,12 @@ public class ApplicationManager {
     }
 
     public String getTaredValueAsStringInGram() {
-        return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
+        switch (Scale.getInstance().getScaleApplication()) {
+            case PART_COUNTING:
+                return String.format("%d", getSumInPieces()-getTareInPieces())+ " g";
+            default:
+                return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
+        }
     }
 
     public void accumulateStatistics() {
@@ -266,6 +271,9 @@ public class ApplicationManager {
 
     public String getUnderLimitAsStringInGram(){
         return String.format("%.5f",currentLibrary.getUnderLimit());
+    }
+    public Double getUnderLimitValueInGram() {
+        return currentLibrary.getUnderLimit();
     }
 
 }

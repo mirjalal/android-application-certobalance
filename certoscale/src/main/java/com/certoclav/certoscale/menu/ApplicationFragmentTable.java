@@ -84,31 +84,77 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
         }
 
 
-        //standard result fields
-        listReferenceFields.get(0).getTextName().setText("TARA");
-        listReferenceFields.get(0).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+        int tara=2;
+        int brutto=0;
+        int netto=4;
+        int loadp=1;
 
-        listReferenceFields.get(1).getTextName().setText("SUM");
-        listReferenceFields.get(1).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+        // Weighing
+        int minweight=3;
 
-        listReferenceFields.get(2).getTextName().setText("LOAD [%]");
-        listReferenceFields.get(2).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
+        //Part Counting
+        int apw=3;
 
-        listReferenceFields.get(3).getTextName().setText("LOAD [g]");
-        listReferenceFields.get(3).getTextValue().setText(ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
+
 
         switch (Scale.getInstance().getScaleApplication()){
             case WEIGHING:
+
+                if  (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible),getResources().getBoolean(R.bool.preferences_weigh_tara_visible))==true) {
+                    listReferenceFields.get(tara).getTextName().setText("TARA");
+                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_weigh_brutto_visible),getResources().getBoolean(R.bool.preferences_weigh_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_weigh_netto_visible),getResources().getBoolean(R.bool.preferences_weigh_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible),getResources().getBoolean(R.bool.preferences_weigh_load_visible))==true) {
+                    listReferenceFields.get(loadp).getTextName().setText("LOAD [%]");
+                    listReferenceFields.get(loadp).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
+                }
+
+
+                //listReferenceFields.get(3).getTextName().setText("LOAD [g]");
+                //listReferenceFields.get(3).getTextValue().setText(ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
+
+
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum_visible),getResources().getBoolean(R.bool.preferences_weigh_minimum_visible))==true) {
-                    listReferenceFields.get(4).getTextName().setText("MINIMUM WEIGHT");
-                    listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g");
+                    listReferenceFields.get(minweight).getTextName().setText("MINIMUM WEIGHT");
+                    listReferenceFields.get(minweight).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g");
                 }
 
                 break;
             case PART_COUNTING:
-                listReferenceFields.get(4).getTextName().setText("PIECE WEIGHT");
-                listReferenceFields.get(4).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
+                if  (prefs.getBoolean(getString(R.string.preferences_counting_tara_visible),getResources().getBoolean(R.bool.preferences_counting_tara_visible))==true) {
+                    listReferenceFields.get(tara).getTextName().setText("TARA");
+                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
 
+                if  (prefs.getBoolean(getString(R.string.preferences_counting_brutto_visible),getResources().getBoolean(R.bool.preferences_counting_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_counting_netto_visible),getResources().getBoolean(R.bool.preferences_counting_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible),getResources().getBoolean(R.bool.preferences_weigh_load_visible))==true) {
+                    listReferenceFields.get(loadp).getTextName().setText("LOAD [%]");
+                    listReferenceFields.get(loadp).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
+                }
+
+
+                if  (prefs.getBoolean(getString(R.string.preferences_counting_apw_visible),getResources().getBoolean(R.bool.preferences_counting_apw_visible))==true){
+                    listReferenceFields.get(apw).getTextName().setText("PIECE WEIGHT");
+                    listReferenceFields.get(apw).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
+                }
 
                 break;
         }

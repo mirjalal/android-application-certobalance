@@ -25,10 +25,10 @@
    <PreferenceCategory android:title="VISIBILITY" >
    
    		<CheckBoxPreference
-	    	android:key="@string/preferences_weigh_secondary_visible"
-	    	android:defaultValue="@bool/preferences_weigh_secondary_visible"
-	    	android:title="Secondary unit"
-	    	android:summary="Turn the secondary display line visible/invisible"
+	    	android:key="@string/preferences_weigh_load_visible"
+	    	android:defaultValue="@bool/preferences_weigh_load_visible"
+	    	android:title="Load in Percent"
+	    	android:summary="Turn the load in percent line visible/invisible"
 	    	android:icon="@drawable/ic_launcher" >
     	</CheckBoxPreference>
  

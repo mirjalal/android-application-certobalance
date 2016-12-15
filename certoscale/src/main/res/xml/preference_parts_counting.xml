@@ -54,24 +54,24 @@
  
    		
 		<CheckBoxPreference
-	    	android:key="@string/preferences_counting_gross_visible"
-	    	android:defaultValue="@bool/preferences_counting_gross_visible"
-	    	android:title="Gross Weight"
-	    	android:summary="Turn the gross weight visible/invisible">
+	    	android:key="@string/preferences_counting_brutto_visible"
+	    	android:defaultValue="@bool/preferences_counting_brutto_visible"
+	    	android:title="Brutto Weight"
+	    	android:summary="Turn the brutto weight visible/invisible">
     	</CheckBoxPreference>	
  
 		<CheckBoxPreference
-	    	android:key="@string/preferences_counting_net_visible"
-	    	android:defaultValue="@bool/preferences_counting_net_visible"
-	    	android:title="Net"
-	    	android:summary="Turn the net weight visible/invisible">
+	    	android:key="@string/preferences_counting_netto_visible"
+	    	android:defaultValue="@bool/preferences_counting_netto_visible"
+	    	android:title="Netto Weight"
+	    	android:summary="Turn the netto weight visible/invisible">
     	</CheckBoxPreference>	
     
 		<CheckBoxPreference
-	    	android:key="@string/preferences_counting_tare_visible"
-	    	android:defaultValue="@bool/preferences_counting_tare_visible"
-	    	android:title="Tare"
-	    	android:summary="Turn the tare weight visible/invisible">
+	    	android:key="@string/preferences_counting_tara_visible"
+	    	android:defaultValue="@bool/preferences_counting_tara_visible"
+	    	android:title="Tara Weight"
+	    	android:summary="Turn the tara weight visible/invisible">
     	</CheckBoxPreference>	
     		
 		<CheckBoxPreference

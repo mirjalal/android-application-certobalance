@@ -26,7 +26,7 @@
     //Weighing app
     <bool name="preferences_weigh_activated_default">true</bool>
     <bool name="preferences_weigh_minimum">true</bool>
-    <bool name="preferences_weigh_secondary_visible">true</bool>
+    <bool name="preferences_weigh_load_visible">true</bool>
     <bool name="preferences_weigh_minimum_visible">true</bool>
     <bool name="preferences_weigh_brutto_visible">true</bool>
     <bool name="preferences_weigh_netto_visible">true</bool>
@@ -38,9 +38,9 @@
     <bool name="preferences_counting_auto_optimization">true</bool>
     <bool name="preferences_counting_secondary_visible">true</bool>
     <bool name="preferences_counting_apw_visible">true</bool>
-    <bool name="preferences_counting_gross_visible">true</bool>
-    <bool name="preferences_counting_net_visible">true</bool>
-    <bool name="preferences_counting_tare_visible">true</bool>
+    <bool name="preferences_counting_brutto_visible">true</bool>
+    <bool name="preferences_counting_netto_visible">true</bool>
+    <bool name="preferences_counting_tara_visible">true</bool>
     <bool name="preferences_counting_target_visible">true</bool>
     <bool name="preferences_counting_difference_visible">true</bool>
     <bool name="preferences_counting_over_limit_visible">true</bool>

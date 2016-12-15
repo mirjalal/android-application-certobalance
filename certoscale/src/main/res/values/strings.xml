@@ -106,9 +106,9 @@
     <string name="preferences_counting_mode">preferences_counting_mode</string>
     <string name="preferences_counting_secondary_visible">preferences_counting_secondary_visible</string>
     <string name="preferences_counting_apw_visible">preferences_counting_apw_visible</string>
-    <string name="preferences_counting_gross_visible">preferences_counting_gross_visible</string>
-    <string name="preferences_counting_net_visible">preferences_counting_net_visible</string>
-    <string name="preferences_counting_tare_visible">preferences_counting_tare_visible</string>
+    <string name="preferences_counting_brutto_visible">preferences_counting_gross_visible</string>
+    <string name="preferences_counting_netto_visible">preferences_counting_net_visible</string>
+    <string name="preferences_counting_tara_visible">preferences_counting_tare_visible</string>
     <string name="preferences_counting_target_visible">preferences_counting_target_visible</string>
     <string name="preferences_counting_difference_visible">preferences_counting_difference_visible</string>
     <string name="preferences_counting_over_limit_visible">preferences_counting_over_limit_visible</string>
@@ -192,7 +192,7 @@
     <string name="preferences_totalization_print_maximum">preferences_totalization_print_maximum</string>
     <string name="preferences_weigh_activated">preferences_weigh_activated</string>
     <string name="preferences_weigh_minimum">preferences_weigh_minimum</string>
-    <string name="preferences_weigh_secondary_visible">preferences_weigh_secondary_visible</string>
+    <string name="preferences_weigh_load_visible">preferences_weigh_secondary_visible</string>
     <string name="preferences_weigh_minimum_visible">preferences_weigh_minimum_visible</string>
     <string name="preferences_weigh_brutto_visible">preferences_weigh_brutto_visible</string>
     <string name="preferences_weigh_netto_visible">preferences_weigh_netto_visible</string>
