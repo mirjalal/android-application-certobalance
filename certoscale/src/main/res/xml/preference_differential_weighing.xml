@@ -12,6 +12,14 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
+            android:key="@string/preferences_differential_lock"
+            android:defaultValue="@bool/preferences_differential_lock"
+            android:title="Lock"
+            android:summary="Lock the differential weighing settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="@string/preferences_differential_autoMode"
             android:defaultValue="@bool/preferences_differential_autoMode"
             android:title="Auto processing Mode"

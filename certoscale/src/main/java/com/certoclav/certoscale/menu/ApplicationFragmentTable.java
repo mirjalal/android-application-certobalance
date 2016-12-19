@@ -155,6 +155,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(apw).getTextName().setText("PIECE WEIGHT");
                     listReferenceFields.get(apw).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
                 }
+                break;
+            case DENSITIY_DETERMINATION:
+                listReferenceFields.get(apw).getTextName().setText("WARUM");
 
                 break;
         }

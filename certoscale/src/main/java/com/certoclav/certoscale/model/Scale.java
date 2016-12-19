@@ -1,5 +1,7 @@
 package com.certoclav.certoscale.model;
 
+import android.util.Log;
+
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
@@ -144,6 +146,7 @@ public class Scale extends Observable {
 	}
 
 	public void setScaleApplication(ScaleApplication scaleApplication) {
+		Log.e("Scale",scaleApplication.toString());
 		this.scaleApplication = scaleApplication;
 		for(ScaleApplicationListener listener : applicationListeners){
 			listener.onApplicationChange(scaleApplication);

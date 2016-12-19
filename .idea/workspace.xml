@@ -6,10 +6,12 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d5d809c-7e58-4611-a3e0-895177893720" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/certoscale/src/main/res/drawable-hdpi/application_icon_weighing.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" />
@@ -23,12 +25,24 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/library.iml" afterPath="$PROJECT_DIR$/library/library.iml" />
     </list>
     <ignored path="android-application-certobalance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,13 +75,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ApplicationFragmentSettingsPartCounting.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsPartCounting.java">
+      <file leaf-file-name="preferences_weighing.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-926">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="323">
+              <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#507#539#0" expanded="true" />
+                <marker date="1482166432265" expanded="false" signature="204:241" ph="&quot;preferences_weigh_activated&quot;" />
+                <marker date="1482166432265" expanded="false" signature="783:818" ph="&quot;preferences_weigh_minimum&quot;" />
+                <marker date="1482166432265" expanded="false" signature="1183:1223" ph="&quot;preferences_weigh_secondary_visible&quot;" />
+                <marker date="1482166432265" expanded="false" signature="1520:1563" ph="&quot;preferences_weigh_minimum_visible&quot;" />
+                <marker date="1482166432265" expanded="false" signature="1851:1893" ph="&quot;preferences_weigh_brutto_visible&quot;" />
+                <marker date="1482166432265" expanded="false" signature="2174:2215" ph="&quot;preferences_weigh_netto_visible&quot;" />
+                <marker date="1482166432265" expanded="false" signature="2495:2535" ph="&quot;preferences_weigh_tara_visible&quot;" />
+                <marker date="1482166432265" expanded="false" signature="2890:2927" ph="&quot;preferences_weigh_print_min&quot;" />
               </folding>
             </state>
           </provider>
@@ -2460,18 +2485,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/library/src/main/res/drawable-mdpi/btn_white_shadow_clickable.xml" />
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/bluetooth/BluetoothService.java" />
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/bluetooth/chooser/BluetoothDeviceListFragment.java" />
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/LineGraph.java" />
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/ProfileGraph.java" />
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/util/UpdateUtils.java" />
-        <option value="$PROJECT_DIR$/library/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/util/LabelPrinterUtils.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/MenuMainActivity.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/AnimationCalibrationActivity.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/AutoclaveState.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ScaleState.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/StateMachine.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/LoginActivity.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/layout/menu_main_activity.xml" />
@@ -2494,23 +2507,35 @@
         <option value="$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_settings_partcounting.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_settings_weighing.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsWeighing.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_weight_display.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingStatisticalQualityControl.java" />
         <option value="$USER_HOME$/AppData/Local/Android/sdk/platforms/android-22/android.jar!/android/R.class" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/database/Library.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/constants/AppConstants.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/SpinnerModeItem.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationActivity.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml" />
       </list>
     </option>
   </component>
@@ -2548,7 +2573,6 @@
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2557,118 +2581,13 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com/certoclav/certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/main">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="com/certoclav/certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="menu">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="certoscale">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="build">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane />
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2689,6 +2608,7 @@
       <recent name="com.certoclav.certoscale" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Enrico\Desktop\CertoBalance\certoscale\src\main\res\drawable-hdpi" />
       <recent name="C:\Users\Michael\Documents\android-application-certobalance-androidstudio\certoscale\src\main\res\layout" />
       <recent name="C:\Users\Michael\Documents\android-application-certobalance-androidstudio\library\src\main\res\drawable-mdpi" />
     </key>
@@ -3006,28 +2926,28 @@
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3418708" sideWeight="0.5191898" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405347" sideWeight="0.82302773" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48218262" sideWeight="0.18976545" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48218262" sideWeight="0.81023455" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40423164" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5178174" sideWeight="0.4936034" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24053451" sideWeight="0.42430705" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24053451" sideWeight="0.42110875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.114072494" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24840085" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2510661" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3418708" sideWeight="0.48081023" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25053304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6024499" sideWeight="0.47228146" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3052,120 +2972,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java</url>
+          <line>224</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_activity.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/android-sdk/sources/android-22/android/view/ViewGroup.java" />
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_settings_partcounting.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_settings_weighing.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_weight_display.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingTotalization.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingStatisticalQualityControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsPercentWeighing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsCheckWeighing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <marker date="1481112757666" expanded="false" signature="51:294" ph="..." />
-            <marker date="1481112757666" expanded="true" signature="296:992" ph="/**...*/" />
-            <marker date="1481112757666" expanded="true" signature="1167:1265" ph="/**...*/" />
-            <marker date="1481112757666" expanded="true" signature="1376:1945" ph="{...}" />
-            <marker date="1481112757666" expanded="true" signature="1989:2063" ph="{...}" />
-            <marker date="1481112757666" expanded="true" signature="2106:2317" ph="{...}" />
-            <marker date="1481112757666" expanded="true" signature="2323:2452" ph="/**...*/" />
-            <marker date="1481112757666" expanded="true" signature="2501:4576" ph="{...}" />
-            <marker date="1481112757666" expanded="true" signature="4667:4736" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPipetteAdjustment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingPeakHold.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingIngredientCosting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingFormulation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -5578,102 +5397,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="348" column="42" selection-start-line="348" selection-start-column="37" selection-end-line="348" selection-end-column="42" />
-          <folding>
-            <marker date="1480930486167" expanded="false" signature="0:619" ph="/.../" />
-            <marker date="1480930486167" expanded="false" signature="653:1378" ph="..." />
-            <marker date="1480930486167" expanded="true" signature="1381:2560" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="3711:3725" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="3953:3959" ph="&lt;~&gt;" />
-            <marker date="1480930486167" expanded="false" signature="4008:4019" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="4034:4040" ph=" }" />
-            <marker date="1480930486167" expanded="false" signature="4105:4116" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="4140:4146" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="4226:4280" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="4377:5715" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="5721:5945" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="5983:5994" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="6020:6026" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="6032:6310" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="6409:7506" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="7512:7546" ph="@{...}" />
-            <marker date="1480930486167" expanded="true" signature="7605:7764" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="7770:7802" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="7868:7941" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="8003:8122" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="8128:8160" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="8217:8389" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="8462:8601" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="8607:8822" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="8894:8988" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="8994:9406" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="9449:10731" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="10737:10972" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="11008:11019" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="11038:11044" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="11050:11664" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="11734:11844" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="11850:12035" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="12099:12110" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="12137:12143" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="12149:12657" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="12732:12850" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="12856:13085" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="13150:13161" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="13188:13194" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="13235:13877" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="13617:13745" ph="//..." />
-            <marker date="1480930486167" expanded="true" signature="13918:14063" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="14105:14254" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="14302:14443" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="14494:14647" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="14654:14686" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="14775:18934" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="18941:18973" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="19075:19167" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="19295:21942" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="21948:21980" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="22062:22157" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="22163:22195" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="22246:23306" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="23312:23344" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="23417:23641" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="23647:23989" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="24085:24096" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="24129:24135" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="24141:24600" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="24674:24685" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="24716:24722" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="24728:24940" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="24983:24994" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="25021:25027" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="25033:25065" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="25145:25226" ph="{...}" />
-            <marker date="1480930486167" expanded="false" signature="25291:25302" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="25315:25321" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="25327:25359" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="25440:25489" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="25589:25632" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="25722:25839" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="25933:26051" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="26057:26378" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="26443:28561" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="26453:26709" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="26752:26792" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="26852:27135" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="27145:27185" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="27236:27251" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="27272:27282" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="27292:27774" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="27839:27920" ph="{...}" />
-            <marker date="1480930486167" expanded="true" signature="27930:27970" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="28029:28044" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="28058:28068" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="28078:28118" ph="/**...*/" />
-            <marker date="1480930486167" expanded="false" signature="28183:28198" ph=" { " />
-            <marker date="1480930486167" expanded="false" signature="28212:28222" ph=" }" />
-            <marker date="1480930486167" expanded="true" signature="28232:28423" ph="/**...*/" />
-            <marker date="1480930486167" expanded="true" signature="28473:28555" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5695,75 +5418,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <marker date="1481730480386" expanded="false" signature="52:198" ph="..." />
-            <marker date="1481730480386" expanded="true" signature="200:334" ph="/**...*/" />
-            <marker date="1481730480386" expanded="false" signature="1779:1784" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="1810:1813" ph=" }" />
-            <marker date="1481730480386" expanded="true" signature="1877:1929" ph="{...}" />
-            <marker date="1481730480386" expanded="false" signature="2064:2069" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="2086:2089" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="2134:2139" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="2166:2169" ph=" }" />
-            <marker date="1481730480386" expanded="true" signature="2511:2925" ph="{...}" />
-            <marker date="1481730480386" expanded="false" signature="2953:2958" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="2975:2978" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3020:3025" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3052:3055" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3085:3090" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3109:3112" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3158:3163" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3194:3197" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3226:3231" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3246:3249" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3290:3295" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3318:3321" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3347:3352" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3367:3370" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3408:3413" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3436:3439" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3465:3470" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3482:3485" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3520:3525" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3542:3545" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3571:3576" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3588:3591" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3626:3631" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3648:3651" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3679:3684" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3698:3701" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3740:3745" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3766:3769" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3801:3806" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3824:3827" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3874:3879" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3908:3911" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="3943:3948" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="3966:3969" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4016:4021" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4050:4053" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4084:4089" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4106:4109" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4154:4159" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4186:4189" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4216:4221" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4234:4237" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4274:4279" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4298:4301" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4324:4329" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4341:4344" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4376:4381" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4398:4401" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4425:4430" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4442:4445" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4478:4483" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4500:4503" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4531:4536" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4551:4554" ph=" }" />
-            <marker date="1481730480386" expanded="false" signature="4592:4597" ph=" { " />
-            <marker date="1481730480386" expanded="false" signature="4613:4616" ph=" }" />
-            <marker date="1481730480386" expanded="true" signature="5497:5524" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5805,9 +5459,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ActionButtonbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/constants/AppConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="52" column="68" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/SpinnerModeItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/UserDropdownAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="55" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ScaleApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1077">
+        <state relative-caret-position="136">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding>
             <marker date="1481462346363" expanded="false" signature="47:961" ph="..." />
@@ -5840,294 +5537,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ActionButtonbar.java">
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsWeighing.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        <state relative-caret-position="227">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
           <folding>
-            <marker date="1481462346405" expanded="false" signature="48:361" ph="..." />
-            <marker date="1481462346405" expanded="true" signature="438:469" ph="{...}" />
-            <marker date="1481462346405" expanded="false" signature="978:983" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1007:1010" ph=" }" />
-            <marker date="1481462346405" expanded="true" signature="1070:1118" ph="{...}" />
-            <marker date="1481462346405" expanded="false" signature="1156:1161" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1185:1188" ph=" }" />
-            <marker date="1481462346405" expanded="true" signature="1248:1296" ph="{...}" />
-            <marker date="1481462346405" expanded="false" signature="1411:1416" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1434:1437" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1484:1489" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1518:1521" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1552:1557" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1574:1577" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1622:1627" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1654:1657" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1690:1695" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1714:1717" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1766:1771" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1802:1805" ph=" }" />
-            <marker date="1481462346405" expanded="false" signature="1844:1849" ph=" { " />
-            <marker date="1481462346405" expanded="false" signature="1874:1877" ph=" }" />
-            <marker date="1481462346405" expanded="true" signature="1939:1989" ph="{...}" />
-            <marker date="1481462346405" expanded="false" signature="2148:2169" ph="&lt;~&gt;" />
-            <marker date="1481462346405" expanded="true" signature="2239:2286" ph="{...}" />
-            <marker date="1481462346405" expanded="true" signature="2356:2410" ph="{...}" />
-            <marker date="1481462346405" expanded="true" signature="2435:4416" ph="{...}" />
-            <marker date="1481462346405" expanded="false" signature="2548:2618" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="2753:2758" ph="}" />
-            <marker date="1481462346405" expanded="false" signature="2887:2955" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="3092:3097" ph="}" />
-            <marker date="1481462346405" expanded="false" signature="3225:3293" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="3430:3435" ph="}" />
-            <marker date="1481462346405" expanded="false" signature="3541:3611" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="3744:3749" ph="}" />
-            <marker date="1481462346405" expanded="false" signature="3860:3930" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="4064:4069" ph="}" />
-            <marker date="1481462346405" expanded="false" signature="4197:4265" ph="(v) → {" />
-            <marker date="1481462346405" expanded="false" signature="4404:4409" ph="}" />
-            <marker date="1481462346405" expanded="true" signature="4447:4614" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/constants/AppConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="52" column="68" selection-start-line="52" selection-start-column="68" selection-end-line="52" selection-end-column="68" />
-          <folding>
-            <marker date="1481736276525" expanded="true" signature="46:206" ph="/**...*/" />
-            <marker date="1481736276525" expanded="true" signature="508:584" ph="/**...*/" />
-            <marker date="1481736276525" expanded="true" signature="944:1036" ph="/**...*/" />
-            <marker date="1481736276525" expanded="true" signature="1865:1925" ph="/**...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1481817827960" expanded="true" signature="51:424" ph="..." />
-            <marker date="1481817827960" expanded="true" signature="427:603" ph="/**...*/" />
-            <marker date="1481817827960" expanded="true" signature="791:975" ph="{...}" />
-            <marker date="1481817827960" expanded="true" signature="980:1187" ph="/**...*/" />
-            <marker date="1481817827960" expanded="true" signature="1276:2790" ph="{...}" />
-            <marker date="1481817827960" expanded="true" signature="3025:3112" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/SpinnerModeItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-          <folding>
-            <marker date="1481737556929" expanded="true" signature="119:124" ph=" { " />
-            <marker date="1481737556929" expanded="true" signature="136:139" ph=" }" />
-            <marker date="1481737556929" expanded="true" signature="174:179" ph=" { " />
-            <marker date="1481737556929" expanded="true" signature="196:199" ph=" }" />
-            <marker date="1481737556929" expanded="false" signature="311:316" ph=" { " />
-            <marker date="1481737556929" expanded="false" signature="328:331" ph=" }" />
-            <marker date="1481737556929" expanded="false" signature="376:381" ph=" { " />
-            <marker date="1481737556929" expanded="false" signature="398:401" ph=" }" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/UserDropdownAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="55" selection-end-column="55" />
-          <folding>
-            <marker date="1481462346173" expanded="false" signature="51:414" ph="..." />
-            <marker date="1481462346173" expanded="true" signature="417:593" ph="/**...*/" />
-            <marker date="1481462346173" expanded="true" signature="760:944" ph="{...}" />
-            <marker date="1481462346173" expanded="true" signature="949:1156" ph="/**...*/" />
-            <marker date="1481462346173" expanded="true" signature="1245:1926" ph="{...}" />
-            <marker date="1481462346173" expanded="true" signature="2161:2248" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="176" column="28" selection-start-line="176" selection-start-column="26" selection-end-line="176" selection-end-column="28" />
-          <folding>
-            <marker date="1481738744326" expanded="true" signature="48:1028" ph="..." />
-            <marker date="1481738744326" expanded="false" signature="1092:1097" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="1114:1117" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="1164:1169" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="1196:1199" ph=" }" />
-            <marker date="1481738744326" expanded="true" signature="1242:1271" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="1578:1583" ph=" { " />
-            <marker date="1481738744326" expanded="true" signature="1607:1610" ph=" }" />
-            <marker date="1481738744326" expanded="true" signature="1682:1730" ph="{...}" />
-            <marker date="1481738744326" expanded="false" signature="1839:1844" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="1871:1874" ph=" }" />
-            <marker date="1481738744326" expanded="true" signature="1954:2008" ph="{...}" />
-            <marker date="1481738744326" expanded="false" signature="2099:2104" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2122:2125" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2172:2177" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2206:2209" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2277:2282" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2300:2303" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2350:2355" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2384:2387" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2423:2428" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2450:2453" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2508:2513" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2550:2553" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2587:2592" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2611:2614" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2664:2669" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2700:2703" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2736:2741" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2759:2762" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="2810:2815" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="2844:2847" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="3111:3132" ph="&lt;~&gt;" />
-            <marker date="1481738744326" expanded="false" signature="3166:3171" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="3188:3191" ph=" }" />
-            <marker date="1481738744326" expanded="false" signature="3236:3241" ph=" { " />
-            <marker date="1481738744326" expanded="false" signature="3268:3271" ph=" }" />
-            <marker date="1481738744326" expanded="true" signature="3374:3423" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="3496:3550" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="3577:7831" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="3729:3747" ph="&lt;~&gt;" />
-            <marker date="1481738744326" expanded="true" signature="4829:5102" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="4931:5020" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="5091:5098" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="5457:6048" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="5559:5964" ph="{...}" />
-            <marker date="1481738744326" expanded="true" signature="6035:6042" ph="{...}" />
-            <marker date="1481738744326" expanded="false" signature="6178:6248" ph="(v) → {" />
-            <marker date="1481738744326" expanded="false" signature="6356:6362" ph="}" />
-            <marker date="1481738744326" expanded="false" signature="6476:6546" ph="(v) → {" />
-            <marker date="1481738744326" expanded="false" signature="6682:6688" ph="}" />
-            <marker date="1481738744326" expanded="false" signature="6805:6875" ph="(v) → {" />
-            <marker date="1481738744326" expanded="false" signature="7088:7094" ph="}" />
-            <marker date="1481738744326" expanded="false" signature="7211:7281" ph="(v) → {" />
-            <marker date="1481738744326" expanded="false" signature="7419:7425" ph="}" />
-            <marker date="1481738744326" expanded="false" signature="7464:7545" ph="(v) → {" />
-            <marker date="1481738744326" expanded="false" signature="7699:7705" ph="}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="28" column="62" selection-start-line="28" selection-start-column="62" selection-end-line="28" selection-end-column="62" />
-          <folding>
-            <marker date="1481811651286" expanded="true" signature="17:2937" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="161:805" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="185:467" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="204:241" ph="&quot;preferences_weigh_activated&quot;" />
-            <marker date="1481811651286" expanded="true" signature="493:771" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="512:547" ph="&quot;preferences_weigh_minimum&quot;" />
-            <marker date="1481811651286" expanded="true" signature="860:2520" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="891:1197" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="910:950" ph="&quot;preferences_weigh_secondary_visible&quot;" />
-            <marker date="1481811651286" expanded="true" signature="1228:1533" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="1247:1290" ph="&quot;preferences_weigh_minimum_visible&quot;" />
-            <marker date="1481811651286" expanded="true" signature="1559:1853" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="1578:1620" ph="&quot;preferences_weigh_brutto_visible&quot;" />
-            <marker date="1481811651286" expanded="true" signature="1882:2172" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="1901:1942" ph="&quot;preferences_weigh_netto_visible&quot;" />
-            <marker date="1481811651286" expanded="true" signature="2203:2489" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="2222:2262" ph="&quot;preferences_weigh_tara_visible&quot;" />
-            <marker date="1481811651286" expanded="true" signature="2574:2915" ph="..." />
-            <marker date="1481811651286" expanded="true" signature="2598:2887" ph="..." />
-            <marker date="1481811651286" expanded="false" signature="2617:2654" ph="&quot;preferences_weigh_print_min&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="56" column="60" selection-start-line="56" selection-start-column="60" selection-end-line="56" selection-end-column="60" />
-          <folding>
-            <marker date="1481817902395" expanded="true" signature="17:5806" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="161:1197" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="185:430" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="204:244" ph="&quot;preferences_counting_activated&quot;" />
-            <marker date="1481817902395" expanded="true" signature="456:728" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="475:523" ph="&quot;preferences_counting_auto_optimization&quot;" />
-            <marker date="1481817902395" expanded="true" signature="758:967" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="780:815" ph="&quot;preferences_counting_mode&quot;" />
-            <marker date="1481817902395" expanded="true" signature="1002:1158" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="1256:4029" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="1284:1564" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="1303:1351" ph="&quot;preferences_counting_secondary_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="1602:1830" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="1621:1663" ph="&quot;preferences_counting_apw_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="1861:2124" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="1880:1925" ph="&quot;preferences_counting_gross_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="2150:2409" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="2169:2213" ph="&quot;preferences_counting_net_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="2438:2693" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="2724:3007" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="2743:2788" ph="&quot;preferences_counting_target_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="3037:3336" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="3056:3105" ph="&quot;preferences_counting_difference_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="3368:3667" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="3387:3436" ph="&quot;preferences_counting_over_limit_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="3697:4000" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="3716:3766" ph="&quot;preferences_counting_under_limit_visible&quot;" />
-            <marker date="1481817902395" expanded="true" signature="4083:5784" ph="..." />
-            <marker date="1481817902395" expanded="true" signature="4107:4337" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="4126:4166" ph="&quot;preferences_counting_print_apw&quot;" />
-            <marker date="1481817902395" expanded="true" signature="4366:4628" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="4385:4433" ph="&quot;preferences_counting_print_sample_size&quot;" />
-            <marker date="1481817902395" expanded="true" signature="4657:4899" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="4676:4719" ph="&quot;preferences_counting_print_target&quot;" />
-            <marker date="1481817902395" expanded="true" signature="4928:5186" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="4947:4994" ph="&quot;preferences_counting_print_difference&quot;" />
-            <marker date="1481817902395" expanded="true" signature="5213:5471" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="5232:5279" ph="&quot;preferences_counting_print_over_limit&quot;" />
-            <marker date="1481817902395" expanded="true" signature="5500:5762" ph="..." />
-            <marker date="1481817902395" expanded="false" signature="5519:5567" ph="&quot;preferences_counting_print_under_limit&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-          <folding>
-            <marker date="1481817957326" expanded="true" signature="49:12065" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="110" column="43" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
-          <folding>
-            <marker date="1481817957298" expanded="true" signature="49:20879" ph="..." />
-            <marker date="1481817957298" expanded="true" signature="19358:19900" ph="..." />
-            <marker date="1481817957298" expanded="true" signature="19942:20406" ph="..." />
-            <marker date="1481817957298" expanded="true" signature="20461:20511" ph="..." />
-            <marker date="1481817957298" expanded="true" signature="20569:20702" ph="..." />
-            <marker date="1481817957298" expanded="true" signature="20754:20856" ph="..." />
+            <marker date="1481462346333" expanded="false" signature="47:523" ph="..." />
+            <marker date="1481462346333" expanded="true" signature="526:893" ph="/**...*/" />
+            <marker date="1481462346333" expanded="true" signature="1193:3338" ph="{...}" />
+            <marker date="1481462346333" expanded="false" signature="1469:1561" ph="(v) → {" />
+            <marker date="1481462346333" expanded="false" signature="2149:2266" ph="(v) → {" />
+            <marker date="1481462346333" expanded="false" signature="2333:2360" ph="}" />
+            <marker date="1481462346333" expanded="false" signature="2591:2707" ph="(v) → {" />
+            <marker date="1481462346333" expanded="false" signature="3023:3050" ph="}" />
+            <marker date="1481462346333" expanded="false" signature="3229:3244" ph="}" />
+            <marker date="1481462346333" expanded="true" signature="3382:3567" ph="{...}" />
+            <marker date="1481462346333" expanded="true" signature="3609:3642" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="193" column="85" selection-start-line="193" selection-start-column="85" selection-end-line="193" selection-end-column="85" />
+        <state relative-caret-position="227">
+          <caret line="190" column="18" selection-start-line="190" selection-start-column="18" selection-end-line="190" selection-end-column="18" />
           <folding>
             <marker date="1481819268975" expanded="false" signature="53:625" ph="..." />
             <marker date="1481819268975" expanded="true" signature="627:670" ph="/**...*/" />
@@ -6189,25 +5622,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java">
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsPartCounting.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-412">
-          <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
+        <state relative-caret-position="-8">
+          <caret line="139" column="36" selection-start-line="139" selection-start-column="36" selection-end-line="139" selection-end-column="36" />
           <folding>
-            <marker date="1481817827960" expanded="true" signature="51:424" ph="..." />
-            <marker date="1481817827960" expanded="true" signature="427:603" ph="/**...*/" />
-            <marker date="1481817827960" expanded="true" signature="791:975" ph="{...}" />
-            <marker date="1481817827960" expanded="true" signature="980:1187" ph="/**...*/" />
-            <marker date="1481817827960" expanded="true" signature="1276:2790" ph="{...}" />
-            <marker date="1481817827960" expanded="true" signature="3025:3112" ph="{...}" />
+            <marker date="1481462346321" expanded="true" signature="47:642" ph="..." />
+            <marker date="1481462346321" expanded="true" signature="1212:10642" ph="{...}" />
+            <marker date="1481462346321" expanded="false" signature="2141:2233" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="2827:2944" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="3011:3038" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="3269:3385" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="3695:3722" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="3901:3916" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="4078:4170" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="4790:4907" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="4974:5001" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="5232:5348" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="5649:5676" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="5855:5870" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="5922:6014" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="6589:6697" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="7451:7474" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="7583:7691" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="8239:8262" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="8275:8290" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="8332:8424" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="8854:8971" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="9038:9065" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="9304:9420" ph="(v) → {" />
+            <marker date="1481462346321" expanded="false" signature="10328:10355" ph="}" />
+            <marker date="1481462346321" expanded="false" signature="10534:10549" ph="}" />
+            <marker date="1481462346321" expanded="true" signature="10686:11000" ph="{...}" />
+            <marker date="1481462346321" expanded="true" signature="11042:11156" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/settings/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="65" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="65" />
+          <folding>
+            <marker date="1481112757666" expanded="false" signature="51:294" ph="..." />
+            <marker date="1481112757666" expanded="true" signature="296:992" ph="/**...*/" />
+            <marker date="1481112757666" expanded="true" signature="1167:1265" ph="/**...*/" />
+            <marker date="1481112757666" expanded="true" signature="1376:1945" ph="{...}" />
+            <marker date="1481112757666" expanded="true" signature="1989:2063" ph="{...}" />
+            <marker date="1481112757666" expanded="true" signature="2106:2317" ph="{...}" />
+            <marker date="1481112757666" expanded="true" signature="2323:2452" ph="/**...*/" />
+            <marker date="1481112757666" expanded="true" signature="2501:4576" ph="{...}" />
+            <marker date="1481112757666" expanded="true" signature="4667:4736" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="183" column="0" selection-start-line="182" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+        <state relative-caret-position="-493">
+          <caret line="152" column="50" selection-start-line="152" selection-start-column="50" selection-end-line="152" selection-end-column="50" />
           <folding>
             <marker date="1481739749903" expanded="false" signature="48:1156" ph="..." />
             <marker date="1481739749903" expanded="true" signature="1546:4655" ph="{...}" />
@@ -6250,128 +5723,812 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/ScaleApplication.java">
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
+        <state relative-caret-position="257">
+          <caret line="147" column="25" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
+          <folding>
+            <marker date="1482160406336" expanded="false" signature="48:408" ph="..." />
+            <marker date="1482160406336" expanded="true" signature="411:492" ph="/**...*/" />
+            <marker date="1482160406336" expanded="false" signature="593:609" ph="&lt;~&gt;" />
+            <marker date="1482160406336" expanded="false" signature="686:712" ph="&lt;~&gt;" />
+            <marker date="1482160406336" expanded="false" signature="1104:1109" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="1121:1124" ph=" }" />
+            <marker date="1482160406336" expanded="false" signature="1157:1162" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="1179:1182" ph=" }" />
+            <marker date="1482160406336" expanded="true" signature="1522:1531" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="1581:1607" ph="{...}" />
+            <marker date="1482160406336" expanded="false" signature="1638:1643" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="1656:1659" ph=" }" />
+            <marker date="1482160406336" expanded="false" signature="1700:1705" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="1724:1727" ph=" }" />
+            <marker date="1482160406336" expanded="false" signature="1773:1778" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="1810:1813" ph=" }" />
+            <marker date="1482160406336" expanded="true" signature="1890:1954" ph="{...}" />
+            <marker date="1482160406336" expanded="false" signature="2013:2017" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="2052:2055" ph=" }" />
+            <marker date="1482160406336" expanded="true" signature="2117:2162" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="2236:2283" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="2360:2410" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="2459:2602" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="2653:2801" ph="{...}" />
+            <marker date="1482160406336" expanded="true" signature="2840:2974" ph="{...}" />
+            <marker date="1482160406336" expanded="false" signature="3008:3013" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="3033:3036" ph=" }" />
+            <marker date="1482160406336" expanded="false" signature="3087:3092" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="3125:3128" ph=" }" />
+            <marker date="1482160406336" expanded="true" signature="3197:3347" ph="{...}" />
+            <marker date="1482160406336" expanded="false" signature="3399:3404" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="3428:3431" ph=" }" />
+            <marker date="1482160406336" expanded="true" signature="3501:3715" ph="{...}" />
+            <marker date="1482160406336" expanded="false" signature="3747:3752" ph=" { " />
+            <marker date="1482160406336" expanded="false" signature="3779:3782" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Navigationbar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="947">
+          <caret line="201" column="76" selection-start-line="201" selection-start-column="76" selection-end-line="201" selection-end-column="76" />
+          <folding>
+            <marker date="1482161814722" expanded="true" signature="48:1028" ph="..." />
+            <marker date="1482161814722" expanded="false" signature="1092:1097" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="1114:1117" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="1164:1169" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="1196:1199" ph=" }" />
+            <marker date="1482161814722" expanded="true" signature="1242:1271" ph="{...}" />
+            <marker date="1482161814722" expanded="false" signature="1623:1628" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="1652:1655" ph=" }" />
+            <marker date="1482161814722" expanded="true" signature="1727:1775" ph="{...}" />
+            <marker date="1482161814722" expanded="false" signature="1884:1889" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="1916:1919" ph=" }" />
+            <marker date="1482161814722" expanded="true" signature="1999:2053" ph="{...}" />
+            <marker date="1482161814722" expanded="false" signature="2144:2149" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2167:2170" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2217:2222" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2251:2254" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2322:2327" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2345:2348" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2395:2400" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2429:2432" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2468:2473" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2495:2498" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2553:2558" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2595:2598" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2632:2637" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2656:2659" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2709:2714" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2745:2748" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2781:2786" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2804:2807" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="2855:2860" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="2889:2892" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="3156:3177" ph="&lt;~&gt;" />
+            <marker date="1482161814722" expanded="false" signature="3211:3216" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="3233:3236" ph=" }" />
+            <marker date="1482161814722" expanded="false" signature="3281:3286" ph=" { " />
+            <marker date="1482161814722" expanded="false" signature="3313:3316" ph=" }" />
+            <marker date="1482161814722" expanded="true" signature="3419:3468" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="3541:3595" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="3622:8234" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="3774:3792" ph="&lt;~&gt;" />
+            <marker date="1482161814722" expanded="true" signature="4874:5425" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="4976:5343" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="5414:5421" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="5860:6451" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="5962:6367" ph="{...}" />
+            <marker date="1482161814722" expanded="true" signature="6438:6445" ph="{...}" />
+            <marker date="1482161814722" expanded="false" signature="6581:6651" ph="(v) → {" />
+            <marker date="1482161814722" expanded="false" signature="6759:6765" ph="}" />
+            <marker date="1482161814722" expanded="false" signature="6879:6949" ph="(v) → {" />
+            <marker date="1482161814722" expanded="false" signature="7085:7091" ph="}" />
+            <marker date="1482161814722" expanded="false" signature="7208:7278" ph="(v) → {" />
+            <marker date="1482161814722" expanded="false" signature="7491:7497" ph="}" />
+            <marker date="1482161814722" expanded="false" signature="7614:7684" ph="(v) → {" />
+            <marker date="1482161814722" expanded="false" signature="7822:7828" ph="}" />
+            <marker date="1482161814722" expanded="false" signature="7867:7948" ph="(v) → {" />
+            <marker date="1482161814722" expanded="false" signature="8102:8108" ph="}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="66" column="64" selection-start-line="66" selection-start-column="64" selection-end-line="66" selection-end-column="64" />
+          <folding>
+            <marker date="1482162882114" expanded="false" signature="51:457" ph="..." />
+            <marker date="1482162882114" expanded="true" signature="460:636" ph="/**...*/" />
+            <marker date="1482162882114" expanded="true" signature="824:1008" ph="{...}" />
+            <marker date="1482162882114" expanded="true" signature="1013:1220" ph="/**...*/" />
+            <marker date="1482162882114" expanded="true" signature="1309:3040" ph="{...}" />
+            <marker date="1482162882114" expanded="true" signature="3275:3362" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="-1937">
           <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
           <folding>
-            <marker date="1481818328130" expanded="false" signature="47:692" ph="..." />
-            <marker date="1481818328130" expanded="false" signature="915:931" ph="&lt;~&gt;" />
-            <marker date="1481818328130" expanded="true" signature="977:1065" ph="{...}" />
-            <marker date="1481818328130" expanded="true" signature="1107:1197" ph="{...}" />
-            <marker date="1481818328130" expanded="true" signature="1323:2990" ph="{...}" />
-            <marker date="1481818328130" expanded="true" signature="3067:8277" ph="{...}" />
-            <marker date="1481818328130" expanded="true" signature="3176:3345" ph="//..." />
-            <marker date="1481818328130" expanded="true" signature="3895:3945" ph="&quot;preferences_weigh_tara_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="4293:4345" ph="&quot;preferences_weigh_brutto_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="4699:4750" ph="&quot;preferences_weigh_netto_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="5106:5156" ph="&quot;preferences_weigh_netto_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="5489:5687" ph="//..." />
-            <marker date="1481818328130" expanded="true" signature="5727:5780" ph="&quot;preferences_weigh_minimum_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="5737:5779" ph="&quot;preferences_weigh_minimum_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="6216:6269" ph="&quot;preferences_counting_tare_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="6620:6675" ph="&quot;preferences_counting_gross_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="7032:7086" ph="&quot;preferences_counting_net_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="7445:7495" ph="&quot;preferences_weigh_secondary_visible&quot;" />
-            <marker date="1481818328130" expanded="true" signature="7850:7902" ph="&quot;preferences_counting_apw_visible&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/model/Scale.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="141" column="28" selection-start-line="141" selection-start-column="28" selection-end-line="141" selection-end-column="28" />
-          <folding>
-            <marker date="1481462346423" expanded="false" signature="48:382" ph="..." />
-            <marker date="1481462346423" expanded="true" signature="385:466" ph="/**...*/" />
-            <marker date="1481462346423" expanded="false" signature="567:583" ph="&lt;~&gt;" />
-            <marker date="1481462346423" expanded="false" signature="660:686" ph="&lt;~&gt;" />
-            <marker date="1481462346423" expanded="false" signature="1078:1083" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="1095:1098" ph=" }" />
-            <marker date="1481462346423" expanded="false" signature="1131:1136" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="1153:1156" ph=" }" />
-            <marker date="1481462346423" expanded="true" signature="1496:1505" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="1555:1581" ph="{...}" />
-            <marker date="1481462346423" expanded="false" signature="1612:1617" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="1630:1633" ph=" }" />
-            <marker date="1481462346423" expanded="false" signature="1674:1679" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="1698:1701" ph=" }" />
-            <marker date="1481462346423" expanded="false" signature="1747:1752" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="1784:1787" ph=" }" />
-            <marker date="1481462346423" expanded="true" signature="1864:1928" ph="{...}" />
-            <marker date="1481462346423" expanded="false" signature="1987:1991" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="2026:2029" ph=" }" />
-            <marker date="1481462346423" expanded="true" signature="2091:2136" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="2210:2257" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="2334:2384" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="2433:2576" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="2627:2775" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="2814:2948" ph="{...}" />
-            <marker date="1481462346423" expanded="false" signature="2982:2987" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="3007:3010" ph=" }" />
-            <marker date="1481462346423" expanded="false" signature="3061:3066" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="3099:3102" ph=" }" />
-            <marker date="1481462346423" expanded="true" signature="3171:3321" ph="{...}" />
-            <marker date="1481462346423" expanded="true" signature="3373:3378" ph=" { " />
-            <marker date="1481462346423" expanded="true" signature="3402:3405" ph=" }" />
-            <marker date="1481462346423" expanded="true" signature="3475:3643" ph="{...}" />
-            <marker date="1481462346423" expanded="false" signature="3675:3680" ph=" { " />
-            <marker date="1481462346423" expanded="false" signature="3707:3710" ph=" }" />
+            <marker date="1482159505904" expanded="true" signature="47:692" ph="..." />
+            <marker date="1482159505904" expanded="false" signature="915:931" ph="&lt;~&gt;" />
+            <marker date="1482159505904" expanded="true" signature="977:1065" ph="{...}" />
+            <marker date="1482159505904" expanded="true" signature="1107:1197" ph="{...}" />
+            <marker date="1482159505904" expanded="true" signature="1323:2990" ph="{...}" />
+            <marker date="1482159505904" expanded="true" signature="3067:8418" ph="{...}" />
+            <marker date="1482159505904" expanded="true" signature="3176:3345" ph="//..." />
+            <marker date="1482159505904" expanded="true" signature="3895:3945" ph="&quot;preferences_weigh_tara_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="4293:4345" ph="&quot;preferences_weigh_brutto_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="4699:4750" ph="&quot;preferences_weigh_netto_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="5106:5156" ph="&quot;preferences_weigh_netto_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="5489:5687" ph="//..." />
+            <marker date="1482159505904" expanded="true" signature="5727:5780" ph="&quot;preferences_weigh_minimum_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="5737:5779" ph="&quot;preferences_weigh_minimum_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="6216:6269" ph="&quot;preferences_counting_tare_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="6620:6675" ph="&quot;preferences_counting_gross_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="7032:7086" ph="&quot;preferences_counting_net_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="7445:7495" ph="&quot;preferences_weigh_secondary_visible&quot;" />
+            <marker date="1482159505904" expanded="true" signature="7850:7902" ph="&quot;preferences_counting_apw_visible&quot;" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="74" column="33" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="39" />
+        <state relative-caret-position="-1223">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
           <folding>
-            <marker date="1481822274861" expanded="false" signature="47:832" ph="..." />
-            <marker date="1481822274861" expanded="true" signature="835:1202" ph="/**...*/" />
-            <marker date="1481822274861" expanded="true" signature="1573:2165" ph="{...}" />
-            <marker date="1481822274861" expanded="true" signature="2209:2297" ph="{...}" />
-            <marker date="1481822274861" expanded="true" signature="2339:2429" ph="{...}" />
-            <marker date="1481822274861" expanded="true" signature="2509:4848" ph="{...}" />
-            <marker date="1481822274861" expanded="true" signature="3364:3409" ph="&quot;preferences_weigh_minimum&quot;" />
+            <marker date="1482160033930" expanded="true" signature="47:832" ph="..." />
+            <marker date="1482160033930" expanded="true" signature="835:1202" ph="/**...*/" />
+            <marker date="1482160033930" expanded="true" signature="1573:2165" ph="{...}" />
+            <marker date="1482160033930" expanded="true" signature="2209:2297" ph="{...}" />
+            <marker date="1482160033930" expanded="true" signature="2339:2429" ph="{...}" />
+            <marker date="1482160033930" expanded="true" signature="2509:5378" ph="{...}" />
+            <marker date="1482160033930" expanded="true" signature="3676:3721" ph="&quot;preferences_weigh_minimum&quot;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsWeighing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-648">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="55" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
           <folding>
-            <marker date="1481462346333" expanded="false" signature="47:523" ph="..." />
-            <marker date="1481462346333" expanded="true" signature="526:893" ph="/**...*/" />
-            <marker date="1481462346333" expanded="true" signature="1193:3338" ph="{...}" />
-            <marker date="1481462346333" expanded="false" signature="1469:1561" ph="(v) → {" />
-            <marker date="1481462346333" expanded="false" signature="2149:2266" ph="(v) → {" />
-            <marker date="1481462346333" expanded="false" signature="2333:2360" ph="}" />
-            <marker date="1481462346333" expanded="false" signature="2591:2707" ph="(v) → {" />
-            <marker date="1481462346333" expanded="false" signature="3023:3050" ph="}" />
-            <marker date="1481462346333" expanded="false" signature="3229:3244" ph="}" />
-            <marker date="1481462346333" expanded="true" signature="3382:3567" ph="{...}" />
-            <marker date="1481462346333" expanded="true" signature="3609:3642" ph="{...}" />
+            <marker date="1482165196825" expanded="true" signature="17:6033" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="161:1424" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="185:415" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="201:241" ph="&quot;preferences_counting_activated&quot;" />
+            <marker date="1482165196825" expanded="true" signature="439:657" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="455:490" ph="&quot;preferences_counting_activated&quot;" />
+            <marker date="1482165196825" expanded="true" signature="683:955" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="702:750" ph="&quot;preferences_counting_auto_optimization&quot;" />
+            <marker date="1482165196825" expanded="true" signature="985:1194" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="1007:1042" ph="&quot;preferences_counting_mode&quot;" />
+            <marker date="1482165196825" expanded="true" signature="1229:1385" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="1483:4256" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="1511:1791" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="1530:1578" ph="&quot;preferences_counting_secondary_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="1829:2057" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="1848:1890" ph="&quot;preferences_counting_apw_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="2088:2351" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="2107:2152" ph="&quot;preferences_counting_gross_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="2377:2636" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="2396:2440" ph="&quot;preferences_counting_net_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="2665:2920" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="2684:2727" ph="&quot;preferences_counting_tare_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="2951:3234" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="2970:3015" ph="&quot;preferences_counting_target_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="3264:3563" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="3283:3332" ph="&quot;preferences_counting_difference_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="3595:3894" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="3614:3663" ph="&quot;preferences_counting_over_limit_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="3924:4227" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="3943:3993" ph="&quot;preferences_counting_under_limit_visible&quot;" />
+            <marker date="1482165196825" expanded="true" signature="4310:6011" ph="..." />
+            <marker date="1482165196825" expanded="true" signature="4334:4564" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="4353:4393" ph="&quot;preferences_counting_print_apw&quot;" />
+            <marker date="1482165196825" expanded="true" signature="4593:4855" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="4612:4660" ph="&quot;preferences_counting_print_sample_size&quot;" />
+            <marker date="1482165196825" expanded="true" signature="4884:5126" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="4903:4946" ph="&quot;preferences_counting_print_target&quot;" />
+            <marker date="1482165196825" expanded="true" signature="5155:5413" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="5174:5221" ph="&quot;preferences_counting_print_difference&quot;" />
+            <marker date="1482165196825" expanded="true" signature="5440:5698" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="5459:5506" ph="&quot;preferences_counting_print_over_limit&quot;" />
+            <marker date="1482165196825" expanded="true" signature="5727:5989" ph="..." />
+            <marker date="1482165196825" expanded="false" signature="5746:5794" ph="&quot;preferences_counting_print_under_limit&quot;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsPartCounting.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-926">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_percent_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="57" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="57" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1482165316665" expanded="true" signature="17:4775" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="149:866" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="179:498" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="204:243" ph="&quot;preferences_percent_activated&quot;" />
+            <marker date="1482165316665" expanded="true" signature="528:838" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="919:3517" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="950:1255" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="975:1022" ph="&quot;preferences_percent_secondary_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="1285:1625" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="1310:1357" ph="&quot;preferences_percent_reference_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="1656:2012" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="1681:1729" ph="&quot;preferences_percent_difference_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="2042:2420" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="2067:2123" ph="&quot;preferences_percent_difference_percent_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="2450:2780" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="2475:2519" ph="&quot;preferences_percent_brutto_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="2810:3137" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="2835:2878" ph="&quot;preferences_percent_netto_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="3167:3490" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="3192:3234" ph="&quot;preferences_percent_tara_visible&quot;" />
+            <marker date="1482165316665" expanded="true" signature="3575:4753" ph="..." />
+            <marker date="1482165316665" expanded="true" signature="3605:3941" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="3630:3675" ph="&quot;preferences_percent_print_reference&quot;" />
+            <marker date="1482165316665" expanded="true" signature="3971:4311" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="3996:4042" ph="&quot;preferences_percent_print_difference&quot;" />
+            <marker date="1482165316665" expanded="true" signature="4341:4726" ph="..." />
+            <marker date="1482165316665" expanded="false" signature="4366:4420" ph="&quot;preferences_percent_print_difference_percent&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="24" column="62" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="62" />
+          <folding>
+            <marker date="1482165430691" expanded="true" signature="26:6559" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="158:1392" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="188:471" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="209:246" ph="&quot;preferences_check_activated&quot;" />
+            <marker date="1482165430691" expanded="true" signature="501:804" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="830:989" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="1015:1172" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="1198:1364" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="1445:4680" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="1476:1777" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="1501:1546" ph="&quot;preferences_check_secondary_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="1807:2127" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="1832:1872" ph="&quot;preferences_check_over_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="2158:2482" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="2183:2224" ph="&quot;preferences_check_under_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="2512:2838" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="2537:2579" ph="&quot;preferences_check_brutto_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="2868:3191" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="2893:2934" ph="&quot;preferences_check_netto_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="3221:3540" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="3246:3286" ph="&quot;preferences_check_tara_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="3570:3897" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="3595:3637" ph="&quot;preferences_check_target_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="3927:4273" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="3952:4001" ph="&quot;preferences_check_overtolerance_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="4303:4653" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="4328:4378" ph="&quot;preferences_check_undertolerance_visible&quot;" />
+            <marker date="1482165430691" expanded="true" signature="4738:6537" ph="..." />
+            <marker date="1482165430691" expanded="true" signature="4768:5081" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="4793:4833" ph="&quot;preferences_check_print_target&quot;" />
+            <marker date="1482165430691" expanded="true" signature="5111:5443" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="5136:5183" ph="&quot;preferences_check_print_overtolerance&quot;" />
+            <marker date="1482165430691" expanded="true" signature="5473:5809" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="5498:5546" ph="&quot;preferences_check_print_undertolerance&quot;" />
+            <marker date="1482165430691" expanded="true" signature="5840:6157" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="5865:5908" ph="&quot;preferences_check_print_overlimit&quot;" />
+            <marker date="1482165430691" expanded="true" signature="6188:6508" ph="..." />
+            <marker date="1482165430691" expanded="false" signature="6213:6257" ph="&quot;preferences_check_print_underlimit&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_animal_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="62" selection-start-line="17" selection-start-column="62" selection-end-line="17" selection-end-column="62" />
+          <folding>
+            <marker date="1482165809503" expanded="true" signature="17:3453" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="149:1125" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="179:472" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="200:238" ph="&quot;preferences_animal_activated&quot;" />
+            <marker date="1482165809503" expanded="true" signature="502:809" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="527:560" ph="&quot;preferences_animal_activated&quot;" />
+            <marker date="1482165809503" expanded="true" signature="835:965" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="860:897" ph="&quot;preferences_check_limitmode&quot;" />
+            <marker date="1482165809503" expanded="true" signature="990:1097" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="1178:2984" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="1209:1512" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="1234:1280" ph="&quot;preferences_animal_secondary_visible&quot;" />
+            <marker date="1482165809503" expanded="true" signature="1542:1890" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="1567:1617" ph="&quot;preferences_animal_measuringtime_visible&quot;" />
+            <marker date="1482165809503" expanded="true" signature="1923:2251" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="1948:1991" ph="&quot;preferences_animal_brutto_visible&quot;" />
+            <marker date="1482165809503" expanded="true" signature="2281:2606" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="2306:2348" ph="&quot;preferences_animal_netto_visible&quot;" />
+            <marker date="1482165809503" expanded="true" signature="2636:2957" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="2661:2702" ph="&quot;preferences_animal_tara_visible&quot;" />
+            <marker date="1482165809503" expanded="true" signature="3042:3431" ph="..." />
+            <marker date="1482165809503" expanded="true" signature="3072:3402" ph="..." />
+            <marker date="1482165809503" expanded="false" signature="3097:3141" ph="&quot;preferences_animal_print_measuring&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_density_determination.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="68" selection-start-line="18" selection-start-column="68" selection-end-line="18" selection-end-column="68" />
+          <folding>
+            <marker date="1482165848877" expanded="true" signature="17:7275" ph="..." />
+            <marker date="1482165848877" expanded="true" signature="149:2298" ph="..." />
+            <marker date="1482165848877" expanded="true" signature="179:498" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="204:243" ph="&quot;preferences_density_activated&quot;" />
+            <marker date="1482165848877" expanded="true" signature="529:844" ph="..." />
+            <marker date="1482165848877" expanded="true" signature="554:588" ph="&quot;preferences_density_activated&quot;" />
+            <marker date="1482165848877" expanded="true" signature="870:1046" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="895:929" ph="&quot;preferences_density_mode&quot;" />
+            <marker date="1482165848877" expanded="true" signature="1071:1250" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="1096:1135" ph="&quot;preferences_density_liquidtyp&quot;" />
+            <marker date="1482165848877" expanded="true" signature="1280:1562" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="1301:1337" ph="&quot;preferences_density_porous&quot;" />
+            <marker date="1482165848877" expanded="true" signature="1592:1918" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="1617:1656" ph="&quot;preferences_density_autoprint&quot;" />
+            <marker date="1482165848877" expanded="true" signature="1948:2269" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="1973:2013" ph="&quot;preferences_density_autosample&quot;" />
+            <marker date="1482165848877" expanded="true" signature="2351:4991" ph="..." />
+            <marker date="1482165848877" expanded="true" signature="2382:2722" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="2407:2451" ph="&quot;preferences_denisty_Liquid_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="2753:3105" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="2778:2825" ph="&quot;preferences_density_watertemp_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="3135:3477" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="3160:3208" ph="&quot;preferences_density_oildensity_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="3512:3852" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="3537:3584" ph="&quot;preferences_density_weightair_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="3882:4200" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="3903:3952" ph="&quot;preferences_density_oiledweight_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="4230:4582" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="4255:4305" ph="&quot;preferences_density_weightliquid_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="4613:4963" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="4638:4688" ph="&quot;preferences_density_sinkervolume_visible&quot;" />
+            <marker date="1482165848877" expanded="true" signature="5049:7253" ph="..." />
+            <marker date="1482165848877" expanded="true" signature="5079:5394" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="5104:5146" ph="&quot;preferences_density_porous_print&quot;" />
+            <marker date="1482165848877" expanded="true" signature="5424:5757" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="5449:5495" ph="&quot;preferences_density_liquidtype_print&quot;" />
+            <marker date="1482165848877" expanded="true" signature="5787:6132" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="5812:5861" ph="&quot;preferences_density_liquiddensity_print&quot;" />
+            <marker date="1482165848877" expanded="true" signature="6162:6496" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="6187:6232" ph="&quot;preferences_density_watertemp_print&quot;" />
+            <marker date="1482165848877" expanded="true" signature="6526:6852" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="6551:6596" ph="&quot;preferences_density_weightair_print&quot;" />
+            <marker date="1482165848877" expanded="true" signature="6882:7224" ph="..." />
+            <marker date="1482165848877" expanded="false" signature="6907:6957" ph="&quot;preferences_density_weightinliquid_print&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_differential_weighing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="68" selection-start-line="17" selection-start-column="68" selection-end-line="17" selection-end-column="68" />
+          <folding>
+            <marker date="1482165886235" expanded="true" signature="17:5569" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="149:1256" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="179:508" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="538:863" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="563:602" ph="&quot;preferences_differential_activated&quot;" />
+            <marker date="1482165886235" expanded="true" signature="893:1228" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="918:961" ph="&quot;preferences_differential_autoMode&quot;" />
+            <marker date="1482165886235" expanded="true" signature="1309:3987" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="1340:1692" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="1365:1415" ph="&quot;preferences_differential_initial_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="1723:2067" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="1748:1796" ph="&quot;preferences_differential_final_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="2097:2456" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="2122:2176" ph="&quot;preferences_differential_differencew_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="2486:2860" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="2511:2565" ph="&quot;preferences_differential_differencep_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="2890:3230" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="2915:2964" ph="&quot;preferences_differential_brutto_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="3260:3597" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="3285:3333" ph="&quot;preferences_differential_netto_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="3627:3960" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="3652:3699" ph="&quot;preferences_differential_tara_visible&quot;" />
+            <marker date="1482165886235" expanded="true" signature="4045:5547" ph="..." />
+            <marker date="1482165886235" expanded="true" signature="4075:4406" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="4100:4148" ph="&quot;preferences_differential_print_initial&quot;" />
+            <marker date="1482165886235" expanded="true" signature="4436:4755" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="4461:4507" ph="&quot;preferences_differential_print_final&quot;" />
+            <marker date="1482165886235" expanded="true" signature="4785:5130" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="4810:4862" ph="&quot;preferences_differential_print_differencew&quot;" />
+            <marker date="1482165886235" expanded="true" signature="5160:5520" ph="..." />
+            <marker date="1482165886235" expanded="false" signature="5185:5237" ph="&quot;preferences_differential_print_differencep&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+          <folding>
+            <marker date="1482166225353" expanded="true" signature="49:22067" ph="..." />
+            <marker date="1482166225353" expanded="true" signature="20546:21088" ph="..." />
+            <marker date="1482166225353" expanded="true" signature="21130:21594" ph="..." />
+            <marker date="1482166225353" expanded="true" signature="21649:21699" ph="..." />
+            <marker date="1482166225353" expanded="true" signature="21757:21890" ph="..." />
+            <marker date="1482166225353" expanded="true" signature="21942:22044" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_filling.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+          <folding>
+            <marker date="1482165939364" expanded="true" signature="17:4847" ph="..." />
+            <marker date="1482165939364" expanded="true" signature="149:990" ph="..." />
+            <marker date="1482165939364" expanded="true" signature="179:498" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="204:243" ph="&quot;preferences_filling_activated&quot;" />
+            <marker date="1482165939364" expanded="true" signature="528:829" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="553:587" ph="&quot;preferences_filling_activated&quot;" />
+            <marker date="1482165939364" expanded="true" signature="855:962" ph="..." />
+            <marker date="1482165939364" expanded="true" signature="1043:3625" ph="..." />
+            <marker date="1482165939364" expanded="true" signature="1074:1379" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="1099:1146" ph="&quot;preferences_filling_secondary_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="1410:1748" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="1435:1479" ph="&quot;preferences_filling_target_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="1778:2134" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="1803:1852" ph="&quot;preferences_filling_differencew_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="2164:2528" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="2189:2238" ph="&quot;preferences_filling_differencep_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="2558:2888" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="2583:2627" ph="&quot;preferences_filling_brutto_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="2918:3245" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="2943:2986" ph="&quot;preferences_filling_netto_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="3275:3598" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="3300:3342" ph="&quot;preferences_filling_tara_visible&quot;" />
+            <marker date="1482165939364" expanded="true" signature="3683:4825" ph="..." />
+            <marker date="1482165939364" expanded="true" signature="3713:4037" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="3738:3780" ph="&quot;preferences_filling_print_target&quot;" />
+            <marker date="1482165939364" expanded="true" signature="4067:4409" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="4092:4139" ph="&quot;preferences_filling_print_differencew&quot;" />
+            <marker date="1482165939364" expanded="true" signature="4439:4798" ph="..." />
+            <marker date="1482165939364" expanded="false" signature="4464:4511" ph="&quot;preferences_filling_print_differencep&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_formulation.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+          <folding>
+            <marker date="1482165972919" expanded="true" signature="17:6038" ph="..." />
+            <marker date="1482165972919" expanded="true" signature="149:1382" ph="..." />
+            <marker date="1482165972919" expanded="true" signature="179:506" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="204:247" ph="&quot;preferences_formulation_activated&quot;" />
+            <marker date="1482165972919" expanded="true" signature="537:850" ph="..." />
+            <marker date="1482165972919" expanded="true" signature="562:600" ph="&quot;preferences_formulation_activated&quot;" />
+            <marker date="1482165972919" expanded="true" signature="876:1009" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="901:950" ph="&quot;preferences_formulation_formulationmode&quot;" />
+            <marker date="1482165972919" expanded="true" signature="1039:1354" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="1064:1104" ph="&quot;preferences_formulation_filter&quot;" />
+            <marker date="1482165972919" expanded="true" signature="1435:4471" ph="..." />
+            <marker date="1482165972919" expanded="true" signature="1466:1828" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="1491:1542" ph="&quot;preferences_formulation_secondary_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="1859:2183" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="1884:1931" ph="&quot;preferences_formulation_total_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="2213:2552" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="2238:2286" ph="&quot;preferences_formulation_brutto_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="2582:2917" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="2607:2654" ph="&quot;preferences_formulation_netto_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="2947:3278" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="2972:3018" ph="&quot;preferences_formulation_tara_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="3308:3647" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="3333:3381" ph="&quot;preferences_formulation_target_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="3677:4041" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="3702:3755" ph="&quot;preferences_formulation_differencew_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="4072:4444" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="4097:4150" ph="&quot;preferences_formulation_differencep_visible&quot;" />
+            <marker date="1482165972919" expanded="true" signature="4529:6016" ph="..." />
+            <marker date="1482165972919" expanded="true" signature="4559:4869" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="4584:4629" ph="&quot;preferences_formulation_print_total&quot;" />
+            <marker date="1482165972919" expanded="true" signature="4899:5213" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="4924:4970" ph="&quot;preferences_formulation_print_target&quot;" />
+            <marker date="1482165972919" expanded="true" signature="5243:5593" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="5268:5319" ph="&quot;preferences_formulation_print_differencew&quot;" />
+            <marker date="1482165972919" expanded="true" signature="5623:5989" ph="..." />
+            <marker date="1482165972919" expanded="false" signature="5648:5699" ph="&quot;preferences_formulation_print_differencep&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_ingredient_costing.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="65" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
+          <folding>
+            <marker date="1482166005089" expanded="true" signature="17:4210" ph="..." />
+            <marker date="1482166005089" expanded="true" signature="149:1081" ph="..." />
+            <marker date="1482166005089" expanded="true" signature="179:504" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="204:246" ph="&quot;preferences_ingrediant_activated&quot;" />
+            <marker date="1482166005089" expanded="true" signature="534:852" ph="..." />
+            <marker date="1482166005089" expanded="true" signature="559:596" ph="&quot;preferences_ingrediant_activated&quot;" />
+            <marker date="1482166005089" expanded="true" signature="878:1053" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="903:940" ph="&quot;preferences_ingrediant_mode&quot;" />
+            <marker date="1482166005089" expanded="true" signature="1134:3373" ph="..." />
+            <marker date="1482166005089" expanded="true" signature="1165:1505" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="1190:1239" ph="&quot;preferences_ingrediant_unitcost_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="1535:1887" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="1560:1612" ph="&quot;preferences_ingrediant_totalweight_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="1917:2257" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="1942:1992" ph="&quot;preferences_ingrediant_totalcost_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="2288:2624" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="2313:2360" ph="&quot;preferences_ingrediant_brutto_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="2654:2987" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="2679:2725" ph="&quot;preferences_ingrediant_netto_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="3017:3346" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="3042:3087" ph="&quot;preferences_ingrediant_tara_visible&quot;" />
+            <marker date="1482166005089" expanded="true" signature="3431:4188" ph="..." />
+            <marker date="1482166005089" expanded="true" signature="3461:3799" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="3486:3536" ph="&quot;preferences_ingrediant_print_totalweight&quot;" />
+            <marker date="1482166005089" expanded="true" signature="3829:4159" ph="..." />
+            <marker date="1482166005089" expanded="false" signature="3854:3902" ph="&quot;preferences_ingrediant_print_totalcost&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_peak_hold.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1482166041238" expanded="true" signature="17:3323" ph="..." />
+            <marker date="1482166041238" expanded="true" signature="149:1383" ph="..." />
+            <marker date="1482166041238" expanded="true" signature="179:484" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="204:240" ph="&quot;preferences_peak_activated&quot;" />
+            <marker date="1482166041238" expanded="true" signature="514:811" ph="..." />
+            <marker date="1482166041238" expanded="true" signature="539:570" ph="&quot;preferences_peak_activated&quot;" />
+            <marker date="1482166041238" expanded="true" signature="837:1004" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="862:893" ph="&quot;preferences_peak_mode&quot;" />
+            <marker date="1482166041238" expanded="true" signature="1034:1353" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="1059:1096" ph="&quot;preferences_peak_stableonly&quot;" />
+            <marker date="1482166041238" expanded="true" signature="1436:2849" ph="..." />
+            <marker date="1482166041238" expanded="true" signature="1467:1766" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="1492:1536" ph="&quot;preferences_peak_secondary_visible&quot;" />
+            <marker date="1482166041238" expanded="true" signature="1797:2122" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="1822:1863" ph="&quot;preferences_peak_brutto_visible&quot;" />
+            <marker date="1482166041238" expanded="true" signature="2152:2474" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="2177:2217" ph="&quot;preferences_peak_netto_visible&quot;" />
+            <marker date="1482166041238" expanded="true" signature="2504:2821" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="2529:2568" ph="&quot;preferences_peak_tara_visible&quot;" />
+            <marker date="1482166041238" expanded="true" signature="2907:3301" ph="..." />
+            <marker date="1482166041238" expanded="true" signature="2937:3272" ph="..." />
+            <marker date="1482166041238" expanded="false" signature="2962:3005" ph="&quot;preferences_peak_print_stableonly&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_pipette_adjustment.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="65" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
+          <folding>
+            <marker date="1482166121279" expanded="true" signature="17:6979" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="149:2038" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="179:498" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="528:840" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="553:587" ph="&quot;preferences_pipette_activated&quot;" />
+            <marker date="1482166121279" expanded="true" signature="870:1198" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="895:939" ph="&quot;preferences_pipette_autosamplemode&quot;" />
+            <marker date="1482166121279" expanded="true" signature="1224:1396" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="1249:1289" ph="&quot;preferences_pipette_liquidtype&quot;" />
+            <marker date="1482166121279" expanded="true" signature="1422:1610" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="1447:1491" ph="&quot;preferences_pipette_numberofsample&quot;" />
+            <marker date="1482166121279" expanded="true" signature="1636:1813" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="1661:1702" ph="&quot;preferences_pipette_presureunit&quot;" />
+            <marker date="1482166121279" expanded="true" signature="1839:2011" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="1864:1904" ph="&quot;preferences_pipette_volumeunit&quot;" />
+            <marker date="1482166121279" expanded="true" signature="2091:4728" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="2122:2476" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="2147:2194" ph="&quot;preferences_pipette_secondary_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="2507:2849" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="2532:2577" ph="&quot;preferences_pipette_nominal_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="2880:3210" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="2905:2948" ph="&quot;preferences_pipette_inacc_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="3240:3574" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="3265:3309" ph="&quot;preferences_pipette_imprec_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="3604:3938" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="3625:3676" ph="&quot;preferences_pipette_liquiddensity_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="3969:4315" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="3994:4040" ph="&quot;preferences_pipette_barounit_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="4346:4698" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="4371:4418" ph="&quot;preferences_pipette_watertemp_visible&quot;" />
+            <marker date="1482166121279" expanded="true" signature="4786:6957" ph="..." />
+            <marker date="1482166121279" expanded="true" signature="4816:5140" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="4841:4884" ph="&quot;preferences_pipette_nominal_print&quot;" />
+            <marker date="1482166121279" expanded="true" signature="5171:5486" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="5196:5237" ph="&quot;preferences_pipette_inacc_print&quot;" />
+            <marker date="1482166121279" expanded="true" signature="5516:5836" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="5541:5583" ph="&quot;preferences_pipette_imprec_print&quot;" />
+            <marker date="1482166121279" expanded="true" signature="5866:6206" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="5891:5940" ph="&quot;preferences_pipette_liquiddensity_print&quot;" />
+            <marker date="1482166121279" expanded="true" signature="6237:6565" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="6262:6306" ph="&quot;preferences_pipette_barounit_print&quot;" />
+            <marker date="1482166121279" expanded="true" signature="6596:6930" ph="..." />
+            <marker date="1482166121279" expanded="false" signature="6621:6666" ph="&quot;preferences_pipette_watertemp_print&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding>
+            <marker date="1482166225385" expanded="true" signature="49:12837" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_statistical_quality_control.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1482166159005" expanded="true" signature="17:6520" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="149:1311" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="179:502" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="532:857" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="557:593" ph="&quot;preferences_statistic_activated&quot;" />
+            <marker date="1482166159005" expanded="true" signature="883:1073" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="908:954" ph="&quot;preferences_statistic_numberofsample&quot;" />
+            <marker date="1482166159005" expanded="true" signature="1099:1283" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="1124:1166" ph="&quot;preferences_statistic_liquidtype&quot;" />
+            <marker date="1482166159005" expanded="true" signature="1364:3945" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="1395:1749" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="1420:1470" ph="&quot;preferences_statistic_numbatches_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="1779:2133" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="1804:1854" ph="&quot;preferences_statistic_numsamples_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="2163:2497" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="2188:2235" ph="&quot;preferences_statistic_average_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="2527:2853" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="2552:2597" ph="&quot;preferences_statistic_total_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="2883:3217" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="2908:2955" ph="&quot;preferences_statistic_minimum_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="3247:3561" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="3268:3315" ph="&quot;preferences_statistic_maximum_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="3591:3917" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="3616:3661" ph="&quot;preferences_statistic_range_visible&quot;" />
+            <marker date="1482166159005" expanded="true" signature="4003:6498" ph="..." />
+            <marker date="1482166159005" expanded="true" signature="4033:4373" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="4058:4106" ph="&quot;preferences_statistic_numbatches_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="4403:4743" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="4428:4476" ph="&quot;preferences_statistic_numsamples_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="4773:5093" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="4798:4843" ph="&quot;preferences_statistic_average_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="5123:5435" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="5148:5191" ph="&quot;preferences_statistic_total_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="5465:5785" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="5490:5535" ph="&quot;preferences_statistic_minimum_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="5815:6135" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="5840:5885" ph="&quot;preferences_statistic_maximum_print&quot;" />
+            <marker date="1482166159005" expanded="true" signature="6165:6471" ph="..." />
+            <marker date="1482166159005" expanded="false" signature="6190:6233" ph="&quot;preferences_statistic_range_print&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_totalization.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-967">
+          <caret line="81" column="29" selection-start-line="81" selection-start-column="29" selection-end-line="81" selection-end-column="29" />
+          <folding>
+            <marker date="1482166222124" expanded="true" signature="17:6641" ph="..." />
+            <marker date="1482166222124" expanded="true" signature="149:1251" ph="..." />
+            <marker date="1482166222124" expanded="true" signature="179:508" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="204:248" ph="&quot;preferences_totalization_activated&quot;" />
+            <marker date="1482166222124" expanded="true" signature="538:854" ph="..." />
+            <marker date="1482166222124" expanded="true" signature="563:602" ph="&quot;preferences_totalization_activated&quot;" />
+            <marker date="1482166222124" expanded="true" signature="884:1223" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="909:958" ph="&quot;preferences_totalization_AutoSampleMode&quot;" />
+            <marker date="1482166222124" expanded="true" signature="1304:4724" ph="..." />
+            <marker date="1482166222124" expanded="true" signature="1335:1699" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="1360:1409" ph="&quot;preferences_totalizaion_NumberofSamples&quot;" />
+            <marker date="1482166222124" expanded="true" signature="1730:2075" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="1755:1805" ph="&quot;preferences_totalization_average_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="2105:2485" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="2130:2190" ph="&quot;preferences_totalization_standarddeviation_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="2515:2860" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="2540:2590" ph="&quot;preferences_totalization_minimum_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="2890:3235" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="2915:2965" ph="&quot;preferences_totalization_maximum_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="3265:3595" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="3290:3338" ph="&quot;preferences_totalization_range_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="3627:3967" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="3652:3701" ph="&quot;preferences_totalization_brutto_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="3997:4334" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="4022:4070" ph="&quot;preferences_totalization_netto_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="4364:4697" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="4389:4436" ph="&quot;preferences_totalization_tara_visible&quot;" />
+            <marker date="1482166222124" expanded="true" signature="4782:6619" ph="..." />
+            <marker date="1482166222124" expanded="true" signature="4812:5154" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="4837:4885" ph="&quot;preferences_totalization_print_samples&quot;" />
+            <marker date="1482166222124" expanded="true" signature="5184:5515" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="5209:5257" ph="&quot;preferences_totalization_print_average&quot;" />
+            <marker date="1482166222124" expanded="true" signature="5545:5869" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="5566:5615" ph="&quot;preferences_totalization_print_standard&quot;" />
+            <marker date="1482166222124" expanded="true" signature="5899:6230" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="5924:5972" ph="&quot;preferences_totalization_print_minimum&quot;" />
+            <marker date="1482166222124" expanded="true" signature="6260:6591" ph="..." />
+            <marker date="1482166222124" expanded="false" signature="6285:6333" ph="&quot;preferences_totalization_print_maximum&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding>
+            <element signature="e#507#539#0" expanded="true" />
+            <marker date="1482166432265" expanded="false" signature="204:241" ph="&quot;preferences_weigh_activated&quot;" />
+            <marker date="1482166432265" expanded="false" signature="783:818" ph="&quot;preferences_weigh_minimum&quot;" />
+            <marker date="1482166432265" expanded="false" signature="1183:1223" ph="&quot;preferences_weigh_secondary_visible&quot;" />
+            <marker date="1482166432265" expanded="false" signature="1520:1563" ph="&quot;preferences_weigh_minimum_visible&quot;" />
+            <marker date="1482166432265" expanded="false" signature="1851:1893" ph="&quot;preferences_weigh_brutto_visible&quot;" />
+            <marker date="1482166432265" expanded="false" signature="2174:2215" ph="&quot;preferences_weigh_netto_visible&quot;" />
+            <marker date="1482166432265" expanded="false" signature="2495:2535" ph="&quot;preferences_weigh_tara_visible&quot;" />
+            <marker date="1482166432265" expanded="false" signature="2890:2927" ph="&quot;preferences_weigh_print_min&quot;" />
           </folding>
         </state>
       </provider>

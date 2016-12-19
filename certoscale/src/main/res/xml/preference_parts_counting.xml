@@ -4,11 +4,18 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
 		<CheckBoxPreference
-	    	android:key="@string/preferences_counting_activated"
-	    	android:defaultValue="@bool/preferences_counting_activated_default"
-	    	android:title="Activated"
-	    	android:summary="Turn the application on/off" >
-    	</CheckBoxPreference>
+			android:key="@string/preferences_counting_activated"
+			android:defaultValue="@bool/preferences_counting_activated_default"
+			android:title="Activated"
+			android:summary="Turn the application on/off" >
+		</CheckBoxPreference>
+
+		<CheckBoxPreference
+			android:key="@string/preferences_counting_lock"
+			android:defaultValue="@bool/preferences_counting_lock"
+			android:title="Lock"
+			android:summary="Lock the part counting settings on/off" >
+		</CheckBoxPreference>
   
 		<CheckBoxPreference
 	    	android:key="@string/preferences_counting_auto_optimization"

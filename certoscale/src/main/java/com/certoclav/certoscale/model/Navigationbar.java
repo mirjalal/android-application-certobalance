@@ -48,6 +48,8 @@ public class Navigationbar {
 	public static final int BUTTON_BACK = 14;
 	public static final int SPINNER_LIBRARY = 20;
 
+	private int spinnerModeOnClickCounter = 0;
+
 	private Button buttonHome = null;
 
 	public SpinnerModeAdapter getArrayAdapterMode() {
@@ -170,7 +172,12 @@ public class Navigationbar {
 		spinnerMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-						Scale.getInstance().setScaleApplication(arrayAdapterMode.getItem(position));
+				//ignore the first click on the	spinner item because this callback function has been called only because of initialization
+				spinnerModeOnClickCounter++;
+				if(spinnerModeOnClickCounter>1) {
+					Scale.getInstance().setScaleApplication(arrayAdapterMode.getItem(position));
+				}
+					    Log.e("NavigationBar", "OnItemSelected ModeSpinner " + position);
 			}
 
 			@Override
@@ -179,7 +186,7 @@ public class Navigationbar {
 			}
 		});
 
-
+		spinnerMode.setSelection(Scale.getInstance().getScaleApplication().ordinal());
 
 		spinnerLib = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
 

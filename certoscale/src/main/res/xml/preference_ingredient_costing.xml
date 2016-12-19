@@ -11,6 +11,14 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_ingrediant_lock"
+            android:defaultValue="@bool/preferences_ingrediant_lock"
+            android:title="Lock"
+            android:summary="Lock the ingrediant costing settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
         <ListPreference
             android:key="@string/preferences_ingrediant_mode"
             android:title="Currency Label"

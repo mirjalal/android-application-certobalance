@@ -11,6 +11,14 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_filling_lock"
+            android:defaultValue="@bool/preferences_filling_lock"
+            android:title="Lock"
+            android:summary="Lock the filling settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
         <ListPreference
             android:key="preferences_check_limitmode"
             android:title="Statistics"

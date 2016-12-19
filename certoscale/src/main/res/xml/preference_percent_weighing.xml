@@ -11,6 +11,13 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_percent_lock"
+            android:defaultValue="@bool/preferences_percent_lock"
+            android:title="Lock"
+            android:summary="Lock the percent weighing settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
 
 
     </PreferenceCategory>

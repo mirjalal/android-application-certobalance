@@ -12,6 +12,14 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
+            android:key="@string/preferences_totalization_lock"
+            android:defaultValue="@bool/preferences_totalization_lock"
+            android:title="Lock"
+            android:summary="Lock the totalization settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="@string/preferences_totalization_AutoSampleMode"
             android:defaultValue="@bool/preferences_totalization_AutoSampleMode"
             android:title="Auto Sample Mode"

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -54,13 +55,16 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 			convertView = inflater.inflate(R.layout.login_spinner_item, parent, false);
 		}
 		CheckedTextView textMail = (CheckedTextView) convertView.findViewById(R.id.login_dopdown_text_mail);
+		ImageView imageApp = (ImageView) convertView.findViewById(R.id.login_dopdown_image_cloud);
 
 		switch (getItem(position)){
 			case WEIGHING:
 				textMail.setText("Weighing");
+				imageApp.setImageResource(R.drawable.application_icon_weighing);
 				break;
 			case PART_COUNTING:
 				textMail.setText("Part Counting");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case PERCENT_WEIGHING:
 				textMail.setText("Percent Weiging");

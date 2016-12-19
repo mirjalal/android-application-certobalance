@@ -11,6 +11,14 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_peak_lock"
+            android:defaultValue="@bool/preferences_peak_lock"
+            android:title="Lock"
+            android:summary="Lock the peak hold settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
         <ListPreference
             android:key="@string/preferences_peak_mode"
             android:title="Auto Sample Mode"

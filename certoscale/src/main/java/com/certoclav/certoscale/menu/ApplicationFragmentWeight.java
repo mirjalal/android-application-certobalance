@@ -78,6 +78,12 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
 
                 break;
+            case PART_COUNTING:
+                textValue.setTextColor(Color.BLACK);
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+
+                break;
             case WEIGHING:
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.BLACK);
@@ -87,6 +93,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         textValue.setTextColor(Color.YELLOW);
                     }
                 }
+                break;
+
+            case DENSITIY_DETERMINATION:
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.BLUE);
 
 
 

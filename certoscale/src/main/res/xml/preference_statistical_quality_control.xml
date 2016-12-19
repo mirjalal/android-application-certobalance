@@ -11,6 +11,14 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_statistic_lock"
+            android:defaultValue="@bool/preferences_statistic_lock"
+            android:title="Lock"
+            android:summary="Lock the statistical quality control settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
         <ListPreference
             android:key="@string/preferences_statistic_numberofsample"
             android:title="Number of Samples"

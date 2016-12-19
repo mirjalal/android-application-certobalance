@@ -10,6 +10,14 @@
 	    	android:summary="Turn the application on/off"
 	    	android:icon="@drawable/ic_launcher" >
     	</CheckBoxPreference>
+
+		<CheckBoxPreference
+			android:key="@string/preferences_weigh_lock"
+			android:defaultValue="@bool/preferences_weigh_lock"
+			android:title="Lock"
+			android:summary="Lock the weighing settings on/off"
+			android:icon="@drawable/ic_launcher" >
+		</CheckBoxPreference>
   
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_minimum"
@@ -18,6 +26,8 @@
 	    	android:summary="Turn the minimum weight on/off"
 	    	android:icon="@drawable/ic_launcher" >
     	</CheckBoxPreference>
+
+
     		
  
    </PreferenceCategory>
