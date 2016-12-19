@@ -29,6 +29,9 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     private Button buttonCancel = null;
     private Button buttonSave = null;
 
+    private Button button_under_limit = null;
+    private Button button_over_limit = null;
+
     private LinearLayout containerSettingsButtons = null;
 
 
@@ -96,6 +99,96 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please enter the number of samples for the calculation of awp");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            dialog.dismiss();
+                            onResume();
+
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        button_under_limit = (Button) rootView.findViewById(R.id.settings_partcounting_button_under_limit);
+        button_under_limit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setTitle("Please enter the under limit");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            dialog.dismiss();
+                            onResume();
+
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        button_over_limit = (Button) rootView.findViewById(R.id.settings_partcounting_button_over_limit);
+        button_over_limit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setTitle("Please enter the over limit");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
                     // set the custom dialog components - text, image and button
 

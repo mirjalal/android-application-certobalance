@@ -257,8 +257,14 @@
         <item>Check Counting</item>
         <item>Fill Counting</item>   
     </string-array>
+
+    <string-array name="preferences_counting_modes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
   
-    <string-array name="preferences_statistics">
+    <string-array name="preferences_counting_statistics">
         <item>Off</item>
         <item>Manual</item>
         <item>Auto</item>   

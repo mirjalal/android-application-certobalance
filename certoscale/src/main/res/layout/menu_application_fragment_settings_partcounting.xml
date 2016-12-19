@@ -95,6 +95,24 @@
         android:background="@drawable/btn_white_shadow_clickable"
         android:layout_weight="1" />
 
+        <Button
+
+            android:text="Under limit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_partcounting_button_under_limit"
+            android:background="@drawable/btn_white_shadow_clickable"
+            android:layout_weight="1" />
+
+        <Button
+
+            android:text="Over limit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_partcounting_button_over_limit"
+            android:background="@drawable/btn_white_shadow_clickable"
+            android:layout_weight="1" />
+
 
         <Button
 

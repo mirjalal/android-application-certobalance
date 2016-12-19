@@ -27,14 +27,15 @@
     		
    		<ListPreference
 	        android:key="@string/preferences_counting_mode"
-			android:defaultValue="Standard Counting"
+			android:defaultValue="1"
 	        android:entries="@array/preferences_counting_modes"
+			android:entryValues="@array/preferences_counting_modes_values"
 	        android:title="Counting Mode" 
    		/>
    		
    		
      	<ListPreference
-	        android:entries="@array/preferences_statistics"
+	        android:entries="@array/preferences_counting_statistics"
 	        android:key="preferences_counting_statistics"
 	        android:title="Statistics" 
    		/>
