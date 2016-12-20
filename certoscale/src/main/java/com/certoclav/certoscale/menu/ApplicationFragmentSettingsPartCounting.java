@@ -161,7 +161,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            ApplicationManager.getInstance().setUnderLimit(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             dialog.dismiss();
                             onResume();
 
@@ -206,7 +206,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            ApplicationManager.getInstance().setOverLimit(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             dialog.dismiss();
                             onResume();
 
@@ -224,6 +224,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 }
             }
         });
+
 
 
 
@@ -327,7 +328,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         super.onResume();
         buttonEditAveragePieceWeight.setText("Average piece weight\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
         buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pieces");
-
+        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsStringInGram() + " pieces");
+        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverlimitPiecesAsStringInGram() + " pieces");
 
 
     }

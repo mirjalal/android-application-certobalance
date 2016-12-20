@@ -23,7 +23,10 @@ public class Library {
 	public static final String FIELD_LIBRARY_SAMPLE_SIZE = "sample_size";
 	public static final String FIELD_LIBRARY_AVERAGE_PIECE_WEIGHT = "apw";
 	public static final String FIELD_LIBRARY_LIMIT_UNDER = "limit_under";
+	public static final String FIELD_LIBRARY_LIMIT_UNDER_PIECES = "limit_under_pieces";
 	public static final String FIELD_LIBRARY_LIMIT_OVER = "limit_over";
+	public static final String FIELD_LIBRARY_LIMIT_OVER_PIECES = "limit_over_pieces";
+	public static final String FIELD_LIBRARY_REFERENCE_WEIGHT= "reference_weight";
 	public static final String FIELD_LIBRARY_LEVEL = "level";
 	public static final String FIELD_LIBRARY_MODE = "mode";
 	public static final String FIELD_LIBRARY_DATE = "date";
@@ -64,7 +67,7 @@ public class Library {
 	private String userEmail;
 
 
-	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double overLimit, double level, int mode, Date date, Boolean isLocal) {
+	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double overLimit,double level, int mode, Date date, Boolean isLocal) {
 		this.userEmail = userEmail;
 		this.application = application;
 		this.cloudId = cloudId;
@@ -75,7 +78,10 @@ public class Library {
 		this.sampleSize = sampleSize;
 		this.averagePieceWeight = averagePieceWeight;
 		this.underLimit = underLimit;
+//		this.underLimitPieces = underLimitPieces;
 		this.overLimit = overLimit;
+//		this.overLimitPieces = overLimitPieces;
+//		this.referenceweight=refweight;
 		this.level = level;
 		this.mode = mode;
 		this.date = date;
@@ -150,6 +156,11 @@ public class Library {
 		return underLimit;
 	}
 
+
+
+
+
+
 	public void setUnderLimit(double underLimit) {
 		this.underLimit = underLimit;
 	}
@@ -157,6 +168,7 @@ public class Library {
 	public double getOverLimit() {
 		return overLimit;
 	}
+
 
 	public void setOverLimit(double overLimit) {
 		this.overLimit = overLimit;
@@ -212,8 +224,13 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
 	private double underLimit;
 
+
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER)
 	private double overLimit;
+
+//	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_WEIGHT)
+//	private double referenceweight;
+
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LEVEL)
 	private double level;

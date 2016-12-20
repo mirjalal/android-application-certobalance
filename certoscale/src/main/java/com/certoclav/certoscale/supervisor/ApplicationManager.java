@@ -72,6 +72,15 @@ public class ApplicationManager {
         currentLibrary.setSampleSize(awpCalcSampleSize);
     }
 
+    public void setUnderLimit(int underLimit) {
+        currentLibrary.setUnderLimit(underLimit);
+    }
+
+    public void setOverLimit(int overLimit) {
+        currentLibrary.setOverLimit(overLimit);
+    }
+
+
 
     private static final int UNIT_GRAM = 1;
     private static final int UNIT_PIECES = 2;
@@ -272,6 +281,15 @@ public class ApplicationManager {
     public String getUnderLimitAsStringInGram(){
         return String.format("%.5f",currentLibrary.getUnderLimit());
     }
+
+    public String getUnderLimitPiecesAsStringInGram(){
+        return String.format("%.1f",currentLibrary.getUnderLimit());
+    }
+
+    public String getOverlimitPiecesAsStringInGram(){
+        return String.format("%.1f",currentLibrary.getOverLimit());
+    };
+
     public Double getUnderLimitValueInGram() {
         return currentLibrary.getUnderLimit();
     }

@@ -111,7 +111,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
         //Update Loading bar
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
-        int width = (int) (Scale.getInstance().getWeightInGram()*7.0);
+        int width = (int) (Scale.getInstance().getWeightInGram()*5.81);
         if(width<0){
             width = 0;
         }
@@ -121,7 +121,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         params.width = width;
         barload.setLayoutParams(params);
 
-        if(ApplicationManager.getInstance().getSumInGram() > 40){
+        if(ApplicationManager.getInstance().getSumInGram() > 100){
             barload.setBackgroundColor(Color.RED);
 
         }else{
