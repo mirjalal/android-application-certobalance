@@ -181,11 +181,15 @@
             android:screenOrientation="sensorLandscape">
         </activity>
 
-        <activity android:name=".menu.HomeActivity"
+        <activity android:name=".menu.MenuActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
 
         <activity android:name=".settings.SettingsActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+        <activity android:name=".menu.MenuUserActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
 

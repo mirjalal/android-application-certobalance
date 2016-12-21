@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
+
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 

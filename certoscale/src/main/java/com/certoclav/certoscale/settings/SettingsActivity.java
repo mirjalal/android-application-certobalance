@@ -17,10 +17,10 @@ import com.certoclav.certoscale.model.Navigationbar;
  * vertical panes.
  * <p>
  * The activity makes heavy use of fragments. The list of items is a
- * {@link ItemListFragment} and the item details (if present) is a
+ * {@link SettingsUserListFragment} and the item details (if present) is a
  * {@link ItemDetailFragment}.
  * <p>
- * This activity also implements the required {@link ItemListFragment.Callbacks}
+ * This activity also implements the required {@link SettingsUserListFragment.Callbacks}
  * interface to listen for item selections.
  */
 public class SettingsActivity extends FragmentActivity implements ItemListFragment.Callbacks, ButtonEventListener {
@@ -79,7 +79,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 
 
 	/**
-	 * Callback method from {@link ItemListFragment.Callbacks} indicating that
+	 * Callback method from {@link SettingsUserListFragment.Callbacks} indicating that
 	 * the item with the given ID was selected.
 	 */
 	@Override

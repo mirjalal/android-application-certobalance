@@ -2,9 +2,6 @@ package com.certoclav.certoscale.model;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -16,13 +13,11 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.SpinnerModeAdapter;
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.settings.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 

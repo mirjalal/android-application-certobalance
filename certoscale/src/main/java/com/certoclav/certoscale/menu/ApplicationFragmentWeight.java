@@ -14,12 +14,7 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.settings.ItemListFragment.Callbacks;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-
-import static android.R.attr.value;
-import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 
 
 /**

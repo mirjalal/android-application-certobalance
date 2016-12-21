@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -24,7 +23,6 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
-import com.certoclav.library.application.ApplicationController;
 
 import java.util.List;
 
@@ -129,7 +127,7 @@ protected void onPause() {
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 		Log.e("ApplicationActivity", "onclickhome");
 		if(buttonId == Navigationbar.BUTTON_HOME){
-			Intent intent = new Intent(ApplicationActivity.this,HomeActivity.class);
+			Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
 			startActivity(intent);
 		}
 	

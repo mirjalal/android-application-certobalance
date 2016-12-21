@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.certoclav.app.button.QuickActionItem
+<com.certoclav.certoscale.view.QuickActionItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/quickaction_item_base"
     android:orientation="horizontal"
@@ -40,4 +40,4 @@
     	android:text=""
     	android:textSize="20dp"
     	android:textColor="#ff333333"/>	
-</com.certoclav.app.button.QuickActionItem>
+</com.certoclav.certoscale.view.QuickActionItem>

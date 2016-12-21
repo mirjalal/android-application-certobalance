@@ -135,7 +135,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			Toast.makeText(LoginActivity.this,getString(R.string.login_successful), Toast.LENGTH_LONG).show();
 			buttonLogin.setEnabled(true);
 			Scale.getInstance().setState(ScaleState.READY);
-			Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+			Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
 			startActivity(intent);
 		}
 	};
@@ -304,7 +304,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 								Scale.getInstance().setState(
 										ScaleState.READY);
 								Intent intent = new Intent(LoginActivity.this,
-										HomeActivity.class);
+										MenuActivity.class);
 								startActivity(intent);
 							} else {
 								Toast.makeText(getApplicationContext(),
@@ -494,7 +494,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				}
 			} catch (Exception e) {
 			}
-			Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+			Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
 			startActivity(intent);
 
 			new AsyncTask<Boolean, Boolean, Boolean>() {
