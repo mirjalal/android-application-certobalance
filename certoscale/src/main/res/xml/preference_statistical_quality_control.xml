@@ -8,7 +8,7 @@
             android:defaultValue="@bool/preferences_statistic_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,19 +16,21 @@
             android:defaultValue="@bool/preferences_statistic_lock"
             android:title="Lock"
             android:summary="Lock the statistical quality control settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true">
         </CheckBoxPreference>
 
         <ListPreference
             android:key="@string/preferences_statistic_numberofsample"
             android:title="Number of Samples"
             android:summary="Select the number of Samples"
+            android:dependency="@string/preferences_statistic_lock"
             />
 
         <ListPreference
             android:key="@string/preferences_statistic_liquidtype"
             android:title="Tolerance"
             android:summary="Tolerance used during measurements"
+            android:dependency="@string/preferences_statistic_lock"
             />
 
 
@@ -41,7 +43,7 @@
             android:defaultValue="@bool/preferences_statistic_numbatches_visible"
             android:title="Number of Batches"
             android:summary="Turn number of batches visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -49,7 +51,7 @@
             android:defaultValue="@bool/preferences_statistic_numsamples_visible"
             android:title="Number of Samples"
             android:summary="Turn number of samples visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -57,7 +59,7 @@
             android:defaultValue="@bool/preferences_statistic_average_visible"
             android:title="Average"
             android:summary="Turn average value visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -65,7 +67,7 @@
             android:defaultValue="@bool/preferences_statistic_total_visible"
             android:title="Total"
             android:summary="Turn total value visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -73,7 +75,7 @@
             android:defaultValue="@bool/preferences_statistic_minimum_visible"
             android:title="Minimum"
             android:summary="Turn minimum value visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -81,7 +83,7 @@
         android:defaultValue="@bool/preferences_statistic_maximum_visible"
         android:title="Maximum"
         android:summary="Turn maximum value visible/invisible"
-        android:icon="@drawable/ic_launcher" >
+        android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -89,7 +91,7 @@
             android:defaultValue="@bool/preferences_statistic_range_visible"
             android:title="Range"
             android:summary="Turn range value visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
 
@@ -101,7 +103,7 @@
             android:defaultValue="@bool/preferences_statistic_numbatches_print"
             android:title="Number of Batches"
             android:summary="Print number of batches on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -109,7 +111,7 @@
             android:defaultValue="@bool/preferences_statistic_numsamples_print"
             android:title="Number of Samples"
             android:summary="Print number of samples on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -117,7 +119,7 @@
             android:defaultValue="@bool/preferences_statistic_average_print"
             android:title="Average"
             android:summary="Print average value on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -125,7 +127,7 @@
             android:defaultValue="@bool/preferences_statistic_total_print"
             android:title="Total"
             android:summary="Print total value on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -133,7 +135,7 @@
             android:defaultValue="@bool/preferences_statistic_minimum_print"
             android:title="Minimum"
             android:summary="Print minimum value on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -141,7 +143,7 @@
             android:defaultValue="@bool/preferences_statistic_maximum_print"
             android:title="Maximum"
             android:summary="Print maximum value on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -149,7 +151,7 @@
             android:defaultValue="@bool/preferences_statistic_range_print"
             android:title="Range"
             android:summary="Print range on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_statistic_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>

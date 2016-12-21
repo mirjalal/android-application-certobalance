@@ -1,0 +1,60 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference
+        android:key="@string/preferences_device_software_update"
+        android:title="@string/check_for_updates" />
+    <Preference
+        android:key="@string/preferences_device_software_update_usb"
+        android:title="@string/install_update_from_usb_flash_drive" />
+    <Preference
+        android:key="@string/preferences_device_software_update_sdcard"
+        android:title="@string/install_update_from_external_sd_card" />
+    <Preference
+        android:key="@string/preferences_device_date"
+        android:title="@string/settings_date_and_time" />
+    <Preference
+        android:key="@string/preferences_device_reset"
+        android:summary="@string/settings_restore_device_to_its_original_manufacturer_setting"
+        android:title="@string/settings_factory_reset" />
+    <Preference
+        android:key="@string/preferences_device_key"
+        android:title="@string/settings_device_key_security_key" />
+    <Preference
+        android:key="@string/preferences_device_software_version"
+        android:title="@string/settings_software_version" />
+    <Preference
+        android:key="@string/preferences_device_firmware_version"
+        android:title="Firmware version" />
+    <Preference
+        android:key="@string/preferences_device_serial_number"
+        android:title="Serial number" />
+    <Preference
+        android:key="@string/preferences_device_storage"
+        android:title="@string/settings_storage" />
+
+
+    <Preference
+        android:key="@string/preferences_device_wlan_manage"
+        android:title="@string/manage_wifi_connections">
+
+    </Preference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_device_bluetooth"
+        android:title="@string/bluetooth_on_off"
+        android:defaultValue="true"
+        android:summary="@string/not_connected">
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
+        android:key="@string/preferences_device_snchronization"
+        android:title="@string/online_mode"
+        android:summary="@string/synchronize_data_with_www_certocloud_com">
+    </CheckBoxPreference>
+
+
+
+
+
+</PreferenceScreen>

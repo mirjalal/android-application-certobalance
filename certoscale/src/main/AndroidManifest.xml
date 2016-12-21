@@ -163,11 +163,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name=".menu.RegisterActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
-        
+
+        <activity android:name=".settings.device.SettingsDeviceActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
         <activity android:name=".menu.RegisterCloudAccountActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
@@ -185,11 +189,11 @@
             android:screenOrientation="sensorLandscape">
         </activity>
 
-        <activity android:name=".settings.SettingsActivity"
+        <activity android:name=".settings.application.SettingsActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
 
-        <activity android:name=".menu.MenuUserActivity"
+        <activity android:name=".settings.user.MenuUserActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
 

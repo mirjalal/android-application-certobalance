@@ -8,7 +8,7 @@
             android:defaultValue="@bool/preferences_percent_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,7 +16,7 @@
             android:defaultValue="@bool/preferences_percent_lock"
             android:title="Lock"
             android:summary="Lock the percent weighing settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true">
         </CheckBoxPreference>
 
 
@@ -29,7 +29,7 @@
             android:defaultValue="@bool/preferences_percent_reference_visible"
             android:title="Reference Weight"
             android:summary="The reference weight is displayed"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
 
@@ -38,7 +38,7 @@
             android:defaultValue="@bool/preferences_percent_difference_visible"
             android:title="Difference Weight"
             android:summary="Display the difference to the reference Weight"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -46,7 +46,7 @@
             android:defaultValue="@bool/preferences_percent_difference_percent_visible"
             android:title="Difference in Percent"
             android:summary="Turn the Difference in Percent visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -54,7 +54,7 @@
             android:defaultValue="@bool/preferences_percent_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -62,7 +62,7 @@
             android:defaultValue="@bool/preferences_percent_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -70,7 +70,7 @@
             android:defaultValue="@bool/preferences_percent_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>
@@ -81,7 +81,7 @@
             android:defaultValue="@bool/preferences_percent_print_reference"
             android:title="Reference Weight"
             android:summary="Print the reference weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -89,7 +89,7 @@
             android:defaultValue="@bool/preferences_percent_print_difference"
             android:title="Difference Weight"
             android:summary="Print the difference weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -97,7 +97,7 @@
             android:defaultValue="@bool/preferences_percent_print_difference_percent"
             android:title="Difference Weight in Percent"
             android:summary="Print the difference weight in percent weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_percent_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>

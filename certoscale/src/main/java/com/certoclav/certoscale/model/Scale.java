@@ -5,6 +5,7 @@ import android.util.Log;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Scale extends Observable {
 
 	ArrayList<WeightListener> weightListeners = new ArrayList<WeightListener>();
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
+	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
 
 	private SerialService serialServiceScale = null;
 	private SerialService serialServicePrinter = null;
@@ -55,17 +57,36 @@ public class Scale extends Observable {
 
 	private boolean microcontrollerReachable = false;
 
-	
+	private Scale(){
+
+	}
 	private static Scale instance = new Scale();
 
-	private Scale(){
-				
-	}
-	
 	public static synchronized Scale getInstance(){
 		return instance;
-		
+
 	}
+
+	public boolean isWifiConnected() {
+		return wifiConnected;
+	}
+	public void setOnWifiListener(WifiListener listener){
+		this.wifiListeners.add(listener);
+	}
+	public void removeOnWifiListener(WifiListener listener){
+		this.wifiListeners.remove(listener);
+	}
+	public void setWifiConnected(boolean wifiConnected) {
+		this.wifiConnected = wifiConnected;
+		for (WifiListener listener : wifiListeners){
+			listener.onWifiConnectionChange(wifiConnected);
+		}
+	}
+
+	private boolean wifiConnected = false;
+
+	
+
 
 	public ScaleState getState() {
 		return state;
@@ -155,7 +176,15 @@ public class Scale extends Observable {
 
 
 	public String getSafetyKey() {
-		return "01234567891234567";
+		return "93943649346387463";
+	} //savetykey of certobalance W01.0001
+
+	public String getFirmwareVersion() {
+		return "1.0";
+	}
+
+	public String getSerialnumber() {
+		return "serialnumber";
 	}
 }
 

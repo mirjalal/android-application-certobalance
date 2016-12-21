@@ -8,7 +8,7 @@
             android:defaultValue="@bool/preferences_peak_activated"
             android:title="Activated"
             android:summary="Turn the application on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,13 +16,14 @@
             android:defaultValue="@bool/preferences_peak_lock"
             android:title="Lock"
             android:summary="Lock the peak hold settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true" >
         </CheckBoxPreference>
 
         <ListPreference
             android:key="@string/preferences_peak_mode"
             android:title="Auto Sample Mode"
             android:summary="Select operation mode"
+            android:dependency="@string/preferences_peak_lock"
             />
 
         <CheckBoxPreference
@@ -30,7 +31,7 @@
             android:defaultValue="@bool/preferences_peak_stableonly"
             android:title="Only Stable Weight"
             android:summary="Turn stable weight only on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
 
@@ -44,7 +45,8 @@
             android:key="@string/preferences_peak_secondary_visible"
             android:defaultValue="@bool/preferences_peak_secondary_visible"
             android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible" >
+            android:summary="Turn the secondary display line visible/invisible"
+            android:dependency="@string/preferences_peak_lock">
         </CheckBoxPreference>
 
 
@@ -53,7 +55,7 @@
             android:defaultValue="@bool/preferences_peak_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the brutto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -61,7 +63,7 @@
             android:defaultValue="@bool/preferences_peak_netto_visible"
             android:title="Brutto"
             android:summary="Turn the netto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -69,7 +71,7 @@
             android:defaultValue="@bool/preferences_peak_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
 
@@ -81,7 +83,7 @@
             android:defaultValue="@bool/preferences_peak_print_stableonly"
             android:title="Stable Weight only"
             android:summary="Print only the stable weightyes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
 

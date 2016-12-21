@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
+import com.certoclav.certoscale.settings.user.MenuUserActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
@@ -41,6 +43,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     private GoogleApiClient client;
 
     private final int INDEX_APPLICATIONS = 3;
+    private final int INDEX_DEVICE = 2;
     private final int INDEX_FACTORY_RESET = 9;
     private final int INDEX_APPLICATIONS_USER = 1;
 
@@ -69,6 +72,10 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 }
                 if(position == INDEX_APPLICATIONS_USER){
                     Intent intent = new Intent(MenuActivity.this, MenuUserActivity.class);
+                    startActivity(intent);
+                }
+                if(position == INDEX_DEVICE){
+                    Intent intent = new Intent(MenuActivity.this, SettingsDeviceActivity.class);
                     startActivity(intent);
                 }
                 // On click factory reset,

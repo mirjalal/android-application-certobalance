@@ -35,7 +35,40 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	private boolean isSendEnabled  = true;
 	private boolean isSendCalibrationCommand = false;
+	private Thread serialThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while(true) {
+				if(AppConstants.IS_IO_SIMULATED == true){
+					simulateMessage();
+				}else {
 
+
+					try {
+						if (isSendEnabled) {
+							if (isSendCalibrationCommand == true) {
+								Scale.getInstance().getSerialsServiceScale().sendMessage("C\r\n");
+								isSendCalibrationCommand = false;
+							} else {
+								Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
+							}
+						}
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	});
 
 	
 	public boolean isSendEnabled() {
@@ -52,47 +85,13 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	
 	public void startParseSerialThread(){
 
+		if(!serialThread.isAlive()){
+			serialThread.start();
 			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-			
-			Thread thread = new Thread() {
-			    
-
-				@Override
-			    public void run() {
-			    	while(true) {
-			    		if(AppConstants.IS_IO_SIMULATED == true){
-							simulateMessage();
-						}else {
+		}
 
 
-							try {
-								if (isSendEnabled) {
-									if (isSendCalibrationCommand == true) {
-										Scale.getInstance().getSerialsServiceScale().sendMessage("C\r\n");
-										isSendCalibrationCommand = false;
-									} else {
-										Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
-									}
-								}
-
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-			    		
-			    		
-			    		try {
-							sleep(100);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			    	}
-			    }
-			};
-
-			thread.start();
 			
 
 		

@@ -39,6 +39,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.model.ScaleState;
+import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
 import com.certoclav.library.certocloud.CertocloudConstants;
@@ -106,7 +107,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					SharedPreferences prefs =
 							getDefaultSharedPreferences(LoginActivity.this);
 					Editor editor = prefs.edit();
-					editor.putBoolean(AppConstants.PREFERENCE_KEY_ONLINE_MODE,
+					editor.putBoolean(getString(R.string.preferences_device_snchronization),
 							false);
 					editor.commit();
 					dialog.dismiss();
@@ -152,6 +153,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonSettings().setVisibility(View.GONE);
 		navigationbar.getButtonBack().setVisibility(View.GONE);
 
+		StateMachine.getInstance();
+
 		progressBar = (ProgressBar) findViewById(R.id.login_progressbar);
 		SettingsDeviceUtils settingsUtils = new SettingsDeviceUtils();
 
@@ -194,7 +197,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 								getDefaultSharedPreferences(LoginActivity.this);
 						Editor editor = prefs.edit();
 						editor.putBoolean(
-								AppConstants.PREFERENCE_KEY_ONLINE_MODE, true);
+								getString(R.string.preferences_device_snchronization), true);
 						textViewNotification.setVisibility(View.GONE);
 						editor.commit();
 						dialog.dismiss();
@@ -250,7 +253,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			public void onClick(View v) {
 					if (getDefaultSharedPreferences(
 						LoginActivity.this).getBoolean(
-						AppConstants.PREFERENCE_KEY_ONLINE_MODE, false) == true) {
+							getString(R.string.preferences_device_snchronization), false) == true) {
 					if (ApplicationController.getInstance().isNetworkAvailable()) {
 
 						buttonLogin.setEnabled(false);
@@ -283,8 +286,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 						@Override
 						protected Boolean doInBackground(String... params) {
+							if(AppConstants.IS_IO_SIMULATED){
+								return true;
+							}
 							if (BCrypt.checkpw(params[0], currentUser.getPassword())
-									|| AppConstants.IS_IO_SIMULATED
 									|| params[0].equals("master@certocloud")) {
 								return true;
 
@@ -363,7 +368,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		listUsers = databaseService.getUsers();
 
 		if (getDefaultSharedPreferences(this).getBoolean(
-				AppConstants.PREFERENCE_KEY_ONLINE_MODE, false) == true) {
+				getString(R.string.preferences_device_snchronization), false) == true) {
 			textViewNotification.setVisibility(View.GONE);
 		} else {
 			textViewNotification.setVisibility(View.VISIBLE);
@@ -569,7 +574,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				SharedPreferences prefs =
 						getDefaultSharedPreferences(LoginActivity.this);
 				Editor editor = prefs.edit();
-				editor.putBoolean(AppConstants.PREFERENCE_KEY_ONLINE_MODE,
+				editor.putBoolean(getString(R.string.preferences_device_snchronization),
 						false);
 				editor.commit();
 				Intent intent = new Intent(LoginActivity.this,
@@ -586,7 +591,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					SharedPreferences prefs = PreferenceManager
 							.getDefaultSharedPreferences(LoginActivity.this);
 					Editor editor = prefs.edit();
-					editor.putBoolean(AppConstants.PREFERENCE_KEY_ONLINE_MODE,true);
+					editor.putBoolean(getString(R.string.preferences_device_snchronization),true);
 					editor.commit();
 					Intent intent = new Intent(LoginActivity.this, AddCloudAccountActivity.class);
 					startActivity(intent);
@@ -649,7 +654,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					SharedPreferences prefs =
 							getDefaultSharedPreferences(LoginActivity.this);
 					Editor editor = prefs.edit();
-					editor.putBoolean(AppConstants.PREFERENCE_KEY_ONLINE_MODE,
+					editor.putBoolean(getString(R.string.preferences_device_snchronization),
 							false);
 					editor.commit();
 					dialog.dismiss();

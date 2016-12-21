@@ -8,7 +8,7 @@
         android:defaultValue="@bool/preferences_animal_activated_default"
         android:title="Activated"
         android:summary="Turn the application on/off"
-        android:icon="@drawable/ic_launcher" >
+        android:dependency="@string/preferences_animal_lock" >
     </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,16 +16,18 @@
             android:defaultValue="@bool/preferences_animal_lock"
             android:title="Lock"
             android:summary="Lock the animal weighing settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true">
         </CheckBoxPreference>
 
         <ListPreference
             android:key="@string/preferences_check_limitmode"
             android:title="Auto Sample Weighing Mode"
+            android:dependency="@string/preferences_animal_lock"
             />
         <ListPreference
             android:key="preferences_check_limitmode"
             android:title="Statistics"
+            android:dependency="@string/preferences_animal_lock"
             />
 
 
@@ -37,7 +39,8 @@
             android:key="@string/preferences_animal_secondary_visible"
             android:defaultValue="@bool/preferences_animal_secondary_visible"
             android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible" >
+            android:summary="Turn the secondary display line visible/invisible"
+            android:dependency="@string/preferences_animal_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -45,7 +48,7 @@
             android:defaultValue="@bool/preferences_animal_measuringtime_visible"
             android:title="Measuring Time"
             android:summary="Turn measuring time visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_animal_lock" >
         </CheckBoxPreference>
 
 
@@ -56,7 +59,7 @@
             android:defaultValue="@bool/preferences_animal_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -64,7 +67,7 @@
             android:defaultValue="@bool/preferences_animal_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -72,7 +75,7 @@
             android:defaultValue="@bool/preferences_animal_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
     </PreferenceCategory>
@@ -83,7 +86,7 @@
             android:defaultValue="@bool/preferences_animal_print_measuring"
             android:title="Measuring Time"
             android:summary="Print the measuring time yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
 

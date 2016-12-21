@@ -8,7 +8,7 @@
             android:defaultValue="@bool/preferences_totalization_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,7 +16,7 @@
             android:defaultValue="@bool/preferences_totalization_lock"
             android:title="Lock"
             android:summary="Lock the totalization settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true">
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -24,7 +24,7 @@
             android:defaultValue="@bool/preferences_totalization_AutoSampleMode"
             android:title="Auto Sample Mode"
             android:summary="Turn auto sample mode on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
 
@@ -37,7 +37,7 @@
             android:defaultValue="@bool/preferences_totalizaion_NumberofSamples"
             android:title="Number of Samples"
             android:summary="Turn the number of weighed samples visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
 
@@ -46,7 +46,7 @@
             android:defaultValue="@bool/preferences_totalization_average_visible"
             android:title="Average"
             android:summary="Turn the average weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -54,7 +54,7 @@
             android:defaultValue="@bool/preferences_totalization_standarddeviation_visible"
             android:title="Standard Deviation"
             android:summary="Turn the standard deviation visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -62,7 +62,7 @@
             android:defaultValue="@bool/preferences_totalization_minimum_visible"
             android:title="Minimum"
             android:summary="Turn the minimum weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -70,7 +70,7 @@
             android:defaultValue="@bool/preferences_totalization_maximum_visible"
             android:title="Maximum"
             android:summary="Turn the Maximum weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -78,7 +78,7 @@
             android:defaultValue="@bool/preferences_totalization_range_visible"
             android:title="Range"
             android:summary="Turn the range visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
 
@@ -88,7 +88,7 @@
             android:defaultValue="@bool/preferences_totalization_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -96,7 +96,7 @@
             android:defaultValue="@bool/preferences_totalization_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -104,7 +104,7 @@
             android:defaultValue="@bool/preferences_totalization_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>
@@ -115,7 +115,7 @@
             android:defaultValue="@bool/preferences_totalization_print_samples"
             android:title="Samples"
             android:summary="Print the number of weighed samples yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -123,7 +123,7 @@
             android:defaultValue="@bool/preferences_totalization_print_average"
             android:title="Average"
             android:summary="Print the average weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -131,7 +131,7 @@
         android:defaultValue="@bool/preferences_totalization_print_standard"
         android:title="Standard Deviation"
         android:summary="Print the standard deviation yes/no"
-        android:icon="@drawable/ic_launcher" >
+        android:dependency="@string/preferences_totalization_lock" >
     </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -139,7 +139,7 @@
             android:defaultValue="@bool/preferences_totalization_print_minimum"
             android:title="Minimum"
             android:summary="Print the minimum weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -147,7 +147,7 @@
             android:defaultValue="@bool/preferences_totalization_print_maximum"
             android:title="Maximum"
             android:summary="Print the maximum weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
 

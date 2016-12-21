@@ -20,7 +20,7 @@ import com.certoclav.certoscale.model.ActionButtonbar;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.settings.SettingsActivity;
+import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 
@@ -91,6 +91,14 @@ protected void onResume() {
 
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
+
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+			actionButtonbar.getButtonStatistics().setEnabled(false);
+		}else {
+			actionButtonbar.getButtonStatistics().setEnabled(true);
+		}
+
 		super.onResume();
 }
 
@@ -139,6 +147,11 @@ protected void onPause() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+					if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+						actionButtonbar.getButtonStatistics().setEnabled(false);
+					}else {
+						actionButtonbar.getButtonStatistics().setEnabled(true);
+					}
 				}
 			});
 
@@ -146,6 +159,11 @@ protected void onPause() {
 		if(buttonId == ActionButtonbar.BUTTON_ACCUMULATE){
 			ApplicationManager.getInstance().accumulateStatistics();
 			actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+			if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+				actionButtonbar.getButtonStatistics().setEnabled(false);
+			}else {
+				actionButtonbar.getButtonStatistics().setEnabled(true);
+			}
 		}
 
 		if(buttonId == ActionButtonbar.BUTTON_APP_SETTINGS){
@@ -221,12 +239,11 @@ protected void onPause() {
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
 		ApplicationManager.getInstance().clearStatistics();
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
 		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-			actionButtonbar.getButtonStatistics().setText("STATISTICS\n");
-			actionButtonbar.getButtonStatistics().setVisibility(View.GONE);
+			actionButtonbar.getButtonStatistics().setEnabled(false);
 		}else {
-			actionButtonbar.getButtonStatistics().setVisibility(View.VISIBLE);
-			actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+			actionButtonbar.getButtonStatistics().setEnabled(true);
 		}
 		try {
 			DatabaseService db = new DatabaseService(ApplicationActivity.this);

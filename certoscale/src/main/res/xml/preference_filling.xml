@@ -8,7 +8,7 @@
             android:defaultValue="@bool/preferences_filling_activated_default"
             android:title="Activated"
             android:summary="Turn the application on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -16,12 +16,13 @@
             android:defaultValue="@bool/preferences_filling_lock"
             android:title="Lock"
             android:summary="Lock the filling settings on/off"
-            android:icon="@drawable/ic_launcher" >
+            android:disableDependentsState="true" >
         </CheckBoxPreference>
 
         <ListPreference
             android:key="preferences_check_limitmode"
             android:title="Statistics"
+            android:dependency="@string/preferences_filling_lock"
             />
 
 
@@ -33,7 +34,8 @@
             android:key="@string/preferences_filling_secondary_visible"
             android:defaultValue="@bool/preferences_filling_secondary_visible"
             android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible" >
+            android:summary="Turn the secondary display line visible/invisible"
+            android:dependency="@string/preferences_filling_lock">
         </CheckBoxPreference>
 
 
@@ -42,7 +44,7 @@
             android:defaultValue="@bool/preferences_filling_target_visible"
             android:title="Target Weight"
             android:summary="Turn the target weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -50,7 +52,7 @@
             android:defaultValue="@bool/preferences_filling_differencew_visible"
             android:title="Difference Weight"
             android:summary="Turn the difference weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -58,7 +60,7 @@
             android:defaultValue="@bool/preferences_filling_differencep_visible"
             android:title="Difference in Percent"
             android:summary="Turn the Difference in Percent visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -66,7 +68,7 @@
             android:defaultValue="@bool/preferences_filling_brutto_visible"
             android:title="Brutto"
             android:summary="Turn the bruto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -74,7 +76,7 @@
             android:defaultValue="@bool/preferences_filling_netto_visible"
             android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -82,7 +84,7 @@
             android:defaultValue="@bool/preferences_filling_tara_visible"
             android:title="Tara"
             android:summary="Turn the tara weight visible/invisible"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>
@@ -93,7 +95,7 @@
             android:defaultValue="@bool/preferences_filling_print_target"
             android:title="Target Weight"
             android:summary="Print the target weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -101,7 +103,7 @@
             android:defaultValue="@bool/preferences_filling_print_differencew"
             android:title="Difference Weight"
             android:summary="Print the difference weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
@@ -109,7 +111,7 @@
             android:defaultValue="@bool/preferences_filling_print_differencep"
             android:title="Difference  in Percent"
             android:summary="Print the difference  in percent weight yes/no"
-            android:icon="@drawable/ic_launcher" >
+            android:dependency="@string/preferences_filling_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>

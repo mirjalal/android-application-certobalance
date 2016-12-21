@@ -6,14 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.ScaleApplication;
-
 
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 
 
 	public SpinnerModeAdapter(Context context, List<ScaleApplication> values) {
-		super(context, R.layout.login_spinner_item, R.id.login_dopdown_text_mail, values);
-		//super(context, R.layout.spinner_dropdown_item_large, values);
+		super(context, R.layout.navigationbar_mode_spinner_item, values);
+
 		this.mContext = context;
 
 
@@ -52,9 +49,9 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 		
 		if(convertView == null){
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = inflater.inflate(R.layout.login_spinner_item, parent, false);
+			convertView = inflater.inflate(R.layout.navigationbar_mode_spinner_item, parent, false);
 		}
-		CheckedTextView textMail = (CheckedTextView) convertView.findViewById(R.id.login_dopdown_text_mail);
+		TextView textMail = (TextView) convertView.findViewById(R.id.login_dopdown_text_mail);
 		ImageView imageApp = (ImageView) convertView.findViewById(R.id.login_dopdown_image_cloud);
 
 		switch (getItem(position)){
@@ -68,43 +65,56 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				break;
 			case PERCENT_WEIGHING:
 				textMail.setText("Percent Weiging");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case CHECK_WEIGHING:
 				textMail.setText("Check Weiging");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case ANIMAL_WEIGHING:
 				textMail.setText("Animal Weiging");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case FILLING:
 				textMail.setText("Filling");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case TOTALIZATION:
 				textMail.setText("Totalization");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case FORMULATION:
 				textMail.setText("Formulation");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case DIFFERENTIAL_WEIGHING:
 				textMail.setText("Differential Weighing");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case DENSITIY_DETERMINATION:
 				textMail.setText("Density Determination");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case PEAK_HOLD:
 				textMail.setText("Peak Hold");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case INGREDIENT_COSTING:
 				textMail.setText("Ingrediant Costing");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case PIPETTE_ADJUSTMENT:
 				textMail.setText("Pipette Adjustment");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 			case STATISTICAL_QUALITY_CONTROL:
 				textMail.setText("Statistical Quality Control");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 				break;
 
 			default:
 				textMail.setText("Not weighing");
+				imageApp.setImageResource(R.drawable.ic_launcher);
 		}
 
 		
