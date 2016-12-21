@@ -228,6 +228,7 @@
     <string name="preferences_device_wlan_manage">preferences_device_wlan_manage</string>
     <string name="preferences_device_bluetooth">preferences_device_bluetooth</string>
     <string name="preferences_device_snchronization">preferences_device_snchronization</string>
+    <string name="preferences_device_language">preferences_device_language</string>
     <string-array name="navigationbar_entries">
         <item>Weighing</item>
         <item>Part Counting</item>
@@ -252,8 +253,6 @@
         <item>Weighing Units</item>
         <item>GLP and GMP Data</item>
         <item>Library</item>
-        <item>Diagnostics</item>
-        <item>Information</item>
     </string-array>
 
 

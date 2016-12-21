@@ -80,6 +80,14 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
     @Override
     protected void onResume() {
         super.onResume();
+        DatabaseService db = new DatabaseService(this);
+        List<User> usersVisible = db.getUsers();
+        adapter.clear();
+        for(User user : usersVisible){
+            adapter.add(user);
+        }
+        adapter.notifyDataSetChanged();
+
         adapter.setOnClickButtonListener(this);
     }
 

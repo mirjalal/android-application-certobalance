@@ -18,7 +18,6 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.ApplicationActivity;
-import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -46,6 +45,7 @@ public class Navigationbar {
 	public static final int SPINNER_LIBRARY = 20;
 	public static final int BUTTON_GO_TO_APPLICATION = 31;
 	public static final int BUTTON_LOGOUT = 32;
+	public static final int BUTTON_SAVE = 33;
 	private int spinnerModeOnClickCounter = 0;
 
 	public Button getButtonLogout() {
@@ -136,6 +136,16 @@ public class Navigationbar {
 	private Spinner spinnerMode = null;
 	private Spinner spinnerLib = null;
 	private TextView textTitle = null;
+
+	public Button getButtonSave() {
+		return buttonSave;
+	}
+
+	public void setButtonSave(Button buttonSave) {
+		this.buttonSave = buttonSave;
+	}
+
+	private Button buttonSave = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
 
 	public Button getButtonAdd() {
@@ -215,11 +225,13 @@ public class Navigationbar {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				DatabaseService db = new DatabaseService(mActivity);
+				//apply change
 				for (Library library : db.getLibraries()) {
 					if (library.getName().equals(arrayAdapterLibrary.getItem(position))) {
 						ApplicationManager.getInstance().setCurrentLibrary(library);
 					}
 				}
+				//notify listeners
 				for (ButtonEventListener listener : navigationbarListeners) {
 					listener.onClickNavigationbarButton(SPINNER_LIBRARY, false);
 				}
@@ -247,8 +259,9 @@ public class Navigationbar {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(mActivity, SettingsActivity.class);
-				mActivity.startActivity(intent);
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(BUTTON_SETTINGS, false);
+				}
 
 			}
 		});
@@ -312,7 +325,15 @@ public class Navigationbar {
 			}
 		});
 
-
+		buttonSave = (Button) mActivity.findViewById(R.id.naviagationbar_button_save);
+		buttonSave.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(BUTTON_SAVE, false);
+				}
+			}
+		});
 	}
 
 

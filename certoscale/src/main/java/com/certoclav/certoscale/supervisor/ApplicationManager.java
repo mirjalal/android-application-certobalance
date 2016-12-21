@@ -298,6 +298,15 @@ public class ApplicationManager {
         return String.format("%.1f",currentLibrary.getUnderLimitPieces());
     }
 
+    public String getUnderLimitPiecesAsString(){
+        return String.format("%.1f",currentLibrary.getUnderLimitPieces());
+    }
+
+
+
+    public String getOverlimitPiecesAsString(){
+        return String.format("%.1f",currentLibrary.getOverLimitPieces());
+    };
 
 
     public String getOverlimitPiecesAsStringInGram(){

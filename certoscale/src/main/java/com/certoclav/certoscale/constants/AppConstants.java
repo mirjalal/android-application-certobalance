@@ -50,4 +50,5 @@ public class AppConstants {
 	public static final Float WEIGHT_MAX = Float.valueOf(120);
 	public static final int INDEX_APPLICATION_NAME_WEIGHING = 0;
 	public static final int INDEX_APPLICATION_NAME_PARTCOUNTING = 1;
+	public static final String INTENT_EXTRA_VIDEOFULLSCREENACTIVITY_VIDEO_PATH = "video_path";
 }

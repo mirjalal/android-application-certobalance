@@ -1,6 +1,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <Preference
+        android:key="@string/preferences_device_language"
+        android:title="Language"
+        android:summary="English"/>
+
+    <Preference
         android:key="@string/preferences_device_software_update"
         android:title="@string/check_for_updates" />
     <Preference

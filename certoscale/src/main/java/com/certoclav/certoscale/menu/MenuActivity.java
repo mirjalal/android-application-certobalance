@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -19,7 +20,9 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
+import com.certoclav.certoscale.settings.glp.SettingsGlpActivity;
 import com.certoclav.certoscale.settings.library.MenuLibraryActivity;
+import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
 import com.certoclav.certoscale.settings.user.MenuUserActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.google.android.gms.appindexing.Action;
@@ -68,12 +71,14 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         navigationbar.getButtonLogout().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setVisibility(View.GONE);
         navigationbar.getButtonGoToApplication().setVisibility(View.VISIBLE);
+        navigationbar.getButtonSettings().setText("?");
         listView = (ListView) findViewById(R.id.menu_main_list);
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_item_menu, getResources().getStringArray(R.array.array_menu_main));
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
 
                 // On click applications, open the ApplicationActivity
                 if (position == INDEX_APPLICATIONS) {
@@ -93,6 +98,21 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                     Intent intent = new Intent(MenuActivity.this, MenuLibraryActivity.class);
                     startActivity(intent);
                 }
+
+                if(position == INDEX_WEIGHING_UNITS){
+                    Intent intent = new Intent(MenuActivity.this, SettingsUnitActivity.class);
+                    startActivity(intent);
+                }
+
+                if(position == INDEX_CALIBRATION){
+                    Toast.makeText(MenuActivity.this,"TODO: Dialog with user choise: AutoCal, InteernalCal, ManualCal",Toast.LENGTH_LONG).show();
+                }
+
+                if(position == INDEX_GLP){
+                    Intent intent = new Intent(MenuActivity.this, SettingsGlpActivity.class);
+                    startActivity(intent);
+                }
+
             }});
 
 
@@ -118,6 +138,10 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         switch (buttonId){
+            case Navigationbar.BUTTON_SETTINGS:
+                Intent intent = new Intent(MenuActivity.this,SettingsEmailActivity.class);
+                startActivity(intent);
+                break;
             case Navigationbar.BUTTON_LOGOUT:
                 try
                 {

@@ -32,6 +32,7 @@ import com.certoclav.library.util.UpdateUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class SettingDevice extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -54,6 +55,19 @@ private SharedPreferences prefs = null;
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+        //Language
+        ((Preference) findPreference(getString(R.string.preferences_device_language))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+                Intent intent = new Intent(getActivity(), SettingsLanguagePickerActivity.class);
+                getActivity().startActivity(intent);
+
+                return false;
+            }
+        });
 
 //Device Key
 
@@ -221,6 +235,12 @@ private SharedPreferences prefs = null;
 
     @Override
     public void onResume() {
+
+        //Display Language
+
+        ((Preference) findPreference(getString(R.string.preferences_device_language))).setSummary(String.format("%s (%s)", toTitleCase(Locale.getDefault().getDisplayLanguage()), toTitleCase(Locale.getDefault().getDisplayCountry())));
+
+
 //show date and time
 
         // get the current date and time
@@ -360,7 +380,12 @@ private SharedPreferences prefs = null;
         }
     };
 
-
+    private static String toTitleCase(String s) {
+        if (s.length() == 0) {
+            return s;
+        }
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+    }
 
 
 }

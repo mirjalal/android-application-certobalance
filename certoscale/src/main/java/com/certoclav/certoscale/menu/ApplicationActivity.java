@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
@@ -38,6 +41,7 @@ private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
 	@Override
 protected void onResume() {
 
+		refreshSpinnerLibrary();
 
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
 		navigationbar.setButtonEventListener(this);
@@ -46,6 +50,8 @@ protected void onResume() {
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
 		navigationbar.getButtonHome().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.GONE);
+		navigationbar.getButtonSettings().setVisibility(View.GONE);
+		navigationbar.getButtonSave().setVisibility(View.VISIBLE);
 		Scale.getInstance().setOnApplicationListener(this);
 
 		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
@@ -126,8 +132,8 @@ protected void onPause() {
 
 		//start parse serial data output every second. TODO: This function call should be moved into a State Machine class
 	    Scale.getInstance().getReadAndParseSerialService().startParseSerialThread();
-		getSupportFragmentManager().beginTransaction().add(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
-		getSupportFragmentManager().beginTransaction().add(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
 
 	}
 
@@ -136,125 +142,183 @@ protected void onPause() {
 	@Override
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 		Log.e("ApplicationActivity", "onclickhome");
-		if(buttonId == Navigationbar.BUTTON_HOME){
-			Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
-			startActivity(intent);
-		}
-	
-		if(buttonId == ActionButtonbar.BUTTON_TARA){
-			ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
-		}
-		if(buttonId == ActionButtonbar.BUTTON_STATISTICS){
-			ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-				@Override
-				public void onDismiss(DialogInterface dialog) {
-					actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+
+		switch (buttonId){
+			case Navigationbar.BUTTON_HOME:
+				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
+				startActivity(intent);
+				break;
+			case ActionButtonbar.BUTTON_TARA:
+				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+				break;
+			case ActionButtonbar.BUTTON_STATISTICS:
+				ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+						if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+							actionButtonbar.getButtonStatistics().setEnabled(false);
+						}else {
+							actionButtonbar.getButtonStatistics().setEnabled(true);
+						}
+					}
+				});
+				break;
+			case ActionButtonbar.BUTTON_ACCUMULATE:
+				ApplicationManager.getInstance().accumulateStatistics();
+				actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+					actionButtonbar.getButtonStatistics().setEnabled(false);
+				}else {
+					actionButtonbar.getButtonStatistics().setEnabled(true);
+				}
+				break;
+			case ActionButtonbar.BUTTON_APP_SETTINGS:
+				if(appSettingsVisible == true) {
+					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+					actionButtonbar.getButtonAppSettings().setText("SETTINGS");
+					actionButtonbar.getButtonCal().setEnabled(true);
+					actionButtonbar.getButtonPrint().setEnabled(true);
+					actionButtonbar.getButtonTara().setEnabled(true);
 					if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
 						actionButtonbar.getButtonStatistics().setEnabled(false);
 					}else {
 						actionButtonbar.getButtonStatistics().setEnabled(true);
 					}
+					actionButtonbar.getButtonAccumulate().setEnabled(true);
+					appSettingsVisible = false;
+				}else{
+					actionButtonbar.getButtonCal().setEnabled(false);
+					actionButtonbar.getButtonPrint().setEnabled(false);
+					if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+						actionButtonbar.getButtonStatistics().setEnabled(false);
+					}else {
+						actionButtonbar.getButtonStatistics().setEnabled(true);
+					}
+					actionButtonbar.getButtonAccumulate().setEnabled(false);
+					//actionButtonbar.getButtonTara().setEnabled(false);
+					switch (Scale.getInstance().getScaleApplication()){
+						case PART_COUNTING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
+							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							appSettingsVisible = true;
+							break;
+						case WEIGHING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
+							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							appSettingsVisible = true;
+							break;
+						case PERCENT_WEIGHING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
+							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							appSettingsVisible = true;
+							break;
+						default:
+							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
+					}
+
+
+
 				}
-			});
+				break;
+			case ActionButtonbar.BUTTON_CAL:
+				//send command for calibration to the scale
+				if(Scale.getInstance().getWeightInGram() <= 5){
 
-		}
-		if(buttonId == ActionButtonbar.BUTTON_ACCUMULATE){
-			ApplicationManager.getInstance().accumulateStatistics();
-			actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-			if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-				actionButtonbar.getButtonStatistics().setEnabled(false);
-			}else {
-				actionButtonbar.getButtonStatistics().setEnabled(true);
-			}
-		}
+					Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
 
-		if(buttonId == ActionButtonbar.BUTTON_APP_SETTINGS){
-			if(appSettingsVisible == true) {
-				getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
-				actionButtonbar.getButtonAppSettings().setText("SETTINGS");
-				actionButtonbar.getButtonCal().setEnabled(true);
-				actionButtonbar.getButtonPrint().setEnabled(true);
-				actionButtonbar.getButtonTara().setEnabled(true);
-				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-					actionButtonbar.getButtonStatistics().setEnabled(false);
-				}else {
-					actionButtonbar.getButtonStatistics().setEnabled(true);
+					Intent intent3 = new Intent(ApplicationActivity.this,AnimationCalibrationActivity.class);
+					startActivity(intent3);
+				}else{
+					Toast.makeText(ApplicationActivity.this, "Please remove item from pan first", Toast.LENGTH_LONG).show();
 				}
-				actionButtonbar.getButtonAccumulate().setEnabled(true);
-				appSettingsVisible = false;
-			}else{
-				actionButtonbar.getButtonCal().setEnabled(false);
-				actionButtonbar.getButtonPrint().setEnabled(false);
-				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-					actionButtonbar.getButtonStatistics().setEnabled(false);
-				}else {
-					actionButtonbar.getButtonStatistics().setEnabled(true);
+				break;
+			case ActionButtonbar.BUTTON_PRINT:
+				Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g", Toast.LENGTH_LONG).show();
+				LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g",1);
+				break;
+			case Navigationbar.BUTTON_SETTINGS:
+				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
+				intent2.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU, navigationbar.getSpinnerMode().getSelectedItemPosition());
+				startActivity(intent2);
+				break;
+			case Navigationbar.BUTTON_SAVE:
+				try{
+					final Dialog dialog = new Dialog(ApplicationActivity.this);
+					dialog.setContentView(R.layout.dialog_edit_text);
+					dialog.setTitle("Please enter a name for the Partcounting library entry");
+
+					Button dialogButtonCansel = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+					dialogButtonCansel.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							dialog.dismiss();
+						}
+					});
+					Button dialogButtonSave = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
+					// if button is clicked, close the custom dialog
+					dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							String name = ((EditText)dialog.findViewById(R.id.dialog_edit_text_edittext)).getText().toString();
+							DatabaseService db = new DatabaseService(ApplicationActivity.this);
+							ApplicationManager.getInstance().getCurrentLibrary().setName(name);
+							int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
+							if(retval == 1){
+								Toast.makeText(ApplicationActivity.this,"Library " + name + " successfully saved" + retval,Toast.LENGTH_LONG).show();
+							}else{
+								Toast.makeText(ApplicationActivity.this,"Library could not be saved" + retval,Toast.LENGTH_LONG).show();
+							}
+							refreshSpinnerLibrary();
+							try {
+								navigationbar.getSpinnerLib().setSelection(navigationbar.getArrayAdapterLibrary().getPosition(name)); //buggy?
+							}catch(Exception e){
+
+							}
+							dialog.dismiss();
+
+
+						}
+					});
+
+					dialog.show();
+
 				}
-				actionButtonbar.getButtonAccumulate().setEnabled(false);
-				//actionButtonbar.getButtonTara().setEnabled(false);
-				switch (Scale.getInstance().getScaleApplication()){
-					case PART_COUNTING:
-						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
-						actionButtonbar.getButtonAppSettings().setText("RESULTS");
-						appSettingsVisible = true;
-						break;
-					case WEIGHING:
-						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
-						actionButtonbar.getButtonAppSettings().setText("RESULTS");
-						appSettingsVisible = true;
-						break;
-					case PERCENT_WEIGHING:
-						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
-						actionButtonbar.getButtonAppSettings().setText("RESULTS");
-						appSettingsVisible = true;
-						break;
-					default:
-						Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
+				catch (Exception e)
+				{
+					e.printStackTrace();
 				}
-
-
-
-			}
-		}
-
-
-		if(buttonId == ActionButtonbar.BUTTON_CAL){
-			//send command for calibration to the scale
-			if(Scale.getInstance().getWeightInGram() <= 5){
-			
-				Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
-				
-				Intent intent = new Intent(ApplicationActivity.this,AnimationCalibrationActivity.class);
-				startActivity(intent);
-			}else{
-				Toast.makeText(ApplicationActivity.this, "Please remove item from pan first", Toast.LENGTH_LONG).show();
-			}
-		}
-		
-		if(buttonId == ActionButtonbar.BUTTON_PRINT){
-			Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g", Toast.LENGTH_LONG).show();
-			LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g",1);
-		}
-		
-		if(buttonId == Navigationbar.BUTTON_SETTINGS){
-			Intent intent = new Intent(ApplicationActivity.this, SettingsActivity.class);
-			intent.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU, navigationbar.getSpinnerMode().getSelectedItemPosition());
-			startActivity(intent);
-		}
-		if(buttonId == Navigationbar.SPINNER_LIBRARY){
+				break;
 
 		}
+
 	}
 
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
 		ApplicationManager.getInstance().clearStatistics();
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+		actionButtonbar.getButtonAppSettings().setText("SETTINGS");
+		actionButtonbar.getButtonCal().setEnabled(true);
+		actionButtonbar.getButtonPrint().setEnabled(true);
+		actionButtonbar.getButtonTara().setEnabled(true);
+		//if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
 			actionButtonbar.getButtonStatistics().setEnabled(false);
-		}else {
-			actionButtonbar.getButtonStatistics().setEnabled(true);
-		}
+		//}else {
+		//	actionButtonbar.getButtonStatistics().setEnabled(true);
+		//}
+		actionButtonbar.getButtonAccumulate().setEnabled(true);
+		appSettingsVisible = false;
+
+
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+
+		refreshSpinnerLibrary();
+	}
+
+	private void refreshSpinnerLibrary() {
 		try {
 			DatabaseService db = new DatabaseService(ApplicationActivity.this);
 			List<Library> libraries = db.getLibraries();

@@ -10,10 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -27,7 +25,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     private TextView textInstruction = null;
     private Button buttonOK = null;
     private Button buttonCancel = null;
-    private Button buttonSave = null;
+   // private Button buttonSave = null;
 
     private Button button_under_limit = null;
     private Button button_over_limit = null;
@@ -41,7 +39,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_partcounting,container, false);
         buttonOK = (Button) rootView.findViewById(R.id.settings_partcounting_button_ok);
         buttonOK.setVisibility(View.INVISIBLE);
-        buttonSave = (Button) rootView.findViewById(R.id.settings_partcounting_button_save);
+      //  buttonSave = (Button) rootView.findViewById(R.id.settings_partcounting_button_save);
         buttonCancel = (Button) rootView.findViewById(R.id.settings_partcounting_button_cancel);
         buttonCancel.setVisibility(View.INVISIBLE);
         textInstruction = (TextView) rootView.findViewById(R.id.settings_partcounting_text_instruction);
@@ -290,54 +288,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
             }
         });
 
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_text);
-                    dialog.setTitle("Please enter a name for the Partcounting library entry");
 
-                    Button dialogButtonCansel = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
-                    dialogButtonCansel.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    Button dialogButtonSave = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
-                    // if button is clicked, close the custom dialog
-                    dialogButtonSave.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            String name = ((EditText)dialog.findViewById(R.id.dialog_edit_text_edittext)).getText().toString();
-                            DatabaseService db = new DatabaseService(getActivity());
-                            ApplicationManager.getInstance().getCurrentLibrary().setName(name);
-                            int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
-                            if(retval == 1){
-                                Toast.makeText(getActivity(),"Library " + name + " successfully saved" + retval,Toast.LENGTH_LONG).show();
-                            }else{
-                                Toast.makeText(getActivity(),"Library could not be saved" + retval,Toast.LENGTH_LONG).show();
-                            }
-
-                            dialog.dismiss();
-                            onResume();
-
-
-
-                        }
-                    });
-
-                    dialog.show();
-
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        });
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
