@@ -59,8 +59,11 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            try {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(0);
+                            }
                             dialog.dismiss();
                             onResume();
 
@@ -105,8 +108,12 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            try {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch(NumberFormatException e) {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(0);
+                            }
+                                dialog.dismiss();
                             onResume();
 
 

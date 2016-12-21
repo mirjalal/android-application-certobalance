@@ -82,12 +82,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case WEIGHING:
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.BLACK);
+
                 if (ApplicationManager.getInstance().getTaredValueInGram()<ApplicationManager.getInstance().getUnderLimitValueInGram() ) {
                     if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum), getResources().getBoolean(R.bool.preferences_weigh_minimum)) == true) {
                         textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                         textValue.setTextColor(Color.YELLOW);
                     }
                 }
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case DENSITIY_DETERMINATION:

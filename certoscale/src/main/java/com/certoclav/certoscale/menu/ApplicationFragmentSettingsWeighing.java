@@ -15,6 +15,9 @@ import com.certoclav.certoscale.R;
 
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 
 /**
  * A list fragment representing a list of Items. This fragment also supports
@@ -58,11 +61,14 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
-                            ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(0);
+                            }
                             dialog.dismiss();
                             onResume();
-
 
 
                         }

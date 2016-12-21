@@ -71,9 +71,12 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            ApplicationManager.getInstance().setAveragePieceWeightInGram(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            try {
+                                ApplicationManager.getInstance().setAveragePieceWeightInGram(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch(NumberFormatException e){
+                                ApplicationManager.getInstance().setAveragePieceWeightInGram(0d);
+                            }
+                                dialog.dismiss();
                             onResume();
 
 
@@ -115,9 +118,13 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch(NumberFormatException e){
+                                ApplicationManager.getInstance().setAwpCalcSampleSize(0);
 
-                            ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            }
+                                dialog.dismiss();
                             onResume();
 
 
@@ -160,9 +167,13 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().setUnderLimitPieces(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
-                            ApplicationManager.getInstance().setUnderLimitPieces(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setUnderLimitPieces(0);
+
+                            }dialog.dismiss();
                             onResume();
 
 
@@ -179,6 +190,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 }
             }
         });
+
 
 
         button_over_limit = (Button) rootView.findViewById(R.id.settings_partcounting_button_over_limit);
@@ -205,9 +217,12 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            ApplicationManager.getInstance().setOverLimitPieces(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            try {
+                                ApplicationManager.getInstance().setOverLimitPieces(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setOverLimitPieces(0);
+                            }
+                                dialog.dismiss();
                             onResume();
 
 
@@ -235,6 +250,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 buttonEditSampleSize.setEnabled(false);
                 buttonEditAveragePieceWeight.setEnabled(false);
                 buttonCalculateAwp.setEnabled(false);
+                button_under_limit.setEnabled(false);
+                button_over_limit.setEnabled(false);
                 textInstruction.setText("Pleace place " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + "onto the pan");
                 textInstruction.setVisibility(View.VISIBLE);
                 buttonOK.setVisibility(View.VISIBLE);
@@ -248,6 +265,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         buttonEditSampleSize.setEnabled(true);
                         buttonEditAveragePieceWeight.setEnabled(true);
                         buttonCalculateAwp.setEnabled(true);
+                        button_under_limit.setEnabled(true);
+                        button_over_limit.setEnabled(true);
                         Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
                         onResume();
                     }
