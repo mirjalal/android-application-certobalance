@@ -71,8 +71,11 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            ApplicationManager.getInstance().setAveragePieceWeightInGram(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            try {
+                                ApplicationManager.getInstance().setAveragePieceWeightInGram(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setAveragePieceWeightInGram((double) 0);
+                            }
                             dialog.dismiss();
                             onResume();
 

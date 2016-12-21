@@ -164,6 +164,13 @@
             </intent-filter>
         </activity>
 
+        <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
+
+
+        <activity android:name=".settings.library.MenuLibraryActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
         <activity android:name=".menu.RegisterActivity"
             android:screenOrientation="sensorLandscape">
         </activity>

@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.User;
+import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
@@ -24,11 +24,11 @@ import java.util.List;
  * data set.
  * 
 */
-public class LibraryAdapter extends ArrayAdapter<User> {
+public class LibraryAdapter extends ArrayAdapter<Library> {
 
 	public interface OnClickButtonListener {
-		 void onClickButtonDelete(User user);
-		 void onClickButtonEdit(User user);
+		 void onClickButtonDelete(Library library);
+		 void onClickButtonEdit(Library library);
 		}
 	ArrayList<OnClickButtonListener> onClickButtonListeners = new ArrayList<OnClickButtonListener>();
 
@@ -44,16 +44,9 @@ public class LibraryAdapter extends ArrayAdapter<User> {
 	private QuickActionItem actionItemEdit;
 
 
-	/**
-	 * Constructor
-	 *
-	 * @param context
-	 *            context of calling activity
-	 * @param values
-	 * {@link List}<{@link Profile}> containing the data to populate the list
-	 */
-	public LibraryAdapter(Context context, List<User> values) {
-		super(context, R.layout.user_list_row, values);
+
+	public LibraryAdapter(Context context, List<Library> values) {
+		super(context, R.layout.settings_library_list_item, values);
 		this.mContext = context;
 
 
@@ -73,7 +66,7 @@ public class LibraryAdapter extends ArrayAdapter<User> {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 
-			convertView = inflater.inflate(R.layout.user_list_row, parent, false);
+			convertView = inflater.inflate(R.layout.settings_library_list_item, parent, false);
 			LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
 			actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
@@ -85,15 +78,37 @@ public class LibraryAdapter extends ArrayAdapter<User> {
 
 			
 		TextView firstLine = (TextView) convertView.findViewById(R.id.first_line);
-		firstLine.setText(getItem(position).getEmail());
+		firstLine.setText(getItem(position).getName());
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("Date:").append("\t\t").append("\n");
+		sb.append("AWP:").append("\t\t").append("\n");
+		sb.append("Level:").append("\t\t").append("\n");
+		sb.append("Over limit:").append("\t\t").append("\n");
+		sb.append("Under limit:").append("\t\t").append("\n");
+		sb.append("Sample size:").append("\t\t").append("\n");
+		sb.append("Tara:").append("\t\t").append("\n");
+		sb.append("Target:").append("\t\t").append("\n");
+		sb.append("User account:").append("\t\t").append("\n");
 
 		final TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
-		secondLine.setText(getItem(position).getIsAdmin()?  "Admin account":"Standard account");
+		secondLine.setText(sb.toString());
 
-	
-		
-		
-		
+		sb = new StringBuilder();
+		sb.append(getItem(position).getDate()).append("\n");
+		sb.append(getItem(position).getAveragePieceWeight()).append("\n");
+		sb.append(getItem(position).getLevel()).append("\n");
+		sb.append(getItem(position).getOverLimit()).append("\n");
+		sb.append(getItem(position).getUnderLimit()).append("\n");
+		sb.append(getItem(position).getSampleSize()).append("\n");
+		sb.append(getItem(position).getTara()).append("\n");
+		sb.append(getItem(position).getTarget()).append("\n");
+		sb.append(getItem(position).getUserEmail()).append("\n");
+		final TextView thirdLine = (TextView) convertView.findViewById(R.id.third_line);
+		thirdLine.setText(sb.toString());
+
+
+
 		actionItemDelete.setChecked(false);
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
 

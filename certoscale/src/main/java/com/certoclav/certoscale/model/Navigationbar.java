@@ -17,6 +17,7 @@ import com.certoclav.certoscale.adapters.SpinnerModeAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
@@ -43,10 +44,30 @@ public class Navigationbar {
 	public static final int BUTTON_ADD = 13;
 	public static final int BUTTON_BACK = 14;
 	public static final int SPINNER_LIBRARY = 20;
-
+	public static final int BUTTON_GO_TO_APPLICATION = 31;
+	public static final int BUTTON_LOGOUT = 32;
 	private int spinnerModeOnClickCounter = 0;
 
+	public Button getButtonLogout() {
+		return buttonLogout;
+	}
+
+	public void setButtonLogout(Button buttonLogout) {
+		this.buttonLogout = buttonLogout;
+	}
+
+	private Button buttonLogout = null;
 	private Button buttonHome = null;
+
+	public Button getButtonGoToApplication() {
+		return buttonGoToApplication;
+	}
+
+	public void setButtonGoToApplication(Button buttonGoToApplication) {
+		this.buttonGoToApplication = buttonGoToApplication;
+	}
+
+	private Button buttonGoToApplication = null;
 
 	public SpinnerModeAdapter getArrayAdapterMode() {
 		return arrayAdapterMode;
@@ -212,6 +233,14 @@ public class Navigationbar {
 
 		});
 
+		buttonGoToApplication = (Button) mActivity.findViewById(R.id.naviagationbar_button_applications);
+		buttonGoToApplication.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mActivity, ApplicationActivity.class);
+				mActivity.startActivity(intent);
+			}
+		});
 
 		buttonSettings = (Button) mActivity.findViewById(R.id.naviagationbar_button_settings);
 		buttonSettings.setOnClickListener(new OnClickListener() {
@@ -272,6 +301,16 @@ public class Navigationbar {
 		});
 		textTitle = (TextView) mActivity.findViewById(R.id.naviagationbar_text_title);
 		textTitle.setVisibility(View.GONE);
+
+		buttonLogout = (Button) mActivity.findViewById(R.id.naviagationbar_button_logout);
+		buttonLogout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(BUTTON_LOGOUT, false);
+				}
+			}
+		});
 
 
 	}

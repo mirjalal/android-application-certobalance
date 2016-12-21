@@ -251,12 +251,8 @@
         <item>Application Modes</item>
         <item>Weighing Units</item>
         <item>GLP and GMP Data</item>
-        <item>Communication</item>
         <item>Library</item>
         <item>Diagnostics</item>
-        <item>Factory Reset</item>
-        <item>Lockout</item>
-        <item>I/O Settings</item>
         <item>Information</item>
     </string-array>
 

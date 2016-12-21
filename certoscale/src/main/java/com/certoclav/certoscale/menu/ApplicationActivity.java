@@ -44,6 +44,8 @@ protected void onResume() {
 		actionButtonbar.setButtonEventListener(this);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
+		navigationbar.getButtonHome().setVisibility(View.VISIBLE);
+		navigationbar.getButtonBack().setVisibility(View.GONE);
 		Scale.getInstance().setOnApplicationListener(this);
 
 		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);

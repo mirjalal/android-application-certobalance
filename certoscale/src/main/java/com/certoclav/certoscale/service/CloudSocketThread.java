@@ -32,9 +32,6 @@ public class CloudSocketThread extends Thread implements SocketEventListener {
 	private boolean runFlag = true;
 	private int index = 0;
 	public CloudSocketThread() {
-
-		
-
 	}
 	
 
@@ -42,8 +39,9 @@ public class CloudSocketThread extends Thread implements SocketEventListener {
 	public void run() {
 	
 		try{
+			Log.e("SocketTread", "Thread init");
 			SocketService.getInstance().setOnSocketEventListener(this);
-			SocketService.getInstance().setDeviceKey("");
+			SocketService.getInstance().setDeviceKey(Scale.getInstance().getSafetyKey());
 			SocketService.getInstance().connectToCertocloud();
 			jsonLiveMessageObj = new JSONObject();
 			counterSendLiveDataToServer = 0;

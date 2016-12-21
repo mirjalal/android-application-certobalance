@@ -25,10 +25,11 @@ public class CloudSocketService  extends Service{
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		
+		Log.e("CloudSocketService", "onStartCommand() called");
 		if(!cloudSocketThread.isAlive()){
 			cloudSocketThread = new CloudSocketThread();
 			cloudSocketThread.start();
+			Log.e("CloudSocketService", "Thread.start called");
 		}
 		
 		
