@@ -12,6 +12,14 @@
         </CheckBoxPreference>
 
         <CheckBoxPreference
+            android:key="@string/preferences_pipette_lock"
+            android:defaultValue="@bool/preferences_pipette_lock"
+            android:title="Lock"
+            android:summary="Lock the pipette adjustment settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
             android:key="@string/preferences_pipette_autosamplemode"
             android:defaultValue="@bool/preferences_pipette_autosamplemode"
             android:title="Auto Sample Mode"

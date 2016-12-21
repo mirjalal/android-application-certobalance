@@ -11,6 +11,7 @@
     <string name="app_name">certoscale</string>
     <string name="hello_world">Hello world!</string>
     <string name="preferences_animal_activated">preferences_animal_activated</string>
+    <string name="preferences_animal_lock">preferences_animal_activated</string>
     <string name="preferences_check_limitmode">preferences_check_limitmode</string>
     <string name="preferences_animal_secondary_visible">preferences_animal_secondary_visible</string>
     <string name="preferences_animal_measuringtime_visible">preferences_animal_measuringtime_visible</string>
@@ -19,6 +20,7 @@
     <string name="preferences_animal_tara_visible">preferences_animal_tara_visible</string>
     <string name="preferences_animal_print_measuring">preferences_animal_print_measuring</string>
     <string name="preferences_check_activated">preferences_check_activated</string>
+    <string name="preferences_check_lock">preferences_check_activated</string>
     <string name="preferences_check_secondary_visible">preferences_check_secondary_visible</string>
     <string name="preferences_check_over_visible">preferences_check_over_visible</string>
     <string name="preferences_check_under_visible">preferences_check_under_visible</string>
@@ -34,6 +36,7 @@
     <string name="preferences_check_print_overlimit">preferences_check_print_overlimit</string>
     <string name="preferences_check_print_underlimit">preferences_check_print_underlimit</string>
     <string name="preferences_density_activated">preferences_density_activated</string>
+    <string name="preferences_density_lock">preferences_density_activated</string>
     <string name="preferences_density_mode">preferences_density_mode</string>
     <string name="preferences_density_liquidtyp">preferences_density_liquidtyp</string>
     <string name="preferences_density_porous">preferences_density_porous</string>
@@ -53,6 +56,7 @@
     <string name="preferences_density_weightair_print">preferences_density_weightair_print</string>
     <string name="preferences_density_weightinliquid_print">preferences_density_weightinliquid_print</string>
     <string name="preferences_differential_activated">preferences_differential_activated</string>
+    <string name="preferences_differential_lock">preferences_differential_activated</string>
     <string name="preferences_differential_autoMode">preferences_differential_autoMode</string>
     <string name="preferences_differential_initial_visible">preferences_differential_initial_visible</string>
     <string name="preferences_differential_final_visible">preferences_differential_final_visible</string>
@@ -66,6 +70,7 @@
     <string name="preferences_differential_print_differencew">preferences_differential_print_differencew</string>
     <string name="preferences_differential_print_differencep">preferences_differential_print_differencep</string>
     <string name="preferences_filling_activated">preferences_filling_activated</string>
+    <string name="preferences_filling_lock">preferences_filling_activated</string>
     <string name="preferences_filling_secondary_visible">preferences_filling_secondary_visible</string>
     <string name="preferences_filling_target_visible">preferences_filling_target_visible</string>
     <string name="preferences_filling_differencew_visible">preferences_filling_differencew_visible</string>
@@ -77,6 +82,7 @@
     <string name="preferences_filling_print_differencew">preferences_filling_print_differencew</string>
     <string name="preferences_filling_print_differencep">preferences_filling_print_differencep</string>
     <string name="preferences_formulation_activated">preferences_formulation_activated</string>
+    <string name="preferences_formulation_lock">preferences_formulation_activated</string>
     <string name="preferences_formulation_formulationmode">preferences_formulation_formulationmode</string>
     <string name="preferences_formulation_filter">preferences_formulation_filter</string>
     <string name="preferences_formulation_secondary_visible">preferences_formulation_secondary_visible</string>
@@ -92,6 +98,7 @@
     <string name="preferences_formulation_print_differencew">preferences_formulation_print_differencew</string>
     <string name="preferences_formulation_print_differencep">preferences_formulation_print_differencep</string>
     <string name="preferences_ingrediant_activated">preferences_ingrediant_activated</string>
+    <string name="preferences_ingrediant_lock">preferences_ingrediant_activated</string>
     <string name="preferences_ingrediant_mode">preferences_ingrediant_mode</string>
     <string name="preferences_ingrediant_unitcost_visible">preferences_ingrediant_unitcost_visible</string>
     <string name="preferences_ingrediant_totalweight_visible">preferences_ingrediant_totalweight_visible</string>
@@ -102,6 +109,8 @@
     <string name="preferences_ingrediant_print_totalweight">preferences_ingrediant_print_totalweight</string>
     <string name="preferences_ingrediant_print_totalcost">preferences_ingrediant_print_totalcost</string>
     <string name="preferences_counting_activated">preferences_counting_activated</string>
+    <string name="preferences_counting_lock">preferences_counting_activated</string>
+
     <string name="preferences_counting_auto_optimization">preferences_counting_auto_optimization</string>
     <string name="preferences_counting_mode">preferences_counting_mode</string>
     <string name="preferences_counting_secondary_visible">preferences_counting_secondary_visible</string>
@@ -120,6 +129,7 @@
     <string name="preferences_counting_print_over_limit">preferences_counting_print_over_limit</string>
     <string name="preferences_counting_print_under_limit">preferences_counting_print_under_limit</string>
     <string name="preferences_peak_activated">preferences_peak_activated</string>
+    <string name="preferences_peak_lock">preferences_peak_activated</string>
     <string name="preferences_peak_mode">preferences_peak_mode</string>
     <string name="preferences_peak_stableonly">preferences_peak_stableonly</string>
     <string name="preferences_peak_secondary_visible">preferences_peak_secondary_visible</string>
@@ -128,6 +138,8 @@
     <string name="preferences_peak_tara_visible">preferences_peak_tara_visible</string>
     <string name="preferences_peak_print_stableonly">preferences_peak_print_stableonly</string>
     <string name="preferences_percent_activated">preferences_percent_activated</string>
+    <string name="preferences_percent_lock">preferences_percent_activated</string>
+
     <string name="preferences_percent_secondary_visible">preferences_percent_secondary_visible</string>
     <string name="preferences_percent_reference_visible">preferences_percent_reference_visible</string>
     <string name="preferences_percent_difference_visible">preferences_percent_difference_visible</string>
@@ -139,6 +151,7 @@
     <string name="preferences_percent_print_difference">preferences_percent_print_difference</string>
     <string name="preferences_percent_print_difference_percent">preferences_percent_print_difference_percent</string>
     <string name="preferences_pipette_activated">preferences_pipette_activated</string>
+    <string name="preferences_pipette_lock">preferences_pipette_activated</string>
     <string name="preferences_pipette_autosamplemode">preferences_pipette_autosamplemode</string>
     <string name="preferences_pipette_liquidtype">preferences_pipette_liquidtype</string>
     <string name="preferences_pipette_numberofsample">preferences_pipette_numberofsample</string>
@@ -158,6 +171,7 @@
     <string name="preferences_pipette_barounit_print">preferences_pipette_barounit_print</string>
     <string name="preferences_pipette_watertemp_print">preferences_pipette_watertemp_print</string>
     <string name="preferences_statistic_activated">preferences_statistic_activated</string>
+    <string name="preferences_statistic_lock">preferences_statistic_activated</string>
     <string name="preferences_statistic_numberofsample">preferences_statistic_numberofsample</string>
     <string name="preferences_statistic_liquidtype">preferences_statistic_liquidtype</string>
     <string name="preferences_statistic_numbatches_visible">preferences_statistic_numbatches_visible</string>
@@ -175,6 +189,7 @@
     <string name="preferences_statistic_maximum_print">preferences_statistic_maximum_print</string>
     <string name="preferences_statistic_range_print">preferences_statistic_range_print</string>
     <string name="preferences_totalization_activated">preferences_totalization_activated</string>
+    <string name="preferences_totalization_lock">preferences_totalization_activated</string>
     <string name="preferences_totalization_AutoSampleMode">preferences_totalization_AutoSampleMode</string>
     <string name="preferences_totalizaion_NumberofSamples">preferences_totalizaion_NumberofSamples</string>
     <string name="preferences_totalization_average_visible">preferences_totalization_average_visible</string>
@@ -191,6 +206,7 @@
     <string name="preferences_totalization_print_minimum">preferences_totalization_print_minimum</string>
     <string name="preferences_totalization_print_maximum">preferences_totalization_print_maximum</string>
     <string name="preferences_weigh_activated">preferences_weigh_activated</string>
+    <string name="preferences_weigh_lock">preferences_weigh_activated</string>
     <string name="preferences_weigh_minimum">preferences_weigh_minimum</string>
     <string name="preferences_weigh_load_visible">preferences_weigh_secondary_visible</string>
     <string name="preferences_weigh_minimum_visible">preferences_weigh_minimum_visible</string>
@@ -241,8 +257,14 @@
         <item>Check Counting</item>
         <item>Fill Counting</item>   
     </string-array>
+
+    <string-array name="preferences_counting_modes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
   
-    <string-array name="preferences_statistics">
+    <string-array name="preferences_counting_statistics">
         <item>Off</item>
         <item>Manual</item>
         <item>Auto</item>   

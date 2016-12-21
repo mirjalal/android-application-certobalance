@@ -128,7 +128,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 
-			value = (Double) (30 + (30.0* Math.sin(((double)counter)*0.02)));
+			value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.02)));
 
 		    handler.sendEmptyMessage(0);
 

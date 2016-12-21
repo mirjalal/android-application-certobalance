@@ -175,6 +175,11 @@ protected void onPause() {
 						actionButtonbar.getButtonAppSettings().setText("RESULTS");
 						appSettingsVisible = true;
 						break;
+					case PERCENT_WEIGHING:
+						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
+						actionButtonbar.getButtonAppSettings().setText("RESULTS");
+						appSettingsVisible = true;
+						break;
 					default:
 						Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 				}
@@ -216,8 +221,13 @@ protected void onPause() {
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
 		ApplicationManager.getInstance().clearStatistics();
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-
+		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+			actionButtonbar.getButtonStatistics().setText("STATISTICS\n");
+			actionButtonbar.getButtonStatistics().setVisibility(View.GONE);
+		}else {
+			actionButtonbar.getButtonStatistics().setVisibility(View.VISIBLE);
+			actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+		}
 		try {
 			DatabaseService db = new DatabaseService(ApplicationActivity.this);
 			List<Library> libraries = db.getLibraries();

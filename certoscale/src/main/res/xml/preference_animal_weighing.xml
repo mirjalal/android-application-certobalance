@@ -4,10 +4,18 @@
 
     <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
         <CheckBoxPreference
-            android:key="@string/preferences_animal_activated"
-            android:defaultValue="@bool/preferences_animal_activated_default"
-            android:title="Activated"
-            android:summary="Turn the application on/off"
+        android:key="@string/preferences_animal_activated"
+        android:defaultValue="@bool/preferences_animal_activated_default"
+        android:title="Activated"
+        android:summary="Turn the application on/off"
+        android:icon="@drawable/ic_launcher" >
+    </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_animal_lock"
+            android:defaultValue="@bool/preferences_animal_lock"
+            android:title="Lock"
+            android:summary="Lock the animal weighing settings on/off"
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 

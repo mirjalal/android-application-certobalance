@@ -3,6 +3,8 @@
 
     //Statistical Quality Control App
     <bool name="preferences_statistic_activated_default">true</bool>
+    <bool name="preferences_statistic_lock">true</bool>
+
 
     <bool name="preferences_statistic_numbatches_visible">true</bool>
     <bool name="preferences_statistic_numsamples_visible">true</bool>
@@ -25,6 +27,7 @@
 
     //Weighing app
     <bool name="preferences_weigh_activated_default">true</bool>
+    <bool name="preferences_weigh_lock">true</bool>
     <bool name="preferences_weigh_minimum">true</bool>
     <bool name="preferences_weigh_load_visible">true</bool>
     <bool name="preferences_weigh_minimum_visible">true</bool>
@@ -35,6 +38,8 @@
 
     //Part counting app
     <bool name="preferences_counting_activated_default">true</bool>
+    <bool name="preferences_counting_lock">true</bool>
+
     <bool name="preferences_counting_auto_optimization">true</bool>
     <bool name="preferences_counting_secondary_visible">true</bool>
     <bool name="preferences_counting_apw_visible">true</bool>
@@ -55,6 +60,8 @@
 
     //Percent Weighing app
     <bool name="preferences_percent_activated_default">true</bool>
+    <bool name="preferences_percent_lock">true</bool>
+
 
 
     <bool name="preferences_percent_secondary_visible">true</bool>
@@ -72,6 +79,8 @@
 
     //Percent Check Weighing app
     <bool name="preferences_check_activated">true</bool>
+    <bool name="preferences_check_lock">true</bool>
+
 
     <bool name="preferences_check_secondary_visible">true</bool>
     <bool name="preferences_check_over_visible">true</bool>
@@ -92,6 +101,7 @@
 
     //Animal Weighing app
     <bool name="preferences_animal_activated_default">true</bool>
+    <bool name="preferences_animal_lock">true</bool>
 
     <bool name="preferences_animal_secondary_visible">true</bool>
     <bool name="preferences_animal_measuringtime_visible">true</bool>
@@ -105,6 +115,7 @@
 
     //Filling app
     <bool name="preferences_filling_activated_default">true</bool>
+    <bool name="preferences_filling_lock">true</bool>
 
     <bool name="preferences_filling_secondary_visible">true</bool>
     <bool name="preferences_filling_target_visible">true</bool>
@@ -120,6 +131,7 @@
 
     //Totalization App
     <bool name="preferences_totalization_activated_default">true</bool>
+    <bool name="preferences_totalization_lock">true</bool>
     <bool name="preferences_totalization_AutoSampleMode">true</bool>
 
 
@@ -141,6 +153,7 @@
 
     //Formulation App
     <bool name="preferences_formulation_activated_default">true</bool>
+    <bool name="preferences_formulation_lock">true</bool>
     <bool name="preferences_formulation_filter">true</bool>
 
     <bool name="preferences_formulation_secondary_visible">true</bool>
@@ -160,6 +173,7 @@
 
     //Differential Weighing App
     <bool name="preferences_differential_activated_default">true</bool>
+    <bool name="preferences_differential_lock">true</bool>
     <bool name="preferences_differential_autoMode">true</bool>
 
     <bool name="preferences_differential_initial_visible">true</bool>
@@ -178,6 +192,7 @@
 
     //Density Determination app
     <bool name="preferences_density_activated_default">true</bool>
+    <bool name="preferences_density_lock">true</bool>
     <bool name="preferences_density_porous">true</bool>
     <bool name="preferences_density_autoprint">true</bool>
     <bool name="preferences_density_autosample">true</bool>
@@ -200,6 +215,7 @@
 
     //Peak Hold App
     <bool name="preferences_peak_activated">true</bool>
+    <bool name="preferences_peak_lock">true</bool>
     <bool name="preferences_peak_stableonly">true</bool>
 
     <bool name="preferences_peak_secondary_visible">true</bool>
@@ -213,6 +229,7 @@
 
     //Ingrediant Costing App
     <bool name="preferences_ingrediant_activated_default">true</bool>
+    <bool name="preferences_ingrediant_lock">true</bool>
 
     <bool name="preferences_ingrediant_unitcost_visible">true</bool>
     <bool name="preferences_ingrediant_totalweight_visible">true</bool>
@@ -228,6 +245,7 @@
 
     //Pipette Adjustment App
     <bool name="preferences_pipette_activated_default">true</bool>
+    <bool name="preferences_pipette_lock">true</bool>
     <bool name="preferences_pipette_autosamplemode">true</bool>
 
 

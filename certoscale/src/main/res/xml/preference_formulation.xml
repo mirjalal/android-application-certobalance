@@ -11,6 +11,15 @@
             android:icon="@drawable/ic_launcher" >
         </CheckBoxPreference>
 
+
+        <CheckBoxPreference
+            android:key="@string/preferences_formulation_lock"
+            android:defaultValue="@bool/preferences_formulation_lock"
+            android:title="Lock"
+            android:summary="Lock the formulation settings on/off"
+            android:icon="@drawable/ic_launcher" >
+        </CheckBoxPreference>
+
         <ListPreference
             android:key="@string/preferences_formulation_formulationmode"
             android:title="Formulation Mode"
