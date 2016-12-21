@@ -175,13 +175,21 @@ protected void onPause() {
 				actionButtonbar.getButtonCal().setEnabled(true);
 				actionButtonbar.getButtonPrint().setEnabled(true);
 				actionButtonbar.getButtonTara().setEnabled(true);
-				actionButtonbar.getButtonStatistics().setEnabled(true);
+				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+					actionButtonbar.getButtonStatistics().setEnabled(false);
+				}else {
+					actionButtonbar.getButtonStatistics().setEnabled(true);
+				}
 				actionButtonbar.getButtonAccumulate().setEnabled(true);
 				appSettingsVisible = false;
 			}else{
 				actionButtonbar.getButtonCal().setEnabled(false);
 				actionButtonbar.getButtonPrint().setEnabled(false);
-				actionButtonbar.getButtonStatistics().setEnabled(false);
+				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+					actionButtonbar.getButtonStatistics().setEnabled(false);
+				}else {
+					actionButtonbar.getButtonStatistics().setEnabled(true);
+				}
 				actionButtonbar.getButtonAccumulate().setEnabled(false);
 				//actionButtonbar.getButtonTara().setEnabled(false);
 				switch (Scale.getInstance().getScaleApplication()){

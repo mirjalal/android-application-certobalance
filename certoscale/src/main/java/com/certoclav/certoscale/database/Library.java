@@ -27,6 +27,7 @@ public class Library {
 	public static final String FIELD_LIBRARY_LIMIT_OVER = "limit_over";
 	public static final String FIELD_LIBRARY_LIMIT_OVER_PIECES = "limit_over_pieces";
 	public static final String FIELD_LIBRARY_REFERENCE_WEIGHT= "reference_weight";
+	public static final String FIELD_LIBRARY_REFERENCE_ADJUSTMENT= "reference_weight_adjustment";
 	public static final String FIELD_LIBRARY_LEVEL = "level";
 	public static final String FIELD_LIBRARY_MODE = "mode";
 	public static final String FIELD_LIBRARY_DATE = "date";
@@ -67,7 +68,7 @@ public class Library {
 	private String userEmail;
 
 
-	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double overLimit,double level, int mode, Date date, Boolean isLocal) {
+	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double underLimitPieces, double overLimit, double overLimitPieces, double refweight, double refweightAdjustment,double level, int mode, Date date, Boolean isLocal) {
 		this.userEmail = userEmail;
 		this.application = application;
 		this.cloudId = cloudId;
@@ -78,10 +79,11 @@ public class Library {
 		this.sampleSize = sampleSize;
 		this.averagePieceWeight = averagePieceWeight;
 		this.underLimit = underLimit;
-//		this.underLimitPieces = underLimitPieces;
+		this.underLimitPieces = underLimitPieces;
 		this.overLimit = overLimit;
-//		this.overLimitPieces = overLimitPieces;
-//		this.referenceweight=refweight;
+		this.overLimitPieces = overLimitPieces;
+		this.referenceweight=refweight;
+		this.referenceweightAdjustment=refweightAdjustment;
 		this.level = level;
 		this.mode = mode;
 		this.date = date;
@@ -156,7 +158,26 @@ public class Library {
 		return underLimit;
 	}
 
+	public double getUnderLimitPieces(){
 
+		return underLimitPieces;
+	}
+
+	public double getReferenceWeight(){
+		return referenceweight;
+	}
+
+	public double getReferenceweightAdjustment(){
+		return referenceweightAdjustment;
+	}
+
+	public void setReferenceWeight(double referenceweight) {
+		this.referenceweight = referenceweight;
+	}
+
+	public void setReferenceweightAdjustment(double referenceweightAdjustment) {
+		this.referenceweightAdjustment = referenceweightAdjustment;
+	}
 
 
 
@@ -164,14 +185,25 @@ public class Library {
 	public void setUnderLimit(double underLimit) {
 		this.underLimit = underLimit;
 	}
+	public void setUnderLimitPieces(double underLimitPieces) {
+		this.underLimitPieces = underLimitPieces;
+	}
 
 	public double getOverLimit() {
 		return overLimit;
 	}
 
+	public double getOverLimitPieces() {
+		return overLimitPieces;
+	}
+
 
 	public void setOverLimit(double overLimit) {
 		this.overLimit = overLimit;
+	}
+
+	public void setOverLimitPieces(double overLimitPieces) {
+		this.overLimitPieces = overLimitPieces;
 	}
 
 	public double getLevel() {
@@ -224,12 +256,21 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
 	private double underLimit;
 
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_PIECES)
+	private double underLimitPieces;
+
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER)
 	private double overLimit;
 
-//	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_WEIGHT)
-//	private double referenceweight;
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER_PIECES)
+	private double overLimitPieces;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_WEIGHT)
+	private double referenceweight;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_ADJUSTMENT)
+	private double referenceweightAdjustment;
 
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LEVEL)

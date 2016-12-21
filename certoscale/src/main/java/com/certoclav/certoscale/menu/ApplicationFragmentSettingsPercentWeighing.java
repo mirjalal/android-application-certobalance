@@ -59,8 +59,11 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            try {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(0);
+                            }
                             dialog.dismiss();
                             onResume();
 
@@ -88,7 +91,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please adjust the reference");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -105,8 +108,12 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-                            dialog.dismiss();
+                            try {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            }catch(NumberFormatException e) {
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(0);
+                            }
+                                dialog.dismiss();
                             onResume();
 
 
@@ -133,8 +140,8 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText("Reference Weight \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getUnderLimit()));
-        buttonReferenceAdjust.setText("Reference Adjustment \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getUnderLimit()));
+        buttonReferenceWeight.setText("Reference Weight \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceWeight())+ " g");
+        buttonReferenceAdjust.setText("Reference Adjustment \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 
 
