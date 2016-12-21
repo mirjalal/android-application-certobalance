@@ -161,7 +161,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().setUnderLimit(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            ApplicationManager.getInstance().setUnderLimitPieces(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             dialog.dismiss();
                             onResume();
 
@@ -206,7 +206,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            ApplicationManager.getInstance().setOverLimit(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            ApplicationManager.getInstance().setOverLimitPieces(Integer.parseInt( ((EditText)dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             dialog.dismiss();
                             onResume();
 

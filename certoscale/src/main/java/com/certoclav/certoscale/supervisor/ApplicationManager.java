@@ -44,7 +44,11 @@ public class ApplicationManager {
             10f,
             1f,
             0f,
+            0f,
             20f,
+            0f,
+            0f,
+            0f,
             0f,
             0,
             new Date(),
@@ -76,8 +80,16 @@ public class ApplicationManager {
         currentLibrary.setUnderLimit(underLimit);
     }
 
+    public void setUnderLimitPieces(int underLimitPieces) {
+        currentLibrary.setUnderLimitPieces(underLimitPieces);
+    }
+
     public void setOverLimit(int overLimit) {
         currentLibrary.setOverLimit(overLimit);
+    }
+
+    public void setOverLimitPieces(int overLimitPieces) {
+        currentLibrary.setOverLimitPieces(overLimitPieces);
     }
 
 
@@ -283,12 +295,16 @@ public class ApplicationManager {
     }
 
     public String getUnderLimitPiecesAsStringInGram(){
-        return String.format("%.1f",currentLibrary.getUnderLimit());
+        return String.format("%.1f",currentLibrary.getUnderLimitPieces());
     }
 
+
+
     public String getOverlimitPiecesAsStringInGram(){
-        return String.format("%.1f",currentLibrary.getOverLimit());
+        return String.format("%.1f",currentLibrary.getOverLimitPieces());
     };
+
+
 
     public Double getUnderLimitValueInGram() {
         return currentLibrary.getUnderLimit();

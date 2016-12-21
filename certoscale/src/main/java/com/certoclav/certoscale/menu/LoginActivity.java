@@ -416,7 +416,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			}
 
 			User user1 = new User("Michael", "", "Dirix","michaeldirix@mytum.de", "mobile", "landline", "Certoclav","companyphone", "companyWebsite", BCrypt.hashpw("1234",BCrypt.gensalt()), new Date(), true,true);
-			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Example library", 10.0f, 20.0f,5,1,1,30,0,0,new Date(),true);
+			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Example library", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true);
 
 			// Max regierstriert sich
 			int result = databaseService.insertUser(user1);

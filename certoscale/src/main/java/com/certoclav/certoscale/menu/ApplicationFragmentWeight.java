@@ -106,7 +106,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
         //Update Loading bar
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
-        int width = (int) (Scale.getInstance().getWeightInGram()*5.81);
+        int width = (int) (Scale.getInstance().getWeightInGram()*5.83);
         if(width<0){
             width = 0;
         }
