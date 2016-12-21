@@ -3,8 +3,10 @@ package com.certoclav.certoscale.menu;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +96,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
         //Part Counting
         int apw=3;
+        int underlimit=5;
+        int overlimit=7;
 
         //Percent Weighing
         int reference_weight=1;
@@ -160,6 +164,24 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(apw).getTextName().setText("PIECE WEIGHT");
                     listReferenceFields.get(apw).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
                 }
+
+
+                String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
+
+                Log.e("AppFragTable", cmode);
+                if  (cmode.equals("2")) {
+                    if (prefs.getBoolean(getString(R.string.preferences_counting_under_limit_visible), getResources().getBoolean(R.bool.preferences_counting_under_limit_visible)) == true) {
+                        listReferenceFields.get(underlimit).getTextName().setText("UNDER LIMIT");
+                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitPiecesAsString());
+                    }
+
+                    if (prefs.getBoolean(getString(R.string.preferences_counting_over_limit_visible), getResources().getBoolean(R.bool.preferences_counting_over_limit_visible)) == true) {
+                        listReferenceFields.get(overlimit).getTextName().setText("OVER LIMIT");
+                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getOverlimitPiecesAsString());
+                    }
+                }
+
+
                 break;
             case PERCENT_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible),getResources().getBoolean(R.bool.preferences_percent_tara_visible))==true) {
