@@ -65,6 +65,21 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.menu_main_element_image);
 		imageView.setImageResource(getItem(position).getImageResId());
 
+		switch (getItem(position).getId()){
+			case MENU_ITEM_APPLICATIONS:
+				convertView.setBackgroundResource(R.drawable.menu_btn_red);
+				break;
+			case MENU_ITEM_CALIBRATION:
+				convertView.setBackgroundResource(R.drawable.quickaction_slider_btn);
+				break;
+			case MENU_ITEM_DEVICE:
+				convertView.setBackgroundResource(R.drawable.menu_btn_blue);
+				break;
+			default:
+				convertView.setBackgroundResource(R.drawable.menu_btn_purple);
+				break;
+		}
+
 		convertView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

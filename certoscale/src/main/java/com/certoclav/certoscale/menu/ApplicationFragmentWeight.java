@@ -68,20 +68,20 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
         switch (Scale.getInstance().getScaleApplication()){
             case PART_COUNTING_CALC_AWP:
-                textValue.setTextColor(Color.BLACK);
+                textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
                 textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
 
                 break;
             case PART_COUNTING:
-                textValue.setTextColor(Color.BLACK);
+                textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
                 break;
             case WEIGHING:
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textValue.setTextColor(Color.BLACK);
+                textValue.setTextColor(Color.WHITE);
 
                 if (ApplicationManager.getInstance().getTaredValueInGram()<ApplicationManager.getInstance().getUnderLimitValueInGram() ) {
                     if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum), getResources().getBoolean(R.bool.preferences_weigh_minimum)) == true) {

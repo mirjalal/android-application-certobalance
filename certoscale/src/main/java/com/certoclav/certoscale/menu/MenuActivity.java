@@ -101,7 +101,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         switch (buttonId){
-            case Navigationbar.BUTTON_SETTINGS:
+            case Navigationbar.BUTTON_ADD:
                 Intent intent = new Intent(MenuActivity.this,SettingsEmailActivity.class);
                 startActivity(intent);
                 break;

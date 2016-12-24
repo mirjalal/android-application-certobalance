@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background_gadient">
  
     <LinearLayout 
         android:id="@+id/dialog_container_text"
@@ -20,6 +21,7 @@
         android:layout_margin="10dp"
         android:gravity="center_horizontal|bottom"
         android:text="@string/do_not_take_advantage_from_certocloud"
+        android:textColor="@android:color/white"
         android:textSize="25sp"
         tools:ignore="HardcodedText" />
     
@@ -37,6 +39,7 @@
         android:layout_margin="10dp"
         android:gravity="center_horizontal|bottom"
         android:text="@string/add_an_existing_certocloud_account"
+        android:textColor="@android:color/white"
         android:textSize="25sp" />
       <View
     android:layout_height="match_parent"
@@ -51,6 +54,7 @@
         android:layout_margin="10dp"
         android:gravity="center_horizontal|bottom"
         android:text="@string/create_a_new_certocloud_account"
+         android:textColor="@android:color/white"
         android:textSize="25sp" />
     </LinearLayout>
     
@@ -67,6 +71,7 @@
         android:layout_weight="1"
         android:text="@string/create_local"
         android:layout_margin="5dp"
+             android:textSize="25sp"
         android:textColor="@android:color/white"
         android:background="@drawable/quickaction_slider_btn"
         />
@@ -78,6 +83,7 @@
         android:layout_weight="1"
         android:text="@string/add_existing"
         android:layout_margin="5dp"
+         android:textSize="25sp"
         android:textColor="@android:color/white"
         android:background="@drawable/quickaction_slider_btn"
 
@@ -89,6 +95,7 @@
         android:layout_height="60dp"
         android:layout_weight="1"
         android:text="@string/create_new"
+              android:textSize="25sp"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"
         android:background="@drawable/quickaction_slider_btn"

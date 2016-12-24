@@ -70,6 +70,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 	private ProgressBar progressBar = null; // progess bar which shows cloud
 											// login process
     private Navigationbar navigationbar = null;
+	private int counter = 0;
 
 	// Need handler for callbacks to the UI thread
 	final Handler mHandler = new Handler();
@@ -150,6 +151,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettings().setVisibility(View.GONE);
 		navigationbar.getButtonBack().setVisibility(View.GONE);
+
+
+
 
 		StateMachine.getInstance();
 

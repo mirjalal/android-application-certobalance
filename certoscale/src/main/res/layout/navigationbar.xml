@@ -41,9 +41,9 @@
      android:visibility="gone"
      />
 
- <Button
+ <ImageButton
      android:id="@+id/naviagationbar_button_logout"
-     android:text="LOGOUT"
+     android:src="@drawable/ic_menu_exit"
      android:layout_width="80dp"
      android:textSize="18sp"
      android:textColor="@android:color/white"

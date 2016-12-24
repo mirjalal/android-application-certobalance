@@ -40,7 +40,8 @@ android:orientation="vertical">
         android:textSize="16sp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:textColor="@android:color/white"
+        android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_1"
         android:layout_weight="2"
@@ -49,7 +50,8 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:text="0"
         android:textSize="16sp"
-        android:background="@android:color/darker_gray"
+        android:background="#444444"
+        android:textColor="@android:color/white"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -63,8 +65,9 @@ android:orientation="vertical">
         android:text="TARA"
         android:textSize="16sp"
         android:gravity="center_vertical"
+        android:textColor="@android:color/white"
         android:paddingLeft="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_2"
         android:layout_weight="2"
@@ -73,8 +76,9 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="0.0000 g"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:background="@android:color/darker_gray"/>
+        android:background="#444444"/>
 </LinearLayout>
 
 <LinearLayout
@@ -88,6 +92,7 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:text="Proben"
         android:textSize="16sp"
+        android:textColor="@android:color/white"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"/>
     <TextView
@@ -98,6 +103,7 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:text="0"
         android:textSize="16sp"
+        android:textColor="@android:color/white"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -111,6 +117,7 @@ android:orientation="vertical">
         android:text="TARA"
         android:textSize="16sp"
         android:gravity="center_vertical"
+        android:textColor="@android:color/white"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_4"
@@ -119,6 +126,7 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
+        android:textColor="@android:color/white"
         android:text="0.0000 g"
         android:textSize="16sp"/>
 
@@ -136,8 +144,9 @@ android:orientation="vertical">
         android:text="Proben"
         android:textSize="16sp"
         android:gravity="center_vertical"
+        android:textColor="@android:color/white"
         android:paddingLeft="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_5"
         android:layout_weight="2"
@@ -146,7 +155,8 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:text="0"
         android:textSize="16sp"
-        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/white"
+        android:background="#444444"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -161,7 +171,8 @@ android:orientation="vertical">
         android:textSize="16sp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:textColor="@android:color/white"
+        android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_6"
         android:layout_weight="2"
@@ -171,7 +182,8 @@ android:orientation="vertical">
         android:paddingRight="10dp"
         android:text="0.0000 g"
         android:textSize="16sp"
-        android:background="@android:color/darker_gray"/>
+        android:textColor="@android:color/white"
+        android:background="#444444"/>
 </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
@@ -185,6 +197,7 @@ android:orientation="vertical">
         android:text="Proben"
         android:textSize="16sp"
         android:gravity="center_vertical"
+        android:textColor="@android:color/white"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_7"
@@ -194,6 +207,7 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:text="0"
         android:textSize="16sp"
+        android:textColor="@android:color/white"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -207,6 +221,7 @@ android:orientation="vertical">
         android:text="TARA"
         android:textSize="16sp"
         android:gravity="center_vertical"
+        android:textColor="@android:color/white"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_8"
@@ -216,6 +231,7 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="0.0000 g"
+        android:textColor="@android:color/white"
         android:textSize="16sp"/>
 
 

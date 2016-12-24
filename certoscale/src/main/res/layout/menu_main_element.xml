@@ -15,6 +15,7 @@
 	                android:adjustViewBounds="true"
 					android:layout_alignParentTop="true"
 					android:layout_centerHorizontal="true"
+					android:layout_margin="20dp"
 	                android:src="@drawable/error_sign" >
 				</ImageView>
 
@@ -27,7 +28,7 @@
 				android:layout_alignParentLeft="true"
                 android:text="APPLICATION SETTINGS"
                 android:textSize="18sp"
-				android:layout_marginLeft="20dp"
+				android:layout_margin="20dp"
 				android:textColor="@android:color/white"/>
         
          </RelativeLayout>

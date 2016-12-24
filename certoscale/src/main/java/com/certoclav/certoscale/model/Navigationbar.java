@@ -49,15 +49,15 @@ public class Navigationbar {
 	public static final int BUTTON_SAVE = 33;
 	private int spinnerModeOnClickCounter = 0;
 
-	public Button getButtonLogout() {
+	public ImageButton getButtonLogout() {
 		return buttonLogout;
 	}
 
-	public void setButtonLogout(Button buttonLogout) {
+	public void setButtonLogout(ImageButton buttonLogout) {
 		this.buttonLogout = buttonLogout;
 	}
 
-	private Button buttonLogout = null;
+	private ImageButton buttonLogout = null;
 	private ImageButton buttonHome = null;
 
 	public Button getButtonGoToApplication() {
@@ -316,7 +316,7 @@ public class Navigationbar {
 		textTitle = (TextView) mActivity.findViewById(R.id.naviagationbar_text_title);
 		textTitle.setVisibility(View.GONE);
 
-		buttonLogout = (Button) mActivity.findViewById(R.id.naviagationbar_button_logout);
+		buttonLogout = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_logout);
 		buttonLogout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
