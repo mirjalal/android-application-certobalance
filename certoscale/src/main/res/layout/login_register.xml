@@ -37,7 +37,7 @@
         android:id="@+id/register_button_ok"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/btn_blue_dark"
+        android:background="@drawable/quickaction_slider_btn"
         android:layout_below="@+id/register_container_edit_text_items"
         android:layout_alignRight="@+id/register_container_edit_text_items"
         android:layout_alignLeft="@+id/register_container_edit_text_items"

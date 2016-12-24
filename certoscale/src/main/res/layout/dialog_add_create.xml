@@ -68,7 +68,7 @@
         android:text="@string/create_local"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"
-        android:background="@drawable/btn_blue_dark"
+        android:background="@drawable/quickaction_slider_btn"
         />
          
      <Button
@@ -79,7 +79,7 @@
         android:text="@string/add_existing"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"
-        android:background="@drawable/btn_blue_dark"
+        android:background="@drawable/quickaction_slider_btn"
 
         />
      
@@ -91,7 +91,7 @@
         android:text="@string/create_new"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"
-        android:background="@drawable/btn_blue_dark"
+        android:background="@drawable/quickaction_slider_btn"
 
         />
           
