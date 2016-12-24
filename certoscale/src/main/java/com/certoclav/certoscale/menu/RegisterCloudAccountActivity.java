@@ -61,7 +61,7 @@ private EditTextItem editLastName;
 		Navigationbar navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
 		navigationbar.getTextTitle().setText(getString(R.string.register_new_user));
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
 	

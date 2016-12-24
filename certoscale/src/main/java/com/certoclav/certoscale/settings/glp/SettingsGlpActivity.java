@@ -7,7 +7,6 @@ import android.view.View;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.settings.unit.SettingUnitFragment;
 
 
 public class SettingsGlpActivity extends FragmentActivity implements  ButtonEventListener {
@@ -26,7 +25,7 @@ public class SettingsGlpActivity extends FragmentActivity implements  ButtonEven
 		setContentView(R.layout.settings_unit_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getButtonHome().setText("BACK");
+		//navigationbar.getButtonHome().setText("BACK");
 		navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
 		navigationbar.getButtonSettings().setVisibility(View.GONE);

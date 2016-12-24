@@ -2,8 +2,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:background="@android:color/white">
+    	android:layout_height="80dp"
+		android:background="@drawable/quickaction_slider_btn_black">
 
 <TextView
     android:id="@+id/login_dopdown_text_mail"
@@ -11,18 +11,31 @@
     android:textSize="20sp"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="match_parent"
     android:ellipsize="marquee"
 	android:paddingLeft="10dp"
+	android:layout_toRightOf="@+id/login_dopdown_image_cloud"
     android:text="Weighing"
+	android:textColor="@android:color/white"
 	android:textAllCaps="true"/>
 
 <ImageView
     android:id="@+id/login_dopdown_image_cloud"
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-	android:layout_marginRight="10dp"
-    android:layout_alignParentRight="true"
-    android:src="@drawable/icon_cloud_ok" />
-    
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+	android:layout_marginLeft="10dp"
+	android:layout_centerVertical="true"
+    android:layout_alignParentLeft="true"
+    android:src="@drawable/application_icon_weighing" />
+
+
+	<ImageView
+		android:layout_width="20dp"
+		android:layout_height="20dp"
+		android:layout_marginLeft="10dp"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:src="@drawable/quickaction_arrow_down"
+		android:layout_marginRight="10dp"/>
+
 </RelativeLayout>

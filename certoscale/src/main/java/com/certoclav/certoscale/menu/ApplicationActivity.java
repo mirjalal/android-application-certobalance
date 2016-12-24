@@ -26,8 +26,11 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
+import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 
 import java.util.List;
+
+import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
@@ -49,9 +52,9 @@ protected void onResume() {
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
 		navigationbar.getButtonHome().setVisibility(View.VISIBLE);
-		navigationbar.getButtonBack().setVisibility(View.GONE);
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
 		navigationbar.getButtonSave().setVisibility(View.VISIBLE);
+		navigationbar.getButtonSettings().setVisibility(View.VISIBLE);
+
 		Scale.getInstance().setOnApplicationListener(this);
 
 		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
@@ -130,8 +133,7 @@ protected void onPause() {
 		navigationbar.onCreate();
 		actionButtonbar.onCreate();
 
-		//start parse serial data output every second. TODO: This function call should be moved into a State Machine class
-	    Scale.getInstance().getReadAndParseSerialService().startParseSerialThread();
+
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
 
@@ -225,7 +227,7 @@ protected void onPause() {
 				//send command for calibration to the scale
 				if(Scale.getInstance().getWeightInGram() <= 5){
 
-					Scale.getInstance().getReadAndParseSerialService().sendCalibrationCommand();
+					Scale.getInstance().getReadAndParseSerialService().getCommandQueue().add("C\r\n");
 
 					Intent intent3 = new Intent(ApplicationActivity.this,AnimationCalibrationActivity.class);
 					startActivity(intent3);
@@ -234,8 +236,13 @@ protected void onPause() {
 				}
 				break;
 			case ActionButtonbar.BUTTON_PRINT:
-				Toast.makeText(ApplicationActivity.this, "Printed: "+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g", Toast.LENGTH_LONG).show();
-				LabelPrinterUtils.printText(""+ String.format("%.4f",Scale.getInstance().getWeightInGram()) + " g",1);
+				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
+				Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
+				//Print whole protocol to protocol printer connected on COM 1
+				ProtocolPrinterUtils.printProtocol();
+				//Print current weight to label printer connected on COM 2
+				LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
+
 				break;
 			case Navigationbar.BUTTON_SETTINGS:
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
@@ -297,6 +304,11 @@ protected void onPause() {
 
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
+
+		//do not react on subApplications
+		if(application == PART_COUNTING_CALC_AWP){
+			return;
+		}
 		ApplicationManager.getInstance().clearStatistics();
 
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();

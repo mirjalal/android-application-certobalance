@@ -39,12 +39,12 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 		setContentView(R.layout.settings_activity); //ItemListFragment, sont nix
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getButtonHome().setText("BACK");
+		//navigationbar.getButtonHome().setText("BACK");
 		navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
 		navigationbar.getTextTitle().setText("Application settings".toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		
 
 

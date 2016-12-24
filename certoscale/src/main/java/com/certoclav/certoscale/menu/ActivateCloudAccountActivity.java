@@ -52,8 +52,9 @@ private EditTextItem editActivationKeyItem;
 		setContentView(R.layout.login_activate_account);
 		Navigationbar navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
+		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getTextTitle().setText("Activate CertoCloud Account");
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		
 		linEditTextItemContainer = (LinearLayout) findViewById(R.id.register_container_edit_text_items);	
 

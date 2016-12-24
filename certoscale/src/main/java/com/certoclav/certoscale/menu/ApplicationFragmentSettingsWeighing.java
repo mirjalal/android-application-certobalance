@@ -33,6 +33,8 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
     private LinearLayout containerSettingsButtons = null;
     private Button buttonMinimumWeight = null;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {

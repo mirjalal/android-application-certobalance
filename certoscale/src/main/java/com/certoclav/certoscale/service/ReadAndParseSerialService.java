@@ -7,25 +7,59 @@ import android.util.Log;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
 
+import java.util.ArrayList;
+
 import android_serialport_api.MessageReceivedListener;
 
-
-
+/**
+ * Behaviour of D&T electronics balance:
+ * UART-Protocol:
+ *
+ * 1)
+ * Command "O\r\n" to turn the balance ON or OFF
+ * Response: no response
+ *
+ * 2)
+ * Command "P\r\n" to turn receive the current weight including unit
+ * Response: "+  0.0000  g\r\n\n" 			if mode is gram
+ * Response: "+   <0><0><0><0>  g\r\n\n"	if balance is OFF
+ * Response: "+0.000007 oz\r\n\n"			if mode is oz
+ * Response: "+  0.0000 ct\r\n\n"			if mode is ct
+ * Response: "+0.000000 lb\r\n\n"			if mode is lb
+ * Response: "      0 pcs\r\n\n"			if mode is pcs
+ * Response: "    0.00 %\r\n\n"				if mode is %
+ * Response: "+<0><0><0><0><0><0><0>  g"	if scale is calibrating currently
+ * 3)
+ * Command "C\r\n" to push the CAL button
+ * Response: no response, Print command not working
+ *
+ * 4)
+ * Command "T\r\n" Tare command. DO NOT USE
+ *
+ */
 public class ReadAndParseSerialService implements MessageReceivedListener {
-	
-	
 
 
+
+	public ArrayList<String> getCommandQueue() {
+		return commandQueue;
+	}
+
+	public void setCommandQueue(ArrayList<String> commandQueue) {
+		this.commandQueue = commandQueue;
+	}
+
+	private ArrayList<String> commandQueue = new ArrayList<String>();
 	
     Double value = 0d;
-    String unit = "";
+    String rawResponse = "default";
 
 	private Handler handler = new Handler() {
 		 
         public void handleMessage(Message msg) {
              
         	
-        	Scale.getInstance().setValue(value);
+        	Scale.getInstance().setValue(value, rawResponse);
 			
 	
 	
@@ -33,8 +67,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
     };
 	private int counter = 0;
 
-	private boolean isSendEnabled  = true;
-	private boolean isSendCalibrationCommand = false;
+
 	private Thread serialThread = new Thread(new Runnable() {
 		@Override
 		public void run() {
@@ -45,14 +78,14 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 					try {
-						if (isSendEnabled) {
-							if (isSendCalibrationCommand == true) {
-								Scale.getInstance().getSerialsServiceScale().sendMessage("C\r\n");
-								isSendCalibrationCommand = false;
+
+							if (commandQueue.size() >0) {
+								Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+								commandQueue.remove(0);
 							} else {
 								Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
 							}
-						}
+
 
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -61,7 +94,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,14 +103,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		}
 	});
 
-	
-	public boolean isSendEnabled() {
-		return isSendEnabled;
-	}
 
-	public void setSendEnabled(boolean isSendEnabled) {
-		this.isSendEnabled = isSendEnabled;
-	}
 
 	public ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
@@ -99,42 +125,39 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	@Override
 	public void onMessageReceived(String message) {
-		
-		Log.e("ReadAndParse", "received: " + message);
-		String[] arguments = message.split(" ");
-		if(arguments.length!= 0){
-		for(String arg : arguments){
-			if(arg.length()>2 && arg.contains(".")){
-				try{
-					value = Double.parseDouble(arg);
-				}catch(Exception e){
-					Log.e("ReadAndParseSerialServ", "Error parsing Double");
+
+		if(message.length()>5) {
+			rawResponse = message;
+			Log.e("ReadAndParse", "received: " + message);
+			String[] arguments = message.split(" ");
+			if (arguments.length != 0) {
+				for (String arg : arguments) {
+					if (arg.length() > 2 && arg.contains(".")) {
+						try {
+							value = Double.parseDouble(arg);
+						} catch (Exception e) {
+							value = 0d;
+							Log.e("ReadAndParseSerialServ", "Error parsing Double");
+						}
+					}
 				}
-				handler.sendEmptyMessage(0);
+			}else{
+				value = 0d;
 			}
+			handler.sendEmptyMessage(0);
 		}
-		    
-		    
-
-		 
-
-		}
-		
 	}
 	
 	private void simulateMessage(){
-		   counter++;
+		 	counter++;
 
 
-
+			rawResponse = "+ 0.0000 g";
 			value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.02)));
 
 		    handler.sendEmptyMessage(0);
 
 	}
 
-	public void sendCalibrationCommand() {
-		isSendCalibrationCommand = true;
-		
-	}
+
 }

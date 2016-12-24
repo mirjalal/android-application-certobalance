@@ -100,7 +100,7 @@ public class ApplicationManager {
     private static ApplicationManager instance = new ApplicationManager();
 
     public void setTareInGram(Double tareInGram) {
-        this.tareInGram = tareInGram;
+        currentLibrary.setTara(tareInGram);
     }
 
     public Double getAveragePieceWeightInGram() {
@@ -119,7 +119,7 @@ public class ApplicationManager {
         this.unit = unit;
     }
 
-    private Double tareInGram = 0d;
+
     private int unit = UNIT_GRAM;
 
     public String getUnitAsString(){
@@ -145,11 +145,11 @@ public class ApplicationManager {
     }
 
     public Double getTareInGram(){
-        return tareInGram;
+        return currentLibrary.getTara();
     }
 
     public int getTareInPieces(){
-        return (int) Math.round(tareInGram/currentLibrary.getAveragePieceWeight());
+        return (int) Math.round(currentLibrary.getTara()/currentLibrary.getAveragePieceWeight());
     }
 
     public int getLoadInPercent(){
@@ -319,4 +319,14 @@ public class ApplicationManager {
         return currentLibrary.getUnderLimit();
     }
 
+    public String getUnderLimitAsStringWithUnit() {
+        switch (Scale.getInstance().getScaleApplication()){
+            case WEIGHING:
+                return String.format("%.4f",currentLibrary.getUnderLimit()) + getUnitAsString();
+            case PART_COUNTING:
+                return String.format("%d",currentLibrary.getUnderLimitPieces()) + getUnitAsString();
+        }
+        return "todo";
+
+    }
 }

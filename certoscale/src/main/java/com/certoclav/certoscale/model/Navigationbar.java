@@ -9,6 +9,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -57,7 +58,7 @@ public class Navigationbar {
 	}
 
 	private Button buttonLogout = null;
-	private Button buttonHome = null;
+	private ImageButton buttonHome = null;
 
 	public Button getButtonGoToApplication() {
 		return buttonGoToApplication;
@@ -99,11 +100,11 @@ public class Navigationbar {
 
 	private Button buttonBack = null;
 
-	public Button getButtonHome() {
+	public ImageButton getButtonHome() {
 		return buttonHome;
 	}
 
-	public void setButtonHome(Button buttonHome) {
+	public void setButtonHome(ImageButton buttonHome) {
 		this.buttonHome = buttonHome;
 	}
 
@@ -217,7 +218,7 @@ public class Navigationbar {
 
 		spinnerLib = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
 
-		arrayAdapterLibrary = new ArrayAdapter<String>(mActivity, R.layout.spinner, new ArrayList<String>());
+		arrayAdapterLibrary = new ArrayAdapter<String>(mActivity, R.layout.spinner, R.id.spinnerTarget, new ArrayList<String>());
 		arrayAdapterLibrary.add("test");
 		spinnerLib.setAdapter(arrayAdapterLibrary);
 
@@ -291,7 +292,7 @@ public class Navigationbar {
 			}
 		});
 
-		buttonHome = (Button) mActivity.findViewById(R.id.naviagationbar_button_home);
+		buttonHome = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_home);
 		buttonHome.setOnClickListener(new OnClickListener() {
 
 			@Override

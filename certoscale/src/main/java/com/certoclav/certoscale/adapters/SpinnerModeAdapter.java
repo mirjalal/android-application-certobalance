@@ -57,31 +57,31 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 		switch (getItem(position)){
 			case WEIGHING:
 				textMail.setText("Weighing");
-				imageApp.setImageResource(R.drawable.application_icon_weighing);
+				imageApp.setImageResource(R.drawable.ic_menu_manage);
 				break;
 			case PART_COUNTING:
 				textMail.setText("Part Counting");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_add);
 				break;
 			case PERCENT_WEIGHING:
 				textMail.setText("Percent Weiging");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_bin);
 				break;
 			case CHECK_WEIGHING:
 				textMail.setText("Check Weiging");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_exit);
 				break;
 			case ANIMAL_WEIGHING:
 				textMail.setText("Animal Weiging");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_help);
 				break;
 			case FILLING:
 				textMail.setText("Filling");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_back);
 				break;
 			case TOTALIZATION:
 				textMail.setText("Totalization");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.ic_menu_delete);
 				break;
 			case FORMULATION:
 				textMail.setText("Formulation");

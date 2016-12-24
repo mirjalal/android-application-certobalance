@@ -38,7 +38,6 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -135,7 +134,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 			Toast.makeText(LoginActivity.this,getString(R.string.login_successful), Toast.LENGTH_LONG).show();
 			buttonLogin.setEnabled(true);
-			Scale.getInstance().setState(ScaleState.READY);
 			Intent intent = new Intent(LoginActivity.this, ApplicationActivity.class);
 			startActivity(intent);
 		}
@@ -147,7 +145,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		setContentView(R.layout.login_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText("LOGIN");
+		navigationbar.getTextTitle().setText("LOGIN MENU");
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettings().setVisibility(View.GONE);
@@ -306,8 +304,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 								Toast.makeText(LoginActivity.this,
 										getString(R.string.login_successful),
 										Toast.LENGTH_LONG).show();
-								Scale.getInstance().setState(
-										ScaleState.READY);
 								Intent intent = new Intent(LoginActivity.this,
 										ApplicationActivity.class);
 								startActivity(intent);
@@ -338,6 +334,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 	@Override
 	protected void onResume() {
+		Scale.getInstance().getReadAndParseSerialService().startParseSerialThread();
 		Log.e("LoginActivity", "onresume called");
 		super.onResume();
 		navigationbar.setButtonEventListener(this);
@@ -489,7 +486,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			Toast.makeText(LoginActivity.this,
 					getResources().getString(R.string.login_successful),
 					Toast.LENGTH_LONG).show();
-			Scale.getInstance().setState(ScaleState.READY);
 			try {
 				if (Scale.getInstance().getUser().getIsLocal() == true) {
 					DatabaseService databaseService = new DatabaseService(

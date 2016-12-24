@@ -2,32 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:background="@android:color/darker_gray">
+    android:background="@android:color/black">
 
  <TextView
      android:id="@+id/naviagationbar_text_title"
      android:text="TITLE"
-     android:layout_margin="2dp"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:gravity="center"
      android:textSize="24sp"
+     android:background="@drawable/quickaction_slider_btn_black"
      android:textColor="@android:color/white"
-     android:textStyle="bold"
-     android:background="@drawable/transparent"/>
+     android:textStyle="bold" />
 
 
 
- <Button 
+ <ImageButton
      android:id="@+id/naviagationbar_button_home"
      android:text="HOME"
      android:layout_width="80dp"
      android:textSize="18sp"
-     android:textColor="@android:color/black"
+     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentLeft="true"
-     android:layout_margin="2dp"
-     android:background="@drawable/btn_white_shadow_clickable"
+     android:src="@drawable/ic_menu_back"
+     android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
      />
  <Button
@@ -35,12 +34,11 @@
      android:text="BACK"
      android:layout_width="80dp"
      android:textSize="18sp"
-     android:textColor="@android:color/black"
+     android:textColor="@android:color/white"
      android:layout_height="match_parent"
-     android:layout_toRightOf="@+id/naviagationbar_button_home"
-     android:layout_margin="2dp"
-     android:background="@drawable/btn_white_shadow_clickable"
-     android:visibility="visible"
+     android:layout_alignParentLeft="true"
+     android:background="@drawable/quickaction_slider_btn_black"
+     android:visibility="gone"
      />
 
  <Button
@@ -48,20 +46,33 @@
      android:text="LOGOUT"
      android:layout_width="80dp"
      android:textSize="18sp"
-     android:textColor="@android:color/black"
+     android:textColor="@android:color/white"
      android:layout_height="match_parent"
-     android:layout_toRightOf="@+id/naviagationbar_button_back"
-     android:layout_margin="2dp"
-     android:background="@drawable/btn_white_shadow_clickable"
+     android:layout_alignParentLeft="true"
+     android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
      />
+
+
+ <Button
+     android:id="@+id/naviagationbar_button_applications"
+     android:text="OPEN WEIGHING APPS"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:gravity="center"
+     android:textSize="24sp"
+     android:textColor="@android:color/white"
+     android:textStyle="bold"
+     android:layout_toRightOf="@+id/naviagationbar_button_logout"
+     android:layout_toLeftOf="@+id/naviagationbar_button_add"
+     android:background="@drawable/quickaction_slider_btn_black"
+     android:visibility="gone"/>
 
 
  <LinearLayout 
      android:layout_height="match_parent"
      android:layout_width="match_parent"
-     android:layout_toRightOf="@+id/naviagationbar_button_logout"
-     android:layout_toLeftOf="@+id/naviagationbar_button_add"
+     android:layout_toRightOf="@+id/naviagationbar_button_home"
      android:orientation="horizontal">
      
      
@@ -72,76 +83,65 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
-     android:layout_margin="2dp"
-     android:background="@drawable/btn_white_shadow_clickable"
+     android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
      />
+
+
+
+  <Button
+      android:id="@+id/naviagationbar_button_settings"
+      android:text="..."
+      android:layout_width="80dp"
+      android:textSize="18sp"
+      android:textColor="@android:color/white"
+      android:layout_height="match_parent"
+      android:background="@drawable/quickaction_slider_btn_black"
+      android:visibility="gone"
+      />
  
   <Spinner 
      android:id="@+id/naviagationbar_spinner_lib"
-     android:layout_marginLeft="2dp"
-     android:entries="@array/navigationbar_entries"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
-     android:layout_margin="2dp"
-      android:background="@drawable/btn_white_shadow_clickable"
+      android:background="@drawable/quickaction_slider_btn_black"
       android:visibility="gone"
      />
+
+  <Button
+      android:id="@+id/naviagationbar_button_save"
+      android:text="NEW"
+      android:layout_width="80dp"
+      android:textSize="18sp"
+      android:textColor="@android:color/white"
+      android:layout_height="match_parent"
+      android:layout_alignParentRight="true"
+      android:background="@drawable/quickaction_slider_btn_black"
+      android:visibility="gone"
+      />
+
+
+
  </LinearLayout>
 
-   <Button 
-     android:id="@+id/naviagationbar_button_settings"
-     android:text="..."
-     android:layout_width="80dp"
-     android:textSize="18sp"
-     android:textColor="@android:color/black"
-     android:layout_height="match_parent"
-     android:layout_alignParentRight="true"
-     android:background="@drawable/btn_white_shadow_clickable"  
-     android:layout_margin="2dp"
-     />
+
  <Button
      android:id="@+id/naviagationbar_button_add"
      android:text="+"
      android:layout_width="80dp"
      android:textSize="40sp"
-     android:textColor="@android:color/black"
+     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentRight="true"
-     android:layout_toLeftOf="@+id/naviagationbar_button_settings"
-     android:background="@drawable/btn_white_shadow_clickable"
-     android:layout_margin="2dp"
+     android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
 
      />
 
- <Button
-     android:id="@+id/naviagationbar_button_save"
-     android:text="NEW"
-     android:layout_width="80dp"
-     android:textSize="18sp"
-     android:textColor="@android:color/black"
-     android:layout_height="match_parent"
-     android:layout_alignParentRight="true"
-     android:background="@drawable/btn_white_shadow_clickable"
-     android:layout_margin="2dp"
-     android:visibility="gone"
-
-     />
-
- <Button
-     android:id="@+id/naviagationbar_button_applications"
-     android:text="GO TO WEIGHING APPLICATION"
-     android:layout_margin="2dp"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:gravity="center"
-     android:textSize="24sp"
-     android:textColor="@android:color/black"
-     android:textStyle="bold"
-     android:layout_toRightOf="@+id/naviagationbar_button_logout"
-     android:layout_toLeftOf="@+id/naviagationbar_button_add"
-     android:background="@drawable/btn_white_shadow_clickable"
-     android:visibility="gone"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="2px"
+    android:background="@drawable/seperator_white"
+    android:layout_alignParentBottom="true"></RelativeLayout>
 </RelativeLayout>

@@ -244,7 +244,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         buttonCalculateAwp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING_CALC_AWP);
+                Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING_CALC_AWP); //problem
                 buttonEditSampleSize.setEnabled(false);
                 buttonEditAveragePieceWeight.setEnabled(false);
                 buttonCalculateAwp.setEnabled(false);

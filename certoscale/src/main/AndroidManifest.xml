@@ -148,7 +148,12 @@
         android:label="@string/app_name"
         android:name="com.certoclav.library.application.ApplicationController"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
-        
+
+        <activity android:name=".menu.NotificationActivity"
+            android:screenOrientation="sensorLandscape"
+            android:launchMode="singleInstance">
+        </activity>
+
         <activity android:name=".menu.AddCloudAccountActivity"
             android:screenOrientation="sensorLandscape">
         </activity>

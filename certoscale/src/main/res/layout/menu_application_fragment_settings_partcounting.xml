@@ -49,7 +49,8 @@
                 android:text="CANCEL"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_white_shadow_clickable"
+                android:background="@drawable/quickaction_slider_btn"
+                android:textColor="@android:color/white"
                 android:layout_weight="1" />
 
             <Button
@@ -57,7 +58,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/settings_partcounting_button_ok"
-                android:background="@drawable/btn_white_shadow_clickable"
+                android:background="@drawable/quickaction_slider_btn"
+                android:textColor="@android:color/white"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -65,7 +67,6 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_below="@+id/application_settings_container"
         android:layout_width="match_parent"
-
         android:layout_weight="1"
         android:layout_height="0dp"
         android:orientation="horizontal">
@@ -75,7 +76,8 @@
         android:text="Set average piece weight"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/btn_white_shadow_clickable"
+        android:textColor="@android:color/white"
+        android:background="@drawable/quickaction_slider_btn"
         android:layout_weight="1" />
 
     <Button
@@ -83,7 +85,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/settings_partcounting_button_calc_awp"
-        android:background="@drawable/btn_white_shadow_clickable"
+        android:textColor="@android:color/white"
+        android:background="@drawable/quickaction_slider_btn"
         android:layout_weight="1" />
 
     <Button
@@ -92,7 +95,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/settings_partcounting_button_sample_size"
-        android:background="@drawable/btn_white_shadow_clickable"
+        android:textColor="@android:color/white"
+        android:background="@drawable/quickaction_slider_btn"
         android:layout_weight="1" />
 
         <Button
@@ -101,7 +105,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_partcounting_button_under_limit"
-            android:background="@drawable/btn_white_shadow_clickable"
+            android:background="@drawable/quickaction_slider_btn"
+            android:textColor="@android:color/white"
             android:layout_weight="1" />
 
         <Button
@@ -110,7 +115,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_partcounting_button_over_limit"
-            android:background="@drawable/btn_white_shadow_clickable"
+            android:background="@drawable/quickaction_slider_btn"
+            android:textColor="@android:color/white"
             android:layout_weight="1" />
 
 

@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/spinnerTarget"
-          android:layout_width="fill_parent"
-          android:layout_height="76dp"
-          android:paddingLeft="20dp"
-          android:background="@android:color/white"
-          android:gravity="center_vertical"
-          android:textColor="@android:color/black"
-          android:textSize="18sp"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@drawable/quickaction_slider_btn_black">
+
+    <TextView
+        android:id="@+id/spinnerTarget"
+        style="?android:attr/spinnerDropDownItemStyle"
+        android:textSize="20sp"
+        android:singleLine="true"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:ellipsize="marquee"
+        android:paddingLeft="10dp"
+        android:layout_toRightOf="@+id/login_dopdown_image_cloud"
+        android:text="Library"
+        android:textColor="@android:color/white"
+        android:textAllCaps="true"/>
+
+    <ImageView
+        android:id="@+id/login_dopdown_image_cloud"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_menu_add" />
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/quickaction_arrow_down"
+        android:layout_marginRight="10dp"/>
+
+</RelativeLayout>

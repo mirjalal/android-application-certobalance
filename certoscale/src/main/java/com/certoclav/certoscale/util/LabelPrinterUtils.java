@@ -52,8 +52,8 @@ public static void printLabel(Date dateExpiration, String serialAutoclave, int c
 
 private static void clearCurentBuffer() {
 	//CLS clears the image Buffer
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("CLS");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("CLS");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	
 }
 
@@ -61,23 +61,23 @@ private static void clearCurentBuffer() {
 public static void sendInitConfigToBuffer(){
 	
 	//Labelsize in mm
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("SIZE 56 mm,25 mm");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("SIZE 56 mm,25 mm");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	//Vertical distance between two Labels in mm
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("GAP 5 mm,0 mm");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("GAP 5 mm,0 mm");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	//Printing Speed in inch per second
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("SPEED 2");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("SPEED 2");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 
 	//Level of Darkness between 0 and 15 (15 specifies the darkest Level)
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("DENSITY 8");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("DENSITY 8");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 
 
 	//Printout direction
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("DIRECTION 1, 0");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");	
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("DIRECTION 1, 0");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 }
 
 
@@ -88,12 +88,12 @@ public static void sendInitConfigToBuffer(){
  * @param numSets specifies how many set of labels will be printed
  */
 public static void printBuffer(int numSets){
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	//This command prints the label format stored in the image buffer
 	// Syntax is Print m
 	// m specifies how many set of labels will be printed
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("PRINT "+ numSets);
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("PRINT "+ numSets);
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 }
 
 // Coordinates are in dots 8dots = 1mm
@@ -105,9 +105,9 @@ public static void sendCertoclavLogoToBuffer(int xCoordinate, int yCoordinate){
 	//Syntax is:
 	//PUTBMP X, Y, filename
 	//The BMP File has to be stored in the internal storage of the Labelprinter.
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("BITMAP "+x+","+y+",27,48,0,");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("BITMAP "+x+","+y+",27,48,0,");
 	byte[] bitmap = hexStringToByteArray("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF45FFFFFFFFFFFFFFFFFFFFFFFFFFFF82FFFFFFFFFFFFFFFFFFFFF8003FFFFFFFFFFFFFFFFFFFFFFFFFFC001FFFFFFFFFFFFFFFFFFFE0000FFFFFFFFFFFFFFFFFFFFFFFFFF00007FFFFFFFFFFFFFFFFFFC00007FFFFFFFFFFFFFFFFFFFFFFFFC00003FFFFFFFFFFFFFFFFFF000003FFFFFFFFFFFFFFFFFFFFFFFF800001FFFFFFFFFFFFFFFFFE000001FFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFE000000FFFFFFFFFFFFFFFFFFFFFFFF0000007FFFFFFFFFFFFFFFFC00FE00FFFFFFFFFFFFFFFFFFFFFFFE007E007FFFFFFFFFFFFFFFF803FF007FFFFFFFFFFFFFFFFFFFFFFC01FF803FFFFFFFFFFFFFFFF807FF807FFFFFFFFFFFFFFFFFFFFFFC03FFC03FFFFFFFFFFFFFFFF807FFE07C0003E007FE0000FF80FFF807FFF07E7FFFFC7F8FFFC7F00FFFFFF80001C0007C00007E001FF807FFFFFC3FFFF83F87FF83F00FFFFFF80001800038000078000FF80FFFFFF83FFFF03F83FF87F01FFFFFF8000380001C0000700C07F00FFFFFF83FFFF01F83FF87E01FFFFFF82007810C1E1820E07F03F00FFFFFF83FFFE01FC3FF07E01FFFFFF83FFF81FE0FF83FE0FFC1F00FFFFFF83FFFE00FC1FF0FE01FFFFFF83FFF81FE0FF83FC1FFC1F00FFFFFF83FFFE10FC1FF0FE01FFFFFF83FFF81FE0FF83FC1FFE0F00FFFFFF83FFFC30FE1FE0FE01FFFFFF83FFF81FE0FF83FC3FFE0F00FFFFFF83FFFC387E0FE1FE01FFFFFF83FFF81FE0FF83F83FFF0F00FFFFFF83FFF8387E0FE1FE01FFFFFF83FFF81FE1FF83F83FFF0700FFFFFF83FFF8787F0FC1FE01FFFFFF8000F81F81FF83F83FFF0700FFFFFF83FFF87C3F0FC3FE01FFFFFF8000780001FF83F83FFF0700FFFFFF83FFF07C3F07C3FE01FFFFFF8000F80003FF83F83FFF0700FFFFFF83FFF0FC1F8783FF01FFFF078201F8000FFF83F83FFF0780FFFF8383FFF0FE1F8787FF00FFFC0383FFF8120FFF83F83FFF07807FFE0183FFE0841F8387FF00FFFC0383FFF81F07FF83F83FFF0F807FFE0383FFE0000FC387FF807FF80783FFF81F03FF83F83FFE0FC03FFC0383FFC0000FC30FFF803FF80783FFF81F83FF83FC1FFE0FC01FFC0383FFC0000FC10FFFC01FF00783FFF81FC1FF83FC1FFC1FE00FF80783FFC3FF07E00FFFC007800F83FFF81FC0FF83FE0FFC1FE003C00783FF83FF87E01FFFE000001F8200081FE0FF83FE07F83FF000000F830187FF83E01FFFF000003F8000001FE07F83FF01407FF800001F800007FF83F01FFFF800007F8000001FF07F83FF8000FFFC00003F800007FFC3F03FFFFC0000FF8000003FF83F83FFC001FFFE00007FC0000FFFC1F03FFFFF0001FFC000007FFC7FC7FFF807FFFF8000FFE0001FFFE3FC7FFFFFE01FFFFFFFFFFFFFFFFFFFFFFFFFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-	Scale.getInstance().getSerialsServicePrinter().sendBytes(bitmap);
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendBytes(bitmap);
 
 	
 }
@@ -149,19 +149,19 @@ public static void sendBarcodeToBuffer(String text, int xCoordinate, int yCoordi
 	// BARCODE 10,10,128M,48,1,0,2,2,!104!096ABCD!101EFGH
 
 
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("BARCODE ");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(new String(x));
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(new String(y));
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("BARCODE ");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(new String(x));
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(new String(y));
 
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",\"128\",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(new String(s));
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(readable); //isReadable "0" or "1"
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",0,2,2,\"");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(new String(text));
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\"");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",\"128\",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(new String(s));
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(readable); //isReadable "0" or "1"
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",0,2,2,\"");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(new String(text));
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\"");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 
 }
 
@@ -184,17 +184,17 @@ public static byte[] hexStringToByteArray(String s) {
 // Coordinates are in dots 8dots = 1mm
 protected static void sendTextToBuffer(String text,int xCoordinate, int yCoordinate){
 	//Labelsize in mm
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("SIZE 56 mm,25 mm");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("SIZE 56 mm,25 mm");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	//Vertical distance between two Labels in mm
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("GAP 5 mm,0 mm");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("GAP 5 mm,0 mm");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	// Printing Speed in inch per second
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("SPEED 2");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("SPEED 2");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	//Level of Darkness between 0 and 15 (15 specifies the darkest Level)
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("DENSITY 8");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("DENSITY 8");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 	
 	
 	String x = Integer.toString(xCoordinate);
@@ -214,23 +214,23 @@ protected static void sendTextToBuffer(String text,int xCoordinate, int yCoordin
 	//content is the Text that will be printed on the label
     //TEXT 20,40,"4",0,1,1\
     //TEXT x,y,"fontName",rotation,x-multiplication,y-multiplication,text
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("TEXT ");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(x); //x-coordinate 1 point = 1/72inch
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(y); //y-coordinate 1 point = 1/72inch
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\"4\""); //font name
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("0"); //rotation in degree
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(s); //scale: x-multiplication of true-type font
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(s); //scale: y-multiplication of true-type font
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(",");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\"");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage(new String(text));
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\"");
-	Scale.getInstance().getSerialsServicePrinter().sendMessage("\r\n");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("TEXT ");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(x); //x-coordinate 1 point = 1/72inch
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(y); //y-coordinate 1 point = 1/72inch
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\"4\""); //font name
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("0"); //rotation in degree
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(s); //scale: x-multiplication of true-type font
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(s); //scale: y-multiplication of true-type font
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(",");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\"");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage(new String(text));
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\"");
+	Scale.getInstance().getSerialsServiceLabelPrinter().sendMessage("\r\n");
 
 }
 

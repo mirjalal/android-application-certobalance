@@ -56,7 +56,7 @@ private 	ProgressBar progressBar;
 		setContentView(R.layout.login_register);
 		Navigationbar navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getTextTitle().setText(getString(R.string.add_existing_certocloud_account));
 		progressBar = (ProgressBar)findViewById(R.id.register_progressbar);

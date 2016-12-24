@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
+import com.certoclav.certoscale.listener.ScaleStateListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
@@ -24,12 +25,26 @@ public class Scale extends Observable {
 	ArrayList<WeightListener> weightListeners = new ArrayList<WeightListener>();
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
 	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
-
+	ArrayList<ScaleStateListener> scaleStateListeners = new ArrayList<ScaleStateListener>();
 	private SerialService serialServiceScale = null;
-	private SerialService serialServicePrinter = null;
+	private SerialService serialServiceLabelPrinter = null;
+	private SerialService serialServiceProtocolPrinter = null;
+
+
+	public String getRawResponseFromBalance() {
+		return rawResponseFromBalance;
+	}
+
+	public void setRawResponseFromBalance(String rawResponseFromBalance) {
+		this.rawResponseFromBalance = rawResponseFromBalance;
+	}
+
+	private String rawResponseFromBalance = "";
+
+
 
 	private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
-	private ScaleState state = ScaleState.READY; //default init state is READY_AND_WAITING_FOR_LOGIN
+	private ScaleState state = ScaleState.OFF; //default init state is READY_AND_WAITING_FOR_LOGIN
 
 	private Double weightInGram = 0d; //raw value reiceived from Serial port of the balance
 
@@ -92,8 +107,11 @@ public class Scale extends Observable {
 		return state;
 	}
 
-	public void setState(ScaleState state) {
+	public void setScaleState(ScaleState state) {
 		this.state = state;
+		for(ScaleStateListener listener : scaleStateListeners){
+			listener.onScaleStateChange(state);
+		}
 	}
 
 	public boolean isMicrocontrollerReachable() {
@@ -117,6 +135,13 @@ public class Scale extends Observable {
 		this.applicationListeners.remove(listener);
 	}
 
+	public void setOnScaleStateListener (ScaleStateListener listener){
+		this.scaleStateListeners.add(listener);
+	}
+	public void removeOnScaleStateListener (ScaleStateListener listener){
+		this.scaleStateListeners.remove(listener);
+	}
+
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
 			serialServiceScale = new SerialService("/dev/ttymxc3",9600); //COM4
@@ -124,19 +149,28 @@ public class Scale extends Observable {
 		return serialServiceScale;
 		}
 
-	public SerialService getSerialsServicePrinter() {
-		if(serialServicePrinter == null){
-			serialServicePrinter = new SerialService("/dev/ttymxc1",9600);//COM2
+	public SerialService getSerialsServiceLabelPrinter() {
+		if(serialServiceLabelPrinter == null){
+			serialServiceLabelPrinter = new SerialService("/dev/ttymxc1",9600);//COM2
 		}
-		return serialServicePrinter;
+		return serialServiceLabelPrinter;
 		}
-	
-	public void setValue(Double value) {
+
+	public SerialService getSerialsServiceProtocolPrinter() {
+		if(serialServiceProtocolPrinter == null){
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc0",9600);//COM1
+		}
+		return serialServiceProtocolPrinter;
+	}
+
+
+
+	public void setValue(Double value, String rawresponse) {
 		setWeightInGram(value);
-		
+		this.rawResponseFromBalance = rawresponse;
 		
 		for(WeightListener listener : weightListeners){
-			listener.onWeightChanged(value, "g");
+			listener.onWeightChanged(value, rawresponse);
 		}
 		
 	}
