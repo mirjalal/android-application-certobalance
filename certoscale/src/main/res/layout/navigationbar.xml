@@ -19,40 +19,35 @@
 
  <ImageButton
      android:id="@+id/naviagationbar_button_home"
-     android:text="HOME"
      android:layout_width="80dp"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentLeft="true"
      android:src="@drawable/ic_menu_back"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"
+     style="@style/button_navigationbar_default"
+
      />
  <ImageButton
      android:id="@+id/naviagationbar_button_back"
-     android:text="BACK"
      android:layout_width="80dp"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentLeft="true"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"
      android:src="@drawable/ic_menu_back"
+     style="@style/button_navigationbar_default"
      />
 
  <ImageButton
      android:id="@+id/naviagationbar_button_logout"
      android:src="@drawable/ic_menu_exit"
      android:layout_width="80dp"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentLeft="true"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"
+     style="@style/button_navigationbar_default"
+
      />
+
+
+ 
+
 
 
 
@@ -60,6 +55,7 @@
      android:layout_height="match_parent"
      android:layout_width="match_parent"
      android:layout_toRightOf="@+id/naviagationbar_button_home"
+     android:layout_toLeftOf="@+id/naviagationbar_button_save"
      android:orientation="horizontal">
      
      
@@ -71,21 +67,17 @@
      android:layout_height="match_parent"
      android:layout_weight="1"
      android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"
+     android:visibility="invisible"
      />
 
 
 
   <ImageButton
       android:id="@+id/naviagationbar_button_settings"
-      android:text="..."
       android:layout_width="80dp"
-      android:textSize="18sp"
-      android:textColor="@android:color/white"
       android:layout_height="match_parent"
-      android:background="@drawable/quickaction_slider_btn_black"
-      android:visibility="gone"
       android:src="@drawable/ic_menu_edit"
+      style="@style/button_navigationbar_default"
       />
  
   <Spinner 
@@ -94,40 +86,51 @@
      android:layout_height="match_parent"
      android:layout_weight="1"
       android:background="@drawable/quickaction_slider_btn_black"
-      android:visibility="gone"
+      android:visibility="invisible"
      />
-
-  <ImageButton
-      android:id="@+id/naviagationbar_button_save"
-      android:text="NEW"
-      android:layout_width="80dp"
-      android:textSize="18sp"
-      android:textColor="@android:color/white"
-      android:layout_height="match_parent"
-      android:layout_alignParentRight="true"
-      android:background="@drawable/quickaction_slider_btn_black"
-      android:visibility="gone"
-      android:src="@drawable/ic_menu_save"
-      />
 
 
 
  </LinearLayout>
 
 
+
  <ImageButton
      android:id="@+id/naviagationbar_button_add"
-     android:text="+"
      android:layout_width="80dp"
-     android:textSize="40sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_alignParentRight="true"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"
      android:src="@drawable/ic_menu_add"
+     style="@style/button_navigationbar_default"
 
      />
+
+ <ImageButton
+     android:id="@+id/naviagationbar_button_settings_device"
+     android:layout_width="80dp"
+     android:layout_height="match_parent"
+     android:src="@drawable/ic_menu_launcher_settings"
+     android:layout_toLeftOf="@+id/naviagationbar_button_add"
+     style="@style/button_navigationbar_default"
+     />
+ <ImageButton
+     android:id="@+id/naviagationbar_button_more"
+     android:layout_width="80dp"
+     android:layout_height="match_parent"
+     android:layout_alignParentRight="true"
+     android:src="@drawable/ic_menu_more"
+     style="@style/button_navigationbar_default"
+     />
+
+ <ImageButton
+     android:id="@+id/naviagationbar_button_save"
+     android:layout_width="80dp"
+     android:layout_height="match_parent"
+     android:layout_toLeftOf="@+id/naviagationbar_button_more"
+     android:src="@drawable/ic_menu_save"
+     style="@style/button_navigationbar_default"
+     />
+ 
 
 <RelativeLayout
     android:layout_width="match_parent"

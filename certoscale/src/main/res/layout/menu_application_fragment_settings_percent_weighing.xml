@@ -21,27 +21,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_below="@+id/application_settings_container"
     android:layout_width="match_parent"
-    android:layout_marginLeft="50dp"
-    android:layout_marginRight="50dp"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/application_settings_container"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/application_settings_percentage_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Place reference weight on the pan. Press OK to continue."
+            android:gravity="center"
+            style="@style/text_default"/>
 
-    <Button
-        android:text="Change reference weight"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/application_settings_percent_weighing_button_reference"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/application_settings_percentage_button_cancel"
+                android:text="CANCEL"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
+
+            <Button
+                android:text="OK"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/application_settings_percentage_button_ok"
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/application_settings_container"
+        android:layout_width="match_parent"
         android:layout_weight="1"
-        style="@style/button_actionbar"/>
+        android:layout_height="0dp"
+        android:orientation="horizontal">
 
-    <Button
+        <Button
+            android:text="Change reference weight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/application_settings_percent_weighing_button_reference"
+            style="@style/button_actionbar"/>
 
-        android:text="Reference Adjustment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:id="@+id/application_settings_percent_weighing_button_reference_adjustment"
-        android:layout_weight="1"
-        style="@style/button_actionbar"/>
+        <Button
 
+            android:text="Reference adjustment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/application_settings_percent_weighing_button_reference_adjustment"
+            style="@style/button_actionbar"/>
+
+        <Button
+
+            android:text="Recalculate Reference Weight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/application_settings_percent_weighing_button_recalculate"
+            style="@style/button_actionbar"/>
+
+
+    </LinearLayout>
 </LinearLayout>
+
+
+
+
+

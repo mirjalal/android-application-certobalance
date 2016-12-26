@@ -2,7 +2,6 @@ package com.certoclav.certoscale.menu;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -196,17 +195,17 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
 
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_reference_visible),getResources().getBoolean(R.bool.preferences_percent_reference_visible))==true) {
-                    listReferenceFields.get(reference_weight).getTextName().setText("REFERENCE");
-                    listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                if  (prefs.getBoolean(getString(R.string.preferences_percent_reference_weight_visible),getResources().getBoolean(R.bool.preferences_percent_reference_weight_visible))==true) {
+                    listReferenceFields.get(reference_weight).getTextName().setText("REFERENCE WEIGHT");
+                    listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getReferenceWeightAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_reference_visible),getResources().getBoolean(R.bool.preferences_percent_reference_visible))==true) {
-                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE");
+                if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible),getResources().getBoolean(R.bool.preferences_percent_difference_visible))==true) {
+                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE [g]");
                     listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible),getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible))==true) {
-                    listReferenceFields.get(difference_percent).getTextName().setText("DIFFERENCE %");
+                    listReferenceFields.get(difference_percent).getTextName().setText("DIFFERENCE [%]");
                     listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
                 break;

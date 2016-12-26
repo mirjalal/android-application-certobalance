@@ -329,4 +329,8 @@ public class ApplicationManager {
         return "todo";
 
     }
+
+    public String getReferenceWeightAsStringInGram() {
+        return String.format("%.4f",currentLibrary.getReferenceWeight() )+ " " +"g";
+    }
 }

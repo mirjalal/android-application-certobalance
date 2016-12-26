@@ -12,8 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.application.ItemListFragment.Callbacks;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+
+import static android.R.attr.button;
+import static android.R.attr.text;
 
 
 /**
@@ -30,12 +35,23 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
     private LinearLayout containerSettingsButtons = null;
     private Button buttonReferenceWeight = null;
     private Button buttonReferenceAdjust = null;
+    private Button buttonCalculateReferenceWeight = null;
+    private Button buttonOK = null;
+    private Button buttonCancel = null;
+    private TextView textInstruction = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_percent_weighing,container, false);
+        buttonCalculateReferenceWeight = (Button) rootView.findViewById(R.id.application_settings_percent_weighing_button_recalculate);
         buttonReferenceWeight =  (Button) rootView.findViewById(R.id.application_settings_percent_weighing_button_reference);
+        buttonCancel = (Button) rootView.findViewById(R.id.application_settings_percentage_button_cancel);
+        buttonCancel.setVisibility(View.INVISIBLE);
+        buttonOK = (Button) rootView.findViewById(R.id.application_settings_percentage_button_ok);
+        buttonOK.setVisibility(View.INVISIBLE);
+        textInstruction = (TextView) rootView.findViewById(R.id.application_settings_percentage_text);
+        textInstruction.setVisibility(View.INVISIBLE);
         buttonReferenceWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +105,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please adjust the reference");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
@@ -131,6 +147,32 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
             }
         });
 
+        buttonCalculateReferenceWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE);
+                buttonReferenceAdjust.setEnabled(false);
+                buttonCalculateReferenceWeight.setEnabled(false);
+                buttonReferenceWeight.setEnabled(false);
+                buttonOK.setVisibility(View.VISIBLE);
+                buttonCancel.setVisibility(View.VISIBLE);
+                textInstruction.setVisibility(View.VISIBLE);
+                buttonOK.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(ApplicationManager.getInstance().getTaredValueInGram());
+                        Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
+                    }
+                });
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
+                    }
+                });
+            }
+        });
+
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
@@ -150,6 +192,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
     @Override
     public void onPause() {
+        Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
         super.onPause();
 
     }

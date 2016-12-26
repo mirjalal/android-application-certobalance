@@ -141,7 +141,7 @@
     <string name="preferences_percent_lock">preferences_percent_lock</string>
 
     <string name="preferences_percent_secondary_visible">preferences_percent_secondary_visible</string>
-    <string name="preferences_percent_reference_visible">preferences_percent_reference_visible</string>
+    <string name="preferences_percent_reference_weight_visible">preferences_percent_reference_weight_visible</string>
     <string name="preferences_percent_difference_visible">preferences_percent_difference_visible</string>
     <string name="preferences_percent_difference_percent_visible">preferences_percent_difference_percent_visible</string>
     <string name="preferences_percent_brutto_visible">preferences_percent_brutto_visible</string>
@@ -278,6 +278,14 @@
         <item>Manual</item>
         <item>Auto</item>   
     </string-array>
-    
-    
+
+
+    <string name="action_settings">Settings</string>
+    <string name="speech_prompt">Say something&#8230;</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="tap_on_mic">Tap on mic to speak</string>
+    <string name="preferences_calibration_internal">preferences_calibration_internal</string>
+    <string name="preferences_calibration_automatic">preferences_calibration_automatic</string>
+
+
 </resources>

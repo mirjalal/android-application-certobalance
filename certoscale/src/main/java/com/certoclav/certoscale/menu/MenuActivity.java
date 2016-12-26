@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.MenuElementAdapter;
@@ -102,8 +103,50 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
         switch (buttonId){
             case Navigationbar.BUTTON_ADD:
-                Intent intent = new Intent(MenuActivity.this,SettingsEmailActivity.class);
-                startActivity(intent);
+                try {
+
+                    final Dialog dialog = new Dialog(MenuActivity.this);
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.setContentView(R.layout.dialog_support);
+                    dialog.setTitle("Support");
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_support_button_speech);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MenuActivity.this, SpeechToTextActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButtonMail = (Button) dialog.findViewById(R.id.dialog_support_button_mail);
+                    // if button is clicked, close the custom dialog
+                    dialogButtonMail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MenuActivity.this, SettingsEmailActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+
+
+                        }
+                    });
+                    Button dialogButtonTeamViewer = (Button) dialog.findViewById(R.id.dialog_support_button_teamviwer);
+                    // if button is clicked, close the custom dialog
+                    dialogButtonTeamViewer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MenuActivity.this, "Contact support@certoclav.com to enable remote service", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }catch(Exception e){
+
+                }
+
+
                 break;
             case Navigationbar.BUTTON_LOGOUT:
                 try

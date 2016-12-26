@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference
+        android:key="@string/preferences_calibration_internal"
+        android:title="Calibrate the balance"
+        android:summary="Only possible after warm up and with empty pan" />
+
+
+
+    <CheckBoxPreference
+        android:key="@string/preferences_calibration_automatic"
+        android:title="Turn automatic calibration ON/OFF"
+        android:summary="Calibrate the balance every hour automatically" />
+
+
+</PreferenceScreen>
+
+
+

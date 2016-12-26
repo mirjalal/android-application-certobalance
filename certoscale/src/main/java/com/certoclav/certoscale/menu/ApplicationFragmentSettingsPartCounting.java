@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -250,8 +252,12 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 buttonCalculateAwp.setEnabled(false);
                 button_under_limit.setEnabled(false);
                 button_over_limit.setEnabled(false);
-                textInstruction.setText("Pleace place " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + "onto the pan");
+                textInstruction.setText("Place " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + "onto the pan");
                 textInstruction.setVisibility(View.VISIBLE);
+                Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
+                a.reset();
+                textInstruction.clearAnimation();
+                textInstruction.startAnimation(a);
                 buttonOK.setVisibility(View.VISIBLE);
                 buttonOK.setOnClickListener(new View.OnClickListener() {
                     @Override

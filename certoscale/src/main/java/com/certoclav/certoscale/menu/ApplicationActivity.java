@@ -31,6 +31,7 @@ import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
+import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
@@ -48,74 +49,27 @@ protected void onResume() {
 
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
 		navigationbar.setButtonEventListener(this);
-		actionButtonbar.setButtonEventListener(this);
-		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
-		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
 		navigationbar.getButtonHome().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSave().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettings().setVisibility(View.VISIBLE);
+		navigationbar.getButtonMore().setVisibility(View.VISIBLE);
+		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
+		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
+		actionButtonbar.setButtonEventListener(this);
 
 		Scale.getInstance().setOnApplicationListener(this);
 
-		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
-
-        navigationbar.getArrayAdapterMode().clear();
-
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
-		if (prefs.getBoolean(getString(R.string.preferences_weigh_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_counting_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.PART_COUNTING);
-		}if (prefs.getBoolean(getString(R.string.preferences_percent_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.PERCENT_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_check_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.CHECK_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_animal_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.ANIMAL_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_filling_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.FILLING);
-		}if (prefs.getBoolean(getString(R.string.preferences_totalization_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.TOTALIZATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_formulation_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.FORMULATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
-		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
-		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
-		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
-		}
+		updateSpinnerMode();
+		updateStatsButtonUI();
 
 
-
-
-		else{
-			//do nothing
-		}
-
-
-
-		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
-
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-			actionButtonbar.getButtonStatistics().setEnabled(false);
-		}else {
-			actionButtonbar.getButtonStatistics().setEnabled(true);
-		}
 
 		super.onResume();
 }
 
 
 
-@Override
+	@Override
 protected void onPause() {
 	PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).unregisterOnSharedPreferenceChangeListener(this);
 	navigationbar.removeNavigationbarListener(this);
@@ -146,6 +100,9 @@ protected void onPause() {
 		Log.e("ApplicationActivity", "onclickhome");
 
 		switch (buttonId){
+			case Navigationbar.BUTTON_MORE:
+				Toast.makeText(ApplicationActivity.this, "Calculator, Stopwatch, Voice control, Units",Toast.LENGTH_LONG).show();
+				break;
 			case Navigationbar.BUTTON_HOME:
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
 				startActivity(intent);
@@ -157,23 +114,13 @@ protected void onPause() {
 				ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-						if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-							actionButtonbar.getButtonStatistics().setEnabled(false);
-						}else {
-							actionButtonbar.getButtonStatistics().setEnabled(true);
-						}
+						updateStatsButtonUI();
 					}
 				});
 				break;
 			case ActionButtonbar.BUTTON_ACCUMULATE:
 				ApplicationManager.getInstance().accumulateStatistics();
-				actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-				if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-					actionButtonbar.getButtonStatistics().setEnabled(false);
-				}else {
-					actionButtonbar.getButtonStatistics().setEnabled(true);
-				}
+				updateStatsButtonUI();
 				break;
 			case ActionButtonbar.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {
@@ -202,17 +149,17 @@ protected void onPause() {
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case PERCENT_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RESULTS");
+							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						default:
@@ -306,7 +253,8 @@ protected void onPause() {
 	public void onApplicationChange(ScaleApplication application) {
 
 		//do not react on subApplications
-		if(application == PART_COUNTING_CALC_AWP){
+		if(application == PART_COUNTING_CALC_AWP ||
+				application == PERCENT_WEIGHING_CALC_REFERENCE){
 			return;
 		}
 		ApplicationManager.getInstance().clearStatistics();
@@ -316,17 +264,10 @@ protected void onPause() {
 		actionButtonbar.getButtonCal().setEnabled(true);
 		actionButtonbar.getButtonPrint().setEnabled(true);
 		actionButtonbar.getButtonTara().setEnabled(true);
-		//if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-			actionButtonbar.getButtonStatistics().setEnabled(false);
-		//}else {
-		//	actionButtonbar.getButtonStatistics().setEnabled(true);
-		//}
-		actionButtonbar.getButtonAccumulate().setEnabled(true);
+
 		appSettingsVisible = false;
 
-
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-
+		updateStatsButtonUI();
 		refreshSpinnerLibrary();
 	}
 
@@ -347,8 +288,17 @@ protected void onPause() {
 		}
 	}
 
+
+
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+			updateSpinnerMode();
+	}
+
+
+
+
+	private void updateSpinnerMode(){
 		Log.e("<Navigationbar", "INFO: CALLBACK FUNCTION HAS BEEN CALLED");
 		navigationbar.getArrayAdapterMode().clear();
 		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
@@ -385,6 +335,17 @@ protected void onPause() {
 		}
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
+	}
+
+
+
+	private void updateStatsButtonUI() {
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
+		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+			actionButtonbar.getButtonStatistics().setEnabled(false);
+		}else {
+			actionButtonbar.getButtonStatistics().setEnabled(true);
+		}
 	}
 
 }

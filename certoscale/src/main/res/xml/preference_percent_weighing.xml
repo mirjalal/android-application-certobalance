@@ -25,8 +25,8 @@
     <PreferenceCategory android:title="VISIBILITY" >
 
         <CheckBoxPreference
-            android:key="@string/preferences_percent_reference_visible"
-            android:defaultValue="@bool/preferences_percent_reference_visible"
+            android:key="@string/preferences_percent_reference_weight_visible"
+            android:defaultValue="@bool/preferences_percent_reference_weight_visible"
             android:title="Reference Weight"
             android:summary="The reference weight is displayed"
             android:dependency="@string/preferences_percent_lock" >

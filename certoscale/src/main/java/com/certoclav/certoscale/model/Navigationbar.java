@@ -44,6 +44,8 @@ public class Navigationbar {
 	public static final int BUTTON_GO_TO_APPLICATION = 31;
 	public static final int BUTTON_LOGOUT = 32;
 	public static final int BUTTON_SAVE = 33;
+	public static final int BUTTON_SETTINGS_DEVICE = 34;
+	public static final int BUTTON_MORE = 35;
 	private int spinnerModeOnClickCounter = 0;
 
 	public ImageButton getButtonLogout() {
@@ -57,6 +59,24 @@ public class Navigationbar {
 	private ImageButton buttonLogout = null;
 	private ImageButton buttonHome = null;
 
+	public ImageButton getButtonMore() {
+		return buttonMore;
+	}
+
+	public void setButtonMore(ImageButton buttonMore) {
+		this.buttonMore = buttonMore;
+	}
+
+	public ImageButton getButtonSettingsDevice() {
+		return buttonSettingsDevice;
+	}
+
+	public void setButtonSettingsDevice(ImageButton buttonSettingsDevice) {
+		this.buttonSettingsDevice = buttonSettingsDevice;
+	}
+
+	private ImageButton buttonMore = null;
+	private ImageButton buttonSettingsDevice = null;
 
 
 	public SpinnerModeAdapter getArrayAdapterMode() {
@@ -163,7 +183,7 @@ public class Navigationbar {
 
 
 		spinnerMode = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_mode);
-
+/*
 		ArrayList<ScaleApplication> scaleApplications = new ArrayList<ScaleApplication>();
 		scaleApplications.add(ScaleApplication.WEIGHING);
 		scaleApplications.add(ScaleApplication.PART_COUNTING);
@@ -179,9 +199,9 @@ public class Navigationbar {
 		scaleApplications.add(ScaleApplication.INGREDIENT_COSTING);
 		scaleApplications.add(ScaleApplication.PIPETTE_ADJUSTMENT);
 		scaleApplications.add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+*/
 
-
-		arrayAdapterMode = new SpinnerModeAdapter(mActivity,scaleApplications);
+		arrayAdapterMode = new SpinnerModeAdapter(mActivity, new ArrayList<ScaleApplication>());
 		spinnerMode.setAdapter(arrayAdapterMode);
 		//spinnerMode.setAdapter(spinnerModeAdapter);
 
@@ -235,8 +255,26 @@ public class Navigationbar {
 
 		});
 
+		buttonSettingsDevice = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_settings_device);
+		buttonSettingsDevice.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(BUTTON_SETTINGS_DEVICE, false);
+				}
+			}
+		});
 
-
+		buttonMore = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_more);
+		buttonMore.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(BUTTON_MORE, false);
+				}
+			}
+		});
+		
 		buttonSettings = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_settings);
 		buttonSettings.setOnClickListener(new OnClickListener() {
 

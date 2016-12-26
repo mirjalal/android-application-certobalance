@@ -38,6 +38,7 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -149,8 +150,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getTextTitle().setText("LOGIN MENU");
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
-		navigationbar.getButtonBack().setVisibility(View.GONE);
+		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
 
 
 
@@ -710,6 +710,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				dialog.show();
 
 				break;
+			case Navigationbar.BUTTON_SETTINGS_DEVICE:
+				Intent intent = new Intent(LoginActivity.this, SettingsDeviceActivity.class);
+				startActivity(intent);
 
 
 		}
