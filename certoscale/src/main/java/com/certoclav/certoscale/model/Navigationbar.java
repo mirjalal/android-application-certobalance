@@ -1,14 +1,12 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,7 +16,6 @@ import com.certoclav.certoscale.adapters.SpinnerModeAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -60,15 +57,7 @@ public class Navigationbar {
 	private ImageButton buttonLogout = null;
 	private ImageButton buttonHome = null;
 
-	public Button getButtonGoToApplication() {
-		return buttonGoToApplication;
-	}
 
-	public void setButtonGoToApplication(Button buttonGoToApplication) {
-		this.buttonGoToApplication = buttonGoToApplication;
-	}
-
-	private Button buttonGoToApplication = null;
 
 	public SpinnerModeAdapter getArrayAdapterMode() {
 		return arrayAdapterMode;
@@ -90,15 +79,15 @@ public class Navigationbar {
 
 	private ArrayAdapter<String> arrayAdapterLibrary = null;
 
-	public Button getButtonBack() {
+	public ImageButton getButtonBack() {
 		return buttonBack;
 	}
 
-	public void setButtonBack(Button buttonBack) {
+	public void setButtonBack(ImageButton buttonBack) {
 		this.buttonBack = buttonBack;
 	}
 
-	private Button buttonBack = null;
+	private ImageButton buttonBack = null;
 
 	public ImageButton getButtonHome() {
 		return buttonHome;
@@ -108,11 +97,11 @@ public class Navigationbar {
 		this.buttonHome = buttonHome;
 	}
 
-	public Button getButtonSettings() {
+	public ImageButton getButtonSettings() {
 		return buttonSettings;
 	}
 
-	public void setButtonSettings(Button buttonSettings) {
+	public void setButtonSettings(ImageButton buttonSettings) {
 		this.buttonSettings = buttonSettings;
 	}
 
@@ -132,32 +121,32 @@ public class Navigationbar {
 		this.spinnerLib = spinnerLib;
 	}
 
-	private Button buttonSettings = null;
+	private ImageButton buttonSettings = null;
 	private Activity mActivity = null;
 	private Spinner spinnerMode = null;
 	private Spinner spinnerLib = null;
 	private TextView textTitle = null;
 
-	public Button getButtonSave() {
+	public ImageButton getButtonSave() {
 		return buttonSave;
 	}
 
-	public void setButtonSave(Button buttonSave) {
+	public void setButtonSave(ImageButton buttonSave) {
 		this.buttonSave = buttonSave;
 	}
 
-	private Button buttonSave = null;
+	private ImageButton buttonSave = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
 
-	public Button getButtonAdd() {
+	public ImageButton getButtonAdd() {
 		return buttonAdd;
 	}
 
-	public void setButtonAdd(Button buttonAdd) {
+	public void setButtonAdd(ImageButton buttonAdd) {
 		this.buttonAdd = buttonAdd;
 	}
 
-	private Button buttonAdd = null;
+	private ImageButton buttonAdd = null;
 
 	public void setButtonEventListener(ButtonEventListener listener) {
 		this.navigationbarListeners.add(listener);
@@ -246,16 +235,9 @@ public class Navigationbar {
 
 		});
 
-		buttonGoToApplication = (Button) mActivity.findViewById(R.id.naviagationbar_button_applications);
-		buttonGoToApplication.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(mActivity, ApplicationActivity.class);
-				mActivity.startActivity(intent);
-			}
-		});
 
-		buttonSettings = (Button) mActivity.findViewById(R.id.naviagationbar_button_settings);
+
+		buttonSettings = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_settings);
 		buttonSettings.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -267,7 +249,7 @@ public class Navigationbar {
 			}
 		});
 
-		buttonAdd = (Button) mActivity.findViewById(R.id.naviagationbar_button_add);
+		buttonAdd = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_add);
 		buttonAdd.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -278,7 +260,7 @@ public class Navigationbar {
 			}
 		});
 
-		buttonBack = (Button) mActivity.findViewById(R.id.naviagationbar_button_back);
+		buttonBack = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_back);
 		buttonBack.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -326,7 +308,7 @@ public class Navigationbar {
 			}
 		});
 
-		buttonSave = (Button) mActivity.findViewById(R.id.naviagationbar_button_save);
+		buttonSave = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_save);
 		buttonSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

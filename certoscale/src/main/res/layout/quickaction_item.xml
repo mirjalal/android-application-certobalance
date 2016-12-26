@@ -24,7 +24,7 @@
     android:gravity="center"
     android:focusable="true"
     android:clickable="true"
-    android:background="@drawable/quickaction_slider_btn" >
+	style="@style/button_default">
     <ImageView
     	android:id="@+id/quickaction_icon"
     	android:layout_width="70dp"

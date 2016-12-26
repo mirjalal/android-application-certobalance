@@ -27,7 +27,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_below="@+id/application_settings_container"
         android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_height="0dp"
         android:orientation="vertical">
         <TextView
@@ -36,8 +36,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Pleace place 10 pcs. on the plate and press OK"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            style="@style/text_default"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,18 +49,16 @@
                 android:text="CANCEL"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/quickaction_slider_btn"
-                android:textColor="@android:color/white"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
 
             <Button
                 android:text="OK"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/settings_partcounting_button_ok"
-                android:background="@drawable/quickaction_slider_btn"
-                android:textColor="@android:color/white"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -73,21 +71,19 @@
 
     <Button
         android:id="@+id/settings_partcounting_button_awp"
-        android:text="Set average piece weight"
+        android:text="AWP:\n0.01121 g"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:textColor="@android:color/white"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/button_actionbar"/>
 
     <Button
-        android:text="Calculate average piece weight"
+        android:text="Calculate AWP"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/settings_partcounting_button_calc_awp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/button_actionbar"/>
 
     <Button
 
@@ -95,9 +91,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/settings_partcounting_button_sample_size"
-        android:textColor="@android:color/white"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/button_actionbar"/>
 
         <Button
 
@@ -105,9 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_partcounting_button_under_limit"
-            android:background="@drawable/quickaction_slider_btn"
-            android:textColor="@android:color/white"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
 
         <Button
 
@@ -115,9 +109,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_partcounting_button_over_limit"
-            android:background="@drawable/quickaction_slider_btn"
-            android:textColor="@android:color/white"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
 
 
     </LinearLayout>

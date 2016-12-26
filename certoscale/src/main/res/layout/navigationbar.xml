@@ -29,7 +29,7 @@
      android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
      />
- <Button
+ <ImageButton
      android:id="@+id/naviagationbar_button_back"
      android:text="BACK"
      android:layout_width="80dp"
@@ -39,6 +39,7 @@
      android:layout_alignParentLeft="true"
      android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
+     android:src="@drawable/ic_menu_back"
      />
 
  <ImageButton
@@ -53,20 +54,6 @@
      android:visibility="gone"
      />
 
-
- <Button
-     android:id="@+id/naviagationbar_button_applications"
-     android:text="OPEN WEIGHING APPS"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:gravity="center"
-     android:textSize="24sp"
-     android:textColor="@android:color/white"
-     android:textStyle="bold"
-     android:layout_toRightOf="@+id/naviagationbar_button_logout"
-     android:layout_toLeftOf="@+id/naviagationbar_button_add"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="gone"/>
 
 
  <LinearLayout 
@@ -89,7 +76,7 @@
 
 
 
-  <Button
+  <ImageButton
       android:id="@+id/naviagationbar_button_settings"
       android:text="..."
       android:layout_width="80dp"
@@ -98,6 +85,7 @@
       android:layout_height="match_parent"
       android:background="@drawable/quickaction_slider_btn_black"
       android:visibility="gone"
+      android:src="@drawable/ic_menu_edit"
       />
  
   <Spinner 
@@ -109,7 +97,7 @@
       android:visibility="gone"
      />
 
-  <Button
+  <ImageButton
       android:id="@+id/naviagationbar_button_save"
       android:text="NEW"
       android:layout_width="80dp"
@@ -119,6 +107,7 @@
       android:layout_alignParentRight="true"
       android:background="@drawable/quickaction_slider_btn_black"
       android:visibility="gone"
+      android:src="@drawable/ic_menu_save"
       />
 
 
@@ -126,7 +115,7 @@
  </LinearLayout>
 
 
- <Button
+ <ImageButton
      android:id="@+id/naviagationbar_button_add"
      android:text="+"
      android:layout_width="80dp"
@@ -136,6 +125,7 @@
      android:layout_alignParentRight="true"
      android:background="@drawable/quickaction_slider_btn_black"
      android:visibility="gone"
+     android:src="@drawable/ic_menu_add"
 
      />
 

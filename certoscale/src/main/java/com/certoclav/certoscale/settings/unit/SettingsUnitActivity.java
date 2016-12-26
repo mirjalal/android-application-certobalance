@@ -25,12 +25,9 @@ public class SettingsUnitActivity extends FragmentActivity implements  ButtonEve
 		setContentView(R.layout.settings_unit_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		//navigationbar.getButtonHome().setText("BACK");
-		navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
-		navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
-		navigationbar.getButtonSettings().setVisibility(View.GONE);
 		navigationbar.getTextTitle().setText("Weighing Units".toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 
 
 

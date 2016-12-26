@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp" >
+    android:layout_height="60dp" >
 
 
  <LinearLayout 
@@ -17,61 +17,49 @@
      android:id="@+id/actionbar_button_tara"
      android:text="TARA"
      android:layout_width="match_parent"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_weight="1"
-     android:background="@drawable/quickaction_slider_btn"
+       style="@style/button_actionbar"
      />
     <Button 
      android:id="@+id/actionbar_button_print"
      android:text="PRINT"
      android:layout_width="match_parent"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_weight="1"
-     android:background="@drawable/quickaction_slider_btn"  
+        style="@style/button_actionbar"
      />
    <Button 
      android:id="@+id/actionbar_button_cal"
      android:text="CAL"
      android:layout_width="match_parent"
-     android:textSize="18sp"
-     android:textColor="@android:color/white"
      android:layout_height="match_parent"
      android:layout_weight="1"
-     android:background="@drawable/quickaction_slider_btn"
+       style="@style/button_actionbar"
      />
      <Button
          android:id="@+id/actionbar_button_statistics"
          android:text="STATS\n(0)"
          android:layout_width="match_parent"
-         android:textSize="18sp"
-         android:textColor="@android:color/white"
          android:layout_height="match_parent"
          android:layout_weight="1"
-         android:background="@drawable/quickaction_slider_btn"
+         style="@style/button_actionbar"
          />
      <Button
          android:id="@+id/actionbar_button_accumulate"
          android:text="ADD TO STATS"
          android:layout_width="match_parent"
-         android:textSize="18sp"
-         android:textColor="@android:color/white"
          android:layout_height="match_parent"
          android:layout_weight="1"
-         android:background="@drawable/quickaction_slider_btn"
+         style="@style/button_actionbar"
          />
      <Button
          android:id="@+id/actionbar_button_settings"
          android:text="SETTINGS"
          android:layout_width="match_parent"
-         android:textSize="18sp"
-         android:textColor="@android:color/white"
          android:layout_height="match_parent"
          android:layout_weight="1"
-         android:background="@drawable/quickaction_slider_btn"
+         style="@style/button_actionbar"
          />
 
  </LinearLayout>

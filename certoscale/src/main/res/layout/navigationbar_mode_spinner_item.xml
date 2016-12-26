@@ -21,12 +21,12 @@
 
 <ImageView
     android:id="@+id/login_dopdown_image_cloud"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
 	android:layout_marginLeft="10dp"
 	android:layout_centerVertical="true"
     android:layout_alignParentLeft="true"
-    android:src="@drawable/application_icon_weighing" />
+    android:src="@drawable/ic_menu_weighing" />
 
 
 	<ImageView

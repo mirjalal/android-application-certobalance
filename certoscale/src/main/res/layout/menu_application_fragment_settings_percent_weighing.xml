@@ -32,8 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/application_settings_percent_weighing_button_reference"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/button_actionbar"/>
 
     <Button
 
@@ -41,7 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/application_settings_percent_weighing_button_reference_adjustment"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        style="@style/button_actionbar"/>
 
 </LinearLayout>

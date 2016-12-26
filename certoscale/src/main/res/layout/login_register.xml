@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_qube_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@android:color/white">
+    android:background="@drawable/background_gadient">
     
     <ScrollView 
         android:layout_width="match_parent"
@@ -14,8 +16,7 @@
        	    android:layout_height="match_parent"
        	    android:layout_width="match_parent"
        	    >
-       	    
-                       <ImageView
+           <ImageView
         android:id="@+id/imageView1"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -29,23 +30,14 @@
     <LinearLayout
         android:id="@+id/register_container_edit_text_items"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical" ></LinearLayout>
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/register_button_ok"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@drawable/quickaction_slider_btn"
-        android:layout_below="@+id/register_container_edit_text_items"
-        android:layout_alignRight="@+id/register_container_edit_text_items"
-        android:layout_alignLeft="@+id/register_container_edit_text_items"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"
-        android:text="@string/register_user" />
+    </LinearLayout>
+
+
     
     </RelativeLayout>
     </ScrollView>
@@ -60,5 +52,14 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:visibility="gone" />
+    <Button
+        android:id="@+id/register_button_ok"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/register_user"
+        style="@style/button_default"/>
+
             
 </RelativeLayout>

@@ -64,20 +64,20 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         navigationbar.getTextTitle().setText("Main menu".toUpperCase());
         navigationbar.getButtonLogout().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getButtonAdd().setText("?");
+        navigationbar.getButtonAdd().setImageResource(R.drawable.ic_menu_help);
 
         //Set up menu items
         gridView = (GridView) findViewById(R.id.menu_main_grid);
         menuMainElementAdapter = new MenuElementAdapter(this,new ArrayList<MenuElement>());
         gridView.setAdapter(menuMainElementAdapter);
-        menuMainElementAdapter.add(new MenuElement("Applications".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
-        menuMainElementAdapter.add(new MenuElement("Application settings".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
-        menuMainElementAdapter.add(new MenuElement("Calibration".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
-        menuMainElementAdapter.add(new MenuElement("Device settings".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
-        menuMainElementAdapter.add(new MenuElement("Glp settings".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_GLP));
-        menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
-        menuMainElementAdapter.add(new MenuElement("User management".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_USER));
-        menuMainElementAdapter.add(new MenuElement("Unit settings".toUpperCase(),R.drawable.error_sign, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
+        menuMainElementAdapter.add(new MenuElement("Applications".toUpperCase(),R.drawable.ic_menu_weighing, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
+        menuMainElementAdapter.add(new MenuElement("Calibration".toUpperCase(),R.drawable.ic_menu_calibration, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
+        menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
+        menuMainElementAdapter.add(new MenuElement("Device settings".toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
+        menuMainElementAdapter.add(new MenuElement("Application settings".toUpperCase(),R.drawable.ic_menu_app_settings, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
+        menuMainElementAdapter.add(new MenuElement("User management".toUpperCase(),R.drawable.ic_menu_settings_user, MenuElement.MenuItemId.MENU_ITEM_USER));
+        menuMainElementAdapter.add(new MenuElement("Glp settings".toUpperCase(),R.drawable.ic_menu_settings_glp, MenuElement.MenuItemId.MENU_ITEM_GLP));
+        menuMainElementAdapter.add(new MenuElement("Unit settings".toUpperCase(),R.drawable.ic_menu_unit, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
 
         ApplicationManager.getInstance();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -130,7 +130,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            Scale.getInstance().setScaleState(ScaleState.OFF);
+                            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
                             Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();

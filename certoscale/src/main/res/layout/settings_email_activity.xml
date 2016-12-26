@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-     
-             <include layout="@layout/navigationbar"
+    android:layout_height="match_parent"
+	android:background="@drawable/background_gadient">
+
+        <include layout="@layout/navigationbar"
         android:id="@+id/navigationbar"/>
              
 <LinearLayout
@@ -22,14 +23,14 @@
 	      android:layout_width="wrap_content"
 	      android:layout_height="wrap_content"
 	      android:text="@string/subject_"
-	      android:textColor="@android:color/black"
-	      android:textSize="20sp" >
+		  style="@style/text_default">
 	  </TextView>
 	
 	  <Spinner
 	      android:id="@+id/email_spinner"
 	      android:layout_width="match_parent"
-	      android:layout_height="wrap_content" />
+	      android:layout_height="wrap_content"
+		  style="@style/spinner_default"/>
         
 
 
@@ -37,9 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/message"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp" />
+        style="@style/text_default"/>
                         
     <EditText
         android:id="@+id/editTextMessage"
@@ -49,17 +48,19 @@
         android:hint="@string/please_enter_message_here"
         android:inputType="textFilter|textMultiLine"
         android:lines="8"
-        android:background="@drawable/edit_text_background_white"/>
+		style="@style/edit_text_default"/>
    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sincerely_"
+	   style="@style/text_default"
  		/>
   <TextView
         android:id="@+id/email_message_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
+	  style="@style/text_default"
  		/>
 
 
@@ -73,11 +74,9 @@
         android:layout_width="150dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:text="@string/send"
         android:textStyle="bold"
-        android:textSize="24sp"
-        android:textColor="@android:color/white"
-        android:background="@drawable/quickaction_slider_btn" />
+		style="@style/button_default" />
          
 </RelativeLayout>

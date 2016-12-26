@@ -20,8 +20,6 @@ import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleState;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -153,7 +151,7 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
             Toast.makeText(MenuUserActivity.this, "Admin account can not be deleted", Toast.LENGTH_LONG).show();
             return;
         }
-        if(Scale.getInstance().getState() == ScaleState.OFF){
+
             try
             {
 
@@ -196,9 +194,7 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
                 e.printStackTrace();
             }
 
-        }else{
-            Toast.makeText(MenuUserActivity.this, getString(R.string.please_log_out_first), Toast.LENGTH_LONG).show();
-        }
+
 
     }
 

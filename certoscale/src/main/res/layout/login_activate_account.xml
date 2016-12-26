@@ -2,7 +2,7 @@
     android:id="@+id/login_qube_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@android:color/white">
+    android:background="@drawable/background_gadient">
     
     <ScrollView 
         android:layout_width="match_parent"
@@ -33,10 +33,7 @@
         android:layout_below="@+id/register_container_edit_text_items"
         android:layout_alignRight="@+id/register_container_edit_text_items"
         android:layout_alignLeft="@+id/register_container_edit_text_items"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"
+        style="@style/button_default"
         android:text="@string/register_user" />
     
         <Button
@@ -47,11 +44,8 @@
         android:layout_below="@+id/register_button_activate"
         android:layout_alignRight="@+id/register_container_edit_text_items"
         android:layout_alignLeft="@+id/register_container_edit_text_items"
-        android:layout_margin="10dp"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@android:color/white"
-        android:text="@string/resend_activation_key_via_mail" />
+        android:text="@string/resend_activation_key_via_mail"
+            style="@style/button_default"/>
         
     </RelativeLayout>
     </ScrollView>

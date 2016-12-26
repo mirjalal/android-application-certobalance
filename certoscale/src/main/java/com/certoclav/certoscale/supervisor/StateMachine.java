@@ -34,8 +34,9 @@ public class StateMachine implements WeightListener {
     private boolean ignoreCableNotConnected = false;
 
     private StateMachine(){
-        timerHandler.postDelayed(timerRunnable, 0);
         Scale.getInstance().setOnWeightListener(this);
+        nanoTimeAtLastMessageReceived = System.nanoTime();
+        timerHandler.postDelayed(timerRunnable, 0);
     }
 
 

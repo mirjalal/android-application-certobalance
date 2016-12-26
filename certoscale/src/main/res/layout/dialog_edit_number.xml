@@ -29,10 +29,9 @@
 	    	android:id="@+id/dialog_edit_number_edittext"
 	        android:layout_width="match_parent"
 	        android:layout_height="30dp"
-	        android:background="@drawable/edit_text_background_white"
 	        android:layout_weight="1"
 	        android:numeric="integer"
-	        android:imeOptions="actionDone"   	        
+					style="@style/edit_text_default"
 	    	        />
 
 	    	<TextView
@@ -43,9 +42,7 @@
 	    	    android:layout_weight="1"
 	    	    android:singleLine="true"
 	    	    android:text="UNIT"
-	    	    android:textColor="@android:color/white"
-	    	    android:textSize="20dp"
-	    	    tools:ignore="HardcodedText" />
+				style="@style/text_default"/>
   
 	    	</LinearLayout>
 	<LinearLayout
@@ -60,10 +57,7 @@
 			android:layout_height="50dp"
 			android:layout_weight="1"
 			android:text="CANCEL"
-			android:layout_margin="5dp"
-			android:textColor="@android:color/white"
-			android:textSize="25sp"
-			android:background="@drawable/quickaction_slider_btn"
+			style="@style/button_default"
 			/>
 
 
@@ -73,10 +67,7 @@
 			android:layout_height="50dp"
 			android:layout_weight="1"
 			android:text="OK"
-			android:layout_margin="5dp"
-			android:textColor="@android:color/white"
-			android:textSize="25sp"
-			android:background="@drawable/quickaction_slider_btn"
+			style="@style/button_default"
 
 			/>
 

@@ -7,45 +7,43 @@
 
 <LinearLayout 
 	    android:layout_height="wrap_content"
-    	android:layout_width="match_parent" 	
-    	android:layout_marginLeft="20dp"
-    	android:layout_marginRight="20dp"
-    	android:orientation="vertical" 
-	            >
+    	android:layout_width="match_parent"
+    	android:orientation="vertical">
 
-
+			<FrameLayout
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@drawable/seperator_white">
+			</FrameLayout>
 	            
 
-	    	<LinearLayout 
-	  	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"  	  
-	        android:orientation="horizontal"
-				android:layout_margin="50dp"
-	        android:layout_marginBottom="20dp">
+	    	<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="20dp"
+				android:orientation="horizontal">
 	    	
 
 	    	    
 	    	    <EditText 
 	    	android:id="@+id/dialog_edit_number_edittext"
 	        android:layout_width="match_parent"
-	        android:layout_height="30dp"
+	        android:layout_height="50dp"
 	        android:background="@drawable/edit_text_background_white"
 	        android:layout_weight="1"
 	        android:numeric="decimal"
-	        android:imeOptions="actionDone"   	        
+					style="@style/edit_text_default"
+
 	    	        />
 
 	    	<TextView
 				android:id="@+id/dialog_edit_number_text_unit"
 	    	    android:layout_width="match_parent"
-	    	    android:layout_height="30dp"
-	    	    android:layout_marginLeft="20dp"
+	    	    android:layout_height="50dp"
 	    	    android:layout_weight="1"
 	    	    android:singleLine="true"
 	    	    android:text="UNIT"
-	    	    android:textColor="@android:color/white"
-	    	    android:textSize="20dp"
-	    	    tools:ignore="HardcodedText" />
+				style="@style/text_default"/>
   
 	    	</LinearLayout>
 	<LinearLayout
@@ -53,6 +51,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:layout_below="@+id/dialog_container_text"
+		android:layout_margin="20dp"
 		>
 		<Button
 			android:id="@+id/dialog_edit_number_button_cancel"
@@ -60,10 +59,7 @@
 			android:layout_height="50dp"
 			android:layout_weight="1"
 			android:text="CANCEL"
-			android:layout_margin="5dp"
-			android:textSize="25sp"
-			android:textColor="@android:color/white"
-			android:background="@drawable/quickaction_slider_btn"
+			style="@style/button_default"
 			/>
 
 
@@ -73,10 +69,7 @@
 			android:layout_height="50dp"
 			android:layout_weight="1"
 			android:text="OK"
-			android:layout_margin="5dp"
-			android:textSize="25sp"
-			android:textColor="@android:color/white"
-			android:background="@drawable/quickaction_slider_btn"
+			style="@style/button_default"
 
 			/>
 

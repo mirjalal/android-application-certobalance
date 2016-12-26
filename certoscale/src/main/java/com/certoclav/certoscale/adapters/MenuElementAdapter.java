@@ -67,13 +67,15 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 
 		switch (getItem(position).getId()){
 			case MENU_ITEM_APPLICATIONS:
-				convertView.setBackgroundResource(R.drawable.menu_btn_red);
-				break;
 			case MENU_ITEM_CALIBRATION:
 				convertView.setBackgroundResource(R.drawable.quickaction_slider_btn);
 				break;
 			case MENU_ITEM_DEVICE:
-				convertView.setBackgroundResource(R.drawable.menu_btn_blue);
+			case MENU_ITEM_GLP:
+			case MENU_ITEM_APPLICATION_SETTINGS:
+			case MENU_ITEM_USER:
+			case MENU_ITEM_WEIGHING_UNITS:
+				convertView.setBackgroundResource(R.drawable.menu_btn_tur);
 				break;
 			default:
 				convertView.setBackgroundResource(R.drawable.menu_btn_purple);

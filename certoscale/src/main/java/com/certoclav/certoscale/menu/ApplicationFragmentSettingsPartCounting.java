@@ -296,7 +296,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        buttonEditAveragePieceWeight.setText("Average piece weight\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
+        buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
         buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pieces");
         button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pieces");
         button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pieces");
