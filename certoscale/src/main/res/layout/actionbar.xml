@@ -15,7 +15,7 @@
      
    <Button 
      android:id="@+id/actionbar_button_tara"
-     android:text="TARA"
+     android:text="TARE"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"

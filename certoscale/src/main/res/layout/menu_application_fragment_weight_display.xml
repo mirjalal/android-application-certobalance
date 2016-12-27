@@ -35,17 +35,30 @@ android:textColor="@android:color/white"
 android:gravity="center"
 android:text="instruction"/>
 
-<TextView
-android:id="@+id/menu_main_text_value"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_below="@+id/menu_main_text_instruction"
-android:layout_alignParentRight="true"
-    android:gravity="right"
-android:layout_marginRight="50dp"
-android:textColor="@android:color/white"
-android:textSize="80sp"
-android:text="0.0001 g" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/menu_main_text_instruction">
+
+        <TextView
+            android:id="@+id/menu_main_text_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:layout_marginRight="50dp"
+            android:textColor="@android:color/white"
+            android:textSize="80sp"
+            android:text="0.0001 g" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_menu_stable"/>
+    </RelativeLayout>
+
 
 <TextView
 android:id="@+id/menu_main_text_information"

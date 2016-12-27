@@ -23,6 +23,7 @@ import com.certoclav.certoscale.model.ActionButtonbar;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
@@ -30,6 +31,7 @@ import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 
 import java.util.List;
 
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
@@ -129,23 +131,15 @@ protected void onPause() {
 					actionButtonbar.getButtonCal().setEnabled(true);
 					actionButtonbar.getButtonPrint().setEnabled(true);
 					actionButtonbar.getButtonTara().setEnabled(true);
-					if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-						actionButtonbar.getButtonStatistics().setEnabled(false);
-					}else {
-						actionButtonbar.getButtonStatistics().setEnabled(true);
-					}
+					updateStatsButtonUI();
 					actionButtonbar.getButtonAccumulate().setEnabled(true);
 					appSettingsVisible = false;
 				}else{
 					actionButtonbar.getButtonCal().setEnabled(false);
 					actionButtonbar.getButtonPrint().setEnabled(false);
-					if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
-						actionButtonbar.getButtonStatistics().setEnabled(false);
-					}else {
-						actionButtonbar.getButtonStatistics().setEnabled(true);
-					}
+					updateStatsButtonUI();
 					actionButtonbar.getButtonAccumulate().setEnabled(false);
-					//actionButtonbar.getButtonTara().setEnabled(false);
+
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
@@ -162,6 +156,11 @@ protected void onPause() {
 							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
+						case ANIMAL_WEIGHING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
+							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							appSettingsVisible = true;
+							break;
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
@@ -174,7 +173,7 @@ protected void onPause() {
 				//send command for calibration to the scale
 				if(Scale.getInstance().getWeightInGram() <= 5){
 
-					Scale.getInstance().getReadAndParseSerialService().getCommandQueue().add("C\r\n");
+					ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
 
 					Intent intent3 = new Intent(ApplicationActivity.this,AnimationCalibrationActivity.class);
 					startActivity(intent3);
@@ -254,17 +253,17 @@ protected void onPause() {
 
 		//do not react on subApplications
 		if(application == PART_COUNTING_CALC_AWP ||
-				application == PERCENT_WEIGHING_CALC_REFERENCE){
+				application == PERCENT_WEIGHING_CALC_REFERENCE ||
+				application == ANIMAL_WEIGHING_CALCULATING){
 			return;
 		}
 		ApplicationManager.getInstance().clearStatistics();
-
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
 		actionButtonbar.getButtonAppSettings().setText("SETTINGS");
 		actionButtonbar.getButtonCal().setEnabled(true);
 		actionButtonbar.getButtonPrint().setEnabled(true);
 		actionButtonbar.getButtonTara().setEnabled(true);
-
+		actionButtonbar.getButtonAccumulate().setEnabled(true);
 		appSettingsVisible = false;
 
 		updateStatsButtonUI();

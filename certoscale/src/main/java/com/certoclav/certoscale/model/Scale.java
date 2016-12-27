@@ -185,12 +185,7 @@ public class Scale extends Observable {
 
 
 
-	public ReadAndParseSerialService getReadAndParseSerialService() {
-		if(readAndParseSerialService == null){
-			readAndParseSerialService = new ReadAndParseSerialService();
-		}
-		return readAndParseSerialService ;
-	}
+
 
 
 

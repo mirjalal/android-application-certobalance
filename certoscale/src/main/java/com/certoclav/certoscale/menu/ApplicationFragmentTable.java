@@ -223,6 +223,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
+                break;
+            case ANIMAL_WEIGHING:
+                if  (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible),getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible))==true) {
+                    listReferenceFields.get(0).getTextName().setText("AVERAGING TIME");
+                    listReferenceFields.get(0).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
+                }
 
 
                 break;

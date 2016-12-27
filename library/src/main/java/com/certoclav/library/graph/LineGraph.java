@@ -1,13 +1,5 @@
 package com.certoclav.library.graph;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.chart.PointStyle;
-import org.achartengine.model.TimeSeries;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,6 +7,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.certoclav.library.R;
+
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.chart.PointStyle;
+import org.achartengine.model.TimeSeries;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
 
 public class LineGraph {
  
@@ -34,7 +34,22 @@ public class LineGraph {
 	public static final int TYPE_PRESS = 2;
 
 
-	
+	public XYSeriesRenderer getRendererForSeriesSteam() {
+		return rendererForSeriesSteam;
+	}
+
+	public void setRendererForSeriesSteam(XYSeriesRenderer rendererForSeriesSteam) {
+		this.rendererForSeriesSteam = rendererForSeriesSteam;
+	}
+
+	public TimeSeries getTimeSeriesSteam() {
+		return timeSeriesSteam;
+	}
+
+	public void setTimeSeriesSteam(TimeSeries timeSeriesSteam) {
+		this.timeSeriesSteam = timeSeriesSteam;
+	}
+
 	public LineGraph()
 	{
 
@@ -48,7 +63,7 @@ public class LineGraph {
 		rendererForSeriesSteam.setColor(Color.BLUE);//Farbe des Graphen (linie)
 		rendererForSeriesSteam.setPointStyle(PointStyle.SQUARE);
 		rendererForSeriesSteam.setLineWidth(5);
-		rendererForSeriesSteam.setDisplayChartValues(true);
+		rendererForSeriesSteam.setDisplayChartValues(false);
 		rendererForSeriesSteam.setChartValuesTextSize(12);
 		rendererForSeriesSteam.setChartValuesSpacing(3);
 	    rendererForSeriesSteam.setFillPoints(true);

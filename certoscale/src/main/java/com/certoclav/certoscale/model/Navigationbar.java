@@ -234,16 +234,20 @@ public class Navigationbar {
 		spinnerLib.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				DatabaseService db = new DatabaseService(mActivity);
-				//apply change
-				for (Library library : db.getLibraries()) {
-					if (library.getName().equals(arrayAdapterLibrary.getItem(position))) {
-						ApplicationManager.getInstance().setCurrentLibrary(library);
+				try {
+					DatabaseService db = new DatabaseService(mActivity);
+					//apply change
+					for (Library library : db.getLibraries()) {
+						if (library.getName().equals(arrayAdapterLibrary.getItem(position))) {
+							ApplicationManager.getInstance().setCurrentLibrary(library);
+						}
 					}
-				}
-				//notify listeners
-				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(SPINNER_LIBRARY, false);
+					//notify listeners
+					for (ButtonEventListener listener : navigationbarListeners) {
+						listener.onClickNavigationbarButton(SPINNER_LIBRARY, false);
+					}
+				}catch (Exception e){
+					Log.e("Navigationbar", e.toString());
 				}
 			}
 

@@ -39,7 +39,11 @@ import android_serialport_api.MessageReceivedListener;
  */
 public class ReadAndParseSerialService implements MessageReceivedListener {
 
+	private static ReadAndParseSerialService instance = new ReadAndParseSerialService();
 
+	public static ReadAndParseSerialService getInstance(){
+		return instance;
+	}
 
 	public ArrayList<String> getCommandQueue() {
 		return commandQueue;
@@ -105,8 +109,15 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 
-	public ReadAndParseSerialService() {
+	private ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
+		if(!serialThread.isAlive()){
+			serialThread.start();
+			if(AppConstants.IS_IO_SIMULATED == false) {
+				Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
+				Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+			}
+		}
 	}
 	
 	public void startParseSerialThread(){
@@ -116,9 +127,6 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 		}
-
-
-			
 
 		
 	}

@@ -34,10 +34,12 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.database.User;
+import com.certoclav.certoscale.graph.GraphService;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
@@ -338,7 +340,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 	@Override
 	protected void onResume() {
-		Scale.getInstance().getReadAndParseSerialService().startParseSerialThread();
+		ReadAndParseSerialService.getInstance();
+		GraphService.getInstance();
 		Log.e("LoginActivity", "onresume called");
 		super.onResume();
 		navigationbar.setButtonEventListener(this);

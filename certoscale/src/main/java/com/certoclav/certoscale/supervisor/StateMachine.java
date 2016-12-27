@@ -9,6 +9,7 @@ import com.certoclav.certoscale.menu.NotificationActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.service.CloudSocketService;
+import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.library.application.ApplicationController;
 
 import static com.certoclav.certoscale.model.ScaleState.CABLE_NOT_CONNECTED;
@@ -110,7 +111,7 @@ public class StateMachine implements WeightListener {
                     //Turn the balance on
                     if ((System.nanoTime() - nanoTimeAtLastONOFFCommand) > (1000000000L * 20)){
                         nanoTimeAtLastONOFFCommand = System.nanoTime();
-                        Scale.getInstance().getReadAndParseSerialService().getCommandQueue().add("O\r\n");
+                        ReadAndParseSerialService.getInstance().getCommandQueue().add("O\r\n");
                         Log.e("StateMachine", "Added O to commandqueue");
                      }
                     break;
@@ -130,7 +131,7 @@ public class StateMachine implements WeightListener {
                     break;
                 case ON_AND_MODE_NOT_GRAM:
                     //change mode until mode is gram
-                    Scale.getInstance().getReadAndParseSerialService().getCommandQueue().add("M\r\n");
+                    ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
                     Log.e("StateMachine", "Added M to commandqueue");
                     break;
                 default:

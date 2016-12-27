@@ -25,6 +25,12 @@ import java.util.Date;
 
 public class ApplicationManager {
 
+    public static synchronized ApplicationManager getInstance(){
+        return instance;
+
+    }
+    private static ApplicationManager instance = new ApplicationManager();
+
     public Library getCurrentLibrary() {
         return currentLibrary;
     }
@@ -97,7 +103,7 @@ public class ApplicationManager {
     private static final int UNIT_GRAM = 1;
     private static final int UNIT_PIECES = 2;
 
-    private static ApplicationManager instance = new ApplicationManager();
+
 
     public void setTareInGram(Double tareInGram) {
         currentLibrary.setTara(tareInGram);
@@ -192,10 +198,7 @@ public class ApplicationManager {
 
     }
 
-    public static synchronized ApplicationManager getInstance(){
-        return instance;
 
-    }
 
     public String getLoadInGramAsStringWithUnit() {
         return String.format("%.4f", getSumInGram()) + " g";
