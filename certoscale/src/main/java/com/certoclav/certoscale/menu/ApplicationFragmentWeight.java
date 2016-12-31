@@ -92,6 +92,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
+            case PERCENT_WEIGHING:
+                textValue.setTextColor(Color.WHITE);
+
+                textValue.setText(ApplicationManager.getInstance().getPercent()+ " %");
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsString()+ " g");
+                break;
+
             case DENSITIY_DETERMINATION:
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.BLUE);

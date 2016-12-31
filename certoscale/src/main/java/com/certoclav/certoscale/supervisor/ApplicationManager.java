@@ -25,10 +25,11 @@ import java.util.Date;
 
 public class ApplicationManager {
 
-    public static synchronized ApplicationManager getInstance(){
+    public static synchronized ApplicationManager getInstance() {
         return instance;
 
     }
+
     private static ApplicationManager instance = new ApplicationManager();
 
     public Library getCurrentLibrary() {
@@ -62,11 +63,12 @@ public class ApplicationManager {
     );
 
     private ArrayList<Double> statisticsArray = new ArrayList<Double>();
+
     public Double getAwpCalcSampleSize() {
         return currentLibrary.getSampleSize();
     }
 
-    public String getAwpCalcSampleSizeAsString(){
+    public String getAwpCalcSampleSizeAsString() {
         return String.format("%.6f", getAwpCalcSampleSize()) + " g";
     }
 
@@ -90,7 +92,7 @@ public class ApplicationManager {
         currentLibrary.setUnderLimitPieces(underLimitPieces);
     }
 
-    public void setTarget(int target){
+    public void setTarget(int target) {
         currentLibrary.setTarget(target);
     }
 
@@ -103,10 +105,8 @@ public class ApplicationManager {
     }
 
 
-
     private static final int UNIT_GRAM = 1;
     private static final int UNIT_PIECES = 2;
-
 
 
     public void setTareInGram(Double tareInGram) {
@@ -132,8 +132,8 @@ public class ApplicationManager {
 
     private int unit = UNIT_GRAM;
 
-    public String getUnitAsString(){
-        switch (Scale.getInstance().getScaleApplication()){
+    public String getUnitAsString() {
+        switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
                 return "pcs";
 
@@ -146,62 +146,72 @@ public class ApplicationManager {
     }
 
 
-    public Double getSumInGram(){
+    public Double getSumInGram() {
         return Scale.getInstance().getWeightInGram();
     }
 
-    public int getSumInPieces(){
-       return (int) Math.round(Scale.getInstance().getWeightInGram()/currentLibrary.getAveragePieceWeight());
+    public int getSumInPieces() {
+        return (int) Math.round(Scale.getInstance().getWeightInGram() / currentLibrary.getAveragePieceWeight());
     }
 
-    public Double getTareInGram(){
+    public Double getTareInGram() {
         return currentLibrary.getTara();
     }
 
-    public int getTareInPieces(){
-        return (int) Math.round(currentLibrary.getTara()/currentLibrary.getAveragePieceWeight());
+    public int getTareInPieces() {
+        return (int) Math.round(currentLibrary.getTara() / currentLibrary.getAveragePieceWeight());
     }
 
-    public int getLoadInPercent(){
-        return (int) Math.round((Scale.getInstance().getWeightInGram()/AppConstants.WEIGHT_MAX)*100.0);
+    public int getLoadInPercent() {
+        return (int) Math.round((Scale.getInstance().getWeightInGram() / AppConstants.WEIGHT_MAX) * 100.0);
     }
 
 
     public String getSumAsStringWithUnit() {
 
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces()) + " "+ getUnitAsString();
+                return String.format("%d", getSumInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getSumInGram()) + " "+ getUnitAsString();
+                return String.format("%.4f", getSumInGram()) + " " + getUnitAsString();
         }
 
     }
 
+    public String getSumAsString() {
+        return String.format("%.4f", getSumInGram());
+    }
+
+
     public String getTaredValueAsStringWithUnit() {
 
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces() ) + " "+ getUnitAsString();
+                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getSumInGram() - getTareInGram()) + " "+ getUnitAsString();
+                return String.format("%.4f", getSumInGram() - getTareInGram()) + " " + getUnitAsString();
         }
 
     }
 
 
     public String getTareAsStringWithUnit() {
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getTareInPieces()) + " "+ getUnitAsString();
+                return String.format("%d", getTareInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getTareInGram()) + " "+ getUnitAsString();
+                return String.format("%.4f", getTareInGram()) + " " + getUnitAsString();
         }
     }
-    private ApplicationManager(){
 
+
+    public String getTareAsString() {
+        return String.format("%d", getTareInPieces());
     }
 
+    private ApplicationManager() {
+
+    }
 
 
     public String getLoadInGramAsStringWithUnit() {
@@ -219,44 +229,45 @@ public class ApplicationManager {
     public String getTaredValueAsStringInGram() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces()-getTareInPieces())+ " g";
+                return String.format("%d", getSumInPieces() - getTareInPieces()) + " g";
             default:
                 return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
         }
     }
 
     public void accumulateStatistics() {
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                statisticsArray.add((double) (getSumInPieces()-getTareInPieces()));
-            break;
+                statisticsArray.add((double) (getSumInPieces() - getTareInPieces()));
+                break;
             default:
                 statisticsArray.add(getTaredValueInGram());
                 break;
         }
 
     }
-    public void clearStatistics(){
+
+    public void clearStatistics() {
         statisticsArray.clear();
     }
 
     public void showStatisticsNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
-        try{
+        try {
             final Dialog dialog = new Dialog(eContext);
             dialog.setContentView(R.layout.dialog_statistics);
             dialog.setOnDismissListener(listener);
             dialog.setTitle("Statistics");
             SummaryStatistics statistic = new SummaryStatistics();
-            for(Double value : statisticsArray){
+            for (Double value : statisticsArray) {
                 statistic.addValue(value);
             }
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText(""+ statistic.getN());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f",statistic.getMean()) + " "+getUnitAsString());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f",statistic.getMax())  + " "+getUnitAsString());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f",statistic.getMin())  + " "+getUnitAsString());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f",statistic.getVariance())  + " "+getUnitAsString());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f",statistic.getStandardDeviation()) +   " "+getUnitAsString());
-            ((TextView)dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f",statistic.getSum()) +  " "+getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + statistic.getN());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f", statistic.getMin()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f", statistic.getVariance()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f", statistic.getStandardDeviation()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f", statistic.getSum()) + " " + getUnitAsString());
 
             // set the custom dialog components - text, image and button
 
@@ -273,7 +284,7 @@ public class ApplicationManager {
             dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(eContext,"Todo: Send statistics to COM port",Toast.LENGTH_LONG).show();
+                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
                 }
             });
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);
@@ -286,48 +297,50 @@ public class ApplicationManager {
 
             dialog.show();
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public String getAveragePieceWeightAsStringInGram() {
-        return String.format("%.5f",currentLibrary.getAveragePieceWeight());
+        return String.format("%.5f", currentLibrary.getAveragePieceWeight());
     }
 
-    public String getUnderLimitAsStringInGram(){
-        return String.format("%.5f",currentLibrary.getUnderLimit());
+    public String getUnderLimitAsStringInGram() {
+        return String.format("%.5f", currentLibrary.getUnderLimit());
     }
 
-    public String getUnderLimitPiecesAsStringInGram(){
-        return String.format("%.1f",currentLibrary.getUnderLimitPieces());
+    public String getUnderLimitPiecesAsStringInGram() {
+        return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
 
-    public String getUnderLimitPiecesAsString(){
-        return String.format("%.1f",currentLibrary.getUnderLimitPieces());
-    }
-
-
-
-    public String getOverlimitPiecesAsString(){
-        return String.format("%.1f",currentLibrary.getOverLimitPieces());
-    };
-
-    public String getDifferenceAsString(){
-        return String.format("%.1f",getSumInPieces()-getTareInPieces()-currentLibrary.getTarget());
-    };
-
-    public String getTargetPiecesAsString(){
-        return String.format("%.1f",currentLibrary.getTargetPieces());
+    public String getUnderLimitPiecesAsString() {
+        return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
 
 
-    public String getOverlimitPiecesAsStringInGram(){
-        return String.format("%.1f",currentLibrary.getOverLimitPieces());
-    };
+    public String getOverlimitPiecesAsString() {
+        return String.format("%.1f", currentLibrary.getOverLimitPieces());
+    }
 
+    ;
+
+    public String getDifferenceAsString() {
+        return String.format("%.1f", getSumInPieces() - getTareInPieces() - currentLibrary.getTarget());
+    }
+
+    ;
+
+    public String getTargetPiecesAsString() {
+        return String.format("%.1f", currentLibrary.getTargetPieces());
+    }
+
+
+    public String getOverlimitPiecesAsStringInGram() {
+        return String.format("%.1f", currentLibrary.getOverLimitPieces());
+    }
+
+    ;
 
 
     public Double getUnderLimitValueInGram() {
@@ -335,17 +348,63 @@ public class ApplicationManager {
     }
 
     public String getUnderLimitAsStringWithUnit() {
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
-                return String.format("%.4f",currentLibrary.getUnderLimit()) + getUnitAsString();
+                return String.format("%.4f", currentLibrary.getUnderLimit()) + getUnitAsString();
             case PART_COUNTING:
-                return String.format("%d",currentLibrary.getUnderLimitPieces()) + getUnitAsString();
+                return String.format("%d", currentLibrary.getUnderLimitPieces()) + getUnitAsString();
         }
         return "todo";
 
     }
 
     public String getReferenceWeightAsStringInGram() {
-        return String.format("%.4f",currentLibrary.getReferenceWeight() )+ " " +"g";
+        return String.format("%.4f", (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)) + " " + "g";
+    }
+
+    public String getDifferenceInGram() {
+        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+        double netto=(getSumInGram() - getTareInGram());
+
+        double difference=netto-ref;
+
+
+        return String.format("%.4f", difference);
+    }
+
+
+    public String getDifferenceInPercent() {
+
+        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+
+        if (ref==0){
+            return String.format("%.4f", (ref));
+        }else {
+
+            double netto = (getSumInGram() - getTareInGram());
+
+            double percent = ((netto/ref)*100)-100;
+
+
+            return String.format("%.4f", percent);
+        }
+    }
+
+
+    public String getPercent() {
+
+        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+
+        if (ref==0){
+            return String.format("%.4f", (ref));
+        }else {
+
+            double netto = (getSumInGram() - getTareInGram());
+
+            double percent = (netto/ref)*100;
+
+
+            return String.format("%.4f", percent);
+        }
     }
 }

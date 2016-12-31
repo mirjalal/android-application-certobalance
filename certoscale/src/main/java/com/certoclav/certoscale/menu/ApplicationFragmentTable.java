@@ -195,12 +195,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case PERCENT_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible),getResources().getBoolean(R.bool.preferences_percent_tara_visible))==true) {
                     listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString()+ " g");
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible),getResources().getBoolean(R.bool.preferences_percent_brutto_visible))==true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
-                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsString()+ " g");
                 }
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_netto_visible),getResources().getBoolean(R.bool.preferences_percent_netto_visible))==true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
@@ -215,11 +215,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible),getResources().getBoolean(R.bool.preferences_percent_difference_visible))==true) {
                     listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE [g]");
-                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInGram()+ " g");
                 }
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible),getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible))==true) {
                     listReferenceFields.get(difference_percent).getTextName().setText("DIFFERENCE [%]");
-                    listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                    listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInPercent()+ " %");
                 }
                 break;
             case CHECK_WEIGHING:
