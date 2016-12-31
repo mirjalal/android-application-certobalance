@@ -18,10 +18,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_certoscale_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" afterPath="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/library/library.iml" afterPath="$PROJECT_DIR$/library/library.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/certoscale.iml" afterPath="$PROJECT_DIR$/certoscale/certoscale.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" afterPath="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" />
     </list>
     <ignored path="android-application-certobalance.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,13 +53,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ApplicationFragmentWeight.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java">
+      <file leaf-file-name="preference_check_weighing.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="97" column="84" selection-start-line="97" selection-start-column="84" selection-end-line="97" selection-end-column="84" />
+            <state relative-caret-position="527">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding>
-                <marker date="1483200354623" expanded="false" signature="3429:3474" ph="&quot;preferences_weigh_minimum&quot;" />
+                <marker date="1483203435100" expanded="false" signature="209:246" ph="&quot;preferences_check_activated&quot;" />
+                <marker date="1483203435100" expanded="false" signature="427:459" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="541:573" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="true" signature="870:907" ph="&quot;preferences_check_limitmode&quot;" />
+                <marker date="1483203435100" expanded="false" signature="1199:1231" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="1642:1674" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="1825:1870" ph="&quot;preferences_check_secondary_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2102:2134" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2219:2259" ph="&quot;preferences_check_over_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2466:2498" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2585:2626" ph="&quot;preferences_check_under_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2836:2868" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="2953:2995" ph="&quot;preferences_check_brutto_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="3206:3238" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="3323:3364" ph="&quot;preferences_check_netto_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="3573:3605" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="3690:3730" ph="&quot;preferences_check_tara_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="3936:3968" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="4053:4095" ph="&quot;preferences_check_target_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="4307:4339" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="4424:4473" ph="&quot;preferences_check_overtolerance_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="4697:4729" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="4814:4864" ph="&quot;preferences_check_undertolerance_visible&quot;" />
+                <marker date="1483203435100" expanded="false" signature="5091:5123" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="5293:5333" ph="&quot;preferences_check_print_target&quot;" />
+                <marker date="1483203435100" expanded="false" signature="5533:5565" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="5650:5697" ph="&quot;preferences_check_print_overtolerance&quot;" />
+                <marker date="1483203435100" expanded="false" signature="5909:5941" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="6026:6074" ph="&quot;preferences_check_print_undertolerance&quot;" />
+                <marker date="1483203435100" expanded="false" signature="6289:6321" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="6407:6450" ph="&quot;preferences_check_print_overlimit&quot;" />
+                <marker date="1483203435100" expanded="false" signature="6651:6683" ph="&quot;preferences_check_lock&quot;" />
+                <marker date="1483203435100" expanded="false" signature="6769:6813" ph="&quot;preferences_check_print_underlimit&quot;" />
+                <marker date="1483203435100" expanded="false" signature="7016:7048" ph="&quot;preferences_check_lock&quot;" />
               </folding>
             </state>
           </provider>
@@ -2453,7 +2488,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/bluetooth/chooser/BluetoothDeviceListFragment.java" />
         <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/LineGraph.java" />
         <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/graph/ProfileGraph.java" />
         <option value="$PROJECT_DIR$/library/src/main/java/com/certoclav/library/util/UpdateUtils.java" />
@@ -2495,7 +2529,6 @@
         <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preferences_weighing.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/values/defaultval.xml" />
-        <option value="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/database/Library.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentSettingsPartCounting.java" />
@@ -2504,6 +2537,8 @@
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java" />
         <option value="$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml" />
       </list>
     </option>
   </component>
@@ -2541,8 +2576,6 @@
       <pane id="ProjectPane">
         <subPane />
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2551,8 +2584,212 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="res">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="xml">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="res">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="com/certoclav/certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/main">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="com/certoclav/certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="menu">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="build">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="build">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="generated/source">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="r/debug">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="certoscale">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="build">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="generated/source">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane />
       </pane>
@@ -2893,8 +3130,8 @@
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32405347" sideWeight="0.18336888" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32405347" sideWeight="0.81663114" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24053451" sideWeight="0.58208954" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32293987" sideWeight="0.8134328" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2902,18 +3139,18 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40423164" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24053451" sideWeight="0.4195096" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24053451" sideWeight="0.41791046" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.114072494" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="92" y="92" width="1736" height="856" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24840085" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.4978678" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25053304" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.344098" sideWeight="0.47654584" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2923,7 +3160,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24840085" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.344098" sideWeight="0.47654584" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2944,21 +3181,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_settings_weighing.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/layout/menu_application_fragment_weight_display.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
@@ -5433,13 +5659,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="110" column="43" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/adapters/SpinnerModeAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-412">
@@ -5470,23 +5689,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="115" column="100" selection-start-line="115" selection-start-column="100" selection-end-line="115" selection-end-column="100" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/constants/AppConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <marker date="1483191470165" expanded="true" signature="46:135" ph="/**...*/" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5494,21 +5700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-986">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding>
-            <marker date="1483191470117" expanded="false" signature="51:537" ph="..." />
-            <marker date="1483191470117" expanded="true" signature="540:716" ph="/**...*/" />
-            <marker date="1483191470117" expanded="true" signature="818:913" ph="{...}" />
-            <marker date="1483191470117" expanded="false" signature="986:1009" ph="&lt;~&gt;" />
-            <marker date="1483191470117" expanded="true" signature="1083:1127" ph="{...}" />
-            <marker date="1483191470117" expanded="true" signature="1200:1247" ph="{...}" />
-            <marker date="1483191470117" expanded="true" signature="1431:1527" ph="{...}" />
-            <marker date="1483191470117" expanded="true" signature="1532:1739" ph="/**...*/" />
-            <marker date="1483191470117" expanded="true" signature="1828:4811" ph="{...}" />
-            <marker date="1483191470117" expanded="false" signature="4133:4205" ph="(v) → {" />
-            <marker date="1483191470117" expanded="false" signature="4341:4348" ph="}" />
-            <marker date="1483191470117" expanded="false" signature="4561:4635" ph="(v) → {" />
-            <marker date="1483191470117" expanded="false" signature="4773:4781" ph="}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -5805,48 +5996,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="221" column="128" selection-start-line="221" selection-start-column="120" selection-end-line="221" selection-end-column="142" />
-          <folding>
-            <marker date="1483199769157" expanded="false" signature="47:649" ph="..." />
-            <marker date="1483199769157" expanded="false" signature="872:888" ph="&lt;~&gt;" />
-            <marker date="1483199769157" expanded="true" signature="934:1022" ph="{...}" />
-            <marker date="1483199769157" expanded="true" signature="1064:1154" ph="{...}" />
-            <marker date="1483199769157" expanded="true" signature="1280:2947" ph="{...}" />
-            <marker date="1483199769157" expanded="true" signature="3024:14918" ph="{...}" />
-            <marker date="1483199769157" expanded="true" signature="3133:3302" ph="//..." />
-            <marker date="1483199769157" expanded="false" signature="4030:4080" ph="&quot;preferences_weigh_tara_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="4428:4480" ph="&quot;preferences_weigh_brutto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="4834:4885" ph="&quot;preferences_weigh_netto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="5241:5291" ph="&quot;preferences_weigh_secondary_visible&quot;" />
-            <marker date="1483199769157" expanded="true" signature="5624:5822" ph="//..." />
-            <marker date="1483199769157" expanded="false" signature="5862:5915" ph="&quot;preferences_weigh_minimum_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="6351:6404" ph="&quot;preferences_counting_tare_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="6755:6810" ph="&quot;preferences_counting_gross_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="7167:7221" ph="&quot;preferences_counting_net_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="7580:7630" ph="&quot;preferences_weigh_secondary_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="7985:8037" ph="&quot;preferences_counting_apw_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="8421:8466" ph="&quot;preferences_counting_mode&quot;" />
-            <marker date="1483199769157" expanded="false" signature="8602:8662" ph="&quot;preferences_counting_under_limit_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="9061:9120" ph="&quot;preferences_counting_over_limit_visible&quot;" />
-            <marker date="1483199769157" expanded="true" signature="9574:9629" ph="&quot;preferences_counting_target_visible&quot;" />
-            <marker date="1483199769157" expanded="true" signature="10014:10073" ph="&quot;preferences_counting_difference_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="10537:10589" ph="&quot;preferences_percent_tara_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="10937:10991" ph="&quot;preferences_percent_brutto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="11345:11398" ph="&quot;preferences_percent_netto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="11757:11821" ph="&quot;preferences_percent_reference_weight_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="12228:12286" ph="&quot;preferences_percent_difference_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="12679:12745" ph="&quot;preferences_percent_difference_percent_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="13207:13257" ph="&quot;preferences_check_tara_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="13605:13657" ph="&quot;preferences_check_brutto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="14011:14062" ph="&quot;preferences_check_netto_visible&quot;" />
-            <marker date="1483199769157" expanded="false" signature="14474:14534" ph="&quot;preferences_animal_measuringtime_visible&quot;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/supervisor/ApplicationManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -5941,10 +6090,196 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentWeight.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
+        <state relative-caret-position="610">
           <caret line="97" column="84" selection-start-line="97" selection-start-column="84" selection-end-line="97" selection-end-column="84" />
           <folding>
+            <marker date="1483200354623" expanded="false" signature="47:584" ph="..." />
+            <marker date="1483200354623" expanded="true" signature="587:954" ph="/**...*/" />
+            <marker date="1483200354623" expanded="true" signature="1325:1917" ph="{...}" />
+            <marker date="1483200354623" expanded="true" signature="1961:2049" ph="{...}" />
+            <marker date="1483200354623" expanded="true" signature="2091:2181" ph="{...}" />
+            <marker date="1483200354623" expanded="true" signature="2261:5536" ph="{...}" />
             <marker date="1483200354623" expanded="false" signature="3429:3474" ph="&quot;preferences_weigh_minimum&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/java/com/certoclav/certoscale/menu/ApplicationFragmentTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3111">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding>
+            <marker date="1483199769157" expanded="false" signature="47:649" ph="..." />
+            <marker date="1483199769157" expanded="false" signature="872:888" ph="&lt;~&gt;" />
+            <marker date="1483199769157" expanded="true" signature="934:1022" ph="{...}" />
+            <marker date="1483199769157" expanded="true" signature="1064:1154" ph="{...}" />
+            <marker date="1483199769157" expanded="true" signature="1280:2947" ph="{...}" />
+            <marker date="1483199769157" expanded="true" signature="3024:14918" ph="{...}" />
+            <marker date="1483199769157" expanded="true" signature="3133:3302" ph="//..." />
+            <marker date="1483199769157" expanded="false" signature="4030:4080" ph="&quot;preferences_weigh_tara_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="4428:4480" ph="&quot;preferences_weigh_brutto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="4834:4885" ph="&quot;preferences_weigh_netto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="5241:5291" ph="&quot;preferences_weigh_secondary_visible&quot;" />
+            <marker date="1483199769157" expanded="true" signature="5624:5822" ph="//..." />
+            <marker date="1483199769157" expanded="false" signature="5862:5915" ph="&quot;preferences_weigh_minimum_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="6351:6404" ph="&quot;preferences_counting_tare_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="6755:6810" ph="&quot;preferences_counting_gross_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="7167:7221" ph="&quot;preferences_counting_net_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="7580:7630" ph="&quot;preferences_weigh_secondary_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="7985:8037" ph="&quot;preferences_counting_apw_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="8421:8466" ph="&quot;preferences_counting_mode&quot;" />
+            <marker date="1483199769157" expanded="false" signature="8602:8662" ph="&quot;preferences_counting_under_limit_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="9061:9120" ph="&quot;preferences_counting_over_limit_visible&quot;" />
+            <marker date="1483199769157" expanded="true" signature="9574:9629" ph="&quot;preferences_counting_target_visible&quot;" />
+            <marker date="1483199769157" expanded="true" signature="10014:10073" ph="&quot;preferences_counting_difference_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="10537:10589" ph="&quot;preferences_percent_tara_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="10937:10991" ph="&quot;preferences_percent_brutto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="11345:11398" ph="&quot;preferences_percent_netto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="11757:11821" ph="&quot;preferences_percent_reference_weight_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="12228:12286" ph="&quot;preferences_percent_difference_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="12679:12745" ph="&quot;preferences_percent_difference_percent_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="13207:13257" ph="&quot;preferences_check_tara_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="13605:13657" ph="&quot;preferences_check_brutto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="14011:14062" ph="&quot;preferences_check_netto_visible&quot;" />
+            <marker date="1483199769157" expanded="false" signature="14474:14534" ph="&quot;preferences_animal_measuringtime_visible&quot;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_parts_counting.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="37" selection-end-column="10" />
+          <folding>
+            <marker date="1483194154962" expanded="true" signature="17:6975" ph="..." />
+            <marker date="1483194154962" expanded="true" signature="161:1495" ph="..." />
+            <marker date="1483194154962" expanded="true" signature="185:472" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="201:241" ph="&quot;preferences_counting_activated&quot;" />
+            <marker date="1483194154962" expanded="false" signature="413:448" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="496:754" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="512:547" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="780:1109" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="799:847" ph="&quot;preferences_counting_auto_optimization&quot;" />
+            <marker date="1483194154962" expanded="false" signature="1047:1082" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="1139:1455" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="1161:1196" ph="&quot;preferences_counting_mode&quot;" />
+            <marker date="1483194154962" expanded="false" signature="1413:1448" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="1554:4856" ph="..." />
+            <marker date="1483194154962" expanded="true" signature="1582:1919" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="1601:1649" ph="&quot;preferences_counting_secondary_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="1857:1892" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="1957:2243" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="1976:2018" ph="&quot;preferences_counting_apw_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="2181:2216" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="2274:2595" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="2293:2338" ph="&quot;preferences_counting_gross_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="2533:2568" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="2621:2938" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="2640:2684" ph="&quot;preferences_counting_net_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="2876:2911" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="2967:3280" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="2986:3029" ph="&quot;preferences_counting_tare_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="3218:3253" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="3311:3652" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="3330:3375" ph="&quot;preferences_counting_target_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="3590:3625" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="3682:4039" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="3701:3750" ph="&quot;preferences_counting_difference_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="3977:4012" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="4071:4432" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="4090:4139" ph="&quot;preferences_counting_over_limit_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="4370:4405" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="4462:4827" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="4481:4531" ph="&quot;preferences_counting_under_limit_visible&quot;" />
+            <marker date="1483194154962" expanded="false" signature="4765:4800" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="4910:6953" ph="..." />
+            <marker date="1483194154962" expanded="true" signature="4934:5221" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="4953:4993" ph="&quot;preferences_counting_print_apw&quot;" />
+            <marker date="1483194154962" expanded="false" signature="5159:5194" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="5250:5569" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="5269:5317" ph="&quot;preferences_counting_print_sample_size&quot;" />
+            <marker date="1483194154962" expanded="false" signature="5507:5542" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="5598:5897" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="5617:5660" ph="&quot;preferences_counting_print_target&quot;" />
+            <marker date="1483194154962" expanded="false" signature="5835:5870" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="5926:6241" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="5945:5992" ph="&quot;preferences_counting_print_difference&quot;" />
+            <marker date="1483194154962" expanded="false" signature="6179:6214" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="6268:6583" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="6287:6334" ph="&quot;preferences_counting_print_over_limit&quot;" />
+            <marker date="1483194154962" expanded="false" signature="6521:6556" ph="&quot;preferences_counting_lock&quot;" />
+            <marker date="1483194154962" expanded="true" signature="6612:6931" ph="..." />
+            <marker date="1483194154962" expanded="false" signature="6631:6679" ph="&quot;preferences_counting_print_under_limit&quot;" />
+            <marker date="1483194154962" expanded="false" signature="6869:6904" ph="&quot;preferences_counting_lock&quot;" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="295" column="24" selection-start-line="295" selection-start-column="24" selection-end-line="295" selection-end-column="61" />
+          <folding>
+            <marker date="1483203393049" expanded="true" signature="49:24407" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="21842:22384" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="22426:22691" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="22746:22796" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="22854:22987" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23048:23137" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23188:23341" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23399:23488" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23547:23630" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23696:23763" ph="..." />
+            <marker date="1483203393049" expanded="true" signature="23825:23927" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/certoscale/src/main/res/xml/preference_check_weighing.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding>
+            <marker date="1483203435100" expanded="false" signature="209:246" ph="&quot;preferences_check_activated&quot;" />
+            <marker date="1483203435100" expanded="false" signature="427:459" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="541:573" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="true" signature="870:907" ph="&quot;preferences_check_limitmode&quot;" />
+            <marker date="1483203435100" expanded="false" signature="1199:1231" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="1642:1674" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="1825:1870" ph="&quot;preferences_check_secondary_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2102:2134" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2219:2259" ph="&quot;preferences_check_over_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2466:2498" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2585:2626" ph="&quot;preferences_check_under_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2836:2868" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="2953:2995" ph="&quot;preferences_check_brutto_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="3206:3238" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="3323:3364" ph="&quot;preferences_check_netto_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="3573:3605" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="3690:3730" ph="&quot;preferences_check_tara_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="3936:3968" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="4053:4095" ph="&quot;preferences_check_target_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="4307:4339" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="4424:4473" ph="&quot;preferences_check_overtolerance_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="4697:4729" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="4814:4864" ph="&quot;preferences_check_undertolerance_visible&quot;" />
+            <marker date="1483203435100" expanded="false" signature="5091:5123" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="5293:5333" ph="&quot;preferences_check_print_target&quot;" />
+            <marker date="1483203435100" expanded="false" signature="5533:5565" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="5650:5697" ph="&quot;preferences_check_print_overtolerance&quot;" />
+            <marker date="1483203435100" expanded="false" signature="5909:5941" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="6026:6074" ph="&quot;preferences_check_print_undertolerance&quot;" />
+            <marker date="1483203435100" expanded="false" signature="6289:6321" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="6407:6450" ph="&quot;preferences_check_print_overlimit&quot;" />
+            <marker date="1483203435100" expanded="false" signature="6651:6683" ph="&quot;preferences_check_lock&quot;" />
+            <marker date="1483203435100" expanded="false" signature="6769:6813" ph="&quot;preferences_check_print_underlimit&quot;" />
+            <marker date="1483203435100" expanded="false" signature="7016:7048" ph="&quot;preferences_check_lock&quot;" />
           </folding>
         </state>
       </provider>

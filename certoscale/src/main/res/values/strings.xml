@@ -272,6 +272,33 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="preferences_check_modes">
+        <item>Over and Under</item>
+        <item>Nominal / Weight Tolerance</item>
+        <item>Nominal / Percent Tolerance</item>
+    </string-array>
+
+
+    <string-array name="preferences_check_modes_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preferences_check_display_modes">
+        <item>Weight</item>
+        <item>Check Status</item>
+
+    </string-array>
+
+
+    <string-array name="preferences_check_display_modes_value">
+        <item>1</item>
+        <item>2</item>
+
+    </string-array>
+
   
     <string-array name="preferences_counting_statistics">
         <item>Off</item>
