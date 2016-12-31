@@ -90,6 +90,10 @@ public class ApplicationManager {
         currentLibrary.setUnderLimitPieces(underLimitPieces);
     }
 
+    public void setTarget(int target){
+        currentLibrary.setTarget(target);
+    }
+
     public void setOverLimit(int overLimit) {
         currentLibrary.setOverLimit(overLimit);
     }
@@ -310,6 +314,14 @@ public class ApplicationManager {
     public String getOverlimitPiecesAsString(){
         return String.format("%.1f",currentLibrary.getOverLimitPieces());
     };
+
+    public String getDifferenceAsString(){
+        return String.format("%.1f",getSumInPieces()-getTareInPieces()-currentLibrary.getTarget());
+    };
+
+    public String getTargetPiecesAsString(){
+        return String.format("%.1f",currentLibrary.getTargetPieces());
+    }
 
 
     public String getOverlimitPiecesAsStringInGram(){

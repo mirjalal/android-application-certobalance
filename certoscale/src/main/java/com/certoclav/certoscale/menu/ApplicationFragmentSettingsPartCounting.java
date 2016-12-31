@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
 
     private Button button_under_limit = null;
     private Button button_over_limit = null;
+
+    private Button button_target = null;
 
     private LinearLayout containerSettingsButtons = null;
 
@@ -241,6 +245,55 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         });
 
 
+        button_target = (Button) rootView.findViewById(R.id.settings_partcounting_button_under_limit);
+        button_target.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setTitle("Please enter the piece target");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().setTarget(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setTarget(0);
+
+                            }dialog.dismiss();
+                            onResume();
+
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
 
 
         buttonCalculateAwp.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +305,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 buttonCalculateAwp.setEnabled(false);
                 button_under_limit.setEnabled(false);
                 button_over_limit.setEnabled(false);
+                button_target.setEnabled(false);
                 textInstruction.setText("Place " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + "onto the pan");
                 textInstruction.setVisibility(View.VISIBLE);
                 Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
@@ -271,6 +325,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         buttonCalculateAwp.setEnabled(true);
                         button_under_limit.setEnabled(true);
                         button_over_limit.setEnabled(true);
+                        button_target.setEnabled(true);
                         Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
                         onResume();
                     }
@@ -306,6 +361,30 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pieces");
         button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pieces");
         button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pieces");
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
+
+        if(cmode.equals("1")){
+            button_under_limit.setVisibility(View.INVISIBLE);
+            button_over_limit.setVisibility(View.INVISIBLE);
+            button_target.setVisibility(View.INVISIBLE);
+
+        }
+        if(cmode.equals("2")){
+            button_target.setVisibility(View.INVISIBLE);
+            button_under_limit.setVisibility(View.VISIBLE);
+            button_over_limit.setVisibility(View.VISIBLE);
+
+        }
+
+        if(cmode.equals("3")){
+            button_under_limit.setVisibility(View.INVISIBLE);
+            button_over_limit.setVisibility(View.INVISIBLE);
+            button_target.setVisibility(View.VISIBLE);
+            button_target.setText("Target:\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pieces");
+        }
 
 
     }
