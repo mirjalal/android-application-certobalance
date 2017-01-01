@@ -39,6 +39,16 @@ public class ApplicationManager {
         this.currentLibrary = currentLibrary;
     }
 
+    public Double getAnimalWeight() {
+        return animalWeight;
+    }
+
+    public void setAnimalWeight(Double animalWeight) {
+        this.animalWeight = animalWeight;
+    }
+
+    private Double animalWeight = 0d;
+
     private Library currentLibrary = new Library(
             "admin",
             ScaleApplication.WEIGHING.ordinal(),
@@ -90,6 +100,10 @@ public class ApplicationManager {
         currentLibrary.setUnderLimitPieces(underLimitPieces);
     }
 
+    public void setTarget(int target){
+        currentLibrary.setTarget(target);
+    }
+
     public void setOverLimit(int overLimit) {
         currentLibrary.setOverLimit(overLimit);
     }
@@ -135,7 +149,6 @@ public class ApplicationManager {
 
             case PERCENT_WEIGHING:
                 return "%";
-
             default:
                 return "g";
         }
@@ -311,6 +324,14 @@ public class ApplicationManager {
         return String.format("%.1f",currentLibrary.getOverLimitPieces());
     };
 
+    public String getDifferenceAsString(){
+        return String.format("%.1f",getSumInPieces()-getTareInPieces()-currentLibrary.getTarget());
+    };
+
+    public String getTargetPiecesAsString(){
+        return String.format("%.1f",currentLibrary.getTargetPieces());
+    }
+
 
     public String getOverlimitPiecesAsStringInGram(){
         return String.format("%.1f",currentLibrary.getOverLimitPieces());
@@ -336,4 +357,6 @@ public class ApplicationManager {
     public String getReferenceWeightAsStringInGram() {
         return String.format("%.4f",currentLibrary.getReferenceWeight() )+ " " +"g";
     }
+
+
 }

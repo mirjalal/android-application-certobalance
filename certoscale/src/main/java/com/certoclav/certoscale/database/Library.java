@@ -154,9 +154,6 @@ public class Library {
 		return target;
 	}
 
-	public void setTarget(double target) {
-		this.target = target;
-	}
 
 	public double getSampleSize() {
 		return sampleSize;
@@ -197,6 +194,10 @@ public class Library {
 	public void setUnderLimit(double underLimit) {
 		this.underLimit = underLimit;
 	}
+
+	public void setTarget(double target){
+		this.target = target;
+	}
 	public void setUnderLimitPieces(double underLimitPieces) {
 		this.underLimitPieces = underLimitPieces;
 	}
@@ -207,6 +208,9 @@ public class Library {
 
 	public double getOverLimitPieces() {
 		return overLimitPieces;
+	}
+	public double getTargetPieces() {
+		return target;
 	}
 
 
@@ -259,14 +263,15 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_TARA)
 	private double tara;
 
-	@DatabaseField(columnName = FIELD_LIBRARY_TARGET)
-	private double target;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_SAMPLE_SIZE)
 	private double sampleSize;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
 	private double underLimit;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_TARGET)
+	private double target;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_PIECES)
 	private double underLimitPieces;

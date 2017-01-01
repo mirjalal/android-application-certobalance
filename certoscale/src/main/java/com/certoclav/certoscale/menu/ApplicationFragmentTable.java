@@ -177,6 +177,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
+                if  (cmode.equals("3")) {
+                    if (prefs.getBoolean(getString(R.string.preferences_counting_target_visible), getResources().getBoolean(R.bool.preferences_counting_target_visible)) == true) {
+                        listReferenceFields.get(underlimit).getTextName().setText("TARGET");
+                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getTargetPiecesAsString());
+                    }
+
+                    if (prefs.getBoolean(getString(R.string.preferences_counting_difference_visible), getResources().getBoolean(R.bool.preferences_counting_difference_visible)) == true) {
+                        listReferenceFields.get(overlimit).getTextName().setText("DIFFERENCE");
+                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsString());
+                    }
+                }
+
+
 
                 break;
             case PERCENT_WEIGHING:

@@ -67,6 +67,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         switch (Scale.getInstance().getScaleApplication()){
+            case ANIMAL_WEIGHING_CALCULATING:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("calculating...");
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                break;
+            case ANIMAL_WEIGHING:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                break;
             case PART_COUNTING_CALC_AWP:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");

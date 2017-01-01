@@ -105,7 +105,7 @@
 	    	android:key="@string/preferences_counting_over_limit_visible"
 	    	android:defaultValue="@bool/preferences_counting_over_limit_visible"
 	    	android:title="Over Limit"
-	    	android:summary="Turn the over limit weight visible/invisible - Used for Check-Fill only"
+	    	android:summary="Turn the over limit weight visible/invisible - Used for Check-Counting only"
 			android:dependency="@string/preferences_counting_lock">
     	</CheckBoxPreference>	
     	
@@ -113,7 +113,7 @@
 	    	android:key="@string/preferences_counting_under_limit_visible"
 	    	android:defaultValue="@bool/preferences_counting_under_limit_visible"
 	    	android:title="Under Limit"
-	    	android:summary="Turn the under limit weight visible/invisible - Used for Check-Fill only"
+	    	android:summary="Turn the under limit weight visible/invisible - Used for Check-Counting only"
 			android:dependency="@string/preferences_counting_lock">
     	</CheckBoxPreference>	
     	

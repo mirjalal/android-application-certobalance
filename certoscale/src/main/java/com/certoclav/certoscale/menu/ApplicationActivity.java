@@ -258,7 +258,11 @@ protected void onPause() {
 			return;
 		}
 		ApplicationManager.getInstance().clearStatistics();
-		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+		if(application == ScaleApplication.ANIMAL_WEIGHING){
+			getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
+		}else {
+			getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+		}
 		actionButtonbar.getButtonAppSettings().setText("SETTINGS");
 		actionButtonbar.getButtonCal().setEnabled(true);
 		actionButtonbar.getButtonPrint().setEnabled(true);

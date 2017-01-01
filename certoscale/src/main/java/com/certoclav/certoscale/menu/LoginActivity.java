@@ -96,6 +96,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 			final Dialog dialog = new Dialog(LoginActivity.this);
 			dialog.setContentView(R.layout.dialog_yes_no);
+			dialog.setCanceledOnTouchOutside(true);
 			dialog.setTitle("Login failed");
 			TextView text = (TextView) dialog.findViewById(R.id.text);
 			text.setText(loginFailedMessage);
@@ -184,6 +185,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			public void onClick(View v) {
 				final Dialog dialog = new Dialog(LoginActivity.this);
 				dialog.setContentView(R.layout.dialog_yes_no);
+				dialog.setCanceledOnTouchOutside(true);
 				dialog.setTitle(getString(R.string.enable_network_communication));
 				TextView text = (TextView) dialog.findViewById(R.id.text);
 				ImageView image = (ImageView) dialog
@@ -563,6 +565,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		final Dialog dialog = new Dialog(LoginActivity.this);
 		dialog.setContentView(R.layout.dialog_add_create);
 		dialog.setTitle(R.string.register_new_user);
+		dialog.setCanceledOnTouchOutside(true);
 
 		Button buttonCreateLocal = (Button) dialog
 				.findViewById(R.id.dialogButtonCreateLocal);
@@ -631,6 +634,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			final Dialog dialog = new Dialog(LoginActivity.this);
 			dialog.setContentView(R.layout.dialog_yes_no);
 			dialog.setTitle(getString(R.string.network_connection_required));
+			dialog.setCanceledOnTouchOutside(true);
 			TextView text = (TextView) dialog.findViewById(R.id.text);
 			text.setText(getString(R.string.please_connect_to_a_network_via_lan_or_wifi_));
 			text.append(getString(R.string.do_you_want_to_open_wifi_settings_));
@@ -681,6 +685,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				final Dialog dialog = new Dialog(LoginActivity.this);
 				dialog.setContentView(R.layout.dialog_yes_no);
 				dialog.setTitle(R.string.register_new_user);
+				dialog.setCanceledOnTouchOutside(true);
 				TextView text = (TextView) dialog.findViewById(R.id.text);
 				ImageView image = (ImageView) dialog
 						.findViewById(R.id.dialog_image);
