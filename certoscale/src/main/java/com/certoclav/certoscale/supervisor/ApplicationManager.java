@@ -64,9 +64,10 @@ public class ApplicationManager {
     );
 
 
-    public Double getAnimalWeight() {
+    public String getAnimalWeight() {
 
-        return animalWeight;
+        return String.format("%.6f", animalWeight);
+
     }
     public void setAnimalWeight(Double animalWeight) {
 

@@ -25,9 +25,12 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_animal_weighing,container, false);
 
-        Button buttonAveragingTime = (Button) rootView.findViewById(R.id.application_settings_animal_button_averaging_time);
+        buttonAveragingTime = (Button) rootView.findViewById(R.id.application_settings_animal_button_averaging_time);
+
+
         buttonAveragingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +38,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the averaging time");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("s");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -83,6 +86,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
 
     @Override
     public void onResume() {
+        buttonAveragingTime.setText("Averaging Time "+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
 
 
         super.onResume();

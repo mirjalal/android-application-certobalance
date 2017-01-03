@@ -24,24 +24,14 @@
             android:title="Auto Sample Weighing Mode"
             android:dependency="@string/preferences_animal_lock"
             />
-        <ListPreference
-            android:key="preferences_check_limitmode"
-            android:title="Statistics"
-            android:dependency="@string/preferences_animal_lock"
-            />
+
 
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="VISIBILITY" >
 
-        <CheckBoxPreference
-            android:key="@string/preferences_animal_secondary_visible"
-            android:defaultValue="@bool/preferences_animal_secondary_visible"
-            android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible"
-            android:dependency="@string/preferences_animal_lock" >
-        </CheckBoxPreference>
+
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_measuringtime_visible"

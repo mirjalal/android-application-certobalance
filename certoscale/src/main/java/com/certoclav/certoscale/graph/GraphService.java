@@ -21,6 +21,11 @@ public class GraphService implements WeightListener{
 	private long nanoTimeAtStart = 0;
 	private long nanoTimeSinceStart = 0;
 
+
+	// Added for mean Value calculation
+	public double counter=0;
+	public double sum=0;
+
 	private static GraphService instance = new GraphService();
 
 	public static synchronized GraphService getInstance() {
@@ -64,6 +69,9 @@ public class GraphService implements WeightListener{
 					Point p = new Point((double) timeStampInMilliSeconds, ApplicationManager.getInstance().getTaredValueInGram());
 					runningGraph.addNewPoints(p, LineGraph.TYPE_STEAM);
 
+					counter++;
+					sum=sum+ApplicationManager.getInstance().getTaredValueInGram();
+
 					Log.e("GraphService", "add new point: " + p.getX() + " "+ p.getY());
 					double[] range = new double[4];
 					range[0] = 0;
@@ -85,4 +93,6 @@ public class GraphService implements WeightListener{
 			e.printStackTrace();
 		}
 	}
+
+
 }

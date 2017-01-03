@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.graph.GraphService;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -70,12 +71,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ANIMAL_WEIGHING_CALCULATING:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("calculating...");
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getTaredValueInGram());
+
+
                 break;
             case ANIMAL_WEIGHING:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getTaredValueInGram()+ " g");
                 break;
             case PART_COUNTING_CALC_AWP:
                 textValue.setTextColor(Color.WHITE);

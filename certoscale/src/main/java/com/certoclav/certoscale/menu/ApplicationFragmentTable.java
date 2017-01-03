@@ -100,6 +100,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
         int difference_weight=3;
         int difference_percent=5;
 
+        //Animal Weighing
+        int measuringTime=1;
+
 
 
         switch (Scale.getInstance().getScaleApplication()){
@@ -238,9 +241,23 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
                 break;
             case ANIMAL_WEIGHING:
+                if  (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                    listReferenceFields.get(tara).getTextName().setText("TARA");
+                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_animal_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_animal_netto_visible),getResources().getBoolean(R.bool.preferences_animal_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible),getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible))==true) {
-                    listReferenceFields.get(0).getTextName().setText("AVERAGING TIME");
-                    listReferenceFields.get(0).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
+                    listReferenceFields.get(measuringTime).getTextName().setText("AVERAGING TIME"+ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
+                   // listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
                 }
 
 

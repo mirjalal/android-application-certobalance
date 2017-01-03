@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.menu;
 
+import android.app.Application;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,8 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                GraphService.getInstance().counter=0;
+                GraphService.getInstance().sum=0;
                 graphContainer.removeAllViews();
                 graphContainer.addView(GraphService.getInstance().getCurrentGraph(getActivity()));
                 Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING_CALCULATING);
@@ -43,7 +46,11 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
                     @Override
                     protected void onPostExecute(Void aVoid) {
                         Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
-                        ApplicationManager.getInstance().setAnimalWeight(777.7d);
+
+
+                        //ApplicationManager.getInstance().setAnimalWeight(777.7d);
+                        double mean=GraphService.getInstance().sum/GraphService.getInstance().counter;
+                        ApplicationManager.getInstance().setAnimalWeight(mean);
                         buttonStart.setVisibility(View.VISIBLE);
                         super.onPostExecute(aVoid);
                     }
