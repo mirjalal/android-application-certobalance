@@ -29,22 +29,23 @@
         </CheckBoxPreference>
 
         <ListPreference
-            android:key="preferences_check_limitmode"
+            android:key="@string/preferences_check_limitmode"
+            android:defaultValue="1"
+            android:entries="@array/preferences_check_modes"
+            android:entryValues="@array/preferences_check_modes_value"
             android:title="Limit Mode"
             android:summary="Select Limit Settings"
             android:dependency="@string/preferences_check_lock"
             />
 
-        <ListPreference
-            android:key="preferences_check_statistics"
-            android:title="Statistics"
-            android:summary="Select statistics "
-            android:dependency="@string/preferences_check_lock"
-            />
+
 
         <ListPreference
             android:key="preferences_check_displayoptions"
             android:title="Display Options"
+            android:defaultValue="1"
+            android:entries="@array/preferences_check_display_modes"
+            android:entryValues="@array/preferences_check_display_modes_value"
             android:summary="Select statistics "
             android:dependency="@string/preferences_check_lock"
             />

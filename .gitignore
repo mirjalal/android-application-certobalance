@@ -12,6 +12,11 @@ android-application-certobalance-androidstudio.iml
 local.properties
 *.iml
 .gradle
+/.gradle/*
+.gradle/*
+/.*
+/.idea/*
+.idea/*
 /.idea/workspace.xml
 /.idea/modules.xml
 /.idea/libaries/support_v4_23_0_0.xml
