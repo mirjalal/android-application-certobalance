@@ -62,6 +62,18 @@ public class ApplicationManager {
             true
     );
 
+
+    public Double getAnimalWeight() {
+
+        return animalWeight;
+    }
+    public void setAnimalWeight(Double animalWeight) {
+
+        this.animalWeight = animalWeight;
+    }
+
+    private Double animalWeight = 0d;
+
     private ArrayList<Double> statisticsArray = new ArrayList<Double>();
 
     public Double getAwpCalcSampleSize() {

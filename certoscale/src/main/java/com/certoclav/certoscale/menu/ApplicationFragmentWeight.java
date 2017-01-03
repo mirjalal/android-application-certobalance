@@ -113,7 +113,45 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.BLUE);
 
+            case FILLING:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
 
+            case TOTALIZATION:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case FORMULATION:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case DIFFERENTIAL_WEIGHING:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case PEAK_HOLD:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case INGREDIENT_COSTING:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case PIPETTE_ADJUSTMENT:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
+            case STATISTICAL_QUALITY_CONTROL:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
 
             default:
                 //Show weight to the user in respect to the TARA weight

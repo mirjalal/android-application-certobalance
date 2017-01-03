@@ -65,7 +65,7 @@ public class Library {
 		this.userEmail = userEmail;
 	}
 
-	public int getAveragingTime() {
+	public double getAveragingTime() {
 		return averagingTime;
 	}
 
@@ -74,7 +74,7 @@ public class Library {
 	}
 
 	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
-	private int averagingTime;
+	private double averagingTime;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_USER_EMAIL)
 	private String userEmail;
@@ -100,6 +100,7 @@ public class Library {
 		this.mode = mode;
 		this.date = date;
 		this.isLocal = isLocal;
+		//this.averagingTime= avtime;
 	}
 
 	public int getLibraryId() {
