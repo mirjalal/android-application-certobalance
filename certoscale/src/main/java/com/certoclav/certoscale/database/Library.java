@@ -69,18 +69,17 @@ public class Library {
 		return averagingTime;
 	}
 
-	public void setAveragingTime(int averagingTime) {
+	public void setAveragingTime(double averagingTime) {
 		this.averagingTime = averagingTime;
 	}
 
-	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
-	private double averagingTime;
+
 
 	@DatabaseField(columnName = FIELD_LIBRARY_USER_EMAIL)
 	private String userEmail;
 
 
-	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double underLimitPieces, double overLimit, double overLimitPieces, double refweight, double refweightAdjustment,double level, int mode, Date date, Boolean isLocal) {
+	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double underLimitPieces, double overLimit, double overLimitPieces, double refweight, double refweightAdjustment,double level, int mode, Date date, Boolean isLocal, double avtime) {
 		this.userEmail = userEmail;
 		this.application = application;
 		this.cloudId = cloudId;
@@ -100,7 +99,8 @@ public class Library {
 		this.mode = mode;
 		this.date = date;
 		this.isLocal = isLocal;
-		//this.averagingTime= avtime;
+		this.averagingTime = avtime;
+
 	}
 
 	public int getLibraryId() {
@@ -298,11 +298,15 @@ public class Library {
 	private int mode;
 
 
+
 	@DatabaseField(columnName = FIELD_LIBRARY_DATE,dataType = DataType.DATE)
 	private Date date;
 
 	@DatabaseField(columnName = FIELD_LIBRARY_IS_LOCAL)
 	private Boolean isLocal;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
+	private double averagingTime;
 
 
 	Library() {

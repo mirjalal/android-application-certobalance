@@ -51,7 +51,9 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
                     @Override
                     protected Void doInBackground(Void... params) {
                         try {
-                            Thread.sleep(10000);
+
+                            double avtime= (ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime()*1000);
+                            Thread.sleep((int) avtime);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
