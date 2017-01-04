@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CertoBalance.iml" filepath="$PROJECT_DIR$/CertoBalance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-application-certobalance-androidstudio.iml" filepath="$PROJECT_DIR$/android-application-certobalance-androidstudio.iml" />
       <module fileurl="file://$PROJECT_DIR$/certoscale/certoscale.iml" filepath="$PROJECT_DIR$/certoscale/certoscale.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>
