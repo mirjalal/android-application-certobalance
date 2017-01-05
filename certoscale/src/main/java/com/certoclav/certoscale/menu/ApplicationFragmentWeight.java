@@ -118,7 +118,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case FILLING:
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case TOTALIZATION:

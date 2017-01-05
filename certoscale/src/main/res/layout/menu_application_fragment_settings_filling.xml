@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_below="@+id/application_settings_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/application_settings_container"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/settings_filling_text_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Pleace place 10 pcs. on the plate and press OK"
+            android:gravity="center"
+            style="@style/text_default"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/settings_filling_button_cancel"
+                android:text="CANCEL"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
+
+            <Button
+                android:text="OK"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/settings_filling_button_ok"
+                android:layout_weight="1"
+                style="@style/button_actionbar"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_below="@+id/application_settings_container"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/settings_filling_button_target"
+            android:text="AWP:\n0.01121 g"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+        <Button
+            android:text="Calculate AWP"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_filling_button_calc_target"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+
+
+    </LinearLayout>
+</LinearLayout>

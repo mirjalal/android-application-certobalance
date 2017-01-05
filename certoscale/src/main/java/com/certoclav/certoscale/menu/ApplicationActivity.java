@@ -32,6 +32,7 @@ import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
@@ -161,6 +162,11 @@ protected void onPause() {
 							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
+						case FILLING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
+							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							appSettingsVisible = true;
+							break;
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
@@ -254,7 +260,8 @@ protected void onPause() {
 		//do not react on subApplications
 		if(application == PART_COUNTING_CALC_AWP ||
 				application == PERCENT_WEIGHING_CALC_REFERENCE ||
-				application == ANIMAL_WEIGHING_CALCULATING){
+				application == ANIMAL_WEIGHING_CALCULATING ||
+				application == FILLING_CALC_TARGET){
 			return;
 		}
 		ApplicationManager.getInstance().clearStatistics();
