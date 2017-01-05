@@ -11,33 +11,72 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class ApplicationFragmentTable extends Fragment implements WeightListener {
+public class ApplicationFragmentTable extends Fragment implements WeightListener, StatisticListener {
 
 
     private float tara = 0;
     private TextView textTara = null;
     private List<ReferenceField> listReferenceFields = new ArrayList<ReferenceField>();
 
+    int indexTableTara=2;
+    int brutto=0;
+    int netto=4;
+    int loadp=1;
+
+    // Weighing
+    int minweight=3;
+
+    //Part Counting
+    int apw=3;
+    int underlimit=5;
+    int overlimit=7;
+
+    //Percent Weighing
+    int reference_weight=1;
+    int difference_weight=3;
+    int difference_percent=5;
+
+    //Animal Weighing
+    int measuringTime=1;
+
+    //Totalization
+    int indexTableNumberOfSamples = 0;
+    int indexTableTotal = 1;
+
+
     @Override
     public void onResume() {
         super.onResume();
+        if (listReferenceFields.isEmpty()==false){
+            for(ReferenceField refField : listReferenceFields){
+                refField.getTextName().setText("");
+                refField.getTextValue().setText("");
+            }
+        }
+
         Scale.getInstance().setOnWeightListener(this);
+        ApplicationManager.getInstance().setOnStatisticListener(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
         Scale.getInstance().removeOnWeightListener(this);
+        ApplicationManager.getInstance().setOnStatisticListener(this);
     }
 
     @Override
@@ -70,47 +109,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
-        //TODO: define fixed indexes instead of hardcoding index positions.
-        //TODO: show only data which is enabled in settings menu
-
-        //Clear listReferenceFields
-        if (listReferenceFields.isEmpty()==false){
-            for(ReferenceField refField : listReferenceFields){
-                refField.getTextName().setText("");
-                refField.getTextValue().setText("");
-            }
-        }
-
-
-        int tara=2;
-        int brutto=0;
-        int netto=4;
-        int loadp=1;
-
-        // Weighing
-        int minweight=3;
-
-        //Part Counting
-        int apw=3;
-        int underlimit=5;
-        int overlimit=7;
-
-        //Percent Weighing
-        int reference_weight=1;
-        int difference_weight=3;
-        int difference_percent=5;
-
-        //Animal Weighing
-        int measuringTime=1;
-
 
 
         switch (Scale.getInstance().getScaleApplication()){
             case WEIGHING:
 
                 if  (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible),getResources().getBoolean(R.bool.preferences_weigh_tara_visible))==true) {
-                    listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_weigh_brutto_visible),getResources().getBoolean(R.bool.preferences_weigh_brutto_visible))==true) {
@@ -140,8 +146,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PART_COUNTING:
                 if  (prefs.getBoolean(getString(R.string.preferences_counting_tara_visible),getResources().getBoolean(R.bool.preferences_counting_tara_visible))==true) {
-                    listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_counting_brutto_visible),getResources().getBoolean(R.bool.preferences_counting_brutto_visible))==true) {
@@ -197,8 +203,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PERCENT_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible),getResources().getBoolean(R.bool.preferences_percent_tara_visible))==true) {
-                    listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString()+ " g");
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString()+ " g");
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible),getResources().getBoolean(R.bool.preferences_percent_brutto_visible))==true) {
@@ -227,8 +233,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case CHECK_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_check_tara_visible),getResources().getBoolean(R.bool.preferences_check_tara_visible))==true) {
-                    listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_check_brutto_visible),getResources().getBoolean(R.bool.preferences_check_brutto_visible))==true) {
@@ -242,8 +248,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case ANIMAL_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
-                    listReferenceFields.get(tara).getTextName().setText("TARA");
-                    listReferenceFields.get(tara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
@@ -262,7 +268,32 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
+            case TOTALIZATION:
+               // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
+                break;
         }
 
     }
+
+    @Override
+    public void onStatisticChanged(SummaryStatistics statistic) {
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(Scale.getInstance().getScaleApplication() == ScaleApplication.TOTALIZATION){
+         //   if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
+                listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText("SAMPLES");
+                try {
+                    listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStatistic().getN()));
+                }catch (Exception e){
+                }
+
+                listReferenceFields.get(indexTableTotal).getTextName().setText("TOTAL");
+                try {
+                    listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getSum()));
+                }catch (Exception e){
+                }
+            }
+
+        }
+
+
 }

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 
@@ -25,10 +26,27 @@ import java.util.Date;
 
 public class ApplicationManager {
 
+    ArrayList<StatisticListener> statisticListeners = new ArrayList<StatisticListener>();
+
+    public void setOnStatisticListener (StatisticListener listener){
+        this.statisticListeners.add(listener);
+    }
+    public void removeOnStatisticListener (StatisticListener listener){
+        this.statisticListeners.remove(listener);
+    }
+
     public static synchronized ApplicationManager getInstance() {
         return instance;
 
     }
+
+    public SummaryStatistics getStatistic() {
+        return statistic;
+    }
+
+
+
+    private SummaryStatistics statistic = new SummaryStatistics();
 
     private static ApplicationManager instance = new ApplicationManager();
 
@@ -76,9 +94,7 @@ public class ApplicationManager {
 
     private Double animalWeight = 0d;
 
-    private ArrayList<Double> statisticsArray = new ArrayList<Double>();
-
-    public Double getAwpCalcSampleSize() {
+     public Double getAwpCalcSampleSize() {
         return currentLibrary.getSampleSize();
     }
 
@@ -86,13 +102,7 @@ public class ApplicationManager {
         return String.format("%.6f", getAwpCalcSampleSize()) + " g";
     }
 
-    public ArrayList<Double> getStatisticsArray() {
-        return statisticsArray;
-    }
 
-    public void setStatisticsArray(ArrayList<Double> statisticsArray) {
-        this.statisticsArray = statisticsArray;
-    }
 
     public void setAwpCalcSampleSize(int awpCalcSampleSize) {
         currentLibrary.setSampleSize(awpCalcSampleSize);
@@ -252,17 +262,24 @@ public class ApplicationManager {
     public void accumulateStatistics() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                statisticsArray.add((double) (getSumInPieces() - getTareInPieces()));
+                statistic.addValue((double) (getSumInPieces() - getTareInPieces()));
                 break;
             default:
-                statisticsArray.add(getTaredValueInGram());
+                statistic.addValue(getTaredValueInGram());
                 break;
         }
+        for (StatisticListener listener : statisticListeners){
+            listener.onStatisticChanged(statistic);
+        }
+
 
     }
 
     public void clearStatistics() {
-        statisticsArray.clear();
+        statistic.clear();
+        for(StatisticListener listener : statisticListeners){
+            listener.onStatisticChanged(statistic);
+        }
     }
 
     public void showStatisticsNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
@@ -271,10 +288,10 @@ public class ApplicationManager {
             dialog.setContentView(R.layout.dialog_statistics);
             dialog.setOnDismissListener(listener);
             dialog.setTitle("Statistics");
-            SummaryStatistics statistic = new SummaryStatistics();
-            for (Double value : statisticsArray) {
-                statistic.addValue(value);
-            }
+ //           statistic = new SummaryStatistics();
+ //           for (Double value : statisticsArray) {
+ //               statistic.addValue(value);
+ //           }
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + statistic.getN());
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());

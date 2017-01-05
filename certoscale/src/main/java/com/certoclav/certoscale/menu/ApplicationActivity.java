@@ -277,6 +277,13 @@ protected void onPause() {
 		actionButtonbar.getButtonAccumulate().setEnabled(true);
 		appSettingsVisible = false;
 
+		//TOTALIZATION HAS NO SETTINGS BUTTON
+		if(application == ScaleApplication.TOTALIZATION){
+			actionButtonbar.getButtonAppSettings().setEnabled(false);
+		}else{
+			actionButtonbar.getButtonAppSettings().setEnabled(true);
+		}
+
 		updateStatsButtonUI();
 		refreshSpinnerLibrary();
 	}
@@ -350,8 +357,8 @@ protected void onPause() {
 
 
 	private void updateStatsButtonUI() {
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatisticsArray().size() + ")");
-		if (ApplicationManager.getInstance().getStatisticsArray().size()==0){
+		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
+		if (ApplicationManager.getInstance().getStatistic().getN()==0){
 			actionButtonbar.getButtonStatistics().setEnabled(false);
 		}else {
 			actionButtonbar.getButtonStatistics().setEnabled(true);

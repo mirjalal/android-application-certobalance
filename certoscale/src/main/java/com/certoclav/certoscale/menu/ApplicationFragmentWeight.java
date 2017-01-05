@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.graph.GraphService;
+import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 
 /**
@@ -51,11 +54,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     public void onResume() {
         super.onResume();
         Scale.getInstance().setOnWeightListener(this);
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
         Scale.getInstance().removeOnWeightListener(this);
     }
 
@@ -93,6 +98,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
             case WEIGHING:
+                textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
 
@@ -106,6 +112,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PERCENT_WEIGHING:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
 
                 textValue.setText(ApplicationManager.getInstance().getPercent()+ " %");
@@ -113,56 +120,30 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case DENSITIY_DETERMINATION:
+                textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.BLUE);
+                break;
 
             case FILLING:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case TOTALIZATION:
+                textInstruction.setText("Place sample on the pan. Press ADD TO STATS to add to the total.");
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case FORMULATION:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case DIFFERENTIAL_WEIGHING:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case PEAK_HOLD:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case INGREDIENT_COSTING:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case PIPETTE_ADJUSTMENT:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
-                break;
-
-            case STATISTICAL_QUALITY_CONTROL:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             default:
-                //Show weight to the user in respect to the TARA weight
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                //Show measured total weight to the user
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
-            break;
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("not implemented");
+                break;
+
         }
 
         //Update Loading bar
@@ -185,12 +166,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             barload.setBackgroundColor(Color.GREEN);
         }
 
-        if(Scale.getInstance().getWeightInGram()  == 0){
-            textInstruction.setText("Please place item");
-        }else{
-            textInstruction.setText("");
-        }
-
 
     }
+
+
 }
