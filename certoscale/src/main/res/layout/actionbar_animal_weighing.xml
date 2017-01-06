@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp" >
+
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/naviagationbar_button_home"
+        android:layout_toLeftOf="@+id/naviagationbar_button_settings"
+        android:orientation="horizontal">
+
+
+
+        <Button
+            android:id="@+id/actionbar_button_tara_animal"
+            android:text="TARE"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_print_animal"
+            android:text="PRINT"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_cal_animal"
+            android:text="CAL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_statistics_animal"
+            android:text="STATS\n(0)"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_accumulate_animal"
+            android:text="ADD TO STATS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_animal_Start_Measurement"
+            android:text="Start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+        <Button
+            android:id="@+id/actionbar_button_settings_animal"
+            android:text="SETTINGS"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/button_actionbar"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
