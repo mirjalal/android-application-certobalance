@@ -19,7 +19,7 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
-import com.certoclav.certoscale.model.ActionButtonbar;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
@@ -41,8 +41,23 @@ public class ApplicationActivity extends FragmentActivity implements  ButtonEven
 
 private Navigationbar navigationbar = new Navigationbar(this);
 
-private ActionButtonbar actionButtonbar = new ActionButtonbar();
+	private ActionButtonbarFragment actionButtonbarFragment = null;
 	private boolean appSettingsVisible = false;
+
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.menu_application_activity);
+		super.onCreate(savedInstanceState);
+		navigationbar.onCreate();
+	    actionButtonbarFragment = new ActionButtonbarFragment();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_actionbar, actionButtonbarFragment).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
+
+
+	}
 
 
 
@@ -59,7 +74,7 @@ protected void onResume() {
 		navigationbar.getButtonMore().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
-		actionButtonbar.setButtonEventListener(this);
+		actionButtonbarFragment.setButtonEventListener(this);
 
 		Scale.getInstance().setOnApplicationListener(this);
 
@@ -77,25 +92,14 @@ protected void onResume() {
 protected void onPause() {
 	PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).unregisterOnSharedPreferenceChangeListener(this);
 	navigationbar.removeNavigationbarListener(this);
-	actionButtonbar.removeButtonEventListener(this);
+	actionButtonbarFragment.removeButtonEventListener(this);
 	Scale.getInstance().removeOnApplicationListener(this);
 	super.onPause();
 }
 
 
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.menu_application_activity);
-		super.onCreate(savedInstanceState);
-		navigationbar.onCreate();
-		actionButtonbar.onCreate();
 
-
-		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
-		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
-
-	}
 
 
 
@@ -111,10 +115,10 @@ protected void onPause() {
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
 				startActivity(intent);
 				break;
-			case ActionButtonbar.BUTTON_TARA:
+			case ActionButtonbarFragment.BUTTON_TARA:
 				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 				break;
-			case ActionButtonbar.BUTTON_STATISTICS:
+			case ActionButtonbarFragment.BUTTON_STATISTICS:
 				ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
@@ -122,50 +126,50 @@ protected void onPause() {
 					}
 				});
 				break;
-			case ActionButtonbar.BUTTON_ACCUMULATE:
+			case ActionButtonbarFragment.BUTTON_ACCUMULATE:
 				ApplicationManager.getInstance().accumulateStatistics();
 				updateStatsButtonUI();
 				break;
-			case ActionButtonbar.BUTTON_APP_SETTINGS:
+			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
-					actionButtonbar.getButtonAppSettings().setText("SETTINGS");
-					actionButtonbar.getButtonCal().setEnabled(true);
-					actionButtonbar.getButtonPrint().setEnabled(true);
-					actionButtonbar.getButtonTara().setEnabled(true);
+					actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
+					actionButtonbarFragment.getButtonCal().setEnabled(true);
+					actionButtonbarFragment.getButtonPrint().setEnabled(true);
+					actionButtonbarFragment.getButtonTara().setEnabled(true);
 					updateStatsButtonUI();
-					actionButtonbar.getButtonAccumulate().setEnabled(true);
+					actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
 					appSettingsVisible = false;
 				}else{
-					actionButtonbar.getButtonCal().setEnabled(false);
-					actionButtonbar.getButtonPrint().setEnabled(false);
+					actionButtonbarFragment.getButtonCal().setEnabled(false);
+					actionButtonbarFragment.getButtonPrint().setEnabled(false);
 					updateStatsButtonUI();
-					actionButtonbar.getButtonAccumulate().setEnabled(false);
+					actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
 
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case PERCENT_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case ANIMAL_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						case FILLING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
-							actionButtonbar.getButtonAppSettings().setText("RETURN TO APPLICATION");
+							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
 							appSettingsVisible = true;
 							break;
 						default:
@@ -176,7 +180,7 @@ protected void onPause() {
 
 				}
 				break;
-			case ActionButtonbar.BUTTON_CAL:
+			case ActionButtonbarFragment.BUTTON_CAL:
 				//send command for calibration to the scale
 				if(Scale.getInstance().getWeightInGram() <= 5){
 
@@ -188,7 +192,7 @@ protected void onPause() {
 					Toast.makeText(ApplicationActivity.this, "Please remove item from pan first", Toast.LENGTH_LONG).show();
 				}
 				break;
-			case ActionButtonbar.BUTTON_PRINT:
+			case ActionButtonbarFragment.BUTTON_PRINT:
 				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
 				Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
 				//Print whole protocol to protocol printer connected on COM 1
@@ -271,18 +275,18 @@ protected void onPause() {
 		}else {
 			getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
 		}
-		actionButtonbar.getButtonAppSettings().setText("SETTINGS");
-		actionButtonbar.getButtonCal().setEnabled(true);
-		actionButtonbar.getButtonPrint().setEnabled(true);
-		actionButtonbar.getButtonTara().setEnabled(true);
-		actionButtonbar.getButtonAccumulate().setEnabled(true);
+		actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
+		actionButtonbarFragment.getButtonCal().setEnabled(true);
+		actionButtonbarFragment.getButtonPrint().setEnabled(true);
+		actionButtonbarFragment.getButtonTara().setEnabled(true);
+		actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
 		appSettingsVisible = false;
 
 		//TOTALIZATION HAS NO SETTINGS BUTTON
 		if(application == ScaleApplication.TOTALIZATION){
-			actionButtonbar.getButtonAppSettings().setEnabled(false);
+			actionButtonbarFragment.getButtonAppSettings().setEnabled(false);
 		}else{
-			actionButtonbar.getButtonAppSettings().setEnabled(true);
+			actionButtonbarFragment.getButtonAppSettings().setEnabled(true);
 		}
 
 		updateStatsButtonUI();
@@ -358,11 +362,11 @@ protected void onPause() {
 
 
 	private void updateStatsButtonUI() {
-		actionButtonbar.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
+		actionButtonbarFragment.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
 		if (ApplicationManager.getInstance().getStatistic().getN()==0){
-			actionButtonbar.getButtonStatistics().setEnabled(false);
+			actionButtonbarFragment.getButtonStatistics().setEnabled(false);
 		}else {
-			actionButtonbar.getButtonStatistics().setEnabled(true);
+			actionButtonbarFragment.getButtonStatistics().setEnabled(true);
 		}
 	}
 

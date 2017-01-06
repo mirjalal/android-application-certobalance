@@ -8,19 +8,18 @@
         android:id="@+id/navigationbar"
         layout="@layout/navigationbar"/>
     
-    <include
-        android:id="@+id/actionbar"
-        layout="@layout/actionbar"
+    <FrameLayout
+        android:id="@+id/menu_application_container_actionbar"
         android:layout_alignParentBottom="true"
         android:layout_height="60dp"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/navigationbar"
-        android:layout_above="@+id/actionbar">
+        android:layout_above="@+id/menu_application_container_actionbar">
 
       <LinearLayout
           android:id="@+id/menu_application_container_display"
