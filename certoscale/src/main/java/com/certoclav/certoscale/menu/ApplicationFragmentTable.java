@@ -262,8 +262,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible),getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible))==true) {
-                    listReferenceFields.get(measuringTime).getTextName().setText("AVERAGING TIME"+ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
-                   // listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
+                    listReferenceFields.get(measuringTime).getTextName().setText("AVERAGING TIME");
+                    listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
                 }
 
 

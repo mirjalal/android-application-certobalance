@@ -1,13 +1,11 @@
 package com.certoclav.certoscale.menu;
 
-import android.app.Application;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
@@ -25,51 +23,13 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
     private LinearLayout graphContainer = null;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_animal_weighing,container, false);
 
         graphContainer = (LinearLayout) rootView.findViewById(R.id.application_settings_animal_container_graph);
-        final Button buttonStart = (Button) rootView.findViewById(R.id.application_settings_animal_button_start);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GraphService.getInstance().counter=0;
-                GraphService.getInstance().sum=0;
-                graphContainer.removeAllViews();
-                graphContainer.addView(GraphService.getInstance().getCurrentGraph(getActivity()));
-                Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING_CALCULATING);
-                buttonStart.setVisibility(View.INVISIBLE);
-                ApplicationManager.getInstance().setAnimalWeight(0d);
-                new AsyncTask<Void, Void, Void>() {
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
-
-
-                        //ApplicationManager.getInstance().setAnimalWeight(777.7d);
-                        double mean=GraphService.getInstance().sum/GraphService.getInstance().counter;
-                        ApplicationManager.getInstance().setAnimalWeight(mean);
-                        buttonStart.setVisibility(View.VISIBLE);
-                        super.onPostExecute(aVoid);
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        try {
-
-                            double avtime= (ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime()*1000);
-                            Thread.sleep((int) avtime);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        //TODO VISUALIZE COUNTDOWN
-                        return null;
-                    }
-                }.execute();
-            }
-        });
 
        return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
@@ -77,7 +37,37 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
 
     @Override
     public void onResume() {
+        GraphService.getInstance().counter=0;
+        GraphService.getInstance().sum=0;
+        graphContainer.removeAllViews();
+        graphContainer.addView(GraphService.getInstance().getCurrentGraph(getActivity()));
+        Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING_CALCULATING);
+        ApplicationManager.getInstance().setAnimalWeight(0d);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                //only set calculated value if application animal_weighing_calculating still active and not closed by user meanwhile
+                if(Scale.getInstance().getScaleApplication() == ANIMAL_WEIGHING_CALCULATING) {
+                    Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
+                    double mean = GraphService.getInstance().sum / GraphService.getInstance().counter;
+                    ApplicationManager.getInstance().setAnimalWeight(mean);
+                }
+                super.onPostExecute(aVoid);
+            }
 
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+
+                    double avtime= (ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime()*1000);
+                    Thread.sleep((int) avtime);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //TODO VISUALIZE COUNTDOWN
+                return null;
+            }
+        }.execute();
 
         super.onResume();
 
@@ -88,6 +78,7 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
 
     }
 

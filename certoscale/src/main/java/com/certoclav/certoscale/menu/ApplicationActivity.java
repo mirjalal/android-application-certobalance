@@ -108,6 +108,9 @@ protected void onPause() {
 		Log.e("ApplicationActivity", "onclickhome");
 
 		switch (buttonId){
+			case ActionButtonbarFragment.BUTTON_START:
+				getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
+				break;
 			case Navigationbar.BUTTON_MORE:
 				Toast.makeText(ApplicationActivity.this, "Calculator, Stopwatch, Voice control, Units",Toast.LENGTH_LONG).show();
 				break;
@@ -136,6 +139,7 @@ protected void onPause() {
 					actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
 					actionButtonbarFragment.getButtonCal().setEnabled(true);
 					actionButtonbarFragment.getButtonPrint().setEnabled(true);
+					actionButtonbarFragment.getButtonStart().setEnabled(true);
 					actionButtonbarFragment.getButtonTara().setEnabled(true);
 					updateStatsButtonUI();
 					actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
@@ -143,6 +147,7 @@ protected void onPause() {
 				}else{
 					actionButtonbarFragment.getButtonCal().setEnabled(false);
 					actionButtonbarFragment.getButtonPrint().setEnabled(false);
+					actionButtonbarFragment.getButtonStart().setEnabled(false);
 					updateStatsButtonUI();
 					actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
 
@@ -270,11 +275,9 @@ protected void onPause() {
 			return;
 		}
 		ApplicationManager.getInstance().clearStatistics();
-		if(application == ScaleApplication.ANIMAL_WEIGHING){
-			getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
-		}else {
-			getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
-		}
+
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
+
 		actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
 		actionButtonbarFragment.getButtonCal().setEnabled(true);
 		actionButtonbarFragment.getButtonPrint().setEnabled(true);

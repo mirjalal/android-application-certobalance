@@ -9,11 +9,12 @@ import android.widget.Button;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.listener.ScaleApplicationListener;
 
 import java.util.ArrayList;
 
 
-public class ActionButtonbarFragment extends Fragment {
+public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener{
 
 
 	public ActionButtonbarFragment() {
@@ -27,7 +28,7 @@ public class ActionButtonbarFragment extends Fragment {
 	public static final int BUTTON_APP_SETTINGS = 6;
 	public static final int BUTTON_STATISTICS = 15;
 	public static final int BUTTON_ACCUMULATE = 16;
-	public static final int BUTTON_ANIMAL_START_MEASUREMENT=17;
+	public static final int BUTTON_START =17;
 
 
 	private Button buttonTara = null;
@@ -37,6 +38,16 @@ public class ActionButtonbarFragment extends Fragment {
 	private Button buttonAccumulate = null;
 	private Button buttonAnimalStart = null;
 	private Button buttonAppSettings = null;
+
+	public Button getButtonStart() {
+		return buttonStart;
+	}
+
+	public void setButtonStart(Button buttonStart) {
+		this.buttonStart = buttonStart;
+	}
+
+	private Button buttonStart = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
 
 
@@ -111,12 +122,37 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 }
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		Scale.getInstance().setOnApplicationListener(this);
+		onApplicationChange(Scale.getInstance().getScaleApplication());
+	}
+
+	@Override
+	public void onPause() {
+		Scale.getInstance().removeOnApplicationListener(this);
+		super.onPause();
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.actionbar,container, false);
+
+		buttonStart = (Button) rootView.findViewById(R.id.actionbar_button_start);
+		buttonStart.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_START,false);
+				}
+
+			}
+		});
+
 
 		buttonPrint = (Button) rootView.findViewById(R.id.actionbar_button_print);
 		buttonPrint.setOnClickListener(new View.OnClickListener() {
@@ -205,6 +241,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonTara.setEnabled(false);
 	}
 
+	@Override
+	public void onApplicationChange(ScaleApplication application) {
+		if(application == ScaleApplication.ANIMAL_WEIGHING){
+			buttonStart.setVisibility(View.VISIBLE);
+			buttonStart.setEnabled(true);
+		}else if(application == ScaleApplication.ANIMAL_WEIGHING_CALCULATING){
+			buttonStart.setVisibility(View.VISIBLE);
+			buttonStart.setEnabled(false);
+		}else{
+			buttonStart.setVisibility(View.GONE);
+			buttonStart.setEnabled(true);
+		}
+	}
 }
 
 
