@@ -40,8 +40,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
-
-private ActionButtonbar actionButtonbar = new ActionButtonbar();
+private ActionButtonbar actionButtonbar = new ActionButtonbar(this);
 	private boolean appSettingsVisible = false;
 
 

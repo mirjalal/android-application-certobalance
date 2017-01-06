@@ -78,7 +78,7 @@ public class ApplicationManager {
             0,
             new Date(),
             true,
-            1f
+            1
     );
 
 
@@ -264,11 +264,6 @@ public class ApplicationManager {
             case PART_COUNTING:
                 statistic.addValue((double) (getSumInPieces() - getTareInPieces()));
                 break;
-            case ANIMAL_WEIGHING:
-                statistic.addValue((double)  animalWeight);
-
-                break;
-
             default:
                 statistic.addValue(getTaredValueInGram());
                 break;

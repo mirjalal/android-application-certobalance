@@ -1,7 +1,6 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -10,15 +9,15 @@ import android.widget.Spinner;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
 
 
-public class ActionButtonbar extends Fragment {
+public class ActionButtonbar {
 
-	public ActionButtonbar(){
-
+	public ActionButtonbar(Activity activity){
+		mActivity = activity;
+		
 	}
 
 	public static final int BUTTON_HOME = 1;
@@ -29,9 +28,7 @@ public class ActionButtonbar extends Fragment {
 	public static final int BUTTON_APP_SETTINGS = 6;
 	public static final int BUTTON_STATISTICS = 15;
 	public static final int BUTTON_ACCUMULATE = 16;
-	public static final int BUTTON_ANIMAL_START_MEASUREMENT=17;
-
-
+	
 	private Button buttonTara = null;
 	private Button buttonCal = null;
 	private Button buttonPrint= null;
@@ -54,17 +51,8 @@ public class ActionButtonbar extends Fragment {
 		this.buttonAccumulate = buttonAccumulate;
 	}
 
-	public Button getButtonAnimalStart() {
-		return buttonAnimalStart;
-	}
-
-	public void getButtonAnimalStart(Button buttonAnimalStart) {
-		this.buttonAnimalStart = buttonAnimalStart;
-	}
-
 	private Button buttonStatistics = null;
 	private Button buttonAccumulate = null;
-	private Button buttonAnimalStart = null;
 
 	public Button getButtonTara() {
 		return buttonTara;
@@ -109,349 +97,89 @@ public void setButtonEventListener (ButtonEventListener listener){
 
 public void removeButtonEventListener(ButtonEventListener listener) {
 	this.navigationbarListeners.remove(listener);
-
-
+	
+	
 }
 
 
 public void onCreate(){
 
 
+	buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print);
+	buttonPrint.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_PRINT,false);
+			}
+			
+		}
+	});
 
 
-	switch (Scale.getInstance().getScaleApplication()) {
-		case ANIMAL_WEIGHING:
-			buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_animal_Start_Measurement);
-			buttonAppSettings.setOnClickListener(new OnClickListener() {
+	buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics);
+	buttonStatistics.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_ANIMAL_START_MEASUREMENT,false);
-					}
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
+			}
 
-				}
-			});
+		}
+	});
 
-			buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print_animal);
-			buttonPrint.setOnClickListener(new OnClickListener() {
+	buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate);
+	buttonAccumulate.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_PRINT,false);
-					}
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
+			}
 
-				}
-			});
+		}
+	});
+	buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal);
+	buttonCal.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_CAL,false);
+			}
+			
+		}
+	});
+	
+	buttonTara = (Button) mActivity.findViewById(R.id.actionbar_button_tara);
+	buttonTara.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_TARA,false);
+			}
+			
+		}
+	});
 
+	buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_settings);
+	buttonAppSettings.setOnClickListener(new OnClickListener() {
 
-			buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics_animal);
-			buttonStatistics.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
+			}
 
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
-					}
-
-				}
-			});
-
-			buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate_animal);
-			buttonAccumulate.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
-					}
-
-				}
-			});
-			buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal_animal);
-			buttonCal.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_CAL,false);
-					}
-
-				}
-			});
-
-			buttonTara = (Button) mActivity.findViewById(R.id.actionbar_button_tara_animal);
-			buttonTara.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_TARA,false);
-					}
-
-				}
-			});
-
-			buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_settings_animal);
-			buttonAppSettings.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
-					}
-
-				}
-			});
-			break;
-
-		default:
-			buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print);
-			buttonPrint.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_PRINT,false);
-					}
-
-				}
-			});
-
-
-			buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics);
-			buttonStatistics.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
-					}
-
-				}
-			});
-
-			buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate);
-			buttonAccumulate.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
-					}
-
-				}
-			});
-			buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal);
-			buttonCal.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_CAL,false);
-					}
-
-				}
-			});
-
-			buttonTara = (Button) mActivity.findViewById(R.id.actionbar_button_tara);
-			buttonTara.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_TARA,false);
-					}
-
-				}
-			});
-
-			buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_settings);
-			buttonAppSettings.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					for(ButtonEventListener listener : navigationbarListeners){
-						listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
-					}
-
-				}
-			});
-			break;
-	}
-
+		}
+	});
 
 
 
 }
-	@Override
-	public void onResume() {
-
-		switch (Scale.getInstance().getScaleApplication()) {
-			case ANIMAL_WEIGHING:
-				buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_animal_Start_Measurement);
-				buttonAppSettings.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_ANIMAL_START_MEASUREMENT,false);
-						}
-
-					}
-				});
-
-				buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print_animal);
-				buttonPrint.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_PRINT,false);
-						}
-
-					}
-				});
-
-
-				buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics_animal);
-				buttonStatistics.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
-						}
-
-					}
-				});
-
-				buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate_animal);
-				buttonAccumulate.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
-						}
-
-					}
-				});
-				buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal_animal);
-				buttonCal.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_CAL,false);
-						}
-
-					}
-				});
-
-				buttonTara = (Button) mActivity.findViewById(R.id.actionbar_button_tara_animal);
-				buttonTara.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_TARA,false);
-						}
-
-					}
-				});
-
-				buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_settings_animal);
-				buttonAppSettings.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
-						}
-
-					}
-				});
-				break;
-
-			default:
-				buttonPrint = (Button) mActivity.findViewById(R.id.actionbar_button_print);
-				buttonPrint.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_PRINT,false);
-						}
-
-					}
-				});
-
-
-				buttonStatistics = (Button) mActivity.findViewById(R.id.actionbar_button_statistics);
-				buttonStatistics.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
-						}
-
-					}
-				});
-
-				buttonAccumulate = (Button) mActivity.findViewById(R.id.actionbar_button_accumulate);
-				buttonAccumulate.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
-						}
-
-					}
-				});
-				buttonCal = (Button) mActivity.findViewById(R.id.actionbar_button_cal);
-				buttonCal.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_CAL,false);
-						}
-
-					}
-				});
-
-				buttonTara = (Button) mActivity.findViewById(R.id.actionbar_button_tara);
-				buttonTara.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_TARA,false);
-						}
-
-					}
-				});
-
-				buttonAppSettings = (Button) mActivity.findViewById(R.id.actionbar_button_settings);
-				buttonAppSettings.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						for(ButtonEventListener listener : navigationbarListeners){
-							listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
-						}
-
-					}
-				});
-				break;
-		}
-
-
-	}
 
 	public void hideAllButtons(){
 		buttonAppSettings.setVisibility(View.GONE);
@@ -461,5 +189,3 @@ public void onCreate(){
 	}
 
 }
-
-
