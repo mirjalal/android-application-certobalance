@@ -265,10 +265,8 @@ public class ApplicationManager {
                 statistic.addValue((double) (getSumInPieces() - getTareInPieces()));
                 break;
             case ANIMAL_WEIGHING:
-                statistic.addValue((double)  animalWeight);
-
+                statistic.addValue( animalWeight);
                 break;
-
             default:
                 statistic.addValue(getTaredValueInGram());
                 break;
