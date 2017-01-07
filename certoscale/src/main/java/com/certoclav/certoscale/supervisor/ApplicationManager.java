@@ -78,7 +78,9 @@ public class ApplicationManager {
             0,
             new Date(),
             true,
-            1f
+            1f,
+            0f,
+            0f
     );
 
 
@@ -110,6 +112,14 @@ public class ApplicationManager {
 
     public void setUnderLimit(int underLimit) {
         currentLibrary.setUnderLimit(underLimit);
+    }
+
+    public void setUnderLimitCheckWeighing(double underLimit) {
+        currentLibrary.setUnderLimitCheckWeighing(underLimit);
+    }
+
+    public void setOverLimitCheckWeighing(double underLimit) {
+        currentLibrary.setOverLimitCheckWeighing(underLimit);
     }
 
     public void setUnderLimitPieces(int underLimitPieces) {
@@ -246,6 +256,9 @@ public class ApplicationManager {
         return getSumInGram() - getTareInGram();
     }
 
+    public double getUnderLimitCheckWeighing(){return currentLibrary.getUnderLimitCheckWeighing();}
+    public double getOverLimitCheckWeighing(){return currentLibrary.getOverLimitCheckWeighing();}
+
     public String getSumAsStringInGram() {
         return String.format("%.4f", getSumInGram()) + " g";
     }
@@ -351,6 +364,15 @@ public class ApplicationManager {
     public String getUnderLimitPiecesAsString() {
         return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
+
+    public String getUnderLimitChekcWeighingAsString() {
+        return String.format("%.4f", currentLibrary.getUnderLimitCheckWeighing());
+    }
+
+    public String getOverLimitChekcWeighingAsString() {
+        return String.format("%.4f", currentLibrary.getOverLimitCheckWeighing());
+    }
+
 
 
     public String getOverlimitPiecesAsString() {

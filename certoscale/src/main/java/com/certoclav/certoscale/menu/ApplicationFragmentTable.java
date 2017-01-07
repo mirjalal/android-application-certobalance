@@ -50,6 +50,10 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int difference_weight=3;
     int difference_percent=5;
 
+    //Check Weighing
+    int checkunderlimit=1;
+    int checkoverlimit=3;
+
     //Animal Weighing
     int measuringTime=1;
 
@@ -245,6 +249,16 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
+                if  (prefs.getBoolean(getString(R.string.preferences_check_under_visible),getResources().getBoolean(R.bool.preferences_check_under_visible))==true) {
+                    listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
+                    listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitChekcWeighingAsString()+" g");
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_check_over_visible),getResources().getBoolean(R.bool.preferences_check_over_visible))==true) {
+                    listReferenceFields.get(checkoverlimit).getTextName().setText("OVERLIMIT");
+                    listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitChekcWeighingAsString()+" g");
+                }
+
+
                 break;
             case ANIMAL_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {

@@ -72,6 +72,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     public void onWeightChanged(Double weight, String unit) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+
+
         switch (Scale.getInstance().getScaleApplication()){
             case ANIMAL_WEIGHING_CALCULATING:
                 textValue.setTextColor(Color.WHITE);
@@ -119,6 +121,42 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 textValue.setText(ApplicationManager.getInstance().getPercent()+ " %");
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsString()+ " g");
+                break;
+
+            case CHECK_WEIGHING:
+                String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions),"");
+                if(cmode.equals("1")) {
+                    textInstruction.setText("");
+                    textValue.setTextColor(Color.WHITE);
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
+
+                    textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if(cmode.equals("2")) {
+                    double current=ApplicationManager.getInstance().getTaredValueInGram();
+                    double under=ApplicationManager.getInstance().getUnderLimitCheckWeighing();
+                    double over=ApplicationManager.getInstance().getOverLimitCheckWeighing();
+                    textInstruction.setText("");
+
+                    if (current<under){
+                        textValue.setTextColor(Color.RED);
+                        textValue.setText("Value to low");
+                    }
+
+                    if (current>over){
+                        textValue.setTextColor(Color.RED);
+                        textValue.setText("Value to high");
+                    }
+
+                    if (current>=under && current<=over){
+                        textValue.setTextColor(Color.GREEN);
+                        textValue.setText("OK");
+                    }
+
+
+                    textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
                 break;
 
             case DENSITIY_DETERMINATION:

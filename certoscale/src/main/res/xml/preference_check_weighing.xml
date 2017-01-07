@@ -41,7 +41,7 @@
 
 
         <ListPreference
-            android:key="preferences_check_displayoptions"
+            android:key="@string/preferences_check_displayoptions"
             android:title="Display Options"
             android:defaultValue="1"
             android:entries="@array/preferences_check_display_modes"

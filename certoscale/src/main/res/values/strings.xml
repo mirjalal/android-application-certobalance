@@ -13,6 +13,7 @@
     <string name="preferences_animal_activated">preferences_animal_activated</string>
     <string name="preferences_animal_lock">preferences_animal_lock</string>
     <string name="preferences_check_limitmode">preferences_check_limitmode</string>
+    <string name="preferences_check_displayoptions">preferences_check_displayoptions</string>
     <string name="preferences_animal_secondary_visible">preferences_animal_secondary_visible</string>
     <string name="preferences_animal_measuringtime_visible">preferences_animal_measuringtime_visible</string>
     <string name="preferences_animal_brutto_visible">preferences_animal_brutto_visible</string>

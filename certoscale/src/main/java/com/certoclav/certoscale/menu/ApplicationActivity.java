@@ -155,6 +155,9 @@ protected void onPause() {
 						case PART_COUNTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
 							break;
+						case CHECK_WEIGHING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsCheckWeighing()).commit();
+							break;
 						case WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
 							break;
