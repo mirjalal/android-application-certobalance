@@ -18,6 +18,7 @@ import com.certoclav.certoscale.settings.calibration.SettingsCalibrationActivity
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.settings.glp.SettingsGlpActivity;
 import com.certoclav.certoscale.settings.library.MenuLibraryActivity;
+import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
 import com.certoclav.certoscale.settings.user.MenuUserActivity;
 
@@ -106,6 +107,10 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 						break;
 					case MENU_ITEM_LIBRARY:
 						intent = new Intent(mContext, MenuLibraryActivity.class);
+						mContext.startActivity(intent);
+						break;
+					case MENU_ITEM_RECIPES:
+						intent = new Intent(mContext, MenuRecipeActivity.class);
 						mContext.startActivity(intent);
 						break;
 					case MENU_ITEM_WEIGHING_UNITS:

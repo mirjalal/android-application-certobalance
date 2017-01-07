@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -183,23 +185,6 @@ public class Navigationbar {
 
 
 		spinnerMode = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_mode);
-/*
-		ArrayList<ScaleApplication> scaleApplications = new ArrayList<ScaleApplication>();
-		scaleApplications.add(ScaleApplication.WEIGHING);
-		scaleApplications.add(ScaleApplication.PART_COUNTING);
-		scaleApplications.add(ScaleApplication.PERCENT_WEIGHING);
-		scaleApplications.add(ScaleApplication.CHECK_WEIGHING);
-		scaleApplications.add(ScaleApplication.ANIMAL_WEIGHING);
-		scaleApplications.add(ScaleApplication.FILLING);
-		scaleApplications.add(ScaleApplication.TOTALIZATION);
-		scaleApplications.add(ScaleApplication.FORMULATION);
-		scaleApplications.add(ScaleApplication.DIFFERENTIAL_WEIGHING);
-		scaleApplications.add(ScaleApplication.DENSITIY_DETERMINATION);
-		scaleApplications.add(ScaleApplication.PEAK_HOLD);
-		scaleApplications.add(ScaleApplication.INGREDIENT_COSTING);
-		scaleApplications.add(ScaleApplication.PIPETTE_ADJUSTMENT);
-		scaleApplications.add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
-*/
 
 		arrayAdapterMode = new SpinnerModeAdapter(mActivity, new ArrayList<ScaleApplication>());
 		spinnerMode.setAdapter(arrayAdapterMode);
@@ -223,7 +208,41 @@ public class Navigationbar {
 			}
 		});
 
-		spinnerMode.setSelection(Scale.getInstance().getScaleApplication().ordinal());
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+		if (prefs.getBoolean(mActivity.getString(R.string.preferences_weigh_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.WEIGHING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_counting_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.PART_COUNTING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_percent_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.PERCENT_WEIGHING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_check_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.CHECK_WEIGHING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_animal_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.ANIMAL_WEIGHING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_filling_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.FILLING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_totalization_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.TOTALIZATION);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_formulation_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.FORMULATION);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_differential_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_density_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_peak_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_ingrediant_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_pipette_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
+			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+		}
+		for(int i = 0; i< arrayAdapterMode.getCount();i++){
+			if(Scale.getInstance().getScaleApplication() == arrayAdapterMode.getItem(i)){
+				spinnerMode.setSelection(i);
+			}
+		}
 
 		spinnerLib = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
 

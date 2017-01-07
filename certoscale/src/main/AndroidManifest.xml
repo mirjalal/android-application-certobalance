@@ -175,6 +175,11 @@
 
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
 
+        <activity android:name=".settings.recipe.MenuRecipeEditActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity android:name=".settings.recipe.MenuRecipeActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+
         <activity android:name=".settings.unit.SettingsUnitActivity"
             android:screenOrientation="sensorLandscape">
         </activity>

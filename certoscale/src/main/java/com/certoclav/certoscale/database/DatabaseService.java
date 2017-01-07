@@ -29,6 +29,7 @@ public class DatabaseService {
 
 	Dao<Library,Integer> libraryDao;
 
+	Dao<Recipe,Integer> recipeDao;
 
 	private DatabaseHelper mDatabaseHelper;
 	
@@ -48,6 +49,7 @@ public class DatabaseService {
 
 		messageDao = getHelper().getMessageDao();
 		libraryDao = getHelper().getLibraryDao();
+		recipeDao = getHelper().getRecipeDao();
 
 
 	}
@@ -70,31 +72,19 @@ public class DatabaseService {
 		    TableUtils.dropTable(connectionSource, User.class, true );
 			TableUtils.dropTable(connectionSource, Message.class, true );
 			TableUtils.dropTable(connectionSource, Library.class, true);
+			TableUtils.dropTable(connectionSource, Recipe.class, true);
 
 			Log.i("DatabaseService", "createTables");
 			TableUtils.createTable(connectionSource, User.class);
 			TableUtils.createTable(connectionSource, Message.class);
 			TableUtils.createTable(connectionSource, Library.class);
+			TableUtils.createTable(connectionSource, Recipe.class);
 			
 		} catch (java.sql.SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
-			throw new RuntimeException(e);
+			//throw new RuntimeException(e);
 		}
 		
-	}
-
-	public List<Library> getLibraries() {
-		try {
-
-			/** query for object in the database with id equal profileId */
-			return libraryDao.queryForAll();
-		} catch (SQLException e) {
-			Log.e(TAG, "Database exception", e);
-		} catch (Exception e) {
-			Log.e(TAG, "Database exception", e);
-		}
-
-		return null;
 	}
 
 
@@ -111,6 +101,55 @@ public class DatabaseService {
 
 		return null;
 	}
+
+
+	public int insertMessage(Message message) {
+
+		try {
+
+			int x =messageDao.create(message);
+
+
+
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+	
+	public int deleteMessage(final Message message) {
+		try {
+
+			return messageDao.delete(message);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+
+
+	public List<Library> getLibraries() {
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return libraryDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
 
 
 
@@ -147,11 +186,40 @@ public class DatabaseService {
 
 
 
-	public int insertMessage(Message message) {
+	public List<Recipe> getRecipes() {
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return recipeDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+	public Recipe getRecipeById(int recipeId) {
+		try {
+
+			return recipeDao.queryForId(recipeId);
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
+
+	public int insertRecipe(Recipe recipe) {
 
 		try {
 
-			int x =messageDao.create(message);
+			int x =recipeDao.create(recipe);
 
 
 
@@ -165,11 +233,11 @@ public class DatabaseService {
 
 		return -1;
 	}
-	
-	public int deleteMessage(final Message message) {
+
+	public int deleteRecipe(final Recipe recipe) {
 		try {
 
-			return messageDao.delete(message);
+			return recipeDao.delete(recipe);
 		} catch (java.sql.SQLException e) {
 			Log.e(TAG, e.getMessage());
 		}catch (Exception e) {
@@ -177,14 +245,9 @@ public class DatabaseService {
 		}
 		return -1;
 	}
-	
 
-	
 
-	public List<User> getUsers() { // f�r gro�e Datenmengen ist for (User user :
-									// userDao) { ... } besser da die objekte
-									// nicht alle auf einmal in eine liste
-									// geladen werden m�ssen
+	public List<User> getUsers() {
 		try {
 
 			/** query for object in the database with id equal profileId */

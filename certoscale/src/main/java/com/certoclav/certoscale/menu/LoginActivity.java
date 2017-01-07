@@ -33,10 +33,12 @@ import com.certoclav.certoscale.adapters.UserDropdownAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.graph.GraphService;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
@@ -52,6 +54,7 @@ import com.certoclav.library.util.SettingsDeviceUtils;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -421,7 +424,13 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				}
 			}
 
-			User user1 = new User("admin", "", "","admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
+			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
+			entries.add(new RecipeEntry("Calcium",10.00));
+			entries.add(new RecipeEntry("Water", 60.00));
+			entries.add(new RecipeEntry("Methanol", 1.0212));
+			databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
+
+			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f);
 
 			// Max regierstriert sich

@@ -154,32 +154,27 @@ protected void onPause() {
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
-							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
-							appSettingsVisible = true;
 							break;
 						case WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
-							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
-							appSettingsVisible = true;
 							break;
 						case PERCENT_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
-							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
-							appSettingsVisible = true;
 							break;
 						case ANIMAL_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
-							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
-							appSettingsVisible = true;
 							break;
 						case FILLING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
-							actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
-							appSettingsVisible = true;
+							break;
+						case FORMULATION:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFormulation()).commit();
 							break;
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
+					actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
+					appSettingsVisible = true;
 
 
 
@@ -208,7 +203,6 @@ protected void onPause() {
 				break;
 			case Navigationbar.BUTTON_SETTINGS:
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
-				intent2.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU, navigationbar.getSpinnerMode().getSelectedItemPosition());
 				startActivity(intent2);
 				break;
 			case Navigationbar.BUTTON_SAVE:

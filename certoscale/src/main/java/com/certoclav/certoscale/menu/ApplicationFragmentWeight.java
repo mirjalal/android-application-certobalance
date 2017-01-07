@@ -80,6 +80,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 break;
+
             case ANIMAL_WEIGHING:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
@@ -97,6 +98,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
                 break;
+            case FORMULATION:
             case WEIGHING:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
