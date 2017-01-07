@@ -125,18 +125,37 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case CHECK_WEIGHING:
                 String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions),"");
+                double current=ApplicationManager.getInstance().getTaredValueInGram();
+                double under=ApplicationManager.getInstance().getUnderLimitCheckWeighing();
+                double over=ApplicationManager.getInstance().getOverLimitCheckWeighing();
+
                 if(cmode.equals("1")) {
                     textInstruction.setText("");
                     textValue.setTextColor(Color.WHITE);
-                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
+
+                    textInstruction.setText("");
+
+                    if (current<under){
+                        textValue.setTextColor(Color.RED);
+                        textValue.setText("↓   "+ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    }
+
+                    if (current>over){
+                        textValue.setTextColor(Color.RED);
+                        textValue.setText("↑   "+ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    }
+
+                    if (current>=under && current<=over){
+                        textValue.setTextColor(Color.GREEN);
+                        textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());;
+                    }
 
 
                     textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if(cmode.equals("2")) {
-                    double current=ApplicationManager.getInstance().getTaredValueInGram();
-                    double under=ApplicationManager.getInstance().getUnderLimitCheckWeighing();
-                    double over=ApplicationManager.getInstance().getOverLimitCheckWeighing();
+
                     textInstruction.setText("");
 
                     if (current<under){
