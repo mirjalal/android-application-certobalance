@@ -67,6 +67,13 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Formulation
     int indexTableRecipeName = 0;
 
+    //Differential Weighing
+    int indexTableItemName = 0;
+    int indexTableItemDifferenceWeight = 1;
+    int indexTableItemDifferencePercentage = 2;
+    int indexTableItemInitialWeight = 3;
+    int indexTableItemFinalWeight = 4;
+
 
     @Override
     public void onResume() {
@@ -320,6 +327,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(indexTableRecipeName).getTextValue().setText("No recipe");
                 }
                     break;
+            case DIFFERENTIAL_WEIGHING:
+                listReferenceFields.get(indexTableItemName).getTextName().setText("ITEM");
+                if(Scale.getInstance().getCurrentRecipe() != null) {
+                  //  listReferenceFields.get(indexTableRecipeName).getTextValue().setText(Scale.getInstance().getCurrentItem().getName());
+                }else{
+                    listReferenceFields.get(indexTableItemName).getTextValue().setText("No item");
+                }
+                listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
+                listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
+                listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("INITIAL WEIGHT");
+                listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("FINAL WEIGHT");
+
+                break;
         }
 
     }

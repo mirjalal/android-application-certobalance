@@ -75,6 +75,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         menuMainElementAdapter.add(new MenuElement("Calibration".toUpperCase(),R.drawable.ic_menu_calibration, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
         menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
         menuMainElementAdapter.add(new MenuElement("Recipes".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
+        menuMainElementAdapter.add(new MenuElement("Items".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
         menuMainElementAdapter.add(new MenuElement("Device settings".toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
         menuMainElementAdapter.add(new MenuElement("Application settings".toUpperCase(),R.drawable.ic_menu_app_settings, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
         menuMainElementAdapter.add(new MenuElement("User management".toUpperCase(),R.drawable.ic_menu_settings_user, MenuElement.MenuItemId.MENU_ITEM_USER));

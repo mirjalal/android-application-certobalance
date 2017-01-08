@@ -24,12 +24,10 @@ public class DatabaseService {
 
 
 	Dao<User, Integer> userDao;
-
 	Dao<Message, Integer> messageDao;
-
 	Dao<Library,Integer> libraryDao;
-
 	Dao<Recipe,Integer> recipeDao;
+	Dao<Item, Integer> itemDao;
 
 	private DatabaseHelper mDatabaseHelper;
 	
@@ -50,6 +48,7 @@ public class DatabaseService {
 		messageDao = getHelper().getMessageDao();
 		libraryDao = getHelper().getLibraryDao();
 		recipeDao = getHelper().getRecipeDao();
+		itemDao = getHelper().getItemDao();
 
 
 	}
@@ -73,12 +72,14 @@ public class DatabaseService {
 			TableUtils.dropTable(connectionSource, Message.class, true );
 			TableUtils.dropTable(connectionSource, Library.class, true);
 			TableUtils.dropTable(connectionSource, Recipe.class, true);
+			TableUtils.dropTable(connectionSource, Item.class, true);
 
 			Log.i("DatabaseService", "createTables");
 			TableUtils.createTable(connectionSource, User.class);
 			TableUtils.createTable(connectionSource, Message.class);
 			TableUtils.createTable(connectionSource, Library.class);
 			TableUtils.createTable(connectionSource, Recipe.class);
+			TableUtils.createTable(connectionSource, Item.class);
 			
 		} catch (java.sql.SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
@@ -183,6 +184,72 @@ public class DatabaseService {
 		}
 		return -1;
 	}
+
+
+
+
+	public List<Item> getItems() {
+		try {
+
+			/** query for object in the database with id equal profileId */
+			return itemDao.queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+	public Item getItemById(int itemId) {
+		try {
+
+			return itemDao.queryForId(itemId);
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
+
+	public int insertItem(Item item) {
+
+		try {
+
+			int x =itemDao.create(item);
+
+
+
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+
+	public int deleteItem(final Item item) {
+		try {
+
+			return itemDao.delete(item);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+
+
+
 
 
 

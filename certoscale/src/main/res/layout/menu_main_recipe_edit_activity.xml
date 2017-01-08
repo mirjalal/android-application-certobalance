@@ -1,17 +1,17 @@
 <RelativeLayout   xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/background_gadient"
-    >
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:orientation="vertical"
+	android:background="@drawable/background_gadient"
+	>
 
-    
-	<RelativeLayout 
-    	android:id="@+id/contentOfActivity"
-    	android:layout_height="match_parent"
-    	android:layout_width="match_parent"
-    	android:layout_below="@+id/navigationbar">
+
+	<RelativeLayout
+		android:id="@+id/contentOfActivity"
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:layout_below="@+id/navigationbar">
 
 		<LinearLayout
 			android:id="@+id/menu_main_recipe_edit_container_title"
@@ -26,27 +26,27 @@
 				android:gravity="center_vertical"
 				style="@style/text_default"/>
 
-		<EditText
-			android:id="@+id/menu_main_recipe_edit_text"
-			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:singleLine="true"
-			android:hint="Recipe name"
-			style="@style/edit_text_default"/>
+			<EditText
+				android:id="@+id/menu_main_recipe_edit_text"
+				android:layout_width="match_parent"
+				android:layout_height="60dp"
+				android:singleLine="true"
+				android:hint="Recipe name"
+				style="@style/edit_text_default"/>
 
 		</LinearLayout>
-<ListView
-    android:id="@+id/menu_main_recipe_edit_list"
-	android:layout_below="@+id/menu_main_recipe_edit_container_title"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</ListView>
+		<ListView
+			android:id="@+id/menu_main_recipe_edit_list"
+			android:layout_below="@+id/menu_main_recipe_edit_container_title"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+		</ListView>
 
 
-    </RelativeLayout>
-    
-    <include layout="@layout/navigationbar"
-        android:id="@+id/navigationbar"></include>
+	</RelativeLayout>
+
+	<include layout="@layout/navigationbar"
+		android:id="@+id/navigationbar"></include>
 
 </RelativeLayout>
 
@@ -56,7 +56,7 @@
 
 
 
-    
+
 
 
 

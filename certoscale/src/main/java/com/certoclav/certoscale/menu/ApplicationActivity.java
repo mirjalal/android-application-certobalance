@@ -141,6 +141,10 @@ protected void onPause() {
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
 				startActivity(intent);
 				break;
+			case ActionButtonbarFragment.BUTTON_ZERO:
+				ApplicationManager.getInstance().setTareInGram(0d);
+				break;
+
 			case ActionButtonbarFragment.BUTTON_TARA:
 				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 				break;
@@ -195,6 +199,9 @@ protected void onPause() {
 							break;
 						case FORMULATION:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFormulation()).commit();
+							break;
+						case DIFFERENTIAL_WEIGHING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDifferentialWeighing()).commit();
 							break;
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();

@@ -13,15 +13,12 @@
     	android:layout_width="match_parent"
     	android:layout_below="@+id/navigationbar">
 
-<GridView
-    android:id="@+id/menu_main_grid"
+
+<ListView
+    android:id="@+id/menu_main_item_edit_list"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-	android:layout_margin="10dp"
-	android:numColumns="4"
-	android:horizontalSpacing="10dp"
-	android:verticalSpacing="10dp">
-</GridView>
+    android:layout_height="match_parent">
+</ListView>
 
 
     </RelativeLayout>

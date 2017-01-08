@@ -37,6 +37,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_STATISTICS = 15;
 	public static final int BUTTON_ACCUMULATE = 16;
 	public static final int BUTTON_START =17;
+	public static final int BUTTON_ZERO = 18;
 
 
 	private Button buttonTara = null;
@@ -46,6 +47,18 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonAccumulate = null;
 	private Button buttonAnimalStart = null;
 	private Button buttonAppSettings = null;
+	private Button buttonZero = null;
+
+
+	public Button getButtonZero() {
+		return buttonZero;
+	}
+
+	public void setButtonZero(Button buttonZero) {
+		this.buttonZero = buttonZero;
+	}
+
+
 
 	public Button getButtonStart() {
 		return buttonStart;
@@ -161,6 +174,17 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			}
 		});
 
+
+		buttonZero = (Button) rootView.findViewById(R.id.actionbar_button_zero);
+		buttonZero.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_ZERO,false);
+				}
+			}
+		});
 
 		buttonPrint = (Button) rootView.findViewById(R.id.actionbar_button_print);
 		buttonPrint.setOnClickListener(new View.OnClickListener() {

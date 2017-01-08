@@ -31,6 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<Message, Integer> messageDao = null;
 	private Dao<Library, Integer> libraryDao = null;
 	private Dao<Recipe,Integer> recipeDao = null;
+	private Dao<Item, Integer> itemDao = null;
 	
 	
 	
@@ -51,6 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, Message.class);
 			TableUtils.createTable(connectionSource, Library.class);
 			TableUtils.createTable(connectionSource, Recipe.class);
+			TableUtils.createTable(connectionSource, Item.class);
 			
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -83,6 +85,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, Message.class, true );
 			TableUtils.dropTable(connectionSource, Library.class, true);
 			TableUtils.dropTable(connectionSource, Recipe.class,true);
+			TableUtils.dropTable(connectionSource, Item.class, true);
 			
 			// after we drop the old databases, we create the new ones
 			onCreate(db, connectionSource);//!
@@ -106,7 +109,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			}
 		}
 		return userDao;
-	}	
+	}
+
+
+	public Dao<Item, Integer> getItemDao(){
+		if (itemDao == null) {
+			try {
+				itemDao = getDao(Item.class);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return itemDao;
+	}
+
 
 	public Dao<Message, Integer> getMessageDao(){
 		if (messageDao == null) {

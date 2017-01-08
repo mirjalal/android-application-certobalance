@@ -13,8 +13,15 @@
      android:layout_toRightOf="@+id/naviagationbar_button_home"
      android:layout_toLeftOf="@+id/naviagationbar_button_settings"
      android:orientation="horizontal">
-     
-     
+
+     <Button
+         android:id="@+id/actionbar_button_zero"
+         android:text="ZERO"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
      
    <Button 
      android:id="@+id/actionbar_button_tara"
