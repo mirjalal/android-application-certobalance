@@ -80,6 +80,9 @@ public class ApplicationManager {
             true,
             1f,
             0f,
+            0f,
+            0f,
+            0f,
             0f
     );
 
@@ -117,6 +120,18 @@ public class ApplicationManager {
     public void setUnderLimitCheckWeighing(double underLimit) {
         currentLibrary.setUnderLimitCheckWeighing(underLimit);
     }
+
+    public void setCheckNominal(double nominal){
+        currentLibrary.setCheckNominal(nominal);
+    }
+
+    public void setCheckNominalToleranceUnder(double NominalToleranceUnder){
+        currentLibrary.setCheckNominalToleranceUnder(NominalToleranceUnder);
+    }
+    public void setCheckNominalToleranceOver(double NominalToleranceOver){
+        currentLibrary.setCheckNominalToleranceOver(NominalToleranceOver);
+    }
+
 
     public void setOverLimitCheckWeighing(double underLimit) {
         currentLibrary.setOverLimitCheckWeighing(underLimit);
@@ -367,6 +382,24 @@ public class ApplicationManager {
 
     public String getUnderLimitChekcWeighingAsString() {
         return String.format("%.4f", currentLibrary.getUnderLimitCheckWeighing());
+    }
+    public String getCheckNominal() {
+        return String.format("%.4f", currentLibrary.getCheckNominal());
+    }
+    public double getCheckNominaldouble() {
+       return currentLibrary.getCheckNominal();
+    }
+    public String getCheckNominalToleranceOver() {
+        return String.format("%.4f", currentLibrary.getCheckNominalToleranceOver());
+    }
+    public double getCheckNominalToleranceOverdouble() {
+        return currentLibrary.getCheckNominalToleranceOver();
+    }
+    public String getCheckNominalToleranceUnder() {
+        return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnder());
+    }
+    public double getCheckNominalToleranceUnderdouble() {
+        return  currentLibrary.getCheckNominalToleranceUnder();
     }
 
     public String getOverLimitChekcWeighingAsString() {

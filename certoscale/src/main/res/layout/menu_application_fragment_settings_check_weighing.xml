@@ -87,6 +87,33 @@
             android:layout_weight="1"
             style="@style/button_actionbar"/>
 
+        <Button
+
+            android:text="Nominal weight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_check_weighing_button_nominal"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+        <Button
+
+            android:text="- Tolerance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_check_weighing_button_nominal_tolerance_under"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+        <Button
+
+            android:text="+ Tolerance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/settings_check_weighing_button_nominal_tolerance_over"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
 
     </LinearLayout>
 </LinearLayout>

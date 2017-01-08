@@ -125,9 +125,22 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case CHECK_WEIGHING:
                 String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions),"");
-                double current=ApplicationManager.getInstance().getTaredValueInGram();
-                double under=ApplicationManager.getInstance().getUnderLimitCheckWeighing();
-                double over=ApplicationManager.getInstance().getOverLimitCheckWeighing();
+                String checklimitmode = prefs.getString(getString(R.string.preferences_check_limitmode),"");
+                double current = ApplicationManager.getInstance().getTaredValueInGram();
+                double under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
+                double over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
+                if(checklimitmode.equals("1")) {
+                    current = ApplicationManager.getInstance().getTaredValueInGram();
+                    under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
+                     over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
+                }
+                if(checklimitmode.equals("2")) {
+                    current = ApplicationManager.getInstance().getTaredValueInGram();
+                    under = ApplicationManager.getInstance().getCheckNominaldouble()-ApplicationManager.getInstance().getCheckNominalToleranceUnderdouble();
+                    over = ApplicationManager.getInstance().getCheckNominaldouble()+ApplicationManager.getInstance().getCheckNominalToleranceOverdouble();
+                }
+
+
 
                 if(cmode.equals("1")) {
                     textInstruction.setText("");

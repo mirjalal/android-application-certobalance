@@ -53,6 +53,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Check Weighing
     int checkunderlimit=1;
     int checkoverlimit=3;
+    int nominal=1;
+    int checkundertolerance=3;
+    int checkovertolerance=5;
 
     //Animal Weighing
     int measuringTime=1;
@@ -236,6 +239,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
                 break;
             case CHECK_WEIGHING:
+
+                String cmode_check = prefs.getString(getString(R.string.preferences_check_limitmode),"");
                 if  (prefs.getBoolean(getString(R.string.preferences_check_tara_visible),getResources().getBoolean(R.bool.preferences_check_tara_visible))==true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
@@ -249,15 +254,34 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_check_under_visible),getResources().getBoolean(R.bool.preferences_check_under_visible))==true) {
-                    listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
-                    listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitChekcWeighingAsString()+" g");
-                }
-                if  (prefs.getBoolean(getString(R.string.preferences_check_over_visible),getResources().getBoolean(R.bool.preferences_check_over_visible))==true) {
-                    listReferenceFields.get(checkoverlimit).getTextName().setText("OVERLIMIT");
-                    listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitChekcWeighingAsString()+" g");
+
+                if  (cmode_check.equals("1")) {
+
+                    if (prefs.getBoolean(getString(R.string.preferences_check_under_visible), getResources().getBoolean(R.bool.preferences_check_under_visible)) == true) {
+                        listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
+                        listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitChekcWeighingAsString() + " g");
+                    }
+                    if (prefs.getBoolean(getString(R.string.preferences_check_over_visible), getResources().getBoolean(R.bool.preferences_check_over_visible)) == true) {
+                        listReferenceFields.get(checkoverlimit).getTextName().setText("OVERLIMIT");
+                        listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitChekcWeighingAsString() + " g");
+                    }
                 }
 
+                if  (cmode_check.equals("2")) {
+
+                    if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
+                        listReferenceFields.get(nominal).getTextName().setText("TARTGET");
+                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominal() + " g");
+                    }
+                    if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
+                        listReferenceFields.get(checkundertolerance).getTextName().setText("UNDER TOLERANCE");
+                        listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnder() + " g");
+                    }
+                    if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
+                        listReferenceFields.get(checkovertolerance).getTextName().setText("OVER TOLERANCE");
+                        listReferenceFields.get(checkovertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g");
+                    }
+                }
 
                 break;
             case ANIMAL_WEIGHING:
