@@ -2,7 +2,9 @@ package com.certoclav.certoscale.model;
 
 import android.util.Log;
 
+import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.User;
+import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.ScaleStateListener;
 import com.certoclav.certoscale.listener.WeightListener;
@@ -26,10 +28,34 @@ public class Scale extends Observable {
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
 	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
 	ArrayList<ScaleStateListener> scaleStateListeners = new ArrayList<ScaleStateListener>();
+	ArrayList<RecipeEntryListener> recipeEntryListeners = new ArrayList<RecipeEntryListener>();
 	private SerialService serialServiceScale = null;
 	private SerialService serialServiceLabelPrinter = null;
 	private SerialService serialServiceProtocolPrinter = null;
 
+	public Recipe getCurrentRecipe() {
+		return currentRecipe;
+	}
+
+	public void setCurrentRecipe(Recipe currentRecipe) {
+		this.currentRecipe = currentRecipe;
+
+	}
+
+	private Recipe currentRecipe = null;
+
+	public RecipeEntry getCurrentRecipeEntry() {
+		return currentRecipeEntry;
+	}
+
+	public void setCurrentRecipeEntry(RecipeEntry currentRecipeEntry) {
+		this.currentRecipeEntry = currentRecipeEntry;
+		for(RecipeEntryListener listener : recipeEntryListeners){
+			listener.onRecipeEntryChanged(currentRecipeEntry);
+		}
+	}
+
+	private RecipeEntry currentRecipeEntry = null;
 
 	public String getRawResponseFromBalance() {
 		return rawResponseFromBalance;
@@ -133,6 +159,13 @@ public class Scale extends Observable {
 	}
 	public void removeOnApplicationListener (ScaleApplicationListener listener){
 		this.applicationListeners.remove(listener);
+	}
+
+	public void setOnRecipeEntryListener (RecipeEntryListener listener){
+		this.recipeEntryListeners.add(listener);
+	}
+	public void removeOnRecipeEntryListener (RecipeEntryListener listener){
+		this.recipeEntryListeners.remove(listener);
 	}
 
 	public void setOnScaleStateListener (ScaleStateListener listener){

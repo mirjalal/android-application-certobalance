@@ -17,6 +17,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -38,6 +39,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
+        navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setText("EDIT RECIPE");
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_recipe_edit_list);
@@ -51,7 +53,10 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
            DatabaseService db = new DatabaseService(this);
            recipe = db.getRecipeById(recipeId);
        }catch (Exception e){
-            recipe = new Recipe("","New recipe", new ArrayList<RecipeEntry>());
+            ArrayList<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
+            recipeEntries.add(new RecipeEntry("H2O",100d));
+            recipeEntries.add(new RecipeEntry("NaCl",0.9));
+            recipe = new Recipe("","My recipe", recipeEntries);
        }
         textRecipeName.setText(recipe.getRecipeName());
 
@@ -127,12 +132,13 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
 
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
+        if(buttonId == Navigationbar.BUTTON_ADD){
+            adapter.add(new RecipeEntry("",0d));
+            adapter.notifyDataSetChanged();
+        }
         if(buttonId == Navigationbar.BUTTON_SAVE){
             try
             {
-
-
-
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
                 dialog.setTitle("Confirm deletion");
@@ -154,9 +160,15 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                     @Override
                     public void onClick(View v) {
                         DatabaseService db = new DatabaseService(MenuRecipeEditActivity.this);
+
                         if(recipe != null){
                             db.deleteRecipe(recipe);
                         }
+                        List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
+                        for(int i = 0; i< adapter.getCount();i++){
+                            recipeEntries.add(adapter.getItem(i));
+                        }
+                        recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries);
                         db.insertRecipe(recipe);
                         dialog.dismiss();
                         finish();

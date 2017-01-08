@@ -12,6 +12,8 @@ import java.util.Date;
  * implemented according to OHAUS user manual
  */
 @DatabaseTable(tableName = "library")
+
+
 public class Library {
 	public static final String FIELD_LIBRARY_APPLICATION = "application";
 	public static final String FIELD_LIBRARY_ID = "library_id";
@@ -51,40 +53,78 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_CLOUD_ID)
 	private String cloudId;
 
-	public double getAveragePieceWeight() {
-		return averagePieceWeight;
-	}
-
-	public void setAveragePieceWeight(double averagePieceWeight) {
-		this.averagePieceWeight = averagePieceWeight;
-	}
-
 	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGE_PIECE_WEIGHT)
 	private double averagePieceWeight;
-
-
-
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	public double getAveragingTime() {
-		return averagingTime;
-	}
-
-	public void setAveragingTime(double averagingTime) {
-		this.averagingTime = averagingTime;
-	}
-
-
 
 	@DatabaseField(columnName = FIELD_LIBRARY_USER_EMAIL)
 	private String userEmail;
 
+	@DatabaseField(columnName = FIELD_LIBRARY_VERSION)
+	private int version;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_NAME)
+	private String name;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_TARA)
+	private double tara;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_SAMPLE_SIZE)
+	private double sampleSize;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
+	private double underLimit;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_TARGET)
+	private double target;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_PIECES)
+	private double underLimitPieces;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_CHECK_WEIGHING)
+	private double underLimitCheckWeighing;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER_CHECK_WEIGHING)
+	private double overLimitCheckWeighing;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_NOMINAL)
+	private double CheckNominal;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_TOLERANCE_UNDER)
+	private double CheckToleranceUnder;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_TOLERANCE_Over)
+	private double CheckToleranceOver;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER)
+	private double overLimit;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER_PIECES)
+	private double overLimitPieces;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_WEIGHT)
+	private double referenceweight;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_ADJUSTMENT)
+	private double referenceweightAdjustment;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_LEVEL)
+	private double level;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_MODE)
+	private int mode;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_DATE,dataType = DataType.DATE)
+	private Date date;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_IS_LOCAL)
+	private Boolean isLocal;
+
+	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
+	private double averagingTime;
+
+	Library() {
+		// needed by ormlite
+	}
 
 	public Library(String userEmail, int application, String cloudId, int version, String name, double tara, double target, double sampleSize, double averagePieceWeight, double underLimit, double underLimitPieces, double overLimit, double overLimitPieces, double refweight, double refweightAdjustment,double level, int mode, Date date, Boolean isLocal, double avtime, double underLimitcheck, double overLimitcheck, double checkNominal,double checkToleranceUnder,double checkToleranceOver) {
 		this.userEmail = userEmail;
@@ -167,7 +207,6 @@ public class Library {
 		return target;
 	}
 
-
 	public double getSampleSize() {
 		return sampleSize;
 	}
@@ -181,7 +220,6 @@ public class Library {
 	}
 
 	public double getUnderLimitPieces(){
-
 		return underLimitPieces;
 	}
 	public double getUnderLimitCheckWeighing() {
@@ -199,6 +237,7 @@ public class Library {
 	public double getCheckNominalToleranceUnder() {
 		return CheckToleranceUnder;
 	}
+
 	public double getOverLimitCheckWeighing() {
 		return overLimitCheckWeighing;
 	}
@@ -218,9 +257,6 @@ public class Library {
 	public void setReferenceweightAdjustment(double referenceweightAdjustment) {
 		this.referenceweightAdjustment = referenceweightAdjustment;
 	}
-
-
-
 
 	public void setUnderLimit(double underLimit) {
 		this.underLimit = underLimit;
@@ -246,6 +282,7 @@ public class Library {
 	public void setTarget(double target){
 		this.target = target;
 	}
+
 	public void setUnderLimitPieces(double underLimitPieces) {
 		this.underLimitPieces = underLimitPieces;
 	}
@@ -257,10 +294,10 @@ public class Library {
 	public double getOverLimitPieces() {
 		return overLimitPieces;
 	}
+
 	public double getTargetPieces() {
 		return target;
 	}
-
 
 	public void setOverLimit(double overLimit) {
 		this.overLimit = overLimit;
@@ -302,82 +339,28 @@ public class Library {
 		isLocal = local;
 	}
 
-	@DatabaseField(columnName = FIELD_LIBRARY_VERSION)
-	private int version;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_NAME)
-	private String name;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_TARA)
-	private double tara;
-
-
-	@DatabaseField(columnName = FIELD_LIBRARY_SAMPLE_SIZE)
-	private double sampleSize;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER)
-	private double underLimit;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_TARGET)
-	private double target;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_PIECES)
-	private double underLimitPieces;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_UNDER_CHECK_WEIGHING)
-	private double underLimitCheckWeighing;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER_CHECK_WEIGHING)
-	private double overLimitCheckWeighing;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_NOMINAL)
-	private double CheckNominal;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_TOLERANCE_UNDER)
-	private double CheckToleranceUnder;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_CHECK_TOLERANCE_Over)
-	private double CheckToleranceOver;
-
-
-
-
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER)
-	private double overLimit;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LIMIT_OVER_PIECES)
-	private double overLimitPieces;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_WEIGHT)
-	private double referenceweight;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_REFERENCE_ADJUSTMENT)
-	private double referenceweightAdjustment;
-
-
-	@DatabaseField(columnName = FIELD_LIBRARY_LEVEL)
-	private double level;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_MODE)
-	private int mode;
-
-
-
-	@DatabaseField(columnName = FIELD_LIBRARY_DATE,dataType = DataType.DATE)
-	private Date date;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_IS_LOCAL)
-	private Boolean isLocal;
-
-	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
-	private double averagingTime;
-
-
-	Library() {
-		// needed by ormlite
+	public double getAveragePieceWeight() {
+		return averagePieceWeight;
 	}
 
+	public void setAveragePieceWeight(double averagePieceWeight) {
+		this.averagePieceWeight = averagePieceWeight;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public double getAveragingTime() {
+		return averagingTime;
+	}
+
+	public void setAveragingTime(double averagingTime) {
+		this.averagingTime = averagingTime;
+	}
 
 }
 

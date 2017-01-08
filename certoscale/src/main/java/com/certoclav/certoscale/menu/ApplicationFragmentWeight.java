@@ -101,6 +101,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
             case FORMULATION:
+            case FORMULATION_RUNNING:
             case WEIGHING:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());

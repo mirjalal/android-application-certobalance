@@ -10,8 +10,16 @@ import android.widget.Button;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
+
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
+import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
+import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
 
 public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener{
@@ -243,17 +251,89 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
-		if(application == ScaleApplication.ANIMAL_WEIGHING){
-			buttonStart.setVisibility(View.VISIBLE);
-			buttonStart.setEnabled(true);
-		}else if(application == ScaleApplication.ANIMAL_WEIGHING_CALCULATING){
-			buttonStart.setVisibility(View.VISIBLE);
-			buttonStart.setEnabled(false);
+
+
+		switch (Scale.getInstance().getScaleApplication()){
+			case ANIMAL_WEIGHING_CALCULATING:
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(false);
+				break;
+			case ANIMAL_WEIGHING:
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
+				break;
+			case FORMULATION:
+				if (Scale.getInstance().getCurrentRecipe() != null) {
+					buttonStart.setEnabled(true);
+					buttonStart.setVisibility(View.VISIBLE);
+				} else {
+					buttonStart.setEnabled(false);
+					buttonStart.setVisibility(View.VISIBLE);
+				}
+				break;
+			case FORMULATION_RUNNING:
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(false);
+				buttonCal.setEnabled(false);
+				buttonPrint.setEnabled(false);
+				buttonTara.setEnabled(false);
+				buttonAppSettings.setEnabled(false);
+				break;
+			default:
+				buttonStart.setVisibility(View.GONE);
+		}
+
+
+		//do not react on subApplications
+		if(application == PART_COUNTING_CALC_AWP ||
+				application == PERCENT_WEIGHING_CALC_REFERENCE ||
+				application == ANIMAL_WEIGHING_CALCULATING ||
+				application == FILLING_CALC_TARGET ||
+				application == FORMULATION_RUNNING){
+			return;
+		}
+
+
+		ApplicationManager.getInstance().clearStatistics();
+		getButtonAppSettings().setText("SETTINGS");
+		getButtonCal().setEnabled(true);
+		getButtonPrint().setEnabled(true);
+		getButtonTara().setEnabled(true);
+		getButtonAccumulate().setEnabled(true);
+		getButtonAppSettings().setEnabled(true);
+
+		if(application == TOTALIZATION){
+			getButtonAppSettings().setEnabled(false);
+		}
+
+
+		//handle Statistic Button visibiltiy (visible or gone)
+		if(application == ScaleApplication.FORMULATION||
+				application == ScaleApplication.FORMULATION_RUNNING){
+			getButtonStatistics().setVisibility(View.GONE);
+			buttonAccumulate.setVisibility(View.GONE);
 		}else{
-			buttonStart.setVisibility(View.GONE);
-			buttonStart.setEnabled(true);
+			buttonStatistics.setVisibility(View.VISIBLE);
+			buttonAccumulate.setVisibility(View.VISIBLE);
+		}
+
+
+
+
+		updateStatsButtonUI();
+
+		
+	}
+
+	public void updateStatsButtonUI() {
+		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
+		if (ApplicationManager.getInstance().getStatistic().getN()==0){
+			getButtonStatistics().setEnabled(false);
+		}else {
+			getButtonStatistics().setEnabled(true);
 		}
 	}
+	
 }
 
 

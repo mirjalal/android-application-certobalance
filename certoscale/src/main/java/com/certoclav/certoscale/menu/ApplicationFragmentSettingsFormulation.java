@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 
 
@@ -44,7 +45,11 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
 
     @Override
     public void onResume() {
-        buttonRecipe.setText("Current Recipe:");
+        if(Scale.getInstance().getCurrentRecipe() != null) {
+            buttonRecipe.setText("Current Recipe:\n" + Scale.getInstance().getCurrentRecipe().getRecipeName());
+        }else{
+            buttonRecipe.setText("Click to choose recipe");
+        }
 
 
         super.onResume();

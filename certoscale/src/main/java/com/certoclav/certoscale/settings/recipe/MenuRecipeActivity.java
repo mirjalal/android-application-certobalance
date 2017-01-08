@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -59,6 +61,15 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Scale.getInstance().setCurrentRecipe(adapter.getItem(position));
+                finish();
+            }
+        });
+
     }
 
     @Override

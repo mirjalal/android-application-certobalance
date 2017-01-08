@@ -102,7 +102,7 @@ public class Recipe {
 			}
 
 		}catch (Exception e){
-
+			entries = new ArrayList<RecipeEntry>();
 		}
 		return entries;
 

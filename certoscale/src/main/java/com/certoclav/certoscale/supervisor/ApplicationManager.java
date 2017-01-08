@@ -380,7 +380,7 @@ public class ApplicationManager {
         return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
 
-    public String getUnderLimitChekcWeighingAsString() {
+    public String getUnderLimitCheckWeighingAsString() {
         return String.format("%.4f", currentLibrary.getUnderLimitCheckWeighing());
     }
     public String getCheckNominal() {
@@ -402,7 +402,7 @@ public class ApplicationManager {
         return  currentLibrary.getCheckNominalToleranceUnder();
     }
 
-    public String getOverLimitChekcWeighingAsString() {
+    public String getOverLimitCheckWeighingAsString() {
         return String.format("%.4f", currentLibrary.getOverLimitCheckWeighing());
     }
 

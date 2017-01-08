@@ -8,8 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -59,8 +57,8 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please enter the under limit");
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle("Please enter the nominal weight");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
 
@@ -78,7 +76,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setCheckNominal(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                ApplicationManager.getInstance().setCheckNominal(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().setCheckNominal(0);
@@ -110,8 +108,8 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please enter the nominal weight");
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle("Please enter the upper tolerance limit weight");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
 
@@ -129,7 +127,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setCheckNominalToleranceOver(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                ApplicationManager.getInstance().setCheckNominalToleranceOver(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().setCheckNominalToleranceOver(0);
@@ -161,8 +159,8 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please enter the under limit");
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle("Please enter the under tolerance limit weight");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
 
@@ -180,7 +178,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setCheckNominalToleranceUnder(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                ApplicationManager.getInstance().setCheckNominalToleranceUnder(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().setCheckNominalToleranceUnder(0);
@@ -211,7 +209,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the under limit");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
@@ -230,7 +228,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setUnderLimitCheckWeighing(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                ApplicationManager.getInstance().setUnderLimitCheckWeighing(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().setUnderLimitCheckWeighing(0);
@@ -261,7 +259,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the over limit");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
@@ -280,7 +278,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setOverLimitCheckWeighing(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                ApplicationManager.getInstance().setOverLimitCheckWeighing(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().setOverLimitCheckWeighing(0);
                             }
@@ -317,18 +315,18 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
 
 
-        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitChekcWeighingAsString() + " g");
-        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverLimitChekcWeighingAsString() + " g");
+        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitCheckWeighingAsString() + " g");
+        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverLimitCheckWeighingAsString() + " g");
 
         button_nominal.setText("Nominal:\n"+ApplicationManager.getInstance().getCheckNominal() + " g");
         button_nominal_tolerance_over.setText("+ Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g");
-        button_nominal_tolerance_under.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g");
+        button_nominal_tolerance_under.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnder() + " g");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String cmode = prefs.getString(getString(R.string.preferences_check_limitmode),"");
 
-        if(cmode.equals("1")){
+        if(cmode.equals("1")){ //Limit mode: Over And Under
             button_under_limit.setVisibility(View.VISIBLE);
             button_over_limit.setVisibility(View.VISIBLE);
             button_under_limit.setEnabled(true);
@@ -343,7 +341,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
 
         }
-        if(cmode.equals("2")){
+        if(cmode.equals("2")){// Limit mode: Nominal +- Weight Tolarance
 
 
 
@@ -358,9 +356,10 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
         }
 
-        if(cmode.equals("3")){
+        if(cmode.equals("3")){ // Nominal +- Percantage Tolerance
             button_under_limit.setVisibility(View.GONE);
             button_over_limit.setVisibility(View.GONE);
+            button_nominal.setVisibility(View.VISIBLE);
 
         }
 

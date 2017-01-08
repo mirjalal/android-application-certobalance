@@ -33,6 +33,7 @@ import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
@@ -64,6 +65,7 @@ private Navigationbar navigationbar = new Navigationbar(this);
 	@Override
 protected void onResume() {
 
+
 		refreshSpinnerLibrary();
 
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
@@ -74,15 +76,31 @@ protected void onResume() {
 		navigationbar.getButtonMore().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerLib().setVisibility(View.VISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.VISIBLE);
-		actionButtonbarFragment.setButtonEventListener(this);
 
+		actionButtonbarFragment.setButtonEventListener(this);
 		Scale.getInstance().setOnApplicationListener(this);
 
 		updateSpinnerMode();
-		updateStatsButtonUI();
 
+		actionButtonbarFragment.updateStatsButtonUI();
 
+		if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION) {
+			if (Scale.getInstance().getCurrentRecipe() != null) {
+				actionButtonbarFragment.getButtonStart().setEnabled(true);
+			} else {
+				actionButtonbarFragment.getButtonStart().setEnabled(false);
+			}
+		}
 
+		if(appSettingsVisible){
+			actionButtonbarFragment.getButtonStart().setEnabled(false);
+		}
+
+		if(appSettingsVisible) {
+			actionButtonbarFragment.getButtonAppSettings().performClick();
+		}else{
+			actionButtonbarFragment.getButtonAppSettings().setEnabled(true);
+		}
 		super.onResume();
 }
 
@@ -109,7 +127,12 @@ protected void onPause() {
 
 		switch (buttonId){
 			case ActionButtonbarFragment.BUTTON_START:
-				getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ANIMAL_WEIGHING) {
+					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
+				}
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION) {
+					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulation()).commit();
+				}
 				break;
 			case Navigationbar.BUTTON_MORE:
 				Toast.makeText(ApplicationActivity.this, "Calculator, Stopwatch, Voice control, Units",Toast.LENGTH_LONG).show();
@@ -125,13 +148,13 @@ protected void onPause() {
 				ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						updateStatsButtonUI();
+						actionButtonbarFragment.updateStatsButtonUI();
 					}
 				});
 				break;
 			case ActionButtonbarFragment.BUTTON_ACCUMULATE:
 				ApplicationManager.getInstance().accumulateStatistics();
-				updateStatsButtonUI();
+				actionButtonbarFragment.updateStatsButtonUI();
 				break;
 			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {
@@ -141,14 +164,14 @@ protected void onPause() {
 					actionButtonbarFragment.getButtonPrint().setEnabled(true);
 					actionButtonbarFragment.getButtonStart().setEnabled(true);
 					actionButtonbarFragment.getButtonTara().setEnabled(true);
-					updateStatsButtonUI();
+					actionButtonbarFragment.updateStatsButtonUI();
 					actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
 					appSettingsVisible = false;
 				}else{
 					actionButtonbarFragment.getButtonCal().setEnabled(false);
 					actionButtonbarFragment.getButtonPrint().setEnabled(false);
 					actionButtonbarFragment.getButtonStart().setEnabled(false);
-					updateStatsButtonUI();
+					actionButtonbarFragment.updateStatsButtonUI();
 					actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
 
 					switch (Scale.getInstance().getScaleApplication()){
@@ -268,28 +291,15 @@ protected void onPause() {
 		if(application == PART_COUNTING_CALC_AWP ||
 				application == PERCENT_WEIGHING_CALC_REFERENCE ||
 				application == ANIMAL_WEIGHING_CALCULATING ||
-				application == FILLING_CALC_TARGET){
+				application == FILLING_CALC_TARGET ||
+				application == FORMULATION_RUNNING){
 			return;
 		}
-		ApplicationManager.getInstance().clearStatistics();
 
+		appSettingsVisible = false;
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
 
-		actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
-		actionButtonbarFragment.getButtonCal().setEnabled(true);
-		actionButtonbarFragment.getButtonPrint().setEnabled(true);
-		actionButtonbarFragment.getButtonTara().setEnabled(true);
-		actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
-		appSettingsVisible = false;
 
-		//TOTALIZATION HAS NO SETTINGS BUTTON
-		if(application == ScaleApplication.TOTALIZATION){
-			actionButtonbarFragment.getButtonAppSettings().setEnabled(false);
-		}else{
-			actionButtonbarFragment.getButtonAppSettings().setEnabled(true);
-		}
-
-		updateStatsButtonUI();
 		refreshSpinnerLibrary();
 	}
 
@@ -361,13 +371,6 @@ protected void onPause() {
 
 
 
-	private void updateStatsButtonUI() {
-		actionButtonbarFragment.getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
-		if (ApplicationManager.getInstance().getStatistic().getN()==0){
-			actionButtonbarFragment.getButtonStatistics().setEnabled(false);
-		}else {
-			actionButtonbarFragment.getButtonStatistics().setEnabled(true);
-		}
-	}
+
 
 }

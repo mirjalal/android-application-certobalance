@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,6 +11,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.RecipeEntry;
@@ -69,15 +72,54 @@ public class RecipeElementAdapter extends ArrayAdapter<RecipeEntry> {
 			
 			actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 			containerItems.addView(actionItemDelete);
-			
 
-			
+
+		TextView textStepNumber = (TextView) convertView.findViewById(R.id.menu_main_recipe_text_step);
+		textStepNumber.setText("Step" + " " + (position+1));
+
+
 		EditText editName = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_name);
 		editName.setText(getItem(position).getName());
+		editName.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				getItem(position).setName(s.toString());
+			}
+		});
 
 		EditText editWeight = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_weight);
 		editWeight.setText(String.format("%.4f",getItem(position).getWeight()));
 
+		editWeight.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				try {
+					getItem(position).setWeight(Double.parseDouble(s.toString()));
+				}catch (Exception e){
+					getItem(position).setWeight(0d);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
 	
 		
 		

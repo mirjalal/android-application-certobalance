@@ -64,6 +64,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexTableNumberOfSamples = 0;
     int indexTableTotal = 1;
 
+    //Formulation
+    int indexTableRecipeName = 0;
+
 
     @Override
     public void onResume() {
@@ -259,11 +262,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_under_visible), getResources().getBoolean(R.bool.preferences_check_under_visible)) == true) {
                         listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
-                        listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitChekcWeighingAsString() + " g");
+                        listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitCheckWeighingAsString() + " g");
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_over_visible), getResources().getBoolean(R.bool.preferences_check_over_visible)) == true) {
                         listReferenceFields.get(checkoverlimit).getTextName().setText("OVERLIMIT");
-                        listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitChekcWeighingAsString() + " g");
+                        listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitCheckWeighingAsString() + " g");
                     }
                 }
 
@@ -309,6 +312,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case TOTALIZATION:
                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
                 break;
+            case FORMULATION:
+                listReferenceFields.get(indexTableRecipeName).getTextName().setText("RECIPE");
+                if(Scale.getInstance().getCurrentRecipe() != null) {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(Scale.getInstance().getCurrentRecipe().getRecipeName());
+                }else{
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText("No recipe");
+                }
+                    break;
         }
 
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Recipe;
+import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
@@ -81,7 +82,12 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 		firstLine.setText(getItem(position).getRecipeName());
 
 		final TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
-		secondLine.setText("Number of ingredients: ");
+		StringBuilder sb = new StringBuilder();
+		sb.append("Formation: ");
+		for(RecipeEntry entry : getItem(position).getRecipeEntries()){
+			sb.append(entry.getWeight()).append(" g").append(" ").append(entry.getName()).append(", ");
+		}
+		secondLine.setText(sb.toString());
 
 	
 		

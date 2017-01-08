@@ -13,16 +13,31 @@
     	android:layout_width="match_parent"
     	android:layout_below="@+id/navigationbar">
 
+		<LinearLayout
+			android:id="@+id/menu_main_recipe_edit_container_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_width="100dp"
+				android:layout_height="match_parent"
+				android:text="NAME:"
+				android:gravity="center_vertical"
+				style="@style/text_default"/>
+
 		<EditText
 			android:id="@+id/menu_main_recipe_edit_text"
 			android:layout_width="match_parent"
 			android:layout_height="60dp"
+			android:singleLine="true"
 			android:hint="Recipe name"
 			style="@style/edit_text_default"/>
 
+		</LinearLayout>
 <ListView
     android:id="@+id/menu_main_recipe_edit_list"
-	android:layout_below="@+id/menu_main_recipe_edit_text"
+	android:layout_below="@+id/menu_main_recipe_edit_container_title"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 </ListView>
