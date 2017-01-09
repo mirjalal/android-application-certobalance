@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.model.Scale;
@@ -25,6 +26,16 @@ import java.util.Date;
  */
 
 public class ApplicationManager {
+
+    public Item getCurrentItem() {
+        return currentItem;
+    }
+
+    public void setCurrentItem(Item currentItem) {
+        this.currentItem = currentItem;
+    }
+
+    private Item currentItem = null;
 
     ArrayList<StatisticListener> statisticListeners = new ArrayList<StatisticListener>();
 
@@ -462,6 +473,17 @@ public class ApplicationManager {
     }
 
 
+    public Double getDifferenceToInitialWeightInGram() {
+        Double retval = 0d;
+        try {
+            retval = getTaredValueInGram() - getCurrentItem().getWeight();
+        }catch (Exception e){
+            retval = 0d;
+        }
+        return retval;
+    }
+
+
     public String getDifferenceInPercent() {
 
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
@@ -496,4 +518,27 @@ public class ApplicationManager {
             return String.format("%.4f", percent);
         }
     }
+
+    public String getDifferenceAsStringInGramWithUnit() {
+        String retVal = "";
+        try {
+            retVal =  String.format("%.4f", getSumInGram() - getTareInGram() - currentItem.getWeight()) + " g";
+        }catch (Exception e){
+            retVal = "";
+        }
+        return retVal;
+    }
+
+    public String getDifferenceToInitialInPercentWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", getDifferenceToInitialWeightInGram() / currentItem.getWeight() * 100.0);
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+        }
+
 }

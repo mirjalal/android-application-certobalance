@@ -87,6 +87,7 @@ public class StateMachine implements WeightListener {
             //after 30 seconds of communications failures, set state of microcontroller to disconnected
             String rawResponseTransformed = Scale.getInstance().getRawResponseFromBalance().replace("\n","").replace("\r","").replaceAll("\\p{C}", "?");
             Log.e("StateMachine", "rawresp: " + rawResponseTransformed);
+
             if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
                 if(ignoreCableNotConnected == false) {
                     Scale.getInstance().setScaleState(CABLE_NOT_CONNECTED);

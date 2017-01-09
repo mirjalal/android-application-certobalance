@@ -98,7 +98,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 				try {
-					Thread.sleep(250);
+					Thread.sleep(333);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
+import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
 
-public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener{
+public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener, WeightListener{
 
 
 	public ActionButtonbarFragment() {
@@ -147,12 +148,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	public void onResume() {
 		super.onResume();
 		Scale.getInstance().setOnApplicationListener(this);
+		Scale.getInstance().setOnWeightListener(this);
 		onApplicationChange(Scale.getInstance().getScaleApplication());
 	}
 
 	@Override
 	public void onPause() {
 		Scale.getInstance().removeOnApplicationListener(this);
+		Scale.getInstance().setOnWeightListener(this);
 		super.onPause();
 	}
 
@@ -357,7 +360,15 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			getButtonStatistics().setEnabled(true);
 		}
 	}
-	
+
+	@Override
+	public void onWeightChanged(Double weight, String unit) {
+		if(ApplicationManager.getInstance().getTareInGram() != 0){
+			buttonZero.setEnabled(true);
+		}else{
+			buttonZero.setEnabled(false);
+		}
+	}
 }
 
 

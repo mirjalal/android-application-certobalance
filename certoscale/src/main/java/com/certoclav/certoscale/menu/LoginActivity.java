@@ -354,9 +354,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		progressBar.setVisibility(View.INVISIBLE);
 		Scale.getInstance();
 		editTextPassword.setText("");
-		if(AppConstants.IS_IO_SIMULATED){
+
 			fillDatabaseIfEmpty();
-		}
+
 
 		refreshUI();
 
@@ -426,13 +426,12 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			}
 
 			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
-			entries.add(new RecipeEntry("Calcium",10.00));
-			entries.add(new RecipeEntry("Water", 60.00));
-			entries.add(new RecipeEntry("Methanol", 1.0212));
+			entries.add(new RecipeEntry("Calcium",0.10));
+			entries.add(new RecipeEntry("Water", 9.90));
 			databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
 
-			databaseService.insertItem(new Item("","Screw",0.01d,"1300234"));
-			databaseService.insertItem(new Item("","Nut",3.23232d,"1300235"));
+			databaseService.insertItem(new Item("","Item 1",0.01d,"1300234"));
+			databaseService.insertItem(new Item("","Item 2",3.2345d,"1300235"));
 
 			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f,0f,0f,0f,0f,0f);

@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.settings.item.MenuItemEditActivity;
+import com.certoclav.certoscale.settings.item.MenuItemActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 
 public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
@@ -31,7 +31,7 @@ public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
         buttonRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent intent = new Intent(getActivity(), MenuItemEditActivity.class);
+              Intent intent = new Intent(getActivity(), MenuItemActivity.class);
                 getActivity().startActivity(intent);
             }
         });
@@ -45,8 +45,8 @@ public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        if(Scale.getInstance().getCurrentRecipe() != null) {
-            buttonRecipe.setText("Current Item:\n" + Scale.getInstance().getCurrentRecipe().getRecipeName());
+        if(ApplicationManager.getInstance().getCurrentItem() != null) {
+            buttonRecipe.setText("Current Item:\n" + ApplicationManager.getInstance().getCurrentItem().getName());
         }else{
             buttonRecipe.setText("Click to choose item");
         }

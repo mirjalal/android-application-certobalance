@@ -329,15 +329,24 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     break;
             case DIFFERENTIAL_WEIGHING:
                 listReferenceFields.get(indexTableItemName).getTextName().setText("ITEM");
-                if(Scale.getInstance().getCurrentRecipe() != null) {
-                  //  listReferenceFields.get(indexTableRecipeName).getTextValue().setText(Scale.getInstance().getCurrentItem().getName());
+                if(ApplicationManager.getInstance().getCurrentItem() != null) {
+                   listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
                 }else{
                     listReferenceFields.get(indexTableItemName).getTextValue().setText("No item");
                 }
-                listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
-                listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
                 listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("INITIAL WEIGHT");
+                if(ApplicationManager.getInstance().getCurrentItem() != null){
+                    listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentItem().getWeight()) + " g");
+                }else{
+                    listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText("");
+                }
+                listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
+                listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringInGramWithUnit());
+                listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
+                listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentWithUnit());
+
                 listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("FINAL WEIGHT");
+                listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
         }

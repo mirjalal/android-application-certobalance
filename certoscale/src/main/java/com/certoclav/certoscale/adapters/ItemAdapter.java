@@ -1,15 +1,13 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
@@ -30,7 +28,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 	public interface OnClickButtonListener {
 		 void onClickButtonDelete(Item item);
-		 void onClickButtonSave(Item item);
+		 void onClickButtonEdit(Item item);
 		}
 	ArrayList<OnClickButtonListener> onClickButtonListeners = new ArrayList<OnClickButtonListener>();
 
@@ -40,17 +38,17 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 	public void removeOnClickButtonListener(OnClickButtonListener listener){
 		onClickButtonListeners.remove(listener);
 	}
-	
-	
+
+
 
 	private final Context mContext;
 	private QuickActionItem actionItemDelete;
-	private QuickActionItem actionItemSave;
+	private QuickActionItem actionItemEdit;
 
 
 
 	public ItemAdapter(Context context, List<Item> values) {
-		super(context, R.layout.menu_main_item_edit_element, values);
+		super(context, R.layout.menu_main_item_element, values);
 		this.mContext = context;
 
 
@@ -70,72 +68,37 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 
-			convertView = inflater.inflate(R.layout.menu_main_item_edit_element, parent, false);
-			LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
+		convertView = inflater.inflate(R.layout.menu_main_item_element, parent, false);
+		LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
-			actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-			containerItems.addView(actionItemDelete);
+		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+		containerItems.addView(actionItemDelete);
 
-		actionItemSave = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-		containerItems.addView(actionItemSave);
+		actionItemEdit = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+		containerItems.addView(actionItemEdit);
 
-		EditText editTextArticleNumber = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
-		
+		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
+		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
 
-
-		EditText editName = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_name);
+		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());
-		editName.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-			}
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				getItem(position).setName(s.toString());
-			}
-		});
-
-		EditText editWeight = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
+		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
 		editWeight.setText(String.format("%.4f",getItem(position).getWeight()));
 
-		editWeight.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-			}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				try {
-					getItem(position).setWeight(Double.parseDouble(s.toString()));
-				}catch (Exception e){
-					getItem(position).setWeight(0d);
-				}
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
-		});
 
 
-		actionItemSave.setChecked(false);
-		actionItemSave.setImageResource(R.drawable.ic_menu_save);
+
+		actionItemEdit.setChecked(false);
+		actionItemEdit.setImageResource(R.drawable.ic_menu_edit);
 
 		//actionItemDelete.setText(getContext().getString(R.string.delete));
-		actionItemSave.setOnClickListener(new OnClickListener() {
+		actionItemEdit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				for(OnClickButtonListener listener : onClickButtonListeners){
-					listener.onClickButtonSave(getItem(position));
+					listener.onClickButtonEdit(getItem(position));
 				}
 
 
@@ -148,7 +111,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
 
 			//actionItemDelete.setText(getContext().getString(R.string.delete));
-			actionItemDelete.setOnClickListener(new OnClickListener() {	
+			actionItemDelete.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					for(OnClickButtonListener listener : onClickButtonListeners){

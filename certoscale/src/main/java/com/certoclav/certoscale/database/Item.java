@@ -20,21 +20,29 @@ public class Item {
 	}
 
 
-	public int getRecipe_id() {
-		return recipe_id;
+	public int getItem_id() {
+		return item_id;
 	}
 
 	@DatabaseField(generatedId = true, columnName = "item_id")
-	private int recipe_id;
+	private int item_id;
 
+
+	public String getItemJson() {
+		return itemJson;
+	}
+
+	public void setItemJson(String itemJson) {
+		this.itemJson = itemJson;
+	}
 
 	@DatabaseField(columnName = "item_json")
 	private String itemJson;
 
 	public String generateItemJson(String name, Double weight, String articleNumber){
 		JSONObject jsonObjectItem = new JSONObject();
-		try {
 
+		try {
 			jsonObjectItem.put("name", name).put("weight", weight).put("artnumber",articleNumber);
 		}catch (Exception e){
 			e.printStackTrace();
@@ -87,6 +95,7 @@ public class Item {
 		try {
 			JSONObject recipeJson = new JSONObject(this.itemJson);
 			recipeJson.put("weight",weight);
+			itemJson = recipeJson.toString();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -100,6 +109,7 @@ public class Item {
 		try {
 			JSONObject recipeJson = new JSONObject(this.itemJson);
 			recipeJson.put("name",name);
+			itemJson = recipeJson.toString();
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -120,6 +130,17 @@ public class Item {
 
 	}
 
+	public void setArticleNumber(String s) {
+
+		try {
+			JSONObject recipeJson = new JSONObject(this.itemJson);
+			recipeJson.put("artnumber",s);
+			itemJson = recipeJson.toString();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+	}
 }
 
 

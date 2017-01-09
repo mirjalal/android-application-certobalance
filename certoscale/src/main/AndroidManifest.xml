@@ -183,6 +183,8 @@
         <activity android:name=".settings.item.MenuItemEditActivity"
             android:screenOrientation="sensorLandscape"></activity>
 
+        <activity android:name=".settings.item.MenuItemActivity"
+            android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.unit.SettingsUnitActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
