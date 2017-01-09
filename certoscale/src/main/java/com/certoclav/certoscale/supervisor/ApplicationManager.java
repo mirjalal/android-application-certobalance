@@ -13,6 +13,7 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.StatisticListener;
+import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 
@@ -25,8 +26,9 @@ import java.util.Date;
  * Created by Michael on 12/6/2016.
  */
 
-public class ApplicationManager {
+public class ApplicationManager implements WeightListener {
 
+    private Double weighOld = 0d;
     public Item getCurrentItem() {
         return currentItem;
     }
@@ -270,7 +272,7 @@ public class ApplicationManager {
     }
 
     private ApplicationManager() {
-
+        Scale.getInstance().setOnWeightListener(this);
     }
 
 
@@ -541,4 +543,17 @@ public class ApplicationManager {
         return retVal;
         }
 
+    @Override
+    public void onWeightChanged(Double weight, String unit) {
+        if(Math.abs(weighOld - weight) <= 0.0001){
+            if(Scale.getInstance().isStable() == false) {
+                Scale.getInstance().setStable(true);
+            }
+        }else{
+            if(Scale.getInstance().isStable() == true) {
+                Scale.getInstance().setStable(false);
+            }
+        }
+        weighOld = weight;
+    }
 }

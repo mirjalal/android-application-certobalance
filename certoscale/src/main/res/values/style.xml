@@ -12,6 +12,12 @@
         <item name="android:scaleType">centerInside</item>
         <item name="android:visibility">invisible</item>
     </style>
+
+    <style name="button_image_default">
+        <item name="android:background">@drawable/quickaction_slider_btn_black</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffffff</item>

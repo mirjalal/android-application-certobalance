@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gadient" >
 
+
+
     <include 
         android:id="@+id/navigationbar"
         layout="@layout/navigationbar"/>
@@ -36,4 +38,41 @@
             android:layout_weight="1"/>
 
 </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_application_container_more"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/background_gadient"
+        android:visibility="gone"
+        >
+        <ImageButton
+            android:id="@+id/menu_application_sidebar_button_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_back"
+            style="@style/button_image_default"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_help"
+            style="@style/button_image_default"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_logout"
+            style="@style/button_image_default"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_calibration"
+            style="@style/button_image_default"/>
+    </LinearLayout>
+
 </RelativeLayout>

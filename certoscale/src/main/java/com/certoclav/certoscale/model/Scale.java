@@ -7,6 +7,7 @@ import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.ScaleStateListener;
+import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
@@ -29,9 +30,24 @@ public class Scale extends Observable {
 	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
 	ArrayList<ScaleStateListener> scaleStateListeners = new ArrayList<ScaleStateListener>();
 	ArrayList<RecipeEntryListener> recipeEntryListeners = new ArrayList<RecipeEntryListener>();
+	ArrayList<StableListener> stableListeners = new ArrayList<StableListener>();
+
 	private SerialService serialServiceScale = null;
 	private SerialService serialServiceLabelPrinter = null;
 	private SerialService serialServiceProtocolPrinter = null;
+
+	public boolean isStable() {
+		return stable;
+	}
+
+	public void setStable(boolean stable) {
+		this.stable = stable;
+		for(StableListener listener : stableListeners){
+			listener.onStableChanged(stable);
+		}
+	}
+
+	private boolean stable = false;
 
 	public Recipe getCurrentRecipe() {
 		return currentRecipe;
@@ -159,6 +175,13 @@ public class Scale extends Observable {
 	}
 	public void removeOnApplicationListener (ScaleApplicationListener listener){
 		this.applicationListeners.remove(listener);
+	}
+
+	public void setOnStableListener (StableListener listener){
+		this.stableListeners.add(listener);
+	}
+	public void removeOnStableListener (StableListener listener){
+		this.stableListeners.remove(listener);
 	}
 
 	public void setOnRecipeEntryListener (RecipeEntryListener listener){

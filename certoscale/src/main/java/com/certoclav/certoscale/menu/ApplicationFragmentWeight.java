@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.graph.GraphService;
+import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
@@ -30,11 +32,12 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ApplicationFragmentWeight extends Fragment implements WeightListener {
+public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
     private FrameLayout barload = null;
     private TextView textInstruction = null;
     private TextView textSum = null;
     private TextView textValue = null;
+    private ImageView imageStable = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +48,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         textInstruction = (TextView) rootView.findViewById(R.id.menu_main_text_instruction);
         textSum = (TextView) rootView.findViewById(R.id.menu_main_text_information);
         textValue = (TextView) rootView.findViewById(R.id.menu_main_text_value);
+        imageStable = (ImageView) rootView.findViewById(R.id.menu_main_image_stable);
 
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
@@ -54,6 +58,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     public void onResume() {
         super.onResume();
         Scale.getInstance().setOnWeightListener(this);
+        Scale.getInstance().setOnStableListener(this);
 
     }
 
@@ -62,6 +67,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         super.onPause();
 
         Scale.getInstance().removeOnWeightListener(this);
+        Scale.getInstance().removeOnStableListener(this);
     }
 
 
@@ -244,4 +250,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     }
 
 
+    @Override
+    public void onStableChanged(boolean isStable)
+    {
+        if(isStable){
+            imageStable.setVisibility(View.VISIBLE);
+        }else {
+            imageStable.setVisibility(View.INVISIBLE);
+        }
+    }
 }

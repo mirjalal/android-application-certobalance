@@ -331,22 +331,27 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 listReferenceFields.get(indexTableItemName).getTextName().setText("ITEM");
                 if(ApplicationManager.getInstance().getCurrentItem() != null) {
                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
+                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
+                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringInGramWithUnit());
+                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
+                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentWithUnit());
+                   listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("FINAL WEIGHT");
+                   listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                   listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("INITIAL WEIGHT");
+                   listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentItem().getWeight()) + " g");
                 }else{
-                    listReferenceFields.get(indexTableItemName).getTextValue().setText("No item");
-                }
-                listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("INITIAL WEIGHT");
-                if(ApplicationManager.getInstance().getCurrentItem() != null){
-                    listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentItem().getWeight()) + " g");
-                }else{
+                    listReferenceFields.get(indexTableItemName).getTextValue().setText("-");
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText("");
+                    listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("");
+                    listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText("");
+                    listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("");
+                    listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText("");
+                    listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("");
+                    listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText("");
+                    listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("");
                     listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText("");
-                }
-                listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
-                listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringInGramWithUnit());
-                listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
-                listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentWithUnit());
 
-                listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("FINAL WEIGHT");
-                listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
 
                 break;
         }

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
@@ -44,6 +46,8 @@ private Navigationbar navigationbar = new Navigationbar(this);
 
 	private ActionButtonbarFragment actionButtonbarFragment = null;
 	private boolean appSettingsVisible = false;
+	private LinearLayout containerMore = null;
+	private ImageButton imageButtonSidebarBack = null;
 
 
 
@@ -56,7 +60,17 @@ private Navigationbar navigationbar = new Navigationbar(this);
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_actionbar, actionButtonbarFragment).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
+		containerMore = (LinearLayout) findViewById(R.id.menu_application_container_more);
+		imageButtonSidebarBack = (ImageButton) findViewById(R.id.menu_application_sidebar_button_back);
+		imageButtonSidebarBack.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 
+
+					containerMore.setVisibility(View.INVISIBLE);
+
+			}
+		});
 
 	}
 
@@ -135,7 +149,13 @@ protected void onPause() {
 				}
 				break;
 			case Navigationbar.BUTTON_MORE:
-				Toast.makeText(ApplicationActivity.this, "Calculator, Stopwatch, Voice control, Units",Toast.LENGTH_LONG).show();
+
+				if(containerMore.getVisibility() == View.INVISIBLE){
+					containerMore.setVisibility(View.VISIBLE);
+				}else{
+					containerMore.setVisibility(View.INVISIBLE);
+				}
+
 				break;
 			case Navigationbar.BUTTON_HOME:
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
