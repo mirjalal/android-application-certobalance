@@ -76,7 +76,7 @@ android:text="SUM: 0.2323 g"/>
 <FrameLayout
 android:id="@+id/menu_main_bar"
 android:layout_width="700dp"
-android:layout_height="5dp"
+android:layout_height="25dp"
     android:layout_gravity="center_horizontal"
 android:layout_centerHorizontal="true"
 android:layout_below="@+id/menu_main_text_information">
@@ -90,10 +90,15 @@ android:layout_below="@+id/menu_main_text_information">
 
 <FrameLayout
     android:id="@+id/menu_main_bar_load"
-    android:layout_width="100dp"
+    android:layout_width="700dp"
     android:layout_height="5dp"
     android:background="#00FFFF"
     ></FrameLayout>
+
+
 </FrameLayout>
+
+
+
 
 </LinearLayout>

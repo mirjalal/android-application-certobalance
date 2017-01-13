@@ -287,6 +287,19 @@
         <item>3</item>
     </string-array>
 
+    <string-array name="preferences_peak_modes">
+        <item>Manual</item>
+        <item>Semi Automatic</item>
+        <item>Automatic</item>
+    </string-array>
+
+    <string-array name="preferences_peak_modes_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
     <string-array name="preferences_check_display_modes">
         <item>Weight</item>
         <item>Check Status</item>

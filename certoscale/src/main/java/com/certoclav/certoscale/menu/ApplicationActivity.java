@@ -223,6 +223,11 @@ protected void onPause() {
 						case DIFFERENTIAL_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDifferentialWeighing()).commit();
 							break;
+						case PEAK_HOLD:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPeakHold()).commit();
+							break;
+
+
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}

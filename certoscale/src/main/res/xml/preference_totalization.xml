@@ -87,7 +87,7 @@
             android:key="@string/preferences_totalization_brutto_visible"
             android:defaultValue="@bool/preferences_totalization_brutto_visible"
             android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+            android:summary="Turn the brutto weight visible/invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 

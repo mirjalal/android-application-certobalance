@@ -523,18 +523,18 @@ public class ApplicationManager implements WeightListener {
     public String getFillingDifferenceInPercent() {
 
         double ref=currentLibrary.getTarget();
+        double netto = getTaredValueInGram();
+
+        double diff=netto-ref;
 
         if (ref==0){
             return String.format("%.4f", (ref));
-        }else {
-
-            double netto = getTaredValueInGram();
-
-            double percent = (netto/ref)*100;
-
-
+        }
+        else {
+            double percent = (diff / ref) * 100;
             return String.format("%.4f", percent);
         }
+
     }
 
     public String getDifferenceFilling(){
@@ -543,13 +543,34 @@ public class ApplicationManager implements WeightListener {
     }
     public String getTargetasString(){
 
-        return String.format("0.4f",currentLibrary.getTarget());
+        return String.format("%.4f",currentLibrary.getTarget());
+    }
+
+    public double getTarget(){
+        return currentLibrary.getTarget();
     }
 
 
     public String getPercent() {
 
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+
+        if (ref==0){
+            return String.format("%.4f", (ref));
+        }else {
+
+            double netto = (getSumInGram() - getTareInGram());
+
+            double percent = (netto/ref)*100;
+
+
+            return String.format("%.4f", percent);
+        }
+    }
+
+    public String getPercentFilling() {
+
+        double ref=currentLibrary.getTarget();
 
         if (ref==0){
             return String.format("%.4f", (ref));

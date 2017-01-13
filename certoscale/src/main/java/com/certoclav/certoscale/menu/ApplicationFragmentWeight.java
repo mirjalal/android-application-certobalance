@@ -34,6 +34,7 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
  */
 public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
     private FrameLayout barload = null;
+    private FrameLayout barloadbackground = null;
     private TextView textInstruction = null;
     private TextView textSum = null;
     private TextView textValue = null;
@@ -45,10 +46,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         View rootView = inflater.inflate(R.layout.menu_application_fragment_weight_display,container, false);
         //Access to views from menu_main xml file
         barload = (FrameLayout) rootView.findViewById(R.id.menu_main_bar_load);
+        barloadbackground =(FrameLayout) rootView.findViewById(R.id.menu_main_countdown_bar_background);
+
+
         textInstruction = (TextView) rootView.findViewById(R.id.menu_main_text_instruction);
         textSum = (TextView) rootView.findViewById(R.id.menu_main_text_information);
         textValue = (TextView) rootView.findViewById(R.id.menu_main_text_value);
         imageStable = (ImageView) rootView.findViewById(R.id.menu_main_image_stable);
+
+
+
 
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
@@ -79,7 +86,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
-
+        boolean loadingbarnormal=true;
         switch (Scale.getInstance().getScaleApplication()){
             case ANIMAL_WEIGHING_CALCULATING:
                 textValue.setTextColor(Color.WHITE);
@@ -209,7 +216,29 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+
+                textSum.setText("Fill Status: " + ApplicationManager.getInstance().getPercentFilling()+" %");
+
+                loadingbarnormal=false;
+                FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
+                FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
+                params.height=15;
+                params2.height=15;
+
+                double filling_width=(ApplicationManager.getInstance().getTarget()/ApplicationManager.getInstance().getTaredValueInGram())*700;
+                if(filling_width<0){
+                    filling_width = 0;
+                }
+                if(filling_width > 700){
+                    filling_width = 700;
+                }
+
+                params.width= (int) filling_width;
+                barload.setLayoutParams(params);
+                barloadbackground.setLayoutParams(params2);
+                barload.setBackgroundColor(Color.CYAN);
+
+
                 break;
 
             case FILLING_CALC_TARGET:
@@ -233,27 +262,33 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
         }
 
+    if (loadingbarnormal==true){
         //Update Loading bar
-        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
-        int width = (int) (Scale.getInstance().getWeightInGram()*5.83);
-        if(width<0){
-            width = 0;
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
+            FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
+            int fwidth = (int) (Scale.getInstance().getWeightInGram()*5.83);
+            if(fwidth<0){
+                fwidth = 0;
+            }
+            if(fwidth > 700){
+                fwidth = 700;
+            }
+            params.width = fwidth;
+            params.height=15;
+            barload.setLayoutParams(params);
+
+            params2.height=15;
+            barloadbackground.setLayoutParams(params2);
+
+
+            if(ApplicationManager.getInstance().getSumInGram() > 100){
+                barload.setBackgroundColor(Color.RED);
+
+            }else{
+                barload.setBackgroundColor(Color.GREEN);
+            }
+
         }
-        if(width > 700){
-            width = 700;
-        }
-        params.width = width;
-        barload.setLayoutParams(params);
-
-        if(ApplicationManager.getInstance().getSumInGram() > 100){
-            barload.setBackgroundColor(Color.RED);
-
-        }else{
-
-            barload.setBackgroundColor(Color.GREEN);
-        }
-
-
     }
 
 

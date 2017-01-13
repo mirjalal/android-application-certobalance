@@ -69,6 +69,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Totalization
     int indexTableNumberOfSamples = 0;
     int indexTableTotal = 1;
+    int indextableaverage= 2;
+    int standarddeviation=4;
+    int minimum=3;
+    int maximum=5;
+    int range=6;
 
     //Formulation
     int indexTableRecipeName = 0;
@@ -355,6 +360,26 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
+
+            case PEAK_HOLD:
+                if  (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible),getResources().getBoolean(R.bool.preferences_filling_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+
+                break;
+
+
             case TOTALIZATION:
                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
                 break;
@@ -413,6 +438,37 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getSum()));
                 }catch (Exception e){
                 }
+                listReferenceFields.get(indextableaverage).getTextName().setText("AVERAGE");
+            try {
+                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMean()));
+            }catch (Exception e){
+            }
+
+            listReferenceFields.get(standarddeviation).getTextName().setText("STANDARD DEV.");
+            try {
+                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getStandardDeviation()));
+            }catch (Exception e){
+            }
+
+            listReferenceFields.get(minimum).getTextName().setText("MINIMUM");
+            try {
+                listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMin()));
+            }catch (Exception e){
+            }
+
+            listReferenceFields.get(maximum).getTextName().setText("MAXIMUM");
+            try {
+                listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMax()));
+            }catch (Exception e){
+            }
+
+            listReferenceFields.get(range).getTextName().setText("Range");
+            try {
+                listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g",(ApplicationManager.getInstance().getStatistic().getMax())-ApplicationManager.getInstance().getStatistic().getMin()));
+            }catch (Exception e){
+            }
+
+
             }
 
         }
