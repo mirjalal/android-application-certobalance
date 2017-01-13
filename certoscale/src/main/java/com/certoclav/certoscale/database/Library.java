@@ -230,8 +230,25 @@ public class Library {
 		return CheckNominal;
 	}
 
+
+
 	public double getCheckNominalToleranceOver() {
 		return CheckToleranceOver;
+	}
+
+
+	public double getCheckNominalToleranceOverPercent() {
+		if (CheckNominal==0) {return 0;}
+		double percentover=(CheckToleranceOver+CheckNominal)/CheckNominal;
+		percentover=(percentover-1)*100;
+		return percentover;
+	}
+
+	public double getCheckNominalToleranceUnderPercent() {
+		if (CheckNominal==0) {return 0;}
+		double percentunder=(CheckNominal-CheckToleranceUnder)/CheckNominal;
+		percentunder=(1-percentunder)*100;
+		return percentunder;
 	}
 
 	public double getCheckNominalToleranceUnder() {
@@ -271,6 +288,15 @@ public class Library {
 
 	public void setCheckNominalToleranceUnder(double nominalToleranceUnder){
 		this.CheckToleranceUnder=nominalToleranceUnder;
+	}
+
+	public void setCheckNominalToleranceUnderPercent(double nominalToleranceUnderPercent){
+		double underPercent=(nominalToleranceUnderPercent/100)*CheckNominal;
+		this.CheckToleranceUnder=underPercent;
+	}
+	public void setCheckNominalToleranceOverPercent(double nominalToleranceOverPercentPercent){
+		double overPercent=(nominalToleranceOverPercentPercent/100)*CheckNominal;
+		this.CheckToleranceUnder=overPercent;
 	}
 	public void setCheckNominalToleranceOver(double nominalToleranceOver){
 		this.CheckToleranceOver=nominalToleranceOver;

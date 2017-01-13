@@ -35,6 +35,9 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
     private Button button_nominal_tolerance_over=null;
     private Button button_nominal_tolerance_under=null;
 
+    private Button button_nominal_tolerance_over_percent=null;
+    private Button button_nominal_tolerance_under_percent=null;
+
 
     private LinearLayout containerSettingsButtons = null;
 
@@ -302,11 +305,111 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
 
 
+        button_nominal_tolerance_under_percent = (Button) rootView.findViewById(R.id.settings_check_weighing_button_nominal_tolerance_under_percent);
+        button_nominal_tolerance_under_percent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle("Please enter the under tolerance limit in percent");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    // set the custom dialog components - text, image and button
 
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().setCheckNominalToleranceUnderPercent(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setCheckNominalToleranceUnderPercent(0);
+
+                            }dialog.dismiss();
+                            onResume();
+
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+        button_nominal_tolerance_over_percent = (Button) rootView.findViewById(R.id.settings_check_weighing_button_nominal_tolerance_over_percent);
+        button_nominal_tolerance_over_percent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle("Please enter the over tolerance in percent");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                ApplicationManager.getInstance().setCheckNominalToleranceOverPercent(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setCheckNominalToleranceOverPercent(0);
+
+                            }dialog.dismiss();
+                            onResume();
+
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
+
+
+
+
 
 
     @Override
@@ -321,6 +424,9 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
         button_nominal.setText("Nominal:\n"+ApplicationManager.getInstance().getCheckNominal() + " g");
         button_nominal_tolerance_over.setText("+ Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g");
         button_nominal_tolerance_under.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnder() + " g");
+
+        button_nominal_tolerance_over_percent.setText("+ Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOverPercent() + " %");
+        button_nominal_tolerance_under_percent.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -339,6 +445,9 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             button_nominal_tolerance_under.setVisibility(View.GONE);
             button_nominal_tolerance_over.setEnabled(true);
 
+            button_nominal_tolerance_over_percent.setVisibility(View.GONE);
+            button_nominal_tolerance_under_percent.setVisibility(View.GONE);
+
 
         }
         if(cmode.equals("2")){// Limit mode: Nominal +- Weight Tolarance
@@ -354,12 +463,31 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             button_nominal_tolerance_under.setVisibility(View.VISIBLE);
             button_nominal_tolerance_under.setEnabled(true);
 
+
+
+            button_nominal_tolerance_over_percent.setVisibility(View.GONE);
+            button_nominal_tolerance_under_percent.setVisibility(View.GONE);
+
+
         }
 
         if(cmode.equals("3")){ // Nominal +- Percantage Tolerance
+
+
             button_under_limit.setVisibility(View.GONE);
             button_over_limit.setVisibility(View.GONE);
             button_nominal.setVisibility(View.VISIBLE);
+            button_nominal.setEnabled(true);
+
+
+            button_nominal_tolerance_over.setVisibility(View.GONE);
+            button_nominal_tolerance_under.setVisibility(View.GONE);
+
+
+            button_nominal_tolerance_over_percent.setVisibility(View.VISIBLE);
+            button_nominal_tolerance_over_percent.setEnabled(true);
+            button_nominal_tolerance_under_percent.setVisibility(View.VISIBLE);
+            button_nominal_tolerance_under_percent.setEnabled(true);
 
         }
 

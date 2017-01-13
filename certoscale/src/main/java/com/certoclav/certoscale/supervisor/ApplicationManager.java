@@ -141,6 +141,14 @@ public class ApplicationManager implements WeightListener {
     public void setCheckNominalToleranceUnder(double NominalToleranceUnder){
         currentLibrary.setCheckNominalToleranceUnder(NominalToleranceUnder);
     }
+
+    public void setCheckNominalToleranceUnderPercent(double NominalToleranceUnderPercent){
+        currentLibrary.setCheckNominalToleranceUnderPercent(NominalToleranceUnderPercent);
+    }
+
+    public void setCheckNominalToleranceOverPercent(double NominalToleranceOverPercent){
+        currentLibrary.setCheckNominalToleranceOverPercent(NominalToleranceOverPercent);
+    }
     public void setCheckNominalToleranceOver(double NominalToleranceOver){
         currentLibrary.setCheckNominalToleranceOver(NominalToleranceOver);
     }
@@ -405,12 +413,21 @@ public class ApplicationManager implements WeightListener {
     public String getCheckNominalToleranceOver() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceOver());
     }
+
+    public String getCheckNominalToleranceOverPercent() {
+        return String.format("%.4f", currentLibrary.getCheckNominalToleranceOverPercent());
+    }
+    public String getCheckNominalToleranceUnderPercent() {
+        return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnderPercent());
+    }
     public double getCheckNominalToleranceOverdouble() {
         return currentLibrary.getCheckNominalToleranceOver();
     }
     public String getCheckNominalToleranceUnder() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnder());
     }
+
+
     public double getCheckNominalToleranceUnderdouble() {
         return  currentLibrary.getCheckNominalToleranceUnder();
     }
