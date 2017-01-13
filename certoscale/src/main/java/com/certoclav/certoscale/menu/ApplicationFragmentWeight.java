@@ -212,6 +212,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
+            case FILLING_CALC_TARGET:
+                textInstruction.setText("");
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                break;
+
             case TOTALIZATION:
                 textInstruction.setText("Place sample on the pan. Press ADD TO STATS to add to the total.");
                 textValue.setTextColor(Color.WHITE);

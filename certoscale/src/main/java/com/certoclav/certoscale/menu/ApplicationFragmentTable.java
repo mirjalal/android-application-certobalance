@@ -60,6 +60,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Animal Weighing
     int measuringTime=1;
 
+    //Filling
+    int FillingTarget=1;
+    int FillingDifference=3;
+    int FillingDifferencePercent=5;
+
+
     //Totalization
     int indexTableNumberOfSamples = 0;
     int indexTableTotal = 1;
@@ -313,6 +319,39 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(measuringTime).getTextName().setText("AVERAGING TIME");
                     listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
                 }
+
+
+                break;
+
+            case FILLING:
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_netto_visible),getResources().getBoolean(R.bool.preferences_filling_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_target_visible),getResources().getBoolean(R.bool.preferences_filling_target_visible))==true) {
+                    listReferenceFields.get(FillingTarget).getTextName().setText("TARGET");
+                    listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetasString() +" g");
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible),getResources().getBoolean(R.bool.preferences_filling_differencew_visible))==true) {
+                    listReferenceFields.get(FillingDifference).getTextName().setText("DIFFERENCE [g]: ");
+                    listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFilling() + " g ");
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible),getResources().getBoolean(R.bool.preferences_filling_differencep_visible))==true) {
+                    listReferenceFields.get(FillingDifferencePercent).getTextName().setText("DIFFERENCE [%]: ");
+                    listReferenceFields.get(FillingDifferencePercent).getTextValue().setText(ApplicationManager.getInstance().getFillingDifferenceInPercent()+ " %");
+                }
+
+
 
 
                 break;

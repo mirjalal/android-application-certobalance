@@ -520,6 +520,32 @@ public class ApplicationManager implements WeightListener {
         }
     }
 
+    public String getFillingDifferenceInPercent() {
+
+        double ref=currentLibrary.getTarget();
+
+        if (ref==0){
+            return String.format("%.4f", (ref));
+        }else {
+
+            double netto = getTaredValueInGram();
+
+            double percent = (netto/ref)*100;
+
+
+            return String.format("%.4f", percent);
+        }
+    }
+
+    public String getDifferenceFilling(){
+
+        return String.format("%.4f",getTaredValueInGram()-currentLibrary.getTarget());
+    }
+    public String getTargetasString(){
+
+        return String.format("0.4f",currentLibrary.getTarget());
+    }
+
 
     public String getPercent() {
 
