@@ -57,7 +57,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             itemFromDb = db.getItemById(extra);
             adapter.add(itemFromDb);
         }else{
-            adapter.add(new Item("","name",1.0d, "Item ID"));
+            adapter.add(new Item("","name",1.0d,1.0d, "Item ID"));
         }
 
     }

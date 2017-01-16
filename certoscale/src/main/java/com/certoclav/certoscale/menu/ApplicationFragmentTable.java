@@ -87,6 +87,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     //Peak Hold
 
+    //Ingrediant Costing
+    int indexTableIngrediantUnitCost=1;
+    int indexTableIngrediantTotalWeight=3;
+    int indexTableIngrediantTotalCost=5;
+    int indexTableIngrediantArticlename=7;
+
 
     @Override
     public void onResume() {
@@ -381,6 +387,43 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
 
+            case INGREDIENT_COSTING:
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_tara_visible),getResources().getBoolean(R.bool.preferences_ingrediant_tara_visible))==true) {
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_brutto_visible),getResources().getBoolean(R.bool.preferences_ingrediant_brutto_visible))==true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_netto_visible),getResources().getBoolean(R.bool.preferences_ingrediant_netto_visible))==true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+
+
+                //To Do
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible),getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible))==true) {
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("UNIT COST");
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible),getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible))==true) {
+                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextName().setText("TOTAL WEIGHT");
+                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible),getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible))==true) {
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText("TOTAL COST");
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                }
+
+
+
+                break;
+
 
             case TOTALIZATION:
                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
@@ -420,6 +463,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 break;
+
+
         }
 
     }

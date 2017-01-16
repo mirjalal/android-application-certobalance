@@ -430,8 +430,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			entries.add(new RecipeEntry("Water", 9.90));
 			databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
 
-			databaseService.insertItem(new Item("","Item 1",0.01d,"1300234"));
-			databaseService.insertItem(new Item("","Item 2",3.2345d,"1300235"));
+			databaseService.insertItem(new Item("","Item 1",0.01d,0.01d,"1300234"));
+			databaseService.insertItem(new Item("","Item 2",3.2345d,0.1d,"1300235"));
 
 			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f,0f,0f,0f,0f,0f);

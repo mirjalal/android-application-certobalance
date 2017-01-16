@@ -226,6 +226,9 @@ protected void onPause() {
 						case PEAK_HOLD:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPeakHold()).commit();
 							break;
+						case INGREDIENT_COSTING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsIngrediantCosting()).commit();
+							break;
 
 
 						default:
