@@ -23,11 +23,11 @@
             android:key="@string/preferences_peak_mode"
             android:title="Auto Sample Mode"
             android:summary="Select operation mode"
-            android:dependency="@string/preferences_peak_mode"
+            android:dependency="@string/preferences_peak_lock"
             android:defaultValue="1"
             android:entries="@array/preferences_peak_modes"
             android:entryValues="@array/preferences_peak_modes_value"
-            android:disableDependentsState="true"
+
             />
 
         <CheckBoxPreference

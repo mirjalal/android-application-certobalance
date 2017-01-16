@@ -112,6 +112,7 @@
     <string name="preferences_counting_activated">preferences_counting_activated</string>
     <string name="preferences_counting_lock">preferences_counting_lock</string>
 
+
     <string name="preferences_counting_auto_optimization">preferences_counting_auto_optimization</string>
     <string name="preferences_counting_mode">preferences_counting_mode</string>
     <string name="preferences_counting_secondary_visible">preferences_counting_secondary_visible</string>

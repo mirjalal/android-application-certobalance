@@ -31,8 +31,7 @@ import java.text.ParseException;
 public class ApplicationFragmentSettingsWeighing extends Fragment {
 
     private LinearLayout containerSettingsButtons = null;
-    private Button buttonStart = null;
-    private Button buttonEnd = null;
+    private Button buttonMinimumWeight = null;
 
 
 
@@ -40,14 +39,14 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_weighing,container, false);
-        buttonStart =  (Button) rootView.findViewById(R.id.application_settings_weighing_button_minimum);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
+        buttonMinimumWeight =  (Button) rootView.findViewById(R.id.application_settings_weighing_button_minimum);
+        buttonMinimumWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("");
+                    dialog.setTitle("Please enter the under limit weight");
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
                     // set the custom dialog components - text, image and button
 
@@ -93,8 +92,7 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonStart.setText("Start");
-        buttonEnd.setText("End");
+        buttonMinimumWeight.setText("Minimum Weight\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getUnderLimit()));
         super.onResume();
 
 

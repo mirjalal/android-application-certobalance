@@ -40,6 +40,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private TextView textValue = null;
     private ImageView imageStable = null;
 
+    public double PeakHoldMaximum=0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
@@ -254,6 +256,35 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
+
+            case PEAK_HOLD:
+                String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+                double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
+
+                //Semi Automatic
+                if (PeakHoldMaximum==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
+                    //Start PeakHold Measurement
+                    ApplicationManager.getInstance().setPeakHoldActivated(true);
+                }
+
+                if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
+                    if (PHcurrentvalue>=PeakHoldMaximum){
+                        PeakHoldMaximum=PHcurrentvalue;
+                    }
+                    textValue.setTextColor(Color.WHITE);
+                    textValue.setText(String.format("%.4f",PeakHoldMaximum)+ " g");
+                    textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }else{
+                    textValue.setTextColor(Color.WHITE);
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    PeakHoldMaximum=0;
+
+
+                }
+
+                break;
+
 
             default:
                 textValue.setTextColor(Color.WHITE);

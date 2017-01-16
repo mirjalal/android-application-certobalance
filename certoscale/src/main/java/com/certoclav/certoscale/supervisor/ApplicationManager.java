@@ -28,6 +28,8 @@ import java.util.Date;
 
 public class ApplicationManager implements WeightListener {
 
+    private boolean  peakholdactivated=false;
+
     private Double weighOld = 0d;
     public Item getCurrentItem() {
         return currentItem;
@@ -290,6 +292,15 @@ public class ApplicationManager implements WeightListener {
 
     public Double getTaredValueInGram() {
         return getSumInGram() - getTareInGram();
+    }
+
+    public boolean getPeakHoldActivated(){
+        return peakholdactivated;
+    }
+
+    public boolean setPeakHoldActivated( boolean status){
+        peakholdactivated=status;
+        return true;
     }
 
     public double getUnderLimitCheckWeighing(){return currentLibrary.getUnderLimitCheckWeighing();}

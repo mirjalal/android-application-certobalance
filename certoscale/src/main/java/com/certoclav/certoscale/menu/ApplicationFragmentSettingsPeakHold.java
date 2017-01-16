@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,52 +33,34 @@ import java.text.ParseException;
 public class ApplicationFragmentSettingsPeakHold extends Fragment {
 
     private LinearLayout containerSettingsButtons = null;
-    private Button buttonMinimumWeight = null;
+    private Button Start = null;
+    private Button End = null;
+
+
+
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_weighing,container, false);
-        buttonMinimumWeight =  (Button) rootView.findViewById(R.id.application_settings_weighing_button_minimum);
-        buttonMinimumWeight.setOnClickListener(new View.OnClickListener() {
+        View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_peak_hold,container, false);
+
+        Start =  (Button) rootView.findViewById(R.id.application_settings_peak_hold_Start);
+        End =  (Button) rootView.findViewById(R.id.application_settings_peak_hold_End);
+
+
+
+        Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
-                    final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the under limit weight");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
-                    // set the custom dialog components - text, image and button
+                    //Make sure that only one Button is clickable
+                    Start.setEnabled(false);
+                    End.setEnabled(true);
 
-                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
-                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
-                    // if button is clicked, close the custom dialog
-                    dialogButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
-
-                            }catch (NumberFormatException e){
-                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(0);
-                            }
-                            dialog.dismiss();
-                            onResume();
-
-
-                        }
-                    });
-
-                    dialog.show();
+                    //Start PeakHold Measurement
+                    ApplicationManager.getInstance().setPeakHoldActivated(true);
 
                 }
                 catch (Exception e)
@@ -86,13 +70,67 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
             }
         });
 
+        End.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    //Make sure that only one Button is clickable
+                    Start.setEnabled(true);
+                    End.setEnabled(false);
+
+                    // End PeakHold Measurenment
+                    ApplicationManager.getInstance().setPeakHoldActivated(false);
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+
+
+
+        End.setEnabled(false);
+
+
+
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
 
     @Override
     public void onResume() {
-        buttonMinimumWeight.setText("Minimum Weight\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getUnderLimit()));
+        //get PeakHoldMode
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+
+
+        //Semi Automatic Mode
+        if(PeakHoldMode.equals("2")){
+
+            Start.setEnabled(false);
+            End.setEnabled(true);
+            //Start PeakHold Measurement
+            ApplicationManager.getInstance().setPeakHoldActivated(true);
+        }
+
+        //Automatic Mode
+        if(PeakHoldMode.equals("3")){
+
+            Start.setEnabled(false);
+            End.setEnabled(false);
+            //Start PeakHold Measurement
+            ApplicationManager.getInstance().setPeakHoldActivated(true);
+        }
+
+
+
+
+
         super.onResume();
 
 
