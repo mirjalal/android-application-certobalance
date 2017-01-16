@@ -16,6 +16,7 @@ import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -83,9 +84,13 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());
 
+		TextView editUnitCost =  (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_unit_cost);
+		editUnitCost.setText(String.format(Locale.US,"%.2f",getItem(position).getCost()));
+
+
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format("%.4f",getItem(position).getWeight()));
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()));
 
 
 
