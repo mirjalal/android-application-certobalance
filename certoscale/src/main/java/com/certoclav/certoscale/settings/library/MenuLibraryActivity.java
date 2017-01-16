@@ -17,6 +17,7 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.RegisterActivity;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -89,7 +90,7 @@ public class MenuLibraryActivity extends Activity implements ButtonEventListener
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
         switch (buttonId){
-            case Navigationbar.BUTTON_ADD:
+            case ActionButtonbarFragment.BUTTON_ADD:
                 Intent intent = new Intent(MenuLibraryActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;

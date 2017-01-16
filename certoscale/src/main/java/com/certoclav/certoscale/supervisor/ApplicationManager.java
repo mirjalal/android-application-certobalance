@@ -6,14 +6,20 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
+
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
+import com.certoclav.certoscale.menu.MenuActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 
@@ -21,14 +27,18 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Michael on 12/6/2016.
  */
 
-public class ApplicationManager implements WeightListener {
+public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
     private boolean  peakholdactivated=false;
+    private double Ingrediant_Unit_Cost=0;
+    private double Ingrediant_Total_Weight=0;
+    private double Ingrediant_Total_Cost=0;
 
     private Double weighOld = 0d;
     public Item getCurrentItem() {
@@ -283,6 +293,7 @@ public class ApplicationManager implements WeightListener {
 
     private ApplicationManager() {
         Scale.getInstance().setOnWeightListener(this);
+        Scale.getInstance().setOnApplicationListener(this);
     }
 
 
@@ -302,6 +313,33 @@ public class ApplicationManager implements WeightListener {
         peakholdactivated=status;
         return true;
     }
+
+    public double getIngrediantUnitCost(){
+        return Ingrediant_Unit_Cost;
+    }
+
+    public double setIngrediantUnitCost(double unitcost){
+        Ingrediant_Unit_Cost=unitcost;
+        return 0;
+    }
+
+    public double getIngrediantTotalCost(){
+        return Ingrediant_Total_Cost;
+    }
+
+    public double setIngrediantTotalCost(double totalcost){
+        Ingrediant_Total_Cost=totalcost;
+        return 0;
+    }
+
+    public double getIngrediantTotalWeight(){
+        return Ingrediant_Total_Weight;
+    }
+    public double setIngrediantTotalWeight(double totalweight){
+        Ingrediant_Total_Weight=totalweight;
+        return 0;
+    }
+
 
     public double getUnderLimitCheckWeighing(){return currentLibrary.getUnderLimitCheckWeighing();}
     public double getOverLimitCheckWeighing(){return currentLibrary.getOverLimitCheckWeighing();}
@@ -351,10 +389,10 @@ public class ApplicationManager implements WeightListener {
             dialog.setContentView(R.layout.dialog_statistics);
             dialog.setOnDismissListener(listener);
             dialog.setTitle("Statistics");
- //           statistic = new SummaryStatistics();
- //           for (Double value : statisticsArray) {
- //               statistic.addValue(value);
- //           }
+            //           statistic = new SummaryStatistics();
+            //           for (Double value : statisticsArray) {
+            //               statistic.addValue(value);
+            //           }
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + statistic.getN());
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());
@@ -382,6 +420,76 @@ public class ApplicationManager implements WeightListener {
                 }
             });
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void showIngrediantNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_ingrediantcosts);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Ingredient Costs");
+            //           statistic = new SummaryStatistics();
+            //           for (Double value : statisticsArray) {
+            //               statistic.addValue(value);
+            //
+
+            // set the custom dialog components - text, image and button
+
+
+            ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_ingrediants_List);
+
+            // Das ist das Stringarray dessen Elemente Zeile für Zeile angezeigt werden sollen
+            List<String> your_array_list = new ArrayList<String>();
+
+            // This is the array adapter, it takes the context of the activity as a
+            // first parameter, the type of list view as a second parameter and your
+            // array as a third parameter.
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                    //MenuActivity.this,
+
+                    //this,
+                    eContext,
+                    android.R.layout.simple_list_item_1,
+                    your_array_list );
+
+            listView.setAdapter(arrayAdapter);
+
+
+            arrayAdapter.add("");
+            arrayAdapter.add("Text von Listenelement 2");
+
+
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_clear);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    clearStatistics();
+                    dialog.dismiss();
+                }
+            });
+            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
+            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+                }
+            });
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
             dialogButtonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -630,5 +738,11 @@ public class ApplicationManager implements WeightListener {
             }
         }
         weighOld = weight;
+    }
+
+    @Override
+    public void onApplicationChange(ScaleApplication application) {
+        ApplicationManager.getInstance().setIngrediantTotalCost(0);
+        ApplicationManager.getInstance().setIngrediantTotalWeight(0);
     }
 }

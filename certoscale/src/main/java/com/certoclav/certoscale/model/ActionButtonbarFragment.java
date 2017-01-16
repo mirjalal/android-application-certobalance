@@ -1,11 +1,15 @@
 package com.certoclav.certoscale.model;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -29,16 +33,27 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public ActionButtonbarFragment() {
 	}
 
-	public static final int BUTTON_HOME = 1;
-	public static final int BUTTON_SETTINGS = 2;
+
 	public static final int BUTTON_TARA = 3;
 	public static final int BUTTON_CAL = 4;
 	public static final int BUTTON_PRINT = 5;
 	public static final int BUTTON_APP_SETTINGS = 6;
-	public static final int BUTTON_STATISTICS = 15;
-	public static final int BUTTON_ACCUMULATE = 16;
-	public static final int BUTTON_START =17;
-	public static final int BUTTON_ZERO = 18;
+	public static final int BUTTON_STATISTICS = 7;
+	public static final int BUTTON_ACCUMULATE = 8;
+	public static final int BUTTON_START =9;
+	public static final int BUTTON_ZERO = 10;
+	public static final int BUTTON_ACCEPT=11;
+	public static final int BUTTON_INGREDIANTLIST=12;
+	public static final int BUTTON_HOME = 13;
+	public static final int BUTTON_SETTINGS = 14;
+	public static final int BUTTON_ADD = 15;
+	public static final int BUTTON_BACK = 16;
+	public static final int SPINNER_LIBRARY = 17;
+	public static final int BUTTON_GO_TO_APPLICATION = 18;
+	public static final int BUTTON_LOGOUT = 19;
+	public static final int BUTTON_SAVE = 20;
+	public static final int BUTTON_SETTINGS_DEVICE = 21;
+	public static final int BUTTON_MORE = 22;
 
 
 	private Button buttonTara = null;
@@ -49,6 +64,9 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonAnimalStart = null;
 	private Button buttonAppSettings = null;
 	private Button buttonZero = null;
+	private Button buttonAccept=null;
+	private Button buttonIngrediantList=null;
+
 
 
 	public Button getButtonZero() {
@@ -262,6 +280,42 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		});
 
 
+		//Ingrediant Costing Calculations
+		buttonAccept = (Button) rootView.findViewById(R.id.actionbar_button_accept);
+		buttonAccept.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (ApplicationManager.getInstance().getCurrentItem()==null) {
+					Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
+				}else {
+					double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
+					double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
+					double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+
+					double unitCost = (Cost * currentWeight) / unitWeight;
+					ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
+
+					double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
+					ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
+
+					double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
+					ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
+				}
+			}
+		});
+
+		buttonIngrediantList = (Button) rootView.findViewById(R.id.actionbar_button_Ingredient_List);
+		buttonIngrediantList.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_INGREDIANTLIST,false);
+				}
+
+			}
+		});
+
+
 		return rootView;
 	}
 	
@@ -306,8 +360,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				break;
+
+			case INGREDIENT_COSTING:
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonIngrediantList.setVisibility(View.VISIBLE);
+
+
+				break;
 			default:
 				buttonStart.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+
 		}
 
 
@@ -336,7 +400,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		//handle Statistic Button visibiltiy (visible or gone)
 		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING){
+				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING){
 			getButtonStatistics().setVisibility(View.GONE);
 			buttonAccumulate.setVisibility(View.GONE);
 		}else{

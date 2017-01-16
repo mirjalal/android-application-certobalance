@@ -38,6 +38,7 @@ import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.graph.GraphService;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
@@ -693,7 +694,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 		switch (buttonId) {
 
-			case Navigationbar.BUTTON_ADD:
+			case ActionButtonbarFragment.BUTTON_ADD:
 				final Dialog dialog = new Dialog(LoginActivity.this);
 				dialog.setContentView(R.layout.dialog_yes_no);
 				dialog.setTitle(R.string.register_new_user);
@@ -730,7 +731,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				dialog.show();
 
 				break;
-			case Navigationbar.BUTTON_SETTINGS_DEVICE:
+			case ActionButtonbarFragment.BUTTON_SETTINGS_DEVICE:
 				Intent intent = new Intent(LoginActivity.this, SettingsDeviceActivity.class);
 				startActivity(intent);
 

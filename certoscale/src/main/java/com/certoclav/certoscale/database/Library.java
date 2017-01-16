@@ -122,6 +122,8 @@ public class Library {
 	@DatabaseField(columnName = FIELD_LIBRARY_AVERAGING_TIME)
 	private double averagingTime;
 
+
+
 	Library() {
 		// needed by ormlite
 	}

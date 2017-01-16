@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 
 
@@ -64,7 +65,7 @@ public class SettingsUnitActivity extends FragmentActivity implements  ButtonEve
 
 	@Override
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
-		if(buttonId == navigationbar.BUTTON_HOME){
+		if(buttonId == ActionButtonbarFragment.BUTTON_HOME){
 			finish();
 		}
 		

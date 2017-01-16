@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.MenuElementAdapter;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.MenuElement;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
@@ -104,7 +105,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         switch (buttonId){
-            case Navigationbar.BUTTON_ADD:
+            case ActionButtonbarFragment.BUTTON_ADD:
                 try {
 
                     final Dialog dialog = new Dialog(MenuActivity.this);
@@ -150,7 +151,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
 
                 break;
-            case Navigationbar.BUTTON_LOGOUT:
+            case ActionButtonbarFragment.BUTTON_LOGOUT:
                 try
                 {
 

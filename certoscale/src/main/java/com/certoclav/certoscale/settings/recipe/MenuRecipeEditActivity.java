@@ -13,6 +13,7 @@ import com.certoclav.certoscale.adapters.RecipeElementAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 
@@ -132,11 +133,11 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
 
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
-        if(buttonId == Navigationbar.BUTTON_ADD){
+        if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
             adapter.add(new RecipeEntry("",0d));
             adapter.notifyDataSetChanged();
         }
-        if(buttonId == Navigationbar.BUTTON_SAVE){
+        if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
             try
             {
                 final Dialog dialog = new Dialog(this);

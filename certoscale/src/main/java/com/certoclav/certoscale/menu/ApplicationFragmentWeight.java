@@ -51,6 +51,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private long ctime_first=0;
     private boolean PHfirst=false;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
@@ -320,6 +322,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 }
+
+                break;
+
+            case INGREDIENT_COSTING:
+                textInstruction.setText("");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+
+
 
                 break;
 
