@@ -85,6 +85,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexTableItemInitialWeight = 3;
     int indexTableItemFinalWeight = 4;
 
+    //Peak Hold
+
 
     @Override
     public void onResume() {

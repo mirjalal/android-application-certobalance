@@ -2,9 +2,12 @@ package com.certoclav.certoscale.menu;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,8 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
+import java.util.Timer;
 
 
 /**
@@ -40,7 +45,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private TextView textValue = null;
     private ImageView imageStable = null;
 
-    public double PeakHoldMaximum=0;
+
+    //Peak Hold Variables
+    private double PeakHoldMaximum=0;
+    private long ctime_first=0;
+    private boolean PHfirst=false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -261,16 +270,45 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
                 double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
 
+                boolean PHstable= Scale.getInstance().isStable();
+                boolean stableonly=false;
+
+                if  (prefs.getBoolean(getString(R.string.preferences_peak_stableonly),getResources().getBoolean(R.bool.preferences_peak_stableonly))==true) {
+                    stableonly=true;
+                }
+
+
+
+                if (PeakHoldMode.equals("3")) {
+                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && PHfirst==false){
+                        ctime_first = System.nanoTime();
+                        PHfirst=true;
+                    }
+                   // final String TAG = getClass().getSimpleName();
+                   // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
+
+                    if(ApplicationManager.getInstance().getSumInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
+                        PeakHoldMaximum=0;
+                        PHfirst=false;
+
+
+                    }
+                }
+
+
+
                 //Semi Automatic
                 if (PeakHoldMaximum==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
                     //Start PeakHold Measurement
                     ApplicationManager.getInstance().setPeakHoldActivated(true);
                 }
 
+                //Display the Maximum Value if PeakHold is activated
                 if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
-                    if (PHcurrentvalue>=PeakHoldMaximum){
+                    if (PHcurrentvalue>=PeakHoldMaximum && (stableonly==false || PHstable==true)  ){
                         PeakHoldMaximum=PHcurrentvalue;
                     }
+
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(String.format("%.4f",PeakHoldMaximum)+ " g");
                     textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -328,6 +366,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     {
         if(isStable){
             imageStable.setVisibility(View.VISIBLE);
+
+
         }else {
             imageStable.setVisibility(View.INVISIBLE);
         }
