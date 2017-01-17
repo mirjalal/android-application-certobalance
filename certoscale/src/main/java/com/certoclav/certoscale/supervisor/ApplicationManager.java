@@ -37,6 +37,41 @@ import java.util.List;
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
+
+    //Density Determination Variables
+    private int density_step_counter=0;
+
+    public int getDensity_step_counter() {
+        return density_step_counter;
+    }
+
+    public void setDensity_step_counter(int density_step_counter) {
+        this.density_step_counter = density_step_counter;
+    }
+
+    private double density_weight_air=0;
+    public double getDensity_weight_air() {
+        return density_weight_air;
+    }
+
+    public void setDensity_weight_air(double density_weight_air) {
+        this.density_weight_air = density_weight_air;
+    }
+
+    private double density_weight_liquid=0;
+
+    public double getDensity_weight_liquid() {
+        return density_weight_liquid;
+    }
+
+    public void setDensity_weight_liquid(double density_weight_liquid) {
+        this.density_weight_liquid = density_weight_liquid;
+    }
+
+
+
+
+
     private boolean  peakholdactivated=false;
     private double Ingrediant_Unit_Cost=0;
     private double Ingrediant_Total_Weight=0;
@@ -117,6 +152,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             new Date(),
             true,
             1f,
+            0f,
             0f,
             0f,
             0f,

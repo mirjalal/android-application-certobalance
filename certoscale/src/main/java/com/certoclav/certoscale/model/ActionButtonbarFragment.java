@@ -21,8 +21,10 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 import java.util.ArrayList;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITIY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
+import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
@@ -189,9 +191,15 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
+				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION) {
+					ApplicationManager.getInstance().setDensity_step_counter(1);
+					buttonAccept.setEnabled(true);
+					buttonStart.setEnabled(false);
+				}
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_START,false);
 				}
+
 
 			}
 		});
@@ -286,29 +294,48 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAccept.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (ApplicationManager.getInstance().getCurrentItem()==null) {
-					Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
-				}else {
-					double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
-					double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
-					double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+				if (Scale.getInstance().getScaleApplication()==INGREDIENT_COSTING){
+					buttonAccept.setEnabled(true);
+					if (ApplicationManager.getInstance().getCurrentItem()==null) {
+						Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
+					}else {
+						double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
+						double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
+						double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
 
-					double unitCost = (Cost * currentWeight) / unitWeight;
-					ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
+						double unitCost = (Cost * currentWeight) / unitWeight;
+						ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
 
-					double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
-					ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
+						double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
+						ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
 
-					double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
-					ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
-
-
-					Item measuredItem= new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+						double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
+						ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
 
 
-					measuredItem.setWeight(currentWeight);
-					measuredItem.setCost(unitCost);
-					ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+						Item measuredItem= new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+
+
+						measuredItem.setWeight(currentWeight);
+						measuredItem.setCost(unitCost);
+						ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+
+					}
+				}
+				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION){
+
+					if (ApplicationManager.getInstance().getDensity_step_counter()==2){
+						ApplicationManager.getInstance().setDensity_weight_liquid(ApplicationManager.getInstance().getTaredValueInGram());
+						ApplicationManager.getInstance().setDensity_step_counter(3);
+						buttonAccept.setEnabled(false);
+						buttonStart.setEnabled(true);
+					}
+
+					if (ApplicationManager.getInstance().getDensity_step_counter()==1){
+						ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
+						ApplicationManager.getInstance().setDensity_step_counter(2);
+					}
+
 
 				}
 			}
@@ -373,14 +400,32 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			case INGREDIENT_COSTING:
 				buttonAccept.setVisibility(View.VISIBLE);
+				buttonAccept.setEnabled(true);
 				buttonIngrediantList.setVisibility(View.VISIBLE);
 
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+
+
+				break;
+
+			case DENSITIY_DETERMINATION:
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonStart.setVisibility(View.VISIBLE);
+
+
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
 
 				break;
 			default:
 				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
+
+
 
 		}
 
@@ -410,7 +455,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		//handle Statistic Button visibiltiy (visible or gone)
 		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING){
+				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING || application==ScaleApplication.DENSITIY_DETERMINATION){
 			getButtonStatistics().setVisibility(View.GONE);
 			buttonAccumulate.setVisibility(View.GONE);
 		}else{

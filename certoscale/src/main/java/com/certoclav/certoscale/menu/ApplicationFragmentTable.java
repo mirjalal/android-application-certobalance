@@ -96,6 +96,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Density Determination
     int DensityWaterTemp=0;
     int DensityLiquidDensity=2;
+    int DensityWeightAir=1;
+    int DensityWeightLiquid=3;
 
 
 
@@ -409,7 +411,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
 
-                //To Do
+
                 if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible),getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible))==true) {
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("UNIT COST");
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText( String.format("%.4f",ApplicationManager.getInstance().getIngrediantUnitCost()));
@@ -434,14 +436,32 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case DENSITIY_DETERMINATION:
+                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
                 if  (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible),getResources().getBoolean(R.bool.preferences_density_watertemp_visible))==true) {
-                    listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
-                    listReferenceFields.get(DensityWaterTemp).getTextValue().setText(  String.format("%.1f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
+                    if (densityliquidtype.equals("1")) {
+                        listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
+                        listReferenceFields.get(DensityWaterTemp).getTextValue().setText(String.format("%.1f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + " °C");
+                    }
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible),getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible))==true) {
-                    listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
-                    listReferenceFields.get(DensityLiquidDensity).getTextValue().setText( String.format("%.4f",ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())));
+                    if (densityliquidtype.equals("1")) {
+                        listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
+                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())));
+                    }else{
+                        listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
+                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity()));
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_density_weightair_visible),getResources().getBoolean(R.bool.preferences_density_weightair_visible))==true) {
+                    listReferenceFields.get(DensityWeightAir).getTextName().setText("WEIGHT IN AIR");
+                    listReferenceFields.get(DensityWeightAir).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_air() ));
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_density_weightinliquid_print),getResources().getBoolean(R.bool.preferences_density_weightinliquid_print))==true) {
+                    listReferenceFields.get(DensityWeightLiquid).getTextName().setText("WEIGHT IN LIQUID");
+                    listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_liquid()));
                 }
 
 

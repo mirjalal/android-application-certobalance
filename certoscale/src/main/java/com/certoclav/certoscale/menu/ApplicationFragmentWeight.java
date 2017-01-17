@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.menu;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -50,6 +51,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private double PeakHoldMaximum=0;
     private long ctime_first=0;
     private boolean PHfirst=false;
+
+
+
+
 
 
 
@@ -220,9 +225,70 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case DENSITIY_DETERMINATION:
-                textInstruction.setText("");
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textValue.setTextColor(Color.BLUE);
+
+                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
+                String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+
+                if (ApplicationManager.getInstance().getDensity_step_counter()==0){
+                    textValue.setTextColor(Color.WHITE);
+                    textValue.setText("Press Start");
+
+                }
+                if(ApplicationManager.getInstance().getDensity_step_counter()==1) {
+                    textInstruction.setText("");
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    //textSum.setTextColor(Color.YELLOW);
+
+                    textSum.setText("Weigh Sample in Air and press Accept");
+                    if (densitymode.equals("2")){
+                        textSum.setText("Weigh Sinker in Air and press Accept");
+                    }
+                }
+
+                if(ApplicationManager.getInstance().getDensity_step_counter()==2) {
+                    textInstruction.setText("");
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    //textSum.setTextColor(Color.YELLOW);
+                    textSum.setText("Weigh Sample in Liquid and press Accept");
+                    if (densitymode.equals("2")){
+                        textSum.setText("Weigh Sinker in Liquid and press Accept");
+                    }
+                }
+
+
+                if(ApplicationManager.getInstance().getDensity_step_counter()==3) {
+
+                    double densitySinker=11.342;
+
+                    textInstruction.setText("");
+
+                    //Equation according to http://www.hs-lausitz.de/fileadmin/user_upload/public/fak/fak2/pdf/Physiklabor/M01_Dichtebestimmung.pdf
+                    double density=0;
+                    double mk=ApplicationManager.getInstance().getDensity_weight_air();
+                    double pf=0;
+                    double dm=ApplicationManager.getInstance().getDensity_weight_liquid();
+                    if (densitymode.equals("1")) {
+                        if (densityliquidtype.equals("1")) {
+                            pf = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp());
+                        } else {
+                            pf = ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity();
+                        }
+                        density=(mk*pf)/(mk-dm);
+                    }
+                    if (densitymode.equals("2")) {
+                        density=(mk-dm)/(mk*densitySinker);
+
+                    }
+
+                    textValue.setText(String.format("%.4f",density)+" g/cm³");
+                    //textSum.setTextColor(Color.YELLOW);
+                    if (densitymode.equals("1")) {
+                        textSum.setText("Density calculated");
+                    }
+                    if (densitymode.equals("2")) {
+                        textSum.setText("Density of the liquid calculated");
+                    }
+                }
                 break;
 
             case FILLING:
