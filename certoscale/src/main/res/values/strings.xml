@@ -294,6 +294,28 @@
         <item>Automatic</item>
     </string-array>
 
+    <string-array name="preferences_density_mode">
+        <item>Solid</item>
+        <item>Liquid</item>
+    </string-array>
+
+    <string-array name="preferences_density_liquid_type">
+        <item>Water</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="preferences_density_liquid_type_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_density_mode_value">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+
     <string-array name="preferences_peak_modes_value">
         <item>1</item>
         <item>2</item>

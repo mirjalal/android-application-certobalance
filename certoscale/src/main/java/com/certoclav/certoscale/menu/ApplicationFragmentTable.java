@@ -93,6 +93,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexTableIngrediantTotalCost=5;
     int indexTableIngrediantArticlename=7;
 
+    //Density Determination
+    int DensityWaterTemp=0;
+    int DensityLiquidDensity=2;
+
+
 
     @Override
     public void onResume() {
@@ -425,6 +430,20 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(indexTableIngrediantArticlename).getTextName().setText("");
                     listReferenceFields.get(indexTableIngrediantArticlename).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
                 }
+
+                break;
+
+            case DENSITIY_DETERMINATION:
+                if  (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible),getResources().getBoolean(R.bool.preferences_density_watertemp_visible))==true) {
+                    listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
+                    listReferenceFields.get(DensityWaterTemp).getTextValue().setText(  String.format("%.1f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible),getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible))==true) {
+                    listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
+                    listReferenceFields.get(DensityLiquidDensity).getTextValue().setText( String.format("%.4f",ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())));
+                }
+
 
                 break;
 
