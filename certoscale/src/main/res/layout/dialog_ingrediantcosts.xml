@@ -5,11 +5,66 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_gadient">
 
+	<LinearLayout
+		android:id="@+id/dialog_ingrediantcosts_header"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:orientation="horizontal"
+		android:background="@drawable/background_gadient">
+		<TextView
+			android:id="@+id/menu_main_item_edit_element_artnumber"
+			android:layout_width="140dp"
+			android:layout_height="60dp"
+			android:text="Article No."
+			android:gravity="center_vertical"
+			android:textStyle="bold"
+			style="@style/text_default"/>
+
+		<TextView
+			android:id="@+id/menu_main_item_edit_element_name"
+			android:layout_width="140dp"
+			android:layout_height="60dp"
+			style="@style/text_default"
+			android:gravity="center_vertical"
+			android:text="Name"
+			android:textStyle="bold"/>
+
+		<TextView
+			android:id="@+id/menu_main_item_edit_element_unit_cost"
+			android:layout_width="140dp"
+			android:layout_height="60dp"
+			style="@style/text_default"
+			android:gravity="center_vertical"
+			android:text="Cost"
+			android:textStyle="bold"/>
+
+
+
+
+		<TextView
+			android:id="@+id/menu_main_item_edit_element_weight"
+			android:layout_width="140dp"
+			android:layout_height="60dp"
+			style="@style/text_default"
+			android:gravity="center_vertical"
+			android:text="Weight"
+			android:textStyle="bold"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			style="@style/text_default"
+			android:gravity="center_vertical"
+			android:text="Unit"
+			android:textStyle="bold"/>
+	</LinearLayout>
+
 
 	<ListView
 		android:id="@+id/dialog_ingrediants_List"
 		android:layout_width="match_parent"
-		android:layout_height="300dp" />
+		android:layout_below="@+id/dialog_ingrediantcosts_header"
+		android:layout_height="200dp" />
 
 
 	<LinearLayout

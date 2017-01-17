@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
@@ -300,6 +301,15 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
 					ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
+
+
+					Item measuredItem= new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+
+
+					measuredItem.setWeight(currentWeight);
+					measuredItem.setCost(unitCost);
+					ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+
 				}
 			}
 		});

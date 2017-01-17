@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.adapters.ItemAdapter;
+import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
@@ -39,6 +41,17 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private double Ingrediant_Unit_Cost=0;
     private double Ingrediant_Total_Weight=0;
     private double Ingrediant_Total_Cost=0;
+
+    public List<Item> getIngrediantCostList() {
+        return ingrediantCostList;
+    }
+
+    public void setIngrediantCostList(List<Item> ingrediantCostList) {
+        this.ingrediantCostList = ingrediantCostList;
+    }
+
+    // Das ist das Stringarray dessen Elemente Zeile für Zeile angezeigt werden sollen
+    private List<Item> ingrediantCostList = new ArrayList<Item>();
 
     private Double weighOld = 0d;
     public Item getCurrentItem() {
@@ -323,6 +336,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return 0;
     }
 
+
+
     public double getIngrediantTotalCost(){
         return Ingrediant_Total_Cost;
     }
@@ -451,25 +466,25 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
             ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_ingrediants_List);
 
-            // Das ist das Stringarray dessen Elemente Zeile für Zeile angezeigt werden sollen
-            List<String> your_array_list = new ArrayList<String>();
+
 
             // This is the array adapter, it takes the context of the activity as a
             // first parameter, the type of list view as a second parameter and your
             // array as a third parameter.
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                    //MenuActivity.this,
-
-                    //this,
-                    eContext,
-                    android.R.layout.simple_list_item_1,
-                    your_array_list );
+            ItemMeasuredAdapter arrayAdapter = new ItemMeasuredAdapter(eContext,new ArrayList<Item>());
 
             listView.setAdapter(arrayAdapter);
+            for(Item item : getIngrediantCostList()){
+                arrayAdapter.add(item);
+            }
+
+            //arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
 
 
-            arrayAdapter.add("");
-            arrayAdapter.add("Text von Listenelement 2");
+
+
+            //arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+            //arrayAdapter.add("Text von Listenelement 2");
 
 
 
@@ -478,7 +493,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
                 @Override
                 public void onClick(View v) {
-                    clearStatistics();
+                    setIngrediantTotalWeight(0);
+                    setIngrediantUnitCost(0);
+                    setIngrediantTotalCost(0);
+                    getIngrediantCostList().clear();
                     dialog.dismiss();
                 }
             });
@@ -744,5 +762,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void onApplicationChange(ScaleApplication application) {
         ApplicationManager.getInstance().setIngrediantTotalCost(0);
         ApplicationManager.getInstance().setIngrediantTotalWeight(0);
+        getIngrediantCostList().clear();
+       // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
 }
