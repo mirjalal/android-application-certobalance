@@ -39,13 +39,6 @@
             android:entryValues="@array/preferences_density_liquid_type_values"
             />
 
-        <CheckBoxPreference
-        android:key="@string/preferences_density_porous"
-        android:defaultValue="@bool/preferences_density_porous"
-        android:title="Porous"
-        android:summary="Turn porous material on/off"
-        android:dependency="@string/preferences_density_lock" >
-        </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_density_autoprint"

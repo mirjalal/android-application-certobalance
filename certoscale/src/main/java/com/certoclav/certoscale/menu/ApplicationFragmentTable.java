@@ -96,8 +96,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Density Determination
     int DensityWaterTemp=0;
     int DensityLiquidDensity=2;
+    int DensityOilDensity=4;
+
     int DensityWeightAir=1;
     int DensityWeightLiquid=3;
+    int DensityOiledWeight=5;
 
 
 
@@ -437,20 +440,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
             case DENSITIY_DETERMINATION:
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
+                String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
                 if  (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible),getResources().getBoolean(R.bool.preferences_density_watertemp_visible))==true) {
-                    if (densityliquidtype.equals("1")) {
+                    if ((densityliquidtype.equals("1")  && (densitymode.equals("1") || densitymode.equals("2")))|| densitymode.equals("4")) {
                         listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
                         listReferenceFields.get(DensityWaterTemp).getTextValue().setText(String.format("%.1f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + " °C");
                     }
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible),getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible))==true) {
-                    if (densityliquidtype.equals("1")) {
+
+                    if ((densitymode.equals("1") || densitymode.equals("2")) || (densitymode.equals("4"))){
                         listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
-                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())));
-                    }else{
-                        listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
-                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity()));
+                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+ " g/cm³");
                     }
                 }
 
@@ -463,6 +465,21 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(DensityWeightLiquid).getTextName().setText("WEIGHT IN LIQUID");
                     listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_liquid()));
                 }
+
+                if(densitymode.equals("4")){
+                    if  (prefs.getBoolean(getString(R.string.preferences_density_oildensity_visible),getResources().getBoolean(R.bool.preferences_density_oildensity_visible))==true) {
+                        listReferenceFields.get(DensityOilDensity).getTextName().setText("OIL DENSITY");
+                        listReferenceFields.get(DensityOilDensity).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_liquid())+ " g/cm³");
+                    }
+                }
+
+                if(densitymode.equals("4")){
+                    if  (prefs.getBoolean(getString(R.string.preferences_density_oiledweight_visible),getResources().getBoolean(R.bool.preferences_density_oiledweight_visible))==true) {
+                        listReferenceFields.get(DensityOiledWeight).getTextName().setText("OILED Weight");
+                        listReferenceFields.get(DensityOiledWeight).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getOiledWeight())+ " g");
+                    }
+                }
+
 
 
                 break;

@@ -60,9 +60,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     private double density_weight_liquid=0;
 
+
     public double getDensity_weight_liquid() {
         return density_weight_liquid;
     }
+
+
 
     public void setDensity_weight_liquid(double density_weight_liquid) {
         this.density_weight_liquid = density_weight_liquid;
@@ -152,6 +155,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             new Date(),
             true,
             1f,
+            0f,
+            0f,
+            0f,
             0f,
             0f,
             0f,

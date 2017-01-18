@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -323,6 +325,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 				}
 				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION){
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+					String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
 
 					if (ApplicationManager.getInstance().getDensity_step_counter()==2){
 						ApplicationManager.getInstance().setDensity_weight_liquid(ApplicationManager.getInstance().getTaredValueInGram());
@@ -331,10 +335,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						buttonStart.setEnabled(true);
 					}
 
-					if (ApplicationManager.getInstance().getDensity_step_counter()==1){
-						ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
+					if(ApplicationManager.getInstance().getDensity_step_counter()==4){
+						ApplicationManager.getInstance().getCurrentLibrary().setOiledWeight(ApplicationManager.getInstance().getTaredValueInGram());
 						ApplicationManager.getInstance().setDensity_step_counter(2);
 					}
+
+					if (ApplicationManager.getInstance().getDensity_step_counter()==1){
+						ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
+						if (densitymode.equals("4")){
+							ApplicationManager.getInstance().setDensity_step_counter(4);
+						}else{
+							ApplicationManager.getInstance().setDensity_step_counter(2);
+						}
+					}
+
+
 
 
 				}

@@ -24,6 +24,7 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
+import org.apache.commons.math3.analysis.function.Sin;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.Timer;
@@ -253,12 +254,24 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     if (densitymode.equals("2")){
                         textSum.setText("Weigh Sinker in Liquid and press Accept");
                     }
+
+                    if(densitymode.equals("3")){
+                        textSum.setText("Weigh oiled Sample in Air and press Accept");
+                    }
+                }
+                if (ApplicationManager.getInstance().getDensity_step_counter()==4){
+                    textInstruction.setText("");
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textSum.setText("Weigh oiled Sample in Liquid and press Accept");
+
                 }
 
 
                 if(ApplicationManager.getInstance().getDensity_step_counter()==3) {
 
-                    double densitySinker=11.342;
+
+                    double Sinkervolume=ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume();
+
 
                     textInstruction.setText("");
 
@@ -275,8 +288,23 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         }
                         density=(mk*pf)/(mk-dm);
                     }
-                    if (densitymode.equals("2")) {
-                        density=(mk-dm)/(mk*densitySinker);
+
+                    if (densitymode.equals("2")){
+
+                        //Equations according to Page 3 from http://www.hs-lausitz.de/fileadmin/user_upload/public/fak/fak2/pdf/Physiklabor/M01_Dichtebestimmung.pdf
+                        if (densityliquidtype.equals("1")) {
+                            pf = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp());
+                        } else {
+                            pf = ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity();
+                        }
+                        double Vk=dm/pf;
+                        density=mk/Vk;
+                    }
+
+                    if (densitymode.equals("3")) {
+
+                        //Equations according http://www.kern-sohn.com/manuals/files/German/ABT-A01-BA-d-0710.pdf  Seite 9
+                        density= (mk-dm)/Sinkervolume+0.0012;
 
                     }
 
