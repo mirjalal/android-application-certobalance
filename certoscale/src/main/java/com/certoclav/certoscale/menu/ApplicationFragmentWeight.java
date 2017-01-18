@@ -429,6 +429,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
+            case STATISTICAL_QUALITY_CONTROL:
+                textInstruction.setText("");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("");
+
+                break;
+
 
             default:
                 textValue.setTextColor(Color.WHITE);

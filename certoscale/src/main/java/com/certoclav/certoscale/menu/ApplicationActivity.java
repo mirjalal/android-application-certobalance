@@ -242,6 +242,9 @@ protected void onPause() {
 						case INGREDIENT_COSTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsIngrediantCosting()).commit();
 							break;
+						case STATISTICAL_QUALITY_CONTROL:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
+							break;
 
 
 						default:

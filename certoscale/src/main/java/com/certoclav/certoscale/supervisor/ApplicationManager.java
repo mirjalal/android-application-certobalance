@@ -164,6 +164,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             0f,
             0f,
             0f,
+            0f,
+            0f,
+            0f,
+            0f,
+            0f,
             0f
     );
 
