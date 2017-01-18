@@ -49,24 +49,58 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 			
 			@Override
 			public void onClick(View v) {
-				StateMachine.getInstance().setIgnoreCableNotConnected(true);
+				StateMachine.getInstance().setIgnoreErrors(true);
 				finish();
 			}
 		});
 
 		//notificationHeadContainer.setBackgroundResource(R.drawable.background_error);
 
-		textNotificationHead.setText(getText(R.string.warning));
+		final TextView tv = (TextView) findViewById(R.id.text_message);
 
-		TextView tv = (TextView) findViewById(R.id.text_message);
-		tv.setText("Please plug in the touchscreen".toUpperCase());
+		switch (Scale.getInstance().getState()){
+			case ON_AND_CALIBRATING:
+				textNotificationHead.setText("NOTIFICATION");
+				tv.setText("Calibrating...");
+				break;
+			case CABLE_NOT_CONNECTED:
+				textNotificationHead.setText("WARNING");
+				tv.setText("Please plug in the touchscreen and power on the balance.");
+				break;
+			case ON_AND_MODE_NOT_GRAM:
+				textNotificationHead.setText("NOTIFICATION");
+				tv.setText("Selftest");
+				break;
+			case DISCONNECTED:
+				textNotificationHead.setText("WARNING");
+				tv.setText("Touchscreen disconnected");
+				break;
+			case OFF:
+				textNotificationHead.setText("WARNING");
+				tv.setText("Balance is powered OFF");
+				break;
+			default:
+				finish();
+		}
+
+
+
 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (true){
-					if(Scale.getInstance().getState() != ScaleState.CABLE_NOT_CONNECTED){
-						finish();
+					switch (Scale.getInstance().getState()){
+						case ON_AND_MODE_GRAM:
+							finish();
+							break;
+						default:
+
+					}
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
 				}
 			}

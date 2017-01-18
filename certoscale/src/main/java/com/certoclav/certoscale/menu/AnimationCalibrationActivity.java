@@ -8,6 +8,9 @@ import android.os.Message;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.listener.ScaleStateListener;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleState;
 
 
 /**
@@ -16,7 +19,7 @@ import com.certoclav.certoscale.R;
  * This Activity shows an animation as long as the Scale is calibrating
  * This activity resumes back to previous activity after the animation is done.
  */
-public class AnimationCalibrationActivity extends Activity {
+public class AnimationCalibrationActivity extends Activity implements ScaleStateListener{
 
 
     private TextView textProgress = null;
@@ -58,32 +61,18 @@ public class AnimationCalibrationActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		final Thread myThread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				int i = 0;
-				int maxI = 45;
-				while(i<maxI){
-					i++;
-					Message msg = new Message();
-					msg.arg1 = DO_UPDATE_TEXT;
-					msg.arg2 = maxI-i; //seconds left of lifetime of this thread
-					myHandler.sendMessage(msg);
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				finish();
-			}
-		});
-		myThread.start();
+		Scale.getInstance().setOnScaleStateListener(this);
+		if(Scale.getInstance().getState() != ScaleState.ON_AND_CALIBRATING){
+			finish();
+		}
 		super.onResume();
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		Scale.getInstance().removeOnScaleStateListener(this);
+	}
 
 	/**
 	 * By overriding this function, its possible to block (disable) the hardware BACK-button or to do alterntave action instead of navigate to previous activity or home screen.
@@ -93,6 +82,12 @@ public class AnimationCalibrationActivity extends Activity {
 		//do nothing
 	}
 
+	@Override
+	public void onScaleStateChange(ScaleState state) {
+		if(state != ScaleState.ON_AND_CALIBRATING){
+			finish();
+		}
+	}
 }
 
 

@@ -235,15 +235,8 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_CAL:
 				//send command for calibration to the scale
-				if(Scale.getInstance().getWeightInGram() <= 5){
-
 					ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
 
-					Intent intent3 = new Intent(ApplicationActivity.this,AnimationCalibrationActivity.class);
-					startActivity(intent3);
-				}else{
-					Toast.makeText(ApplicationActivity.this, "Please remove item from pan first", Toast.LENGTH_LONG).show();
-				}
 				break;
 			case ActionButtonbarFragment.BUTTON_PRINT:
 				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();

@@ -35,6 +35,7 @@ public class Scale extends Observable {
 	private SerialService serialServiceScale = null;
 	private SerialService serialServiceLabelPrinter = null;
 	private SerialService serialServiceProtocolPrinter = null;
+	private SerialService serialServiceSics = null;
 
 	public boolean isStable() {
 		return stable;
@@ -219,6 +220,12 @@ public class Scale extends Observable {
 		return serialServiceProtocolPrinter;
 	}
 
+	public SerialService getSerialsServiceSics() {
+		if(serialServiceProtocolPrinter == null){
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM1
+		}
+		return serialServiceProtocolPrinter;
+	}
 
 
 	public void setValue(Double value, String rawresponse) {
@@ -271,5 +278,7 @@ public class Scale extends Observable {
 	public String getSerialnumber() {
 		return "serialnumber";
 	}
+
+
 }
 

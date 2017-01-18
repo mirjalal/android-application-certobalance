@@ -5,11 +5,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.AnimationCalibrationActivity;
 import com.certoclav.certoscale.menu.NotificationActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.service.CloudSocketService;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.certoscale.service.ReadAndParseSerialSicsService;
 import com.certoclav.library.application.ApplicationController;
 
 import static com.certoclav.certoscale.model.ScaleState.CABLE_NOT_CONNECTED;
@@ -24,15 +26,16 @@ import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_NOT_GRAM;
 
 public class StateMachine implements WeightListener {
 
-    public boolean isIgnoreCableNotConnected() {
-        return ignoreCableNotConnected;
+    public boolean isIgnoreErrors() {
+        return ignoreErrors;
     }
 
-    public void setIgnoreCableNotConnected(boolean ignoreCableNotConnected) {
-        this.ignoreCableNotConnected = ignoreCableNotConnected;
+    public void setIgnoreErrors(boolean ignoreErrors) {
+        this.ignoreErrors = ignoreErrors;
     }
 
-    private boolean ignoreCableNotConnected = false;
+    private int delaycounter =0;
+    private boolean ignoreErrors = false;
 
     private StateMachine(){
         Scale.getInstance().setOnWeightListener(this);
@@ -79,6 +82,9 @@ public class StateMachine implements WeightListener {
             //restart service. Mabye it has been killed by Operating System
             Intent intent = new Intent(ApplicationController.getContext(), CloudSocketService.class);
             ApplicationController.getContext().startService(intent);
+
+            intent = new Intent(ApplicationController.getContext(), ReadAndParseSerialSicsService.class);
+            ApplicationController.getContext().startService(intent);
         }
 
 
@@ -88,18 +94,22 @@ public class StateMachine implements WeightListener {
             String rawResponseTransformed = Scale.getInstance().getRawResponseFromBalance().replace("\n","").replace("\r","").replaceAll("\\p{C}", "?");
             Log.e("StateMachine", "rawresp: " + rawResponseTransformed);
 
+
             if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
-                if(ignoreCableNotConnected == false) {
                     Scale.getInstance().setScaleState(CABLE_NOT_CONNECTED);
-                }
             }else{
                 if(rawResponseTransformed.contains("g") && !rawResponseTransformed.contains("??")){
+                    delaycounter = 0;
                     Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
                 }else if(rawResponseTransformed.contains("?????")){
                     Scale.getInstance().setScaleState(ON_AND_CALIBRATING);
                 }else if(rawResponseTransformed.contains("????")){
+                    delaycounter++;
+                    if(delaycounter> 10)
                     Scale.getInstance().setScaleState(ScaleState.OFF); //for example: "+   ????  g"
                 }else{
+                    delaycounter++;
+                    if(delaycounter> 10)
                     Scale.getInstance().setScaleState(ON_AND_MODE_NOT_GRAM);
                 }
             }
@@ -109,6 +119,12 @@ public class StateMachine implements WeightListener {
         //ISSUE HANDLER
             switch (Scale.getInstance().getState()) {
                 case OFF:
+                    if(ignoreErrors == false) {
+                        Intent intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        ApplicationController.getContext().startActivity(intent);
+                    }
                     //Turn the balance on
                     if ((System.nanoTime() - nanoTimeAtLastONOFFCommand) > (1000000000L * 20)){
                         nanoTimeAtLastONOFFCommand = System.nanoTime();
@@ -117,7 +133,7 @@ public class StateMachine implements WeightListener {
                      }
                     break;
                 case CABLE_NOT_CONNECTED:
-                    if(ignoreCableNotConnected == false) {
+                    if(ignoreErrors == false) {
                         Intent intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -128,13 +144,23 @@ public class StateMachine implements WeightListener {
                     //Everything is well. Nothing to do right now.
                     break;
                 case ON_AND_CALIBRATING:
-                    //Everything is well. Nothing to do right now.
+                    Intent intent = new Intent(ApplicationController.getContext(), AnimationCalibrationActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    ApplicationController.getContext().startActivity(intent);
                     break;
                 case ON_AND_MODE_NOT_GRAM:
+                    if(ignoreErrors == false) {
+                        intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        ApplicationController.getContext().startActivity(intent);
+                    }
                     //change mode until mode is gram
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
                     Log.e("StateMachine", "Added M to commandqueue");
                     break;
+
                 default:
                     break;
             }

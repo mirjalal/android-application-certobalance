@@ -30,7 +30,7 @@
 	     android:layout_centerHorizontal="true"
 	     android:layout_marginTop="50dp"
 	     android:gravity="center"
-	     android:text="asdf asfd asdf asdf asdf\n asdf asdf asdf"
+	     android:text="Calibrating"
 	     android:textColor="@android:color/darker_gray"
 	     android:textSize="25sp"
 	     tools:ignore="HardcodedText" />
