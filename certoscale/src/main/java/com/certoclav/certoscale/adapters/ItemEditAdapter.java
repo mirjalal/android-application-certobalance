@@ -15,6 +15,7 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
 
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -99,8 +100,35 @@ public class ItemEditAdapter extends ArrayAdapter<Item> {
 			}
 		});
 
+		//
+		EditText editUnitCost = (EditText) convertView.findViewById(R.id.menu_main_item_edit_unit_cost);
+		editUnitCost.setText(String.format(Locale.US,"%.4f",getItem(position).getCost()));
+		editUnitCost.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				try {
+					getItem(position).setCost(Double.parseDouble(s.toString()));
+				}catch (Exception e){
+					getItem(position).setCost(0d);
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+
+			}
+		});
+
+
+
+
 		EditText editWeight = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format("%.4f",getItem(position).getWeight()));
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()));
 
 		editWeight.addTextChangedListener(new TextWatcher() {
 			@Override

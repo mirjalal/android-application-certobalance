@@ -112,6 +112,7 @@
     <string name="preferences_counting_activated">preferences_counting_activated</string>
     <string name="preferences_counting_lock">preferences_counting_lock</string>
 
+
     <string name="preferences_counting_auto_optimization">preferences_counting_auto_optimization</string>
     <string name="preferences_counting_mode">preferences_counting_mode</string>
     <string name="preferences_counting_secondary_visible">preferences_counting_secondary_visible</string>
@@ -286,6 +287,45 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="preferences_peak_modes">
+        <item>Manual</item>
+        <item>Semi Automatic</item>
+        <item>Automatic</item>
+    </string-array>
+
+    <string-array name="preferences_density_mode">
+        <item>Solid density higher than Water</item>
+        <item>Solid density lower than Water </item>
+        <item>Liquid Density  </item>
+        <item>Porous Material  </item>
+    </string-array>
+
+    <string-array name="preferences_density_liquid_type">
+        <item>Water</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="preferences_density_liquid_type_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_density_mode_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+
+
+    <string-array name="preferences_peak_modes_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 
     <string-array name="preferences_check_display_modes">
         <item>Weight</item>

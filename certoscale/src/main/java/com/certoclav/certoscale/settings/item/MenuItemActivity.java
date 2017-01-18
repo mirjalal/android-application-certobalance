@@ -15,6 +15,7 @@ import com.certoclav.certoscale.adapters.ItemAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
@@ -143,7 +144,7 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
 
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
-        if(buttonId == Navigationbar.BUTTON_ADD){
+        if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
             Intent intent = new Intent(MenuItemActivity.this, MenuItemEditActivity.class);
             startActivity(intent);
 

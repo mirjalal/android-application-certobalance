@@ -38,16 +38,7 @@ public class Navigationbar {
 
 	}
 
-	public static final int BUTTON_HOME = 1;
-	public static final int BUTTON_SETTINGS = 2;
-	public static final int BUTTON_ADD = 13;
-	public static final int BUTTON_BACK = 14;
-	public static final int SPINNER_LIBRARY = 20;
-	public static final int BUTTON_GO_TO_APPLICATION = 31;
-	public static final int BUTTON_LOGOUT = 32;
-	public static final int BUTTON_SAVE = 33;
-	public static final int BUTTON_SETTINGS_DEVICE = 34;
-	public static final int BUTTON_MORE = 35;
+
 	private int spinnerModeOnClickCounter = 0;
 
 	public ImageButton getButtonLogout() {
@@ -263,7 +254,7 @@ public class Navigationbar {
 					}
 					//notify listeners
 					for (ButtonEventListener listener : navigationbarListeners) {
-						listener.onClickNavigationbarButton(SPINNER_LIBRARY, false);
+						listener.onClickNavigationbarButton(ActionButtonbarFragment.SPINNER_LIBRARY, false);
 					}
 				}catch (Exception e){
 					Log.e("Navigationbar", e.toString());
@@ -283,7 +274,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_SETTINGS_DEVICE, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_SETTINGS_DEVICE, false);
 				}
 			}
 		});
@@ -293,7 +284,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_MORE, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_MORE, false);
 				}
 			}
 		});
@@ -304,7 +295,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_SETTINGS, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_SETTINGS, false);
 				}
 
 			}
@@ -316,7 +307,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_ADD, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_ADD, false);
 				}
 			}
 		});
@@ -327,7 +318,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_BACK, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_BACK, false);
 				}
 				//if(navigationbarListeners.isEmpty()){
 				mActivity.finish();
@@ -341,7 +332,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_HOME, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_HOME, false);
 				}
 
 			}
@@ -351,7 +342,7 @@ public class Navigationbar {
 			@Override
 			public boolean onLongClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_HOME, true);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_HOME, true);
 				}
 				return false;
 			}
@@ -364,7 +355,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_LOGOUT, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_LOGOUT, false);
 				}
 			}
 		});
@@ -374,7 +365,7 @@ public class Navigationbar {
 			@Override
 			public void onClick(View v) {
 				for (ButtonEventListener listener : navigationbarListeners) {
-					listener.onClickNavigationbarButton(BUTTON_SAVE, false);
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_SAVE, false);
 				}
 			}
 		});

@@ -16,7 +16,7 @@
         android:gravity="center_vertical"  >
         <TextView
             android:id="@+id/menu_main_item_edit_element_artnumber"
-            android:layout_width="200dp"
+            android:layout_width="140dp"
             android:layout_height="60dp"
             android:text="1300345"
             android:gravity="center_vertical"
@@ -24,15 +24,25 @@
 
         <TextView
             android:id="@+id/menu_main_item_edit_element_name"
-            android:layout_width="200dp"
+            android:layout_width="140dp"
             android:layout_height="60dp"
             style="@style/text_default"
             android:gravity="center_vertical"
             android:text="Screw" />
 
         <TextView
+            android:id="@+id/menu_main_item_edit_element_unit_cost"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            style="@style/text_default"
+            android:gravity="center_vertical"
+            android:text="1.54" />
+
+
+
+        <TextView
             android:id="@+id/menu_main_item_edit_element_weight"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="60dp"
             style="@style/text_default"
             android:gravity="center_vertical"

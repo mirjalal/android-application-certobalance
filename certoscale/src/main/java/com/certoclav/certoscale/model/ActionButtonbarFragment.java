@@ -1,13 +1,20 @@
 package com.certoclav.certoscale.model;
 
+import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
@@ -16,8 +23,10 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 import java.util.ArrayList;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITIY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
+import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
@@ -29,16 +38,27 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public ActionButtonbarFragment() {
 	}
 
-	public static final int BUTTON_HOME = 1;
-	public static final int BUTTON_SETTINGS = 2;
+
 	public static final int BUTTON_TARA = 3;
 	public static final int BUTTON_CAL = 4;
 	public static final int BUTTON_PRINT = 5;
 	public static final int BUTTON_APP_SETTINGS = 6;
-	public static final int BUTTON_STATISTICS = 15;
-	public static final int BUTTON_ACCUMULATE = 16;
-	public static final int BUTTON_START =17;
-	public static final int BUTTON_ZERO = 18;
+	public static final int BUTTON_STATISTICS = 7;
+	public static final int BUTTON_ACCUMULATE = 8;
+	public static final int BUTTON_START =9;
+	public static final int BUTTON_ZERO = 10;
+	public static final int BUTTON_ACCEPT=11;
+	public static final int BUTTON_INGREDIANTLIST=12;
+	public static final int BUTTON_HOME = 13;
+	public static final int BUTTON_SETTINGS = 14;
+	public static final int BUTTON_ADD = 15;
+	public static final int BUTTON_BACK = 16;
+	public static final int SPINNER_LIBRARY = 17;
+	public static final int BUTTON_GO_TO_APPLICATION = 18;
+	public static final int BUTTON_LOGOUT = 19;
+	public static final int BUTTON_SAVE = 20;
+	public static final int BUTTON_SETTINGS_DEVICE = 21;
+	public static final int BUTTON_MORE = 22;
 
 
 	private Button buttonTara = null;
@@ -49,6 +69,9 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonAnimalStart = null;
 	private Button buttonAppSettings = null;
 	private Button buttonZero = null;
+	private Button buttonAccept=null;
+	private Button buttonIngrediantList=null;
+
 
 
 	public Button getButtonZero() {
@@ -170,9 +193,15 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
+				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION) {
+					ApplicationManager.getInstance().setDensity_step_counter(1);
+					buttonAccept.setEnabled(true);
+					buttonStart.setEnabled(false);
+				}
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_START,false);
 				}
+
 
 			}
 		});
@@ -262,6 +291,83 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		});
 
 
+		//Ingrediant Costing Calculations
+		buttonAccept = (Button) rootView.findViewById(R.id.actionbar_button_accept);
+		buttonAccept.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (Scale.getInstance().getScaleApplication()==INGREDIENT_COSTING){
+					buttonAccept.setEnabled(true);
+					if (ApplicationManager.getInstance().getCurrentItem()==null) {
+						Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
+					}else {
+						double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
+						double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
+						double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+
+						double unitCost = (Cost * currentWeight) / unitWeight;
+						ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
+
+						double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
+						ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
+
+						double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
+						ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
+
+
+						Item measuredItem= new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+
+
+						measuredItem.setWeight(currentWeight);
+						measuredItem.setCost(unitCost);
+						ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+
+					}
+				}
+				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION){
+					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+					String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+
+					if (ApplicationManager.getInstance().getDensity_step_counter()==2){
+						ApplicationManager.getInstance().setDensity_weight_liquid(ApplicationManager.getInstance().getTaredValueInGram());
+						ApplicationManager.getInstance().setDensity_step_counter(3);
+						buttonAccept.setEnabled(false);
+						buttonStart.setEnabled(true);
+					}
+
+					if(ApplicationManager.getInstance().getDensity_step_counter()==4){
+						ApplicationManager.getInstance().getCurrentLibrary().setOiledWeight(ApplicationManager.getInstance().getTaredValueInGram());
+						ApplicationManager.getInstance().setDensity_step_counter(2);
+					}
+
+					if (ApplicationManager.getInstance().getDensity_step_counter()==1){
+						ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
+						if (densitymode.equals("4")){
+							ApplicationManager.getInstance().setDensity_step_counter(4);
+						}else{
+							ApplicationManager.getInstance().setDensity_step_counter(2);
+						}
+					}
+
+
+
+
+				}
+			}
+		});
+
+		buttonIngrediantList = (Button) rootView.findViewById(R.id.actionbar_button_Ingredient_List);
+		buttonIngrediantList.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_INGREDIANTLIST,false);
+				}
+
+			}
+		});
+
+
 		return rootView;
 	}
 	
@@ -306,8 +412,36 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				break;
+
+			case INGREDIENT_COSTING:
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonAccept.setEnabled(true);
+				buttonIngrediantList.setVisibility(View.VISIBLE);
+
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+
+
+				break;
+
+			case DENSITIY_DETERMINATION:
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonStart.setVisibility(View.VISIBLE);
+
+
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+
+				break;
 			default:
 				buttonStart.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+
+
+
 		}
 
 
@@ -336,7 +470,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		//handle Statistic Button visibiltiy (visible or gone)
 		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING){
+				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING || application==ScaleApplication.DENSITIY_DETERMINATION){
 			getButtonStatistics().setVisibility(View.GONE);
 			buttonAccumulate.setVisibility(View.GONE);
 		}else{

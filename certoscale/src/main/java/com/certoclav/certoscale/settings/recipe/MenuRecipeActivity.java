@@ -15,6 +15,7 @@ import com.certoclav.certoscale.adapters.RecipeAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.google.android.gms.appindexing.AppIndex;
@@ -98,7 +99,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
         switch (buttonId){
-            case Navigationbar.BUTTON_ADD:
+            case ActionButtonbarFragment.BUTTON_ADD:
                 Intent intent = new Intent(MenuRecipeActivity.this, MenuRecipeEditActivity.class);
                 startActivity(intent);
                 break;

@@ -14,6 +14,7 @@ import com.certoclav.certoscale.adapters.ItemEditAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             itemFromDb = db.getItemById(extra);
             adapter.add(itemFromDb);
         }else{
-            adapter.add(new Item("","name",1.0d, "Item ID"));
+            adapter.add(new Item("","name",1.0d,1.0d, "Item ID"));
         }
 
     }
@@ -90,7 +91,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
-        if(buttonId == Navigationbar.BUTTON_SAVE){
+        if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
             try
             {
                 final Dialog dialog = new Dialog(this);

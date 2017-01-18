@@ -148,7 +148,7 @@ protected void onPause() {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulation()).commit();
 				}
 				break;
-			case Navigationbar.BUTTON_MORE:
+			case ActionButtonbarFragment.BUTTON_MORE:
 
 				if(containerMore.getVisibility() == View.INVISIBLE){
 					containerMore.setVisibility(View.VISIBLE);
@@ -157,7 +157,7 @@ protected void onPause() {
 				}
 
 				break;
-			case Navigationbar.BUTTON_HOME:
+			case ActionButtonbarFragment.BUTTON_HOME:
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
 				startActivity(intent);
 				break;
@@ -175,6 +175,16 @@ protected void onPause() {
 						actionButtonbarFragment.updateStatsButtonUI();
 					}
 				});
+				break;
+
+			case ActionButtonbarFragment.BUTTON_INGREDIANTLIST:
+				ApplicationManager.getInstance().showIngrediantNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						actionButtonbarFragment.updateStatsButtonUI();
+					}
+				});
+
 				break;
 			case ActionButtonbarFragment.BUTTON_ACCUMULATE:
 				ApplicationManager.getInstance().accumulateStatistics();
@@ -223,6 +233,20 @@ protected void onPause() {
 						case DIFFERENTIAL_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDifferentialWeighing()).commit();
 							break;
+						case DENSITIY_DETERMINATION:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDensityDetermination()).commit();
+							break;
+						case PEAK_HOLD:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPeakHold()).commit();
+							break;
+						case INGREDIENT_COSTING:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsIngrediantCosting()).commit();
+							break;
+						case STATISTICAL_QUALITY_CONTROL:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
+							break;
+
+
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
@@ -247,11 +271,11 @@ protected void onPause() {
 				LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
 
 				break;
-			case Navigationbar.BUTTON_SETTINGS:
+			case ActionButtonbarFragment.BUTTON_SETTINGS:
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
 				startActivity(intent2);
 				break;
-			case Navigationbar.BUTTON_SAVE:
+			case ActionButtonbarFragment.BUTTON_SAVE:
 				try{
 					final Dialog dialog = new Dialog(ApplicationActivity.this);
 					dialog.setContentView(R.layout.dialog_edit_text);

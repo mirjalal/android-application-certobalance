@@ -7,8 +7,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
@@ -25,7 +25,7 @@ import java.util.Locale;
  * data set.
  * 
 */
-public class ItemAdapter extends ArrayAdapter<Item> {
+public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 
 	public interface OnClickButtonListener {
 		 void onClickButtonDelete(Item item);
@@ -43,12 +43,11 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 	private final Context mContext;
-	private QuickActionItem actionItemDelete;
-	private QuickActionItem actionItemEdit;
 
 
 
-	public ItemAdapter(Context context, List<Item> values) {
+
+	public ItemMeasuredAdapter(Context context, List<Item> values) {
 		super(context, R.layout.menu_main_item_element, values);
 		this.mContext = context;
 
@@ -72,11 +71,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		convertView = inflater.inflate(R.layout.menu_main_item_element, parent, false);
 		LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
-		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-		containerItems.addView(actionItemDelete);
 
-		actionItemEdit = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-		containerItems.addView(actionItemEdit);
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
 		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
@@ -95,38 +90,8 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 
-		actionItemEdit.setChecked(false);
-		actionItemEdit.setImageResource(R.drawable.ic_menu_edit);
-
-		//actionItemDelete.setText(getContext().getString(R.string.delete));
-		actionItemEdit.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				for(OnClickButtonListener listener : onClickButtonListeners){
-					listener.onClickButtonEdit(getItem(position));
-				}
 
 
-
-			}
-		});
-
-
-		actionItemDelete.setChecked(false);
-		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
-
-			//actionItemDelete.setText(getContext().getString(R.string.delete));
-			actionItemDelete.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					for(OnClickButtonListener listener : onClickButtonListeners){
-						listener.onClickButtonDelete(getItem(position));
-					}
-
-
-
-				}
-			});
 
 		
 		return convertView;
