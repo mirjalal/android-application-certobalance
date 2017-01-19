@@ -437,6 +437,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
+            case PIPETTE_ADJUSTMENT:
+                textInstruction.setText("");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("");
+
+                break;
+
 
             default:
                 textValue.setTextColor(Color.WHITE);

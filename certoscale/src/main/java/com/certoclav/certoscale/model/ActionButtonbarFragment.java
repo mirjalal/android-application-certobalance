@@ -19,6 +19,7 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.database.SQC;
 
 import java.util.ArrayList;
 
@@ -69,8 +70,11 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonAnimalStart = null;
 	private Button buttonAppSettings = null;
 	private Button buttonZero = null;
-	private Button buttonAccept=null;
-	private Button buttonIngrediantList=null;
+	private Button buttonAccept = null;
+	private Button buttonIngrediantList = null;
+
+	private Button buttonNewBatch = null;
+	private Button buttonShowBatch = null;
 
 
 
@@ -173,6 +177,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		Scale.getInstance().setOnApplicationListener(this);
 		Scale.getInstance().setOnWeightListener(this);
 		onApplicationChange(Scale.getInstance().getScaleApplication());
+		if (ApplicationManager.getInstance().getSqc_state()==1){
+			buttonNewBatch.setText("End\n");
+		}
+		if(ApplicationManager.getInstance().getSqc_state()==0){
+			buttonNewBatch.setText("New Batch");
+		}
 	}
 
 	@Override
@@ -368,6 +378,80 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		});
 
 
+		buttonNewBatch = (Button) rootView.findViewById(R.id.actionbar_button_new_batch);
+		buttonNewBatch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				if (ApplicationManager.getInstance().getSqc_state()==0) {
+
+					final String[] name = {""};
+
+					try {
+						final Dialog dialog = new Dialog(getActivity());
+						dialog.setContentView(R.layout.dialog_edit_text);
+						dialog.setTitle("Please enter the batch name");
+
+						// set the custom dialog components - text, image and button
+
+						Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+						dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								dialog.dismiss();
+							}
+						});
+						Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
+						// if button is clicked, close the custom dialog
+						dialogButton.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
+								name[0] = editText.getText().toString();
+								//								ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+
+								SQC Batch = new SQC(ApplicationManager.getInstance().getStatistic(), name[0]);
+								ApplicationManager.getInstance().setSqc_state(1);
+
+								dialog.dismiss();
+								onResume();
+
+
+							}
+						});
+
+						dialog.show();
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+
+
+				}
+				if (ApplicationManager.getInstance().getSqc_state()==1){
+
+					buttonNewBatch.setText("New Batch");
+					ApplicationManager.getInstance().setSqc_state(0);
+				}
+
+
+			}
+		});
+
+		buttonShowBatch = (Button) rootView.findViewById(R.id.actionbar_button_view_batch);
+		buttonShowBatch.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_INGREDIANTLIST,false);
+				}
+
+			}
+		});
+
+
 		return rootView;
 	}
 	
@@ -435,6 +519,20 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 
 				break;
+
+			case STATISTICAL_QUALITY_CONTROL:
+				buttonNewBatch.setVisibility(View.VISIBLE);
+				buttonShowBatch.setVisibility(View.VISIBLE);
+
+
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+
+				buttonStatistics.setVisibility(View.GONE);
+
+
+				break;
+
 			default:
 				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
@@ -476,6 +574,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		}else{
 			buttonStatistics.setVisibility(View.VISIBLE);
 			buttonAccumulate.setVisibility(View.VISIBLE);
+		}
+
+
+		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL){
+			buttonNewBatch.setVisibility(View.GONE);
+			buttonShowBatch.setVisibility(View.GONE);
+		}else{
+			buttonStatistics.setVisibility(View.GONE);
 		}
 
 

@@ -56,6 +56,22 @@
          style="@style/button_actionbar"
          />
      <Button
+         android:id="@+id/actionbar_button_new_batch"
+         android:text="New Batch"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
+     <Button
+         android:id="@+id/actionbar_button_view_batch"
+         android:text="Show Batch Data"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
+     <Button
          android:id="@+id/actionbar_button_accumulate"
          android:text="ADD TO STATS"
          android:layout_width="match_parent"

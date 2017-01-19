@@ -111,6 +111,15 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int SQCmaximum=3;
     int SQCrange=5;
 
+    //Pipette Adjustment
+    int pipetteNominal=0;
+    int pipetteInaccuracy=2;
+    int pipetteImprecison=4;
+
+    int pipetteBarometric=1;
+    int pipetteLiquidDensity=3;
+    int pipetteWaterTemp=5;
+
 
 
     @Override
@@ -532,6 +541,41 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 break;
+
+            case PIPETTE_ADJUSTMENT:
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible),getResources().getBoolean(R.bool.preferences_pipette_nominal_visible))==true) {
+                    listReferenceFields.get(pipetteNominal).getTextName().setText("NOMINAL");
+                    listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_inacc_visible),getResources().getBoolean(R.bool.preferences_pipette_inacc_visible))==true) {
+                    listReferenceFields.get(pipetteInaccuracy).getTextName().setText("INACCURACY");
+                    listReferenceFields.get(pipetteInaccuracy).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %");
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_imprec_visible),getResources().getBoolean(R.bool.preferences_pipette_imprec_visible))==true) {
+                    listReferenceFields.get(pipetteImprecison).getTextName().setText("IMPRECISION");
+                    listReferenceFields.get(pipetteImprecison).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %");
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_barounit_visible),getResources().getBoolean(R.bool.preferences_pipette_barounit_visible))==true) {
+                    listReferenceFields.get(pipetteBarometric).getTextName().setText("BAROMETRIC UNIT");
+                    listReferenceFields.get(pipetteBarometric).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_liquiddensity_visible),getResources().getBoolean(R.bool.preferences_pipette_liquiddensity_visible))==true) {
+                    listReferenceFields.get(pipetteLiquidDensity).getTextName().setText("LIQUID DENSITY");
+                    listReferenceFields.get(pipetteLiquidDensity).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp()))+" g/cm³");
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_pipette_watertemp_visible),getResources().getBoolean(R.bool.preferences_pipette_watertemp_visible))==true) {
+                    listReferenceFields.get(pipetteWaterTemp).getTextName().setText("WATER TEMP.");
+                    listReferenceFields.get(pipetteWaterTemp).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+"°C");
+                }
+
+
+                break;
+
 
             case STATISTICAL_QUALITY_CONTROL:
                 if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {

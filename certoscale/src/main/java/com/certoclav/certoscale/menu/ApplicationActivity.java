@@ -245,6 +245,9 @@ protected void onPause() {
 						case STATISTICAL_QUALITY_CONTROL:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
+						case PIPETTE_ADJUSTMENT:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
+							break;
 
 
 						default:

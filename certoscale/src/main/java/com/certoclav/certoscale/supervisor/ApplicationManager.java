@@ -80,6 +80,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private double Ingrediant_Total_Weight=0;
     private double Ingrediant_Total_Cost=0;
 
+    public int getSqc_state() {
+        return sqc_state;
+    }
+
+    public void setSqc_state(int sqc_state) {
+        this.sqc_state = sqc_state;
+    }
+
+    private int sqc_state=0;
+
     public List<Item> getIngrediantCostList() {
         return ingrediantCostList;
     }
@@ -155,6 +165,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             new Date(),
             true,
             1f,
+            0f,
+            0f,
+            0f,
+            0f,
+            0f,
             0f,
             0f,
             0f,
@@ -844,6 +859,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         ApplicationManager.getInstance().setIngrediantTotalCost(0);
         ApplicationManager.getInstance().setIngrediantTotalWeight(0);
         getIngrediantCostList().clear();
+        sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
 }
