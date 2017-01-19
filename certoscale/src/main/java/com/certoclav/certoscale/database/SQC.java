@@ -9,6 +9,8 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 public class SQC {
 
 
+
+
     SummaryStatistics statistics=new SummaryStatistics();
     private String name;
 
@@ -20,10 +22,12 @@ public class SQC {
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         name = name;
     }
+
+    public SummaryStatistics getStatistics() {return statistics;}
+    public void setStatistics(SummaryStatistics statistics) {this.statistics = statistics;}
 
 
 }

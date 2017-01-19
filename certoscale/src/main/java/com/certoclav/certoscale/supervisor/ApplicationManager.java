@@ -14,9 +14,11 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemAdapter;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
+import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
@@ -89,6 +91,24 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     private int sqc_state=0;
+
+
+
+    private String batchName="";
+    public String getBatchName() {return batchName;}
+    public void setBatchName(String batchName) {this.batchName = batchName;}
+
+    private SQC currentBatch = null;
+    public SQC getCurrentBatch() {return currentBatch;}
+    public void setCurrentBatch(SQC currentBatch) {this.currentBatch = currentBatch;}
+
+
+    public List<SQC> batchList= new ArrayList<SQC>();
+    public List<SQC> getBatchList() {return batchList;}
+    public void setBatchList(List<SQC> batchList) {this.batchList = batchList;}
+
+
+
 
     public List<Item> getIngrediantCostList() {
         return ingrediantCostList;
@@ -560,6 +580,72 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                     setIngrediantUnitCost(0);
                     setIngrediantTotalCost(0);
                     getIngrediantCostList().clear();
+                    dialog.dismiss();
+                }
+            });
+            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
+            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+                }
+            });
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void showBatchList(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_batchlist);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Batch List");
+
+
+
+            ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
+
+
+
+            // This is the array adapter, it takes the context of the activity as a
+            // first parameter, the type of list view as a second parameter and your
+            // array as a third parameter.
+            SQCAdapter arrayAdapter = new SQCAdapter(eContext,new ArrayList<SQC>());
+
+            listView.setAdapter(arrayAdapter);
+            for(SQC sqc : getBatchList()){
+                arrayAdapter.add(sqc);
+            }
+
+            //arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
+
+
+
+
+            //arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+            //arrayAdapter.add("Text von Listenelement 2");
+
+
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_clear);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    ApplicationManager.getInstance().setBatchName("");
+                    getBatchList().clear();
                     dialog.dismiss();
                 }
             });

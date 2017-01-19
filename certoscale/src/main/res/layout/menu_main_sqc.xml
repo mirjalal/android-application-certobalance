@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
+    android:layout_width="fill_parent"
+    android:layout_height="60dp"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center_vertical"  >
+        <TextView
+            android:id="@+id/menu_main_sqc_edit_element_name"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:text="1300345"
+            android:gravity="center_vertical"
+            style="@style/text_default"/>
+
+        <TextView
+            android:id="@+id/menu_main_sqc_edit_element_maximum"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            style="@style/text_default"
+            android:gravity="center_vertical"
+            android:text="Screw" />
+
+        <TextView
+            android:id="@+id/menu_main_sqc_edit_element_minimum"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            style="@style/text_default"
+            android:gravity="center_vertical"
+            android:text="1.54" />
+
+
+
+        <TextView
+            android:id="@+id/menu_main_sqc_edit_element_average"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            style="@style/text_default"
+            android:gravity="center_vertical"
+            android:text="12.0121"/>
+
+        <TextView
+            android:id="@+id/menu_main_sqc_edit_element_standard"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            style="@style/text_default"
+            android:gravity="center_vertical"
+            android:text="12.0121"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_list_element_container_button"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp" ></LinearLayout>
+
+</RelativeLayout>

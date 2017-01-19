@@ -306,7 +306,17 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="preferences_sqc_tolerance_mode">
+        <item>Weight</item>
+        <item>Percent</item>
+    </string-array>
+
     <string-array name="preferences_density_liquid_type_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_sqc_tolerance_mode_values">
         <item>1</item>
         <item>2</item>
     </string-array>

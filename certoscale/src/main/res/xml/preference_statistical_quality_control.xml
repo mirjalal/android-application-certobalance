@@ -19,18 +19,15 @@
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
-        <ListPreference
-            android:key="@string/preferences_statistic_numberofsample"
-            android:title="Number of Samples"
-            android:summary="Select the number of Samples"
-            android:dependency="@string/preferences_statistic_lock"
-            />
 
         <ListPreference
             android:key="@string/preferences_statistic_liquidtype"
             android:title="Tolerance"
             android:summary="Tolerance used during measurements"
             android:dependency="@string/preferences_statistic_lock"
+            android:defaultValue="1"
+            android:entries="@array/preferences_sqc_tolerance_mode"
+            android:entryValues="@array/preferences_sqc_tolerance_mode_values"
             />
 
 

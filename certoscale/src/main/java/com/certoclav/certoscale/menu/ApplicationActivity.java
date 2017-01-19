@@ -185,6 +185,14 @@ protected void onPause() {
 					}
 				});
 
+			case ActionButtonbarFragment.BUTTON_SHOWBATCH:
+				ApplicationManager.getInstance().showBatchList(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						actionButtonbarFragment.updateStatsButtonUI();
+					}
+				});
+
 				break;
 			case ActionButtonbarFragment.BUTTON_ACCUMULATE:
 				ApplicationManager.getInstance().accumulateStatistics();

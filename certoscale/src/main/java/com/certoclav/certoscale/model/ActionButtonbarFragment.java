@@ -21,6 +21,8 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.database.SQC;
 
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
 import java.util.ArrayList;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
@@ -50,6 +52,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_ZERO = 10;
 	public static final int BUTTON_ACCEPT=11;
 	public static final int BUTTON_INGREDIANTLIST=12;
+	public static final int BUTTON_NEWBATCH=30;
+	public static final int BUTTON_SHOWBATCH=31;
 	public static final int BUTTON_HOME = 13;
 	public static final int BUTTON_SETTINGS = 14;
 	public static final int BUTTON_ADD = 15;
@@ -325,7 +329,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
 
 
-						Item measuredItem= new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+						Item measuredItem = new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
 
 
 						measuredItem.setWeight(currentWeight);
@@ -385,7 +389,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				if (ApplicationManager.getInstance().getSqc_state()==0) {
 
-					final String[] name = {""};
+
 
 					try {
 						final Dialog dialog = new Dialog(getActivity());
@@ -408,10 +412,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							@Override
 							public void onClick(View v) {
 								EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
-								name[0] = editText.getText().toString();
+								ApplicationManager.getInstance().setBatchName(editText.getText().toString());
 								//								ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
-								SQC Batch = new SQC(ApplicationManager.getInstance().getStatistic(), name[0]);
+								ApplicationManager.getInstance().setBatchName(editText.getText().toString());
+
 								ApplicationManager.getInstance().setSqc_state(1);
 
 								dialog.dismiss();
@@ -432,6 +437,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				}
 				if (ApplicationManager.getInstance().getSqc_state()==1){
 
+					//Data from one Batch
+					//SummaryStatistics currentStatistics = new SummaryStatistics();
+					//ApplicationManager.getInstance().getStatistic().copy();
+					//currentStatistics=ApplicationManager.getInstance().getStatistic();
+
+					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStatistic().copy(),ApplicationManager.getInstance().getBatchName());
+					//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
+					//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
+
+					ApplicationManager.getInstance().getBatchList().add(currentBatch);
+					ApplicationManager.getInstance().getStatistic().clear();
+
+
 					buttonNewBatch.setText("New Batch");
 					ApplicationManager.getInstance().setSqc_state(0);
 				}
@@ -445,7 +463,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 				for(ButtonEventListener listener : navigationbarListeners){
-					listener.onClickNavigationbarButton(BUTTON_INGREDIANTLIST,false);
+					listener.onClickNavigationbarButton(BUTTON_SHOWBATCH,false);
 				}
 
 			}
