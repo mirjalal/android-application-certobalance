@@ -426,7 +426,6 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
 
-
                 break;
 
             case STATISTICAL_QUALITY_CONTROL:

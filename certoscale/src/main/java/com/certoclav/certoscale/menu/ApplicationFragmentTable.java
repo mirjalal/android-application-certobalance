@@ -174,7 +174,6 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
 
-
         switch (Scale.getInstance().getScaleApplication()){
             case WEIGHING:
 
@@ -630,6 +629,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%.4f", (ApplicationManager.getInstance().getStatistic().getMax()) - ApplicationManager.getInstance().getStatistic().getMin()));
                     }
                 }
+
+
                 break;
 
 

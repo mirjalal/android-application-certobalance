@@ -78,19 +78,50 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     private boolean  peakholdactivated=false;
+
+    //Ingrediant Costing variable
     private double Ingrediant_Unit_Cost=0;
     private double Ingrediant_Total_Weight=0;
     private double Ingrediant_Total_Cost=0;
 
+
+    //Pipette Adjustment variables
+    private String pipette_name="";
+    private int pipette_number=0;
+
+    public String getPipette_name() {return pipette_name;}
+    public void setPipette_name(String pipette_name) {this.pipette_name = pipette_name;}
+    public int getPipette_number() {return pipette_number;}
+    public void setPipette_number(int pipette_number) {this.pipette_number = pipette_number;}
+
+
+
+    //SQC variables
+    private int sqc_state=0;
+    private int sqcPT1=0;
+    private int sqcPT2=0;
+    private int sqcNT1=0;
+    private int sqcNT2=0;
+
     public int getSqc_state() {
         return sqc_state;
     }
-
     public void setSqc_state(int sqc_state) {
         this.sqc_state = sqc_state;
     }
 
-    private int sqc_state=0;
+    public int getSqcPT1() {return sqcPT1;}
+    public void setSqcPT1(int sqcPT1) {this.sqcPT1 = sqcPT1;}
+
+    public int getSqcPT2() {return sqcPT2;}
+    public void setSqcPT2(int sqcPT2) {this.sqcPT2 = sqcPT2;}
+
+    public int getSqcNT1() {return sqcNT1;}
+    public void setSqcNT1(int sqcNT1) {this.sqcNT1 = sqcNT1;}
+
+    public int getSqcNT2() {return sqcNT2;}
+    public void setSqcNT2(int sqcNT2) {this.sqcNT2 = sqcNT2;}
+
 
 
 
@@ -204,7 +235,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             0f,
             0f,
             0f,
-            0f
+            0f,
+            0
     );
 
 

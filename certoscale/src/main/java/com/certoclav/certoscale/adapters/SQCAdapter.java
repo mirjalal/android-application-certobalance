@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,11 +15,18 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.SQC;
+import com.certoclav.certoscale.menu.ApplicationActivity;
+import com.certoclav.certoscale.menu.ApplicationFragmentSettingsSQC;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.view.QuickActionItem;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+
+
 
 
 /**
@@ -78,26 +87,23 @@ public class SQCAdapter extends ArrayAdapter<SQC> {
         editTextName.setText(getItem(position).getName());
 
         TextView editTextMaximum = (TextView) convertView.findViewById(R.id.menu_main_sqc_edit_element_maximum);
-        editTextMaximum.setText(String.format("%.4f",getItem(position).getStatistics().getMax())+" g");
+        editTextMaximum.setText(String.format("%.2f",getItem(position).getStatistics().getMax())+" g");
 
 
         TextView editTextMinimum =  (TextView) convertView.findViewById(R.id.menu_main_sqc_edit_element_minimum);
-        editTextMinimum.setText(String.format(Locale.US,"%.4f",getItem(position).getStatistics().getMin())+" g");
+        editTextMinimum.setText(String.format(Locale.US,"%.2f",getItem(position).getStatistics().getMin())+" g");
 
         TextView editTextAverage =  (TextView) convertView.findViewById(R.id.menu_main_sqc_edit_element_average);
-        editTextAverage.setText(String.format(Locale.US,"%.4f",getItem(position).getStatistics().getMean())+ " g");
+        editTextAverage.setText(String.format(Locale.US,"%.2f",getItem(position).getStatistics().getMean())+ " g");
 
 
         TextView editTextStandardDeviation = (TextView) convertView.findViewById(R.id.menu_main_sqc_edit_element_standard);
-        editTextStandardDeviation.setText(String.format(Locale.US,"%.4f",getItem(position).getStatistics().getStandardDeviation())+ " g");
-
-
-
-
+        editTextStandardDeviation.setText(String.format(Locale.US,"%.2f",getItem(position).getStatistics().getStandardDeviation())+ " g");
 
 
 
 
         return convertView;
     }
+
 }

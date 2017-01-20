@@ -32,14 +32,10 @@
             android:title="Liquid Type"
             android:summary="Select the liquid type"
             android:dependency="@string/preferences_pipette_lock"
+            android:entries="@array/preferences_density_liquid_type"
+            android:entryValues="@array/preferences_density_liquid_type_values"
             />
 
-        <ListPreference
-            android:key="@string/preferences_pipette_numberofsample"
-            android:title="Number of Samples"
-            android:summary="Select the number of Samples"
-            android:dependency="@string/preferences_pipette_lock"
-            />
 
         <ListPreference
             android:key="@string/preferences_pipette_presureunit"

@@ -32,6 +32,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNIN
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
 
@@ -200,7 +201,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		View rootView = inflater.inflate(R.layout.actionbar,container, false);
+		final View rootView = inflater.inflate(R.layout.actionbar,container, false);
 
 		buttonStart = (Button) rootView.findViewById(R.id.actionbar_button_start);
 		buttonStart.setOnClickListener(new View.OnClickListener() {
@@ -264,6 +265,25 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_ACCUMULATE,false);
+				}
+
+				if(Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
+					double sqcNominal=ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal();
+					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ApplicationManager.getInstance().getSqcPT1())){
+						ApplicationManager.getInstance().setSqcPT1(ApplicationManager.getInstance().getSqcPT1()+1);
+					}
+					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ApplicationManager.getInstance().getSqcPT2())){
+						ApplicationManager.getInstance().setSqcPT2(ApplicationManager.getInstance().getSqcPT2()+1);
+					}
+
+					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal-ApplicationManager.getInstance().getSqcNT1())){
+						ApplicationManager.getInstance().setSqcNT1(ApplicationManager.getInstance().getSqcNT1()+1);
+					}
+
+					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal-ApplicationManager.getInstance().getSqcNT2())){
+						ApplicationManager.getInstance().setSqcPT1(ApplicationManager.getInstance().getSqcPT1()+1);
+					}
+
 				}
 
 			}
@@ -416,6 +436,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 								//								ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
 								ApplicationManager.getInstance().setBatchName(editText.getText().toString());
+								buttonAccumulate.setEnabled(true);
 
 								ApplicationManager.getInstance().setSqc_state(1);
 
@@ -442,7 +463,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					//ApplicationManager.getInstance().getStatistic().copy();
 					//currentStatistics=ApplicationManager.getInstance().getStatistic();
 
-					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStatistic().copy(),ApplicationManager.getInstance().getBatchName());
+					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
+							ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
+							ApplicationManager.getInstance().getSqcNT2());
 					//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
 					//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
@@ -451,7 +474,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 					buttonNewBatch.setText("New Batch");
+					buttonAccumulate.setEnabled(false);
 					ApplicationManager.getInstance().setSqc_state(0);
+					ApplicationManager.getInstance().setSqcPT1(0);
+					ApplicationManager.getInstance().setSqcPT2(0);
+					ApplicationManager.getInstance().setSqcNT1(0);
+					ApplicationManager.getInstance().setSqcNT2(0);
 				}
 
 
@@ -541,6 +569,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case STATISTICAL_QUALITY_CONTROL:
 				buttonNewBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
+				buttonAccumulate.setEnabled(false);
 
 
 				buttonIngrediantList.setVisibility(View.GONE);
@@ -598,8 +627,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL){
 			buttonNewBatch.setVisibility(View.GONE);
 			buttonShowBatch.setVisibility(View.GONE);
+
 		}else{
 			buttonStatistics.setVisibility(View.GONE);
+			if (ApplicationManager.getInstance().getSqc_state()==0){
+				buttonAccumulate.setEnabled(false);
+			}
+
 		}
 
 

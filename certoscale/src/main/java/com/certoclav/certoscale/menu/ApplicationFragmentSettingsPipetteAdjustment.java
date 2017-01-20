@@ -39,6 +39,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
     private Button buttonPressure = null;
     private Button buttonPipettename = null;
     private Button buttonPipettenumber = null;
+    private Button buttonNumberofSamples = null;
 
 
 
@@ -289,6 +290,152 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
             }
         });
 
+
+        buttonPipettename =  (Button) rootView.findViewById(R.id.application_settings_pipette_button_pipettename);
+        buttonPipettename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_text);
+                    dialog.setTitle("Please enter the pipette name");
+
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
+
+                            ApplicationManager.getInstance().setPipette_name(editText.getText().toString());
+
+                            dialog.dismiss();
+                            onResume();
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+
+        buttonPipettenumber =  (Button) rootView.findViewById(R.id.application_settings_pipette_button_pipettenumber);
+        buttonPipettenumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setTitle("Please enter the pipette number");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("");
+
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_number_edittext);
+
+                            ApplicationManager.getInstance().setPipette_number(Integer.parseInt(editText.getText().toString()));
+
+                            dialog.dismiss();
+                            onResume();
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+
+        buttonNumberofSamples =  (Button) rootView.findViewById(R.id.application_settings_pipette_button_pipettenumberofsample);
+        buttonNumberofSamples.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_number);
+                    dialog.setTitle("Please enter the number of samples");
+
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("");
+
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_number_edittext);
+
+                           // ApplicationManager.getInstance().setPipette_number(Integer.parseInt(editText.getText().toString()));
+
+                            ApplicationManager.getInstance().getCurrentLibrary().setPipetteNumberofSamples(Integer.parseInt(editText.getText().toString()));
+
+                            dialog.dismiss();
+                            onResume();
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+
+
+
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
@@ -300,6 +447,11 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
         buttonImprecision.setText("Imprecision\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %" );
         buttonWaterTemp.setText("Water Temperature\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+ " °C");
         buttonPressure.setText("Pressure\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
+
+        buttonPipettename.setText("Pipette Name\n"+ApplicationManager.getInstance().getPipette_name());
+        buttonPipettenumber.setText("Pipette Number\n"+ApplicationManager.getInstance().getPipette_number());
+
+        buttonNumberofSamples.setText("Number of Samples\n"+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples());
         super.onResume();
 
 
