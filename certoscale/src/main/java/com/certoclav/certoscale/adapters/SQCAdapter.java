@@ -37,20 +37,6 @@ import java.util.Locale;
  */
 public class SQCAdapter extends ArrayAdapter<SQC> {
 
-    public interface OnClickButtonListener {
-        void onClickButtonDelete(SQC sqc);
-        void onClickButtonEdit(SQC sqc);
-    }
-    ArrayList<OnClickButtonListener> onClickButtonListeners = new ArrayList<OnClickButtonListener>();
-
-    public void setOnClickButtonListener(OnClickButtonListener listener){
-        onClickButtonListeners.add(listener);
-    }
-    public void removeOnClickButtonListener(OnClickButtonListener listener){
-        onClickButtonListeners.remove(listener);
-    }
-
-
 
     private final Context mContext;
 
@@ -102,6 +88,16 @@ public class SQCAdapter extends ArrayAdapter<SQC> {
 
 
 
+
+
+        convertView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // ApplicationManager.getInstance().showStatisticsNotification(getContext(),getItem(position).getStatistics());
+                ApplicationManager.getInstance().showStatisticsSQC(getContext(),getItem(position));
+            }
+        });
 
         return convertView;
     }

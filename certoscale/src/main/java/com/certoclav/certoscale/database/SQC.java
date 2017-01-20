@@ -17,6 +17,7 @@ public class SQC {
 
 
 
+    private int nominal;
     private int sqcPT1;
     private int sqcPT2;
     private int sqcNT1;
@@ -43,6 +44,10 @@ public class SQC {
 
     public SummaryStatistics getStatistics() {return statistics;}
     public void setStatistics(SummaryStatistics statistics) {this.statistics = statistics;}
+
+
+    public int getNominal() {return nominal;}
+    public void setNominal(int nominal) {this.nominal = nominal;}
 
 
     public int getSqcPT1() {return sqcPT1;}
