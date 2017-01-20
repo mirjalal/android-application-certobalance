@@ -89,6 +89,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private String pipette_name="";
     private int pipette_number=0;
 
+
+    private int pipette_current_sample=0;
+    public int getPipette_current_sample() {return pipette_current_sample;}
+    public void setPipette_current_sample(int pipette_current_sample) {this.pipette_current_sample = pipette_current_sample;}
+
+
+
+
     public String getPipette_name() {return pipette_name;}
     public void setPipette_name(String pipette_name) {this.pipette_name = pipette_name;}
     public int getPipette_number() {return pipette_number;}
@@ -98,10 +106,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     //SQC variables
     private int sqc_state=0;
+
+
+
+
     private int sqcPT1=0;
     private int sqcPT2=0;
     private int sqcNT1=0;
     private int sqcNT2=0;
+
+
 
     public int getSqc_state() {
         return sqc_state;
@@ -957,6 +971,58 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     }
+
+
+
+
+    public void showStatisticsSQC(final Context eContext, SQC sqc) {
+        try {
+
+            SummaryStatistics statistic =sqc.getStatistics();
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_statistics_sqc);
+            dialog.setTitle("Statistics of "+sqc.getName());
+            //           statistic = new SummaryStatistics();
+            //           for (Double value : statisticsArray) {
+            //               statistic.addValue(value);
+            //           }
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + statistic.getN());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(String.format("%.4f", statistic.getMin()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(String.format("%.4f", statistic.getVariance()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(String.format("%.4f", statistic.getStandardDeviation()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f", statistic.getSum()) + " " + getUnitAsString());
+
+            //((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal() + " " + getUnitAsString()));
+
+
+            // set the custom dialog components - text, image and button
+
+
+            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+                }
+            });
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public void onWeightChanged(Double weight, String unit) {

@@ -480,6 +480,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					ApplicationManager.getInstance().setSqcPT2(0);
 					ApplicationManager.getInstance().setSqcNT1(0);
 					ApplicationManager.getInstance().setSqcNT2(0);
+
 				}
 
 
