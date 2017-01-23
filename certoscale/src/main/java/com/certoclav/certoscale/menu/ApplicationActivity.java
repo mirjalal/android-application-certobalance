@@ -22,6 +22,7 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
+import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
@@ -34,6 +35,7 @@ import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 
 import java.util.List;
 
+import static com.certoclav.certoscale.R.string.preferences_totalization_AutoSampleMode;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
@@ -42,7 +44,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 
 
-public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
+public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
 
@@ -110,7 +112,7 @@ private Navigationbar navigationbar = new Navigationbar(this);
 
 	@Override
 protected void onResume() {
-
+		Scale.getInstance().setOnStableListener(this);
 
 		refreshSpinnerLibrary();
 
@@ -158,6 +160,7 @@ protected void onPause() {
 	navigationbar.removeNavigationbarListener(this);
 	actionButtonbarFragment.removeButtonEventListener(this);
 	Scale.getInstance().removeOnApplicationListener(this);
+		Scale.getInstance().removeOnStableListener(this);
 	super.onPause();
 }
 
@@ -469,9 +472,14 @@ protected void onPause() {
 	}
 
 
+	@Override
+	public void onStableChanged(boolean isStable) {
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		if  (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode),getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode))==true) {
+			actionButtonbarFragment.getButtonAccumulate().performClick();
+		}
 
 
-
-
-
+	}
 }

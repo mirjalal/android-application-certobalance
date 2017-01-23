@@ -19,24 +19,18 @@
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
+        <!--
         <ListPreference
             android:key="preferences_check_limitmode"
             android:title="Statistics"
             android:dependency="@string/preferences_filling_lock"
             />
-
+    -->
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="VISIBILITY" >
 
-        <CheckBoxPreference
-            android:key="@string/preferences_filling_secondary_visible"
-            android:defaultValue="@bool/preferences_filling_secondary_visible"
-            android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible"
-            android:dependency="@string/preferences_filling_lock">
-        </CheckBoxPreference>
 
 
         <CheckBoxPreference

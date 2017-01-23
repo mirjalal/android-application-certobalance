@@ -19,6 +19,7 @@
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
+
         <CheckBoxPreference
             android:key="@string/preferences_totalization_AutoSampleMode"
             android:defaultValue="@bool/preferences_totalization_AutoSampleMode"
