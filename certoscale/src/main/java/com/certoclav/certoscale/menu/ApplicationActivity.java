@@ -1,8 +1,8 @@
 package com.certoclav.certoscale.menu;
 
 
-import android.app.Application;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +50,9 @@ private Navigationbar navigationbar = new Navigationbar(this);
 	private boolean appSettingsVisible = false;
 	private LinearLayout containerMore = null;
 	private ImageButton imageButtonSidebarBack = null;
+	private ImageButton imageButtonTimer = null;
+	private ImageButton imageButtonCalculator = null;
+	private ImageButton imageButtonCalibration = null;
 
 
 
@@ -63,13 +66,40 @@ private Navigationbar navigationbar = new Navigationbar(this);
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
 		containerMore = (LinearLayout) findViewById(R.id.menu_application_container_more);
+
+		imageButtonCalculator = (ImageButton) findViewById(R.id.menu_application_sidebar_button_calculator);
+		imageButtonCalculator.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setComponent(new ComponentName("com.moblynx.calculatorjb","com.android.calculator2.Calculator"));
+				startActivity(intent);
+			}
+		});
+
+		imageButtonCalibration = (ImageButton) findViewById(R.id.menu_application_sidebar_button_calibration);
+		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
+			}
+		});
+		imageButtonTimer = (ImageButton) findViewById(R.id.menu_application_sidebar_button_timer);
+		imageButtonTimer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setComponent(new ComponentName("org.ilumbo.ovo","org.ilumbo.ovo.TimerActivity"));
+				startActivity(intent);
+			}
+		});
 		imageButtonSidebarBack = (ImageButton) findViewById(R.id.menu_application_sidebar_button_back);
 		imageButtonSidebarBack.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 
-					containerMore.setVisibility(View.INVISIBLE);
+					containerMore.setVisibility(View.GONE);
 
 			}
 		});
@@ -152,10 +182,10 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_MORE:
 
-				if(containerMore.getVisibility() == View.INVISIBLE){
+				if(containerMore.getVisibility() == View.GONE){
 					containerMore.setVisibility(View.VISIBLE);
 				}else{
-					containerMore.setVisibility(View.INVISIBLE);
+					containerMore.setVisibility(View.GONE);
 				}
 
 				break;
@@ -285,7 +315,7 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_CAL:
 				//send command for calibration to the scale
-					ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
+
 
 				break;
 			case ActionButtonbarFragment.BUTTON_PRINT:
