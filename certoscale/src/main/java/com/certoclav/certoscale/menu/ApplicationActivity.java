@@ -187,7 +187,6 @@ protected void onPause() {
 				}else{
 					containerMore.setVisibility(View.GONE);
 				}
-
 				break;
 			case ActionButtonbarFragment.BUTTON_HOME:
 				Intent intent = new Intent(ApplicationActivity.this,MenuActivity.class);
@@ -335,7 +334,7 @@ protected void onPause() {
 				try{
 					final Dialog dialog = new Dialog(ApplicationActivity.this);
 					dialog.setContentView(R.layout.dialog_edit_text);
-					dialog.setTitle("Please enter a name for the Partcounting library entry");
+					dialog.setTitle("Please enter a name for the library");
 
 					Button dialogButtonCansel = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
 					dialogButtonCansel.setOnClickListener(new View.OnClickListener() {

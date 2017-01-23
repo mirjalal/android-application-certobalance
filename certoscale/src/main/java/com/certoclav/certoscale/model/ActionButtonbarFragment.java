@@ -181,7 +181,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		Scale.getInstance().setOnWeightListener(this);
 		onApplicationChange(Scale.getInstance().getScaleApplication());
 		if (ApplicationManager.getInstance().getSqc_state()==1){
-			buttonNewBatch.setText("End\n");
+			buttonNewBatch.setText("End\n" + ApplicationManager.getInstance().getBatchName());
 		}
 		if(ApplicationManager.getInstance().getSqc_state()==0){
 			buttonNewBatch.setText("New Batch");
@@ -609,6 +609,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
+				buttonStart.setVisibility(View.GONE);
 
 
 				buttonIngrediantList.setVisibility(View.GONE);

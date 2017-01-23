@@ -118,7 +118,7 @@
      android:layout_width="80dp"
      android:layout_height="match_parent"
      android:layout_alignParentRight="true"
-     android:src="@drawable/ic_menu_more"
+     android:src="@drawable/application_icon3"
      style="@style/button_navigationbar_default"
      />
 

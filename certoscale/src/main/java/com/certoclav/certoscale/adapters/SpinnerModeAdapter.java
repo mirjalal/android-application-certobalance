@@ -61,55 +61,55 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				break;
 			case PART_COUNTING:
 				textMail.setText("Part Counting");
-				imageApp.setImageResource(R.drawable.ic_menu_add);
+				imageApp.setImageResource(R.drawable.application_icon_partcounting);
 				break;
 			case PERCENT_WEIGHING:
 				textMail.setText("Percent Weiging");
-				imageApp.setImageResource(R.drawable.ic_menu_bin);
+				imageApp.setImageResource(R.drawable.application_icon_percent);
 				break;
 			case CHECK_WEIGHING:
 				textMail.setText("Check Weiging");
-				imageApp.setImageResource(R.drawable.ic_menu_exit);
+				imageApp.setImageResource(R.drawable.application_icon_check);
 				break;
 			case ANIMAL_WEIGHING:
 				textMail.setText("Animal Weiging");
-				imageApp.setImageResource(R.drawable.ic_menu_help);
+				imageApp.setImageResource(R.drawable.application_icon_animal);
 				break;
 			case FILLING:
 				textMail.setText("Filling");
-				imageApp.setImageResource(R.drawable.ic_menu_back);
+				imageApp.setImageResource(R.drawable.application_icon_filling);
 				break;
 			case TOTALIZATION:
 				textMail.setText("Totalization");
-				imageApp.setImageResource(R.drawable.ic_menu_delete);
+				imageApp.setImageResource(R.drawable.application_icon_totalization);
 				break;
 			case FORMULATION:
 				textMail.setText("Formulation");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_formula2);
 				break;
 			case DIFFERENTIAL_WEIGHING:
 				textMail.setText("Differential Weighing");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_differential);
 				break;
 			case DENSITIY_DETERMINATION:
 				textMail.setText("Density Determination");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_density);
 				break;
 			case PEAK_HOLD:
 				textMail.setText("Peak Hold");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_peak_hold);
 				break;
 			case INGREDIENT_COSTING:
 				textMail.setText("Ingrediant Costing");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_costing);
 				break;
 			case PIPETTE_ADJUSTMENT:
 				textMail.setText("Pipette Adjustment");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_pipette);
 				break;
 			case STATISTICAL_QUALITY_CONTROL:
 				textMail.setText("Statistical Quality Control");
-				imageApp.setImageResource(R.drawable.ic_launcher);
+				imageApp.setImageResource(R.drawable.application_icon_statistic2);
 				break;
 
 			default:
