@@ -3,7 +3,6 @@
 <resources>
     <style name="button_default">
         <item name="android:textSize">25sp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/quickaction_slider_btn</item>
         <item name="android:capitalize">characters</item>
@@ -22,7 +21,6 @@
 
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/quickaction_slider_btn</item>
         <item name="android:capitalize">characters</item>

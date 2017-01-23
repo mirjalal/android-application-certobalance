@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.util;
 
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.model.Scale;
 
 import java.util.Calendar;
@@ -27,6 +28,17 @@ public static void printText(String text, Integer numSets){
 	sendTextToBuffer(text,40,40);
 	printBuffer(numSets);
 }
+
+	public static void printItem(Item item){
+		int numSets = 1;
+		clearCurentBuffer();
+		sendInitConfigToBuffer();
+		sendCertoclavLogoToBuffer(100, 0);
+		sendBarcodeToBuffer(item.getItemArticleNumber(), 64, 50);
+		sendTextToBuffer(item.getName(), 40,110);
+		printBuffer(numSets);
+
+	}
 
 public static void printLabel(Date dateExpiration, String serialAutoclave, int cycleNumber, int numSets){
 	if(numSets>5){

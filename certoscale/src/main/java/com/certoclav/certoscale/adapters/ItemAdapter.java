@@ -9,9 +9,11 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 	private final Context mContext;
 	private QuickActionItem actionItemDelete;
 	private QuickActionItem actionItemEdit;
+	private QuickActionItem actionItemPrint;
 
 
 
@@ -77,6 +80,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 		actionItemEdit = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemEdit);
+		
+		actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems,false);
+		containerItems.addView(actionItemPrint);
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
 		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
@@ -111,6 +117,25 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			}
 		});
 
+
+		actionItemPrint.setChecked(false);
+		actionItemPrint.setImageResource(R.drawable.ic_menu_print);
+
+		//actionItemDelete.setText(getContext().getString(R.string.delete));
+		actionItemPrint.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LabelPrinterUtils.printItem(getItem(position));
+				Toast.makeText(mContext,"Item printed", Toast.LENGTH_LONG).show();
+				for(OnClickButtonListener listener : onClickButtonListeners){
+				//	listener.onClickButtonPrint(getItem(position));
+				}
+
+
+
+			}
+		});
+		
 
 		actionItemDelete.setChecked(false);
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);

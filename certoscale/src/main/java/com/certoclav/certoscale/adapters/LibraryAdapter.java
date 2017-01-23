@@ -73,7 +73,7 @@ public class LibraryAdapter extends ArrayAdapter<Library> {
 			containerItems.addView(actionItemDelete);
 			
 			actionItemEdit = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-			containerItems.addView(actionItemEdit);
+			//containerItems.addView(actionItemEdit);
 
 
 			
@@ -81,29 +81,16 @@ public class LibraryAdapter extends ArrayAdapter<Library> {
 		firstLine.setText(getItem(position).getName());
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("Date:").append("\t\t").append("\n");
-		sb.append("AWP:").append("\t\t").append("\n");
-		sb.append("Level:").append("\t\t").append("\n");
-		sb.append("Over limit:").append("\t\t").append("\n");
-		sb.append("Under limit:").append("\t\t").append("\n");
-		sb.append("Sample size:").append("\t\t").append("\n");
-		sb.append("Tara:").append("\t\t").append("\n");
-		sb.append("Target:").append("\t\t").append("\n");
-		sb.append("User account:").append("\t\t").append("\n");
+		sb.append("Created on:").append("\t\t").append("\n");
+		sb.append("Created by:").append("\t\t").append("\n");
 
 		final TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
 		secondLine.setText(sb.toString());
 
 		sb = new StringBuilder();
 		sb.append(getItem(position).getDate()).append("\n");
-		sb.append(getItem(position).getAveragePieceWeight()).append("\n");
-		sb.append(getItem(position).getLevel()).append("\n");
-		sb.append(getItem(position).getOverLimit()).append("\n");
-		sb.append(getItem(position).getUnderLimit()).append("\n");
-		sb.append(getItem(position).getSampleSize()).append("\n");
-		sb.append(getItem(position).getTara()).append("\n");
-		sb.append(getItem(position).getTarget()).append("\n");
 		sb.append(getItem(position).getUserEmail()).append("\n");
+
 		final TextView thirdLine = (TextView) convertView.findViewById(R.id.third_line);
 		thirdLine.setText(sb.toString());
 
