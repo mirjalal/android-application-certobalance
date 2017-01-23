@@ -21,7 +21,8 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Open voice control window"
-        style="@style/text_default"/>
+        style="@style/text_default"
+        android:visibility="gone" />
     
     <View
     android:layout_height="match_parent"
@@ -65,7 +66,7 @@
         android:layout_weight="1"
         android:text="Voice control"
              style="@style/button_default"
-        />
+             android:visibility="gone" />
          
      <Button
         android:id="@+id/dialog_support_button_teamviwer"
