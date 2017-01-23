@@ -60,14 +60,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_menu_manage"
+            android:src="@drawable/application_icon_calculator"
             style="@style/button_image_default"/>
         <ImageButton
             android:id="@+id/menu_application_sidebar_button_timer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_menu_delete_holo_dark"
+            android:src="@drawable/application_icon_stopwatch"
             style="@style/button_image_default"/>
         <ImageButton
             android:id="@+id/menu_application_sidebar_button_calibration"
