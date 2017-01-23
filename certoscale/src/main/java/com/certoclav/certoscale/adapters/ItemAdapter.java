@@ -126,7 +126,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			@Override
 			public void onClick(View v) {
 				LabelPrinterUtils.printItem(getItem(position));
-				Toast.makeText(mContext,"Item printed", Toast.LENGTH_LONG);
+				Toast.makeText(mContext,"Item printed", Toast.LENGTH_LONG).show();
 				for(OnClickButtonListener listener : onClickButtonListeners){
 				//	listener.onClickButtonPrint(getItem(position));
 				}

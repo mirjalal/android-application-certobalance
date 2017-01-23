@@ -14,6 +14,7 @@ public ProtocolPrinterUtils() {
 
 	}
 
+
 	public static void printProtocol(){
 		printHeader();
 		printDate();
