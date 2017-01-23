@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 
+import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +42,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGE
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener{
@@ -212,6 +214,18 @@ protected void onPause() {
 					actionButtonbarFragment.updateStatsButtonUI();
 					actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
 					appSettingsVisible = false;
+
+					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+						if (ApplicationManager.getInstance().getPipette_current_sample()==0){
+							actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
+							actionButtonbarFragment.updateStatsButtonUI();
+							actionButtonbarFragment.getButtonTara().setEnabled(true);
+						}else{
+							actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
+							actionButtonbarFragment.getButtonTara().setEnabled(false);
+
+						}
+					}
 				}else{
 					actionButtonbarFragment.getButtonCal().setEnabled(false);
 					actionButtonbarFragment.getButtonPrint().setEnabled(false);
@@ -258,6 +272,7 @@ protected void onPause() {
 							break;
 						case PIPETTE_ADJUSTMENT:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
+
 							break;
 
 

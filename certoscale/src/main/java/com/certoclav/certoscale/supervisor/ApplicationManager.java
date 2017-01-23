@@ -90,11 +90,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private int pipette_number=0;
 
 
+
+    private double pipetteCalculatedML=0;
+    public double getPipetteCalculatedML() {return pipetteCalculatedML;}
+    public void setPipetteCalculatedML(double pipetteCalculatedML) {this.pipetteCalculatedML = pipetteCalculatedML;}
+
+
+
     private int pipette_current_sample=0;
     public int getPipette_current_sample() {return pipette_current_sample;}
     public void setPipette_current_sample(int pipette_current_sample) {this.pipette_current_sample = pipette_current_sample;}
-
-
 
 
     public String getPipette_name() {return pipette_name;}
@@ -508,6 +513,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 break;
             case ANIMAL_WEIGHING:
                 statistic.addValue( animalWeight);
+                break;
+            case PIPETTE_ADJUSTMENT:
+                statistic.addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
                 break;
             default:
                 statistic.addValue(getTaredValueInGram());
@@ -994,7 +1002,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(String.format("%.4f", statistic.getStandardDeviation()) + " " + getUnitAsString());
             ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f", statistic.getSum()) + " " + getUnitAsString());
 
-            //((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal() + " " + getUnitAsString()));
+
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_nominal)).setText(String.format("%.4f",sqc.getNominal()));
+
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ptolerance1)).setText(String.format("%d",sqc.getSqcPT1())+ "   " +String.format("%.1f",((double)sqc.getSqcPT1()/(double)statistic.getN())*100 )+ "%");
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ptolerance2)).setText(String.format("%d",sqc.getSqcPT2())+ "   " +String.format("%.1f",((double)sqc.getSqcPT2()/(double)statistic.getN())*100 )+ "%");
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ntolerance1)).setText(String.format("%d",sqc.getSqcNT1())+ "   " +String.format("%.1f",((double)sqc.getSqcNT1()/(double)statistic.getN())*100 )+ "%");
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ntolerance2)).setText(String.format("%d",sqc.getSqcNT2())+ "   " +String.format("%.1f",((double)sqc.getSqcNT2()/(double)statistic.getN())*100 )+ "%");
 
 
             // set the custom dialog components - text, image and button

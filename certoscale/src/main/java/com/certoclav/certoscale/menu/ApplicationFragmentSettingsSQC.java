@@ -288,11 +288,11 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
 
     @Override
     public void onResume() {
-        buttonNominal.setText("Nominal\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal())+" g");
-        buttonPTolerance1.setText("+ Tolerance1\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1())+" g");
-        buttonPTolerance2.setText("+ Tolerance2\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2())+" g");
-        buttonNTolerance1.setText("- Tolerance1\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1())+" g");
-        buttonNTolerance2.setText("- Tolerance2\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance2())+" g");
+        buttonNominal.setText("Nominal\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal())+" g");
+        buttonPTolerance1.setText("+ Tolerance1\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1())+" g");
+        buttonPTolerance2.setText("+ Tolerance2\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2())+" g");
+        buttonNTolerance1.setText("- Tolerance1\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1())+" g");
+        buttonNTolerance2.setText("- Tolerance2\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance2())+" g");
         super.onResume();
 
 

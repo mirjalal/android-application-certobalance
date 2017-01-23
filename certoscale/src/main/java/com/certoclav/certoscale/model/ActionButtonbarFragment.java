@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.ApplicationFragmentWeight;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.database.SQC;
 
@@ -32,6 +34,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNIN
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
@@ -269,21 +272,51 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				if(Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
 					double sqcNominal=ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal();
-					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ApplicationManager.getInstance().getSqcPT1())){
+					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1())){
 						ApplicationManager.getInstance().setSqcPT1(ApplicationManager.getInstance().getSqcPT1()+1);
+
+
 					}
-					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ApplicationManager.getInstance().getSqcPT2())){
+					if (ApplicationManager.getInstance().getTaredValueInGram()>(sqcNominal+ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2())){
 						ApplicationManager.getInstance().setSqcPT2(ApplicationManager.getInstance().getSqcPT2()+1);
 					}
 
-					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal-ApplicationManager.getInstance().getSqcNT1())){
+					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal+ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1())){
 						ApplicationManager.getInstance().setSqcNT1(ApplicationManager.getInstance().getSqcNT1()+1);
 					}
 
-					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal-ApplicationManager.getInstance().getSqcNT2())){
+					if (ApplicationManager.getInstance().getTaredValueInGram()<(sqcNominal-sqcNominal+ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2())){
 						ApplicationManager.getInstance().setSqcPT1(ApplicationManager.getInstance().getSqcPT1()+1);
 					}
 
+				}
+
+				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
+						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+						ApplicationManager.getInstance().setPipette_current_sample(0);
+						ApplicationManager.getInstance().getStatistic().clear();
+						updateStatsButtonUI();
+
+					}else {
+						//Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
+						double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+						pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
+						double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
+						buttonAccumulate.setText("Accept");
+
+						ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
+
+						ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
+						if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
+							ApplicationManager.getInstance().setPipette_current_sample(0);
+							buttonAccumulate.setEnabled(false);
+							buttonTara.setEnabled(true);
+						}
+
+						ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+
+					}
 				}
 
 			}
@@ -309,6 +342,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					listener.onClickNavigationbarButton(BUTTON_TARA,false);
 				}
 
+				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT) {
+					ApplicationManager.getInstance().setPipette_current_sample(1);
+					ApplicationManager.getInstance().getStatistic().clear();
+
+					updateStatsButtonUI();
+					buttonTara.setEnabled(false);
+					buttonAccumulate.setEnabled(true);
+				}
 			}
 		});
 
@@ -464,6 +505,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					//currentStatistics=ApplicationManager.getInstance().getStatistic();
 
 					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
+							ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
 							ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
 							ApplicationManager.getInstance().getSqcNT2());
 					//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
@@ -580,6 +622,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				break;
+			case PIPETTE_ADJUSTMENT:
+				ApplicationManager.getInstance().setPipette_current_sample(0);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				buttonAccumulate.setText("Accept");
+				buttonAccumulate.setEnabled(false);
+				break;
 
 			default:
 				buttonStart.setVisibility(View.GONE);
@@ -606,7 +656,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		getButtonCal().setEnabled(true);
 		getButtonPrint().setEnabled(true);
 		getButtonTara().setEnabled(true);
+		if (application!=PIPETTE_ADJUSTMENT){
 		getButtonAccumulate().setEnabled(true);
+
+		}
 		getButtonAppSettings().setEnabled(true);
 
 		if(application == TOTALIZATION){

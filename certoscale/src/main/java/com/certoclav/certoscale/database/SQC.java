@@ -17,16 +17,17 @@ public class SQC {
 
 
 
-    private int nominal;
+    private double nominal;
     private int sqcPT1;
     private int sqcPT2;
     private int sqcNT1;
     private int sqcNT2;
 
 
-    public SQC(SummaryStatistics statistics,String name,int sqcPT1, int sqcPT2,int sqcNT1,int sqcNT2) {
+    public SQC(SummaryStatistics statistics,String name,double nominal,int sqcPT1, int sqcPT2,int sqcNT1,int sqcNT2) {
         this.statistics = statistics;
         this.name=name;
+        this.nominal=nominal;
         this.sqcPT1=sqcPT1;
         this.sqcPT2=sqcPT2;
         this.sqcNT1=sqcNT1;
@@ -46,8 +47,8 @@ public class SQC {
     public void setStatistics(SummaryStatistics statistics) {this.statistics = statistics;}
 
 
-    public int getNominal() {return nominal;}
-    public void setNominal(int nominal) {this.nominal = nominal;}
+    public double getNominal() {return nominal;}
+    public void setNominal(double nominal) {this.nominal = nominal;}
 
 
     public int getSqcPT1() {return sqcPT1;}

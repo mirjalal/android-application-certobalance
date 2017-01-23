@@ -5,12 +5,15 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_gadient">
 
-
+<ScrollView
+	android:layout_width="match_parent"
+	android:layout_height="300dp"
+	android:id="@+id/dialog_statistics_sqc_table_container">
 	<TableLayout
 		android:layout_centerHorizontal="true"
-		android:id="@+id/dialog_statistics_sqc_table_container"
+
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
+		android:layout_height="match_parent"
 		android:layout_margin="5dp"
 		android:gravity="center_horizontal"
 		android:layout_gravity="center_horizontal">
@@ -146,9 +149,105 @@
 	</TableRow>
 
 
+		<TableRow
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="Nominal"
+				style="@style/text_statistics"/>
+			<TextView
+				android:id="@+id/dialog_statistics_sqc_text_nominal"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1"
+				android:gravity="right"
+				style="@style/text_statistics"/>
+		</TableRow>
+
+		<TableRow
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="+Tolerance1"
+				style="@style/text_statistics"/>
+			<TextView
+				android:id="@+id/dialog_statistics_sqc_text_ptolerance1"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1"
+				android:gravity="right"
+				style="@style/text_statistics"/>
+		</TableRow>
+
+
+		<TableRow
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="+Tolerance2"
+				style="@style/text_statistics"/>
+			<TextView
+				android:id="@+id/dialog_statistics_sqc_text_ptolerance2"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1"
+				android:gravity="right"
+				style="@style/text_statistics"/>
+		</TableRow>
+
+
+		<TableRow
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="-Tolerance1"
+				style="@style/text_statistics"/>
+			<TextView
+				android:id="@+id/dialog_statistics_sqc_text_ntolerance1"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1"
+				android:gravity="right"
+				style="@style/text_statistics"/>
+		</TableRow>
+
+		<TableRow
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="-Tolerance2"
+				style="@style/text_statistics"/>
+			<TextView
+				android:id="@+id/dialog_statistics_sqc_text_ntolerance2"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="1"
+				android:gravity="right"
+				style="@style/text_statistics"/>
+		</TableRow>
+
+
+
+
+
+
+
+
+
 	</TableLayout>
 
 
+</ScrollView>
 
 
 	<LinearLayout
@@ -178,6 +277,7 @@
 
 
 	</LinearLayout>
+
 
 
 </RelativeLayout>

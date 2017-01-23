@@ -437,10 +437,18 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PIPETTE_ADJUSTMENT:
-                textInstruction.setText("");
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
+                if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
+                    textInstruction.setText("Place Container on the pan. Press Tare");
+                }else{
+                    textInstruction.setText("Dispense sample "+String.format("%d",ApplicationManager.getInstance().getPipette_current_sample())+ " and press Accept");
+                }
+
+                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
                 textValue.setTextColor(Color.WHITE);
-                textSum.setText("");
+                textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
+
 
                 break;
 
