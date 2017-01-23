@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <resources>
-        <style name="button_default">
-            <item name="android:textSize">25sp</item>
-            <item name="android:textColor">#ffffff</item>
-            <item name="android:background">@drawable/quickaction_slider_btn</item>
-            <item name="android:capitalize">characters</item>
-            <item name="android:layout_margin">5dp</item>
-        </style>
+
+<resources>
+    <style name="button_default">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@drawable/quickaction_slider_btn</item>
+        <item name="android:capitalize">characters</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
     <style name="button_navigationbar_default">
         <item name="android:background">@drawable/quickaction_slider_btn_black</item>
         <item name="android:scaleType">centerInside</item>
@@ -20,6 +22,7 @@
 
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:background">@drawable/quickaction_slider_btn</item>
         <item name="android:capitalize">characters</item>
@@ -46,6 +49,12 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
+    <style name="text_default_small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
     <style name="text_statistics">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#ffffff</item>
@@ -64,6 +73,9 @@
     <style name="spinner_element_default">
         <item name="android:background">@drawable/spinner_background_white</item>
     </style>
+
+
+
 
     </resources>
 

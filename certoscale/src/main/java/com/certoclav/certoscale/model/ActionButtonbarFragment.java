@@ -5,25 +5,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.ApplicationFragmentWeight;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.database.SQC;
-
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.ArrayList;
 
@@ -322,6 +317,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			}
 		});
 		buttonCal = (Button) rootView.findViewById(R.id.actionbar_button_cal);
+		buttonCal.setVisibility(View.GONE);
 		buttonCal.setOnClickListener(new View.OnClickListener() {
 
 			@Override

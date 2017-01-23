@@ -85,7 +85,7 @@ android:layout_below="@+id/menu_main_text_information">
     android:id="@+id/menu_main_countdown_bar_background"
     android:layout_width="700dp"
     android:layout_height="5dp"
-    android:background="@android:color/black"
+    android:background="#333333"
     ></FrameLayout>
 
 <FrameLayout
