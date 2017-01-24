@@ -51,7 +51,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     //Peak Hold Variables
     private double PeakHoldMaximum=0;
     private long ctime_first=0;
-    private boolean PHfirst=false;
+    //private boolean PHfirst=false;
+    private double pholdWeight=0;
 
 
 
@@ -376,21 +377,22 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 if (PeakHoldMode.equals("3")) {
-                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && PHfirst==false){
+                    if (ApplicationManager.getInstance().getTaredValueInGram()<0.02f && pholdWeight>0.02f){
                         ctime_first = System.nanoTime();
-                        PHfirst=true;
+
                     }
                    // final String TAG = getClass().getSimpleName();
                    // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
 
-                    if(ApplicationManager.getInstance().getSumInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
+                    if(ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
                         PeakHoldMaximum=0;
-                        PHfirst=false;
+
 
 
                     }
                 }
 
+                pholdWeight=ApplicationManager.getInstance().getTaredValueInGram();
 
 
                 //Semi Automatic

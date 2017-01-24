@@ -3,6 +3,7 @@ package com.certoclav.certoscale.supervisor;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -171,7 +172,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     // Das ist das Stringarray dessen Elemente Zeile für Zeile angezeigt werden sollen
     private List<Item> ingrediantCostList = new ArrayList<Item>();
 
+    //Variables for isStable calculation
+    private double lastStableweight=0;
     private Double weighOld = 0d;
+    private int stableCounter=0;
+
+
     public Item getCurrentItem() {
         return currentItem;
     }
@@ -1041,10 +1047,20 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     @Override
     public void onWeightChanged(Double weight, String unit) {
         if(Math.abs(weighOld - weight) <= 0.0001){
+
             if(Scale.getInstance().isStable() == false) {
-                Scale.getInstance().setStable(true);
+                stableCounter=stableCounter+1;
+                if(stableCounter>=8 && weight>0.002) {
+                    if (Math.abs(lastStableweight-weight)>0.002) {
+                        Scale.getInstance().setStable(true);
+                        stableCounter = 0;
+                        lastStableweight=weight;
+                        Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
+                    }
+                }
             }
         }else{
+            stableCounter=0;
             if(Scale.getInstance().isStable() == true) {
                 Scale.getInstance().setStable(false);
             }
@@ -1057,6 +1073,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         ApplicationManager.getInstance().setIngrediantTotalCost(0);
         ApplicationManager.getInstance().setIngrediantTotalWeight(0);
         getIngrediantCostList().clear();
+        lastStableweight=0;
+        stableCounter=0;
+        
         sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }

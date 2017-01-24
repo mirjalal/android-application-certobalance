@@ -19,12 +19,14 @@
             android:summary="Lock the formulation settings on/off"
             android:disableDependentsState="true" >
         </CheckBoxPreference>
-
+<!--
         <ListPreference
             android:key="@string/preferences_formulation_formulationmode"
             android:title="Formulation Mode"
             android:dependency="@string/preferences_formulation_lock"
             />
+
+
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_filter"
@@ -34,11 +36,12 @@
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
-
+-->
     </PreferenceCategory>
 
     <PreferenceCategory android:title="VISIBILITY" >
 
+        <!--
         <CheckBoxPreference
             android:key="@string/preferences_formulation_secondary_visible"
             android:defaultValue="@bool/preferences_formulation_secondary_visible"
@@ -46,7 +49,7 @@
             android:summary="Turn the secondary display line visible/invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
-
+        -->
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_total_visible"

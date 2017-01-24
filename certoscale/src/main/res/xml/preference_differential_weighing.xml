@@ -19,6 +19,7 @@
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
+        <!--
         <CheckBoxPreference
             android:key="@string/preferences_differential_autoMode"
             android:defaultValue="@bool/preferences_differential_autoMode"
@@ -26,7 +27,7 @@
             android:summary="Turn auto processing mode on/off"
             android:dependency="@string/preferences_differential_lock" >
         </CheckBoxPreference>
-
+    -->
 
     </PreferenceCategory>
 

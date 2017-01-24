@@ -458,6 +458,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case DENSITIY_DETERMINATION:
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
                 String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+                if(densityliquidtype.equals("1")){
+
+                    ApplicationManager.getInstance().getCurrentLibrary().setDensityLiquidDensity(ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()));
+                }
+
                 if  (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible),getResources().getBoolean(R.bool.preferences_density_watertemp_visible))==true) {
                     if ((densityliquidtype.equals("1")  && (densitymode.equals("1") || densitymode.equals("2")))|| densitymode.equals("4")) {
                         listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
