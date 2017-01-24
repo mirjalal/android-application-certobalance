@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //Printing options
+    <bool name="preferences_print_header">true</bool>
+    <bool name="preferences_print_balance_name">true</bool>
+    <bool name="preferences_print_project_name">true</bool>
+    <bool name="preferences_print_application_name">true</bool>
+    <bool name="preferences_print_signature">true</bool>
+    <bool name="preferences_print_date">true</bool>
+    <bool name="preferences_print_balance_id">true</bool>
+    <bool name="preferences_print_user_name">true</bool>
+
+
+
     //Statistical Quality Control App
     <bool name="preferences_statistic_activated_default">true</bool>
     <bool name="preferences_statistic_lock">true</bool>
+    <bool name="preferences_statistic_mode">true</bool>
 
 
     <bool name="preferences_statistic_numbatches_visible">true</bool>
@@ -247,6 +260,7 @@
     <bool name="preferences_pipette_activated_default">true</bool>
     <bool name="preferences_pipette_lock">true</bool>
     <bool name="preferences_pipette_autosamplemode">true</bool>
+
 
 
     <bool name="preferences_pipette_secondary_visible">true</bool>

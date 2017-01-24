@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 	public ActionButtonbarFragment() {
 	}
+
 
 
 	public static final int BUTTON_TARA = 3;

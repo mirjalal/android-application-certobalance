@@ -1,12 +1,22 @@
 package com.certoclav.certoscale.util;
 
+import android.widget.EditText;
+import android.view.*;
+
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.Calendar;
 
+import com.certoclav.certoscale.R;
+
 
 public class ProtocolPrinterUtils {
+
+
+
+
+
 
 
 
@@ -28,6 +38,8 @@ public ProtocolPrinterUtils() {
 	}
 
 public static void printHeader(){
+
+
 	Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Header line 1\n");
 	Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Header line 2\n");
 	Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Header line 3\n");
@@ -52,11 +64,11 @@ public static void printHeader(){
 	}
 
 	public static void printProjectName(){
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Project Name:"+" ");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Project Name:"+" \n");
 	}
 
 	public static void printApplicationName(){
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Application:"+" "+Scale.getInstance().getScaleApplication().toString().replace("_", " "));
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Application:"+" "+Scale.getInstance().getScaleApplication().toString().replace("_", " ")+"\n");
 	}
 
 	public static void printResults(){

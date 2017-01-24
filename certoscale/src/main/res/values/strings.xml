@@ -176,6 +176,18 @@
     <string name="preferences_statistic_lock">preferences_statistic_lock</string>
     <string name="preferences_statistic_numberofsample">preferences_statistic_numberofsample</string>
     <string name="preferences_statistic_liquidtype">preferences_statistic_liquidtype</string>
+    <string name="preferences_statistic_mode">preferences_statistic_mode</string>
+    <string name="preferences_print_header">preferences_statistic_mode</string>
+    <string name="preferences_glp_header">preferences_statistic_mode</string>
+
+    <string name="preferences_print_balance_name">preferences_statistic_mode</string>
+    <string name="preferences_print_project_name">preferences_statistic_mode</string>
+    <string name="preferences_print_application_name">preferences_statistic_mode</string>
+    <string name="preferences_print_signature">preferences_statistic_mode</string>
+    <string name="preferences_print_date">preferences_statistic_mode</string>
+    <string name="preferences_print_balance_id">preferences_statistic_mode</string>
+    <string name="preferences_print_user_name">preferences_statistic_mode</string>
+
     <string name="preferences_statistic_numbatches_visible">preferences_statistic_numbatches_visible</string>
     <string name="preferences_statistic_numsamples_visible">preferences_statistic_numsamples_visible</string>
     <string name="preferences_statistic_average_visible">preferences_statistic_average_visible</string>
@@ -310,6 +322,7 @@
         <item>Weight</item>
         <item>Percent</item>
     </string-array>
+
 
     <string-array name="preferences_pipette_liquid_type">
         <item>Water</item>

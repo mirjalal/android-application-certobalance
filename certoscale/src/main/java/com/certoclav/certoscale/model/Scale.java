@@ -215,14 +215,14 @@ public class Scale extends Observable {
 
 	public SerialService getSerialsServiceProtocolPrinter() {
 		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc0",9600);//COM1
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM1
 		}
 		return serialServiceProtocolPrinter;
 	}
 
 	public SerialService getSerialsServiceSics() {
 		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM1
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc0",9600);//COM1
 		}
 		return serialServiceProtocolPrinter;
 	}

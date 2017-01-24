@@ -19,6 +19,14 @@
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_statistic_mode"
+            android:defaultValue="@bool/preferences_statistic_mode"
+            android:title="Auto Sample Mode"
+            android:summary="Turn auto sample modeon/off"
+            android:dependency="@string/preferences_statistic_lock" >
+        </CheckBoxPreference>
+
 
         <ListPreference
             android:key="@string/preferences_statistic_liquidtype"

@@ -42,6 +42,9 @@ import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNIN
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
+import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
+import static com.certoclav.certoscale.util.ProtocolPrinterUtils.*;
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
@@ -321,12 +324,65 @@ protected void onPause() {
 
 				break;
 			case ActionButtonbarFragment.BUTTON_PRINT:
-				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
-				Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
 				//Print whole protocol to protocol printer connected on COM 1
-				ProtocolPrinterUtils.printProtocol();
+
+				//Print GLP and GMP Data which is independent of the application
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+				if  (prefs.getBoolean(getString(R.string.preferences_print_header),getResources().getBoolean(R.bool.preferences_print_header))==true) {
+	
+					printHeader();
+				}
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_date),getResources().getBoolean(R.bool.preferences_print_date))==true) {
+					printDate();
+				}
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_balance_id),getResources().getBoolean(R.bool.preferences_print_balance_id))==true) {
+					printBalanceId();
+				}
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_balance_name),getResources().getBoolean(R.bool.preferences_print_balance_name))==true) {
+					printBalanceName();
+				}
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_user_name),getResources().getBoolean(R.bool.preferences_print_user_name))==true) {
+					printUserName();
+				}
+				if  (prefs.getBoolean(getString(R.string.preferences_print_project_name),getResources().getBoolean(R.bool.preferences_print_project_name))==true) {
+					printProjectName();
+				}
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_application_name),getResources().getBoolean(R.bool.preferences_print_application_name))==true) {
+					printApplicationName();
+				}
+
+
+
+				switch (Scale.getInstance().getScaleApplication()){
+					case WEIGHING:
+
+
+					break;
+
+
+					default:
+						Toast.makeText(ApplicationActivity.this, "Not implemented", Toast.LENGTH_LONG).show();
+						break;
+				}
+
+
+
+				if  (prefs.getBoolean(getString(R.string.preferences_print_signature),getResources().getBoolean(R.bool.preferences_print_signature))==true) {
+					printSignature();
+				}
+
+
+				//ProtocolPrinterUtils.printProtocol();
+
+				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
+				//Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
 				//Print current weight to label printer connected on COM 2
-				LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
+				//LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
 
 				break;
 			case ActionButtonbarFragment.BUTTON_SETTINGS:
@@ -476,10 +532,25 @@ protected void onPause() {
 	public void onStableChanged(boolean isStable) {
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-		if  (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode),getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode))==true) {
-			actionButtonbarFragment.getButtonAccumulate().performClick();
+
+
+		if (Scale.getInstance().getScaleApplication()==TOTALIZATION) {
+			if (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode)) == true) {
+				actionButtonbarFragment.getButtonAccumulate().performClick();
+			}
 		}
 
+		if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+			if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
+				actionButtonbarFragment.getButtonAccumulate().performClick();
+			}
+		}
+
+		if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
+			if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
+				actionButtonbarFragment.getButtonAccumulate().performClick();
+			}
+		}
 
 	}
 }

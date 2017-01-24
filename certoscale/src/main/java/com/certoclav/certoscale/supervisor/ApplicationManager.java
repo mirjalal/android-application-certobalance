@@ -1045,12 +1045,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     @Override
-    public void onWeightChanged(Double weight, String unit) {
+    public void onWeightChanged(Double absweight, String unit) {
+        Double weight=ApplicationManager.getInstance().getTaredValueInGram();
         if(Math.abs(weighOld - weight) <= 0.0001){
 
             if(Scale.getInstance().isStable() == false) {
                 stableCounter=stableCounter+1;
-                if(stableCounter>=8 && weight>0.002) {
+                if(stableCounter>=8 && Math.abs(weight)>0.002) {
                     if (Math.abs(lastStableweight-weight)>0.002) {
                         Scale.getInstance().setStable(true);
                         stableCounter = 0;
@@ -1075,7 +1076,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         getIngrediantCostList().clear();
         lastStableweight=0;
         stableCounter=0;
-        
+
         sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }

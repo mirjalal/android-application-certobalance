@@ -1,26 +1,86 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <EditTextPreference
-        android:key="preferences_glp_header"
+        android:key="@string/preferences_glp_header"
         android:title="Header"
-        android:summary="Enables the printing of GLP headings" />
+        android:summary="GLP Header" />
+
+    <CheckBoxPreference
+        android:key="@string/preferences_print_header"
+        android:defaultValue="@bool/preferences_print_header"
+        android:title="Print Header"
+        android:summary="Print the header on/off">
+
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
+        android:key="@string/preferences_print_date"
+        android:defaultValue="@bool/preferences_print_date"
+        android:title="Print Date"
+        android:summary="Print date on/off">
+
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_print_balance_id"
+        android:defaultValue="@bool/preferences_print_balance_id"
+        android:title="Print Balance ID"
+        android:summary="Print balance id on/off">
+
+    </CheckBoxPreference>
+
+
 
     <EditTextPreference
         android:key="preferences_glp_balance_name"
         android:title="Balance Name"
         android:summary="Set the balance identification" />
 
+
     <CheckBoxPreference
-        android:key="preferences_glp_user_name"
-        android:title="User Name"
-        android:summary="Enable to print the user name"
-        android:defaultValue="false"/>
+        android:key="@string/preferences_print_balance_name"
+        android:defaultValue="@bool/preferences_print_balance_name"
+        android:title="Print Balance Name"
+        android:summary="Print the balance name on/off">
+
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
+        android:key="preferences_print_user_name"
+        android:defaultValue="@bool/preferences_print_user_name"
+        android:title="Print User Name"
+        android:summary="Print the user name on/off"
+       />
 
     <EditTextPreference
         android:key="preferences_glp_project_name"
         android:title="Project Name"
         android:summary="Set the project name"/>
 
+    <CheckBoxPreference
+        android:key="@string/preferences_print_project_name"
+        android:defaultValue="@bool/preferences_print_balance_name"
+        android:title="Print Project Name"
+        android:summary="Print the project name on/off">
+
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
+        android:key="@string/preferences_print_application_name"
+        android:defaultValue="@bool/preferences_print_application_name"
+        android:title="Print Application Name"
+        android:summary="Print the application name on/off">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_print_signature"
+        android:defaultValue="@bool/preferences_print_signature"
+        android:title="Print Signature Line"
+        android:summary="Print the signature line on/off">
+    </CheckBoxPreference>
 </PreferenceScreen>
 
 
