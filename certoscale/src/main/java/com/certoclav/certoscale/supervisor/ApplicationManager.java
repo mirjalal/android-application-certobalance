@@ -27,6 +27,7 @@ import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.menu.MenuActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
@@ -39,6 +40,8 @@ import java.util.List;
  */
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
+
+    private ProtocolPrinterUtils protocolPrinter=new ProtocolPrinterUtils();
 
     private double PeakHoldMaximum=0;
     public double getPeakHoldMaximum() {return PeakHoldMaximum;}
@@ -993,7 +996,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
-    public void showStatisticsSQC(final Context eContext, SQC sqc) {
+    public void showStatisticsSQC(final Context eContext, final SQC sqc) {
         try {
 
             SummaryStatistics statistic =sqc.getStatistics();
@@ -1028,6 +1031,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    protocolPrinter.printTop();
+
+                    protocolPrinter.printSQCBatch(sqc);
+
+                    protocolPrinter.printBottom();
+
                     Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
                 }
             });
@@ -1060,7 +1070,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                         Scale.getInstance().setStable(true);
                         stableCounter = 0;
                         lastStableweight=weight;
-                        //Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
+                       // Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
                     }
                 }
             }
