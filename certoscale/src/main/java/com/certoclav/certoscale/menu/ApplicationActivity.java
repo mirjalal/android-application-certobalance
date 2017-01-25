@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
@@ -50,6 +52,7 @@ import static com.certoclav.certoscale.util.ProtocolPrinterUtils.*;
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
+
 
 	private ActionButtonbarFragment actionButtonbarFragment = null;
 	private boolean appSettingsVisible = false;
@@ -329,8 +332,9 @@ protected void onPause() {
 				//Print GLP and GMP Data which is independent of the application
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 				if  (prefs.getBoolean(getString(R.string.preferences_print_header),getResources().getBoolean(R.bool.preferences_print_header))==true) {
-	
-					printHeader();
+
+					String header=prefs.getString("preferences_glp_header","");
+					printHeader(header+"\n");
 				}
 
 				if  (prefs.getBoolean(getString(R.string.preferences_print_date),getResources().getBoolean(R.bool.preferences_print_date))==true) {
@@ -342,27 +346,67 @@ protected void onPause() {
 				}
 
 				if  (prefs.getBoolean(getString(R.string.preferences_print_balance_name),getResources().getBoolean(R.bool.preferences_print_balance_name))==true) {
-					printBalanceName();
+					String balanceName=prefs.getString("preferences_glp_balance_name","");
+					printBalanceName(balanceName);
 				}
 
 				if  (prefs.getBoolean(getString(R.string.preferences_print_user_name),getResources().getBoolean(R.bool.preferences_print_user_name))==true) {
 					printUserName();
 				}
 				if  (prefs.getBoolean(getString(R.string.preferences_print_project_name),getResources().getBoolean(R.bool.preferences_print_project_name))==true) {
-					printProjectName();
+					String projectName=prefs.getString("preferences_glp_project_name","");
+					printProjectName(projectName);
 				}
 
 				if  (prefs.getBoolean(getString(R.string.preferences_print_application_name),getResources().getBoolean(R.bool.preferences_print_application_name))==true) {
 					printApplicationName();
 				}
 
-
-
+				//Printing the application data
 				switch (Scale.getInstance().getScaleApplication()){
 					case WEIGHING:
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit() +"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+
+						if (prefs.getBoolean(getString(R.string.preferences_weigh_print_min),getResources().getBoolean(R.bool.preferences_weigh_print_min))==true) {
+							Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight: "+ ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g"+"\n");
+							}
+						break;
+
+					case PART_COUNTING:
+
+						if  (prefs.getBoolean(getString(R.string.preferences_counting_print_sample_size),getResources().getBoolean(R.bool.preferences_counting_print_sample_size))==true) {
+							Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram() +"\n");
+						}
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+						if  (prefs.getBoolean(getString(R.string.preferences_counting_print_apw),getResources().getBoolean(R.bool.preferences_counting_print_apw))==true){
+							Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("APW: "+ ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g"+"\n");
+						}
+
+						String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
+						if  (cmode.equals("2")) {
+							if (prefs.getBoolean(getString(R.string.preferences_counting_print_under_limit), getResources().getBoolean(R.bool.preferences_counting_print_under_limit)) == true) {
+								Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getUnderLimitPiecesAsString()+" PCS"+"\n");
+							}
+							if (prefs.getBoolean(getString(R.string.preferences_counting_print_over_limit), getResources().getBoolean(R.bool.preferences_counting_print_over_limit)) == true) {
+								Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getOverlimitPiecesAsString()+" PCS"+"\n");
+							}
+						}
+						if  (cmode.equals("3")) {
+							if (prefs.getBoolean(getString(R.string.preferences_counting_print_target), getResources().getBoolean(R.bool.preferences_counting_print_target)) == true) {
+								Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+ ApplicationManager.getInstance().getTargetPiecesAsString()+" PCS"+"\n");
+							}
+							if (prefs.getBoolean(getString(R.string.preferences_counting_difference_visible), getResources().getBoolean(R.bool.preferences_counting_difference_visible)) == true) {
+								Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceAsString()+" PCS"+"\n");
+							}
+						}
 
 
-					break;
+						break;
 
 
 					default:

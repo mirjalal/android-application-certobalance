@@ -276,7 +276,7 @@ public class Scale extends Observable {
 	}
 
 	public String getSerialnumber() {
-		return "serialnumber";
+		return "Serialnumber";
 	}
 
 

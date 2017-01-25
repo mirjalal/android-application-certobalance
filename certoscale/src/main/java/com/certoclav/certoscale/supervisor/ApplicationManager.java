@@ -506,7 +506,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTaredValueAsStringInGram() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces()) + " g";
+                return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
             default:
                 return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
         }

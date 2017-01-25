@@ -24,6 +24,7 @@ private SharedPreferences prefs = null;
         addPreferencesFromResource(R.xml.preferences_glp);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
     }
 
 

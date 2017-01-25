@@ -42,7 +42,7 @@
          </PreferenceCategory>
 
          <PreferenceCategory android:title="VISIBLE FIELDS" >
-
+<!--
                  <CheckBoxPreference
                   android:key="@string/preferences_counting_secondary_visible"
                   android:defaultValue="@bool/preferences_counting_secondary_visible"
@@ -50,7 +50,7 @@
                   android:summary="Turn the secondary display line visible/invisible"
                   android:dependency="@string/preferences_counting_lock">
               </CheckBoxPreference>
-
+-->
 
                  <CheckBoxPreference
                   android:key="@string/preferences_counting_apw_visible"
