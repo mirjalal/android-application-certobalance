@@ -15,4 +15,5 @@ public class AppConstants {
 	public static final String INTENT_EXTRA_VIDEOFULLSCREENACTIVITY_VIDEO_PATH = "video_path";
 	public static final String MODEL_SCALE = "ESJ-120A";
 	public static final String MODEL_TABLET = "lilliput";
+
 }

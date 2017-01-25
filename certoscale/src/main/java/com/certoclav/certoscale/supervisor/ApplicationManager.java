@@ -40,6 +40,10 @@ import java.util.List;
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
+    private double PeakHoldMaximum=0;
+    public double getPeakHoldMaximum() {return PeakHoldMaximum;}
+    public void setPeakHoldMaximum(double peakHoldMaximum) {PeakHoldMaximum = peakHoldMaximum;}
+
 
     //Density Determination Variables
     private int density_step_counter=0;
@@ -1056,7 +1060,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                         Scale.getInstance().setStable(true);
                         stableCounter = 0;
                         lastStableweight=weight;
-                        Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
+                        //Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
                     }
                 }
             }

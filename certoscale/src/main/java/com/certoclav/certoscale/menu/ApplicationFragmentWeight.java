@@ -48,12 +48,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private ImageView imageStable = null;
 
 
+
+
     //Peak Hold Variables
-    private double PeakHoldMaximum=0;
+
     private long ctime_first=0;
     //private boolean PHfirst=false;
     private double pholdWeight=0;
-
 
 
 
@@ -119,7 +120,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ANIMAL_WEIGHING:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getTaredValueInGram()+ " g");
+                textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram())+ " g");
                 break;
             case PART_COUNTING_CALC_AWP:
                 textValue.setTextColor(Color.WHITE);
@@ -377,7 +378,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 if (PeakHoldMode.equals("3")) {
-                    if (ApplicationManager.getInstance().getTaredValueInGram()<0.02f && pholdWeight>0.02f){
+                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && pholdWeight>0.02f){
                         ctime_first = System.nanoTime();
 
                     }
@@ -385,7 +386,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                    // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
 
                     if(ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
-                        PeakHoldMaximum=0;
+                       ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
 
@@ -396,25 +397,25 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 //Semi Automatic
-                if (PeakHoldMaximum==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
+                if (ApplicationManager.getInstance().getPeakHoldMaximum()==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
                     //Start PeakHold Measurement
                     ApplicationManager.getInstance().setPeakHoldActivated(true);
                 }
 
                 //Display the Maximum Value if PeakHold is activated
                 if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
-                    if (PHcurrentvalue>=PeakHoldMaximum && (stableonly==false || PHstable==true)  ){
-                        PeakHoldMaximum=PHcurrentvalue;
+                    if (PHcurrentvalue>=ApplicationManager.getInstance().getPeakHoldMaximum() && (stableonly==false || PHstable==true)  ){
+                        ApplicationManager.getInstance().setPeakHoldMaximum(PHcurrentvalue);
                     }
 
                     textValue.setTextColor(Color.WHITE);
-                    textValue.setText(String.format("%.4f",PeakHoldMaximum)+ " g");
+                    textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPeakHoldMaximum())+ " g");
                     textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }else{
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    PeakHoldMaximum=0;
+                    ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
                 }
