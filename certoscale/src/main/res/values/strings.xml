@@ -178,7 +178,6 @@
     <string name="preferences_statistic_liquidtype">preferences_statistic_liquidtype</string>
     <string name="preferences_statistic_mode">preferences_statistic_mode</string>
     <string name="preferences_print_header">preferences_statistic_mode</string>
-    <string name="preferences_glp_header">preferences_statistic_mode</string>
 
     <string name="preferences_print_balance_name">preferences_statistic_mode</string>
     <string name="preferences_print_project_name">preferences_statistic_mode</string>

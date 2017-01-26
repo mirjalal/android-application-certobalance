@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -28,6 +29,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
@@ -54,6 +56,8 @@ import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printUserName;
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
+private ProtocolPrinterUtils protocolPrinter= new ProtocolPrinterUtils();
+
 
 	private ActionButtonbarFragment actionButtonbarFragment = null;
 	private boolean appSettingsVisible = false;
@@ -332,58 +336,17 @@ protected void onPause() {
 
 				//Print GLP and GMP Data which is independent of the application
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-				if  (prefs.getBoolean(getString(R.string.preferences_print_header),getResources().getBoolean(R.bool.preferences_print_header))==true) {
-	
-					printHeader();
-				}
 
-				if  (prefs.getBoolean(getString(R.string.preferences_print_date),getResources().getBoolean(R.bool.preferences_print_date))==true) {
-					printDate();
-				}
+				protocolPrinter.printTop();
 
-				if  (prefs.getBoolean(getString(R.string.preferences_print_balance_id),getResources().getBoolean(R.bool.preferences_print_balance_id))==true) {
-					printBalanceId();
-				}
-
-				if  (prefs.getBoolean(getString(R.string.preferences_print_balance_name),getResources().getBoolean(R.bool.preferences_print_balance_name))==true) {
-					printBalanceName();
-				}
-
-				if  (prefs.getBoolean(getString(R.string.preferences_print_user_name),getResources().getBoolean(R.bool.preferences_print_user_name))==true) {
-					printUserName();
-				}
-				if  (prefs.getBoolean(getString(R.string.preferences_print_project_name),getResources().getBoolean(R.bool.preferences_print_project_name))==true) {
-					printProjectName();
-				}
-
-				if  (prefs.getBoolean(getString(R.string.preferences_print_application_name),getResources().getBoolean(R.bool.preferences_print_application_name))==true) {
-					printApplicationName();
-				}
+				//Printing the application data
+				protocolPrinter.printApplicationData();
 
 
+				//Print Signature liness
+				protocolPrinter.printBottom();
 
-				switch (Scale.getInstance().getScaleApplication()){
-					case WEIGHING:
-
-
-					break;
-
-
-					default:
-						Toast.makeText(ApplicationActivity.this, "Not implemented", Toast.LENGTH_LONG).show();
-						break;
-				}
-
-
-
-				if  (prefs.getBoolean(getString(R.string.preferences_print_signature),getResources().getBoolean(R.bool.preferences_print_signature))==true) {
-					printSignature();
-				}
-
-
-				//ProtocolPrinterUtils.printProtocol();
-
-				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
+								Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
 				//Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
 				//Print current weight to label printer connected on COM 2
 				//LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
@@ -532,27 +495,36 @@ protected void onPause() {
 	}
 
 
+
+
+
+
+
 	@Override
 	public void onStableChanged(boolean isStable) {
+
+		Log.e("ApplicationActivity", "onStableChanged");
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 
-		if (Scale.getInstance().getScaleApplication()==TOTALIZATION) {
-			if (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode)) == true) {
-				actionButtonbarFragment.getButtonAccumulate().performClick();
+		if (isStable==true) {
+			if (Scale.getInstance().getScaleApplication() == TOTALIZATION) {
+				if (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode)) == true) {
+					actionButtonbarFragment.getButtonAccumulate().performClick();
+				}
 			}
-		}
 
-		if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
-			if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
-				actionButtonbarFragment.getButtonAccumulate().performClick();
+			if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
+				if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
+					actionButtonbarFragment.getButtonAccumulate().performClick();
+				}
 			}
-		}
 
-		if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
-			if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
-				actionButtonbarFragment.getButtonAccumulate().performClick();
+			if (Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL) {
+				if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
+					actionButtonbarFragment.getButtonAccumulate().performClick();
+				}
 			}
 		}
 

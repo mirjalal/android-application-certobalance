@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -557,16 +558,139 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 		switch (Scale.getInstance().getScaleApplication()){
+
+			case WEIGHING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
+			case PART_COUNTING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
+			case PERCENT_WEIGHING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
+			case CHECK_WEIGHING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
+
+
 			case ANIMAL_WEIGHING_CALCULATING:
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(false);
 				break;
 			case ANIMAL_WEIGHING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
 				break;
+
+			case FILLING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
+			case TOTALIZATION:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
 			case FORMULATION:
-				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+
+				if (Scale.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
 					buttonStart.setVisibility(View.VISIBLE);
 				} else {
@@ -583,7 +707,36 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setEnabled(false);
 				break;
 
+
+			case DIFFERENTIAL_WEIGHING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				break;
+
 			case INGREDIENT_COSTING:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonAccept.setEnabled(true);
 				buttonIngrediantList.setVisibility(View.VISIBLE);
@@ -596,17 +749,71 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				break;
 
 			case DENSITIY_DETERMINATION:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 
 
 				buttonIngrediantList.setVisibility(View.GONE);
-				buttonAccumulate.setVisibility(View.GONE);
-				buttonStatistics.setVisibility(View.GONE);
+
+
+				break;
+			case PEAK_HOLD:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
 
 				break;
 
+			case PIPETTE_ADJUSTMENT:
+
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+
+				ApplicationManager.getInstance().setPipette_current_sample(0);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				buttonAccumulate.setText("Accept");
+				buttonAccumulate.setEnabled(false);
+				break;
+
+
 			case STATISTICAL_QUALITY_CONTROL:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.GONE);
+
+
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonIngrediantList.setVisibility(View.GONE);
+
 				buttonNewBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
@@ -619,15 +826,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 
 
+
+
 				break;
-			case PIPETTE_ADJUSTMENT:
-				ApplicationManager.getInstance().setPipette_current_sample(0);
-				buttonAccept.setVisibility(View.GONE);
-				buttonIngrediantList.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.GONE);
-				buttonAccumulate.setText("Accept");
-				buttonAccumulate.setEnabled(false);
-				break;
+
+
+
 
 			default:
 				buttonStart.setVisibility(View.GONE);
@@ -674,7 +878,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			buttonStatistics.setVisibility(View.VISIBLE);
 			buttonAccumulate.setVisibility(View.VISIBLE);
 		}
-
 
 		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL){
 			buttonNewBatch.setVisibility(View.GONE);
