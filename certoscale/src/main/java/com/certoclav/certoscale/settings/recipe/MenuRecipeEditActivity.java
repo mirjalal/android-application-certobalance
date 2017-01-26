@@ -3,6 +3,7 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -55,8 +56,8 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
            recipe = db.getRecipeById(recipeId);
        }catch (Exception e){
             ArrayList<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
-            recipeEntries.add(new RecipeEntry("H2O",100d));
-            recipeEntries.add(new RecipeEntry("NaCl",0.9));
+            recipeEntries.add(new RecipeEntry("H2O",100d,0.0));
+            recipeEntries.add(new RecipeEntry("NaCl",0.9,0.0));
             recipe = new Recipe("","My recipe", recipeEntries);
        }
         textRecipeName.setText(recipe.getRecipeName());
@@ -134,7 +135,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
         if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
-            adapter.add(new RecipeEntry("",0d));
+            adapter.add(new RecipeEntry("",0d,0.0));
             adapter.notifyDataSetChanged();
         }
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
@@ -182,6 +183,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
             }
             catch (Exception e)
             {
+
                 e.printStackTrace();
             }
         }

@@ -556,6 +556,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
 
+		buttonPrint.setEnabled(true);
 
 		switch (Scale.getInstance().getScaleApplication()){
 
@@ -679,6 +680,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case FORMULATION:
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
+				buttonPrint.setEnabled(false);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);

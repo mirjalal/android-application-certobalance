@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.model;
 
 
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+
 public class RecipeEntry {
 
 
@@ -12,14 +14,15 @@ private String name;
 
 	public void setMeasuredWeight(Double measuredWeight) {
 		this.measuredWeight = measuredWeight;
+
 	}
 
 	private Double measuredWeight;
 
-	public RecipeEntry(String name, Double weight) {
+	public RecipeEntry(String name, Double weight, Double measuredWeight) {
 		this.name = name;
 		this.weight = weight;
-
+		this.measuredWeight=measuredWeight;
 
 	}
 

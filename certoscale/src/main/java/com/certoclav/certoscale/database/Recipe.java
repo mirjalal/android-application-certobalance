@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.database;
 
 
+import android.util.Log;
+
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -41,11 +43,12 @@ public class Recipe {
 		try {
 			JSONArray jsonArrayRecipeEntries = new JSONArray();
 			for (RecipeEntry entry : recipeEntrys) {
-				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()));
+				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()).put("measuredWeight",entry.getMeasuredWeight()));
 			}
 			jsonObjectRecipe.put("recipeName", name);
 			jsonObjectRecipe.put("recipeEntries",jsonArrayRecipeEntries);
 		}catch (Exception e){
+
 			e.printStackTrace();
 		}
 		return jsonObjectRecipe.toString();
@@ -92,13 +95,14 @@ public class Recipe {
 
 	}
 
+
 	public List<RecipeEntry> getRecipeEntries() {
 		ArrayList<RecipeEntry> entries = new ArrayList<RecipeEntry>();
 		try {
 			JSONObject jsonObjectRecipe = new JSONObject(recipeJson);
 			JSONArray jsonArrayEntries = jsonObjectRecipe.getJSONArray("recipeEntries");
 			for(int i = 0; i< jsonArrayEntries.length(); i++){
-				entries.add(new RecipeEntry(jsonArrayEntries.getJSONObject(i).getString("name"),jsonArrayEntries.getJSONObject(i).getDouble("weight")));
+				entries.add(new RecipeEntry(jsonArrayEntries.getJSONObject(i).getString("name"),jsonArrayEntries.getJSONObject(i).getDouble("weight"),jsonArrayEntries.getJSONObject(i).getDouble("measuredWeight")));
 			}
 
 		}catch (Exception e){

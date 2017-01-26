@@ -19,6 +19,7 @@ import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.Calendar;
+import java.util.Map;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.library.application.ApplicationController;
@@ -335,7 +336,43 @@ public void  printHeader(  String header){
 				break;
 
 			case FORMULATION:
-				//To Do
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Name: "+ ApplicationManager.getInstance().getCurrentRecipe().getRecipeName() +"\n");
+				double formulationTotal=0;
+				double formulationTotalTarget=0;
+				double formulationTotalDifference=0;
+				int formulationcounter=0;
+				while(formulationcounter<ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()){
+
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getName() +"\n");
+
+					formulationTotalTarget=formulationTotalTarget+ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+					formulationTotal=formulationTotal+ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+					double currentdifference=Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()-ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight())/Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight());
+					currentdifference=currentdifference*100;
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight())+" g\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Actual: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight())+" g\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Diff(%): "+String.format("%.2f",currentdifference) +" %\n");
+
+					formulationcounter++;
+				}
+
+
+				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target))==true) {
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Target: "+String.format("%.4f g",formulationTotalTarget)+" g"+"\n");
+				}
+
+				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total))==true) {
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Actual: "+String.format("%.4f g",formulationTotal)+" g"+"\n");
+				}
+
+				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total))==true) {
+					formulationTotalDifference= Math.abs(formulationTotal-formulationTotalTarget)/Math.abs(formulationTotalTarget);
+					formulationTotalDifference=formulationTotalDifference*100;
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Diff: "+String.format("%.2f g",formulationTotalDifference)+" %"+"\n");
+				}
+
 
 				break;
 

@@ -17,6 +17,7 @@ import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
@@ -77,6 +78,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     //Formulation
     int indexTableRecipeName = 0;
+    int indexFormulationTotal=3;
+    int indexFormulationTotalTarget=1;
+    int indexFormulationTotalDifference=5;
 
     //Differential Weighing
     int indexTableItemName = 0;
@@ -174,24 +178,24 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
 
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
 
-                if  (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible),getResources().getBoolean(R.bool.preferences_weigh_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible), getResources().getBoolean(R.bool.preferences_weigh_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_weigh_brutto_visible),getResources().getBoolean(R.bool.preferences_weigh_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_brutto_visible), getResources().getBoolean(R.bool.preferences_weigh_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_weigh_netto_visible),getResources().getBoolean(R.bool.preferences_weigh_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_netto_visible), getResources().getBoolean(R.bool.preferences_weigh_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible),getResources().getBoolean(R.bool.preferences_weigh_load_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible), getResources().getBoolean(R.bool.preferences_weigh_load_visible)) == true) {
                     listReferenceFields.get(loadp).getTextName().setText("LOAD [%]");
                     listReferenceFields.get(loadp).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
                 }
@@ -201,117 +205,116 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 //listReferenceFields.get(3).getTextValue().setText(ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
 
 
-                if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum_visible),getResources().getBoolean(R.bool.preferences_weigh_minimum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum_visible), getResources().getBoolean(R.bool.preferences_weigh_minimum_visible)) == true) {
                     listReferenceFields.get(minweight).getTextName().setText("MINIMUM WEIGHT");
-                    listReferenceFields.get(minweight).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g");
+                    listReferenceFields.get(minweight).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringInGram() + " g");
                 }
 
                 break;
             case PART_COUNTING:
-                if  (prefs.getBoolean(getString(R.string.preferences_counting_tara_visible),getResources().getBoolean(R.bool.preferences_counting_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_counting_tara_visible), getResources().getBoolean(R.bool.preferences_counting_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_counting_brutto_visible),getResources().getBoolean(R.bool.preferences_counting_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_counting_brutto_visible), getResources().getBoolean(R.bool.preferences_counting_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_counting_netto_visible),getResources().getBoolean(R.bool.preferences_counting_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_counting_netto_visible), getResources().getBoolean(R.bool.preferences_counting_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible),getResources().getBoolean(R.bool.preferences_weigh_load_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_weigh_load_visible), getResources().getBoolean(R.bool.preferences_weigh_load_visible)) == true) {
                     listReferenceFields.get(loadp).getTextName().setText("LOAD [%]");
                     listReferenceFields.get(loadp).getTextValue().setText(ApplicationManager.getInstance().getLoadInPercent() + " %");
                 }
 
 
-                if  (prefs.getBoolean(getString(R.string.preferences_counting_apw_visible),getResources().getBoolean(R.bool.preferences_counting_apw_visible))==true){
+                if (prefs.getBoolean(getString(R.string.preferences_counting_apw_visible), getResources().getBoolean(R.bool.preferences_counting_apw_visible)) == true) {
                     listReferenceFields.get(apw).getTextName().setText("PIECE WEIGHT");
                     listReferenceFields.get(apw).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
                 }
 
 
-                String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
+                String cmode = prefs.getString(getString(R.string.preferences_counting_mode), "");
 
                 Log.e("AppFragTable", cmode);
-                if  (cmode.equals("2")) {
+                if (cmode.equals("2")) {
                     if (prefs.getBoolean(getString(R.string.preferences_counting_under_limit_visible), getResources().getBoolean(R.bool.preferences_counting_under_limit_visible)) == true) {
                         listReferenceFields.get(underlimit).getTextName().setText("UNDER LIMIT");
-                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitPiecesAsString()+" PCS");
+                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " PCS");
                     }
 
                     if (prefs.getBoolean(getString(R.string.preferences_counting_over_limit_visible), getResources().getBoolean(R.bool.preferences_counting_over_limit_visible)) == true) {
                         listReferenceFields.get(overlimit).getTextName().setText("OVER LIMIT");
-                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getOverlimitPiecesAsString()+" PCS");
+                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getOverlimitPiecesAsString() + " PCS");
                     }
                 }
 
-                if  (cmode.equals("3")) {
+                if (cmode.equals("3")) {
                     if (prefs.getBoolean(getString(R.string.preferences_counting_target_visible), getResources().getBoolean(R.bool.preferences_counting_target_visible)) == true) {
                         listReferenceFields.get(underlimit).getTextName().setText("TARGET");
-                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getTargetPiecesAsString()+" PCS");
+                        listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getTargetPiecesAsString() + " PCS");
                     }
 
                     if (prefs.getBoolean(getString(R.string.preferences_counting_difference_visible), getResources().getBoolean(R.bool.preferences_counting_difference_visible)) == true) {
                         listReferenceFields.get(overlimit).getTextName().setText("DIFFERENCE");
-                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsString()+ " PCS");
+                        listReferenceFields.get(overlimit).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsString() + " PCS");
                     }
                 }
 
 
-
                 break;
             case PERCENT_WEIGHING:
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible),getResources().getBoolean(R.bool.preferences_percent_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible), getResources().getBoolean(R.bool.preferences_percent_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
-                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString()+ " g");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString() + " g");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible),getResources().getBoolean(R.bool.preferences_percent_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible), getResources().getBoolean(R.bool.preferences_percent_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
-                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsString()+ " g");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsString() + " g");
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_netto_visible),getResources().getBoolean(R.bool.preferences_percent_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_netto_visible), getResources().getBoolean(R.bool.preferences_percent_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
 
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_reference_weight_visible),getResources().getBoolean(R.bool.preferences_percent_reference_weight_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_reference_weight_visible), getResources().getBoolean(R.bool.preferences_percent_reference_weight_visible)) == true) {
                     listReferenceFields.get(reference_weight).getTextName().setText("REFERENCE WEIGHT");
                     listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getReferenceWeightAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible),getResources().getBoolean(R.bool.preferences_percent_difference_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible), getResources().getBoolean(R.bool.preferences_percent_difference_visible)) == true) {
                     listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE [g]");
-                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInGram()+ " g");
+                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInGram() + " g");
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible),getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible), getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible)) == true) {
                     listReferenceFields.get(difference_percent).getTextName().setText("DIFFERENCE [%]");
-                    listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInPercent()+ " %");
+                    listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInPercent() + " %");
                 }
                 break;
             case CHECK_WEIGHING:
 
-                String cmode_check = prefs.getString(getString(R.string.preferences_check_limitmode),"");
-                if  (prefs.getBoolean(getString(R.string.preferences_check_tara_visible),getResources().getBoolean(R.bool.preferences_check_tara_visible))==true) {
+                String cmode_check = prefs.getString(getString(R.string.preferences_check_limitmode), "");
+                if (prefs.getBoolean(getString(R.string.preferences_check_tara_visible), getResources().getBoolean(R.bool.preferences_check_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_check_brutto_visible),getResources().getBoolean(R.bool.preferences_check_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_check_brutto_visible), getResources().getBoolean(R.bool.preferences_check_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_check_netto_visible),getResources().getBoolean(R.bool.preferences_check_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_check_netto_visible), getResources().getBoolean(R.bool.preferences_check_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
-                if  (cmode_check.equals("1")) {
+                if (cmode_check.equals("1")) {
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_under_visible), getResources().getBoolean(R.bool.preferences_check_under_visible)) == true) {
                         listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
@@ -323,7 +326,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
-                if  (cmode_check.equals("2")) {
+                if (cmode_check.equals("2")) {
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
                         listReferenceFields.get(nominal).getTextName().setText("TARTGET");
@@ -339,7 +342,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
-                if (cmode_check.equals("3")){
+                if (cmode_check.equals("3")) {
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
                         listReferenceFields.get(nominal).getTextName().setText("TARTGET");
                         listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominal() + " g");
@@ -360,21 +363,21 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
             case ANIMAL_WEIGHING:
-                if  (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_animal_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_animal_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_animal_netto_visible),getResources().getBoolean(R.bool.preferences_animal_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_animal_netto_visible), getResources().getBoolean(R.bool.preferences_animal_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible),getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible), getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible)) == true) {
                     listReferenceFields.get(measuringTime).getTextName().setText("AVERAGING TIME");
                     listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
                 }
@@ -383,49 +386,47 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case FILLING:
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_netto_visible),getResources().getBoolean(R.bool.preferences_filling_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_target_visible),getResources().getBoolean(R.bool.preferences_filling_target_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_target_visible), getResources().getBoolean(R.bool.preferences_filling_target_visible)) == true) {
                     listReferenceFields.get(FillingTarget).getTextName().setText("TARGET");
-                    listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetasString() +" g");
+                    listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetasString() + " g");
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible),getResources().getBoolean(R.bool.preferences_filling_differencew_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible), getResources().getBoolean(R.bool.preferences_filling_differencew_visible)) == true) {
                     listReferenceFields.get(FillingDifference).getTextName().setText("DIFFERENCE [g]: ");
                     listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFilling() + " g ");
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible),getResources().getBoolean(R.bool.preferences_filling_differencep_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible), getResources().getBoolean(R.bool.preferences_filling_differencep_visible)) == true) {
                     listReferenceFields.get(FillingDifferencePercent).getTextName().setText("DIFFERENCE [%]: ");
-                    listReferenceFields.get(FillingDifferencePercent).getTextValue().setText(ApplicationManager.getInstance().getFillingDifferenceInPercent()+ " %");
+                    listReferenceFields.get(FillingDifferencePercent).getTextValue().setText(ApplicationManager.getInstance().getFillingDifferenceInPercent() + " %");
                 }
-
-
 
 
                 break;
 
             case PEAK_HOLD:
-                if  (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible),getResources().getBoolean(R.bool.preferences_animal_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible),getResources().getBoolean(R.bool.preferences_filling_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
@@ -434,39 +435,37 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case INGREDIENT_COSTING:
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_tara_visible),getResources().getBoolean(R.bool.preferences_ingrediant_tara_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_tara_visible), getResources().getBoolean(R.bool.preferences_ingrediant_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_brutto_visible),getResources().getBoolean(R.bool.preferences_ingrediant_brutto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_brutto_visible), getResources().getBoolean(R.bool.preferences_ingrediant_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_netto_visible),getResources().getBoolean(R.bool.preferences_ingrediant_netto_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_netto_visible), getResources().getBoolean(R.bool.preferences_ingrediant_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 }
 
 
-
-
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible),getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("UNIT COST");
-                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText( String.format("%.4f",ApplicationManager.getInstance().getIngrediantUnitCost()));
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost()));
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible),getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantTotalWeight).getTextName().setText("TOTAL WEIGHT");
-                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalWeight()));
+                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalWeight()));
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible),getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText("TOTAL COST");
-                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalCost()));
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost()));
                 }
 
-                if(ApplicationManager.getInstance().getCurrentItem()!=null) {
+                if (ApplicationManager.getInstance().getCurrentItem() != null) {
 
                     listReferenceFields.get(indexTableIngrediantArticlename).getTextName().setText("");
                     listReferenceFields.get(indexTableIngrediantArticlename).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
@@ -475,67 +474,110 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case DENSITIY_DETERMINATION:
-                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
-                String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
-                if(densityliquidtype.equals("1")){
+                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp), "");
+                String densitymode = prefs.getString(getString(R.string.preferences_density_mode), "");
+                if (densityliquidtype.equals("1")) {
 
                     ApplicationManager.getInstance().getCurrentLibrary().setDensityLiquidDensity(ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()));
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible),getResources().getBoolean(R.bool.preferences_density_watertemp_visible))==true) {
-                    if ((densityliquidtype.equals("1")  && (densitymode.equals("1") || densitymode.equals("2")))|| densitymode.equals("4")) {
+                if (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible), getResources().getBoolean(R.bool.preferences_density_watertemp_visible)) == true) {
+                    if ((densityliquidtype.equals("1") && (densitymode.equals("1") || densitymode.equals("2"))) || densitymode.equals("4")) {
                         listReferenceFields.get(DensityWaterTemp).getTextName().setText("WATER TEMP.");
                         listReferenceFields.get(DensityWaterTemp).getTextValue().setText(String.format("%.1f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + " °C");
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible),getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible), getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible)) == true) {
 
-                    if ((densitymode.equals("1") || densitymode.equals("2")) || (densitymode.equals("4"))){
+                    if ((densitymode.equals("1") || densitymode.equals("2")) || (densitymode.equals("4"))) {
                         listReferenceFields.get(DensityLiquidDensity).getTextName().setText("LIQUID DENSITY");
-                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+ " g/cm³");
+                        listReferenceFields.get(DensityLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity()) + " g/cm³");
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_density_weightair_visible),getResources().getBoolean(R.bool.preferences_density_weightair_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_density_weightair_visible), getResources().getBoolean(R.bool.preferences_density_weightair_visible)) == true) {
                     listReferenceFields.get(DensityWeightAir).getTextName().setText("WEIGHT IN AIR");
-                    listReferenceFields.get(DensityWeightAir).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_air() ));
+                    listReferenceFields.get(DensityWeightAir).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_air()));
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_density_weightinliquid_print),getResources().getBoolean(R.bool.preferences_density_weightinliquid_print))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_density_weightinliquid_print), getResources().getBoolean(R.bool.preferences_density_weightinliquid_print)) == true) {
                     listReferenceFields.get(DensityWeightLiquid).getTextName().setText("WEIGHT IN LIQUID");
-                    listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_liquid()));
+                    listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()));
                 }
 
-                if(densitymode.equals("4")){
-                    if  (prefs.getBoolean(getString(R.string.preferences_density_oildensity_visible),getResources().getBoolean(R.bool.preferences_density_oildensity_visible))==true) {
+                if (densitymode.equals("4")) {
+                    if (prefs.getBoolean(getString(R.string.preferences_density_oildensity_visible), getResources().getBoolean(R.bool.preferences_density_oildensity_visible)) == true) {
                         listReferenceFields.get(DensityOilDensity).getTextName().setText("OIL DENSITY");
-                        listReferenceFields.get(DensityOilDensity).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getDensity_weight_liquid())+ " g/cm³");
+                        listReferenceFields.get(DensityOilDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()) + " g/cm³");
                     }
                 }
 
-                if(densitymode.equals("4")){
-                    if  (prefs.getBoolean(getString(R.string.preferences_density_oiledweight_visible),getResources().getBoolean(R.bool.preferences_density_oiledweight_visible))==true) {
+                if (densitymode.equals("4")) {
+                    if (prefs.getBoolean(getString(R.string.preferences_density_oiledweight_visible), getResources().getBoolean(R.bool.preferences_density_oiledweight_visible)) == true) {
                         listReferenceFields.get(DensityOiledWeight).getTextName().setText("OILED Weight");
-                        listReferenceFields.get(DensityOiledWeight).getTextValue().setText(  String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getOiledWeight())+ " g");
+                        listReferenceFields.get(DensityOiledWeight).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getOiledWeight()) + " g");
                     }
                 }
-
 
 
                 break;
 
 
             case TOTALIZATION:
-               // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
+                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
                 break;
             case FORMULATION:
                 listReferenceFields.get(indexTableRecipeName).getTextName().setText("RECIPE");
-                if(ApplicationManager.getInstance().getCurrentRecipe() != null) {
-                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
-                }else{
-                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText("No recipe");
+                    if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
+                        listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+                    } else {
+                        listReferenceFields.get(indexTableRecipeName).getTextValue().setText("No recipe");
+                    }
+                    if(ApplicationManager.getInstance().getCurrentRecipe()!= null){
+                    double formulationTotal = 0;
+                    double formulationTotalTarget = 0;
+                    double formulationTotalDifference = 0;
+                    int formulationcounter = 0;
+                    while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+                        formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+                        formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+                        formulationcounter++;
+                    }
+
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
+                        listReferenceFields.get(indexFormulationTotalTarget).getTextName().setText("Total Target: ");
+                        listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(String.format("%.4f g", formulationTotalTarget));
+
+
+                    }
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+                        listReferenceFields.get(indexFormulationTotal).getTextName().setText("Total Actual: ");
+                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(String.format("%.4f g", formulationTotal) );
+
+
+                    }
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+                        formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
+                        formulationTotalDifference = formulationTotalDifference * 100;
+
+
+
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextName().setText("Total Diff: ");
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference)+" %"  );
+
+                    }
                 }
+
+
+
+
+
+
                     break;
             case DIFFERENTIAL_WEIGHING:
                 listReferenceFields.get(indexTableItemName).getTextName().setText("ITEM");

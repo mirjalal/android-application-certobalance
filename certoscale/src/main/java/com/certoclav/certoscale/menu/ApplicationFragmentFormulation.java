@@ -2,6 +2,7 @@ package com.certoclav.certoscale.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.adapters.RecipeElementAdapter;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ApplicationFragmentFormulation extends Fragment implements RecipeEntryListener  {
@@ -31,6 +41,15 @@ private TextView textInstruction = null;
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //set measured Weight
+                ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
+                                
+                Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).getMeasuredWeight()));
+
+                //ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().set(currentRecipeStepIndex,
+                //        ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex)).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
+
                 currentRecipeStepIndex++;
                 ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
                 if(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size() > currentRecipeStepIndex) {
@@ -56,9 +75,11 @@ private TextView textInstruction = null;
                ApplicationManager.getInstance().setCurrentRecipeEntry(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex));
            }else{
                Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
+
            }
         }else{
             Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
+
         }
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
             textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");

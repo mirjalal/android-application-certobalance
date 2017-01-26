@@ -53,7 +53,7 @@ private Navigationbar navigationbar = new Navigationbar(this);
 private ProtocolPrinterUtils protocolPrinter= new ProtocolPrinterUtils();
 
 
-	private ActionButtonbarFragment actionButtonbarFragment = null;
+	public ActionButtonbarFragment actionButtonbarFragment = null;
 	private boolean appSettingsVisible = false;
 	private LinearLayout containerMore = null;
 	private ImageButton imageButtonSidebarBack = null;
@@ -185,7 +185,9 @@ protected void onPause() {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();
 				}
 				if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION) {
-					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulation()).commit();
+
+						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulation()).commit();
+
 				}
 				break;
 			case ActionButtonbarFragment.BUTTON_MORE:

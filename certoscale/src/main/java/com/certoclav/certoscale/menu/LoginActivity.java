@@ -427,9 +427,11 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			}
 
 			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
-			entries.add(new RecipeEntry("Calcium",0.10));
-			entries.add(new RecipeEntry("Water", 9.90));
-			databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
+			entries.add(new RecipeEntry("Calcium",0.10,0.0));
+			entries.add(new RecipeEntry("Water", 9.90,0.0));
+
+			//databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
+			databaseService.insertRecipe(new Recipe("","Calcium recipe"));
 
 			databaseService.insertItem(new Item("","Item 1",0.01d,0.01d,"1300234"));
 			databaseService.insertItem(new Item("","Item 2",3.2345d,0.1d,"1300235"));

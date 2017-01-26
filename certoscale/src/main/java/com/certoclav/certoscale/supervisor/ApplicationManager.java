@@ -751,13 +751,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                     dialog.dismiss();
                 }
             });
-            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
-            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
-                }
-            });
+
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
             dialogButtonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
