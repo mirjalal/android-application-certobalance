@@ -3,7 +3,6 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -54,6 +53,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
            int recipeId = getIntent().getExtras().getInt(INTENT_EXTRA_RECIPE_ID);
            DatabaseService db = new DatabaseService(this);
            recipe = db.getRecipeById(recipeId);
+           recipe.parseRecipeJson();
        }catch (Exception e){
             ArrayList<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
             recipeEntries.add(new RecipeEntry("H2O",100d,0.0));
@@ -171,6 +171,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                             recipeEntries.add(adapter.getItem(i));
                         }
                         recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries);
+                        recipe.generateRecipeJson();
                         db.insertRecipe(recipe);
                         dialog.dismiss();
                         finish();

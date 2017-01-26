@@ -431,7 +431,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			entries.add(new RecipeEntry("Water", 9.90,0.0));
 
 			//databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
-			databaseService.insertRecipe(new Recipe("","Calcium recipe"));
+			Recipe recipe = new Recipe("","Calcium sol.",entries);
+			recipe.generateRecipeJson();
+			databaseService.insertRecipe(recipe);
 
 			databaseService.insertItem(new Item("","Item 1",0.01d,0.01d,"1300234"));
 			databaseService.insertItem(new Item("","Item 2",3.2345d,0.1d,"1300235"));

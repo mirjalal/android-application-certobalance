@@ -10,20 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.adapters.RecipeElementAdapter;
-import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.library.application.ApplicationController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ApplicationFragmentFormulation extends Fragment implements RecipeEntryListener  {
@@ -43,12 +34,10 @@ private TextView textInstruction = null;
             public void onClick(View v) {
 
                 //set measured Weight
-                ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
-                                
+                Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+                ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(currentWeight);
                 Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).getMeasuredWeight()));
 
-                //ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().set(currentRecipeStepIndex,
-                //        ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex)).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
 
                 currentRecipeStepIndex++;
                 ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
@@ -58,6 +47,7 @@ private TextView textInstruction = null;
                 }else{
                     Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
                     ApplicationManager.getInstance().setTareInGram(0d);
+                    currentRecipeStepIndex = 0;
                 }
             }
         });
@@ -67,7 +57,7 @@ private TextView textInstruction = null;
 
     @Override
     public void onResume() {
-
+        currentRecipeStepIndex = 0;
         ApplicationManager.getInstance().setOnRecipeEntryListener(this);
         Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION_RUNNING);
         if(ApplicationManager.getInstance().getCurrentRecipe()!= null){

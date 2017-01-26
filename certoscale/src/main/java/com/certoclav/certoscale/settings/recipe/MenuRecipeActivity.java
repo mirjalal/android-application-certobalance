@@ -82,6 +82,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         List<Recipe> recipes = db.getRecipes();
        if(recipes != null) {
            for (Recipe recipe : recipes) {
+               recipe.parseRecipeJson();
                adapter.add(recipe);
            }
        }
