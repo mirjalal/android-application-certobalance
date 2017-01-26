@@ -90,6 +90,7 @@
 			android:text="Print"
 			style="@style/button_default"
 			/>
+
 		<Button
 			android:id="@+id/dialog_ingrediant_button_close"
 			android:layout_width="match_parent"

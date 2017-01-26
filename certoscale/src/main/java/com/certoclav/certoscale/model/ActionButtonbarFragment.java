@@ -690,7 +690,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 
-				if (Scale.getInstance().getCurrentRecipe() != null) {
+				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
 					buttonStart.setVisibility(View.VISIBLE);
 				} else {

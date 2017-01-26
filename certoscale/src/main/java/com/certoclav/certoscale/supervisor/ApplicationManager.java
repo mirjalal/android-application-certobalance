@@ -610,7 +610,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+
+
+                    protocolPrinter.printTop();
+                    protocolPrinter.printStatistics();
+                    protocolPrinter.printBottom();
+
+                    Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
                 }
             });
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);

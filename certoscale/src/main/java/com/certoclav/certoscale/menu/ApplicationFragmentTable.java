@@ -339,6 +339,25 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
+                if (cmode_check.equals("3")){
+                    if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
+                        listReferenceFields.get(nominal).getTextName().setText("TARTGET");
+                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominal() + " g");
+                    }
+
+                    if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
+                        listReferenceFields.get(checkundertolerance).getTextName().setText("UNDER TOLERANCE");
+                        listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %");
+                    }
+
+                    if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
+                        listReferenceFields.get(checkovertolerance).getTextName().setText("OVER TOLERANCE");
+                        listReferenceFields.get(checkovertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceOverPercent() + " %");
+                    }
+
+
+                }
+
                 break;
             case ANIMAL_WEIGHING:
                 if  (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible),getResources().getBoolean(R.bool.preferences_animal_tara_visible))==true) {

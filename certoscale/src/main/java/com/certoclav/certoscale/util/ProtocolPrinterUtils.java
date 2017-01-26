@@ -33,7 +33,7 @@ public ProtocolPrinterUtils() {
 
 
 	public  void printProtocol(){
-
+		printStatistics();
 		printApplicationData();
 		printTop();
 		printBottom();
@@ -52,6 +52,7 @@ public ProtocolPrinterUtils() {
 	public void printBottom(){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
 	if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_signature),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_signature))==true) {
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
 		printSignature();
 	}
 
@@ -268,6 +269,22 @@ public void  printHeader(  String header){
 						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g"+"\n");
 					}
 				}
+
+				if (cmode_check.equals("3")){
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_target)) == true) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("target: "+ ApplicationManager.getInstance().getCheckNominal() + " g"+"\n");
+					}
+
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_undertolerance),ApplicationController.getContext(). getResources().getBoolean(R.bool.preferences_check_print_undertolerance)) == true) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %"+"\n");
+					}
+
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_overtolerance), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_overtolerance)) == true) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceOverPercent() + " %"+"\n");
+					}
+
+
+				}
 				break;
 
 			case ANIMAL_WEIGHING:
@@ -396,6 +413,40 @@ public void  printHeader(  String header){
 
 
 	}
+
+	public void printStatistics(){
+
+
+		switch (Scale.getInstance().getScaleApplication()){
+
+
+			case PART_COUNTING:
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics" + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStatistic().getN()) + " \n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getSum()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMean()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getStandardDeviation()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMin()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMax()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.0f", (ApplicationManager.getInstance().getStatistic().getMax() - ApplicationManager.getInstance().getStatistic().getMin())) + " PCS\n");
+
+				break;
+
+			default:
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics" + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStatistic().getN()) + " \n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getSum()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMean()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getStandardDeviation()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMin()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMax()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.4f", (ApplicationManager.getInstance().getStatistic().getMax() - ApplicationManager.getInstance().getStatistic().getMin())) + " g\n");
+				break;
+		}
+	}
+
+
+
 
 }
 			

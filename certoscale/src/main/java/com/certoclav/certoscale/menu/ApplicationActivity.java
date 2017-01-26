@@ -32,6 +32,7 @@ import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 
 import java.util.List;
 
@@ -43,14 +44,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printApplicationName;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printBalanceId;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printBalanceName;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printDate;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printHeader;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printProjectName;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printSignature;
-import static com.certoclav.certoscale.util.ProtocolPrinterUtils.printUserName;
+
 
 
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
