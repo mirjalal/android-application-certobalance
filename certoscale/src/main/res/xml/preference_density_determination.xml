@@ -125,6 +125,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
+
+        <!---
         <CheckBoxPreference
             android:key="@string/preferences_density_porous_print"
             android:defaultValue="@bool/preferences_density_porous_print"
@@ -173,6 +175,7 @@
             android:dependency="@string/preferences_density_lock" >
         </CheckBoxPreference>
 
+    -->
 
 
     </PreferenceCategory>

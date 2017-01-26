@@ -4,6 +4,7 @@ package com.certoclav.certoscale.database;
 import android.util.Log;
 
 import com.certoclav.certoscale.model.RecipeEntry;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -37,6 +38,26 @@ public class Recipe {
 
 	@DatabaseField(columnName = "recipe_json")
 	private String recipeJson;
+
+
+	public void setMeasuredWegiht(int currentRecipeStepIndex){
+
+		try {
+			JSONArray arr = new JSONArray(ApplicationManager.getInstance().getCurrentRecipe().getRecipeJson());
+
+
+			JSONObject jsonObj = (JSONObject) arr.get(currentRecipeStepIndex); // get the json object
+			//    if (jsonObj.getString("measuredWeight").equals("0")) { // compare for the key-value
+			((JSONObject) arr.get(currentRecipeStepIndex)).put("measuredWeight", ApplicationManager.getInstance().getTaredValueInGram()); // put the new value for the key
+
+			ApplicationManager.getInstance().getCurrentRecipe().setRecipeJson(arr.toString());
+
+
+		}catch (Exception e){
+
+			e.printStackTrace();
+		}
+	}
 
 	public String generateRecipeJson(String name, List<RecipeEntry> recipeEntrys){
 		JSONObject jsonObjectRecipe = new JSONObject();

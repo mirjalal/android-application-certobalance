@@ -402,7 +402,40 @@ public void  printHeader(  String header){
 				}
 				break;
 			case DENSITIY_DETERMINATION:
-				//To Do
+				String densityliquidtype = prefs.getString(ApplicationController.getContext().getString(R.string.preferences_density_liquidtyp), "");
+				String densitymode = prefs.getString(ApplicationController.getContext().getString(R.string.preferences_density_mode), "");
+
+
+				if (densitymode.equals("1")||densitymode.equals("2")){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Solid");
+				}else if (densitymode.equals("3")){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Liquid");
+				}
+
+					if (densityliquidtype.equals("1")) {
+						ApplicationManager.getInstance().getCurrentLibrary().setDensityLiquidDensity(ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()));
+					}
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Denisty Determ: " + String.format("%.4f", ApplicationManager.getInstance().getDensity()) + " g/cm3" + "\n");
+
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: " + ApplicationManager.getInstance().getSumAsStringWithUnit() + "\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: " + ApplicationManager.getInstance().getTareAsStringWithUnit() + "\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: " + ApplicationManager.getInstance().getTaredValueAsStringInGram() + "\n");
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Weight in Air: " + String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_air()) + "\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Weight in Liquid: " + String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()) + "\n");
+
+					if (densityliquidtype.equals("1")) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Water Temp: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + "\n");
+					}
+
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Liquid Density: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity()) + " g/cm3" + "\n");
+
+
+
+
+
 				break;
 
 			case PEAK_HOLD:

@@ -48,14 +48,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     //Density Determination Variables
     private int density_step_counter=0;
-
     public int getDensity_step_counter() {
         return density_step_counter;
     }
+    public void setDensity_step_counter(int density_step_counter) {this.density_step_counter = density_step_counter;}
 
-    public void setDensity_step_counter(int density_step_counter) {
-        this.density_step_counter = density_step_counter;
-    }
+    private double density=0;
+    public double getDensity() {return density;}
+    public void setDensity(double density) {this.density = density;}
+
 
     private Recipe currentRecipe = null;
     private RecipeEntry currentRecipeEntry = null;

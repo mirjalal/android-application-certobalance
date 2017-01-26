@@ -254,17 +254,17 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     //textSum.setTextColor(Color.YELLOW);
                     textSum.setText("Weigh Sample in Liquid and press Accept");
                     if (densitymode.equals("2")){
-                        textSum.setText("Weigh Sinker in Liquid and press Accept");
+                        textSum.setText("Weigh Sample in Liquid (push the sample under water) and press Accept");
                     }
 
                     if(densitymode.equals("3")){
-                        textSum.setText("Weigh oiled Sample in Air and press Accept");
+                        textSum.setText("Weigh the Sinker in Air and press Accept");
                     }
                 }
                 if (ApplicationManager.getInstance().getDensity_step_counter()==4){
                     textInstruction.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textSum.setText("Weigh oiled Sample in Liquid and press Accept");
+                    textSum.setText("Weigh sinker in Liquid and press Accept");
 
                 }
 
@@ -311,6 +311,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     }
 
                     textValue.setText(String.format("%.4f",density)+" g/cm³");
+                    ApplicationManager.getInstance().setDensity(density);
                     //textSum.setTextColor(Color.YELLOW);
                     if (densitymode.equals("1")) {
                         textSum.setText("Density calculated");

@@ -22,6 +22,9 @@ import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +47,18 @@ private TextView textInstruction = null;
 
                 //set measured Weight
                 ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
-                                
-                Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).getMeasuredWeight()));
+                ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
+
+
+                //ApplicationManager.getInstance().getCurrentRecipe().
+                ApplicationManager.getInstance().getCurrentRecipe().setMeasuredWegiht(currentRecipeStepIndex);
+
+
+                Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipeEntry().getMeasuredWeight()));
+                Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()));
+                Log.e("MeasuredWeight",ApplicationManager.getInstance().getCurrentRecipeEntry().getName());
+
+
 
                 //ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().set(currentRecipeStepIndex,
                 //        ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex)).setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
