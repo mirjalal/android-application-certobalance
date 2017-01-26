@@ -2,7 +2,6 @@ package com.certoclav.certoscale.model;
 
 import android.util.Log;
 
-import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
@@ -29,7 +28,6 @@ public class Scale extends Observable {
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
 	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
 	ArrayList<ScaleStateListener> scaleStateListeners = new ArrayList<ScaleStateListener>();
-	ArrayList<RecipeEntryListener> recipeEntryListeners = new ArrayList<RecipeEntryListener>();
 	ArrayList<StableListener> stableListeners = new ArrayList<StableListener>();
 
 	private SerialService serialServiceScale = null;
@@ -50,29 +48,8 @@ public class Scale extends Observable {
 
 	private boolean stable = false;
 
-	public Recipe getCurrentRecipe() {
-		return currentRecipe;
-	}
 
-	public void setCurrentRecipe(Recipe currentRecipe) {
-		this.currentRecipe = currentRecipe;
 
-	}
-
-	private Recipe currentRecipe = null;
-
-	public RecipeEntry getCurrentRecipeEntry() {
-		return currentRecipeEntry;
-	}
-
-	public void setCurrentRecipeEntry(RecipeEntry currentRecipeEntry) {
-		this.currentRecipeEntry = currentRecipeEntry;
-		for(RecipeEntryListener listener : recipeEntryListeners){
-			listener.onRecipeEntryChanged(currentRecipeEntry);
-		}
-	}
-
-	private RecipeEntry currentRecipeEntry = null;
 
 	public String getRawResponseFromBalance() {
 		return rawResponseFromBalance;
@@ -185,12 +162,7 @@ public class Scale extends Observable {
 		this.stableListeners.remove(listener);
 	}
 
-	public void setOnRecipeEntryListener (RecipeEntryListener listener){
-		this.recipeEntryListeners.add(listener);
-	}
-	public void removeOnRecipeEntryListener (RecipeEntryListener listener){
-		this.recipeEntryListeners.remove(listener);
-	}
+
 
 	public void setOnScaleStateListener (ScaleStateListener listener){
 		this.scaleStateListeners.add(listener);

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -567,7 +566,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setEnabled(true);
 				break;
 			case FORMULATION:
-				if (Scale.getInstance().getCurrentRecipe() != null) {
+				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
 					buttonStart.setVisibility(View.VISIBLE);
 				} else {

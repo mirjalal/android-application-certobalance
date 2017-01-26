@@ -6,25 +6,23 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
-
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.adapters.ItemAdapter;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.SQC;
+import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
-import com.certoclav.certoscale.menu.MenuActivity;
+import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 
@@ -51,6 +49,37 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void setDensity_step_counter(int density_step_counter) {
         this.density_step_counter = density_step_counter;
     }
+
+    private Recipe currentRecipe = null;
+    private RecipeEntry currentRecipeEntry = null;
+    ArrayList<RecipeEntryListener> recipeEntryListeners = new ArrayList<RecipeEntryListener>();
+    public Recipe getCurrentRecipe() {
+        return currentRecipe;
+    }
+
+    public void setCurrentRecipe(Recipe currentRecipe) {
+        this.currentRecipe = currentRecipe;
+
+    }
+
+    public void setOnRecipeEntryListener (RecipeEntryListener listener){
+        this.recipeEntryListeners.add(listener);
+    }
+    public void removeOnRecipeEntryListener (RecipeEntryListener listener){
+        this.recipeEntryListeners.remove(listener);
+    }
+
+    public RecipeEntry getCurrentRecipeEntry() {
+        return currentRecipeEntry;
+    }
+
+    public void setCurrentRecipeEntry(RecipeEntry currentRecipeEntry) {
+        this.currentRecipeEntry = currentRecipeEntry;
+        for(RecipeEntryListener listener : recipeEntryListeners){
+            listener.onRecipeEntryChanged(currentRecipeEntry);
+        }
+    }
+
 
     private double density_weight_air=0;
     public double getDensity_weight_air() {

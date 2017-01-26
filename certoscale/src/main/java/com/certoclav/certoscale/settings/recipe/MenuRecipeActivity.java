@@ -17,7 +17,7 @@ import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -66,7 +66,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Scale.getInstance().setCurrentRecipe(adapter.getItem(position));
+                ApplicationManager.getInstance().setCurrentRecipe(adapter.getItem(position));
                 finish();
             }
         });

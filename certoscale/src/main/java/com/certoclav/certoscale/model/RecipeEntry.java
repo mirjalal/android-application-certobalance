@@ -6,9 +6,21 @@ public class RecipeEntry {
 
 private String name;
 
+	public Double getMeasuredWeight() {
+		return measuredWeight;
+	}
+
+	public void setMeasuredWeight(Double measuredWeight) {
+		this.measuredWeight = measuredWeight;
+	}
+
+	private Double measuredWeight;
+
 	public RecipeEntry(String name, Double weight) {
 		this.name = name;
 		this.weight = weight;
+
+
 	}
 
 	public String getName() {

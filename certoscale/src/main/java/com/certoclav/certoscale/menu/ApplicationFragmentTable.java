@@ -512,8 +512,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case FORMULATION:
                 listReferenceFields.get(indexTableRecipeName).getTextName().setText("RECIPE");
-                if(Scale.getInstance().getCurrentRecipe() != null) {
-                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(Scale.getInstance().getCurrentRecipe().getRecipeName());
+                if(ApplicationManager.getInstance().getCurrentRecipe() != null) {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
                 }else{
                     listReferenceFields.get(indexTableRecipeName).getTextValue().setText("No recipe");
                 }
