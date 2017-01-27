@@ -38,6 +38,7 @@ import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
@@ -227,12 +228,25 @@ protected void onPause() {
 				});
 				break;
 			case ActionButtonbarFragment.BUTTON_SHOWBATCH:
-				ApplicationManager.getInstance().showBatchList(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						actionButtonbarFragment.updateStatsButtonUI();
-					}
-				});
+				if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
+					ApplicationManager.getInstance().showBatchList(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							actionButtonbarFragment.updateStatsButtonUI();
+						}
+					});
+				}
+
+				if (Scale.getInstance().getScaleApplication()==FORMULATION){
+					ApplicationManager.getInstance().showRecipeResults(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							actionButtonbarFragment.updateStatsButtonUI();
+						}
+					});
+				}
+
+
 
 				break;
 			case ActionButtonbarFragment.BUTTON_ACCUMULATE:

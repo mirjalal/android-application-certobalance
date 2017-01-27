@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITIY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
@@ -292,7 +293,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
 						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
 						ApplicationManager.getInstance().setPipette_current_sample(0);
-						ApplicationManager.getInstance().getStatistic().clear();
+						ApplicationManager.getInstance().getStats().getStatistic().clear();
 						updateStatsButtonUI();
 
 					}else {
@@ -342,7 +343,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT) {
 					ApplicationManager.getInstance().setPipette_current_sample(1);
-					ApplicationManager.getInstance().getStatistic().clear();
+					ApplicationManager.getInstance().getStats().getStatistic().clear();
 
 					updateStatsButtonUI();
 					buttonTara.setEnabled(false);
@@ -502,7 +503,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					//ApplicationManager.getInstance().getStatistic().copy();
 					//currentStatistics=ApplicationManager.getInstance().getStatistic();
 
-					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
+					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
 							ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
 							ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
 							ApplicationManager.getInstance().getSqcNT2());
@@ -510,7 +511,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
 					ApplicationManager.getInstance().getBatchList().add(currentBatch);
-					ApplicationManager.getInstance().getStatistic().clear();
+					ApplicationManager.getInstance().getStats().getStatistic().clear();
 
 
 					buttonNewBatch.setText("New Batch");
@@ -690,7 +691,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
-				buttonShowBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.VISIBLE);
+				buttonShowBatch.setText("Show Results");
 
 				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
@@ -818,6 +820,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
+				buttonShowBatch.setText("Show Batch \n List");
+
 				buttonAccumulate.setEnabled(false);
 				buttonStart.setVisibility(View.GONE);
 
@@ -881,7 +885,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			buttonAccumulate.setVisibility(View.VISIBLE);
 		}
 
-		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL){
+		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL && application!=FORMULATION){
 			buttonNewBatch.setVisibility(View.GONE);
 			buttonShowBatch.setVisibility(View.GONE);
 
@@ -902,8 +906,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	}
 
 	public void updateStatsButtonUI() {
-		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStatistic().getN() + ")");
-		if (ApplicationManager.getInstance().getStatistic().getN()==0){
+		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStats().getStatistic().getN() + ")");
+		if (ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
 			getButtonStatistics().setEnabled(false);
 		}else {
 			getButtonStatistics().setEnabled(true);

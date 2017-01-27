@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,12 +13,16 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
+import com.certoclav.certoscale.adapters.RecipeAdapter;
+import com.certoclav.certoscale.adapters.RecipeElementAdapter;
+import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.SQC;
+import com.certoclav.certoscale.database.Statistics;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
@@ -239,13 +244,19 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
-    public SummaryStatistics getStatistic() {
+    /*public SummaryStatistics getStatistic() {
         return statistic;
     }
+    */
 
 
+    //private SummaryStatistics statistic = new SummaryStatistics();
 
-    private SummaryStatistics statistic = new SummaryStatistics();
+    public Statistics getStats() {return stats;}
+
+    public void setStats(Statistics stats) {this.stats = stats;}
+
+    private Statistics stats=new Statistics();
 
     private static ApplicationManager instance = new ApplicationManager();
 
@@ -552,29 +563,34 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void accumulateStatistics() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                statistic.addValue((double) (getSumInPieces() - getTareInPieces()));
+
+                stats.getStatistic().addValue((double) (getSumInPieces() - getTareInPieces()));
+                stats.getSamples().add((double) (getSumInPieces() - getTareInPieces()));
                 break;
             case ANIMAL_WEIGHING:
-                statistic.addValue( animalWeight);
+                stats.getStatistic().addValue( animalWeight);
+                stats.getSamples().add(animalWeight);
                 break;
             case PIPETTE_ADJUSTMENT:
-                statistic.addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
+                stats.getStatistic().addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
+                stats.getSamples().add(ApplicationManager.getInstance().getPipetteCalculatedML());
                 break;
             default:
-                statistic.addValue(getTaredValueInGram());
+                stats.getStatistic().addValue(getTaredValueInGram());
+                stats.getSamples().add(getTaredValueInGram());
                 break;
         }
         for (StatisticListener listener : statisticListeners){
-            listener.onStatisticChanged(statistic);
+            listener.onStatisticChanged(stats.getStatistic());
         }
 
 
     }
 
     public void clearStatistics() {
-        statistic.clear();
+        stats.getStatistic().clear();
         for(StatisticListener listener : statisticListeners){
-            listener.onStatisticChanged(statistic);
+            listener.onStatisticChanged(stats.getStatistic());
         }
     }
 
@@ -588,13 +604,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             //           for (Double value : statisticsArray) {
             //               statistic.addValue(value);
             //           }
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + statistic.getN());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f", statistic.getMin()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f", statistic.getVariance()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f", statistic.getStandardDeviation()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f", statistic.getSum()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + stats.getStatistic().getN());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", stats.getStatistic().getMean()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", stats.getStatistic().getMax()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f", stats.getStatistic().getMin()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f", stats.getStatistic().getVariance()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f", stats.getStatistic().getStandardDeviation()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f", stats.getStatistic().getSum()) + " " + getUnitAsString());
 
             // set the custom dialog components - text, image and button
 
@@ -754,6 +770,94 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             });
 
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showRecipeResults(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_recipe_results);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Result of Recipe: ");// + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+
+
+
+            ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
+
+
+
+            // This is the array adapter, it takes the context of the activity as a
+            // first parameter, the type of list view as a second parameter and your
+            // array as a third parameter.
+
+            List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
+            //List<String> entryList= new ArrayList<String>();
+
+
+
+            //double formulationTotal = 0;
+            double formulationTotalTarget = 0;
+            double formulationTotalDifference = 0;
+            int formulationcounter = 0;
+            while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+               // formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+               // formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+                entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
+
+
+                formulationcounter++;
+            }
+
+
+
+
+
+            RecipeResultElementAdapter recipeAdapter = new RecipeResultElementAdapter(eContext,new ArrayList<RecipeEntry>());
+            listView.setAdapter(recipeAdapter);
+            for(RecipeEntry recipeEntry:entryList){
+                recipeAdapter.add(recipeEntry);
+            }
+
+
+            //arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
+
+
+
+
+            //arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+            //arrayAdapter.add("Text von Listenelement 2");
+
+
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_recipe_button_print);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+
+                    protocolPrinter.printTop();
+                    //Printing the application data
+                    protocolPrinter.printApplicationData();
+                    //Print Signature liness
+                    protocolPrinter.printBottom();
+                    dialog.dismiss();
+                }
+            });
+
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_recipe_button_close);
             dialogButtonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1085,6 +1189,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             e.printStackTrace();
         }
     }
+
+
 
 
 

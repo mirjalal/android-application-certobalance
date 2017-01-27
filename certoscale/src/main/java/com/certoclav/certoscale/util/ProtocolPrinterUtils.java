@@ -303,62 +303,67 @@ public void  printHeader(  String header){
 				break;
 
 			case TOTALIZATION:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total: "+String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getSum())+" g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getSum())+" g"+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_samples),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_samples))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples: "+Long.toString(ApplicationManager.getInstance().getStatistic().getN())+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples: "+Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN())+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_average),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_average))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average: "+String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMean())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMean())+" g"+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_standard),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_standard))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation: "+String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getStandardDeviation())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" g"+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_minimum),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_minimum))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum: "+String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMin())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_maximum),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_maximum))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum: "+String.format("%.4f g",ApplicationManager.getInstance().getStatistic().getMax())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMax())+" g"+"\n");
 				}
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+String.format("%.4f g",(ApplicationManager.getInstance().getStatistic().getMax())-ApplicationManager.getInstance().getStatistic().getMin())+" g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+String.format("%.4f g",(ApplicationManager.getInstance().getStats().getStatistic().getMax())-ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
 
 				break;
 
 			case FORMULATION:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Name: "+ ApplicationManager.getInstance().getCurrentRecipe().getRecipeName() +"\n");
-				double formulationTotal=0;
-				double formulationTotalTarget=0;
-				double formulationTotalDifference=0;
-				int formulationcounter=0;
-				while(formulationcounter<ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()){
+				if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null) {
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Name: " + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName() + "\n");
+					double formulationTotal = 0;
+					double formulationTotalTarget = 0;
+					double formulationTotalDifference = 0;
+					int formulationcounter = 0;
+					while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
 
 
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getName() +"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getName() + "\n");
 
-					formulationTotalTarget=formulationTotalTarget+ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
-					formulationTotal=formulationTotal+ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
-					double currentdifference=Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()-ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight())/Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight());
-					currentdifference=currentdifference*100;
+						formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+						formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+						double currentdifference = Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight() - ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) / Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight());
+						currentdifference = currentdifference * 100;
 
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight())+" g\n");
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Actual: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight())+" g\n");
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Diff(%): "+String.format("%.2f",currentdifference) +" %\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()) + " g\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Actual: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) + " g\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Diff(%): " + String.format("%.2f", currentdifference) + " %\n");
 
-					formulationcounter++;
-				}
+						formulationcounter++;
+					}
 
 
-				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Target: "+String.format("%.4f g",formulationTotalTarget)+" g"+"\n");
-				}
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Target: " + String.format("%.4f g", formulationTotalTarget) + " g" + "\n");
+					}
 
-				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Actual: "+String.format("%.4f g",formulationTotal)+" g"+"\n");
-				}
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Actual: " + String.format("%.4f g", formulationTotal) + " g" + "\n");
+					}
 
-				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total))==true) {
-					formulationTotalDifference= Math.abs(formulationTotal-formulationTotalTarget)/Math.abs(formulationTotalTarget);
-					formulationTotalDifference=formulationTotalDifference*100;
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Diff: "+String.format("%.2f g",formulationTotalDifference)+" %"+"\n");
+					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+						formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
+						formulationTotalDifference = formulationTotalDifference * 100;
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Diff: " + String.format("%.2f g", formulationTotalDifference) + " %" + "\n");
+					}
+				}else{
+
+					Toast.makeText(ApplicationController.getContext(), "No results to print", Toast.LENGTH_LONG).show();
 				}
 
 
@@ -480,25 +485,25 @@ public void  printHeader(  String header){
 
 			case PART_COUNTING:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics" + "\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStatistic().getN()) + " \n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getSum()) + " PCS\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMean()) + " PCS\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getStandardDeviation()) + " PCS\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMin()) + " PCS\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.0f", ApplicationManager.getInstance().getStatistic().getMax()) + " PCS\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.0f", (ApplicationManager.getInstance().getStatistic().getMax() - ApplicationManager.getInstance().getStatistic().getMin())) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()) + " \n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getSum()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMean()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMin()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMax()) + " PCS\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.0f", (ApplicationManager.getInstance().getStats().getStatistic().getMax() - ApplicationManager.getInstance().getStats().getStatistic().getMin())) + " PCS\n");
 
 				break;
 
 			default:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics" + "\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStatistic().getN()) + " \n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getSum()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMean()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getStandardDeviation()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMin()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.4f", ApplicationManager.getInstance().getStatistic().getMax()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.4f", (ApplicationManager.getInstance().getStatistic().getMax() - ApplicationManager.getInstance().getStatistic().getMin())) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()) + " \n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getSum()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMean()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMin()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMax()) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.4f", (ApplicationManager.getInstance().getStats().getStatistic().getMax() - ApplicationManager.getInstance().getStats().getStatistic().getMin())) + " g\n");
 				break;
 		}
 	}
