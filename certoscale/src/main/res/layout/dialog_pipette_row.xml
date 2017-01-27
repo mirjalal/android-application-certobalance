@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:layout_width="fill_parent"
+    android:layout_height="35dp"
+    android:gravity="left" xmlns:tools="http://schemas.android.com/tools">
+
+
+
+            <TextView
+                android:id="@+id/menu_main_pipette_edit_text"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="1"
+                android:gravity="center_horizontal"
+                style="@style/text_statistics"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>

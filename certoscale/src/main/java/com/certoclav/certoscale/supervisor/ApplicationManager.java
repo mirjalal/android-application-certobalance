@@ -1313,6 +1313,122 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
+    public void showPipetteResults(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_pipette_results);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Pipette Adjustment Results");
+
+
+
+            ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_pipette_listview);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(eContext,R.layout.dialog_pipette_row,R.id.menu_main_pipette_edit_text);
+            listView.setAdapter(adapter);
+
+            adapter.add("Inaccuracy: \n");
+
+            double meanError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getMean()-ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
+            adapter.add("Mean Error:"+String.format("%.4f",meanError)+" ml\n");
+            double meanErrorPercent=Math.abs(meanError/ApplicationManager.getInstance().getStats().getStatistic().getMean())*100;
+            adapter.add("Mean Error %:"+String.format("%.4f",meanErrorPercent)+" %\n");
+            adapter.add("Limit %:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
+
+
+            adapter.add("\n");
+            adapter.add("Impreccision:\n");
+            adapter.add("Standard Deviation:"+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
+            double standardError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()/ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())*100;
+            adapter.add("Error CS%:"+String.format("%.4f",standardError)+" %\n");
+            adapter.add("Limit CV:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
+
+            if (meanErrorPercent<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy() && standardError<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()){
+                adapter.add("\n");
+                adapter.add("Result: Pass");
+                adapter.add("\n");
+            }else{
+                adapter.add("\n");
+                adapter.add("Result: Fail");
+                adapter.add("\n");
+            }
+
+            adapter.add("\n");
+            adapter.add("Number of Samples"+ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()+"\n");
+
+            double standardDeviation=ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation();
+            double mean=ApplicationManager.getInstance().getStats().getStatistic().getMean();
+            int nstandard1=0;
+            int nstandard2=0;
+            int pstandard1=0;
+            int pstandard2=0;
+            double pcurrent=0;
+
+            for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+                pcurrent=mean-ApplicationManager.getInstance().getStats().getSamples().get(i);
+                if (pcurrent<0){
+                    if (Math.abs(pcurrent)>standardDeviation){
+                        if (Math.abs(pcurrent)>2*standardDeviation){
+                            nstandard2++;
+                        }else{
+                            nstandard1++;
+                        }
+                    }
+                }else {
+                    if (Math.abs(pcurrent)>standardDeviation){
+                        if (Math.abs(pcurrent)>2*standardDeviation){
+                            pstandard2++;
+                        }else{
+                            pstandard1++;
+                        }
+                    }
+
+                }
+            }
+
+            adapter.add("> +2s:"+pstandard2+"\n");
+            adapter.add("> +2s:"+pstandard1+"\n");
+            adapter.add("*+1S > Mean > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
+            adapter.add("- +2s:"+nstandard1+"\n");
+            adapter.add("- +2s:"+nstandard2+"\n");
+
+            adapter.add("\n");
+
+
+            adapter.add("---Sample Data---\n");
+            for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+                adapter.add("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+
+            }
+
+
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_pipette_button_clear);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    ApplicationManager.getInstance().setBatchName("");
+                    getBatchList().clear();
+                    dialog.dismiss();
+                }
+            });
+
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_pipette_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @Override
     public void onWeightChanged(Double absweight, String unit) {

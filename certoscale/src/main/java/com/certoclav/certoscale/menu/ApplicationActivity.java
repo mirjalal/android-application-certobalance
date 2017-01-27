@@ -212,14 +212,15 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
 
-				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION) {
+				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT) {
 					ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							actionButtonbarFragment.updateStatsButtonUI();
 						}
 					});
-				}else{
+				}
+				if(Scale.getInstance().getScaleApplication()==TOTALIZATION){
 					ApplicationManager.getInstance().showStatisticsTotalization(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -228,6 +229,16 @@ protected void onPause() {
 					});
 
 				}
+				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+					ApplicationManager.getInstance().showPipetteResults(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							actionButtonbarFragment.updateStatsButtonUI();
+						}
+					});
+				}
+
+
 				break;
 
 			case ActionButtonbarFragment.BUTTON_INGREDIANTLIST:
