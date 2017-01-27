@@ -211,12 +211,23 @@ protected void onPause() {
 				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 				break;
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
-				ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						actionButtonbarFragment.updateStatsButtonUI();
-					}
-				});
+
+				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION) {
+					ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							actionButtonbarFragment.updateStatsButtonUI();
+						}
+					});
+				}else{
+					ApplicationManager.getInstance().showStatisticsTotalization(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							actionButtonbarFragment.updateStatsButtonUI();
+						}
+					});
+
+				}
 				break;
 
 			case ActionButtonbarFragment.BUTTON_INGREDIANTLIST:
@@ -505,7 +516,9 @@ protected void onPause() {
 	}
 
 
-
+	public void updateUI(){
+		actionButtonbarFragment.updateStatsButtonUI();
+	}
 
 
 

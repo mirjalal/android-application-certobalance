@@ -321,6 +321,13 @@ public void  printHeader(  String header){
 				}
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+String.format("%.4f g",(ApplicationManager.getInstance().getStats().getStatistic().getMax())-ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
 
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---");
+				for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+
+				}
+
 				break;
 
 			case FORMULATION:

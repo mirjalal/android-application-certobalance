@@ -4,9 +4,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.certoclav.certoscale.adapters.RecipeAdapter;
 import com.certoclav.certoscale.adapters.RecipeElementAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
+import com.certoclav.certoscale.adapters.SamplesAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
@@ -27,6 +31,7 @@ import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
@@ -588,6 +593,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public void clearStatistics() {
+        stats.getSamples().clear();
         stats.getStatistic().clear();
         for(StatisticListener listener : statisticListeners){
             listener.onStatisticChanged(stats.getStatistic());
@@ -621,6 +627,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 public void onClick(View v) {
                     clearStatistics();
                     dialog.dismiss();
+
                 }
             });
             Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_button_print);
@@ -1190,6 +1197,115 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         }
     }
 
+
+    public void showStatisticsTotalization(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+
+
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_statistics_totalization);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Statistics:");
+            //           statistic = new SummaryStatistics();
+            //           for (Double value : statisticsArray) {
+            //               statistic.addValue(value);
+            //           }
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + stats.getStatistic().getN());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(String.format("%.4f", stats.getStatistic().getMean()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(String.format("%.4f", stats.getStatistic().getMax()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(String.format("%.4f", stats.getStatistic().getMin()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(String.format("%.4f", stats.getStatistic().getVariance()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(String.format("%.4f", stats.getStatistic().getStandardDeviation()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f", stats.getStatistic().getSum()) + " " + getUnitAsString());
+
+
+
+/*
+            List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
+            //List<String> entryList= new ArrayList<String>();
+
+
+
+            //double formulationTotal = 0;
+            double formulationTotalTarget = 0;
+            double formulationTotalDifference = 0;
+            int formulationcounter = 0;
+            while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+                // formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+                // formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+                entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
+
+
+                formulationcounter++;
+            }*/
+
+
+
+           /* RecipeResultElementAdapter recipeAdapter = new RecipeResultElementAdapter(eContext,new ArrayList<RecipeEntry>());
+            listView.setAdapter(recipeAdapter);
+            for(RecipeEntry recipeEntry:entryList){
+                recipeAdapter.add(recipeEntry);
+
+
+
+
+            }
+*/
+            ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = ApplicationManager.getInstance().getStats().getSamples().size()*50;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            SamplesAdapter sAdapter= new SamplesAdapter(eContext,new ArrayList<Double>());
+            listView.setAdapter(sAdapter);
+
+            for(Double sample:ApplicationManager.getInstance().getStats().getSamples()){
+                sAdapter.add(sample);
+            }
+
+
+
+            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_statistics_button_clear);
+            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    clearStatistics();
+                    dialog.dismiss();
+
+                }
+            });
+
+
+            Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+            dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+
+
+
+                }
+            });
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

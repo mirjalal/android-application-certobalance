@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -252,9 +254,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
-				for(ButtonEventListener listener : navigationbarListeners){
-					listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
-				}
+			for(ButtonEventListener listener : navigationbarListeners){
+				listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
+			}
 
 			}
 		});
@@ -906,6 +908,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	}
 
 	public void updateStatsButtonUI() {
+
 		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStats().getStatistic().getN() + ")");
 		if (ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
 			getButtonStatistics().setEnabled(false);
