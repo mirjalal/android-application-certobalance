@@ -4,7 +4,6 @@ package com.certoclav.certoscale.database;
 import android.util.Log;
 
 import com.certoclav.certoscale.model.RecipeEntry;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -35,54 +34,21 @@ public class Recipe {
 	@DatabaseField(generatedId = true, columnName = "recipe_id")
 	private int recipe_id;
 
-
 	@DatabaseField(columnName = "recipe_json")
 	private String recipeJson;
 
+	@DatabaseField(columnName = "cloud_id")
+	private String cloudId;
 
-	public void setMeasuredWegiht(int currentRecipeStepIndex){
+	private List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
+	private String recipeName = "";
 
-		try {
-			JSONArray arr = new JSONArray(ApplicationManager.getInstance().getCurrentRecipe().getRecipeJson());
-
-
-			JSONObject jsonObj = (JSONObject) arr.get(currentRecipeStepIndex); // get the json object
-			//    if (jsonObj.getString("measuredWeight").equals("0")) { // compare for the key-value
-			((JSONObject) arr.get(currentRecipeStepIndex)).put("measuredWeight", ApplicationManager.getInstance().getTaredValueInGram()); // put the new value for the key
-
-			ApplicationManager.getInstance().getCurrentRecipe().setRecipeJson(arr.toString());
-
-
-		}catch (Exception e){
-
-			e.printStackTrace();
-		}
-	}
-
-	public String generateRecipeJson(String name, List<RecipeEntry> recipeEntrys){
-		JSONObject jsonObjectRecipe = new JSONObject();
-		try {
-			JSONArray jsonArrayRecipeEntries = new JSONArray();
-			for (RecipeEntry entry : recipeEntrys) {
-				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()).put("measuredWeight",entry.getMeasuredWeight()));
-			}
-			jsonObjectRecipe.put("recipeName", name);
-			jsonObjectRecipe.put("recipeEntries",jsonArrayRecipeEntries);
-		}catch (Exception e){
-
-			e.printStackTrace();
-		}
-		return jsonObjectRecipe.toString();
-	}
-
-	public Recipe(String cloudId, String recipeJson) {
-		this.cloudId = cloudId;
-		this.recipeJson = recipeJson;
-	}
 	public Recipe(String cloudId, String recipeName, List<RecipeEntry> entries) {
 		this.cloudId = cloudId;
-		this.recipeJson = generateRecipeJson(recipeName,entries);
+		this.recipeName = recipeName;
+		this.recipeEntries = entries;
 	}
+
 	public String getCloudId() {
 		return cloudId;
 	}
@@ -91,47 +57,76 @@ public class Recipe {
 		this.cloudId = cloudId;
 	}
 
-	public String getRecipeJson() {
-		return recipeJson;
+	public List<RecipeEntry> getRecipeEntries() {
+		return recipeEntries;
 	}
 
-	public void setRecipeJson(String recipeJson) {
-		this.recipeJson = recipeJson;
+	public void setRecipeEntries(List<RecipeEntry> recipeEntries) {
+		this.recipeEntries = recipeEntries;
 	}
-
-	@DatabaseField(columnName = "cloud_id")
-	private String cloudId;
-
 
 	public String getRecipeName() {
-		String retVal = "";
+		return recipeName;
+	}
 
+	public void setRecipeName(String recipeName) {
+		this.recipeName = recipeName;
+	}
+
+	/**
+	 * This function must be called before inserting the Recipe into the Database DatabaseService.insertRecipe()
+	 */
+	public void generateRecipeJson(){
+
+		JSONObject jsonObjectRecipe = new JSONObject();
 		try {
-			JSONObject recipeJson = new JSONObject(this.recipeJson);
-			retVal = recipeJson.getString("recipeName");
+			JSONArray jsonArrayRecipeEntries = new JSONArray();
+			for (RecipeEntry entry : recipeEntries) {
+				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()).put("measuredWeight",entry.getMeasuredWeight()));
+			}
+			jsonObjectRecipe.put("recipeName", recipeName);
+			jsonObjectRecipe.put("recipeEntries",jsonArrayRecipeEntries);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return retVal;
 
+		this.recipeJson = jsonObjectRecipe.toString();
 	}
 
 
-	public List<RecipeEntry> getRecipeEntries() {
-		ArrayList<RecipeEntry> entries = new ArrayList<RecipeEntry>();
+
+
+
+
+
+
+	public void parseRecipeJson(){
+		try {
+			JSONObject recipeJson = new JSONObject(this.recipeJson);
+			recipeName = recipeJson.getString("recipeName");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
+		recipeEntries = new ArrayList<RecipeEntry>();
 		try {
 			JSONObject jsonObjectRecipe = new JSONObject(recipeJson);
 			JSONArray jsonArrayEntries = jsonObjectRecipe.getJSONArray("recipeEntries");
 			for(int i = 0; i< jsonArrayEntries.length(); i++){
-				entries.add(new RecipeEntry(jsonArrayEntries.getJSONObject(i).getString("name"),jsonArrayEntries.getJSONObject(i).getDouble("weight"),jsonArrayEntries.getJSONObject(i).getDouble("measuredWeight")));
+				recipeEntries.add(new RecipeEntry(jsonArrayEntries.getJSONObject(i).getString("name"),jsonArrayEntries.getJSONObject(i).getDouble("weight"),jsonArrayEntries.getJSONObject(i).getDouble("measuredWeight")));
 			}
-
 		}catch (Exception e){
-			entries = new ArrayList<RecipeEntry>();
+			Log.e("Recipe", "error reading recipe entries" + e.toString());
+			recipeEntries = new ArrayList<RecipeEntry>();
 		}
-		return entries;
+
 
 	}
+
+
+
+
+
 }
 
 

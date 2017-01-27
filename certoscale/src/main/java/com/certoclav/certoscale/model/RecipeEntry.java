@@ -1,12 +1,13 @@
 package com.certoclav.certoscale.model;
 
 
-import com.certoclav.certoscale.supervisor.ApplicationManager;
-
 public class RecipeEntry {
 
 
-private String name;
+	private String name = "";
+	private Double measuredWeight = -1d;
+	private Double weight = -1d;
+
 
 	public Double getMeasuredWeight() {
 		return measuredWeight;
@@ -14,10 +15,9 @@ private String name;
 
 	public void setMeasuredWeight(Double measuredWeight) {
 		this.measuredWeight = measuredWeight;
-
 	}
 
-	private Double measuredWeight;
+
 
 	public RecipeEntry(String name, Double weight, Double measuredWeight) {
 		this.name = name;
@@ -42,7 +42,7 @@ private String name;
 		this.weight = weight;
 	}
 
-	private Double weight;
+
 
 
 

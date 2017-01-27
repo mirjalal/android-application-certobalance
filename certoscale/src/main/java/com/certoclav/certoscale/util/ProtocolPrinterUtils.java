@@ -1,28 +1,16 @@
 package com.certoclav.certoscale.util;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.EditText;
-import android.view.*;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.SQC;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.Calendar;
-import java.util.Map;
-
-import com.certoclav.certoscale.R;
-import com.certoclav.library.application.ApplicationController;
 
 
 public class ProtocolPrinterUtils {
