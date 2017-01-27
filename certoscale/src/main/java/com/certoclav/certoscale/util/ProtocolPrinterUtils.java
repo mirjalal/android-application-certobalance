@@ -5,12 +5,14 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.Calendar;
+import java.util.List;
 
 
 public class ProtocolPrinterUtils {
@@ -322,7 +324,7 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+String.format("%.4f g",(ApplicationManager.getInstance().getStats().getStatistic().getMax())-ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
 
 
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---\n");
 				for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
 
@@ -451,6 +453,110 @@ public void  printHeader(  String header){
 				break;
 
 			case INGREDIENT_COSTING:
+
+				List<Item> costList=ApplicationManager.getInstance().getIngrediantCostList();
+
+
+
+				for(int i=0; i<costList.size();i++){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage( costList.get(i).getName()+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item weight: "+ String.format("%.4f",costList.get(i).getWeight())+"\n"+ "g");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item cost: "+ String.format("%.4f",costList.get(i).getCost())+"\n");
+				}
+
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("------------------\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Items: " +costList.size()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total weight: " +String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalWeight())+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total cost: " +String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalCost())+"\n");
+
+
+				break;
+
+			case PIPETTE_ADJUSTMENT:
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Pipette Name:"+ApplicationManager.getInstance().getPipette_name());
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Pipette Number:"+ApplicationManager.getInstance().getPipette_number());
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Nominal Volume: "+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Water Temp: "+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Pressure"+ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure());
+
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Inaccuracy: \n");
+
+				double meanError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getMean()-ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Mean Error:"+String.format("%.4f",meanError)+" ml\n");
+				double meanErrorPercent=Math.abs(meanError/ApplicationManager.getInstance().getStats().getStatistic().getMean())*100;
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Mean Error %:"+String.format("%.4f",meanErrorPercent)+" %\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Limit %:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
+
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Impreccision:\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation:"+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
+				double standardError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()/ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())*100;
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Error CS%:"+String.format("%.4f",standardError)+" %\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Limit CV:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
+
+				if (meanErrorPercent<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy() && standardError<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: Pass");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+				}else{
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: Fail");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+				}
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Number of Samples"+ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()+"\n");
+
+				double standardDeviation=ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation();
+				double mean=ApplicationManager.getInstance().getStats().getStatistic().getMean();
+				int nstandard1=0;
+				int nstandard2=0;
+				int pstandard1=0;
+				int pstandard2=0;
+				double pcurrent=0;
+
+				 for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+					 pcurrent=mean-ApplicationManager.getInstance().getStats().getSamples().get(i);
+					 if (pcurrent<0){
+						 if (Math.abs(pcurrent)>standardDeviation){
+							 if (Math.abs(pcurrent)>2*standardDeviation){
+								 nstandard2++;
+							 }else{
+								 nstandard1++;
+							 }
+						 }
+					 }else {
+						 if (Math.abs(pcurrent)>standardDeviation){
+							 if (Math.abs(pcurrent)>2*standardDeviation){
+								 pstandard2++;
+							 }else{
+								 pstandard1++;
+							 }
+						 }
+
+					 }
+				 }
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("> +2s:"+pstandard2+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("> +2s:"+pstandard1+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("*+1S > Mean > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("- +2s:"+nstandard1+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("- +2s:"+nstandard2+"\n");
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
+
+
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---\n");
+				for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+
+				}
+
 				break;
 
 

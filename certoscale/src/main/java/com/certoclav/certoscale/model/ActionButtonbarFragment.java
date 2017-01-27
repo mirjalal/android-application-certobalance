@@ -346,6 +346,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT) {
 					ApplicationManager.getInstance().setPipette_current_sample(1);
 					ApplicationManager.getInstance().getStats().getStatistic().clear();
+					ApplicationManager.getInstance().getStats().getSamples().clear();
 
 					updateStatsButtonUI();
 					buttonTara.setEnabled(false);

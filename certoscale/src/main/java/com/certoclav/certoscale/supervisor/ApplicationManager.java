@@ -713,6 +713,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    protocolPrinter.printTop();
+                    protocolPrinter.printApplicationData();
+                    protocolPrinter.printBottom();
+
                     Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
                 }
             });
