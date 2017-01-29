@@ -35,6 +35,7 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.database.Recipe;
+import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.graph.GraphService;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -356,7 +357,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		Scale.getInstance();
 		editTextPassword.setText("");
 
-			fillDatabaseIfEmpty();
+		fillDatabaseIfEmpty();
 
 
 		refreshUI();
@@ -442,9 +443,55 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
 
 			// Max regierstriert sich
-			int result = databaseService.insertUser(user1);
-			result = databaseService.insertLibrary(library);
-			Log.e("return of insertUser: ", Integer.toString(result));
+			databaseService.insertUser(user1);
+			int result = databaseService.insertLibrary(library);
+			Log.e("return insertLibrary: ", " " +result);
+
+			Unit unit = new Unit(0d,1d,"gram",Unit.UNIT_GRAM,"",true,false); // 1g = 1*10^0 g
+			result = databaseService.insertUnit(unit);
+			Log.e("return insertUnit: ", " " +result);
+			unit = new Unit(-5d,35274d,"Unze",Unit.UNIT_OUNCE,"",true,false); //1g = 35274*10^-5 oz
+			databaseService.insertUnit(unit);
+			unit = new Unit(-3d,1d,"kilogram",Unit.UNIT_KILOGRAM,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(3d,1d,"milligram",Unit.UNIT_MILLIGRAM,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,157473d,"stone",Unit.UNIT_STONE,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-8d,220462d,"pound",Unit.UNIT_POUND,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(0d,5d,"metric carat",Unit.UNIT_METRIC_CARAT,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,32150746d,"ounce troy",Unit.UNIT_OUNCE_TROY,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-6d,643015d,"pennyweight",Unit.UNIT_PENNYWEIGHT,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-4d,154324d,"grain",Unit.UNIT_GRAIN,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-8d,980665d,"Newton",Unit.UNIT_NEWTON,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-6d,264555d,"momme",Unit.UNIT_MOMME,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,217391304d,"mesghal",Unit.UNIT_MESGHAL,"",true,false); //nochmal überprüfen
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,26659557d,"Tael (HK)",Unit.UNIT_TAEL_HK,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,26455470d,"Tael (SG)",Unit.UNIT_TAEL_SG,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,60975609d,"tical (Asia)",Unit.UNIT_TICAL_ASIA,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,85735260d,"tola",Unit.UNIT_TOLA,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(-9d,66666666d,"baht (Thailand)",Unit.UNIT_BAHT,"",true,false);
+			databaseService.insertUnit(unit);
+			unit = new Unit(0d,1d,"Custom unit 1","c1","",true,true);
+			databaseService.insertUnit(unit);
+			unit = new Unit(0d,1d,"Custom unit 2","c2","",true,true);
+			databaseService.insertUnit(unit);
+			unit = new Unit(0d,1d,"Custom unit 3","c3","",true,true);
+			databaseService.insertUnit(unit);
+
+
 
 		} catch (Exception e) {
 			Log.e("LoginActivity", "Database broken");

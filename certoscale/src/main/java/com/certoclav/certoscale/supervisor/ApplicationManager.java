@@ -3,39 +3,36 @@ package com.certoclav.certoscale.supervisor;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
-import com.certoclav.certoscale.adapters.RecipeAdapter;
-import com.certoclav.certoscale.adapters.RecipeElementAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.adapters.SamplesAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.database.Statistics;
+import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.util.ProtocolPrinterUtils;
+import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
@@ -273,49 +270,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         this.currentLibrary = currentLibrary;
     }
 
-    private Library currentLibrary = new Library(
-            "admin",
-            ScaleApplication.WEIGHING.ordinal(),
-            "",
-            0,
-            "default library",
-            0f,
-            10f,
-            10f,
-            1f,
-            0f,
-            0f,
-            20f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0,
-            new Date(),
-            true,
-            1f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0f,
-            0
-    );
+    private Library currentLibrary = null;
 
 
     public String getAnimalWeight() {
@@ -409,16 +364,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         currentLibrary.setAveragePieceWeight(averagePieceWeight);
     }
 
-    public int getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit(int unit) {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
 
-    private int unit = UNIT_GRAM;
+    private Unit unit = null;
 
     public String getUnitAsString() {
         switch (Scale.getInstance().getScaleApplication()) {
@@ -429,7 +384,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 return "%";
 
             default:
-                return "g";
+                return unit.getName();
         }
     }
 
@@ -438,8 +393,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return Scale.getInstance().getWeightInGram();
     }
 
+    public Double getSumInCurrentUnit() {
+        return transformGramToCurrentUnit(Scale.getInstance().getWeightInGram());
+    }
+
     public int getSumInPieces() {
         return (int) Math.round(Scale.getInstance().getWeightInGram() / currentLibrary.getAveragePieceWeight());
+    }
+
+    public Double getTareInCurrentUnit(){
+        return transformGramToCurrentUnit(getTareInGram());
     }
 
     public Double getTareInGram() {
@@ -451,7 +414,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public int getLoadInPercent() {
-        return (int) Math.round((Scale.getInstance().getWeightInGram() / AppConstants.WEIGHT_MAX) * 100.0);
+        return (int) Math.round((Scale.getInstance().getWeightInGram() / AppConstants.WEIGHT_MAX_IN_GRAM) * 100.0);
     }
 
 
@@ -477,7 +440,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getSumInGram() - getTareInGram()) + " " + getUnitAsString();
+                return String.format("%.4f", getSumInCurrentUnit() - getTareInCurrentUnit() ) + " " + getUnitAsString();
         }
 
     }
@@ -500,6 +463,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private ApplicationManager() {
         Scale.getInstance().setOnWeightListener(this);
         Scale.getInstance().setOnApplicationListener(this);
+        DatabaseService db = new DatabaseService(ApplicationController.getContext());
+        unit = new Unit(0d,1d,"gram","g","",true,false);
+        currentLibrary = new Library("",0,"",0,"default",0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0,new Date(),true,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0);
     }
 
 
@@ -883,12 +849,22 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         }
     }
 
+    public String getAveragePieceWeightAsStringWithUnit() {
+        return String.format("%.5f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " " +getUnitAsString();
+    }
+
     public String getAveragePieceWeightAsStringInGram() {
         return String.format("%.5f", currentLibrary.getAveragePieceWeight());
     }
 
     public String getUnderLimitAsStringInGram() {
         return String.format("%.5f", currentLibrary.getUnderLimit());
+    }
+
+
+
+    private Double transformGramToCurrentUnit(double gram) {
+        return gram * unit.getFactor()* Math.pow(10,unit.getExponent());
     }
 
     public String getUnderLimitPiecesAsStringInGram() {
@@ -967,9 +943,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getUnderLimitAsStringWithUnit() {
         switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
-                return String.format("%.4f", currentLibrary.getUnderLimit()) + getUnitAsString();
+                return String.format("%.4f ", transformGramToCurrentUnit(currentLibrary.getUnderLimit())) + getUnitAsString();
             case PART_COUNTING:
-                return String.format("%d", currentLibrary.getUnderLimitPieces()) + getUnitAsString();
+                return String.format("%d ", currentLibrary.getUnderLimitPieces()) + getUnitAsString();
         }
         return "todo";
 
@@ -1035,6 +1011,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
+
+    public String getDifferenceFillingWithUnit(){
+
+        return String.format("%.4f",transformGramToCurrentUnit(getTaredValueInGram()-currentLibrary.getTarget())) + " "+getUnitAsString();
+    }
+
     public String getDifferenceFilling(){
 
         return String.format("%.4f",getTaredValueInGram()-currentLibrary.getTarget());
@@ -1042,6 +1024,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTargetasString(){
 
         return String.format("%.4f",currentLibrary.getTarget());
+    }
+
+    public String getTargetasStringWithUnit(){
+
+        return String.format("%.4f",transformGramToCurrentUnit(currentLibrary.getTarget())) + " " + getUnitAsString();
     }
 
     public double getTarget(){

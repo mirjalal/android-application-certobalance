@@ -5,18 +5,11 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.listener.ButtonEventListener;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 
 
-public class SettingsUnitActivity extends FragmentActivity implements  ButtonEventListener {
+public class SettingsUnitActivity extends FragmentActivity {
 
-	public static String INTENT_EXTRA_SUBMENU = "submenu";
-	/**
-	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-	 * device.
-	 */
 
 	private Navigationbar navigationbar = null;
 
@@ -31,7 +24,6 @@ public class SettingsUnitActivity extends FragmentActivity implements  ButtonEve
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 
 
-
 	}
 	
 	
@@ -39,7 +31,6 @@ public class SettingsUnitActivity extends FragmentActivity implements  ButtonEve
 
 	@Override
 	protected void onPause() {
-		navigationbar.removeNavigationbarListener(this);
 		super.onPause();
 	}
 
@@ -48,26 +39,11 @@ public class SettingsUnitActivity extends FragmentActivity implements  ButtonEve
 
 	@Override
 	protected void onResume() {
-		navigationbar.setButtonEventListener(this);
+		getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsUnitFragment()).commit();
 		super.onResume();
-		int index = 0;
-		try{
-			index = getIntent().getIntExtra(INTENT_EXTRA_SUBMENU, 0);
-		}catch(Exception e){
-			
-		}
-		getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, new SettingUnitFragment()).commit();
+
 	}
 
 
 
-
-
-	@Override
-	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
-		if(buttonId == ActionButtonbarFragment.BUTTON_HOME){
-			finish();
-		}
-		
-	}
 }

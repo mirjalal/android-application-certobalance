@@ -7,30 +7,19 @@
     >
 
     
-	<RelativeLayout 
+	<RelativeLayout
     	android:id="@+id/contentOfActivity"
     	android:layout_height="match_parent"
     	android:layout_width="match_parent"
     	android:layout_below="@+id/navigationbar">
 
-    <LinearLayout
-        android:id="@+id/LinearLayout1"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:divider="?android:attr/dividerHorizontal"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        tools:context=".SettingsActivity" >
 
-        <FrameLayout
-            android:id="@+id/item_detail_container"
+        <LinearLayout
+			android:id="@+id/settings_unit_container_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" 
-           />
-        
-    </LinearLayout>
-
-
+            android:layout_height="match_parent"
+			android:orientation="vertical"
+             />
 
     </RelativeLayout>
     

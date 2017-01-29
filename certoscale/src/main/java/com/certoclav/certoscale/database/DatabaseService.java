@@ -10,6 +10,7 @@ import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class DatabaseService {
 	Dao<Library,Integer> libraryDao;
 	Dao<Recipe,Integer> recipeDao;
 	Dao<Item, Integer> itemDao;
+	Dao<Unit, Integer> unitDao;
 
 	private DatabaseHelper mDatabaseHelper;
 	
@@ -49,6 +51,7 @@ public class DatabaseService {
 		libraryDao = getHelper().getLibraryDao();
 		recipeDao = getHelper().getRecipeDao();
 		itemDao = getHelper().getItemDao();
+		unitDao = getHelper().getUnitDao();
 
 
 	}
@@ -253,6 +256,74 @@ public class DatabaseService {
 
 
 
+
+
+
+
+	public List<Unit> getUnits() {
+		try {
+		List<Unit> units = new ArrayList<Unit>();
+			/** query for object in the database with id equal profileId */
+			units =  unitDao.queryForAll();
+			for(Unit unit : units){
+				unit.parseUnitJson();
+			}
+			return units;
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
+	public int insertUnit(Unit unit) {
+
+		unit.generateUnitJson();
+		try {
+
+			int x =unitDao.create(unit);
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+
+	public int deleteUnit(Unit unit) {
+		try {
+
+			return unitDao.delete(unit);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public List<Recipe> getRecipes() {
 		try {
 
@@ -366,17 +437,7 @@ public class DatabaseService {
 		return -1;
 	}
 
-	/*
-	public int deleteUser(final User user) {
-		try {
 
-			return userDao.delete(user);
-		} catch (java.sql.SQLException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return -1;
-	}
-*/
 
 	/**
 	 * Get the helper from the manager once per class.

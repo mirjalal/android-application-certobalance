@@ -27,9 +27,6 @@ public class Recipe {
 	}
 
 
-	public int getRecipe_id() {
-		return recipe_id;
-	}
 
 	@DatabaseField(generatedId = true, columnName = "recipe_id")
 	private int recipe_id;
@@ -40,6 +37,9 @@ public class Recipe {
 	@DatabaseField(columnName = "cloud_id")
 	private String cloudId;
 
+	public int getRecipe_id() {
+		return recipe_id;
+	}
 	private List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
 	private String recipeName = "";
 
@@ -72,6 +72,10 @@ public class Recipe {
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
 	}
+
+
+
+
 
 	/**
 	 * This function must be called before inserting the Recipe into the Database DatabaseService.insertRecipe()

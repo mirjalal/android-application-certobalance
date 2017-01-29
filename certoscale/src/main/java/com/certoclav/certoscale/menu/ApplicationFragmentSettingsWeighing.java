@@ -92,7 +92,7 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonMinimumWeight.setText("Minimum Weight\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getUnderLimit()));
+        buttonMinimumWeight.setText("Minimum Weight\n"+ ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
         super.onResume();
 
 

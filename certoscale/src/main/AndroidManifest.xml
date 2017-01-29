@@ -154,9 +154,10 @@
             android:launchMode="singleInstance">
         </activity>
 
-        <activity android:name=".settings.calibration.SettingsCalibrationActivity"
+        <activity android:name=".settings.unit.SettingsUnitActivity"
             android:screenOrientation="sensorLandscape"
             ></activity>
+
         <activity android:name=".menu.AddCloudAccountActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
@@ -176,6 +177,8 @@
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
         <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 
+        <activity android:name=".settings.calibration.SettingsCalibrationActivity"
+            android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.recipe.MenuRecipeEditActivity"
             android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.recipe.MenuRecipeActivity"

@@ -1,14 +1,11 @@
 package com.certoclav.certoscale.menu;
 
-import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,28 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.graph.GraphService;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.listener.StableListener;
-import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
-import org.apache.commons.math3.analysis.function.Sin;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
-
-import java.util.Timer;
 
 
-/**
- * A list fragment representing a list of Items. This fragment also supports
- * tablet devices by allowing list items to be given an 'activated' state upon
- * selection. This helps indicate which item is currently being viewed in a
- * {@link ItemDetailFragment}.
- * <p>
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
- */
 public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
     private FrameLayout barload = null;
     private FrameLayout barloadbackground = null;
@@ -46,6 +30,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private TextView textSum = null;
     private TextView textValue = null;
     private ImageView imageStable = null;
+
+    private static final int WIDTH_LOADING_BAR_TOTAL = 700;
 
 
 
@@ -74,6 +60,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         textSum = (TextView) rootView.findViewById(R.id.menu_main_text_information);
         textValue = (TextView) rootView.findViewById(R.id.menu_main_text_value);
         imageStable = (ImageView) rootView.findViewById(R.id.menu_main_image_stable);
+
+        textValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SettingsUnitActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
 
 
@@ -468,12 +462,12 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         //Update Loading bar
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
-            int fwidth = (int) (Scale.getInstance().getWeightInGram()*5.83);
+            int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
             if(fwidth<0){
                 fwidth = 0;
             }
-            if(fwidth > 700){
-                fwidth = 700;
+            if(fwidth > WIDTH_LOADING_BAR_TOTAL){
+                fwidth = WIDTH_LOADING_BAR_TOTAL;
             }
             params.width = fwidth;
             params.height=15;
