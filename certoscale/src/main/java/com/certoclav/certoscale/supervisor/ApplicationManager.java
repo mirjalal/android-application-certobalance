@@ -46,6 +46,12 @@ import java.util.List;
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
+
+    private Unit currentUnit=new Unit(0d,1d,"gram",Unit.UNIT_GRAM,"",true,false);
+    public Unit getCurrentUnit() {return currentUnit;}
+    public void setCurrentUnit(Unit currentUnit) {this.currentUnit = currentUnit;}
+
+
     private ProtocolPrinterUtils protocolPrinter=new ProtocolPrinterUtils();
 
     private double PeakHoldMaximum=0;
@@ -440,7 +446,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getSumInCurrentUnit() - getTareInCurrentUnit() ) + " " + getUnitAsString();
+                return String.format("%.4f", getSumInCurrentUnit() - getTareInCurrentUnit() ) + " " + ApplicationManager.getInstance().getCurrentUnit().getName();
+
         }
 
     }
@@ -566,7 +573,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         }
     }
 
-    public void showStatisticsNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
+    public void showStatisticsNotification(final Context eContext, final DialogInterface.OnDismissListener listener) {
         try {
             final Dialog dialog = new Dialog(eContext);
             dialog.setContentView(R.layout.dialog_statistics);
@@ -609,7 +616,62 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                     Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
                 }
             });
+
+
+            Button dialogButtonSamples = (Button) dialog.findViewById(R.id.dialog_statistics_button_samples);
+            dialogButtonSamples.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showStatisticsSamples(eContext,listener);
+
+                }
+            });
+
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);
+            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void showStatisticsSamples(final Context eContext, DialogInterface.OnDismissListener listener) {
+        try {
+            final Dialog dialog = new Dialog(eContext);
+            dialog.setContentView(R.layout.dialog_statistics_samples);
+            dialog.setOnDismissListener(listener);
+            dialog.setTitle("Statistics");
+            //           statistic = new SummaryStatistics();
+            //           for (Double value : statisticsArray) {
+            //               statistic.addValue(value);
+            //           }
+
+            ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
+
+            /*ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = ApplicationManager.getInstance().getStats().getSamples().size()*50;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+*/
+            SamplesAdapter sAdapter= new SamplesAdapter(eContext,new ArrayList<Double>());
+            listView.setAdapter(sAdapter);
+
+            for(Double sample:ApplicationManager.getInstance().getStats().getSamples()){
+                sAdapter.add(sample);
+            }
+
+
+
+            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_close);
             dialogButtonClose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
