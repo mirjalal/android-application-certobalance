@@ -46,6 +46,7 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -144,9 +145,11 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		public void run() {
 
 			Toast.makeText(LoginActivity.this,getString(R.string.login_successful), Toast.LENGTH_LONG).show();
+
 			buttonLogin.setEnabled(true);
 			Intent intent = new Intent(LoginActivity.this, ApplicationActivity.class);
 			startActivity(intent);
+
 		}
 	};
 
@@ -440,7 +443,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			databaseService.insertItem(new Item("","Item 2",3.2345d,0.1d,"1300235"));
 
 			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
-			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 10.0f, 20.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
+			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 0.0f, 0.0f,5,1,1,30,0,0,0,0,0,0,new Date(),true,1.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
 
 			// Max regierstriert sich
 			databaseService.insertUser(user1);

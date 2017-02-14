@@ -22,7 +22,11 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.menu.ApplicationActivity;
+import com.certoclav.certoscale.menu.LoginActivity;
+import com.certoclav.certoscale.menu.MenuActivity;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.util.DownloadUtils;
@@ -193,6 +197,14 @@ private SharedPreferences prefs = null;
                             editor.commit();
                             ApplicationController.getInstance().clearApplicationData();
                             android.os.Process.killProcess(android.os.Process.myPid());
+
+
+                            //User will be logged out to avoid bugs
+                            //Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+                            //Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            //startActivity(intent);
+                            //getActivity().finish();
+
 
 
                         }

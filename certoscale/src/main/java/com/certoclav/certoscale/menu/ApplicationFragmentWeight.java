@@ -106,7 +106,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ANIMAL_WEIGHING_CALCULATING:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("calculating...");
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getTaredValueInGram());
+                textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram()));
 
 
                 break;
@@ -159,16 +159,19 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 double current = ApplicationManager.getInstance().getTaredValueInGram();
                 double under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
                 double over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
+
+
                 if(checklimitmode.equals("1")) {
                     current = ApplicationManager.getInstance().getTaredValueInGram();
                     under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
                      over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
                 }
-                if(checklimitmode.equals("2")) {
+                if(checklimitmode.equals("2") || checklimitmode.equals("3")) {
                     current = ApplicationManager.getInstance().getTaredValueInGram();
                     under = ApplicationManager.getInstance().getCheckNominaldouble()-ApplicationManager.getInstance().getCheckNominalToleranceUnderdouble();
                     over = ApplicationManager.getInstance().getCheckNominaldouble()+ApplicationManager.getInstance().getCheckNominalToleranceOverdouble();
                 }
+
 
 
 
@@ -201,14 +204,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                     textInstruction.setText("");
 
+
                     if (current<under){
                         textValue.setTextColor(Color.RED);
-                        textValue.setText("Value to low");
+                        textValue.setText("Value too low");
                     }
 
                     if (current>over){
                         textValue.setTextColor(Color.RED);
-                        textValue.setText("Value to high");
+                        textValue.setText("Value too high");
                     }
 
                     if (current>=under && current<=over){
@@ -329,7 +333,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 params.height=15;
                 params2.height=15;
 
-                double filling_width=(ApplicationManager.getInstance().getTarget()/ApplicationManager.getInstance().getTaredValueInGram())*700;
+                double filling_width=(ApplicationManager.getInstance().getTaredValueInGram()/ApplicationManager.getInstance().getTarget())*WIDTH_LOADING_BAR_TOTAL;
+
+                //double filling_width=(ApplicationManager.getInstance().getTarget()/ApplicationManager.getInstance().getTaredValueInGram())*700;
+
                 if(filling_width<0){
                     filling_width = 0;
                 }

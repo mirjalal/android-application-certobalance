@@ -409,20 +409,26 @@ protected void onPause() {
 						public void onClick(View v) {
 							String name = ((EditText)dialog.findViewById(R.id.dialog_edit_text_edittext)).getText().toString();
 							DatabaseService db = new DatabaseService(ApplicationActivity.this);
-							ApplicationManager.getInstance().getCurrentLibrary().setName(name);
-							int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
-							if(retval == 1){
-								Toast.makeText(ApplicationActivity.this,"Library " + name + " successfully saved" + retval,Toast.LENGTH_LONG).show();
-							}else{
-								Toast.makeText(ApplicationActivity.this,"Library could not be saved" + retval,Toast.LENGTH_LONG).show();
-							}
-							refreshSpinnerLibrary();
-							try {
-								navigationbar.getSpinnerLib().setSelection(navigationbar.getArrayAdapterLibrary().getPosition(name)); //buggy?
-							}catch(Exception e){
 
+							if (name.length()==0){
+								Toast.makeText(ApplicationActivity.this, "Please enter a name for the library", Toast.LENGTH_LONG).show();
+
+							}else{
+								ApplicationManager.getInstance().getCurrentLibrary().setName(name);
+								int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
+								if (retval == 1) {
+									Toast.makeText(ApplicationActivity.this, "Library " + name + " successfully saved" + retval, Toast.LENGTH_LONG).show();
+								} else {
+									Toast.makeText(ApplicationActivity.this, "Library could not be saved" + retval, Toast.LENGTH_LONG).show();
+								}
+								refreshSpinnerLibrary();
+								try {
+									navigationbar.getSpinnerLib().setSelection(navigationbar.getArrayAdapterLibrary().getPosition(name)); //buggy?
+								} catch (Exception e) {
+
+								}
+								dialog.dismiss();
 							}
-							dialog.dismiss();
 
 
 						}

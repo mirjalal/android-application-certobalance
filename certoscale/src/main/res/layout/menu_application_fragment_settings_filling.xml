@@ -62,7 +62,7 @@
             style="@style/button_actionbar"/>
 
         <Button
-            android:text="Calculate AWP"
+            android:text="Calculate Target Weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_filling_button_calc_target"
