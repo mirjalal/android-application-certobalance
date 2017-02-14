@@ -488,6 +488,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
+                if (prefs.getBoolean(getString(R.string.preferences_density_sinkervolume_visible), getResources().getBoolean(R.bool.preferences_density_sinkervolume_visible)) == true) {
+                    if (densitymode.equals("3")) {
+                        listReferenceFields.get(0).getTextName().setText("SINKER VOLUME");
+                        listReferenceFields.get(0).getTextValue().setText(String.format("%.2f", ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume()) + " ml");
+                    }
+                }
+
+
                 if (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible), getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible)) == true) {
 
                     if ((densitymode.equals("1") || densitymode.equals("2")) || (densitymode.equals("4"))) {

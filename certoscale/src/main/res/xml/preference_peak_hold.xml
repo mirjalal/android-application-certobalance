@@ -57,7 +57,7 @@
         <CheckBoxPreference
             android:key="@string/preferences_peak_netto_visible"
             android:defaultValue="@bool/preferences_peak_netto_visible"
-            android:title="Brutto"
+            android:title="Netto"
             android:summary="Turn the netto weight visible/invisible"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>

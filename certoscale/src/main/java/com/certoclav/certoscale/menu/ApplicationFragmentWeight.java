@@ -236,33 +236,33 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 }
                 if(ApplicationManager.getInstance().getDensity_step_counter()==1) {
-                    textInstruction.setText("");
+                    textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     //textSum.setTextColor(Color.YELLOW);
 
-                    textSum.setText("Weigh Sample in Air and press Accept");
-                    if (densitymode.equals("2")){
-                        textSum.setText("Weigh Sinker in Air and press Accept");
+                    textInstruction.setText("Weigh sample in air and press accept");
+                    if (densitymode.equals("2") || densitymode.equals("3")){
+                        textInstruction.setText("Weigh sinker in air and press accept");
                     }
                 }
 
                 if(ApplicationManager.getInstance().getDensity_step_counter()==2) {
-                    textInstruction.setText("");
+                    textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     //textSum.setTextColor(Color.YELLOW);
-                    textSum.setText("Weigh Sample in Liquid and press Accept");
+                    textInstruction.setText("Weigh sample in liquid and press accept");
                     if (densitymode.equals("2")){
-                        textSum.setText("Weigh Sample in Liquid (push the sample under water) and press Accept");
+                        textInstruction.setText("Weigh sample in liquid (push the sample under water) and press accept");
                     }
 
                     if(densitymode.equals("3")){
-                        textSum.setText("Weigh the Sinker in Air and press Accept");
+                        textInstruction.setText("Weigh the sinker in liquid and press accept");
                     }
                 }
                 if (ApplicationManager.getInstance().getDensity_step_counter()==4){
-                    textInstruction.setText("");
+                    textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textSum.setText("Weigh sinker in Liquid and press Accept");
+                    textInstruction.setText("Weigh sinker in liquid and press accept");
 
                 }
 
@@ -273,7 +273,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     double Sinkervolume=ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume();
 
 
-                    textInstruction.setText("");
+                    textSum.setText("");
 
                     //Equation according to http://www.hs-lausitz.de/fileadmin/user_upload/public/fak/fak2/pdf/Physiklabor/M01_Dichtebestimmung.pdf
                     double density=0;
@@ -312,20 +312,20 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     ApplicationManager.getInstance().setDensity(density);
                     //textSum.setTextColor(Color.YELLOW);
                     if (densitymode.equals("1")) {
-                        textSum.setText("Density calculated");
+                        textInstruction.setText("Density calculated");
                     }
                     if (densitymode.equals("2")) {
-                        textSum.setText("Density of the liquid calculated");
+                        textInstruction.setText("Density of the liquid calculated");
                     }
                 }
                 break;
 
             case FILLING:
-                textInstruction.setText("");
+                textSum.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
-                textSum.setText("Fill Status: " + ApplicationManager.getInstance().getPercentFilling()+" %");
+                textInstruction.setText("Fill Status: " + ApplicationManager.getInstance().getPercentFilling()+" %");
 
                 loadingbarnormal=false;
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
@@ -367,6 +367,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PEAK_HOLD:
+                textInstruction.setText("");
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
                 double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
 

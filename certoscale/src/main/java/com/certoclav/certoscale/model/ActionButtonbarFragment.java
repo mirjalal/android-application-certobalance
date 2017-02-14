@@ -780,10 +780,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
-				buttonStatistics.setVisibility(View.VISIBLE);
-				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAppSettings.setVisibility(View.VISIBLE);
 
+
+				
+
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonAppSettings.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
