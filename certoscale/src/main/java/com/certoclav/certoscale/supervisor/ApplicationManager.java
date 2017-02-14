@@ -47,6 +47,11 @@ import java.util.List;
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
 
+
+    private String Currency="€";
+    public String getCurrency() {return Currency;}
+    public void setCurrency(String currency) {Currency = currency;}
+
     private Unit currentUnit=new Unit(0d,1d,"gram",Unit.UNIT_GRAM,"",true,false);
     public Unit getCurrentUnit() {return currentUnit;}
     public void setCurrentUnit(Unit currentUnit) {this.currentUnit = currentUnit;}
@@ -1456,8 +1461,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
                 @Override
                 public void onClick(View v) {
-                    ApplicationManager.getInstance().setBatchName("");
-                    getBatchList().clear();
+                    clearStatistics();
+                    //ApplicationManager.getInstance().setBatchName("");
+                    //getBatchList().clear();
+
+
                     dialog.dismiss();
                 }
             });

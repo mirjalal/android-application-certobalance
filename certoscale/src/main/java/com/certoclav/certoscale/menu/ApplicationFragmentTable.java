@@ -452,7 +452,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("UNIT COST");
-                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost()));
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost())+ " " +ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible)) == true) {
@@ -462,7 +462,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText("TOTAL COST");
-                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost()));
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost())+ " " + ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (ApplicationManager.getInstance().getCurrentItem() != null) {

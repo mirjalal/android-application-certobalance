@@ -52,14 +52,14 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
         buttonCurrency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                try {
                     final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the cost currency");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" ");
+                    dialog.setContentView(R.layout.dialog_edit_text);
+                    dialog.setTitle("Please enter the pipette name");
+
                     // set the custom dialog components - text, image and button
 
-                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
                         @Override
@@ -67,20 +67,17 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
                             dialog.dismiss();
                         }
                     });
-                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
                     // if button is clicked, close the custom dialog
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            try {
-                               // ApplicationManager.getInstance().setCheckNominalToleranceOver((((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                            EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
 
-                            }catch (NumberFormatException e){
-                              //  ApplicationManager.getInstance().setCheckNominalToleranceOver(0);
+                            ApplicationManager.getInstance().setCurrency(editText.getText().toString());
 
-                            }dialog.dismiss();
+                            dialog.dismiss();
                             onResume();
-
 
 
                         }
@@ -88,14 +85,13 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
 
                     dialog.show();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+
             }
         });
-
 
 
 
@@ -111,6 +107,12 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
             buttonRecipe.setText("Click to choose item");
         }
 
+        if(ApplicationManager.getInstance().getCurrency() == null){
+            buttonCurrency.setText("Currency: ");
+        }
+        else{
+            buttonCurrency.setText("Currency: " + ApplicationManager.getInstance().getCurrency());
+        }
 
         super.onResume();
 
