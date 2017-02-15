@@ -64,15 +64,15 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				imageApp.setImageResource(R.drawable.application_icon_partcounting);
 				break;
 			case PERCENT_WEIGHING:
-				textMail.setText("Percent Weiging");
+				textMail.setText("Percent Weighing");
 				imageApp.setImageResource(R.drawable.application_icon_percent);
 				break;
 			case CHECK_WEIGHING:
-				textMail.setText("Check Weiging");
+				textMail.setText("Check Weighing");
 				imageApp.setImageResource(R.drawable.application_icon_check);
 				break;
 			case ANIMAL_WEIGHING:
-				textMail.setText("Animal Weiging");
+				textMail.setText("Animal Weighing");
 				imageApp.setImageResource(R.drawable.application_icon_animal);
 				break;
 			case FILLING:
