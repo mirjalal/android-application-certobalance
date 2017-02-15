@@ -56,7 +56,7 @@ public class SettingsGlpActivity extends FragmentActivity implements  ButtonEven
 		}catch(Exception e){
 			
 		}
-		getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, new SettingsGlpFragment()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsGlpFragment()).commit();
 	}
 
 
