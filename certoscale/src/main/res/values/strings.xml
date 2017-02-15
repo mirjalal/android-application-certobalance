@@ -210,6 +210,8 @@
     <string name="preferences_totalization_minimum_visible">preferences_totalization_minimum_visible</string>
     <string name="preferences_totalization_maximum_visible">preferences_totalization_maximum_visible</string>
     <string name="preferences_totalization_range_visible">preferences_totalization_range_visible</string>
+    <string name="preferences_totalization_total_visible">preferences_totalization_range_visible</string>
+    <string name="preferences_totalization_current_visible">preferences_totalization_range_visible</string>
     <string name="preferences_totalization_brutto_visible">preferences_totalization_brutto_visible</string>
     <string name="preferences_totalization_netto_visible">preferences_totalization_netto_visible</string>
     <string name="preferences_totalization_tara_visible">preferences_totalization_tara_visible</string>

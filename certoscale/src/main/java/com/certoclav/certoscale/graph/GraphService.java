@@ -76,8 +76,14 @@ public class GraphService implements WeightListener{
 					double[] range = new double[4];
 					range[0] = 0;
 					range[1] = (int)timeStampInMilliSeconds;
-					range[2] = 0;
-					range[3] = 150;
+
+					//range[2] = 0;
+					//range[3] = 150;
+
+
+					range[2]=runningGraph.getTimeSeriesSteam().getMinY()-3;
+					range[3]=runningGraph.getTimeSeriesSteam().getMaxY()+3;
+
 					runningGraph.setRange(range);
 
 					mGuiHandler.sendEmptyMessage(0);

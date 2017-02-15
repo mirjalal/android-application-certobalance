@@ -85,6 +85,23 @@
 
 
         <CheckBoxPreference
+            android:key="@string/preferences_totalization_total_visible"
+            android:defaultValue="@bool/preferences_totalization_total_visible"
+            android:title="Total"
+            android:summary="Turn the brutto weight visible/invisible"
+            android:dependency="@string/preferences_totalization_lock" >
+        </CheckBoxPreference>
+
+        <CheckBoxPreference
+            android:key="@string/preferences_totalization_current_visible"
+            android:defaultValue="@bool/preferences_totalization_current_visible"
+            android:title="Range"
+            android:summary="Turn the brutto weight visible/invisible"
+            android:dependency="@string/preferences_totalization_lock" >
+        </CheckBoxPreference>
+
+<!--
+        <CheckBoxPreference
             android:key="@string/preferences_totalization_brutto_visible"
             android:defaultValue="@bool/preferences_totalization_brutto_visible"
             android:title="Brutto"
@@ -107,8 +124,9 @@
             android:summary="Turn the tara weight visible/invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
-
+-->
     </PreferenceCategory>
+
 
     <PreferenceCategory android:title="PRINTER OPTIONS" >
         <CheckBoxPreference
