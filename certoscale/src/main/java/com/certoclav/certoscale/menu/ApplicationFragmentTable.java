@@ -33,6 +33,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     private TextView textTara = null;
     private List<ReferenceField> listReferenceFields = new ArrayList<ReferenceField>();
 
+
     int indexTableTara=2;
     int brutto=0;
     int netto=4;
@@ -75,6 +76,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int minimum=3;
     int maximum=5;
     int range=6;
+    int totalizationCurrrent=7;
 
     //Formulation
     int indexTableRecipeName = 0;
@@ -533,7 +535,82 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
             case TOTALIZATION:
-                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code
+
+                // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code Why? Whats the benefit? Visibility options are easier to use if the table is filled here
+                   if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
+                        listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText("SAMPLES");
+                        try {
+                            listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_total_visible),getResources().getBoolean(R.bool.preferences_totalization_total_visible))==true) {
+                        listReferenceFields.get(indexTableTotal).getTextName().setText("TOTAL");
+                        try {
+                            listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_average_visible),getResources().getBoolean(R.bool.preferences_totalization_average_visible))==true) {
+                        listReferenceFields.get(indextableaverage).getTextName().setText("AVERAGE");
+                        try {
+                            listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+                        } catch (Exception e) {
+                        }
+
+                    }
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_standarddeviation_visible),getResources().getBoolean(R.bool.preferences_totalization_standarddeviation_visible))==true) {
+                        listReferenceFields.get(standarddeviation).getTextName().setText("STANDARD DEV.");
+                        try {
+                            listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_minimum_visible),getResources().getBoolean(R.bool.preferences_totalization_minimum_visible))==true) {
+                        listReferenceFields.get(minimum).getTextName().setText("MINIMUM");
+                        try {
+                            listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_maximum_visible),getResources().getBoolean(R.bool.preferences_totalization_maximum_visible))==true) {
+
+                        listReferenceFields.get(maximum).getTextName().setText("MAXIMUM");
+                        try {
+                            listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible),getResources().getBoolean(R.bool.preferences_totalization_range_visible))==true) {
+
+                        listReferenceFields.get(range).getTextName().setText("RANGE");
+                        try {
+                            listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getStatistic().getMax()) - ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                        } catch (Exception e) {
+                        }
+                    }
+
+
+                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible),getResources().getBoolean(R.bool.preferences_totalization_range_visible))==true) {
+
+                        listReferenceFields.get(totalizationCurrrent).getTextName().setText("CURRENT ");
+                        try {
+                            //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
+                            listReferenceFields.get(totalizationCurrrent).getTextValue().setText(String.format("%.4f g",(ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1))));
+                        } catch (Exception e) {
+                        }
+
+                    }
+
+
+
                 break;
             case FORMULATION:
                 listReferenceFields.get(indexTableRecipeName).getTextName().setText("RECIPE");
@@ -716,6 +793,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     @Override
     public void onStatisticChanged(SummaryStatistics statistic) {
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+       /*
         if(Scale.getInstance().getScaleApplication() == ScaleApplication.TOTALIZATION){
          //   if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
                 listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText("SAMPLES");
@@ -761,7 +839,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
             }
-
+*/
         }
 
 

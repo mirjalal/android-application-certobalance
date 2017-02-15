@@ -154,6 +154,8 @@
     <bool name="preferences_totalization_minimum_visible">true</bool>
     <bool name="preferences_totalization_maximum_visible">true</bool>
     <bool name="preferences_totalization_range_visible">true</bool>
+    <bool name="preferences_totalization_total_visible">true</bool>
+    <bool name="preferences_totalization_current_visible">true</bool>
     <bool name="preferences_totalization_brutto_visible">true</bool>
     <bool name="preferences_totalization_netto_visible">true</bool>
     <bool name="preferences_totalization_tara_visible">true</bool>
