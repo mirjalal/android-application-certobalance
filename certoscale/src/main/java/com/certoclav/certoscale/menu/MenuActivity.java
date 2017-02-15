@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 public class MenuActivity extends Activity implements ButtonEventListener {
 
+
     private Navigationbar navigationbar = new Navigationbar(this);
     private MenuElementAdapter menuMainElementAdapter = null;
     private GridView gridView = null;

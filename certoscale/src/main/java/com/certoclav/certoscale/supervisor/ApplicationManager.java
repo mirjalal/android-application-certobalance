@@ -3,6 +3,7 @@ package com.certoclav.certoscale.supervisor;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,7 @@ import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.MenuActivity;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
@@ -690,6 +692,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             e.printStackTrace();
         }
     }
+
 
 
     public void showIngrediantNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
@@ -1489,27 +1492,35 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     @Override
     public void onWeightChanged(Double absweight, String unit) {
-        Double weight=ApplicationManager.getInstance().getTaredValueInGram();
-        if(Math.abs(weighOld - weight) <= 0.0001){
+        Double weight = ApplicationManager.getInstance().getTaredValueInGram();
+        if (AppConstants.IS_IO_SIMULATED == true) {
+        Scale.getInstance().setStable(false);
 
-            if(Scale.getInstance().isStable() == false) {
-                stableCounter=stableCounter+1;
-                if(stableCounter>=8 && Math.abs(weight)>0.002) {
-                    if (Math.abs(lastStableweight-weight)>0.002) {
-                        Scale.getInstance().setStable(true);
-                        stableCounter = 0;
-                        lastStableweight=weight;
-                       // Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
+        } else {
+
+            if (Math.abs(weighOld - weight) <= 0.0001) {
+
+               // Log.e("Diff",String.format("%.4f",Math.abs(weighOld - weight)) );
+                if (Scale.getInstance().isStable() == false) {
+                    stableCounter = stableCounter + 1;
+                    if (stableCounter >= 8 && Math.abs(weight) > 0.002) {
+                        if (Math.abs(lastStableweight - weight) > 0.002) {
+                            Scale.getInstance().setStable(true);
+                            stableCounter = 0;
+                            lastStableweight = weight;
+                            // Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
+                        }
                     }
                 }
+            } else {
+
+                stableCounter = 0;
+                if (Scale.getInstance().isStable() == true) {
+                    Scale.getInstance().setStable(false);
+                }
             }
-        }else{
-            stableCounter=0;
-            if(Scale.getInstance().isStable() == true) {
-                Scale.getInstance().setStable(false);
-            }
+            weighOld = weight;
         }
-        weighOld = weight;
     }
 
     @Override

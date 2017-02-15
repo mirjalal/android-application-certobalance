@@ -196,14 +196,20 @@ private SharedPreferences prefs = null;
                             editor.clear();
                             editor.commit();
                             ApplicationController.getInstance().clearApplicationData();
-                            android.os.Process.killProcess(android.os.Process.myPid());
+
+                            //android.os.Process.killProcess(android.os.Process.myPid());
 
 
                             //User will be logged out to avoid bugs
-                            //Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
-                            //Intent intent = new Intent(getActivity(), LoginActivity.class);
-                            //startActivity(intent);
-                            //getActivity().finish();
+                            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+                            Intent intent = new Intent( getContext() ,LoginActivity.class);
+                            startActivity(intent);
+
+                            getActivity().finish();
+                            android.os.Process.killProcess(android.os.Process.myPid());
+
+
+
 
 
 
