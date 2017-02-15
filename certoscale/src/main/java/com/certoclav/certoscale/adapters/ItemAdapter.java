@@ -135,7 +135,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 			}
 		});
-		
+
 
 		actionItemDelete.setChecked(false);
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);

@@ -296,45 +296,45 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    final Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_edit_text);
-                    dialog.setTitle("Please enter the pipette name");
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_edit_text);
+            dialog.setTitle("Please enter the pipette name");
 
-                    // set the custom dialog components - text, image and button
+            // set the custom dialog components - text, image and button
 
-                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
-                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+            dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
-                    // if button is clicked, close the custom dialog
-                    dialogButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
-
-                            ApplicationManager.getInstance().setPipette_name(editText.getText().toString());
-
-                            dialog.dismiss();
-                            onResume();
-
-
-                        }
-                    });
-
-                    dialog.show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
                 }
+            });
+            Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
+            // if button is clicked, close the custom dialog
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
+
+                    ApplicationManager.getInstance().setPipette_name(editText.getText().toString());
+
+                    dialog.dismiss();
+                    onResume();
 
 
-            }
-        });
+                }
+            });
+
+            dialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+});
 
 
         buttonPipettenumber =  (Button) rootView.findViewById(R.id.application_settings_pipette_button_pipettenumber);

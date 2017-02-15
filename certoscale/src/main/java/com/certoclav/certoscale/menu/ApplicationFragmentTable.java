@@ -452,7 +452,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("UNIT COST");
-                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost()));
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost())+ " " +ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible)) == true) {
@@ -462,7 +462,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText("TOTAL COST");
-                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost()));
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost())+ " " + ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (ApplicationManager.getInstance().getCurrentItem() != null) {
@@ -487,6 +487,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(DensityWaterTemp).getTextValue().setText(String.format("%.1f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + " °C");
                     }
                 }
+
+                if (prefs.getBoolean(getString(R.string.preferences_density_sinkervolume_visible), getResources().getBoolean(R.bool.preferences_density_sinkervolume_visible)) == true) {
+                    if (densitymode.equals("3")) {
+                        listReferenceFields.get(0).getTextName().setText("SINKER VOLUME");
+                        listReferenceFields.get(0).getTextValue().setText(String.format("%.2f", ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume()) + " ml");
+                    }
+                }
+
 
                 if (prefs.getBoolean(getString(R.string.preferences_denisty_Liquid_visible), getResources().getBoolean(R.bool.preferences_denisty_Liquid_visible)) == true) {
 

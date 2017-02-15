@@ -433,7 +433,7 @@ public class Library {
 	}
 	public void setCheckNominalToleranceOverPercent(double nominalToleranceOverPercentPercent){
 		double overPercent=(nominalToleranceOverPercentPercent/100)*CheckNominal;
-		this.CheckToleranceUnder=overPercent;
+		this.CheckToleranceOver=overPercent;
 	}
 	public void setCheckNominalToleranceOver(double nominalToleranceOver){
 		this.CheckToleranceOver=nominalToleranceOver;

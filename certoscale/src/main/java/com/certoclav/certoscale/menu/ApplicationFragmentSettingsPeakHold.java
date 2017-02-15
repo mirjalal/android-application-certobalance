@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.io.IOException;
@@ -35,6 +36,8 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
     private LinearLayout containerSettingsButtons = null;
     private Button Start = null;
     private Button End = null;
+
+
 
 
 

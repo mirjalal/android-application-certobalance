@@ -37,7 +37,7 @@
             />
 
 
-        <ListPreference
+   <!---     <ListPreference
             android:key="@string/preferences_pipette_presureunit"
             android:title="Pressure unit"
             android:summary="Select the pressure unit"
@@ -51,6 +51,7 @@
             android:dependency="@string/preferences_pipette_lock"
             />
 
+    -->
     </PreferenceCategory>
 
     <PreferenceCategory android:title="VISIBILITY" >

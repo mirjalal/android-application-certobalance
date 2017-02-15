@@ -313,7 +313,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the under tolerance limit in percent");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -353,6 +353,10 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
             }
         });
 
+        button_nominal_tolerance_under_percent.setVisibility(View.GONE);
+        button_nominal_tolerance_under_percent.setEnabled(true);
+
+
 
 
         button_nominal_tolerance_over_percent = (Button) rootView.findViewById(R.id.settings_check_weighing_button_nominal_tolerance_over_percent);
@@ -363,7 +367,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the over tolerance in percent");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -402,6 +406,11 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 }
             }
         });
+
+        button_nominal_tolerance_over_percent.setVisibility(View.GONE);
+        button_nominal_tolerance_over_percent.setEnabled(true);
+
+        //test
 
 
         return rootView;//inflater.inflate(R.layout.article_view, container, false);

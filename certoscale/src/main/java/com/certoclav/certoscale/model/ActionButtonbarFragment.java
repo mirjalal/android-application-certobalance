@@ -32,6 +32,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
+import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
@@ -80,6 +81,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonZero = null;
 	private Button buttonAccept = null;
 	private Button buttonIngrediantList = null;
+	private Button buttonEnd = null;
 
 	private Button buttonNewBatch = null;
 	private Button buttonShowBatch = null;
@@ -216,8 +218,49 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonAccept.setEnabled(true);
 					buttonStart.setEnabled(false);
 				}
+
+				if(Scale.getInstance().getScaleApplication()==PEAK_HOLD){
+					try{
+						//Make sure that only one Button is clickable
+						buttonStart.setEnabled(false);
+						buttonEnd.setEnabled(true);
+
+						//Start PeakHold Measurement
+						ApplicationManager.getInstance().setPeakHoldActivated(true);
+
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+
+				}
+
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_START,false);
+				}
+
+
+			}
+		});
+
+		buttonEnd = (Button) rootView.findViewById(R.id.actionbar_button_end);
+		buttonEnd.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				try{
+					//Make sure that only one Button is clickable
+					buttonStart.setEnabled(true);
+					buttonEnd.setEnabled(false);
+
+					// End PeakHold Measurenment
+					ApplicationManager.getInstance().setPeakHoldActivated(false);
+
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
 				}
 
 
@@ -780,15 +823,42 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
-				buttonStatistics.setVisibility(View.VISIBLE);
-				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAppSettings.setVisibility(View.VISIBLE);
 
+				buttonStart.setVisibility(View.VISIBLE);
+
+
+
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonAppSettings.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.GONE);
+
+
+				buttonEnd.setVisibility(View.VISIBLE);
+				//get PeakHoldMode
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+				String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+				//Semi Automatic Mode
+				if(PeakHoldMode.equals("2")){
+
+					buttonStart.setEnabled(false);
+					buttonEnd.setEnabled(true);
+					//Start PeakHold Measurement
+					ApplicationManager.getInstance().setPeakHoldActivated(true);
+				}
+
+				//Automatic Mode
+				if(PeakHoldMode.equals("3")){
+
+					buttonStart.setEnabled(false);
+					buttonEnd.setEnabled(false);
+					//Start PeakHold Measurement
+					ApplicationManager.getInstance().setPeakHoldActivated(true);
+				}
+
 
 				break;
 
@@ -877,10 +947,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			getButtonAppSettings().setEnabled(false);
 		}
 
+		if(application != PEAK_HOLD){
+			buttonEnd.setVisibility(View.GONE);
+		}
 
 		//handle Statistic Button visibiltiy (visible or gone)
 		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING || application==ScaleApplication.DENSITIY_DETERMINATION){
+				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING ||
+				application==ScaleApplication.DENSITIY_DETERMINATION || application==ScaleApplication.PEAK_HOLD ){
 			getButtonStatistics().setVisibility(View.GONE);
 			buttonAccumulate.setVisibility(View.GONE);
 		}else{
