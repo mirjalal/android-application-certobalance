@@ -19,12 +19,13 @@
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
+        <!---
         <ListPreference
             android:key="@string/preferences_check_limitmode"
             android:title="Auto Sample Weighing Mode"
             android:dependency="@string/preferences_animal_lock"
             />
-
+         -->
 
 
     </PreferenceCategory>

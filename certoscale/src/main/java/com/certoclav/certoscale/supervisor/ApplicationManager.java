@@ -42,12 +42,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
+import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
+import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+
 /**
  * Created by Michael on 12/6/2016.
  */
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
+
+    boolean returnFromSubMenu=false;
+    public boolean isReturnFromSubMenu() {return returnFromSubMenu;}
+    public void setReturnFromSubMenu(boolean returnFromSubMenu) {this.returnFromSubMenu = returnFromSubMenu;}
 
 
     private String Currency="€";
@@ -606,6 +616,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 @Override
                 public void onClick(View v) {
                     clearStatistics();
+
                     dialog.dismiss();
 
                 }
@@ -676,6 +687,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 sAdapter.add(sample);
             }
 
+            /*
+            Button dialogShowGraph = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_showgraph);
+            dialogShowGraph.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });*/
 
 
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_close);
@@ -920,15 +939,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public String getAveragePieceWeightAsStringWithUnit() {
-        return String.format("%.5f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " " +getUnitAsString();
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " g";
     }
 
     public String getAveragePieceWeightAsStringInGram() {
-        return String.format("%.5f", currentLibrary.getAveragePieceWeight());
+        return String.format("%.4f", currentLibrary.getAveragePieceWeight());
     }
 
     public String getUnderLimitAsStringInGram() {
-        return String.format("%.5f", currentLibrary.getUnderLimit());
+        return String.format("%.4f", currentLibrary.getUnderLimit());
     }
 
 
@@ -1525,6 +1544,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     @Override
     public void onApplicationChange(ScaleApplication application) {
+        //do not react on subApplications
+        if(application == PART_COUNTING_CALC_AWP ||
+                application == PERCENT_WEIGHING_CALC_REFERENCE ||
+                application == ANIMAL_WEIGHING_CALCULATING ||
+                application == FILLING_CALC_TARGET ||
+                application == FORMULATION_RUNNING){
+            return;
+        }
         ApplicationManager.getInstance().setIngrediantTotalCost(0);
         ApplicationManager.getInstance().setIngrediantTotalWeight(0);
         getIngrediantCostList().clear();

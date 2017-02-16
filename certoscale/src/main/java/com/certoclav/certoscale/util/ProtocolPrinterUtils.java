@@ -132,13 +132,20 @@ public void  printHeader(  String header){
 	}
 
 	public void printResults(){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
+
+
 		switch (Scale.getInstance().getScaleApplication()){
 			case WEIGHING:
+
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result:"+ " " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Grosss:" + " " + ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Net:" +" " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tare:" +" " + ApplicationManager.getInstance().getTareAsStringWithUnit());
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight:" + " " + ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
+
+				if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_weigh_tara_visible), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_weigh_tara_visible)) == true) {
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight:" + " " + ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
+				}
 				break;
 			default:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Todo: printResults()"); //TODO

@@ -613,6 +613,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
@@ -629,6 +630,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
@@ -645,6 +647,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
@@ -661,6 +664,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
@@ -683,6 +687,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
@@ -928,11 +933,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				application == ANIMAL_WEIGHING_CALCULATING ||
 				application == FILLING_CALC_TARGET ||
 				application == FORMULATION_RUNNING){
+			ApplicationManager.getInstance().setReturnFromSubMenu(true);
 			return;
+		}else{
+			if (ApplicationManager.getInstance().isReturnFromSubMenu()==true){
+				ApplicationManager.getInstance().setReturnFromSubMenu(false);
+				return;
+			}
+
+
 		}
 
 
 		ApplicationManager.getInstance().clearStatistics();
+
+
 		getButtonAppSettings().setText("SETTINGS");
 		getButtonCal().setEnabled(true);
 		getButtonPrint().setEnabled(true);

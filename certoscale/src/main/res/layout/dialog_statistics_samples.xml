@@ -27,11 +27,23 @@
 		android:layout_below="@+id/dialog_sample_list"
 		>
 
+		<!--
+		<Button
+			android:id="@+id/dialog_statistics_samples_button_showgraph"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Show graph"
+			style="@style/button_default"
+
+			/>
+		-->
 
 		<Button
 			android:id="@+id/dialog_statistics_samples_button_close"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
+			android:layout_weight="1"
 			android:text="Close"
 			style="@style/button_default"
 

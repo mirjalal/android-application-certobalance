@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -180,7 +181,16 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		final DatabaseService databaseService = new DatabaseService(this);
 
 
+		TextView textSimulationMode=(TextView) findViewById(R.id.menu_main_text_simulation_mode);
+		if (AppConstants.IS_IO_SIMULATED == true) {
 
+			textSimulationMode.setTextColor(Color.YELLOW);
+			textSimulationMode.setText("Simulation Mode");
+
+
+		}else{
+			textSimulationMode.setText("");
+		}
 
 		// initialize login form
 		buttonLogin = (Button) findViewById(R.id.loginButtonLogin);

@@ -548,7 +548,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_total_visible),getResources().getBoolean(R.bool.preferences_totalization_total_visible))==true) {
                         listReferenceFields.get(indexTableTotal).getTextName().setText("TOTAL");
                         try {
-                            listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+                            if (ApplicationManager.getInstance().getStats().getStatistic().getSum()==0){
+                                listReferenceFields.get(indexTableTotal).getTextValue().setText("0 g");
+                            }else {
+                                listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -556,7 +560,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_average_visible),getResources().getBoolean(R.bool.preferences_totalization_average_visible))==true) {
                         listReferenceFields.get(indextableaverage).getTextName().setText("AVERAGE");
                         try {
-                            listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMean())){
+                                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("0 g"));
+                            }else {
+                                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+                            }
                         } catch (Exception e) {
                         }
 
@@ -565,7 +573,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_standarddeviation_visible),getResources().getBoolean(R.bool.preferences_totalization_standarddeviation_visible))==true) {
                         listReferenceFields.get(standarddeviation).getTextName().setText("STANDARD DEV.");
                         try {
-                            listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+                            if (Double.isNaN( ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())){
+                                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("0 g"));
+                            }else {
+                                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -573,7 +585,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_minimum_visible),getResources().getBoolean(R.bool.preferences_totalization_minimum_visible))==true) {
                         listReferenceFields.get(minimum).getTextName().setText("MINIMUM");
                         try {
-                            listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMin())){
+                                listReferenceFields.get(minimum).getTextValue().setText(String.format("0 g"));
+                            }else {
+                                listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -583,7 +599,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                         listReferenceFields.get(maximum).getTextName().setText("MAXIMUM");
                         try {
-                            listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+                            if(Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax())){
+                                listReferenceFields.get(maximum).getTextValue().setText(String.format("0 g"));
+                            } else {
+                                listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -592,7 +612,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                         listReferenceFields.get(range).getTextName().setText("RANGE");
                         try {
-                            listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getStatistic().getMax()) - ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax()-ApplicationManager.getInstance().getStats().getStatistic().getMin())){
+                                listReferenceFields.get(range).getTextValue().setText("0 g");
+                            }else {
+                                listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getStatistic().getMax()) - ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                            }
                         } catch (Exception e) {
                         }
                     }
@@ -602,8 +626,15 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                         listReferenceFields.get(totalizationCurrrent).getTextName().setText("CURRENT ");
                         try {
-                            //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
-                            listReferenceFields.get(totalizationCurrrent).getTextValue().setText(String.format("%.4f g",(ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1))));
+
+                            if (ApplicationManager.getInstance().getStats().getSamples().isEmpty()==true){
+
+                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText("0 g");
+                            }else {
+
+                                //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
+                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size() - 1))));
+                            }
                         } catch (Exception e) {
                         }
 

@@ -104,6 +104,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         boolean loadingbarnormal=true;
         switch (Scale.getInstance().getScaleApplication()){
             case ANIMAL_WEIGHING_CALCULATING:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("calculating...");
                 textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram()));
@@ -111,26 +112,36 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
+            case PERCENT_WEIGHING_CALC_REFERENCE:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText( String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram())+" g");
+
             case ANIMAL_WEIGHING:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
                 textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram())+ " g");
                 break;
             case PART_COUNTING_CALC_AWP:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
                 textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
 
                 break;
             case PART_COUNTING:
+                textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
                 break;
             case FORMULATION:
+                textInstruction.setText("");
             case FORMULATION_RUNNING:
+                textInstruction.setText("");
             case DIFFERENTIAL_WEIGHING:
+                textInstruction.setText("");
             case WEIGHING:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -154,6 +165,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case CHECK_WEIGHING:
+                textInstruction.setText("");
+
                 String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions),"");
                 String checklimitmode = prefs.getString(getString(R.string.preferences_check_limitmode),"");
                 double current = ApplicationManager.getInstance().getTaredValueInGram();
@@ -226,6 +239,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case DENSITIY_DETERMINATION:
+                textInstruction.setText("");
 
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
                 String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
@@ -321,6 +335,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case FILLING:
+                textInstruction.setText("");
                 textSum.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -360,7 +375,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case TOTALIZATION:
-                textInstruction.setText("Place sample on the pan. Press ADD TO STATS to add to the total.");
+
+                textInstruction.setText("Place sample on the pan. Press Accept to add to the total.");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
@@ -443,6 +459,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PIPETTE_ADJUSTMENT:
+                textInstruction.setText("");
 
                 if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
                     textInstruction.setText("Place Container on the pan. Press Tare");
