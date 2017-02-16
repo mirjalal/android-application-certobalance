@@ -70,6 +70,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
         }
     };
 	private int counter = 0;
+	private int counter2 = 0;
 
 
 	private Thread serialThread = new Thread(new Runnable() {
@@ -158,6 +159,18 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	
 	private void simulateMessage(){
 		 	counter++;
+
+			if ((counter%30)==0){
+
+				counter--;
+				counter2++;
+			}
+			if (counter2>10){
+				counter++;
+				counter2=0;
+			}
+
+
 
 
 			rawResponse = "+ 0.0000 g";
