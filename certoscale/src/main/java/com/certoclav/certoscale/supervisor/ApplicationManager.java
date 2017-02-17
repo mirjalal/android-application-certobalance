@@ -1537,18 +1537,18 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             adapter.add("Inaccuracy: \n");
 
             double meanError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getMean()-ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
-            adapter.add("Mean Error:"+String.format("%.4f",meanError)+" ml\n");
+            adapter.add("Mean Error: "+String.format("%.4f",meanError)+" ml\n");
             double meanErrorPercent=Math.abs(meanError/ApplicationManager.getInstance().getStats().getStatistic().getMean())*100;
-            adapter.add("Mean Error %:"+String.format("%.4f",meanErrorPercent)+" %\n");
-            adapter.add("Limit %:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
+            adapter.add("Mean Error %: "+String.format("%.4f",meanErrorPercent)+" %\n");
+            adapter.add("Limit %: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
 
 
             adapter.add("\n");
             adapter.add("Impreccision:\n");
-            adapter.add("Standard Deviation:"+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
+            adapter.add("Standard Deviation: "+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
             double standardError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()/ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())*100;
-            adapter.add("Error CS%:"+String.format("%.4f",standardError)+" %\n");
-            adapter.add("Limit CV:"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
+            adapter.add("Error CS%: "+String.format("%.4f",standardError)+" %\n");
+            adapter.add("Limit CV: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
 
             if (meanErrorPercent<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy() && standardError<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()){
                 adapter.add("\n");
@@ -1596,15 +1596,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             adapter.add("> +2s:"+pstandard2+"\n");
             adapter.add("> +2s:"+pstandard1+"\n");
             adapter.add("*+1S > Mean > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
-            adapter.add("- +2s:"+nstandard1+"\n");
-            adapter.add("- +2s:"+nstandard2+"\n");
+            adapter.add("< -2s:"+nstandard1+"\n");
+            adapter.add("< -2s:"+nstandard2+"\n");
 
             adapter.add("\n");
 
 
             adapter.add("---Sample Data---\n");
             for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-                adapter.add("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+                adapter.add("PipetteSample "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
 
             }
 

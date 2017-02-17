@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -255,6 +256,14 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
         String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
         String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
 
+        if (densityliquidtype.isEmpty()){
+            densityliquidtype="1";
+        }
+
+        if (densitymode.isEmpty()){
+            densitymode="1";
+        }
+
         if (densitymode.equals("1") || densitymode.equals("2")) {
 
             if (densityliquidtype.equals("1")) {
@@ -295,7 +304,7 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
         //buttonWaterTemp.setText("Water Temperature\n"+ String.format("%.8f",ApplicationManager.getInstance().WaterTempInDensity(30.5))+" °C" );
         super.onResume();
 
-
+        Log.e("Denisty Mode",densityliquidtype);
 
 
     }
