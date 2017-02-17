@@ -6,12 +6,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
@@ -243,6 +245,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
                 String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+
+                if (densityliquidtype.isEmpty()){
+                    densityliquidtype="1";
+                }
+
+                if (densitymode.isEmpty()){
+                    densitymode="1";
+                }
 
                 if (ApplicationManager.getInstance().getDensity_step_counter()==0){
                     textValue.setTextColor(Color.WHITE);

@@ -20,23 +20,28 @@
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
+
+
+
         <ListPreference
             android:key="@string/preferences_density_mode"
-            android:title="Density mode"
-            android:summary="Select between solid and liquid"
-            android:dependency="@string/preferences_density_lock"
             android:defaultValue="1"
             android:entries="@array/preferences_density_mode"
             android:entryValues="@array/preferences_density_mode_value"
+            android:title="Density mode"
+            android:summary="Select between solid and liquid"
+            android:dependency="@string/preferences_density_lock"
+
+
             />
         <ListPreference
             android:key="@string/preferences_density_liquidtyp"
-            android:title="Liquid Type"
-            android:summary="Select between water and ohter"
-            android:dependency="@string/preferences_density_lock"
             android:defaultValue="1"
             android:entries="@array/preferences_density_liquid_type"
             android:entryValues="@array/preferences_density_liquid_type_values"
+            android:title="Liquid Type"
+            android:summary="Select between water and ohter"
+            android:dependency="@string/preferences_density_lock"
             />
 
 

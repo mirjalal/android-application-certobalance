@@ -19,12 +19,14 @@
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
+        <!---
         <ListPreference
             android:key="@string/preferences_ingrediant_mode"
             android:title="Currency Label"
             android:summary="Select the currency label"
             android:dependency="@string/preferences_ingrediant_lock"
             />
+        -->
 
 
     </PreferenceCategory>
