@@ -3,7 +3,6 @@ package com.certoclav.certoscale.supervisor;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -29,7 +28,6 @@ import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.MenuActivity;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
@@ -313,7 +311,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public String getAwpCalcSampleSizeAsString() {
-        return String.format("%.6f", getAwpCalcSampleSize()) + " g";
+        return String.format("%.6f", transformGramToCurrentUnit(getAwpCalcSampleSize())) + " " + getCurrentUnit().getName();
     }
 
 
@@ -387,16 +385,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         currentLibrary.setAveragePieceWeight(averagePieceWeight);
     }
 
-    public Unit getUnit() {
-        return unit;
-    }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-
-    private Unit unit = null;
 
     public String getUnitAsString() {
         switch (Scale.getInstance().getScaleApplication()) {
@@ -407,7 +396,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 return "%";
 
             default:
-                return unit.getName();
+                return currentUnit.getName();
         }
     }
 
@@ -461,9 +450,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + getUnitAsString();
+                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
             default:
-                return String.format("%.4f", getSumInCurrentUnit() - getTareInCurrentUnit() ) + " " + ApplicationManager.getInstance().getCurrentUnit().getName();
+                return String.format("%.4f", transformGramToCurrentUnit(getTaredValueInGram())) + " " + getCurrentUnit().getName();
 
         }
 
@@ -488,7 +477,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         Scale.getInstance().setOnWeightListener(this);
         Scale.getInstance().setOnApplicationListener(this);
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
-        unit = new Unit(0d,1d,"gram","g","",true,false);
+        currentUnit = new Unit(0d,1d,"gram","g","",true,false);
         currentLibrary = new Library("",0,"",0,"default",0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0,new Date(),true,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0);
     }
 
@@ -939,7 +928,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public String getAveragePieceWeightAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " g";
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getAveragePieceWeight());
     }
 
     public String getAveragePieceWeightAsStringInGram() {
@@ -953,7 +942,19 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     private Double transformGramToCurrentUnit(double gram) {
-        return gram * unit.getFactor()* Math.pow(10,unit.getExponent());
+        return gram * currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent());
+    }
+
+    public String getTransformedWeightAsStringWithUnit(double gram) {
+        String retVal = "";
+        try {
+            retVal =  String.format("%.4f", transformGramToCurrentUnit(gram)) + " "+getCurrentUnit().getName();
+        }catch (Exception e){
+            retVal = "";
+        }
+        return retVal;
+
+
     }
 
     public String getUnderLimitPiecesAsStringInGram() {
@@ -964,15 +965,32 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
 
+
+    public String getUnderLimitCheckWeighingAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getUnderLimitCheckWeighing())) + getCurrentUnit().getName();
+    }
     public String getUnderLimitCheckWeighingAsString() {
         return String.format("%.4f", currentLibrary.getUnderLimitCheckWeighing());
     }
+
+    public String getCheckNominalAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominal())) + " "+ getCurrentUnit().getName();
+    }
+
+
+
     public String getCheckNominal() {
         return String.format("%.4f", currentLibrary.getCheckNominal());
     }
     public double getCheckNominaldouble() {
        return currentLibrary.getCheckNominal();
     }
+
+    public String getCheckNominalToleranceOverAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominalToleranceOver())) + " "+ getCurrentUnit().getName();
+    }
+
+
     public String getCheckNominalToleranceOver() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceOver());
     }
@@ -986,6 +1004,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public double getCheckNominalToleranceOverdouble() {
         return currentLibrary.getCheckNominalToleranceOver();
     }
+
+    public String getCheckNominalToleranceUnderAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominalToleranceUnder())) + " "+ getCurrentUnit().getName();
+    }
+
     public String getCheckNominalToleranceUnder() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnder());
     }
@@ -993,6 +1016,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public double getCheckNominalToleranceUnderdouble() {
         return  currentLibrary.getCheckNominalToleranceUnder();
+    }
+
+
+    public String getOverLimitCheckWeighingAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getOverLimitCheckWeighing())) + " "+ getCurrentUnit().getName();
     }
 
     public String getOverLimitCheckWeighingAsString() {
@@ -1043,6 +1071,21 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getReferenceWeightAsStringInGram() {
         return String.format("%.4f", (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)) + " " + "g";
     }
+    public String getReferenceWeightAsStringWithUnit() {
+        return String.format("%.4f", (transformGramToCurrentUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100))) + " " + getCurrentUnit().getName();
+    }
+
+    public String getDifferenceAsStringWithUnit() {
+        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+        double netto=(getSumInGram() - getTareInGram());
+
+        double difference=netto-ref;
+
+
+        return String.format("%.4f", transformGramToCurrentUnit(difference)) + " " + getCurrentUnit().getName();
+    }
+
+
 
     public String getDifferenceInGram() {
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
@@ -1162,24 +1205,113 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getDifferenceAsStringInGramWithUnit() {
         String retVal = "";
         try {
-            retVal =  String.format("%.4f", getSumInGram() - getTareInGram() - currentItem.getWeight()) + " g";
+            retVal =  String.format("%.4f", transformGramToCurrentUnit(getSumInGram() - getTareInGram() - currentItem.getWeight())) + " "+getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
         return retVal;
     }
 
-    public String getDifferenceToInitialInPercentWithUnit() {
+    public String getDifferenceToInitialInPercentAsString() {
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", getDifferenceToInitialWeightInGram() / currentItem.getWeight() * 100.0);
+            retVal = String.format("%.4f", getDifferenceToInitialWeightInGram() / currentItem.getWeight() * 100.0) + " %";
         }catch (Exception e){
             retVal = "";
         }
 
         return retVal;
         }
+
+
+
+
+    public String getStatisticsCurrentAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(   getStats().getSamples().get(getStats().getSamples().size() - 1))) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+
+
+    public String getStatisticsRangeAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax()) - getStats().getStatistic().getMin()) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+    public String getStatisticsMaxAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax())) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+    public String getStatisticsMinAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMin())) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+    public String getStatisticsStandardDeviationAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getStandardDeviation())) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+    public String getStatisticsMeanAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMean())) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
+    public String getStatisticsSumAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getSum())) + " "+ getCurrentUnit();
+        }catch (Exception e){
+            retVal = "";
+        }
+
+        return retVal;
+    }
 
     public double WaterTempInDensity(double temp){
 
@@ -1512,10 +1644,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     @Override
     public void onWeightChanged(Double absweight, String unit) {
         Double weight = ApplicationManager.getInstance().getTaredValueInGram();
-        if (AppConstants.IS_IO_SIMULATED == true) {
-        Scale.getInstance().setStable(false);
 
-        } else {
+
 
             if (Math.abs(weighOld - weight) <= 0.0001) {
 
@@ -1540,7 +1670,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             }
             weighOld = weight;
         }
-    }
+
 
     @Override
     public void onApplicationChange(ScaleApplication application) {
@@ -1561,4 +1691,6 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
+
+
 }

@@ -39,11 +39,12 @@ public class SettingsUnitFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(adapter.getItem(position).getEnabled()) {
-                    ApplicationManager.getInstance().setUnit(adapter.getItem(position));
+                    ApplicationManager.getInstance().setCurrentUnit(adapter.getItem(position));
                     getActivity().finish();
                 }
             }
         });
+
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 

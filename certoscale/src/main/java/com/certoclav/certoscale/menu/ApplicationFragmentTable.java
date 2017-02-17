@@ -15,7 +15,6 @@ import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 
@@ -272,27 +271,27 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case PERCENT_WEIGHING:
                 if (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible), getResources().getBoolean(R.bool.preferences_percent_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
-                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsString() + " g");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible), getResources().getBoolean(R.bool.preferences_percent_brutto_visible)) == true) {
                     listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
-                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsString() + " g");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_netto_visible), getResources().getBoolean(R.bool.preferences_percent_netto_visible)) == true) {
                     listReferenceFields.get(netto).getTextName().setText("NETTO");
-                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_reference_weight_visible), getResources().getBoolean(R.bool.preferences_percent_reference_weight_visible)) == true) {
                     listReferenceFields.get(reference_weight).getTextName().setText("REFERENCE WEIGHT");
-                    listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getReferenceWeightAsStringInGram());
+                    listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible), getResources().getBoolean(R.bool.preferences_percent_difference_visible)) == true) {
-                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE [g]");
-                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInGram() + " g");
+                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE" +" "+ ApplicationManager.getInstance().getCurrentUnit().getName() + "["+"]");
+                    listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible), getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible)) == true) {
                     listReferenceFields.get(difference_percent).getTextName().setText("DIFFERENCE [%]");
@@ -320,34 +319,34 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_under_visible), getResources().getBoolean(R.bool.preferences_check_under_visible)) == true) {
                         listReferenceFields.get(checkunderlimit).getTextName().setText("UNDER LIMIT");
-                        listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitCheckWeighingAsString() + " g");
+                        listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_over_visible), getResources().getBoolean(R.bool.preferences_check_over_visible)) == true) {
                         listReferenceFields.get(checkoverlimit).getTextName().setText("OVERLIMIT");
-                        listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitCheckWeighingAsString() + " g");
+                        listReferenceFields.get(checkoverlimit).getTextValue().setText(ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit());
                     }
                 }
 
                 if (cmode_check.equals("2")) {
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
-                        listReferenceFields.get(nominal).getTextName().setText("TARTGET");
-                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominal() + " g");
+                        listReferenceFields.get(nominal).getTextName().setText("TARGET");
+                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
                         listReferenceFields.get(checkundertolerance).getTextName().setText("UNDER TOLERANCE");
-                        listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnder() + " g");
+                        listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnderAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
                         listReferenceFields.get(checkovertolerance).getTextName().setText("OVER TOLERANCE");
-                        listReferenceFields.get(checkovertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g");
+                        listReferenceFields.get(checkovertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceOver());
                     }
                 }
 
                 if (cmode_check.equals("3")) {
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
-                        listReferenceFields.get(nominal).getTextName().setText("TARTGET");
-                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominal() + " g");
+                        listReferenceFields.get(nominal).getTextName().setText("TARGET");
+                        listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
                     }
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
@@ -549,9 +548,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(indexTableTotal).getTextName().setText("TOTAL");
                         try {
                             if (ApplicationManager.getInstance().getStats().getStatistic().getSum()==0){
-                                listReferenceFields.get(indexTableTotal).getTextValue().setText("0 g");
+                                listReferenceFields.get(indexTableTotal).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
-                                listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+                                listReferenceFields.get(indexTableTotal).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -561,9 +560,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(indextableaverage).getTextName().setText("AVERAGE");
                         try {
                             if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMean())){
-                                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("0 g"));
+                                listReferenceFields.get(indextableaverage).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
-                                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+                                listReferenceFields.get(indextableaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -574,9 +573,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(standarddeviation).getTextName().setText("STANDARD DEV.");
                         try {
                             if (Double.isNaN( ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())){
-                                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("0 g"));
+                                listReferenceFields.get(standarddeviation).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
-                                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+                                listReferenceFields.get(standarddeviation).getTextValue().setText(ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -586,9 +585,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(minimum).getTextName().setText("MINIMUM");
                         try {
                             if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMin())){
-                                listReferenceFields.get(minimum).getTextValue().setText(String.format("0 g"));
+                                listReferenceFields.get(minimum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
-                                listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                                listReferenceFields.get(minimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -600,9 +599,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(maximum).getTextName().setText("MAXIMUM");
                         try {
                             if(Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax())){
-                                listReferenceFields.get(maximum).getTextValue().setText(String.format("0 g"));
+                                listReferenceFields.get(maximum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             } else {
-                                listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g", ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+                                listReferenceFields.get(maximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -613,9 +612,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(range).getTextName().setText("RANGE");
                         try {
                             if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax()-ApplicationManager.getInstance().getStats().getStatistic().getMin())){
-                                listReferenceFields.get(range).getTextValue().setText("0 g");
+                                listReferenceFields.get(range).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
-                                listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getStatistic().getMax()) - ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                                listReferenceFields.get(range).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -629,11 +628,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                             if (ApplicationManager.getInstance().getStats().getSamples().isEmpty()==true){
 
-                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText("0 g");
+                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
                             }else {
 
                                 //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
-                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText(String.format("%.4f g", (ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size() - 1))));
+                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText(ApplicationManager.getInstance().getStatisticsCurrentAsStringWithUnit());
                             }
                         } catch (Exception e) {
                         }
@@ -665,14 +664,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
                         listReferenceFields.get(indexFormulationTotalTarget).getTextName().setText("Total Target: ");
-                        listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(String.format("%.4f g", formulationTotalTarget));
+                        listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotalTarget));
 
 
                     }
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
                         listReferenceFields.get(indexFormulationTotal).getTextName().setText("Total Actual: ");
-                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(String.format("%.4f g", formulationTotal) );
+                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal) );
 
 
                     }
@@ -699,14 +698,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 listReferenceFields.get(indexTableItemName).getTextName().setText("ITEM");
                 if(ApplicationManager.getInstance().getCurrentItem() != null) {
                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
-                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE [g]");
-                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringInGramWithUnit());
+                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("DIFFERENCE"+" "+ ApplicationManager.getInstance().getCurrentUnit().getName() + "["+"]");
+                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringWithUnit());
                    listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText("DIFFERENCE [%]");
-                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentWithUnit());
+                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentAsString());
                    listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText("FINAL WEIGHT");
                    listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                    listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText("INITIAL WEIGHT");
-                   listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentItem().getWeight()) + " g");
+                   listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentItem().getWeight()));
                 }else{
                     listReferenceFields.get(indexTableItemName).getTextValue().setText("-");
                     listReferenceFields.get(indexTableRecipeName).getTextValue().setText("");
@@ -772,7 +771,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
                         listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
                     }else{
-                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
                     }
                 }
 
@@ -781,7 +780,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
                         listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
                     }else {
-                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+                        listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                     }
                 }
 
@@ -790,7 +789,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
                         listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
                     }else {
-                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
                     }
                 }
 
@@ -799,7 +798,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
                         listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
                     }else {
-                    listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+                    listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
                     }
                 }
 
@@ -808,7 +807,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
                         listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
                     }else {
-                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%.4f", (ApplicationManager.getInstance().getStats().getStatistic().getMax()) - ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+                        listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
                     }
                 }
 

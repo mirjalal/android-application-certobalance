@@ -99,7 +99,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 				try {
-					Thread.sleep(333);
+					Thread.sleep(150);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -160,12 +160,12 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	private void simulateMessage(){
 		 	counter++;
 
-			if ((counter%30)==0){
+			if ((counter%100)==0){
 
 				counter--;
 				counter2++;
 			}
-			if (counter2>10){
+			if (counter2>25){
 				counter++;
 				counter2=0;
 			}
@@ -174,7 +174,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 			rawResponse = "+ 0.0000 g";
-			value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.02)));
+			value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.002)));
 
 		    handler.sendEmptyMessage(0);
 

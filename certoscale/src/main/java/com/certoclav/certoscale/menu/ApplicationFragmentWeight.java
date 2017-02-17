@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     @Override
     public void onResume() {
         super.onResume();
+        if(Scale.getInstance().isStable()){
+            imageStable.setVisibility(View.VISIBLE);
+        }else {
+            imageStable.setVisibility(View.INVISIBLE);
+        }
         Scale.getInstance().setOnWeightListener(this);
         Scale.getInstance().setOnStableListener(this);
 
@@ -192,8 +198,6 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textInstruction.setText("");
                     textValue.setTextColor(Color.WHITE);
 
-
-                    textInstruction.setText("");
 
                     if (current<under){
                         textValue.setTextColor(Color.RED);
@@ -516,6 +520,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     @Override
     public void onStableChanged(boolean isStable)
     {
+        Log.e("ApplicationFragmentWe", "onStable called " + isStable);
         if(isStable){
             imageStable.setVisibility(View.VISIBLE);
 

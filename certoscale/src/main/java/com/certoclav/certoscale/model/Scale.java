@@ -3,7 +3,6 @@ package com.certoclav.certoscale.model;
 import android.util.Log;
 
 import com.certoclav.certoscale.database.User;
-import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.ScaleStateListener;
 import com.certoclav.certoscale.listener.StableListener;
@@ -40,10 +39,15 @@ public class Scale extends Observable {
 	}
 
 	public void setStable(boolean stable) {
+		boolean stableOld = this.stable;
 		this.stable = stable;
-		for(StableListener listener : stableListeners){
-			listener.onStableChanged(stable);
+		if(stableOld != stable) {
+			for (StableListener listener : stableListeners) {
+				listener.onStableChanged(stable);
+			}
 		}
+
+
 	}
 
 	private boolean stable = false;
@@ -129,6 +133,7 @@ public class Scale extends Observable {
 
 	public void setScaleState(ScaleState state) {
 		this.state = state;
+		Log.e("Scale", "STATE: " + state.toString());
 		for(ScaleStateListener listener : scaleStateListeners){
 			listener.onScaleStateChange(state);
 		}
@@ -158,6 +163,7 @@ public class Scale extends Observable {
 	public void setOnStableListener (StableListener listener){
 		this.stableListeners.add(listener);
 	}
+
 	public void removeOnStableListener (StableListener listener){
 		this.stableListeners.remove(listener);
 	}

@@ -406,7 +406,7 @@ public void  printHeader(  String header){
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_differencep), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_differencep)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getDifferenceToInitialInPercentWithUnit() + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getDifferenceToInitialInPercentAsString() + "\n");
 					}
 				}
 				break;
