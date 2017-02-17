@@ -193,6 +193,34 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		if(ApplicationManager.getInstance().getSqc_state()==0){
 			buttonNewBatch.setText("New Batch");
 		}
+
+		if (Scale.getInstance().getScaleApplication()==PEAK_HOLD){
+
+			//get PeakHoldMode
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+
+
+			//Semi Automatic Mode
+			if(PeakHoldMode.equals("2")){
+
+				buttonStart.setEnabled(false);
+				buttonEnd.setEnabled(true);
+				//Start PeakHold Measurement
+				ApplicationManager.getInstance().setPeakHoldActivated(true);
+			}
+
+			//Automatic Mode
+			if(PeakHoldMode.equals("3")){
+
+				buttonStart.setEnabled(false);
+				buttonEnd.setEnabled(false);
+				//Start PeakHold Measurement
+				ApplicationManager.getInstance().setPeakHoldActivated(true);
+			}
+
+
+		}
 	}
 
 	@Override
@@ -256,6 +284,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					// End PeakHold Measurenment
 					ApplicationManager.getInstance().setPeakHoldActivated(false);
+
 
 				}
 				catch (Exception e)

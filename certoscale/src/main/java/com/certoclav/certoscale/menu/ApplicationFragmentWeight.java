@@ -42,7 +42,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
     private long ctime_first=0;
     //private boolean PHfirst=false;
-    private double pholdWeight=0;
+
 
 
 
@@ -410,7 +410,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                 if (PeakHoldMode.equals("3")) {
-                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && pholdWeight>0.02f){
+                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && ApplicationManager.getInstance().getPholdWeight()>0.02f){
                         ctime_first = System.nanoTime();
 
                     }
@@ -425,14 +425,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     }
                 }
 
-                pholdWeight=ApplicationManager.getInstance().getTaredValueInGram();
+                ApplicationManager.getInstance().setPholdWeight(ApplicationManager.getInstance().getTaredValueInGram());
 
 
                 //Semi Automatic
-                if (ApplicationManager.getInstance().getPeakHoldMaximum()==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
+                //if (ApplicationManager.getInstance().getPeakHoldMaximum()==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
                     //Start PeakHold Measurement
-                    ApplicationManager.getInstance().setPeakHoldActivated(true);
-                }
+                //    ApplicationManager.getInstance().setPeakHoldActivated(true);
+               // }
 
                 //Display the Maximum Value if PeakHold is activated
                 if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
@@ -445,7 +445,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }else{
                     textValue.setTextColor(Color.WHITE);
-                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textValue.setText("Press Start");
+                    //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
