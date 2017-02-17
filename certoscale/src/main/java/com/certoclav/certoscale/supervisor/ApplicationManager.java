@@ -142,6 +142,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
+    private double pholdWeight=0;
+    public double getPholdWeight() {return pholdWeight;}
+    public void setPholdWeight(double pholdWeight) {this.pholdWeight = pholdWeight;}
+
+
 
     private boolean  peakholdactivated=false;
 
@@ -1693,6 +1698,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         getIngrediantCostList().clear();
         lastStableweight=0;
         stableCounter=0;
+
+
+        pholdWeight=0;
+        setPeakHoldMaximum(0);
 
         sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
