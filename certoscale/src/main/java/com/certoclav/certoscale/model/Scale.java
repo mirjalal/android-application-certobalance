@@ -237,7 +237,7 @@ public class Scale extends Observable {
 	}
 
 	public void setScaleApplication(ScaleApplication scaleApplication) {
-		Log.e("Scale",scaleApplication.toString());
+		Log.e("Scale","SCALEAPPLICATION STATE: " + scaleApplication.toString());
 		this.scaleApplication = scaleApplication;
 		for(ScaleApplicationListener listener : applicationListeners){
 			listener.onApplicationChange(scaleApplication);

@@ -47,7 +47,8 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the under limit weight");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -64,7 +65,9 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(0);

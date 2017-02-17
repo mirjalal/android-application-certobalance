@@ -15,7 +15,8 @@ public class MenuElement {
 		MENU_ITEM_ITEMS,
 		MENU_ITEM_WEIGHING_UNITS,
 		MENU_ITEM_CALIBRATION,
-		MENU_ITEM_GLP
+		MENU_ITEM_GLP,
+		MENU_ITEM_COMMUNICATION
 	}
 
 	public MenuElement(String menuText, int imageResId, MenuItemId id) {

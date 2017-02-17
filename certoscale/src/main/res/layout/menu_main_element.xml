@@ -27,7 +27,7 @@
                 android:layout_alignParentBottom="true"
 				android:layout_alignParentLeft="true"
                 android:text="APPLICATION SETTINGS"
-                android:textSize="18sp"
+                android:textSize="16sp"
 				android:layout_margin="20dp"
 				android:textColor="@android:color/white"/>
         

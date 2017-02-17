@@ -1,0 +1,35 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:key="preferences_communication_lims"
+        android:title="LIMS"
+        android:summary="Connected on COM 2" />
+
+    <CheckBoxPreference
+        android:key="preferences_communication_labelprinter"
+        android:title="Label printer"
+        android:summary="Connected on COM 1">
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
+        android:key="preferences_communication_protocolprinter"
+        android:title="Protocol printer"
+        android:summary="Connected on COM 3">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="preferences_communication_scanner"
+        android:title="Barcode or QR-code scanner"
+        android:summary="Connected on USB HOST">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="preferences_communication_balance"
+        android:title="Balance"
+        android:summary="Connected to COM 4" />
+
+</PreferenceScreen>
+
+
+

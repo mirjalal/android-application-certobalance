@@ -314,6 +314,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return String.format("%.6f", transformGramToCurrentUnit(getAwpCalcSampleSize())) + " " + getCurrentUnit().getName();
     }
 
+    public Double transformCurrentUnitToGram(Double value) {
+         return value /(currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent()));
+    }
 
 
     public void setAwpCalcSampleSize(int awpCalcSampleSize) {
@@ -1071,10 +1074,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getReferenceWeightAsStringInGram() {
         return String.format("%.4f", (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)) + " " + "g";
     }
-    public String getReferenceWeightAsStringWithUnit() {
+    public String getReferenceWeightAdjustedAsStringWithUnit() {
         return String.format("%.4f", (transformGramToCurrentUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100))) + " " + getCurrentUnit().getName();
     }
 
+   public String getReferenceWeightAsStringWithUnit() {
+        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getReferenceWeight() )) + " " + getCurrentUnit().getName();
+    }
     public String getDifferenceAsStringWithUnit() {
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
         double netto=(getSumInGram() - getTareInGram());
@@ -1691,6 +1697,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         sqc_state=0;
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
+
 
 
 }

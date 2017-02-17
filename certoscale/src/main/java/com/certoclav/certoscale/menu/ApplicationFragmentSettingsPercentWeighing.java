@@ -14,22 +14,10 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.settings.application.ItemListFragment.Callbacks;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
-import static android.R.attr.button;
-import static android.R.attr.text;
 
 
-/**
- * A list fragment representing a list of Items. This fragment also supports
- * tablet devices by allowing list items to be given an 'activated' state upon
- * selection. This helps indicate which item is currently being viewed in a
- * {@link ItemDetailFragment}.
- * <p>
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
- */
 public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
     private LinearLayout containerSettingsButtons = null;
@@ -59,7 +47,8 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the reference weight");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -76,7 +65,9 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(inputvalTransformed);
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(0);
                             }
@@ -125,6 +116,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                         public void onClick(View v) {
 
                             try {
+
                                 ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             }catch(NumberFormatException e) {
                                 ApplicationManager.getInstance().getCurrentLibrary().setReferenceweightAdjustment(0);
@@ -182,7 +174,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText("Reference Weight \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceWeight())+ " g");
+        buttonReferenceWeight.setText("Reference Weight \n"+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
         buttonReferenceAdjust.setText("Reference Adjustment \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 

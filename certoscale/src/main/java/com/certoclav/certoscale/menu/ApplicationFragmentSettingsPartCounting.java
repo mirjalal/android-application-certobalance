@@ -59,7 +59,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                         dialog.setTitle("Please enter the average piece weight");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -76,7 +77,9 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().setAveragePieceWeightInGram(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().setAveragePieceWeightInGram(inputvalTransformed);
                             }catch(NumberFormatException e){
                                 ApplicationManager.getInstance().setAveragePieceWeightInGram(0d);
                             }
@@ -106,7 +109,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please enter the number of samples for the calculation of awp");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -123,6 +126,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
+
                                 ApplicationManager.getInstance().setAwpCalcSampleSize(Integer.parseInt(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
                             }catch(NumberFormatException e){
                                 ApplicationManager.getInstance().setAwpCalcSampleSize(0);
@@ -155,7 +159,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please enter the under limit");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -205,7 +209,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please enter the over limit");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -253,7 +257,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
                     dialog.setTitle("Please enter the piece target");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pieces");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -357,10 +361,10 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g");
-        buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pieces");
-        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pieces");
-        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pieces");
+        buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit());
+        buttonEditSampleSize.setText("Sample size:\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
+        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
+        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -383,7 +387,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
             button_under_limit.setVisibility(View.INVISIBLE);
             button_over_limit.setVisibility(View.INVISIBLE);
             button_target.setVisibility(View.VISIBLE);
-            button_target.setText("Target:\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pieces");
+            button_target.setText("Target:\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
         }
 
 

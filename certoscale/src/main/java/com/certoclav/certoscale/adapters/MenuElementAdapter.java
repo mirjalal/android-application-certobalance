@@ -15,6 +15,7 @@ import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.model.MenuElement;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.settings.calibration.SettingsCalibrationActivity;
+import com.certoclav.certoscale.settings.communication.SettingsCommunicationActivity;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.settings.glp.SettingsGlpActivity;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
@@ -128,6 +129,10 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 						break;
 					case MENU_ITEM_GLP:
 						intent = new Intent(mContext, SettingsGlpActivity.class);
+						mContext.startActivity(intent);
+						break;
+					case MENU_ITEM_COMMUNICATION:
+						intent = new Intent(mContext, SettingsCommunicationActivity.class);
 						mContext.startActivity(intent);
 						break;
 				}

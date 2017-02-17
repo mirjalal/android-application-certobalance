@@ -52,7 +52,7 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the nominal weight");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -69,7 +69,9 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setSQCNominal(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setSQCNominal(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setSQCNominal(0);
@@ -99,7 +101,8 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the first positive tolerance");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -116,7 +119,9 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance1(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance1(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance1(0);
@@ -147,7 +152,8 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the second positive tolerance");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -164,7 +170,9 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance2(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance2(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setSQCpTolerance2(0);
@@ -195,7 +203,8 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the first negative tolerance");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -212,7 +221,9 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance1(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance1(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance1(0);
@@ -243,7 +254,8 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle("Please enter the second negative tolerance");
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("g");
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
+
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -260,7 +272,9 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance2(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance2(inputvalTransformed);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setSQCnTolerance2(0);
@@ -288,11 +302,11 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
 
     @Override
     public void onResume() {
-        buttonNominal.setText("Nominal\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal())+" g");
-        buttonPTolerance1.setText("+ Tolerance1\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1())+" g");
-        buttonPTolerance2.setText("+ Tolerance2\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2())+" g");
-        buttonNTolerance1.setText("- Tolerance1\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1())+" g");
-        buttonNTolerance2.setText("- Tolerance2\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance2())+" g");
+        buttonNominal.setText("Nominal\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal()));
+        buttonPTolerance1.setText("+ Tolerance1\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1()));
+        buttonPTolerance2.setText("+ Tolerance2\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2()));
+        buttonNTolerance1.setText("- Tolerance1\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1()));
+        buttonNTolerance2.setText("- Tolerance2\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance2()));
         super.onResume();
 
 
