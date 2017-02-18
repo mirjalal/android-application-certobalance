@@ -219,7 +219,7 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_differential_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_density_activated),true)==true){
-			getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
+			getArrayAdapterMode().add(ScaleApplication.DENSITY_DETERMINATION);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_peak_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_ingrediant_activated),true)==true){

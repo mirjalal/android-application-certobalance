@@ -12,6 +12,25 @@
         android:title="Turn automatic calibration ON/OFF"
         android:summary="Calibrate the balance every hour automatically" />
 
+    <Preference
+        android:key="preferences_calibration_adjustment"
+        android:title="Automatic calibration adjustment"
+        android:summary="Adjust the zero calibration point" />
+
+    <Preference
+        android:key="preferences_calibration_span"
+        android:title="Span calibration"
+        android:summary="Calibration with two calibration points. Follow the screen instructions." />
+
+    <Preference
+        android:key="preferences_calibration_user"
+        android:title="User calibration"
+        android:summary="Calibrate the balance using a user defined mass. Follow the screen instructions" />
+
+    <Preference
+        android:key="preferences_calibration_test"
+        android:title="Calibration test"
+        android:summary="Compare known calibration weight against stored span calibration data" />
 
 </PreferenceScreen>
 

@@ -1,6 +1,6 @@
 package com.certoclav.certoscale.menu;
 
-import android.content.Intent;
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,19 +10,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.adapters.UnitAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
@@ -45,10 +52,6 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
 
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
@@ -66,8 +69,56 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SettingsUnitActivity.class);
-                getActivity().startActivity(intent);
+
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_pick_unit);
+                    dialog.setTitle("Pick a unit");
+                    ListView listView = (ListView) dialog.findViewById(R.id.dialog_pick_unit_list);
+                    final UnitAdapter adapter = new UnitAdapter(getActivity(),new ArrayList<Unit>());
+                    listView.setAdapter(adapter);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            if(adapter.getItem(position).getEnabled()) {
+                                ApplicationManager.getInstance().setCurrentUnit(adapter.getItem(position));
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    DatabaseService db = new DatabaseService(getActivity());
+                    List<Unit> units = db.getUnits();
+
+                    adapter.clear();
+                    if (units != null){
+                        Collections.sort(units, new Comparator<Unit>() {
+                            @Override
+                            public int compare(Unit unit1, Unit unit2) {
+                                return unit1.getName().compareToIgnoreCase(unit2.getName());
+                            }
+                        });
+                        for (Unit unit : units) {
+                                if(unit.getEnabled()){
+                                    adapter.add(unit);
+                                    adapter.setHideCheckbox(true);
+                                }
+                            Log.e("SettingsUnitFragment", "added unit");
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    Log.e("SettingsUnitFragment", "notifydatasetchanged" + adapter.getCount());
+
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+
+
             }
         });
 
@@ -114,20 +165,20 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("calculating...");
-                textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram()));
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
 
                 break;
 
             case PERCENT_WEIGHING_CALC_REFERENCE:
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText( String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram())+" g");
+                textValue.setText( ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
             case ANIMAL_WEIGHING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText(ApplicationManager.getInstance().getAnimalWeight() + " g");
-                textSum.setText("SUM: " + String.format("%.4f",ApplicationManager.getInstance().getTaredValueInGram())+ " g");
+                textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getAnimalWeightInGram()));
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             case PART_COUNTING_CALC_AWP:
                 textInstruction.setText("");
@@ -168,7 +219,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setTextColor(Color.WHITE);
 
                 textValue.setText(ApplicationManager.getInstance().getPercent()+ " %");
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsString()+ " g");
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case CHECK_WEIGHING:
@@ -242,8 +293,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 break;
-
-            case DENSITIY_DETERMINATION:
+            case DENSITY_DETERMINATION_STARTED:
+            case DENSITY_DETERMINATION:
                 textInstruction.setText("");
 
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
@@ -394,7 +445,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
-
+            case PEAK_HOLD_STARTED:
             case PEAK_HOLD:
                 textInstruction.setText("");
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
@@ -441,13 +492,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     }
 
                     textValue.setTextColor(Color.WHITE);
-                    textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPeakHoldMaximum())+ " g");
-                    textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
+                    textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }else{
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText("Press Start");
                     //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textSum.setText("Curent Weight: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
@@ -476,7 +527,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
 
                 if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
-                    textInstruction.setText("Place Container on the pan. Press Tare");
+                    textInstruction.setText("Place container on the pan. Press Tare");
                 }else{
                     textInstruction.setText("Dispense sample "+String.format("%d",ApplicationManager.getInstance().getPipette_current_sample())+ " and press Accept");
                 }

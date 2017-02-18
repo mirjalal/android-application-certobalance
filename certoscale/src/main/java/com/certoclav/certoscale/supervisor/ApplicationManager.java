@@ -299,9 +299,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private Library currentLibrary = null;
 
 
-    public String getAnimalWeight() {
 
-        return String.format("%.6f", animalWeight);
+    public String getAnimalWeightAsStringWithUnit() {
+
+        return getTransformedWeightAsStringWithUnit(animalWeight);
+
+    }
+
+    public Double getAnimalWeightInGram() {
+
+        return animalWeight;
 
     }
     public void setAnimalWeight(Double animalWeight) {
@@ -442,9 +449,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getSumInPieces()) + " " + getUnitAsString();
+                return String.format("%d", getSumInPieces()) + " " + "pcs";
             default:
-                return String.format("%.4f", getSumInGram()) + " " + getUnitAsString();
+                return getTransformedWeightAsStringWithUnit(getSumInGram());
         }
 
     }
@@ -472,7 +479,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             case PART_COUNTING:
                 return String.format("%d", getTareInPieces()) + " " + getUnitAsString();
             default:
-                return String.format("%.4f", getTareInGram()) + " " + getUnitAsString();
+                return getTransformedWeightAsStringWithUnit(getTareInGram());
         }
     }
 
@@ -598,12 +605,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             //               statistic.addValue(value);
             //           }
             ((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + stats.getStatistic().getN());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(String.format("%.4f", stats.getStatistic().getMean()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(String.format("%.4f", stats.getStatistic().getMax()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(String.format("%.4f", stats.getStatistic().getMin()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(String.format("%.4f", stats.getStatistic().getVariance()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(String.format("%.4f", stats.getStatistic().getStandardDeviation()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(String.format("%.4f", stats.getStatistic().getSum()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMean()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMax()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMin()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getVariance()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getStandardDeviation()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getSum()));
 
             // set the custom dialog components - text, image and button
 
@@ -1068,9 +1075,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getUnderLimitAsStringWithUnit() {
         switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
-                return String.format("%.4f ", transformGramToCurrentUnit(currentLibrary.getUnderLimit())) + getUnitAsString();
+                return getTransformedWeightAsStringWithUnit(currentLibrary.getUnderLimit());
             case PART_COUNTING:
-                return String.format("%d ", currentLibrary.getUnderLimitPieces()) + getUnitAsString();
+                return String.format("%d ", currentLibrary.getUnderLimitPieces()) + " pcs";
         }
         return "todo";
 
@@ -1080,11 +1087,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return String.format("%.4f", (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)) + " " + "g";
     }
     public String getReferenceWeightAdjustedAsStringWithUnit() {
-        return String.format("%.4f", (transformGramToCurrentUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100))) + " " + getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit((transformGramToCurrentUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)));
     }
 
    public String getReferenceWeightAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getReferenceWeight() )) + " " + getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(currentLibrary.getReferenceWeight() ));
     }
     public String getDifferenceAsStringWithUnit() {
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
@@ -1093,19 +1100,19 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         double difference=netto-ref;
 
 
-        return String.format("%.4f", transformGramToCurrentUnit(difference)) + " " + getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(difference));
     }
 
 
 
-    public String getDifferenceInGram() {
+    public String getDifferenceAsStringInGram() {
         double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
         double netto=(getSumInGram() - getTareInGram());
 
         double difference=netto-ref;
 
 
-        return String.format("%.4f", difference);
+        return String.format("%.4f g", difference);
     }
 
 
@@ -1155,23 +1162,17 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-    public String getDifferenceFillingWithUnit(){
+    public String getDifferenceFillingAsStringWithUnit(){
 
-        return String.format("%.4f",transformGramToCurrentUnit(getTaredValueInGram()-currentLibrary.getTarget())) + " "+getUnitAsString();
+        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(getTaredValueInGram()-currentLibrary.getTarget()));
     }
 
-    public String getDifferenceFilling(){
 
-        return String.format("%.4f",getTaredValueInGram()-currentLibrary.getTarget());
-    }
-    public String getTargetasString(){
 
-        return String.format("%.4f",currentLibrary.getTarget());
-    }
 
-    public String getTargetasStringWithUnit(){
+    public String getTargetAsStringWithUnit(){
 
-        return String.format("%.4f",transformGramToCurrentUnit(currentLibrary.getTarget())) + " " + getUnitAsString();
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getTarget());
     }
 
     public double getTarget(){
@@ -1242,7 +1243,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(   getStats().getSamples().get(getStats().getSamples().size() - 1))) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(   getStats().getSamples().get(getStats().getSamples().size() - 1))) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1256,7 +1257,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax()) - getStats().getStatistic().getMin()) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax()) - getStats().getStatistic().getMin()) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1268,7 +1269,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax())) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax())) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1280,7 +1281,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMin())) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMin())) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1292,7 +1293,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getStandardDeviation())) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getStandardDeviation())) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1304,7 +1305,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMean())) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMean())) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1316,7 +1317,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getSum())) + " "+ getCurrentUnit();
+            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getSum())) + " "+ getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -1372,12 +1373,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             //               statistic.addValue(value);
             //           }
             ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + statistic.getN());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(String.format("%.4f", statistic.getMean()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(String.format("%.4f", statistic.getMax()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(String.format("%.4f", statistic.getMin()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(String.format("%.4f", statistic.getVariance()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(String.format("%.4f", statistic.getStandardDeviation()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f", statistic.getSum()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(getTransformedWeightAsStringWithUnit(statistic.getMean()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(getTransformedWeightAsStringWithUnit(statistic.getMax()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(getTransformedWeightAsStringWithUnit(statistic.getMin()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(getTransformedWeightAsStringWithUnit(statistic.getVariance()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(getTransformedWeightAsStringWithUnit(statistic.getStandardDeviation()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(getTransformedWeightAsStringWithUnit(statistic.getSum()));
 
 
             ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_nominal)).setText(String.format("%.4f",sqc.getNominal()));
@@ -1434,12 +1435,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             //               statistic.addValue(value);
             //           }
             ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + stats.getStatistic().getN());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(String.format("%.4f", stats.getStatistic().getMean()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(String.format("%.4f", stats.getStatistic().getMax()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(String.format("%.4f", stats.getStatistic().getMin()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(String.format("%.4f", stats.getStatistic().getVariance()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(String.format("%.4f", stats.getStatistic().getStandardDeviation()) + " " + getUnitAsString());
-            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(String.format("%.4f", stats.getStatistic().getSum()) + " " + getUnitAsString());
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMean()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMax()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getMin()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getVariance()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getStandardDeviation()));
+            ((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(getTransformedWeightAsStringWithUnit(stats.getStatistic().getSum()));
 
 
 

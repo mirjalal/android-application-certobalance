@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.io.IOException;
@@ -64,6 +66,7 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
 
                     //Start PeakHold Measurement
                     ApplicationManager.getInstance().setPeakHoldActivated(true);
+                    Scale.getInstance().setScaleApplication(ScaleApplication.PEAK_HOLD_STARTED);
 
                 }
                 catch (Exception e)
@@ -83,6 +86,7 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
 
                     // End PeakHold Measurenment
                     ApplicationManager.getInstance().setPeakHoldActivated(false);
+                    Scale.getInstance().setScaleApplication(ScaleApplication.PEAK_HOLD);
 
                 }
                 catch (Exception e)
@@ -119,6 +123,7 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
             End.setEnabled(true);
             //Start PeakHold Measurement
             ApplicationManager.getInstance().setPeakHoldActivated(true);
+            Scale.getInstance().setScaleApplication(ScaleApplication.PEAK_HOLD_STARTED);
         }
 
         //Automatic Mode
@@ -128,6 +133,7 @@ public class ApplicationFragmentSettingsPeakHold extends Fragment {
             End.setEnabled(false);
             //Start PeakHold Measurement
             ApplicationManager.getInstance().setPeakHoldActivated(true);
+            Scale.getInstance().setScaleApplication(ScaleApplication.PEAK_HOLD_STARTED);
         }
 
 

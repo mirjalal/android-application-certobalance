@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,19 +18,20 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
-import static com.certoclav.certoscale.model.ScaleApplication.DENSITIY_DETERMINATION;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
+import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
@@ -102,9 +101,6 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 		return buttonStart;
 	}
 
-	public void setButtonStart(Button buttonStart) {
-		this.buttonStart = buttonStart;
-	}
 
 	private Button buttonStart = null;
 	private ArrayList<ButtonEventListener> navigationbarListeners = new ArrayList<ButtonEventListener>();
@@ -194,19 +190,35 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			buttonNewBatch.setText("New Batch");
 		}
 
+		//get PeakHoldMode
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+
+		if(Scale.getInstance().getScaleApplication() == PEAK_HOLD_STARTED){
+				//Manual Mode
+				if(PeakHoldMode.equals("1")){
+					buttonStart.setEnabled(false);
+					buttonEnd.setEnabled(true);
+
+				}
+		}
+
 		if (Scale.getInstance().getScaleApplication()==PEAK_HOLD){
 
-			//get PeakHoldMode
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-			String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+			//Manual Mode
+			if(PeakHoldMode.equals("1")){
+				buttonStart.setEnabled(true);
+				buttonEnd.setEnabled(false);
 
+			}
 
 			//Semi Automatic Mode
 			if(PeakHoldMode.equals("2")){
-
 				buttonStart.setEnabled(false);
 				buttonEnd.setEnabled(true);
+
 				//Start PeakHold Measurement
+				Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 				ApplicationManager.getInstance().setPeakHoldActivated(true);
 			}
 
@@ -216,9 +228,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setEnabled(false);
 				buttonEnd.setEnabled(false);
 				//Start PeakHold Measurement
+				Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 				ApplicationManager.getInstance().setPeakHoldActivated(true);
 			}
-
 
 		}
 	}
@@ -241,12 +253,16 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
-				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION) {
+				if (Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION) {
+
 					ApplicationManager.getInstance().setDensity_step_counter(1);
 					buttonAccept.setEnabled(true);
+					Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION_STARTED);
 					buttonStart.setEnabled(false);
+
 				}
 
+				//somebody starts the peak hold mode manually
 				if(Scale.getInstance().getScaleApplication()==PEAK_HOLD){
 					try{
 						//Make sure that only one Button is clickable
@@ -254,6 +270,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						buttonEnd.setEnabled(true);
 
 						//Start PeakHold Measurement
+						Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 						ApplicationManager.getInstance().setPeakHoldActivated(true);
 
 					}
@@ -284,6 +301,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					// End PeakHold Measurenment
 					ApplicationManager.getInstance().setPeakHoldActivated(false);
+					Scale.getInstance().setScaleApplication(PEAK_HOLD);
 
 
 				}
@@ -473,7 +491,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					}
 				}
-				if (Scale.getInstance().getScaleApplication()==DENSITIY_DETERMINATION){
+				if (Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION_STARTED){
 					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 					String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
 
@@ -482,6 +500,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						ApplicationManager.getInstance().setDensity_step_counter(3);
 						buttonAccept.setEnabled(false);
 						buttonStart.setEnabled(true);
+						Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION);
 					}
 
 					if(ApplicationManager.getInstance().getDensity_step_counter()==4){
@@ -834,7 +853,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				break;
 
-			case DENSITIY_DETERMINATION:
+			case DENSITY_DETERMINATION:
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
@@ -846,24 +865,41 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.GONE);
-				buttonAccept.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 
 
 				buttonIngrediantList.setVisibility(View.GONE);
 
-
+				buttonAccept.setEnabled(false);
+				buttonStart.setEnabled(true);
 				break;
+
+			case DENSITY_DETERMINATION_STARTED:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.VISIBLE);
+
+
+				buttonIngrediantList.setVisibility(View.GONE);
+
+				buttonAccept.setEnabled(true);
+				buttonStart.setEnabled(false);
+				break;
+
 			case PEAK_HOLD:
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
-
 				buttonStart.setVisibility(View.VISIBLE);
-
-
-
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonAppSettings.setVisibility(View.GONE);
@@ -871,18 +907,25 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-
-
 				buttonEnd.setVisibility(View.VISIBLE);
 				//get PeakHoldMode
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 				String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
+
+				//Manual Mode
+				if(PeakHoldMode.equals("1")){
+					buttonStart.setEnabled(true);
+					buttonEnd.setEnabled(false);
+
+				}
+
 				//Semi Automatic Mode
 				if(PeakHoldMode.equals("2")){
-
 					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(true);
+
 					//Start PeakHold Measurement
+					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 					ApplicationManager.getInstance().setPeakHoldActivated(true);
 				}
 
@@ -892,12 +935,23 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(false);
 					//Start PeakHold Measurement
+					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 					ApplicationManager.getInstance().setPeakHoldActivated(true);
 				}
 
-
 				break;
+			case PEAK_HOLD_STARTED:
+				//get PeakHoldMode
+				prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+				PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
 
+				//Manual Mode
+				if(PeakHoldMode.equals("1")){
+					buttonStart.setEnabled(false);
+					buttonEnd.setEnabled(true);
+
+				}
+				break;
 			case PIPETTE_ADJUSTMENT:
 
 				buttonTara.setVisibility(View.VISIBLE);
@@ -993,14 +1047,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			getButtonAppSettings().setEnabled(false);
 		}
 
-		if(application != PEAK_HOLD){
+		if(application != PEAK_HOLD && application != PEAK_HOLD_STARTED){
 			buttonEnd.setVisibility(View.GONE);
 		}
 
 		//handle Statistic Button visibiltiy (visible or gone)
 		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING || application==ScaleApplication.INGREDIENT_COSTING ||
-				application==ScaleApplication.DENSITIY_DETERMINATION || application==ScaleApplication.PEAK_HOLD ){
+				application == ScaleApplication.FORMULATION_RUNNING ||
+				application==ScaleApplication.INGREDIENT_COSTING ||
+				application==ScaleApplication.DENSITY_DETERMINATION ||
+				application == ScaleApplication.DENSITY_DETERMINATION_STARTED||
+				application == ScaleApplication.PEAK_HOLD_STARTED||
+				application==ScaleApplication.PEAK_HOLD ){
 			getButtonStatistics().setVisibility(View.GONE);
 			buttonAccumulate.setVisibility(View.GONE);
 		}else{

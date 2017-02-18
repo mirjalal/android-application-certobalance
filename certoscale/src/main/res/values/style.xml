@@ -20,6 +20,12 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
+    <style name="button_image_sidebar">
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">30dp</item>
+    </style>
+
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffffff</item>

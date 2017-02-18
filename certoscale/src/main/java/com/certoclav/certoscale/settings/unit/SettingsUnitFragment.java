@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UnitAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -26,6 +27,7 @@ public class SettingsUnitFragment extends Fragment {
 
     private ListView list = null;
     private UnitAdapter adapter = null;
+
 
 
     @Override
@@ -51,10 +53,21 @@ public class SettingsUnitFragment extends Fragment {
 
     @Override
     public void onResume() {
+
         Log.e("SettingsUnitFragment", "onResume");
         super.onResume();
+        boolean checkboxVisible = true;
+        try{
+            checkboxVisible = getActivity().getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_CHECKBOX_VISIBLE,true);
+
+        }catch (Exception e){
+            checkboxVisible = true;
+        }
+
+
         DatabaseService db = new DatabaseService(getActivity());
         List<Unit> units = db.getUnits();
+
         adapter.clear();
         if (units != null){
             Collections.sort(units, new Comparator<Unit>() {
@@ -64,7 +77,15 @@ public class SettingsUnitFragment extends Fragment {
                 }
             });
             for (Unit unit : units) {
-                adapter.add(unit);
+                if(checkboxVisible == false){
+                    if(unit.getEnabled()){
+                        adapter.add(unit);
+                        adapter.setHideCheckbox(true);
+                    }
+                }else{
+                    adapter.add(unit);
+                    adapter.setHideCheckbox(false);
+                }
                 Log.e("SettingsUnitFragment", "added unit");
             }
          }

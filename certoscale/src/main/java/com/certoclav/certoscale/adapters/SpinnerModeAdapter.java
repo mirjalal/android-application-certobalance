@@ -91,7 +91,7 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				textMail.setText("Differential Weighing");
 				imageApp.setImageResource(R.drawable.application_icon_differential);
 				break;
-			case DENSITIY_DETERMINATION:
+			case DENSITY_DETERMINATION:
 				textMail.setText("Density Determination");
 				imageApp.setImageResource(R.drawable.application_icon_density);
 				break;

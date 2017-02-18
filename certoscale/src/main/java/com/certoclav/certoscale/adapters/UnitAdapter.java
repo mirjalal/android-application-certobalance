@@ -35,6 +35,7 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 	private final Context mContext;
 	private QuickActionItem actionUnitDelete;
 	private QuickActionItem actionUnitEdit;
+	private boolean hideCheckBox = false;
 
 
 
@@ -74,8 +75,8 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 		TextView editName = (TextView) convertView.findViewById(R.id.list_item_unit_text_description);
 		editName.setText(getItem(position).getDescription());
 
-		CheckBox cbEnabled = (CheckBox) convertView.findViewById(R.id.list_item_unit_checkbox);
 
+		CheckBox cbEnabled = (CheckBox) convertView.findViewById(R.id.list_item_unit_checkbox);
 
 		if(getItem(position).getCustom() == false){
 			actionUnitDelete.setVisibility(View.INVISIBLE);
@@ -84,6 +85,19 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 			actionUnitDelete.setVisibility(View.VISIBLE);
 			actionUnitEdit.setVisibility(View.VISIBLE);
 		}
+		
+
+		if(hideCheckBox){
+			cbEnabled.setVisibility(View.GONE);
+			actionUnitDelete.setVisibility(View.GONE);
+			actionUnitEdit.setVisibility(View.GONE);
+		}else{
+			cbEnabled.setVisibility(View.VISIBLE);
+			actionUnitDelete.setVisibility(View.VISIBLE);
+			actionUnitEdit.setVisibility(View.VISIBLE);
+		}
+
+
 
 			cbEnabled.setChecked(getItem(position).getEnabled());
 
@@ -124,5 +138,9 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
 		
 		return convertView;
+	}
+
+	public void setHideCheckbox(boolean b) {
+		hideCheckBox = b;
 	}
 }

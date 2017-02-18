@@ -168,7 +168,7 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
 
 				if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_weigh_print_min),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_weigh_print_min))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight: "+ ApplicationManager.getInstance().getUnderLimitAsStringInGram()+ " g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight: "+ ApplicationManager.getInstance().getUnderLimitAsStringWithUnit()+"\n");
 				}
 				break;
 
@@ -181,13 +181,13 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_counting_print_apw),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_counting_print_apw))==true){
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("APW: "+ ApplicationManager.getInstance().getAveragePieceWeightAsStringInGram() + " g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("APW: "+ ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit() +"\n");
 				}
 
 				String cmode = prefs.getString(ApplicationController.getContext().getString(R.string.preferences_counting_mode),"");
 				if  (cmode.equals("2")) {
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_counting_print_under_limit), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_counting_print_under_limit)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getUnderLimitPiecesAsString()+" PCS"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getUnderLimitPiecesAsString()+" pcs"+"\n");
 					}
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_counting_print_over_limit), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_counting_print_over_limit)) == true) {
 						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getOverlimitPiecesAsString()+" PCS"+"\n");
@@ -205,8 +205,8 @@ public void  printHeader(  String header){
 
 			case PERCENT_WEIGHING:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Percentage: " +ApplicationManager.getInstance().getPercent()+ " %"+"\n" );
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsString()+ " g"+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsString()+ " g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
 
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_reference),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_reference))==true) {
@@ -214,7 +214,7 @@ public void  printHeader(  String header){
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Reference Adjust: "+ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment()+" %" +"\n" );
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceInGram() +" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceAsStringInGram() +"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference_percent),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference_percent))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getDifferenceInPercent()+ " %"+"\n");
@@ -248,29 +248,29 @@ public void  printHeader(  String header){
 
 				if  (cmode_check.equals("1")) {
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_underlimit), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_underlimit)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getUnderLimitCheckWeighingAsString() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Limit: "+ ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit()+"\n");
 					}
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_overlimit), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_overlimit)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Over Limit: "+ ApplicationManager.getInstance().getOverLimitCheckWeighingAsString() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Over Limit: "+ ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit()+"\n");
 					}
 				}
 
 				if  (cmode_check.equals("2")) {
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_target)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("target: "+ ApplicationManager.getInstance().getCheckNominal() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("target: "+ ApplicationManager.getInstance().getCheckNominalAsStringWithUnit()+"\n");
 					}
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_undertolerance),ApplicationController.getContext(). getResources().getBoolean(R.bool.preferences_check_print_undertolerance)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceUnder() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceUnderAsStringWithUnit()+"\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_overtolerance), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_overtolerance)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceOver() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Under Tolerance: "+ApplicationManager.getInstance().getCheckNominalToleranceOverAsStringWithUnit()+"\n");
 					}
 				}
 
 				if (cmode_check.equals("3")){
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_target)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("target: "+ ApplicationManager.getInstance().getCheckNominal() + " g"+"\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("target: "+ ApplicationManager.getInstance().getCheckNominalAsStringWithUnit() +"\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_undertolerance),ApplicationController.getContext(). getResources().getBoolean(R.bool.preferences_check_print_undertolerance)) == true) {
@@ -291,8 +291,8 @@ public void  printHeader(  String header){
 				}
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Final Weight: "+ApplicationManager.getInstance().getAnimalWeight() + " g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Final Weight: "+ApplicationManager.getInstance().getAnimalWeightAsStringWithUnit()+"\n");
 				break;
 
 			case FILLING:
@@ -301,10 +301,10 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_filling_print_target),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_filling_print_target))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+ApplicationManager.getInstance().getTargetasString() +" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+ApplicationManager.getInstance().getTargetAsStringWithUnit()+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_filling_print_differencew),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_filling_print_differencew))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getDifferenceFilling() +" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getDifferenceFillingAsStringWithUnit()+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_filling_differencep_visible),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_filling_differencep_visible))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getFillingDifferenceInPercent()+ " %"+"\n");
@@ -312,28 +312,28 @@ public void  printHeader(  String header){
 				break;
 
 			case TOTALIZATION:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getSum())+" g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total: "+ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit()+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_samples),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_samples))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples: "+Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN())+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_average),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_average))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMean())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average: "+ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit()+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_standard),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_standard))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation: "+ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit()+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_minimum),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_minimum))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum: "+ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit()+"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_totalization_print_maximum),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_totalization_print_maximum))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum: "+String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMax())+" g"+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum: "+ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit()+"\n");
 				}
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+String.format("%.4f g",(ApplicationManager.getInstance().getStats().getStatistic().getMax())-ApplicationManager.getInstance().getStats().getStatistic().getMin())+" g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range: "+ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit()+"\n");
 
 
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---\n");
 				for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+"\n");
 
 				}
 
@@ -356,8 +356,8 @@ public void  printHeader(  String header){
 						double currentdifference = Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight() - ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) / Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight());
 						currentdifference = currentdifference * 100;
 
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()) + " g\n");
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Actual: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) + " g\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()) + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Actual: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) + "\n");
 						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Diff(%): " + String.format("%.2f", currentdifference) + " %\n");
 
 						formulationcounter++;
@@ -365,17 +365,17 @@ public void  printHeader(  String header){
 
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Target: " + String.format("%.4f g", formulationTotalTarget) + " g" + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Target: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotalTarget) + "\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Actual: " + String.format("%.4f g", formulationTotal) + " g" + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Actual: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal) + "\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
 						formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
 						formulationTotalDifference = formulationTotalDifference * 100;
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Diff: " + String.format("%.2f g", formulationTotalDifference) + " %" + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Diff: " + String.format("%.2f", formulationTotalDifference) + " %" + "\n");
 					}
 				}else{
 
@@ -394,7 +394,7 @@ public void  printHeader(  String header){
 				if(ApplicationManager.getInstance().getCurrentItem() != null) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item Name: " + ApplicationManager.getInstance().getCurrentItem().getName() + "\n");
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_initial), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_initial)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Initial: " + String.format("%.4f", ApplicationManager.getInstance().getCurrentItem().getWeight()) + " g" + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Initial: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentItem().getWeight()) +  "\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_final), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_final)) == true) {
@@ -410,7 +410,7 @@ public void  printHeader(  String header){
 					}
 				}
 				break;
-			case DENSITIY_DETERMINATION:
+			case DENSITY_DETERMINATION:
 				String densityliquidtype = prefs.getString(ApplicationController.getContext().getString(R.string.preferences_density_liquidtyp), "");
 				String densitymode = prefs.getString(ApplicationController.getContext().getString(R.string.preferences_density_mode), "");
 
@@ -446,12 +446,12 @@ public void  printHeader(  String header){
 
 
 				break;
-
+			case PEAK_HOLD_STARTED:
 			case PEAK_HOLD:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Peak Weight: "+ ApplicationManager.getInstance().getPeakHoldMaximum()+ " g"+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Peak Weight: "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum())+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 
 				if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_peak_print_stableonly), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_peak_print_stableonly)) == true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Stable only : yes\n");
@@ -467,15 +467,15 @@ public void  printHeader(  String header){
 
 				for(int i=0; i<costList.size();i++){
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage( costList.get(i).getName()+"\n");
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item weight: "+ String.format("%.4f",costList.get(i).getWeight())+"\n"+ "g");
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item cost: "+ String.format("%.4f",costList.get(i).getCost())+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item weight: "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(costList.get(i).getWeight())+"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item cost: "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(costList.get(i).getCost())+"\n");
 				}
 
 
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("------------------\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total Items: " +costList.size()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total weight: " +String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalWeight())+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total cost: " +String.format("%.4f",ApplicationManager.getInstance().getIngrediantTotalCost())+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total weight: " +ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getIngrediantTotalWeight())+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total cost: " +ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getIngrediantTotalCost())+"\n");
 
 
 				break;
@@ -560,7 +560,7 @@ public void  printHeader(  String header){
 
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("---Sample Data---\n");
 				for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item "+String.format("%d",i)+" "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+"\n");
 
 				}
 
@@ -579,15 +579,15 @@ public void  printHeader(  String header){
 
 		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics of "+sqc.getName()+"\n");
 		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples "+String.format("%d",sqc.getStatistics().getN())+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average "+String.format("%.4f",sqc.getStatistics().getMean())+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum "+String.format("%.4f",sqc.getStatistics().getMax())+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum "+String.format("%.4f",sqc.getStatistics().getMin())+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range "+String.format("%.4f",(sqc.getStatistics().getMax()-sqc.getStatistics().getMin()))+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation "+String.format("%.4f",sqc.getStatistics().getStandardDeviation())+"\n");
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total "+String.format("%.4f",sqc.getStatistics().getSum())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMean())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMin())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax()-sqc.getStatistics().getMin()) +"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getStandardDeviation())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getSum())+"\n");
 		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("\n");
 
-		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Nomininal "+String.format("%.4f",sqc.getNominal())+"\n");
+		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Nomininal "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getNominal())+"\n");
 
 		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("+Tolerance1 "+String.format("%d",sqc.getSqcPT1())+ "   " +String.format("%.1f",((double)sqc.getSqcPT1()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
 		Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("+Tolerance2 "+String.format("%d",sqc.getSqcPT2())+ "   " +String.format("%.1f",((double)sqc.getSqcPT2()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
@@ -618,12 +618,12 @@ public void  printHeader(  String header){
 			default:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Statistics" + "\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Samples " + String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()) + " \n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getSum()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMean()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMin()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + String.format("%.4f", ApplicationManager.getInstance().getStats().getStatistic().getMax()) + " g\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + String.format("%.4f", (ApplicationManager.getInstance().getStats().getStatistic().getMax() - ApplicationManager.getInstance().getStats().getStatistic().getMin())) + " g\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Total " + ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit() + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Average " + ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit() + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Standard Deviation " +ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit() + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum " + ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit() + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Maximum " + ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit() + "\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Range " + ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit() + "\n");
 				break;
 		}
 	}

@@ -403,11 +403,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_filling_target_visible), getResources().getBoolean(R.bool.preferences_filling_target_visible)) == true) {
                     listReferenceFields.get(FillingTarget).getTextName().setText("TARGET");
-                    listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetasStringWithUnit());
+                    listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible), getResources().getBoolean(R.bool.preferences_filling_differencew_visible)) == true) {
                     listReferenceFields.get(FillingDifference).getTextName().setText("DIFFERENCE: ");
-                    listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFillingWithUnit());
+                    listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFillingAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible), getResources().getBoolean(R.bool.preferences_filling_differencep_visible)) == true) {
                     listReferenceFields.get(FillingDifferencePercent).getTextName().setText("DIFFERENCE %: ");
@@ -416,7 +416,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
-
+            case PEAK_HOLD_STARTED:
             case PEAK_HOLD:
                 if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
@@ -473,8 +473,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 break;
-
-            case DENSITIY_DETERMINATION:
+            case DENSITY_DETERMINATION_STARTED:
+            case DENSITY_DETERMINATION:
                 String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp), "");
                 String densitymode = prefs.getString(getString(R.string.preferences_density_mode), "");
                 if (densityliquidtype.equals("1")) {

@@ -78,6 +78,7 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 			case MENU_ITEM_APPLICATION_SETTINGS:
 			case MENU_ITEM_USER:
 			case MENU_ITEM_WEIGHING_UNITS:
+			case MENU_ITEM_COMMUNICATION:
 				convertView.setBackgroundResource(R.drawable.menu_btn_tur);
 				break;
 			default:

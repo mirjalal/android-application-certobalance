@@ -328,7 +328,7 @@ protected void onPause() {
 						case DIFFERENTIAL_WEIGHING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDifferentialWeighing()).commit();
 							break;
-						case DENSITIY_DETERMINATION:
+						case DENSITY_DETERMINATION:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsDensityDetermination()).commit();
 							break;
 						case PEAK_HOLD:
@@ -516,7 +516,7 @@ protected void onPause() {
 		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
 		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITIY_DETERMINATION);
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITY_DETERMINATION);
 		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
 		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
