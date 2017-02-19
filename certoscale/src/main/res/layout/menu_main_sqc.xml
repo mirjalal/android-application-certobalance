@@ -20,13 +20,13 @@
             android:layout_height="60dp"
             android:text="1300345"
             android:gravity="center_vertical"
-            style="@style/text_default"/>
+            style="@style/text_small"/>
 
         <TextView
             android:id="@+id/menu_main_sqc_edit_element_maximum"
             android:layout_width="140dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="Screw" />
 
@@ -34,7 +34,7 @@
             android:id="@+id/menu_main_sqc_edit_element_minimum"
             android:layout_width="140dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="1.54" />
 
@@ -44,7 +44,7 @@
             android:id="@+id/menu_main_sqc_edit_element_average"
             android:layout_width="140dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="12.0121"/>
 
@@ -52,7 +52,7 @@
             android:id="@+id/menu_main_sqc_edit_element_standard"
             android:layout_width="140dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="12.0121"/>
 

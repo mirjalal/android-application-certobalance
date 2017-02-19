@@ -8,22 +8,12 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 
-/**
- * An activity representing a list of Items. This activity has different
- * presentations for handset and tablet-size devices. On handsets, the activity
- * presents a list of items, which when touched, lead to a
- * {@link ItemDetailActivity} representing item details. On tablets, the
- * activity presents the list of items and item details side-by-side using two
- * vertical panes.
- * <p>
- * The activity makes heavy use of fragments. The list of items is a
- * {@link SettingsUserListFragment} and the item details (if present) is a
- * {@link ItemDetailFragment}.
- * <p>
- * This activity also implements the required {@link SettingsUserListFragment.Callbacks}
- * interface to listen for item selections.
- */
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SettingsActivity extends FragmentActivity implements ItemListFragment.Callbacks, ButtonEventListener {
 
 	public static String INTENT_EXTRA_SUBMENU = "submenu";
@@ -31,7 +21,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
 	 */
-
+    private List<String> settingsEntriesList = null;
 	private Navigationbar navigationbar = null;
 
 	@Override
@@ -46,7 +36,8 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 		navigationbar.getTextTitle().setText("Application settings".toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-		
+		settingsEntriesList = new ArrayList<String>();
+		settingsEntriesList.addAll(Arrays.asList(getResources().getStringArray(R.array.navigationbar_entries)));
 
 
 	}
@@ -67,11 +58,23 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 	protected void onResume() {
 		navigationbar.setButtonEventListener(this);
 		super.onResume();
+		//always open settings of current app
 		int index = 0;
-		try{
-			index = getIntent().getIntExtra(INTENT_EXTRA_SUBMENU, 0);
-		}catch(Exception e){
-			
+		switch (Scale.getInstance().getScaleApplication()){
+			case WEIGHING: index = 0; break;
+			case PART_COUNTING: index = 1; break;
+			case PERCENT_WEIGHING: index = 2; break;
+			case CHECK_WEIGHING: index = 3; break;
+			case ANIMAL_WEIGHING: index = 4; break;
+			case FILLING: index = 5; break;
+			case TOTALIZATION: index = 6; break;
+			case FORMULATION: index = 7; break;
+			case DIFFERENTIAL_WEIGHING: index = 8; break;
+			case DENSITY_DETERMINATION: index = 9; break;
+			case PEAK_HOLD: index = 10; break;
+			case INGREDIENT_COSTING: index = 11; break;
+			case PIPETTE_ADJUSTMENT: index = 12; break;
+			case STATISTICAL_QUALITY_CONTROL: index = 13; break;
 		}
 		onItemSelected(index);
 	}
@@ -79,15 +82,15 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 
 
 
-	/**
-	 * Callback method from {@link SettingsUserListFragment.Callbacks} indicating that
-	 * the item with the given ID was selected.
-	 */
 	@Override
 	public void onItemSelected(long id) {
-		
+		try {
+			navigationbar.getTextTitle().setText(settingsEntriesList.get((int) id).toUpperCase() + " SETTINGS");
+		}catch (Exception e){
+
+		}
 		if(id == 0){
-			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, new SettingsWeighing()).commit(); 	
+			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container, new SettingsWeighing()).commit();
 		}else if(id == 1){
 			getSupportFragmentManager().beginTransaction().replace(R.id.item_detail_container,  new SettingsCounting()).commit();
 		}else if(id == 2){

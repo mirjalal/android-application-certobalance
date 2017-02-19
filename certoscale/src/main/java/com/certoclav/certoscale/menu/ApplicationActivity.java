@@ -243,19 +243,12 @@ protected void onPause() {
 				ApplicationManager.getInstance().showIngrediantNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
-						actionButtonbarFragment.updateStatsButtonUI();
+						actionButtonbarFragment.updateIngrediantButtonUI();
 					}
 				});
 				break;
 			case ActionButtonbarFragment.BUTTON_SHOWBATCH:
-				if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
-					ApplicationManager.getInstance().showBatchList(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							actionButtonbarFragment.updateStatsButtonUI();
-						}
-					});
-				}
+
 
 				if (Scale.getInstance().getScaleApplication()==FORMULATION){
 					ApplicationManager.getInstance().showRecipeResults(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
@@ -384,6 +377,7 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_SETTINGS:
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
+				intent2.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU,Scale.getInstance().getScaleApplication().ordinal());
 				startActivity(intent2);
 				break;
 			case ActionButtonbarFragment.BUTTON_SAVE:
@@ -528,6 +522,11 @@ protected void onPause() {
 		}
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
+		try {
+			Scale.getInstance().setScaleApplication(navigationbar.getArrayAdapterMode().getItem(navigationbar.getSpinnerMode().getSelectedItemPosition()));
+		}catch (Exception e){
+
+		}
 	}
 
 

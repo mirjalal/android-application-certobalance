@@ -78,24 +78,6 @@ public class ItemListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
-		
-	//	setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-		//		android.R.layout.simple_list_item_activated_1,
-		//		android.R.id.text1, DummyContent.ITEMS));
-
-	
-	
-
-	
-	
-	
-
-
-	
-		// TODO: replace with a real list adapter.
-
 	}
 
 	@Override

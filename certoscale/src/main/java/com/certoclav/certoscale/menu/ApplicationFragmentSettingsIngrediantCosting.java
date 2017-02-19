@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
@@ -55,7 +54,7 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
                 try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_text);
-                    dialog.setTitle("Please enter the pipette name");
+                    dialog.setTitle("Please enter the name of the currency");
 
                     // set the custom dialog components - text, image and button
 

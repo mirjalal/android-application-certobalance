@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
-import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.adapters.SamplesAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
@@ -467,7 +466,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
             default:
-                return String.format("%.4f", transformGramToCurrentUnit(getTaredValueInGram())) + " " + getCurrentUnit().getName();
+                return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
 
         }
 
@@ -776,7 +775,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                     protocolPrinter.printApplicationData();
                     protocolPrinter.printBottom();
 
-                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+                    Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
                 }
             });
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
@@ -795,64 +794,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-    public void showBatchList(final Context eContext, DialogInterface.OnDismissListener listener) {
-        try {
-            final Dialog dialog = new Dialog(eContext);
-            dialog.setContentView(R.layout.dialog_batchlist);
-            dialog.setOnDismissListener(listener);
-            dialog.setTitle("Batch List");
 
-
-
-            ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
-
-
-
-            // This is the array adapter, it takes the context of the activity as a
-            // first parameter, the type of list view as a second parameter and your
-            // array as a third parameter.
-            SQCAdapter arrayAdapter = new SQCAdapter(eContext,new ArrayList<SQC>());
-
-            listView.setAdapter(arrayAdapter);
-            for(SQC sqc : getBatchList()){
-                arrayAdapter.add(sqc);
-            }
-
-            //arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
-
-
-
-
-            //arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
-            //arrayAdapter.add("Text von Listenelement 2");
-
-
-
-            Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_clear);
-            dialogButtonClear.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    ApplicationManager.getInstance().setBatchName("");
-                    getBatchList().clear();
-                    dialog.dismiss();
-                }
-            });
-
-            Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
-            dialogButtonClose.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void showRecipeResults(final Context eContext, DialogInterface.OnDismissListener listener) {
         try {
@@ -963,7 +905,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
         try {
-            retVal =  String.format("%.4f", transformGramToCurrentUnit(gram)) + " "+getCurrentUnit().getName();
+            int numDezimalPlaces = 4 - (int)Math.round(getCurrentUnit().getExponent());
+            retVal =  String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " "+getCurrentUnit().getName();
         }catch (Exception e){
             retVal = "";
         }
@@ -982,33 +925,25 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public String getUnderLimitCheckWeighingAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getUnderLimitCheckWeighing())) + getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getUnderLimitCheckWeighing());
     }
-    public String getUnderLimitCheckWeighingAsString() {
-        return String.format("%.4f", currentLibrary.getUnderLimitCheckWeighing());
-    }
+
 
     public String getCheckNominalAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominal())) + " "+ getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getCheckNominal());
     }
 
 
 
-    public String getCheckNominal() {
-        return String.format("%.4f", currentLibrary.getCheckNominal());
-    }
+
     public double getCheckNominaldouble() {
        return currentLibrary.getCheckNominal();
     }
 
     public String getCheckNominalToleranceOverAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominalToleranceOver())) + " "+ getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getCheckNominalToleranceOver());
     }
 
-
-    public String getCheckNominalToleranceOver() {
-        return String.format("%.4f", currentLibrary.getCheckNominalToleranceOver());
-    }
 
     public String getCheckNominalToleranceOverPercent() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceOverPercent());
@@ -1021,11 +956,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public String getCheckNominalToleranceUnderAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getCheckNominalToleranceUnder())) + " "+ getCurrentUnit().getName();
-    }
-
-    public String getCheckNominalToleranceUnder() {
-        return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnder());
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getCheckNominalToleranceUnder());
     }
 
 
@@ -1035,13 +966,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public String getOverLimitCheckWeighingAsStringWithUnit() {
-        return String.format("%.4f", transformGramToCurrentUnit(currentLibrary.getOverLimitCheckWeighing())) + " "+ getCurrentUnit().getName();
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getOverLimitCheckWeighing());
     }
-
-    public String getOverLimitCheckWeighingAsString() {
-        return String.format("%.4f", currentLibrary.getOverLimitCheckWeighing());
-    }
-
 
 
     public String getOverlimitPiecesAsString() {
@@ -1074,12 +1000,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getUnderLimitAsStringWithUnit() {
         switch (Scale.getInstance().getScaleApplication()) {
-            case WEIGHING:
-                return getTransformedWeightAsStringWithUnit(currentLibrary.getUnderLimit());
             case PART_COUNTING:
                 return String.format("%d ", currentLibrary.getUnderLimitPieces()) + " pcs";
+            default:
+                return getTransformedWeightAsStringWithUnit(currentLibrary.getUnderLimit());
         }
-        return "todo";
 
     }
 
@@ -1214,15 +1139,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         }
     }
 
-    public String getDifferenceAsStringInGramWithUnit() {
-        String retVal = "";
-        try {
-            retVal =  String.format("%.4f", transformGramToCurrentUnit(getSumInGram() - getTareInGram() - currentItem.getWeight())) + " "+getCurrentUnit().getName();
-        }catch (Exception e){
-            retVal = "";
-        }
-        return retVal;
-    }
+
 
     public String getDifferenceToInitialInPercentAsString() {
         String retVal = "";
@@ -1243,7 +1160,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(   getStats().getSamples().get(getStats().getSamples().size() - 1))) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(  getStats().getSamples().get(getStats().getSamples().size() - 1));
         }catch (Exception e){
             retVal = "";
         }
@@ -1257,7 +1174,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax()) - getStats().getStatistic().getMin()) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(   getStats().getStatistic().getMax() - getStats().getStatistic().getMin()  );
         }catch (Exception e){
             retVal = "";
         }
@@ -1269,7 +1186,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMax())) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMax());
         }catch (Exception e){
             retVal = "";
         }
@@ -1281,7 +1198,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMin())) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMin());
         }catch (Exception e){
             retVal = "";
         }
@@ -1293,7 +1210,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getStandardDeviation())) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getStandardDeviation());
         }catch (Exception e){
             retVal = "";
         }
@@ -1305,7 +1222,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getMean())) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMean());
         }catch (Exception e){
             retVal = "";
         }
@@ -1317,7 +1234,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         String retVal = "";
 
         try {
-            retVal = String.format("%.4f", transformGramToCurrentUnit(getStats().getStatistic().getSum())) + " "+ getCurrentUnit().getName();
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getSum());
         }catch (Exception e){
             retVal = "";
         }
@@ -1403,7 +1320,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
                     protocolPrinter.printBottom();
 
-                    Toast.makeText(eContext, "Todo: Send statistics to COM port", Toast.LENGTH_LONG).show();
+                    Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
                 }
             });
             Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);
@@ -1704,7 +1621,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         pholdWeight=0;
         setPeakHoldMaximum(0);
 
-        sqc_state=0;
+
        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
 

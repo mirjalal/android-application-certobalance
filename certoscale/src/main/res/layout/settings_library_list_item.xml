@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linear"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="100dp"
     android:gravity="center_vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_gadient">
@@ -11,6 +11,7 @@
         android:id="@+id/imageView1"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_centerVertical="true"
         android:src="@drawable/icon_cloud_x"
         android:layout_alignParentLeft="true" >
         
@@ -18,10 +19,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
         android:layout_toRightOf="@+id/imageView1"
-        android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"  >
+        android:layout_marginLeft="10dp">
 
         <TextView
             android:id="@+id/first_line"
@@ -30,38 +31,41 @@
             android:text="first line"
             android:textStyle="bold"
             style="@style/text_default"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/imageView1">
 
-        <TextView
-            android:id="@+id/second_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="second line"
-            android:textStyle="bold"
-            style="@style/text_default_small"/>
 
-        <TextView
-            android:id="@+id/third_line"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="third line"
-            android:textStyle="bold"
-            style="@style/text_default_small" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imageView1">
 
-</LinearLayout>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/second_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="second line"
+                    android:textStyle="bold"
+                    style="@style/text_default_small"/>
+
+                <TextView
+                    android:id="@+id/third_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="third line"
+                    android:textStyle="bold"
+                    style="@style/text_default_small" />
+
+            </LinearLayout>
+    </LinearLayout>
 
         <LinearLayout
             android:id="@+id/user_list_element_container_button"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentRight="true"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
             android:layout_marginRight="20dp" ></LinearLayout>
 
 </RelativeLayout>

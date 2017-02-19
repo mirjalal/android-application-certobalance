@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -183,12 +187,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		Scale.getInstance().setOnApplicationListener(this);
 		Scale.getInstance().setOnWeightListener(this);
 		onApplicationChange(Scale.getInstance().getScaleApplication());
-		if (ApplicationManager.getInstance().getSqc_state()==1){
-			buttonNewBatch.setText("End\n" + ApplicationManager.getInstance().getBatchName());
-		}
-		if(ApplicationManager.getInstance().getSqc_state()==0){
-			buttonNewBatch.setText("New Batch");
-		}
+
+
+
 
 		//get PeakHoldMode
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -253,6 +254,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
+
 				if (Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION) {
 
 					ApplicationManager.getInstance().setDensity_step_counter(1);
@@ -393,7 +395,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
 						pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
 						double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
-						buttonAccumulate.setText("Accept");
+						buttonAccumulate.setText("ACCEPT");
 
 						ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
 
@@ -464,6 +466,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 				if (Scale.getInstance().getScaleApplication()==INGREDIENT_COSTING){
+					buttonIngrediantList.setEnabled(true);
 					buttonAccept.setEnabled(true);
 					if (ApplicationManager.getInstance().getCurrentItem()==null) {
 						Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
@@ -488,6 +491,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						measuredItem.setWeight(currentWeight);
 						measuredItem.setCost(unitCost);
 						ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+						updateIngrediantButtonUI();
 
 					}
 				}
@@ -541,9 +545,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 
+				//if button is NEW BATCH
 				if (ApplicationManager.getInstance().getSqc_state()==0) {
-
-
 
 					try {
 						final Dialog dialog = new Dialog(getActivity());
@@ -589,34 +592,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
+				}else {
+					endCurrentBatch();
 				}
-				if (ApplicationManager.getInstance().getSqc_state()==1){
 
-					//Data from one Batch
-					//SummaryStatistics currentStatistics = new SummaryStatistics();
-					//ApplicationManager.getInstance().getStatistic().copy();
-					//currentStatistics=ApplicationManager.getInstance().getStatistic();
-
-					SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
-							ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
-							ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
-							ApplicationManager.getInstance().getSqcNT2());
-					//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
-					//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
-
-					ApplicationManager.getInstance().getBatchList().add(currentBatch);
-					ApplicationManager.getInstance().getStats().getStatistic().clear();
-
-
-					buttonNewBatch.setText("New Batch");
-					buttonAccumulate.setEnabled(false);
-					ApplicationManager.getInstance().setSqc_state(0);
-					ApplicationManager.getInstance().setSqcPT1(0);
-					ApplicationManager.getInstance().setSqcPT2(0);
-					ApplicationManager.getInstance().setSqcNT1(0);
-					ApplicationManager.getInstance().setSqcNT2(0);
-
-				}
 
 
 			}
@@ -626,6 +605,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonShowBatch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL){
+					showBatchList(getActivity(),null);
+				}
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_SHOWBATCH,false);
 				}
@@ -636,9 +618,38 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		return rootView;
 	}
-	
-	
 
+	public void endCurrentBatch() {
+		if (ApplicationManager.getInstance().getSqc_state()==1){
+
+			//Data from one Batch
+			//SummaryStatistics currentStatistics = new SummaryStatistics();
+			//ApplicationManager.getInstance().getStatistic().copy();
+			//currentStatistics=ApplicationManager.getInstance().getStatistic();
+
+			SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
+					ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
+					ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
+					ApplicationManager.getInstance().getSqcNT2());
+			//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
+			//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
+
+			ApplicationManager.getInstance().getBatchList().add(currentBatch);
+			ApplicationManager.getInstance().getStats().getStatistic().clear();
+
+
+			buttonNewBatch.setText("NEW BATCH");
+			buttonAccumulate.setEnabled(false);
+			buttonShowBatch.setEnabled(true);
+			updateBatchListButtonText();
+			ApplicationManager.getInstance().setSqc_state(0);
+			ApplicationManager.getInstance().setSqcPT1(0);
+			ApplicationManager.getInstance().setSqcPT2(0);
+			ApplicationManager.getInstance().setSqcNT1(0);
+			ApplicationManager.getInstance().setSqcNT2(0);
+
+		}
+	}
 
 
 	public void disbalbeAllButtons(){
@@ -652,6 +663,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	public void onApplicationChange(ScaleApplication application) {
 
 		buttonPrint.setEnabled(true);
+
 
 		switch (Scale.getInstance().getScaleApplication()){
 
@@ -781,19 +793,20 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			case FORMULATION:
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.GONE);
 				buttonPrint.setEnabled(false);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonAppSettings.setEnabled(true);
 
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText("Show Results");
+				buttonShowBatch.setText("RESULTS");
 
 				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
@@ -802,6 +815,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonStart.setEnabled(false);
 					buttonStart.setVisibility(View.VISIBLE);
 				}
+				buttonShowBatch.setEnabled(true);
+				buttonTara.setEnabled(true);
+				buttonZero.setEnabled(true);
 				break;
 			case FORMULATION_RUNNING:
 				buttonStart.setVisibility(View.VISIBLE);
@@ -810,6 +826,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonPrint.setEnabled(false);
 				buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonShowBatch.setEnabled(false);
 				break;
 
 
@@ -836,15 +854,17 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-
-				buttonAccept.setVisibility(View.GONE);
-				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonAccept.setEnabled(true);
 				buttonIngrediantList.setVisibility(View.VISIBLE);
+
+				updateIngrediantButtonUI();
+				if(ApplicationManager.getInstance().getCurrentItem() == null) {
+					buttonAccept.setEnabled(false); // only enabled after item has been choosed
+				}
 
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
@@ -983,18 +1003,30 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText("Show Batch \n List");
 
 				buttonAccumulate.setEnabled(false);
 				buttonStart.setVisibility(View.GONE);
-
+				updateBatchListButtonText();
 
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 
 				buttonStatistics.setVisibility(View.GONE);
 
+				if (ApplicationManager.getInstance().getSqc_state()==1){
+					buttonNewBatch.setText("END BATCH\n" + ApplicationManager.getInstance().getBatchName());
+					buttonShowBatch.setEnabled(false);
+					updateBatchListButtonText();
+					buttonAccumulate.setEnabled(true);
 
+				}
+				if(ApplicationManager.getInstance().getSqc_state()==0){
+					buttonNewBatch.setText("NEW BATCH");
+					buttonShowBatch.setEnabled(true);
+					updateBatchListButtonText();
+					buttonAccumulate.setEnabled(false);
+
+				}
 
 
 				break;
@@ -1086,6 +1118,28 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		
 	}
 
+
+	public void updateBatchListButtonText() {
+
+		buttonShowBatch.setText("BATCH LIST\n(" + ApplicationManager.getInstance().getBatchList().size() + ")");
+		//if there is no batch to show, hide the button
+		if(ApplicationManager.getInstance().getBatchList().size() == 0){
+			buttonShowBatch.setEnabled(false);
+		}
+
+	}
+
+	public void updateIngrediantButtonUI() {
+
+		buttonIngrediantList.setText("COST LIST\n(" + ApplicationManager.getInstance().getIngrediantCostList().size() + ")");
+		if (ApplicationManager.getInstance().getIngrediantCostList().size() == 0){
+			buttonIngrediantList.setEnabled(false);
+		}else {
+			buttonIngrediantList.setEnabled(true);
+		}
+	}
+
+
 	public void updateStatsButtonUI() {
 
 		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStats().getStatistic().getN() + ")");
@@ -1104,6 +1158,75 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			buttonZero.setEnabled(false);
 		}
 	}
+
+
+
+
+	public void showBatchList(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_batchlist);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Batch List");
+
+
+
+			ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
+
+
+
+			// This is the array adapter, it takes the context of the activity as a
+			// first parameter, the type of list view as a second parameter and your
+			// array as a third parameter.
+			SQCAdapter arrayAdapter = new SQCAdapter(eContext,new ArrayList<SQC>());
+
+			listView.setAdapter(arrayAdapter);
+			for(SQC sqc : ApplicationManager.getInstance().getBatchList()){
+				arrayAdapter.add(sqc);
+			}
+
+			//arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
+
+
+
+
+			//arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+			//arrayAdapter.add("Text von Listenelement 2");
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_clear);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					resetSqc();
+					dialog.dismiss();
+				}
+			});
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+ private void resetSqc(){
+	 ApplicationManager.getInstance().setBatchName("");
+	 ApplicationManager.getInstance().getBatchList().clear();
+	 endCurrentBatch();
+	 buttonAccumulate.setEnabled(false);
+	 buttonShowBatch.setEnabled(false);
+	 updateBatchListButtonText();
+ }
 }
 
 

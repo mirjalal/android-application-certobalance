@@ -139,7 +139,7 @@ public void  printHeader(  String header){
 			case WEIGHING:
 
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result:"+ " " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Grosss:" + " " + ApplicationManager.getInstance().getLoadInGramAsStringWithUnit());
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Grosss:" + " " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Net:" +" " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tare:" +" " + ApplicationManager.getInstance().getTareAsStringWithUnit());
 
@@ -165,7 +165,7 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit() +"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 
 				if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_weigh_print_min),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_weigh_print_min))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Minimum Weight: "+ ApplicationManager.getInstance().getUnderLimitAsStringWithUnit()+"\n");
@@ -175,11 +175,11 @@ public void  printHeader(  String header){
 			case PART_COUNTING:
 
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_counting_print_sample_size),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_counting_print_sample_size))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram() +"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit() +"\n");
 				}
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_counting_print_apw),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_counting_print_apw))==true){
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("APW: "+ ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit() +"\n");
 				}
@@ -207,14 +207,14 @@ public void  printHeader(  String header){
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Percentage: " +ApplicationManager.getInstance().getPercent()+ " %"+"\n" );
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_reference),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_reference))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Reference Weight: " +ApplicationManager.getInstance().getReferenceWeightAsStringInGram()+"\n" );
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Reference Weight: " +ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()+"\n" );
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Reference Adjust: "+ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment()+" %" +"\n" );
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceAsStringInGram() +"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceAsStringWithUnit() +"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference_percent),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference_percent))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getDifferenceInPercent()+ " %"+"\n");
@@ -244,7 +244,7 @@ public void  printHeader(  String header){
 
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 
 				if  (cmode_check.equals("1")) {
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_check_print_underlimit), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_check_print_underlimit)) == true) {
@@ -296,10 +296,10 @@ public void  printHeader(  String header){
 				break;
 
 			case FILLING:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: " +ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: " +ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_filling_print_target),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_filling_print_target))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Target: "+ApplicationManager.getInstance().getTargetAsStringWithUnit()+"\n");
 				}
@@ -386,10 +386,10 @@ public void  printHeader(  String header){
 				break;
 
 			case DIFFERENTIAL_WEIGHING:
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: " +ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Result: " +ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringInGram()+"\n");
+				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
 
 				if(ApplicationManager.getInstance().getCurrentItem() != null) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Item Name: " + ApplicationManager.getInstance().getCurrentItem().getName() + "\n");
@@ -402,7 +402,7 @@ public void  printHeader(  String header){
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_differencew), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_differencew)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getDifferenceAsStringInGramWithUnit() + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getDifferenceAsStringWithUnit() + "\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_differencep), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_differencep)) == true) {
@@ -430,7 +430,7 @@ public void  printHeader(  String header){
 
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Brutto: " + ApplicationManager.getInstance().getSumAsStringWithUnit() + "\n");
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Tara: " + ApplicationManager.getInstance().getTareAsStringWithUnit() + "\n");
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: " + ApplicationManager.getInstance().getTaredValueAsStringInGram() + "\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Netto: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit() + "\n");
 
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Weight in Air: " + String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_air()) + "\n");
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Weight in Liquid: " + String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()) + "\n");

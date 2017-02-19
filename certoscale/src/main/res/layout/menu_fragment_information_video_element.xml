@@ -5,7 +5,8 @@
 		    xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/information_video_list_element"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="100dp"
+			android:background="@drawable/background_gadient">
             
 	       <RelativeLayout
 	        android:layout_width="match_parent"

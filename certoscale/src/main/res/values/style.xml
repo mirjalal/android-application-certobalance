@@ -29,6 +29,7 @@
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#ffffff</item>
+        <item name="android:soundEffectsEnabled">true</item>
         <item name="android:background">@drawable/quickaction_slider_btn</item>
         <item name="android:capitalize">characters</item>
         <item name="android:layout_margin">1dp</item>
@@ -50,6 +51,12 @@
 
     <style name="text_default">
         <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="text_small">
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_margin">5dp</item>
     </style>

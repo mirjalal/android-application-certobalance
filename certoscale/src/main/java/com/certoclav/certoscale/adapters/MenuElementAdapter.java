@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.menu.ApplicationActivity;
+import com.certoclav.certoscale.menu.VideoActivity;
 import com.certoclav.certoscale.model.MenuElement;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.settings.calibration.SettingsCalibrationActivity;
@@ -134,6 +135,10 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 						break;
 					case MENU_ITEM_COMMUNICATION:
 						intent = new Intent(mContext, SettingsCommunicationActivity.class);
+						mContext.startActivity(intent);
+						break;
+					case MENU_ITEM_VIDEO:
+						intent = new Intent(mContext, VideoActivity.class);
 						mContext.startActivity(intent);
 						break;
 				}

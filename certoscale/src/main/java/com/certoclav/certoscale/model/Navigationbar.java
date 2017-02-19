@@ -122,9 +122,7 @@ public class Navigationbar {
 		return spinnerMode;
 	}
 
-	public void setSpinnerMode(Spinner spinnerMode) {
-		this.spinnerMode = spinnerMode;
-	}
+
 
 	public Spinner getSpinnerLib() {
 		return spinnerLib;

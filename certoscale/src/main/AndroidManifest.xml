@@ -154,6 +154,16 @@
             android:launchMode="singleInstance">
         </activity>
 
+        <activity android:name=".menu.VideoActivity"
+            android:screenOrientation="sensorLandscape"
+            android:launchMode="singleInstance">
+        </activity>
+
+        <activity android:name=".menu.VideoFullscreenActivity"
+            android:screenOrientation="sensorLandscape"
+            android:launchMode="singleInstance">
+        </activity>
+
         <activity android:name=".settings.unit.SettingsUnitActivity"
             android:screenOrientation="sensorLandscape"
             ></activity>

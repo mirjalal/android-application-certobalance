@@ -10,6 +10,7 @@ import android.widget.VideoView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.model.Navigationbar;
 
 
 public class VideoFullscreenActivity extends Activity  {
@@ -27,6 +28,11 @@ public class VideoFullscreenActivity extends Activity  {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_fragment_information_video_fullscreen_activity);
+		Navigationbar navigationbar = new Navigationbar(this);
+		navigationbar.onCreate();
+		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
+		navigationbar.getTextTitle().setText("VIDEO");
 
         VideoView videoView = (VideoView) findViewById(R.id.information_video_fullscreen_videoView);
         String videoPath = getIntent().getExtras().getString(AppConstants.INTENT_EXTRA_VIDEOFULLSCREENACTIVITY_VIDEO_PATH);

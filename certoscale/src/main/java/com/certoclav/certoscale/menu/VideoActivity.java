@@ -8,6 +8,7 @@ import android.widget.GridView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.VideoAdapter;
+import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Video;
 import com.certoclav.library.util.FileUtils;
 
@@ -33,7 +34,11 @@ public class VideoActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu_fragment_information_video_activity);
-
+		Navigationbar navigationbar= new Navigationbar(this);
+		navigationbar.onCreate();
+		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+		navigationbar.getTextTitle().setText("VIDEOS");
+		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		programGrid = (GridView) findViewById(R.id.video_gridlayout);
 		
 		

@@ -75,6 +75,8 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 		TextView editName = (TextView) convertView.findViewById(R.id.list_item_unit_text_description);
 		editName.setText(getItem(position).getDescription());
 
+		TextView textDescription = (TextView) convertView.findViewById(R.id.list_item_unit_text_calc);
+		textDescription.setText("1 g = "+ getItem(position).getFactor()+" * 10^(" + getItem(position).getExponent()+ ") " + getItem(position).getName());
 
 		CheckBox cbEnabled = (CheckBox) convertView.findViewById(R.id.list_item_unit_checkbox);
 
@@ -85,7 +87,7 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 			actionUnitDelete.setVisibility(View.VISIBLE);
 			actionUnitEdit.setVisibility(View.VISIBLE);
 		}
-		
+
 
 		if(hideCheckBox){
 			cbEnabled.setVisibility(View.GONE);
@@ -93,8 +95,6 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 			actionUnitEdit.setVisibility(View.GONE);
 		}else{
 			cbEnabled.setVisibility(View.VISIBLE);
-			actionUnitDelete.setVisibility(View.VISIBLE);
-			actionUnitEdit.setVisibility(View.VISIBLE);
 		}
 
 

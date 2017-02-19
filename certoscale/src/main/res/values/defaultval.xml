@@ -53,7 +53,7 @@
     <bool name="preferences_counting_activated_default">true</bool>
     <bool name="preferences_counting_lock">true</bool>
 
-    <bool name="preferences_counting_auto_optimization">true</bool>
+    <bool name="preferences_counting_auto_optimization">false</bool>
     <bool name="preferences_counting_secondary_visible">true</bool>
     <bool name="preferences_counting_apw_visible">true</bool>
     <bool name="preferences_counting_brutto_visible">true</bool>
@@ -145,7 +145,7 @@
     //Totalization App
     <bool name="preferences_totalization_activated_default">true</bool>
     <bool name="preferences_totalization_lock">true</bool>
-    <bool name="preferences_totalization_AutoSampleMode">true</bool>
+    <bool name="preferences_totalization_AutoSampleMode">false</bool>
 
 
     <bool name="preferences_totalizaion_NumberofSamples">true</bool>
@@ -189,7 +189,7 @@
     //Differential Weighing App
     <bool name="preferences_differential_activated_default">true</bool>
     <bool name="preferences_differential_lock">true</bool>
-    <bool name="preferences_differential_autoMode">true</bool>
+    <bool name="preferences_differential_autoMode">false</bool>
 
     <bool name="preferences_differential_initial_visible">true</bool>
     <bool name="preferences_differential_final_visible">true</bool>
@@ -209,8 +209,8 @@
     <bool name="preferences_density_activated_default">true</bool>
     <bool name="preferences_density_lock">true</bool>
     <bool name="preferences_density_porous">true</bool>
-    <bool name="preferences_density_autoprint">true</bool>
-    <bool name="preferences_density_autosample">true</bool>
+    <bool name="preferences_density_autoprint">false</bool>
+    <bool name="preferences_density_autosample">false</bool>
 
     <bool name="preferences_denisty_Liquid_visible">true</bool>
     <bool name="preferences_density_watertemp_visible">true</bool>
@@ -261,7 +261,7 @@
     //Pipette Adjustment App
     <bool name="preferences_pipette_activated_default">true</bool>
     <bool name="preferences_pipette_lock">true</bool>
-    <bool name="preferences_pipette_autosamplemode">true</bool>
+    <bool name="preferences_pipette_autosamplemode">false</bool>
 
 
 

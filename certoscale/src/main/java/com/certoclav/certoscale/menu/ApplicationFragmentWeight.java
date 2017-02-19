@@ -184,7 +184,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-                textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
             case PART_COUNTING:
@@ -439,8 +439,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case TOTALIZATION:
+                Boolean isAutoSampleMode = prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode),getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode));
+                if(isAutoSampleMode){
+                    textInstruction.setText("Automatic sample mode ON. Samples will be added automatically.");
+                }else{
+                    textInstruction.setText("Manual mode ON. Press ADD TO STATS to add to the total.");
+                }
 
-                textInstruction.setText("Place sample on the pan. Press Accept to add to the total.");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());

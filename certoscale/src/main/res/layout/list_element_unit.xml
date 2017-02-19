@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linear"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:descendantFocusability="blocksDescendants"
-    android:gravity="center_vertical">
+    android:layout_height="90dp"
+    android:descendantFocusability="blocksDescendants">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingLeft="10dp"
-        android:orientation="horizontal"
-        android:descendantFocusability="blocksDescendants">
-        <TextView
-            android:id="@+id/list_item_unit_text_unit"
-            android:layout_width="100dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="g"
-            style="@style/text_default"/>
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:descendantFocusability="blocksDescendants">
+                    <TextView
+                        android:id="@+id/list_item_unit_text_unit"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:text="g"
+                        style="@style/text_default"/>
 
+                    <TextView
+                        android:id="@+id/list_item_unit_text_description"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        style="@style/text_default"
+                        android:textStyle="bold"
+                        android:text="gram" />
+
+        </LinearLayout>
         <TextView
-            android:id="@+id/list_item_unit_text_description"
-            android:layout_width="200dp"
+            android:id="@+id/list_item_unit_text_calc"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/text_default"
-            android:text="gram" />
-
-
+            android:layout_weight="1"
+            android:gravity="top"
+            android:layout_marginLeft="115dp"
+            android:textSize="14dp"
+            android:textColor="@android:color/white"
+            android:text="Factor: 0.31313132, Exponent: -2" />
 
     </LinearLayout>
     <CheckBox

@@ -46,7 +46,6 @@ public class DatabaseService {
 	
 
 		userDao = getHelper().getUserDao();
-
 		messageDao = getHelper().getMessageDao();
 		libraryDao = getHelper().getLibraryDao();
 		recipeDao = getHelper().getRecipeDao();
