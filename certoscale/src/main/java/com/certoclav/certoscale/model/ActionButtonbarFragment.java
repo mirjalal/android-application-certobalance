@@ -986,7 +986,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
-				buttonAccumulate.setText("Accept");
+				buttonAccumulate.setText("ACCEPT");
 				buttonAccumulate.setEnabled(false);
 				break;
 
