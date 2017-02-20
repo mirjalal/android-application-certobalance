@@ -24,7 +24,7 @@
             android:key="@string/preferences_check_lock"
             android:defaultValue="@bool/preferences_check_lock"
             android:title="Lock"
-            android:summary="Lock the check weighing settingson/off"
+            android:summary="Lock the check weighing settings on/off"
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
@@ -50,6 +50,14 @@
             android:dependency="@string/preferences_check_lock"
             />
 
+        <CheckBoxPreference
+            android:key="@string/preferences_check_auto_mode"
+            android:defaultValue="@bool/preferences_check_auto_mode"
+            android:title="Auto Mode"
+            android:summary="Turn the auto sample mode on/off"
+            android:dependency="@string/preferences_check_lock"
+            android:disableDependentsState="true">
+        </CheckBoxPreference>
 
     </PreferenceCategory>
 

@@ -27,6 +27,14 @@
 			android:dependency="@string/preferences_weigh_lock">
     	</CheckBoxPreference>
 
+		<CheckBoxPreference
+			android:key="@string/preferences_weigh_auto_mode"
+			android:defaultValue="@bool/preferences_weigh_auto_mode"
+			android:title="Auto mode"
+			android:summary="Turn the auto mode on/off"
+			android:dependency="@string/preferences_weigh_lock">
+		</CheckBoxPreference>
+
 
     		
  

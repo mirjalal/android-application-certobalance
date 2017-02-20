@@ -11,6 +11,7 @@
     <string name="app_name">certoscale</string>
     <string name="hello_world">Hello world!</string>
     <string name="preferences_animal_activated">preferences_animal_activated</string>
+    <string name="preferences_animal_auto_mode">preferences_animal_auto_mode</string>
     <string name="preferences_animal_lock">preferences_animal_lock</string>
     <string name="preferences_check_limitmode">preferences_check_limitmode</string>
     <string name="preferences_check_displayoptions">preferences_check_displayoptions</string>
@@ -21,6 +22,7 @@
     <string name="preferences_animal_tara_visible">preferences_animal_tara_visible</string>
     <string name="preferences_animal_print_measuring">preferences_animal_print_measuring</string>
     <string name="preferences_check_activated">preferences_check_activated</string>
+    <string name="preferences_check_auto_mode">preferences_check_auto_mode</string>
     <string name="preferences_check_lock">preferences_check_lock</string>
     <string name="preferences_check_secondary_visible">preferences_check_secondary_visible</string>
     <string name="preferences_check_over_visible">preferences_check_over_visible</string>
@@ -72,6 +74,7 @@
     <string name="preferences_differential_print_differencep">preferences_differential_print_differencep</string>
     <string name="preferences_filling_activated">preferences_filling_activated</string>
     <string name="preferences_filling_lock">preferences_filling_lock</string>
+    <string name="preferences_filling_auto_mode">preferences_filling_auto_mode</string>
     <string name="preferences_filling_secondary_visible">preferences_filling_secondary_visible</string>
     <string name="preferences_filling_target_visible">preferences_filling_target_visible</string>
     <string name="preferences_filling_differencew_visible">preferences_filling_differencew_visible</string>
@@ -111,6 +114,8 @@
     <string name="preferences_ingrediant_print_totalcost">preferences_ingrediant_print_totalcost</string>
     <string name="preferences_counting_activated">preferences_counting_activated</string>
     <string name="preferences_counting_lock">preferences_counting_lock</string>
+    <string name="preferences_counting_auto_mode">preferences_auto_mode</string>
+
 
 
     <string name="preferences_counting_auto_optimization">preferences_counting_auto_optimization</string>
@@ -223,6 +228,7 @@
     <string name="preferences_weigh_activated">preferences_weigh_activated</string>
     <string name="preferences_weigh_lock">preferences_weigh_lock</string>
     <string name="preferences_weigh_minimum">preferences_weigh_minimum</string>
+    <string name="preferences_weigh_auto_mode">preferences_auto_mode</string>
     <string name="preferences_weigh_load_visible">preferences_weigh_secondary_visible</string>
     <string name="preferences_weigh_minimum_visible">preferences_weigh_minimum_visible</string>
     <string name="preferences_weigh_brutto_visible">preferences_weigh_brutto_visible</string>

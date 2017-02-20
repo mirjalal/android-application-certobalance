@@ -573,6 +573,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 stats.getStatistic().addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
                 stats.getSamples().add(ApplicationManager.getInstance().getPipetteCalculatedML());
                 break;
+
+
+
             default:
                 stats.getStatistic().addValue(getTaredValueInGram());
                 stats.getSamples().add(getTaredValueInGram());

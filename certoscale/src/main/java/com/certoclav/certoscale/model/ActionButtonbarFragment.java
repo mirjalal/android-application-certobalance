@@ -26,6 +26,7 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
 
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
@@ -410,6 +411,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					}
 				}
+
+
 
 			}
 		});

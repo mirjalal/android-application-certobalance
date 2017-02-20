@@ -19,6 +19,15 @@
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
+        <CheckBoxPreference
+            android:key="@string/preferences_animal_auto_mode"
+            android:defaultValue="@bool/preferences_animal_auto_mode"
+            android:title="Auto Mode"
+            android:summary="Turn the auto sample mode on/off"
+            android:dependency="@string/preferences_animal_lock" >
+            android:disableDependentsState="true">
+        </CheckBoxPreference>
+
         <!---
         <ListPreference
             android:key="@string/preferences_check_limitmode"

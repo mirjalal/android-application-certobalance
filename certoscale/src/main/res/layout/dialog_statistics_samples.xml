@@ -27,7 +27,7 @@
 		android:layout_below="@+id/dialog_sample_list"
 		>
 
-		<!--
+
 		<Button
 			android:id="@+id/dialog_statistics_samples_button_showgraph"
 			android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 			style="@style/button_default"
 
 			/>
-		-->
+
 
 		<Button
 			android:id="@+id/dialog_statistics_samples_button_close"

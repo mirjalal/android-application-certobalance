@@ -51,6 +51,9 @@ public class ApplicationFragmentAnimalWeighing extends Fragment {
                     Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
                     double mean = GraphService.getInstance().sum / GraphService.getInstance().counter;
                     ApplicationManager.getInstance().setAnimalWeight(mean);
+
+
+
                 }
                 super.onPostExecute(aVoid);
             }

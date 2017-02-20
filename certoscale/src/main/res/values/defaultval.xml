@@ -42,6 +42,7 @@
     <bool name="preferences_weigh_activated_default">true</bool>
     <bool name="preferences_weigh_lock">true</bool>
     <bool name="preferences_weigh_minimum">true</bool>
+    <bool name="preferences_weigh_auto_mode">true</bool>
     <bool name="preferences_weigh_load_visible">true</bool>
     <bool name="preferences_weigh_minimum_visible">true</bool>
     <bool name="preferences_weigh_brutto_visible">true</bool>
@@ -52,6 +53,7 @@
     //Part counting app
     <bool name="preferences_counting_activated_default">true</bool>
     <bool name="preferences_counting_lock">true</bool>
+    <bool name="preferences_counting_auto_mode">true</bool>
 
     <bool name="preferences_counting_auto_optimization">false</bool>
     <bool name="preferences_counting_secondary_visible">true</bool>
@@ -92,6 +94,7 @@
 
     //Percent Check Weighing app
     <bool name="preferences_check_activated">true</bool>
+    <bool name="preferences_check_auto_mode">true</bool>
     <bool name="preferences_check_lock">true</bool>
 
 
@@ -114,6 +117,7 @@
 
     //Animal Weighing app
     <bool name="preferences_animal_activated_default">true</bool>
+    <bool name="preferences_animal_auto_mode">true</bool>
     <bool name="preferences_animal_lock">true</bool>
 
     <bool name="preferences_animal_secondary_visible">true</bool>
@@ -129,6 +133,8 @@
     //Filling app
     <bool name="preferences_filling_activated_default">true</bool>
     <bool name="preferences_filling_lock">true</bool>
+    <bool name="preferences_filling_auto_mode">true</bool>
+
 
     <bool name="preferences_filling_secondary_visible">true</bool>
     <bool name="preferences_filling_target_visible">true</bool>

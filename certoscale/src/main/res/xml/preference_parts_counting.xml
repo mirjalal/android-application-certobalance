@@ -37,6 +37,15 @@
                   android:dependency="@string/preferences_counting_lock"
                  />
 
+        <CheckBoxPreference
+            android:key="@string/preferences_counting_auto_mode"
+            android:defaultValue="@bool/preferences_counting_auto_mode"
+            android:title="Auto Mode"
+            android:summary="Turn the auto sample mode on/off"
+            android:dependency="@string/preferences_counting_lock"
+            android:disableDependentsState="true">
+
+        </CheckBoxPreference>
 
 
          </PreferenceCategory>
