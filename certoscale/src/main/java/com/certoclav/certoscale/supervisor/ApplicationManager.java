@@ -175,24 +175,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     //SQC variables
-    private int sqc_state=0;
-
-
-
-
     private int sqcPT1=0;
     private int sqcPT2=0;
     private int sqcNT1=0;
     private int sqcNT2=0;
 
-
-
-    public int getSqc_state() {
-        return sqc_state;
-    }
-    public void setSqc_state(int sqc_state) {
-        this.sqc_state = sqc_state;
-    }
 
     public int getSqcPT1() {return sqcPT1;}
     public void setSqcPT1(int sqcPT1) {this.sqcPT1 = sqcPT1;}

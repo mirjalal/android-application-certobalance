@@ -45,6 +45,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 import static com.certoclav.certoscale.model.ScaleApplication.WEIGHING;
 
@@ -532,7 +533,7 @@ protected void onPause() {
 				}
 			}
 
-			if (Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL) {
+			if (Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL || Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_BATCH_STARTED ) {
 				if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
 					actionButtonbarFragment.getButtonAccumulate().performClick();
 				}

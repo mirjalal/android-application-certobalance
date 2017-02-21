@@ -528,13 +528,39 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
+            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+                textInstruction.setText("");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("");
+
+                break;
+
             case PIPETTE_ADJUSTMENT:
                 textInstruction.setText("");
 
                 if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
-                    textInstruction.setText("Place container on the pan. Press Tare");
+                    textInstruction.setText("Place container on the pan. Press Start");
                 }else{
                     textInstruction.setText("Dispense sample "+String.format("%d",ApplicationManager.getInstance().getPipette_current_sample())+ " and press Accept");
+                }
+
+                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
+
+
+                break;
+
+
+            case PIPETTE_ADJUSTMENT_STARTED:
+                textInstruction.setText("");
+
+                if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
+                    textInstruction.setText("Place container on the pan. Press Tare");
+                }else {
+                    textInstruction.setText("Dispense sample " + String.format("%d", ApplicationManager.getInstance().getPipette_current_sample()) + " and press Accept");
                 }
 
                 textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");

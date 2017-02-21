@@ -65,6 +65,14 @@
          style="@style/button_actionbar"
          />
      <Button
+         android:id="@+id/actionbar_button_end_batch"
+         android:text="END BATCH"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
+     <Button
          android:id="@+id/actionbar_button_view_batch"
          android:text="SHOW"
          android:layout_width="match_parent"

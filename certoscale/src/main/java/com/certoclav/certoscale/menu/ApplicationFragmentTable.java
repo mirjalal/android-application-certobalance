@@ -813,7 +813,62 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
+            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
+                    listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
 
+                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d",ApplicationManager.getInstance().getStats().getStatistic().getN()));
+
+
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible),getResources().getBoolean(R.bool.preferences_statistic_average_visible))==true) {
+                    listReferenceFields.get(SQCaverage).getTextName().setText("AVERAGE");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
+                    }else{
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible),getResources().getBoolean(R.bool.preferences_statistic_total_visible))==true) {
+                    listReferenceFields.get(SQCsum).getTextName().setText("SUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible),getResources().getBoolean(R.bool.preferences_statistic_minimum_visible))==true) {
+                    listReferenceFields.get(SQCminimum).getTextName().setText("MINIMUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible),getResources().getBoolean(R.bool.preferences_statistic_maximum_visible))==true) {
+                    listReferenceFields.get(SQCmaximum).getTextName().setText("MAXIMUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible),getResources().getBoolean(R.bool.preferences_statistic_range_visible))==true) {
+                    listReferenceFields.get(SQCrange).getTextName().setText("RANGE");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
+                    }
+                }
+
+
+                break;
 
 
         }
