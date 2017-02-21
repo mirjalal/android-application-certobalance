@@ -80,6 +80,9 @@
          android:layout_weight="1"
          style="@style/button_actionbar"
          />
+
+
+
      <Button
          android:id="@+id/actionbar_button_accumulate"
          android:text="ADD TO STATS"

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
@@ -296,6 +298,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 
+				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT ||Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_STARTED) {
+					ApplicationManager.getInstance().setPipette_current_sample(1);
+					ApplicationManager.getInstance().getStats().getStatistic().clear();
+					ApplicationManager.getInstance().getStats().getSamples().clear();
+
+					//Toast.makeText(getActivity(), String.format("%d",ApplicationManager.getInstance().getPipette_current_sample()), Toast.LENGTH_SHORT).show();
+
+					Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_STARTED);
+					updateStatsButtonUI();
+
+				}
+
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_START,false);
 				}
@@ -421,7 +435,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 
-				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_STARTED){
 					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
 						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
 						ApplicationManager.getInstance().setPipette_current_sample(0);
@@ -440,8 +454,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
 						if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
 							ApplicationManager.getInstance().setPipette_current_sample(0);
-							buttonAccumulate.setEnabled(false);
-							buttonTara.setEnabled(true);
+
+							Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT);
 						}
 
 						ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
@@ -475,15 +489,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					listener.onClickNavigationbarButton(BUTTON_TARA,false);
 				}
 
-				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT) {
-					ApplicationManager.getInstance().setPipette_current_sample(1);
-					ApplicationManager.getInstance().getStats().getStatistic().clear();
-					ApplicationManager.getInstance().getStats().getSamples().clear();
 
-					updateStatsButtonUI();
-					buttonTara.setEnabled(false);
-					buttonAccumulate.setEnabled(true);
-				}
 			}
 		});
 
@@ -661,7 +667,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
 				ApplicationManager.getInstance().getBatchList().add(currentBatch);
-				ApplicationManager.getInstance().getStats().getStatistic().clear();
+
+				//ApplicationManager.getInstance().getStats().getStatistic().clear();
+
+				ApplicationManager.getInstance().clearStatistics();
 
 
 				buttonAccumulate.setEnabled(false);
@@ -1089,11 +1098,30 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
 				buttonAccumulate.setText("ACCEPT");
 				buttonAccumulate.setEnabled(false);
+				buttonEnd.setVisibility(View.GONE);
+
 				break;
 
 			case PIPETTE_ADJUSTMENT_STARTED:
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+
+				buttonEndBatch.setVisibility(View.GONE);
+				ApplicationManager.getInstance().setPipette_current_sample(0);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(false);
+				buttonAccumulate.setText("ACCEPT");
+				buttonAccumulate.setEnabled(false);
 				break;
 
 
@@ -1164,7 +1192,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.VISIBLE);
 				buttonEndBatch.setText("END BATCH\n" + ApplicationManager.getInstance().getBatchName());
 
-				buttonShowBatch.setEnabled(false);
+				buttonShowBatch.setEnabled(true);
 				updateBatchListButtonText();
 				buttonAccumulate.setEnabled(true);
 
@@ -1191,7 +1219,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				application == PERCENT_WEIGHING_CALC_REFERENCE ||
 				application == ANIMAL_WEIGHING_CALCULATING ||
 				application == FILLING_CALC_TARGET ||
-				application == FORMULATION_RUNNING){
+				application == FORMULATION_RUNNING ||
+				application == PIPETTE_ADJUSTMENT_STARTED||
+				application == STATISTICAL_QUALITY_CONTROL_BATCH_STARTED){
 			ApplicationManager.getInstance().setReturnFromSubMenu(true);
 			return;
 		}else{
@@ -1335,6 +1365,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			for(SQC sqc : ApplicationManager.getInstance().getBatchList()){
 				arrayAdapter.add(sqc);
 			}
+
+
 
 			//arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
 
