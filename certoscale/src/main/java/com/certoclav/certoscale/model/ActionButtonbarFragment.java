@@ -10,21 +10,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
+import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
+import com.certoclav.certoscale.adapters.SamplesAdapter;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
@@ -347,6 +356,31 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
+
+				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT) {
+					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							updateStatsButtonUI();
+						}
+					});
+				}
+				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
+					showPipetteResults(getActivity(), new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							updateStatsButtonUI();
+						}
+					});
+				}
+				if (Scale.getInstance().getScaleApplication() == TOTALIZATION) {
+					showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							updateStatsButtonUI();
+						}
+					});
+				}
 			for(ButtonEventListener listener : navigationbarListeners){
 				listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
 			}
@@ -535,6 +569,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonIngrediantList.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				showIngrediantNotification(getActivity(), new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						updateIngrediantButtonUI();
+					}
+				});
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_INGREDIANTLIST,false);
 				}
@@ -611,6 +651,16 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				if(Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL){
 					showBatchList(getActivity(),null);
 				}
+
+				if (Scale.getInstance().getScaleApplication()==FORMULATION){
+					showRecipeResults(getActivity(), new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							updateStatsButtonUI();
+						}
+					});
+				}
+
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_SHOWBATCH,false);
 				}
@@ -1183,6 +1233,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			// array as a third parameter.
 			SQCAdapter arrayAdapter = new SQCAdapter(eContext,new ArrayList<SQC>());
 
+
+			arrayAdapter.setOnClickListener(new SQCAdapter.OnClickListener() {
+				@Override
+				public void onEntryClick(SQC sqc) {
+					showStatisticsSQC(getContext(),sqc);
+				}
+			});
+
 			listView.setAdapter(arrayAdapter);
 			for(SQC sqc : ApplicationManager.getInstance().getBatchList()){
 				arrayAdapter.add(sqc);
@@ -1192,9 +1250,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
-
-			//arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
-			//arrayAdapter.add("Text von Listenelement 2");
 
 
 
@@ -1222,6 +1277,588 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			e.printStackTrace();
 		}
 	}
+
+
+
+
+	public void showPipetteResults(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_pipette_results);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Pipette Adjustment Results");
+
+
+
+			ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_pipette_listview);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(eContext,R.layout.dialog_pipette_row,R.id.menu_main_pipette_edit_text);
+			listView.setAdapter(adapter);
+
+			adapter.add("Inaccuracy: \n");
+
+			double meanError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getMean()-ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
+			adapter.add("Mean Error: "+String.format("%.4f",meanError)+" ml\n");
+			double meanErrorPercent=Math.abs(meanError/ApplicationManager.getInstance().getStats().getStatistic().getMean())*100;
+			adapter.add("Mean Error %: "+String.format("%.4f",meanErrorPercent)+" %\n");
+			adapter.add("Limit %: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
+
+
+			adapter.add("\n");
+			adapter.add("Impreccision:\n");
+			adapter.add("Standard Deviation: "+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
+			double standardError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()/ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())*100;
+			adapter.add("Error CS%: "+String.format("%.4f",standardError)+" %\n");
+			adapter.add("Limit CV: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
+
+			if (meanErrorPercent<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy() && standardError<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()){
+				adapter.add("\n");
+				adapter.add("Result: Pass");
+				adapter.add("\n");
+			}else{
+				adapter.add("\n");
+				adapter.add("Result: Fail");
+				adapter.add("\n");
+			}
+
+			adapter.add("\n");
+			adapter.add("Number of Samples"+ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()+"\n");
+
+			double standardDeviation=ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation();
+			double mean=ApplicationManager.getInstance().getStats().getStatistic().getMean();
+			int nstandard1=0;
+			int nstandard2=0;
+			int pstandard1=0;
+			int pstandard2=0;
+			double pcurrent=0;
+
+			for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+				pcurrent=mean-ApplicationManager.getInstance().getStats().getSamples().get(i);
+				if (pcurrent<0){
+					if (Math.abs(pcurrent)>standardDeviation){
+						if (Math.abs(pcurrent)>2*standardDeviation){
+							nstandard2++;
+						}else{
+							nstandard1++;
+						}
+					}
+				}else {
+					if (Math.abs(pcurrent)>standardDeviation){
+						if (Math.abs(pcurrent)>2*standardDeviation){
+							pstandard2++;
+						}else{
+							pstandard1++;
+						}
+					}
+
+				}
+			}
+
+			adapter.add("> +2s:"+pstandard2+"\n");
+			adapter.add("> +2s:"+pstandard1+"\n");
+			adapter.add("*+1S > Mean > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
+			adapter.add("< -2s:"+nstandard1+"\n");
+			adapter.add("< -2s:"+nstandard2+"\n");
+
+			adapter.add("\n");
+
+
+			adapter.add("---Sample Data---\n");
+			for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+				adapter.add("PipetteSample "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+
+			}
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_pipette_button_clear);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					ApplicationManager.getInstance().clearStatistics();
+					//ApplicationManager.getInstance().setBatchName("");
+					//getBatchList().clear();
+
+
+					dialog.dismiss();
+				}
+			});
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_pipette_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void showStatisticsTotalization(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+
+
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_statistics_totalization);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Statistics:");
+			//           statistic = new SummaryStatistics();
+			//           for (Double value : statisticsArray) {
+			//               statistic.addValue(value);
+			//           }
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + ApplicationManager.getInstance().getStats().getStatistic().getN());
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+
+
+
+/*
+            List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
+            //List<String> entryList= new ArrayList<String>();
+
+
+
+            //double formulationTotal = 0;
+            double formulationTotalTarget = 0;
+            double formulationTotalDifference = 0;
+            int formulationcounter = 0;
+            while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+                // formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+                // formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+                entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
+
+
+                formulationcounter++;
+            }*/
+
+
+
+           /* RecipeResultElementAdapter recipeAdapter = new RecipeResultElementAdapter(eContext,new ArrayList<RecipeEntry>());
+            listView.setAdapter(recipeAdapter);
+            for(RecipeEntry recipeEntry:entryList){
+                recipeAdapter.add(recipeEntry);
+
+
+
+
+            }
+*/
+			ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
+
+			ViewGroup.LayoutParams params = listView.getLayoutParams();
+			params.height = ApplicationManager.getInstance().getStats().getSamples().size()*50;
+			listView.setLayoutParams(params);
+			listView.requestLayout();
+
+			SamplesAdapter sAdapter= new SamplesAdapter(eContext,new ArrayList<Double>());
+			listView.setAdapter(sAdapter);
+
+			for(Double sample:ApplicationManager.getInstance().getStats().getSamples()){
+				sAdapter.add(sample);
+			}
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_statistics_button_clear);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					ApplicationManager.getInstance().clearStatistics();
+					dialog.dismiss();
+
+				}
+			});
+
+
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+
+
+
+
+
+				}
+			});
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void showStatisticsSQC(final Context eContext, final SQC sqc) {
+		try {
+
+			SummaryStatistics statistic =sqc.getStatistics();
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_statistics_sqc);
+			dialog.setTitle("Statistics of "+sqc.getName());
+			//           statistic = new SummaryStatistics();
+			//           for (Double value : statisticsArray) {
+			//               statistic.addValue(value);
+			//           }
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + statistic.getN());
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getMean()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getMax()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_minimum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getMin()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_range)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getVariance()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_stdev)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getStandardDeviation()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_total)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(statistic.getSum()));
+
+
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_nominal)).setText(String.format("%.4f",sqc.getNominal()));
+
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ptolerance1)).setText(String.format("%d",sqc.getSqcPT1())+ "   " +String.format("%.1f",((double)sqc.getSqcPT1()/(double)statistic.getN())*100 )+ "%");
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ptolerance2)).setText(String.format("%d",sqc.getSqcPT2())+ "   " +String.format("%.1f",((double)sqc.getSqcPT2()/(double)statistic.getN())*100 )+ "%");
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ntolerance1)).setText(String.format("%d",sqc.getSqcNT1())+ "   " +String.format("%.1f",((double)sqc.getSqcNT1()/(double)statistic.getN())*100 )+ "%");
+			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_ntolerance2)).setText(String.format("%d",sqc.getSqcNT2())+ "   " +String.format("%.1f",((double)sqc.getSqcNT2()/(double)statistic.getN())*100 )+ "%");
+
+
+			// set the custom dialog components - text, image and button
+
+
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+
+					ApplicationManager.getInstance().getProtocolPrinter().printSQCBatch(sqc);
+
+					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+				}
+			});
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void showStatisticsNotification(final Context eContext, final DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_statistics);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Statistics");
+			//           statistic = new SummaryStatistics();
+			//           for (Double value : statisticsArray) {
+			//               statistic.addValue(value);
+			//           }
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_sample_number)).setText("" + ApplicationManager.getInstance().getStats().getStatistic().getN());
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_average)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_maximum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_minimum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_range)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_stdev)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
+			((TextView) dialog.findViewById(R.id.dialog_statistics_text_total)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum()));
+
+			// set the custom dialog components - text, image and button
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_statistics_button_clear);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					ApplicationManager.getInstance().clearStatistics();
+
+					dialog.dismiss();
+
+				}
+			});
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+
+					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					ApplicationManager.getInstance().getProtocolPrinter().printStatistics();
+					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+				}
+			});
+
+
+			Button dialogButtonSamples = (Button) dialog.findViewById(R.id.dialog_statistics_button_samples);
+			dialogButtonSamples.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showStatisticsSamples(eContext,listener);
+
+				}
+			});
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void showStatisticsSamples(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_statistics_samples);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Statistics");
+			//           statistic = new SummaryStatistics();
+			//           for (Double value : statisticsArray) {
+			//               statistic.addValue(value);
+			//           }
+
+			ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
+
+            /*ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = ApplicationManager.getInstance().getStats().getSamples().size()*50;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+*/
+			SamplesAdapter sAdapter= new SamplesAdapter(eContext,new ArrayList<Double>());
+			listView.setAdapter(sAdapter);
+
+			for(Double sample:ApplicationManager.getInstance().getStats().getSamples()){
+				sAdapter.add(sample);
+			}
+
+            /*
+            Button dialogShowGraph = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_showgraph);
+            dialogShowGraph.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });*/
+
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	public void showIngrediantNotification(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_ingrediantcosts);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Ingredient Costs");
+			//           statistic = new SummaryStatistics();
+			//           for (Double value : statisticsArray) {
+			//               statistic.addValue(value);
+			//
+
+			// set the custom dialog components - text, image and button
+
+
+			ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_ingrediants_List);
+
+
+
+			// This is the array adapter, it takes the context of the activity as a
+			// first parameter, the type of list view as a second parameter and your
+			// array as a third parameter.
+			ItemMeasuredAdapter arrayAdapter = new ItemMeasuredAdapter(eContext,new ArrayList<Item>());
+
+			listView.setAdapter(arrayAdapter);
+			for(Item item : ApplicationManager.getInstance().getIngrediantCostList()){
+				arrayAdapter.add(item);
+			}
+
+			//arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
+
+
+
+
+			//arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+			//arrayAdapter.add("Text von Listenelement 2");
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_clear);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					ApplicationManager.getInstance().setIngrediantTotalWeight(0);
+					ApplicationManager.getInstance().setIngrediantUnitCost(0);
+					ApplicationManager.getInstance().setIngrediantTotalCost(0);
+					ApplicationManager.getInstance().getIngrediantCostList().clear();
+					dialog.dismiss();
+				}
+			});
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
+					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+				}
+			});
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	public void showRecipeResults(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_recipe_results);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Result of Recipe: ");// + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+
+
+
+			ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
+
+
+
+			// This is the array adapter, it takes the context of the activity as a
+			// first parameter, the type of list view as a second parameter and your
+			// array as a third parameter.
+
+			List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
+			//List<String> entryList= new ArrayList<String>();
+
+
+
+			//double formulationTotal = 0;
+			double formulationTotalTarget = 0;
+			double formulationTotalDifference = 0;
+			int formulationcounter = 0;
+			while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+				// formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+				// formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+				entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
+
+
+				formulationcounter++;
+			}
+
+
+
+
+
+			RecipeResultElementAdapter recipeAdapter = new RecipeResultElementAdapter(eContext,new ArrayList<RecipeEntry>());
+			listView.setAdapter(recipeAdapter);
+			for(RecipeEntry recipeEntry:entryList){
+				recipeAdapter.add(recipeEntry);
+			}
+
+
+			//arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
+
+
+
+
+			//arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
+			//arrayAdapter.add("Text von Listenelement 2");
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_recipe_button_print);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+
+					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					//Printing the application data
+					ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
+					//Print Signature liness
+					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+					dialog.dismiss();
+				}
+			});
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_recipe_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
  private void resetSqc(){
 	 ApplicationManager.getInstance().setBatchName("");
 	 ApplicationManager.getInstance().getBatchList().clear();

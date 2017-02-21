@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.VolumeProvider;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,9 +16,11 @@ import android.os.StatFs;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -242,7 +246,31 @@ private SharedPreferences prefs = null;
             }
         });
 
+        //Adjust the volume
+        ((Preference) findPreference(getString(R.string.preferences_device_volume))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+                startActivity(new Intent(Settings.ACTION_SOUND_SETTINGS));
+
+                return false;
+            }
+        });
+
+        //Adjust the screen brightness
+        ((Preference) findPreference(getString(R.string.preferences_device_brightness))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+                startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+
+                return false;
+            }
+        });
 
     }
 
@@ -369,6 +397,9 @@ private SharedPreferences prefs = null;
                 startWifiPicker();
             }
 
+
+
+
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
@@ -386,6 +417,8 @@ private SharedPreferences prefs = null;
 
 
 
+
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if(key.equals(getString(R.string.preferences_device_wlan))){
@@ -395,6 +428,17 @@ private SharedPreferences prefs = null;
                 SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 wifiManager.setWifiEnabled(sharedPrefs.getBoolean(getString(R.string.preferences_device_wlan), false));
             }
+        }
+
+
+
+        if(key.equals(getString(R.string.preferences_device_volume))){
+            AudioManager  audioManager= (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            if(audioManager !=null){
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            }
+
         }
     };
 

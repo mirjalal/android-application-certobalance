@@ -214,53 +214,25 @@ protected void onPause() {
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
 
 				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT) {
-					ApplicationManager.getInstance().showStatisticsNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							actionButtonbarFragment.updateStatsButtonUI();
-						}
-					});
+
 				}
 				if(Scale.getInstance().getScaleApplication()==TOTALIZATION){
-					ApplicationManager.getInstance().showStatisticsTotalization(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							actionButtonbarFragment.updateStatsButtonUI();
-						}
-					});
+
 
 				}
 				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
-					ApplicationManager.getInstance().showPipetteResults(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							actionButtonbarFragment.updateStatsButtonUI();
-						}
-					});
+
 				}
 
 
 				break;
 
 			case ActionButtonbarFragment.BUTTON_INGREDIANTLIST:
-				ApplicationManager.getInstance().showIngrediantNotification(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						actionButtonbarFragment.updateIngrediantButtonUI();
-					}
-				});
+
 				break;
 			case ActionButtonbarFragment.BUTTON_SHOWBATCH:
 
 
-				if (Scale.getInstance().getScaleApplication()==FORMULATION){
-					ApplicationManager.getInstance().showRecipeResults(ApplicationActivity.this, new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							actionButtonbarFragment.updateStatsButtonUI();
-						}
-					});
-				}
 
 
 

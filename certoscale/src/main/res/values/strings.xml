@@ -246,6 +246,8 @@
     <string name="preferences_device_software_update_usb">preferences_device_software_update_usb</string>
     <string name="preferences_device_software_update">preferences_device_software_update</string>
     <string name="preferences_device_wlan">preferences_device_wlan</string>
+    <string name="preferences_device_volume">preferences_device_volume</string>
+    <string name="preferences_device_brightness">preferences_device_brightness</string>
     <string name="preferences_device_wlan_manage">preferences_device_wlan_manage</string>
     <string name="preferences_device_bluetooth">preferences_device_bluetooth</string>
     <string name="preferences_device_snchronization">preferences_device_snchronization</string>
