@@ -109,7 +109,6 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
 
 
 
-
     @Override
     public void onClickButtonDelete(final Recipe recipe) {
 

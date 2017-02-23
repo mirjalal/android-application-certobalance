@@ -107,7 +107,7 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				textMail.setText("Pipette Adjustment");
 				imageApp.setImageResource(R.drawable.application_icon_pipette);
 				break;
-			case STATISTICAL_QUALITY_CONTROL:
+			case STATISTICAL_QUALITY_CONTROL_1_HOME:
 				textMail.setText("Statistical Quality Control");
 				imageApp.setImageResource(R.drawable.application_icon_statistic2);
 				break;

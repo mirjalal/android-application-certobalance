@@ -757,7 +757,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
 
-            case STATISTICAL_QUALITY_CONTROL:
+            case STATISTICAL_QUALITY_CONTROL_1_HOME:
                 if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
 
@@ -813,7 +813,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
-            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+            case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
                 if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
 

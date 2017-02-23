@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -331,6 +332,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         button_over_limit.setEnabled(true);
                         button_target.setEnabled(true);
                         Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
+
                         onResume();
                     }
                 });
@@ -344,6 +346,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                         buttonEditSampleSize.setEnabled(true);
                         buttonEditAveragePieceWeight.setEnabled(true);
                         buttonCalculateAwp.setEnabled(true);
+                        button_under_limit.setEnabled(true);
+                        button_over_limit.setEnabled(true);
                         Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
                         onResume();
                     }

@@ -188,5 +188,52 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                 e.printStackTrace();
             }
         }
+
+
+/*
+        if(buttonId == ActionButtonbarFragment.BUTTON_BACK){
+            try
+            {
+                final Dialog dialog = new Dialog(this);
+                dialog.setContentView(R.layout.dialog_yes_no);
+                dialog.setTitle("Return");
+
+                // set the custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.text);
+                text.setText("Do you really want to return without saving");
+                Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                // if button is clicked, close the custom dialog
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DatabaseService db = new DatabaseService(MenuRecipeEditActivity.this);
+
+
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+                dialog.show();
+
+
+            }
+            catch (Exception e)
+            {
+
+                e.printStackTrace();
+            }
+        }
+*/
+
+
     }
 }

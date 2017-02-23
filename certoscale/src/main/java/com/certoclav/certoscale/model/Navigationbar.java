@@ -227,7 +227,7 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_pipette_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
-			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
 		for(int i = 0; i< arrayAdapterMode.getCount();i++){
 			if(Scale.getInstance().getScaleApplication() == arrayAdapterMode.getItem(i)){
@@ -321,6 +321,7 @@ public class Navigationbar {
 					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_BACK, false);
 				}
 				//if(navigationbarListeners.isEmpty()){
+
 				mActivity.finish();
 				//}
 			}

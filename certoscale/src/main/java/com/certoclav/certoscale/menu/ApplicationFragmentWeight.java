@@ -195,7 +195,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
             case FORMULATION:
-                textInstruction.setText("");
+                if(ApplicationManager.getInstance().getCurrentRecipe()==null){
+                textInstruction.setText("Click SETTINGS and choose a recipe first");
+                }else {
+                    textInstruction.setText("Press START to begin with the recipe");
+                }
             case FORMULATION_RUNNING:
                 textInstruction.setText("");
             case DIFFERENTIAL_WEIGHING:
@@ -520,15 +524,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
-            case STATISTICAL_QUALITY_CONTROL:
-                textInstruction.setText("");
+            case STATISTICAL_QUALITY_CONTROL_1_HOME:
+                textInstruction.setText("Press NEW BATCH to creat a new batch");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText("");
 
                 break;
 
-            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+            case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);

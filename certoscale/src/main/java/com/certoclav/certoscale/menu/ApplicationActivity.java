@@ -47,8 +47,9 @@ import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
-import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL;
-import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_BATCH_STARTED;
+
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 import static com.certoclav.certoscale.model.ScaleApplication.WEIGHING;
 
@@ -314,10 +315,10 @@ protected void onPause() {
 						case INGREDIENT_COSTING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsIngrediantCosting()).commit();
 							break;
-						case STATISTICAL_QUALITY_CONTROL:
+						case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
-						case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+						case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
 						case PIPETTE_ADJUSTMENT:
@@ -508,7 +509,7 @@ protected void onPause() {
 		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
 		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
@@ -536,46 +537,47 @@ protected void onPause() {
 
 
 		if (isStable==true) {
-			if (Scale.getInstance().getScaleApplication() == TOTALIZATION) {
-				if (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+			if (actionButtonbarFragment.getButtonAccumulate().isEnabled()==true) {
+				if (Scale.getInstance().getScaleApplication() == TOTALIZATION) {
+					if (prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
-			}
 
-			if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
-				if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
+					if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
-			}
 
-			if (Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL || Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_BATCH_STARTED ) {
-				if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+				if (Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_1_HOME || Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED) {
+					if (prefs.getBoolean(getString(R.string.preferences_statistic_mode), getResources().getBoolean(R.bool.preferences_statistic_mode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
-			}
-			if (Scale.getInstance().getScaleApplication() == WEIGHING){
-				if (prefs.getBoolean(getString(R.string.preferences_weigh_auto_mode), getResources().getBoolean(R.bool.preferences_weigh_auto_mode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+				if (Scale.getInstance().getScaleApplication() == WEIGHING) {
+					if (prefs.getBoolean(getString(R.string.preferences_weigh_auto_mode), getResources().getBoolean(R.bool.preferences_weigh_auto_mode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
-			}
 
-			if (Scale.getInstance().getScaleApplication() == PART_COUNTING){
-				if (prefs.getBoolean(getString(R.string.preferences_counting_auto_mode), getResources().getBoolean(R.bool.preferences_counting_auto_mode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+				if (Scale.getInstance().getScaleApplication() == PART_COUNTING) {
+					if (prefs.getBoolean(getString(R.string.preferences_counting_auto_mode), getResources().getBoolean(R.bool.preferences_counting_auto_mode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
-			}
 
-			if (Scale.getInstance().getScaleApplication() == CHECK_WEIGHING){
-				if (prefs.getBoolean(getString(R.string.preferences_check_auto_mode), getResources().getBoolean(R.bool.preferences_check_auto_mode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
+				if (Scale.getInstance().getScaleApplication() == CHECK_WEIGHING) {
+					if (prefs.getBoolean(getString(R.string.preferences_check_auto_mode), getResources().getBoolean(R.bool.preferences_check_auto_mode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
+				}
+				if (Scale.getInstance().getScaleApplication() == FILLING) {
+					if (prefs.getBoolean(getString(R.string.preferences_filling_auto_mode), getResources().getBoolean(R.bool.preferences_filling_auto_mode)) == true) {
+						actionButtonbarFragment.getButtonAccumulate().performClick();
+					}
 				}
 			}
-			if (Scale.getInstance().getScaleApplication() == FILLING){
-				if (prefs.getBoolean(getString(R.string.preferences_filling_auto_mode), getResources().getBoolean(R.bool.preferences_filling_auto_mode)) == true) {
-					actionButtonbarFragment.getButtonAccumulate().performClick();
-				}
-			}
-
 
 		}
 
