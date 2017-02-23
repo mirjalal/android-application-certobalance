@@ -332,6 +332,11 @@
         <item>Percent</item>
     </string-array>
 
+    <string-array name="preferences_communication_string_array_devices">
+        <item>G&amp;G PLC-6000</item>
+        <item>D&amp;T AY120B</item>
+    </string-array>
+
 
     <string-array name="preferences_pipette_liquid_type">
         <item>Water</item>
@@ -350,6 +355,11 @@
     </string-array>
 
     <string-array name="preferences_sqc_tolerance_mode_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_communication_list_devices_values">
         <item>1</item>
         <item>2</item>
     </string-array>

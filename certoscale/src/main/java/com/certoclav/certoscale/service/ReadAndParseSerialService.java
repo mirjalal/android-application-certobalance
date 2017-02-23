@@ -2,10 +2,12 @@ package com.certoclav.certoscale.service;
 
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 
@@ -45,12 +47,24 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		return instance;
 	}
 
-	public ArrayList<String> getCommandQueue() {
+	private ArrayList<String> getCommandQueue() {
 		return commandQueue;
 	}
 
-	public void setCommandQueue(ArrayList<String> commandQueue) {
-		this.commandQueue = commandQueue;
+	public void sendCalibrationCommand(){
+		//check current model
+		String key = "preferences_communication_list_devices";
+		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+
+		switch (modelValue) {
+			case "1": // G&G
+				getCommandQueue().add("\u001Bq");
+				break;
+			case "2": // D&T
+				getCommandQueue().add("C\r\n");
+				break;
+		}
+
 	}
 
 	private ArrayList<String> commandQueue = new ArrayList<String>();
@@ -81,25 +95,57 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					simulateMessage();
 				}else {
 
+					//check current model
+					String key = "preferences_communication_list_devices";
+					String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
-					try {
+					switch (modelValue){
+						case "1": // G&G
+							try {
 
-							if (commandQueue.size() >0) {
-								Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-								commandQueue.remove(0);
-							} else {
-								Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
+								if (commandQueue.size() >0) {
+									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+									commandQueue.remove(0);
+								} else {
+
+									//mPrinter.write(0x1B);
+									//mPrinter.write(0x70);
+									//byte[] bytes = {27,112};
+									//byte[] bytes = hexStringToByteArray2("1B70");
+									//Log.e("SerialService", "SEND: " + new String(bytes));
+									//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
+									Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bp");
+								}
+
+
+							} catch (Exception e) {
+								e.printStackTrace();
 							}
 
+							break;
+						case "2": //D&T
+							try {
 
-					} catch (Exception e) {
-						e.printStackTrace();
+								if (commandQueue.size() >0) {
+									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+									commandQueue.remove(0);
+								} else {
+									Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
+								}
+
+
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+
+							break;
 					}
+
 				}
 
 
 				try {
-					Thread.sleep(150);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,7 +180,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	@Override
 	public void onMessageReceived(String message) {
-
+		Log.e("ReadAndParse", "received: " + message);
 		if(message.length()>5) {
 			rawResponse = message;
 			Log.e("ReadAndParse", "received: " + message);
@@ -180,5 +226,47 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	}
 
+
+	public void sendOnOffCommand() {
+		String key = "preferences_communication_list_devices";
+		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+
+		switch (modelValue) {
+			case "1": // G&G
+
+				break;
+			case "2": // D&T
+				getCommandQueue().add("O\r\n");
+				break;
+		}
+
+	}
+
+	public void sendModeCommand() {
+		String key = "preferences_communication_list_devices";
+		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+
+		switch (modelValue) {
+			case "1": // G&G
+				getCommandQueue().add("\u001Bs");
+				break;
+			case "2": // D&T
+				getCommandQueue().add("M\r\n");
+				break;
+		}
+
+
+
+	}
+
+	public static byte[] hexStringToByteArray2(String s) {
+		int len = s.length();
+		byte[] data = new byte[len / 2];
+		for (int i = 0; i < len; i += 2) {
+			data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+					+ Character.digit(s.charAt(i+1), 16));
+		}
+		return data;
+	}
 
 }

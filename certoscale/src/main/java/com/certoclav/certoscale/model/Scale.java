@@ -180,6 +180,7 @@ public class Scale extends Observable {
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
 			serialServiceScale = new SerialService("/dev/ttymxc3",9600); //COM4
+			serialServiceScale.setStringTerminatin("\n");
 		}
 		return serialServiceScale;
 		}
