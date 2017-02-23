@@ -39,10 +39,19 @@
 
 
     <Preference
-        android:key="@string/preferences_device_wlan_manage"
-        android:title="@string/manage_wifi_connections">
+    android:key="@string/preferences_device_wlan_manage"
+    android:title="@string/manage_wifi_connections"/>
 
+    <Preference
+        android:key="@string/preferences_device_volume"
+        android:title="@string/adjust_volume">
     </Preference>
+
+    <Preference
+        android:key="@string/preferences_device_brightness"
+        android:title="@string/adjust_brightness">
+    </Preference>
+
 
     <CheckBoxPreference
         android:key="@string/preferences_device_bluetooth"

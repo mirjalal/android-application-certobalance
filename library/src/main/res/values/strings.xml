@@ -254,6 +254,9 @@
     <string name="network_not_connected">Network not connected</string>
     
     <string name="manage_wifi_connections">Manage WIFI connections</string>
+
+    <string name="adjust_volume">Adjust Volume</string>
+    <string name="adjust_brightness">Adjust Brightness</string>
     <string name="wifi_on_off">WIFI ON/OFF</string>
     <string name="online_mode">Online mode</string>
     <string name="bluetooth_on_off">Bluetooth ON/OFF</string>

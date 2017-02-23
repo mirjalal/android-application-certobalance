@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.SQC;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.List;
@@ -28,7 +29,12 @@ import java.util.List;
  */
 public class SQCAdapter extends ArrayAdapter<SQC> {
 
+    public interface OnClickListener{
+        void onEntryClick(SQC sqc);
 
+    }
+
+    private OnClickListener listener=null;
     private final Context mContext;
 
 
@@ -81,16 +87,26 @@ public class SQCAdapter extends ArrayAdapter<SQC> {
 
 
 
-        convertView.setOnClickListener(new OnClickListener() {
+
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listener.onEntryClick(getItem(position));
+                // ApplicationManager.getInstance().showStatisticsNotification(getContext(),getItem(position).getStatistics());
+                 //showStatisticsSQC(getContext(),getItem(position));
 
-               // ApplicationManager.getInstance().showStatisticsNotification(getContext(),getItem(position).getStatistics());
-                ApplicationManager.getInstance().showStatisticsSQC(getContext(),getItem(position));
             }
         });
+
 
         return convertView;
     }
 
+
+
+    public void setOnClickListener(OnClickListener listener){
+        this.listener=listener;
+
+
+    }
 }

@@ -58,7 +58,7 @@
          />
      <Button
          android:id="@+id/actionbar_button_new_batch"
-         android:text="New Batch"
+         android:text="NEW BATCH"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -66,7 +66,7 @@
          />
      <Button
          android:id="@+id/actionbar_button_view_batch"
-         android:text="Show Batch Data"
+         android:text="SHOW"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
