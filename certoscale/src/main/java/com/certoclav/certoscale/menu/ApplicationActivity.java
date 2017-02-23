@@ -124,6 +124,7 @@ protected void onResume() {
 
 		refreshSpinnerLibrary();
 
+
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
 		navigationbar.setButtonEventListener(this);
 		navigationbar.getButtonHome().setVisibility(View.VISIBLE);
@@ -140,23 +141,7 @@ protected void onResume() {
 
 		actionButtonbarFragment.updateStatsButtonUI();
 
-		if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION) {
-			if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
-				actionButtonbarFragment.getButtonStart().setEnabled(true);
-			} else {
-				actionButtonbarFragment.getButtonStart().setEnabled(false);
-			}
-		}
 
-		if(appSettingsVisible){
-			actionButtonbarFragment.getButtonStart().setEnabled(false);
-		}
-
-		if(appSettingsVisible) {
-			actionButtonbarFragment.getButtonAppSettings().performClick();
-		}else{
-			actionButtonbarFragment.getButtonAppSettings().setEnabled(true);
-		}
 		super.onResume();
 }
 
@@ -245,32 +230,12 @@ protected void onPause() {
 			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
-					actionButtonbarFragment.getButtonAppSettings().setText("SETTINGS");
-					actionButtonbarFragment.getButtonCal().setEnabled(true);
-					actionButtonbarFragment.getButtonPrint().setEnabled(true);
-					actionButtonbarFragment.getButtonStart().setEnabled(true);
-					actionButtonbarFragment.getButtonTara().setEnabled(true);
-					actionButtonbarFragment.updateStatsButtonUI();
-					actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
+
+
 					appSettingsVisible = false;
 
-					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
-						if (ApplicationManager.getInstance().getPipette_current_sample()==0){
-							actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
-							actionButtonbarFragment.updateStatsButtonUI();
-							actionButtonbarFragment.getButtonTara().setEnabled(true);
-						}else{
-							actionButtonbarFragment.getButtonAccumulate().setEnabled(true);
-							actionButtonbarFragment.getButtonTara().setEnabled(false);
-
-						}
-					}
 				}else{
-					actionButtonbarFragment.getButtonCal().setEnabled(false);
-					actionButtonbarFragment.getButtonPrint().setEnabled(false);
-					actionButtonbarFragment.getButtonStart().setEnabled(false);
-					actionButtonbarFragment.updateStatsButtonUI();
-					actionButtonbarFragment.getButtonAccumulate().setEnabled(false);
+
 
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
@@ -323,7 +288,8 @@ protected void onPause() {
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
-					actionButtonbarFragment.getButtonAppSettings().setText("RETURN TO APPLICATION");
+
+
 					appSettingsVisible = true;
 
 

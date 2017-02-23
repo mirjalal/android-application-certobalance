@@ -88,6 +88,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_END_BATCH=23;
 
 
+
+
 	private Button buttonTara = null;
 	private Button buttonCal = null;
 	private Button buttonPrint= null;
@@ -198,6 +200,26 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	@Override
 	public void onResume() {
+		/*
+		if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION) {
+			if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
+				getButtonStart().setEnabled(true);
+			} else {
+				getButtonStart().setEnabled(false);
+			}
+		}
+
+		if(appSettingsVisible){
+			getButtonStart().setEnabled(false);
+		}
+
+		if(appSettingsVisible) {
+			getButtonAppSettings().performClick();
+		}else{
+			getButtonAppSettings().setEnabled(true);
+		}*/
+
+
 		super.onResume();
 		Scale.getInstance().setOnApplicationListener(this);
 		Scale.getInstance().setOnWeightListener(this);
@@ -498,6 +520,47 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
+
+				//Toast.makeText(getActivity(), "App Settings Clicked", Toast.LENGTH_SHORT).show();
+
+				if(ApplicationManager.getInstance().isAppSettingsVisible() == true) {
+					getButtonAppSettings().setText("SETTINGS");
+					getButtonCal().setEnabled(true);
+					getButtonPrint().setEnabled(true);
+					getButtonStart().setEnabled(true);
+					getButtonTara().setEnabled(true);
+					updateStatsButtonUI();
+					getButtonAccumulate().setEnabled(true);
+
+					ApplicationManager.getInstance().setAppSettingsVisible(false);
+
+
+					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+						if (ApplicationManager.getInstance().getPipette_current_sample()==0){
+							getButtonAccumulate().setEnabled(false);
+							updateStatsButtonUI();
+							getButtonTara().setEnabled(true);
+						}else{
+							getButtonAccumulate().setEnabled(true);
+							getButtonTara().setEnabled(false);
+
+						}
+					}
+
+				}else{
+					getButtonCal().setEnabled(false);
+					getButtonPrint().setEnabled(false);
+					getButtonStart().setEnabled(false);
+					updateStatsButtonUI();
+					getButtonAccumulate().setEnabled(false);
+
+					getButtonAppSettings().setText("RETURN TO APPLICATION");
+					ApplicationManager.getInstance().setAppSettingsVisible(true);
+
+				}
+
+
+
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_APP_SETTINGS,false);
 				}
@@ -657,8 +720,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonEndBatch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL);
-
 				SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
 						ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
 						ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
@@ -667,22 +728,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
 				ApplicationManager.getInstance().getBatchList().add(currentBatch);
-
-				//ApplicationManager.getInstance().getStats().getStatistic().clear();
-
-				ApplicationManager.getInstance().clearStatistics();
+				ApplicationManager.getInstance().getStats().getStatistic().clear();
 
 
+				buttonNewBatch.setText("NEW BATCH");
 				buttonAccumulate.setEnabled(false);
 				buttonShowBatch.setEnabled(true);
 				updateBatchListButtonText();
 
-				//ApplicationManager.getInstance().setSqc_state(0);
 				ApplicationManager.getInstance().setSqcPT1(0);
 				ApplicationManager.getInstance().setSqcPT2(0);
 				ApplicationManager.getInstance().setSqcNT1(0);
 				ApplicationManager.getInstance().setSqcNT2(0);
-
 				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL);
 			}
 		});
@@ -768,43 +825,80 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		switch (Scale.getInstance().getScaleApplication()){
 
 			case WEIGHING:
+
+				//Buttons used in this application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-
-
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setText("ADD TO STATS");
-
 				buttonAppSettings.setVisibility(View.VISIBLE);
+
+
+
+				//unused Buttons
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 				break;
 
 			case PART_COUNTING:
+
+				//Button used by the application
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
-				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText("ADD TO STATS");
 
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setEnabled(true);
+				buttonAccumulate.setText("ADD TO STATS");
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
+
+				//unused Buttons
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				break;
+
+			case PART_COUNTING_CALC_AWP:
+				//Button used by the application
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonPrint.setVisibility(View.VISIBLE);
+				buttonPrint.setEnabled(false);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStatistics.setVisibility(View.VISIBLE);
+
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setEnabled(false);
+				buttonAccumulate.setText("ADD TO STATS");
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+
+				//unused Buttons
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 				break;
 
 			case PERCENT_WEIGHING:
+
+				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
@@ -814,30 +908,37 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
+				//unused Buttons
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 				break;
 
 			case CHECK_WEIGHING:
+				//Buttons used by the application
+
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
+
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setText("ADD TO STATS");
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
+				// unused Buttons
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 				break;
 
 
@@ -863,6 +964,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
+				buttonEnd.setVisibility(View.GONE);
 				break;
 
 			case FILLING:
@@ -1213,78 +1315,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		}
 
-
-		//do not react on subApplications
-		if(application == PART_COUNTING_CALC_AWP ||
-				application == PERCENT_WEIGHING_CALC_REFERENCE ||
-				application == ANIMAL_WEIGHING_CALCULATING ||
-				application == FILLING_CALC_TARGET ||
-				application == FORMULATION_RUNNING ||
-				application == PIPETTE_ADJUSTMENT_STARTED||
-				application == STATISTICAL_QUALITY_CONTROL_BATCH_STARTED){
-			ApplicationManager.getInstance().setReturnFromSubMenu(true);
-			return;
-		}else{
-			if (ApplicationManager.getInstance().isReturnFromSubMenu()==true){
-				ApplicationManager.getInstance().setReturnFromSubMenu(false);
-				return;
-			}
+		//Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
 
-		}
-
-
-		ApplicationManager.getInstance().clearStatistics();
-
-
-		getButtonAppSettings().setText("SETTINGS");
-		getButtonCal().setEnabled(true);
-		getButtonPrint().setEnabled(true);
-		getButtonTara().setEnabled(true);
-		if (application!=PIPETTE_ADJUSTMENT){
-		getButtonAccumulate().setEnabled(true);
-
-		}
-		getButtonAppSettings().setEnabled(true);
-
-		if(application == TOTALIZATION){
-			getButtonAppSettings().setEnabled(false);
-		}
-
-		if(application != PEAK_HOLD && application != PEAK_HOLD_STARTED){
-			buttonEnd.setVisibility(View.GONE);
-		}
-
-		//handle Statistic Button visibiltiy (visible or gone)
-		if(application == ScaleApplication.FORMULATION||
-				application == ScaleApplication.FORMULATION_RUNNING ||
-				application==ScaleApplication.INGREDIENT_COSTING ||
-				application==ScaleApplication.DENSITY_DETERMINATION ||
-				application == ScaleApplication.DENSITY_DETERMINATION_STARTED||
-				application == ScaleApplication.PEAK_HOLD_STARTED||
-				application==ScaleApplication.PEAK_HOLD ){
-			getButtonStatistics().setVisibility(View.GONE);
-			buttonAccumulate.setVisibility(View.GONE);
-		}else{
-			buttonStatistics.setVisibility(View.VISIBLE);
-			buttonAccumulate.setVisibility(View.VISIBLE);
-		}
-
-		if(application != ScaleApplication.STATISTICAL_QUALITY_CONTROL && application!=FORMULATION && application!=STATISTICAL_QUALITY_CONTROL_BATCH_STARTED){
-			buttonNewBatch.setVisibility(View.GONE);
-			buttonShowBatch.setVisibility(View.GONE);
-
-		}else{
-			buttonStatistics.setVisibility(View.GONE);
-			//if (ApplicationManager.getInstance().getSqc_state()==0){
-			if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL){
-				buttonAccumulate.setEnabled(false);
-			}
-
-		}
-
-
-
+		//getButtonAppSettings().setText("SETTINGS");
 
 		updateStatsButtonUI();
 
@@ -1674,7 +1708,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
 
-					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
 				}
 			});
 			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_close);

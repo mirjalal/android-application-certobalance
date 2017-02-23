@@ -185,8 +185,10 @@ public class Navigationbar {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				//ignore the first click on the	spinner item because this callback function has been called only because of initialization
 				spinnerModeOnClickCounter++;
+				ApplicationManager.getInstance().clearStatistics();
 				if(spinnerModeOnClickCounter>1) {
 					Scale.getInstance().setScaleApplication(arrayAdapterMode.getItem(position));
+
 				}
 					    Log.e("NavigationBar", "OnItemSelected ModeSpinner " + position);
 			}
