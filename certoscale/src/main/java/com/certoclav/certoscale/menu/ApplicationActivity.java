@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -11,6 +12,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -87,7 +90,7 @@ private ProtocolPrinterUtils protocolPrinter= new ProtocolPrinterUtils();
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
+				ReadAndParseSerialService.getInstance().sendCalibrationCommand();
 			}
 		});
 		imageButtonTimer = (ImageButton) findViewById(R.id.menu_application_sidebar_button_timer);
@@ -105,7 +108,24 @@ private ProtocolPrinterUtils protocolPrinter= new ProtocolPrinterUtils();
 			public void onClick(View v) {
 
 
-					containerMore.setVisibility(View.GONE);
+				Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(ApplicationActivity.this, R.anim.righttoleft);
+				hyperspaceJumpAnimation.setAnimationListener(new Animation.AnimationListener() {
+					@Override
+					public void onAnimationStart(Animation animation) {
+
+					}
+
+					@Override
+					public void onAnimationEnd(Animation animation) {
+						containerMore.setVisibility(View.GONE);
+					}
+
+					@Override
+					public void onAnimationRepeat(Animation animation) {
+
+					}
+				});
+				containerMore.startAnimation(hyperspaceJumpAnimation);
 
 			}
 		});
@@ -173,7 +193,7 @@ protected void onPause() {
 
 
 
-
+	@SuppressLint("NewApi")
 	@Override
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 		Log.e("ApplicationActivity", "onclickhome");
@@ -192,9 +212,32 @@ protected void onPause() {
 			case ActionButtonbarFragment.BUTTON_MORE:
 
 				if(containerMore.getVisibility() == View.GONE){
+					//funktioniert super
 					containerMore.setVisibility(View.VISIBLE);
+					Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
+					containerMore.startAnimation(hyperspaceJumpAnimation);
+
+
 				}else{
-					containerMore.setVisibility(View.GONE);
+
+					Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(this, R.anim.righttoleft);
+					hyperspaceJumpAnimation.setAnimationListener(new Animation.AnimationListener() {
+						@Override
+						public void onAnimationStart(Animation animation) {
+
+						}
+
+						@Override
+						public void onAnimationEnd(Animation animation) {
+							containerMore.setVisibility(View.GONE);
+						}
+
+						@Override
+						public void onAnimationRepeat(Animation animation) {
+
+						}
+					});
+					containerMore.startAnimation(hyperspaceJumpAnimation);
 				}
 				break;
 			case ActionButtonbarFragment.BUTTON_HOME:

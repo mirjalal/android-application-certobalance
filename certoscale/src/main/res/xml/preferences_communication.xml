@@ -29,6 +29,15 @@
         android:title="Balance"
         android:summary="Connected to COM 4" />
 
+    <ListPreference
+        android:key="preferences_communication_list_devices"
+        android:title="Balance model"
+        android:summary="Tab to choose connected model"
+        android:defaultValue="1"
+        android:entries="@array/preferences_communication_string_array_devices"
+        android:entryValues="@array/preferences_communication_list_devices_values"
+        />
+
 </PreferenceScreen>
 
 

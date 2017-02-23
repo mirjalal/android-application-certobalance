@@ -128,7 +128,7 @@ public class StateMachine implements WeightListener {
                     //Turn the balance on
                     if ((System.nanoTime() - nanoTimeAtLastONOFFCommand) > (1000000000L * 20)){
                         nanoTimeAtLastONOFFCommand = System.nanoTime();
-                        ReadAndParseSerialService.getInstance().getCommandQueue().add("O\r\n");
+                        ReadAndParseSerialService.getInstance().sendOnOffCommand();
                         Log.e("StateMachine", "Added O to commandqueue");
                      }
                     break;
@@ -157,7 +157,7 @@ public class StateMachine implements WeightListener {
                         ApplicationController.getContext().startActivity(intent);
                     }
                     //change mode until mode is gram
-                    ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
+                    ReadAndParseSerialService.getInstance().sendModeCommand();
                     Log.e("StateMachine", "Added M to commandqueue");
                     break;
 

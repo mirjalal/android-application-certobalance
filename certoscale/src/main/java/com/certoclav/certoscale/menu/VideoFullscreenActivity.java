@@ -48,6 +48,7 @@ public class VideoFullscreenActivity extends Activity  {
 				
 			}
 		});
+
         videoView.start();
 
 
