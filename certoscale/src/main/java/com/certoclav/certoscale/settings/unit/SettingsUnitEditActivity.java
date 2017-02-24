@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.settings.unit;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SettingsUnitEditActivity extends FragmentActivity implements ButtonEventListener {
+public class SettingsUnitEditActivity extends Activity implements ButtonEventListener {
 
     private Navigationbar navigationbar = new Navigationbar(this);
     private UnitEditAdapter adapter = null;
@@ -39,13 +40,13 @@ public class SettingsUnitEditActivity extends FragmentActivity implements Button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_main_item_edit_activity);
+        setContentView(R.layout.menu_main_unit_edit_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setText("EDIT ITEMS");
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
-        listView = (ListView) findViewById(R.id.menu_main_item_edit_list);
+        listView = (ListView) findViewById(R.id.menu_main_unit_edit_list);
 
 
 
@@ -63,7 +64,7 @@ public class SettingsUnitEditActivity extends FragmentActivity implements Button
             unitFromDb = db.getUnitbyId(extra);
             adapter.add(unitFromDb);
         }else{
-            adapter.add(new Unit("","name",1.0d,1.0d, "Item ID"));
+            adapter.add(new Unit(unitFromDb.getExponent(),unitFromDb.getFactor(),unitFromDb.getDescription(),unitFromDb.getName(),unitFromDb.getCloudId(),unitFromDb.getEnabled(),true));
         }
 
     }
@@ -123,18 +124,17 @@ public class SettingsUnitEditActivity extends FragmentActivity implements Button
                         if(unitFromDb != null){
                             db.deleteUnit(unitFromDb);
                         }
-                        /*
+
                         for(int i = 0; i< adapter.getCount();i++){
-                            Item item = adapter.getItem(i);
-                            Log.e("MenuItemEditActivity", "item json: "+ item.getItemJson());
+                            Unit unit = adapter.getItem(i);
+                        //    Log.e("MenuItemEditActivity", "item json: "+ unit.getItemJson());
                         }
 
                         if(adapter.getCount()>0){
-                            Item item = adapter.getItem(0);
-                            Log.e("MenuItemEditActivty", "insert item: "+ item.getItemArticleNumber() + item.getName() + item.getWeight());
-                            db.insertItem(item);
+                            Unit unit = adapter.getItem(0);
+                        //    Log.e("MenuItemEditActivty", "insert item: "+ item.getItemArticleNumber() + item.getName() + item.getWeight());
+                            db.insertUnit(unit);
                         }
-                        */
 
                         dialog.dismiss();
                         finish();

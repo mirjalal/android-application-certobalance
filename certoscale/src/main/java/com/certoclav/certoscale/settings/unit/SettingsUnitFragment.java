@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.settings.unit;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,9 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
+import com.certoclav.certoscale.settings.item.MenuItemActivity;
+import com.certoclav.certoscale.settings.item.MenuItemEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -108,11 +112,6 @@ public class SettingsUnitFragment extends Fragment implements UnitAdapter.OnClic
 
 
     @Override
-    public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
-
-    }
-
-    @Override
     public void onClickButtonDelete(final Unit unit) {
 
 
@@ -159,8 +158,16 @@ public class SettingsUnitFragment extends Fragment implements UnitAdapter.OnClic
 
     @Override
     public void onClickButtonEdit(Unit unit) {
+        Intent intent = new Intent(getActivity(), SettingsUnitEditActivity.class);
+        intent.putExtra(SettingsUnitEditActivity.INTENT_EXTRA_UNIT_ID, unit.getUnit_id());
+        startActivity(intent);
 
 
+    }
+
+
+    @Override
+    public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
     }
 }

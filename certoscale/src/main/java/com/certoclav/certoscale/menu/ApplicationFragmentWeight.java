@@ -506,15 +506,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
                     textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                /*}else{
-                    textValue.setTextColor(Color.WHITE);
-                    textValue.setText("Press Start");
-                    //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    ApplicationManager.getInstance().setPeakHoldMaximum(0);
+                break;
 
-
-                }*/
             case PEAK_HOLD:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("Press Start");
