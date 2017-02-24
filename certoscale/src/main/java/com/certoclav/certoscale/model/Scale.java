@@ -177,6 +177,7 @@ public class Scale extends Observable {
 		this.scaleStateListeners.remove(listener);
 	}
 
+	public final static Sting COM_1
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
 			serialServiceScale = new SerialService("/dev/ttymxc3",9600); //COM4

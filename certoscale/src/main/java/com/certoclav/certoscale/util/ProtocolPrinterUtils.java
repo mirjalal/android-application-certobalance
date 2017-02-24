@@ -214,7 +214,7 @@ public void  printHeader(  String header){
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Reference Adjust: "+ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment()+" %" +"\n" );
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference))==true) {
-					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getDifferenceAsStringWithUnit() +"\n");
+					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDifferenceInGram()) +"\n");
 				}
 				if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_percent_print_difference_percent),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_percent_print_difference_percent))==true) {
 					Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: "+ApplicationManager.getInstance().getDifferenceInPercent()+ " %"+"\n");
@@ -402,7 +402,7 @@ public void  printHeader(  String header){
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_differencew), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_differencew)) == true) {
-						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getDifferenceAsStringWithUnit() + "\n");
+						Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Difference: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDifferenceInGram()) + "\n");
 					}
 
 					if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_differential_print_differencep), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_differential_print_differencep)) == true) {

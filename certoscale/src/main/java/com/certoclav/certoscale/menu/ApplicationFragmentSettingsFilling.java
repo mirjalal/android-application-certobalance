@@ -162,7 +162,7 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
 
     @Override
     public void onPause() {
-        Scale.getInstance().setScaleApplication(ScaleApplication.FILLING);
+
         super.onPause();
 
     }

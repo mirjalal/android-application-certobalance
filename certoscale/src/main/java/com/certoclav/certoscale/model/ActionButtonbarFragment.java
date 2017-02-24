@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -36,21 +34,14 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
-import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
-import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
-import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
-import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
-
-
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
@@ -352,6 +343,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 
+				//PART COUNTING
 				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT_1_HOME) {
 					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override

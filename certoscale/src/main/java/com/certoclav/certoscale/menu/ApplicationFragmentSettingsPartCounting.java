@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -399,7 +398,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
 
     @Override
     public void onPause() {
-        Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
+
         super.onPause();
 
     }

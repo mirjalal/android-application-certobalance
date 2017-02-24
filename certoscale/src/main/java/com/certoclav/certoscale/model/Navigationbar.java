@@ -321,11 +321,7 @@ public class Navigationbar {
 				for (ButtonEventListener listener : navigationbarListeners) {
 					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_BACK, false);
 				}
-<<<<<<< HEAD
-=======
-				//if(navigationbarListeners.isEmpty()){
 
->>>>>>> 940b28ae17fa2a6bbdf4bcb6c73b11bf9d8c1827
 				mActivity.finish();
 
 			}

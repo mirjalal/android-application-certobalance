@@ -184,7 +184,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
     @Override
     public void onPause() {
-        Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
+
         super.onPause();
 
     }

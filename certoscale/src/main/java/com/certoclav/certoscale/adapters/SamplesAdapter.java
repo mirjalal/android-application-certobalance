@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 
@@ -65,7 +63,7 @@ public class SamplesAdapter extends ArrayAdapter<Double> {
 
 
         convertView = inflater.inflate(R.layout.menu_main_samples, parent, false);
-        ;
+
 
         //actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
         //containerItems.addView(actionItemDelete);
@@ -73,7 +71,7 @@ public class SamplesAdapter extends ArrayAdapter<Double> {
 
         TextView text = (TextView) convertView.findViewById(R.id.menu_main_samples_edit_text);
 
-        text.setText("Item "+String.format("%d",position)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(position))+" g\n");
+        text.setText("Item "+String.format("%02d",position)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(position)));
 
 
 

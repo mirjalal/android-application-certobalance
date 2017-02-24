@@ -4,7 +4,6 @@ package com.certoclav.certoscale.menu;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,13 +40,10 @@ import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CA
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
-import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
-
-
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
@@ -243,17 +239,6 @@ protected void onPause() {
 				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 				break;
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
-
-				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT_1_HOME) {
-
-				}
-				if(Scale.getInstance().getScaleApplication()==TOTALIZATION){
-
-
-				}
-				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME){
-
-				}
 
 
 				break;
