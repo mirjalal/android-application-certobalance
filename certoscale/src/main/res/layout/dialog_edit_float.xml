@@ -8,19 +8,14 @@
 <LinearLayout 
 	    android:layout_height="wrap_content"
     	android:layout_width="match_parent"
-    	android:orientation="vertical">
+    	android:orientation="vertical"
+		android:layout_margin="20dp">
 
-			<FrameLayout
-				android:layout_width="match_parent"
-				android:layout_height="2dp"
-				android:background="@drawable/seperator_white">
-			</FrameLayout>
-	            
+
 
 	    	<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_margin="20dp"
 				android:orientation="horizontal">
 	    	
 
@@ -51,7 +46,6 @@
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
 		android:layout_below="@+id/dialog_container_text"
-		android:layout_margin="20dp"
 		>
 		<Button
 			android:id="@+id/dialog_edit_number_button_cancel"

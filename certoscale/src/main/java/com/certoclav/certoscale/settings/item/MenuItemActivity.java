@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -54,7 +55,9 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ApplicationManager.getInstance().setCurrentItem(adapter.getItem(position));
-                finish();
+                if(getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK,false)==true) {
+                    finish();
+                }
             }
         });
 

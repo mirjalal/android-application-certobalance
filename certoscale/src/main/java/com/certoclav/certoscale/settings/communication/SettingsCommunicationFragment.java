@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
+import com.certoclav.library.certocloud.SocketService;
 
 
 public class SettingsCommunicationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -44,6 +45,17 @@ private SharedPreferences prefs = null;
         String key = "preferences_communication_list_devices";
         Preference devicePref = findPreference(key);
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
+
+        key = getActivity().getString(R.string.preferences_communication_socket_connected);
+        devicePref = findPreference(key);
+        String summary = "";
+        if( SocketService.getInstance().getSocket().connected()){
+            summary = "connected";
+        }else{
+            summary = "not connected";
+        }
+        devicePref.setSummary(summary);
+
 
         super.onResume();
     }

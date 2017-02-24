@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
@@ -17,21 +18,22 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
 
     private LinearLayout containerSettingsButtons = null;
-    private Button buttonRecipe = null;
+    private Button buttonChooseItem = null;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_differential_weighing,container, false);
 
-        buttonRecipe = (Button) rootView.findViewById(R.id.application_settings_differential_button_item_name);
+        buttonChooseItem = (Button) rootView.findViewById(R.id.application_settings_differential_button_item_name);
 
 
-        buttonRecipe.setOnClickListener(new View.OnClickListener() {
+        buttonChooseItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               Intent intent = new Intent(getActivity(), MenuItemActivity.class);
+                intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK,true);
                 getActivity().startActivity(intent);
             }
         });
@@ -46,9 +48,9 @@ public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
     @Override
     public void onResume() {
         if(ApplicationManager.getInstance().getCurrentItem() != null) {
-            buttonRecipe.setText("Current Item:\n" + ApplicationManager.getInstance().getCurrentItem().getName());
+            buttonChooseItem.setText("Current Item:\n" + ApplicationManager.getInstance().getCurrentItem().getName());
         }else{
-            buttonRecipe.setText("Click to choose item");
+            buttonChooseItem.setText("Click to choose item");
         }
 
 

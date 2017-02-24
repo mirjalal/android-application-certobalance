@@ -406,6 +406,7 @@
     <string name="tap_on_mic">Tap on mic to speak</string>
     <string name="preferences_calibration_internal">preferences_calibration_internal</string>
     <string name="preferences_calibration_automatic">preferences_calibration_automatic</string>
+    <string name="preferences_communication_socket_connected">preferences_communication_socket_connected</string>
 
 
 </resources>

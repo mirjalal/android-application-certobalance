@@ -101,8 +101,8 @@ public class SettingsEmailActivity extends Activity{
 
 	    
 	    
-		dataAdapter = ArrayAdapter.createFromResource(SettingsEmailActivity.this, R.array.email_subjects_array,  R.layout.settings_email_list_item);
-		dataAdapter.setDropDownViewResource(R.layout.settings_email_list_item);
+		dataAdapter = ArrayAdapter.createFromResource(SettingsEmailActivity.this, R.array.email_subjects_array,  R.layout.list_element_email);
+		dataAdapter.setDropDownViewResource(R.layout.list_element_email);
 		spinnerSubject.setAdapter(dataAdapter);   
 		spinnerSubject.setOnItemSelectedListener(new OnItemSelectedListener() {
 				@Override

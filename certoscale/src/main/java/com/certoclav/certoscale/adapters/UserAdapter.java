@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 	 * {@link List}<{@link Profile}> containing the data to populate the list
 	 */
 	public UserAdapter(Context context, List<User> values) {
-		super(context, R.layout.user_list_row, values);
+		super(context, R.layout.list_element_user, values);
 		this.mContext = context;
 
 
@@ -73,7 +74,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 
-			convertView = inflater.inflate(R.layout.user_list_row, parent, false);
+			convertView = inflater.inflate(R.layout.list_element_user, parent, false);
 			LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
 			actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
@@ -90,8 +91,27 @@ public class UserAdapter extends ArrayAdapter<User> {
 		final TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
 		secondLine.setText(getItem(position).getIsAdmin()?  "Admin account":"Standard account");
 
-	
-		
+
+
+		//make only the own account editable
+		if(getItem(position).getUserId() != Scale.getInstance().getUser().getUserId()){
+			actionItemDelete.setVisibility(View.INVISIBLE);
+			actionItemEdit.setVisibility(View.INVISIBLE);
+		}else{
+			actionItemDelete.setVisibility(View.VISIBLE);
+			actionItemEdit.setVisibility(View.VISIBLE);
+		}
+
+		//if admin is logged in, then make all accounts editable
+		if(Scale.getInstance().getUser().getIsAdmin()){
+			actionItemEdit.setVisibility(View.VISIBLE);
+			actionItemDelete.setVisibility(View.VISIBLE);
+		}
+
+		//admin account is never deleteable
+		if(getItem(position).getIsAdmin()){
+			actionItemDelete.setVisibility(View.INVISIBLE);
+		}
 		
 		
 		actionItemDelete.setChecked(false);
