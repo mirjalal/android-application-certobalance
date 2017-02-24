@@ -557,36 +557,32 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PIPETTE_ADJUSTMENT_1_HOME:
-                textInstruction.setText("");
 
-                if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
-                    textInstruction.setText("Place container on the pan. Press Start");
-                }else{
-                    textInstruction.setText("Dispense sample "+String.format("%d",ApplicationManager.getInstance().getPipette_current_sample())+ " and press Accept");
-                }
-
-                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+                textInstruction.setText("Place container on the pan and press START");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
-                textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-
-
+                textSum.setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
 
                 break;
 
 
             case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
-                textInstruction.setText("");
 
-
-                textInstruction.setText("Dispense sample " + String.format("%d", ApplicationManager.getInstance().getPipette_current_sample()) + " and press Accept");
+                textInstruction.setText("Dispense sample number" + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+"and press ACCEPT");
 
 
                 textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                break;
+
+            case PIPETTE_ADJUSTMENT_3_FINISHED:
+                textInstruction.setText("Pipette Adjustment finished. Press Start to start again.");
 
 
-
+                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
 
 

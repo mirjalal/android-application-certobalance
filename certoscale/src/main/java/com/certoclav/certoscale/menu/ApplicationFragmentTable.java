@@ -736,6 +736,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case PIPETTE_ADJUSTMENT_1_HOME:
+            case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+            case PIPETTE_ADJUSTMENT_3_FINISHED:
                 if  (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible),getResources().getBoolean(R.bool.preferences_pipette_nominal_visible))==true) {
                     listReferenceFields.get(pipetteNominal).getTextName().setText("NOMINAL");
                     listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
@@ -763,7 +765,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if  (prefs.getBoolean(getString(R.string.preferences_pipette_watertemp_visible),getResources().getBoolean(R.bool.preferences_pipette_watertemp_visible))==true) {
                     listReferenceFields.get(pipetteWaterTemp).getTextName().setText("WATER TEMP.");
-                    listReferenceFields.get(pipetteWaterTemp).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+"°C");
+                    listReferenceFields.get(pipetteWaterTemp).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+" " + "°C");
                 }
 
 

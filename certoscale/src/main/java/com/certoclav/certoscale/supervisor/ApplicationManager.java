@@ -71,9 +71,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void setDensity(double density) {this.density = density;}
 
 
-    private boolean appSettingsVisible=false;
-    public boolean isAppSettingsVisible() {return appSettingsVisible;}
-    public void setAppSettingsVisible(boolean appSettingsVisible) {this.appSettingsVisible = appSettingsVisible;}
+
+
 
 
 

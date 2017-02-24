@@ -37,17 +37,15 @@ import java.util.List;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
-import static com.certoclav.certoscale.model.ScaleApplication.INGREDIENT_COSTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
-import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_3_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED;
-import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
 
 public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener, WeightListener{
@@ -258,28 +256,22 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 
-				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME ||Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES) {
-					ApplicationManager.getInstance().setPipette_current_sample(1);
-					ApplicationManager.getInstance().getStats().getStatistic().clear();
-					ApplicationManager.getInstance().getStats().getSamples().clear();
-
-
-					Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
-					updateStatsButtonUI();
-
-				}
-
-				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES){
+				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT_3_FINISHED){
 					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
 						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
-						ApplicationManager.getInstance().setPipette_current_sample(0);
-						ApplicationManager.getInstance().getStats().getStatistic().clear();
-						updateStatsButtonUI();
 					}else{
+						//start at pipette sample one and reset all statistics
+						ApplicationManager.getInstance().setPipette_current_sample(1);
+						ApplicationManager.getInstance().getStats().getStatistic().clear();
+						ApplicationManager.getInstance().getStats().getSamples().clear();
 						Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
+						updateStatsButtonUI();
 
 					}
 				}
+
+
+
 
 				for(ButtonEventListener listener : navigationbarListeners){
 					listener.onClickNavigationbarButton(BUTTON_START,false);
@@ -342,32 +334,34 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			@Override
 			public void onClick(View v) {
-
-				//PART COUNTING
-				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT_1_HOME) {
+			switch (Scale.getInstance().getScaleApplication()){
+				case PART_COUNTING:
 					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							updateStatsButtonUI();
 						}
 					});
-				}
-				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT_1_HOME) {
+					break;
+				case PIPETTE_ADJUSTMENT_3_FINISHED:
 					showPipetteResults(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							updateStatsButtonUI();
 						}
 					});
-				}
-				if (Scale.getInstance().getScaleApplication() == TOTALIZATION) {
+					break;
+				case TOTALIZATION:
 					showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							updateStatsButtonUI();
 						}
 					});
-				}
+					break;
+			}
+
+
 			for(ButtonEventListener listener : navigationbarListeners){
 				listener.onClickNavigationbarButton(BUTTON_STATISTICS,false);
 			}
@@ -443,56 +437,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 
-				//Toast.makeText(getActivity(), "App Settings Clicked", Toast.LENGTH_SHORT).show();
-				String buttonAPPSettingName=buttonAppSettings.getText().toString();
-
-				//if(ApplicationManager.getInstance().isAppSettingsVisible() == true) {
-				if(buttonAPPSettingName.equals("RETURN TO APPLICATION")){
-
-					if (Scale.getInstance().getScaleApplication()==PART_COUNTING_CALC_AWP){
-						Scale.getInstance().setScaleApplication(PART_COUNTING);
-					}
-
-
-
+				if(buttonAppSettings.getText().toString().equals("RETURN TO APPLICATION")){
 					getButtonAppSettings().setText("SETTINGS");
-					getButtonCal().setEnabled(true);
-					getButtonPrint().setEnabled(true);
 
-					getButtonStart().setEnabled(true);
-					getButtonTara().setEnabled(true);
-					updateStatsButtonUI();
-					if ( Scale.getInstance().getScaleApplication()!=STATISTICAL_QUALITY_CONTROL_1_HOME){
-						getButtonAccumulate().setEnabled(true);
-					}
-					buttonAccept.setEnabled(true);
+					switch (Scale.getInstance().getScaleApplication()){
 
-					ApplicationManager.getInstance().setAppSettingsVisible(false);
+						case PART_COUNTING_CALC_AWP:
+							Scale.getInstance().setScaleApplication(PART_COUNTING);
+							break;
+						case STATISTICAL_QUALITY_CONTROL_1_HOME:
+							break;
 
-
-					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME){
-						if (ApplicationManager.getInstance().getPipette_current_sample()==0){
-							getButtonAccumulate().setEnabled(false);
-							updateStatsButtonUI();
-							getButtonTara().setEnabled(true);
-						}else{
-							getButtonAccumulate().setEnabled(true);
-							getButtonTara().setEnabled(false);
-
-						}
 					}
 
 				}else{
-					getButtonCal().setEnabled(false);
-					getButtonPrint().setEnabled(false);
-					getButtonStart().setEnabled(false);
-					updateStatsButtonUI();
-					getButtonAccumulate().setEnabled(false);
-
 					getButtonAppSettings().setText("RETURN TO APPLICATION");
-					ApplicationManager.getInstance().setAppSettingsVisible(true);
-					buttonAccept.setEnabled(false);
-
 				}
 
 
@@ -510,93 +469,101 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAccept.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (Scale.getInstance().getScaleApplication()==INGREDIENT_COSTING){
+				updateStatsButtonUI();
 
-					if (ApplicationManager.getInstance().getCurrentItem()==null) {
-						Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
-					}else {
-						double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
-						double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
-						double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+				switch (Scale.getInstance().getScaleApplication()){
+					case INGREDIENT_COSTING:
 
-						double unitCost = (Cost * currentWeight) / unitWeight;
-						ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
+						if (ApplicationManager.getInstance().getCurrentItem()==null) {
+							Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
+						}else {
+							double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
+							double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
+							double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
 
-						double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
-						ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
+							double unitCost = (Cost * currentWeight) / unitWeight;
+							ApplicationManager.getInstance().setIngrediantUnitCost(unitCost);
 
-						double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
-						ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
+							double totalWeight = ApplicationManager.getInstance().getIngrediantTotalWeight();
+							ApplicationManager.getInstance().setIngrediantTotalWeight(totalWeight + currentWeight);
+
+							double totalCost = ApplicationManager.getInstance().getIngrediantTotalCost();
+							ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
 
 
-						Item measuredItem = new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+							Item measuredItem = new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
 
 
-						measuredItem.setWeight(currentWeight);
-						measuredItem.setCost(unitCost);
-						ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
-						updateIngrediantButtonUI();
+							measuredItem.setWeight(currentWeight);
+							measuredItem.setCost(unitCost);
+							ApplicationManager.getInstance().getIngrediantCostList().add(measuredItem);
+							updateIngrediantButtonUI();
 
-					}
-				}
-				if (Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION_STARTED){
-					SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-					String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+						}
+						break;
+					case DENSITY_DETERMINATION_STARTED:
+						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+						String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
 
-					if (ApplicationManager.getInstance().getDensity_step_counter()==2){
-						ApplicationManager.getInstance().setDensity_weight_liquid(ApplicationManager.getInstance().getTaredValueInGram());
-						ApplicationManager.getInstance().setDensity_step_counter(3);
-						buttonAccept.setEnabled(false);
-						buttonStart.setEnabled(true);
-						Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION);
-					}
+						if (ApplicationManager.getInstance().getDensity_step_counter()==2){
+							ApplicationManager.getInstance().setDensity_weight_liquid(ApplicationManager.getInstance().getTaredValueInGram());
+							ApplicationManager.getInstance().setDensity_step_counter(3);
+							buttonAccept.setEnabled(false);
+							buttonStart.setEnabled(true);
+							Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION);
+						}
 
-					if(ApplicationManager.getInstance().getDensity_step_counter()==4){
-						ApplicationManager.getInstance().getCurrentLibrary().setOiledWeight(ApplicationManager.getInstance().getTaredValueInGram());
-						ApplicationManager.getInstance().setDensity_step_counter(2);
-					}
-
-					if (ApplicationManager.getInstance().getDensity_step_counter()==1){
-						ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
-						if (densitymode.equals("4")){
-							ApplicationManager.getInstance().setDensity_step_counter(4);
-						}else{
+						if(ApplicationManager.getInstance().getDensity_step_counter()==4){
+							ApplicationManager.getInstance().getCurrentLibrary().setOiledWeight(ApplicationManager.getInstance().getTaredValueInGram());
 							ApplicationManager.getInstance().setDensity_step_counter(2);
 						}
-					}
 
-
-
-
-				}
-
-				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES){
-					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
-						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
-						ApplicationManager.getInstance().setPipette_current_sample(0);
-						ApplicationManager.getInstance().getStats().getStatistic().clear();
-						updateStatsButtonUI();
-
-					}else {
-						//Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
-						double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
-						pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
-						double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
-
-
-						ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
-
-						ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
-						if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
-							ApplicationManager.getInstance().setPipette_current_sample(0);
-
-							Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_1_HOME);
+						if (ApplicationManager.getInstance().getDensity_step_counter()==1){
+							ApplicationManager.getInstance().setDensity_weight_air(ApplicationManager.getInstance().getTaredValueInGram());
+							if (densitymode.equals("4")){
+								ApplicationManager.getInstance().setDensity_step_counter(4);
+							}else{
+								ApplicationManager.getInstance().setDensity_step_counter(2);
+							}
 						}
 
-						ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+					case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 
-					}
+						if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
+							Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+							ApplicationManager.getInstance().setPipette_current_sample(0);
+							ApplicationManager.getInstance().getStats().getStatistic().clear();
+							updateStatsButtonUI();
+
+						}else {
+
+
+							//Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
+							double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+							pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
+							double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
+
+							ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
+							ApplicationManager.getInstance().accumulateStatistics();
+							updateStatsButtonUI();
+							ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+
+							ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
+							if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
+								Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_3_FINISHED);
+							}
+
+
+
+
+						}
+						break;
+
+
+
+
 				}
+
 			}
 		});
 
@@ -1222,6 +1189,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 
 				break;
+			case PIPETTE_ADJUSTMENT_3_FINISHED:
 			case PIPETTE_ADJUSTMENT_1_HOME:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
@@ -1231,6 +1199,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonAppSettings.setText("SETTINGS");
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonAccept.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
 
@@ -1239,10 +1209,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				//unused Buttons
-				buttonAccept.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				ApplicationManager.getInstance().setPipette_current_sample(0);
-				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
@@ -1259,18 +1227,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-
+				buttonStart.setVisibility(View.VISIBLE);
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonAccept.setEnabled(true);
+				buttonStart.setEnabled(false);
 
 
 				//Buttons used by the application
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
-				ApplicationManager.getInstance().setPipette_current_sample(0);
 				buttonIngrediantList.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.GONE);
+
 
 
 				break;
