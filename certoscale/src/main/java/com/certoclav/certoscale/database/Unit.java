@@ -38,6 +38,14 @@ public class Unit {
 	}
 
 
+	public int getUnit_id() {
+		return unit_id;
+	}
+
+	public void setUnit_id(int unit_id) {
+		this.unit_id = unit_id;
+	}
+
 	@DatabaseField(generatedId = true, columnName = "unit_id")
 	private int unit_id;
 

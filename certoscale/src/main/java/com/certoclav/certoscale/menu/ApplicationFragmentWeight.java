@@ -200,8 +200,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 }else {
                     textInstruction.setText("Press START to begin with the recipe");
                 }
+                break;
             case FORMULATION_RUNNING:
                 textInstruction.setText("");
+                break;
             case DIFFERENTIAL_WEIGHING:
                 textInstruction.setText("");
             case WEIGHING:
@@ -504,15 +506,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
                     textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                /*}else{
-                    textValue.setTextColor(Color.WHITE);
-                    textValue.setText("Press Start");
-                    //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    ApplicationManager.getInstance().setPeakHoldMaximum(0);
+                break;
 
-
-                }*/
             case PEAK_HOLD:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("Press Start");

@@ -218,6 +218,20 @@ public class DatabaseService {
 	}
 
 
+	public Unit getUnitbyId(int unitID) {
+		try {
+
+			return unitDao.queryForId(unitID);
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
 
 	public int insertItem(Item item) {
 

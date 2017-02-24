@@ -1,0 +1,125 @@
+<RelativeLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_gadient"
+    >
+
+
+    <RelativeLayout
+        android:id="@+id/contentOfActivity"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/navigationbar">
+
+        <LinearLayout
+            android:id="@+id/menu_main_unint_edit_container_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Name:"
+                android:gravity="center_vertical"
+                style="@style/text_default"/>
+
+            <EditText
+                android:id="@+id/menu_main_recipe_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:singleLine="true"
+                android:hint="c1"
+                style="@style/edit_text_default"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_main_unint_edit_container_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/menu_main_unint_edit_container_name">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Description:"
+                android:gravity="center_vertical"
+                style="@style/text_default"/>
+
+            <EditText
+                android:id="@+id/menu_main_recipe_edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:singleLine="true"
+                android:hint="Custom unit 1"
+                style="@style/edit_text_default"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu_main_unint_edit_container_factor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/menu_main_unint_edit_container_description">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Factor: "
+                android:gravity="center_vertical"
+                style="@style/text_default"/>
+
+            <EditText
+                android:id="@+id/menu_main_recipe_edit_factor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:singleLine="true"
+                android:hint="Factor"
+                style="@style/edit_text_default"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:id="@+id/menu_main_unit_edit_container_exponent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/menu_main_unint_edit_container_factor"
+            >
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:text="Exponent:"
+                android:gravity="center_vertical"
+                style="@style/text_default"/>
+
+            <EditText
+                android:id="@+id/menu_main_recipe_edit_text_exponent"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:singleLine="true"
+                android:hint="Exponent"
+                style="@style/edit_text_default"/>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/navigationbar"
+        android:id="@+id/navigationbar"></include>
+
+</RelativeLayout>

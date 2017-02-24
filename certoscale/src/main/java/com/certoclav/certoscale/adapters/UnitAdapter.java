@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.view.QuickActionItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,6 +38,19 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 	private QuickActionItem actionUnitDelete;
 	private QuickActionItem actionUnitEdit;
 	private boolean hideCheckBox = false;
+
+	public interface OnClickButtonListener {
+		void onClickButtonDelete(Unit unit);
+		void onClickButtonEdit(Unit unit);
+	}
+	ArrayList<UnitAdapter.OnClickButtonListener> onClickButtonListeners = new ArrayList<UnitAdapter.OnClickButtonListener>();
+
+	public void setOnClickButtonListener(UnitAdapter.OnClickButtonListener listener){
+		onClickButtonListeners.add(listener);
+	}
+	public void removeOnClickButtonListener(ItemAdapter.OnClickButtonListener listener){
+		onClickButtonListeners.remove(listener);
+	}
 
 
 
@@ -119,7 +134,16 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 		actionUnitEdit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				/*
+				for(OnClickButtonListener listener : onClickButtonListeners){
+					listener.onClickButtonEdit(getItem(position));
+				}
 
+				*/
+
+				for(UnitAdapter.OnClickButtonListener listener : onClickButtonListeners){
+					listener.onClickButtonEdit(getItem(position));
+				}
 			}
 		});
 
@@ -132,8 +156,13 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 			actionUnitDelete.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
+
+					for(UnitAdapter.OnClickButtonListener listener : onClickButtonListeners){
+						listener.onClickButtonDelete(getItem(position));
+					}
 				}
 			});
+
 
 
 		

@@ -206,6 +206,10 @@
         <activity android:name=".settings.unit.SettingsUnitActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
+
+        <activity android:name=".settings.unit.SettingsUnitEditActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
         <activity android:name=".settings.glp.SettingsGlpActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
