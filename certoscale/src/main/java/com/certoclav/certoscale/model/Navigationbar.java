@@ -225,7 +225,7 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_ingrediant_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_pipette_activated),true)==true){
-			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}

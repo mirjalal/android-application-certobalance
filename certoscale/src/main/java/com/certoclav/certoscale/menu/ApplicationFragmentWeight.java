@@ -556,7 +556,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 textInstruction.setText("");
 
                 if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
@@ -574,7 +574,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
 
-            case PIPETTE_ADJUSTMENT_STARTED:
+            case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
                 textInstruction.setText("");
 
 

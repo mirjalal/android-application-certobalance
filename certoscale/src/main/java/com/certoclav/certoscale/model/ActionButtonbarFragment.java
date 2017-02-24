@@ -51,8 +51,8 @@ import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
 
-import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
-import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_STARTED;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED;
@@ -267,15 +267,27 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 
-				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT ||Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_STARTED) {
+				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME ||Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES) {
 					ApplicationManager.getInstance().setPipette_current_sample(1);
 					ApplicationManager.getInstance().getStats().getStatistic().clear();
 					ApplicationManager.getInstance().getStats().getSamples().clear();
 
 
-					Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_STARTED);
+					Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
 					updateStatsButtonUI();
 
+				}
+
+				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES){
+					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
+						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+						ApplicationManager.getInstance().setPipette_current_sample(0);
+						ApplicationManager.getInstance().getStats().getStatistic().clear();
+						updateStatsButtonUI();
+					}else{
+						Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
+
+					}
 				}
 
 				for(ButtonEventListener listener : navigationbarListeners){
@@ -340,7 +352,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 
-				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT) {
+				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT_1_HOME) {
 					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -348,7 +360,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						}
 					});
 				}
-				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
+				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT_1_HOME) {
 					showPipetteResults(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -401,33 +413,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 
-				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_STARTED){
-					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
-						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
-						ApplicationManager.getInstance().setPipette_current_sample(0);
-						ApplicationManager.getInstance().getStats().getStatistic().clear();
-						updateStatsButtonUI();
 
-					}else {
-						//Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
-						double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
-						pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
-						double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
-
-
-						ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
-
-						ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
-						if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
-							ApplicationManager.getInstance().setPipette_current_sample(0);
-
-							Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT);
-						}
-
-						ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
-
-					}
-				}
 
 
 
@@ -492,7 +478,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					ApplicationManager.getInstance().setAppSettingsVisible(false);
 
 
-					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+					if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME){
 						if (ApplicationManager.getInstance().getPipette_current_sample()==0){
 							getButtonAccumulate().setEnabled(false);
 							updateStatsButtonUI();
@@ -590,6 +576,34 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
+				}
+
+				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES){
+					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
+						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+						ApplicationManager.getInstance().setPipette_current_sample(0);
+						ApplicationManager.getInstance().getStats().getStatistic().clear();
+						updateStatsButtonUI();
+
+					}else {
+						//Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
+						double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+						pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
+						double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
+
+
+						ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
+
+						ApplicationManager.getInstance().setPipette_current_sample(ApplicationManager.getInstance().getPipette_current_sample() + 1);
+						if (ApplicationManager.getInstance().getPipette_current_sample() == ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples() + 1) {
+							ApplicationManager.getInstance().setPipette_current_sample(0);
+
+							Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_1_HOME);
+						}
+
+						ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+
+					}
 				}
 			}
 		});
@@ -1216,8 +1230,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 
 				break;
-			case PIPETTE_ADJUSTMENT:
-
+			case PIPETTE_ADJUSTMENT_1_HOME:
+				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
@@ -1225,22 +1239,28 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonAppSettings.setText("SETTINGS");
-				buttonNewBatch.setVisibility(View.GONE);
-				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
 
+
+
+
+
+				//unused Buttons
+				buttonAccept.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				ApplicationManager.getInstance().setPipette_current_sample(0);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.VISIBLE);
-				buttonStart.setEnabled(true);
-				buttonAccumulate.setText("ACCEPT");
-				buttonAccumulate.setEnabled(false);
+				buttonAccumulate.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
 
 				break;
 
-			case PIPETTE_ADJUSTMENT_STARTED:
+			case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
@@ -1248,17 +1268,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 
+				buttonAccept.setVisibility(View.VISIBLE);
+				buttonAccept.setEnabled(true);
+
+
+				//Buttons used by the application
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-
 				buttonEndBatch.setVisibility(View.GONE);
 				ApplicationManager.getInstance().setPipette_current_sample(0);
-				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.VISIBLE);
-				buttonStart.setEnabled(false);
-				buttonAccumulate.setText("ACCEPT");
-				buttonAccumulate.setEnabled(false);
+				buttonStart.setVisibility(View.GONE);
+
+
 				break;
 
 
@@ -1281,14 +1303,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccumulate.setEnabled(false);
 
-
-				//if (ApplicationManager.getInstance().getSqc_state()==1){
-		/*	    if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL_BATCH_STARTED){
-					buttonNewBatch.setText("END BATCH\n" + ApplicationManager.getInstance().getBatchName());
-					buttonShowBatch.setEnabled(false);
-					updateBatchListButtonText();
-					buttonAccumulate.setEnabled(true);
-				}*/
 
 				buttonShowBatch.setEnabled(true);
 				updateBatchListButtonText();

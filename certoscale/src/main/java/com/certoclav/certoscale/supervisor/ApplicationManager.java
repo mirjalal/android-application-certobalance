@@ -557,7 +557,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 stats.getStatistic().addValue( animalWeight);
                 stats.getSamples().add(animalWeight);
                 break;
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 stats.getStatistic().addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
                 stats.getSamples().add(ApplicationManager.getInstance().getPipetteCalculatedML());
                 break;

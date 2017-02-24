@@ -735,7 +735,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
 
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 if  (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible),getResources().getBoolean(R.bool.preferences_pipette_nominal_visible))==true) {
                     listReferenceFields.get(pipetteNominal).getTextName().setText("NOMINAL");
                     listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");

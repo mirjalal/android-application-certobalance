@@ -46,8 +46,9 @@ import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNIN
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
-import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 
+
+import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
@@ -243,14 +244,14 @@ protected void onPause() {
 				break;
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
 
-				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT) {
+				if(Scale.getInstance().getScaleApplication()!=TOTALIZATION && Scale.getInstance().getScaleApplication()!=PIPETTE_ADJUSTMENT_1_HOME) {
 
 				}
 				if(Scale.getInstance().getScaleApplication()==TOTALIZATION){
 
 
 				}
-				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT){
+				if (Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME){
 
 				}
 
@@ -324,10 +325,10 @@ protected void onPause() {
 						case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
-						case PIPETTE_ADJUSTMENT:
+						case PIPETTE_ADJUSTMENT_1_HOME:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
-						case PIPETTE_ADJUSTMENT_STARTED:
+						case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
 
@@ -510,7 +511,7 @@ protected void onPause() {
 		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
 		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
-			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME);
 		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
@@ -547,7 +548,7 @@ protected void onPause() {
 					}
 				}
 
-				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT) {
+				if (Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT_1_HOME) {
 					if (prefs.getBoolean(getString(R.string.preferences_pipette_autosamplemode), getResources().getBoolean(R.bool.preferences_pipette_autosamplemode)) == true) {
 						actionButtonbarFragment.getButtonAccumulate().performClick();
 					}

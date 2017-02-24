@@ -480,7 +480,7 @@ public void  printHeader(  String header){
 
 				break;
 
-			case PIPETTE_ADJUSTMENT:
+			case PIPETTE_ADJUSTMENT_1_HOME:
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Pipette Name:"+ApplicationManager.getInstance().getPipette_name());
 				Scale.getInstance().getSerialsServiceProtocolPrinter().sendMessage("Pipette Number:"+ApplicationManager.getInstance().getPipette_number());
 
