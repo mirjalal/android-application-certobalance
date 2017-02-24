@@ -1334,7 +1334,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setText("END BATCH\n" + ApplicationManager.getInstance().getBatchName());
 				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
-				buttonShowBatch.setEnabled(true);
+				buttonShowBatch.setEnabled(false);
 				buttonEndBatch.setVisibility(View.VISIBLE);
 
 				//unused Buttons

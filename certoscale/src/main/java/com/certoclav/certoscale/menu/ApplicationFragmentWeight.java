@@ -200,8 +200,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 }else {
                     textInstruction.setText("Press START to begin with the recipe");
                 }
+                break;
             case FORMULATION_RUNNING:
                 textInstruction.setText("");
+                break;
             case DIFFERENTIAL_WEIGHING:
                 textInstruction.setText("");
             case WEIGHING:
