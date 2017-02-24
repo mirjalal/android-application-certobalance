@@ -290,7 +290,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible), getResources().getBoolean(R.bool.preferences_percent_difference_visible)) == true) {
-                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE" +" "+ ApplicationManager.getInstance().getCurrentUnit().getName() + "["+"]");
+                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE" +" "+"[" +ApplicationManager.getInstance().getCurrentUnit().getName() + "]");
                     listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible), getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible)) == true) {
@@ -417,6 +417,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
             case PEAK_HOLD_STARTED:
+                if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
             case PEAK_HOLD:
                 if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
@@ -722,7 +735,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
 
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 if  (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible),getResources().getBoolean(R.bool.preferences_pipette_nominal_visible))==true) {
                     listReferenceFields.get(pipetteNominal).getTextName().setText("NOMINAL");
                     listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
@@ -757,7 +770,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
 
-            case STATISTICAL_QUALITY_CONTROL:
+            case STATISTICAL_QUALITY_CONTROL_1_HOME:
                 if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
 
@@ -813,7 +826,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
-            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
+            case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
                 if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
 
@@ -869,6 +882,61 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 break;
+
+            case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
+                    listReferenceFields.get(SQCnumberofSamples).getTextName().setText("SAMPLES");
+
+                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d",ApplicationManager.getInstance().getStats().getStatistic().getN()));
+
+
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible),getResources().getBoolean(R.bool.preferences_statistic_average_visible))==true) {
+                    listReferenceFields.get(SQCaverage).getTextName().setText("AVERAGE");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
+                    }else{
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible),getResources().getBoolean(R.bool.preferences_statistic_total_visible))==true) {
+                    listReferenceFields.get(SQCsum).getTextName().setText("SUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible),getResources().getBoolean(R.bool.preferences_statistic_minimum_visible))==true) {
+                    listReferenceFields.get(SQCminimum).getTextName().setText("MINIMUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible),getResources().getBoolean(R.bool.preferences_statistic_maximum_visible))==true) {
+                    listReferenceFields.get(SQCmaximum).getTextName().setText("MAXIMUM");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
+                    }
+                }
+
+                if  (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible),getResources().getBoolean(R.bool.preferences_statistic_range_visible))==true) {
+                    listReferenceFields.get(SQCrange).getTextName().setText("RANGE");
+                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
+                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
+                    }else {
+                        listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
+                    }
+                }
+
 
 
         }

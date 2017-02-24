@@ -480,7 +480,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         Scale.getInstance().setOnApplicationListener(this);
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
         currentUnit = new Unit(0d,1d,"gram","g","",true,false);
-        currentLibrary = new Library("",0,"",0,"default",0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0,new Date(),true,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0);
+        currentLibrary = new Library("",0,"",0,"default",0d,0d,0d,0d,0d,0d,0d,0d,0d,100,0d,0,new Date(),true,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0);
     }
 
 
@@ -557,7 +557,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 stats.getStatistic().addValue( animalWeight);
                 stats.getSamples().add(animalWeight);
                 break;
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 stats.getStatistic().addValue(ApplicationManager.getInstance().getPipetteCalculatedML());
                 stats.getSamples().add(ApplicationManager.getInstance().getPipetteCalculatedML());
                 break;

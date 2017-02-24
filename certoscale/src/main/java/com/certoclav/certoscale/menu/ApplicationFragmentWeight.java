@@ -195,7 +195,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
             case FORMULATION:
-                textInstruction.setText("");
+                if(ApplicationManager.getInstance().getCurrentRecipe()==null){
+                textInstruction.setText("Click SETTINGS and choose a recipe first");
+                }else {
+                    textInstruction.setText("Press START to begin with the recipe");
+                }
             case FORMULATION_RUNNING:
                 textInstruction.setText("");
             case DIFFERENTIAL_WEIGHING:
@@ -451,10 +455,18 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             case PEAK_HOLD_STARTED:
-            case PEAK_HOLD:
-                textInstruction.setText("");
+
+                textValue.setText("");
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
                 double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
+
+                if (PeakHoldMode.equals("3")) {
+                    textInstruction.setText("Automatic Mode");
+                }
+                if (PeakHoldMode.equals("2")) {
+                    textInstruction.setText("Semi Automatic Mode");
+                }
+
 
                 boolean PHstable= Scale.getInstance().isStable();
                 boolean stableonly=false;
@@ -470,11 +482,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         ctime_first = System.nanoTime();
 
                     }
-                   // final String TAG = getClass().getSimpleName();
-                   // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
+                    // final String TAG = getClass().getSimpleName();
+                    // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
 
                     if(ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
-                       ApplicationManager.getInstance().setPeakHoldMaximum(0);
+                        ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
 
@@ -484,14 +496,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 ApplicationManager.getInstance().setPholdWeight(ApplicationManager.getInstance().getTaredValueInGram());
 
 
-                //Semi Automatic
-                //if (ApplicationManager.getInstance().getPeakHoldMaximum()==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
-                    //Start PeakHold Measurement
-                //    ApplicationManager.getInstance().setPeakHoldActivated(true);
-               // }
-
-                //Display the Maximum Value if PeakHold is activated
-                if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
+               //if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
                     if (PHcurrentvalue>=ApplicationManager.getInstance().getPeakHoldMaximum() && (stableonly==false || PHstable==true)  ){
                         ApplicationManager.getInstance().setPeakHoldMaximum(PHcurrentvalue);
                     }
@@ -499,7 +504,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
                     textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                }else{
+                /*}else{
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText("Press Start");
                     //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -507,7 +512,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
-                }
+                }*/
+            case PEAK_HOLD:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("Press Start");
+                //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                ApplicationManager.getInstance().setPeakHoldMaximum(0);
+
 
                 break;
 
@@ -520,7 +532,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
-            case STATISTICAL_QUALITY_CONTROL:
+            case STATISTICAL_QUALITY_CONTROL_1_HOME:
+                textInstruction.setText("Press NEW BATCH to creat a new batch");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("");
+
+                break;
+
+            case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
@@ -528,15 +548,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
-            case STATISTICAL_QUALITY_CONTROL_BATCH_STARTED:
-                textInstruction.setText("");
+            case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+                textInstruction.setText("Press NEW BATCH to creat a new batch");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText("");
 
                 break;
 
-            case PIPETTE_ADJUSTMENT:
+            case PIPETTE_ADJUSTMENT_1_HOME:
                 textInstruction.setText("");
 
                 if (ApplicationManager.getInstance().getPipette_current_sample()==0) {
@@ -554,7 +574,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
 
-            case PIPETTE_ADJUSTMENT_STARTED:
+            case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
                 textInstruction.setText("");
 
 

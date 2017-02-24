@@ -177,7 +177,7 @@ public class Navigationbar {
 
 		arrayAdapterMode = new SpinnerModeAdapter(mActivity, new ArrayList<ScaleApplication>());
 		spinnerMode.setAdapter(arrayAdapterMode);
-		//spinnerMode.setAdapter(spinnerModeAdapter);
+
 
 
 		spinnerMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -225,9 +225,9 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_ingrediant_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_pipette_activated),true)==true){
-			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT);
+			getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME);
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
-			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL);
+			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
 		for(int i = 0; i< arrayAdapterMode.getCount();i++){
 			if(Scale.getInstance().getScaleApplication() == arrayAdapterMode.getItem(i)){
@@ -321,6 +321,11 @@ public class Navigationbar {
 				for (ButtonEventListener listener : navigationbarListeners) {
 					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_BACK, false);
 				}
+<<<<<<< HEAD
+=======
+				//if(navigationbarListeners.isEmpty()){
+
+>>>>>>> 940b28ae17fa2a6bbdf4bcb6c73b11bf9d8c1827
 				mActivity.finish();
 
 			}

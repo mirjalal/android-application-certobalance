@@ -107,7 +107,7 @@
 
      <Button
          android:id="@+id/actionbar_button_Ingredient_List"
-         android:text="Cost List"
+         android:text="COST LIST"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -116,7 +116,7 @@
 
      <Button
          android:id="@+id/actionbar_button_accept"
-         android:text="Accept"
+         android:text="ACCEPT"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -125,7 +125,7 @@
 
      <Button
          android:id="@+id/actionbar_button_end"
-         android:text="End"
+         android:text="END"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"

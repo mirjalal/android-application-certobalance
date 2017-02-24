@@ -73,8 +73,8 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 			case DENSITY_DETERMINATION: index = 9; break;
 			case PEAK_HOLD: index = 10; break;
 			case INGREDIENT_COSTING: index = 11; break;
-			case PIPETTE_ADJUSTMENT: index = 12; break;
-			case STATISTICAL_QUALITY_CONTROL: index = 13; break;
+			case PIPETTE_ADJUSTMENT_1_HOME: index = 12; break;
+			case STATISTICAL_QUALITY_CONTROL_1_HOME: index = 13; break;
 		}
 		onItemSelected(index);
 	}
