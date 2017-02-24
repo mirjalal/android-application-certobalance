@@ -290,7 +290,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible), getResources().getBoolean(R.bool.preferences_percent_difference_visible)) == true) {
-                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE" +" "+ ApplicationManager.getInstance().getCurrentUnit().getName() + "["+"]");
+                    listReferenceFields.get(difference_weight).getTextName().setText("DIFFERENCE" +" "+"[" +ApplicationManager.getInstance().getCurrentUnit().getName() + "]");
                     listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getDifferenceAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible), getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible)) == true) {
@@ -417,6 +417,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
             case PEAK_HOLD_STARTED:
+                if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
+                    listReferenceFields.get(indexTableTara).getTextName().setText("TARA");
+                    listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
+                    listReferenceFields.get(brutto).getTextName().setText("BRUTTO");
+                    listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
+                }
+                if (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
+                    listReferenceFields.get(netto).getTextName().setText("NETTO");
+                    listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
             case PEAK_HOLD:
                 if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText("TARA");

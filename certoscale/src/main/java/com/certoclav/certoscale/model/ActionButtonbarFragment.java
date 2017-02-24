@@ -49,9 +49,10 @@ import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
+
+
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_STARTED;
-
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
@@ -253,13 +254,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//somebody starts the peak hold mode manually
 				if(Scale.getInstance().getScaleApplication()==PEAK_HOLD){
 					try{
-						//Make sure that only one Button is clickable
-						buttonStart.setEnabled(false);
-						buttonEnd.setEnabled(true);
 
 						//Start PeakHold Measurement
 						Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
-						ApplicationManager.getInstance().setPeakHoldActivated(true);
 
 					}
 					catch (Exception e)
@@ -274,7 +271,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					ApplicationManager.getInstance().getStats().getStatistic().clear();
 					ApplicationManager.getInstance().getStats().getSamples().clear();
 
-					//Toast.makeText(getActivity(), String.format("%d",ApplicationManager.getInstance().getPipette_current_sample()), Toast.LENGTH_SHORT).show();
 
 					Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_STARTED);
 					updateStatsButtonUI();
@@ -295,9 +291,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 				try{
-					//Make sure that only one Button is clickable
-					buttonStart.setEnabled(true);
-					buttonEnd.setEnabled(false);
+
 
 					// End PeakHold Measurenment
 					ApplicationManager.getInstance().setPeakHoldActivated(false);
@@ -734,40 +728,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		return rootView;
 	}
 
-	/*
-	public void endCurrentBatch() {
-		//if (ApplicationManager.getInstance().getSqc_state()==1){
-		if (Scale.getInstance().getScaleApplication()==STATISTICAL_QUALITY_CONTROL_BATCH_STARTED){
 
-			//Data from one Batch
-			//SummaryStatistics currentStatistics = new SummaryStatistics();
-			//ApplicationManager.getInstance().getStatistic().copy();
-			//currentStatistics=ApplicationManager.getInstance().getStatistic();
-
-			SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
-					ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
-					ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
-					ApplicationManager.getInstance().getSqcNT2());
-			//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
-			//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
-
-			ApplicationManager.getInstance().getBatchList().add(currentBatch);
-			ApplicationManager.getInstance().getStats().getStatistic().clear();
-
-
-			buttonNewBatch.setText("NEW BATCH");
-			buttonAccumulate.setEnabled(false);
-			buttonShowBatch.setEnabled(true);
-			updateBatchListButtonText();
-			Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL);
-			//ApplicationManager.getInstance().setSqc_state(0);
-			ApplicationManager.getInstance().setSqcPT1(0);
-			ApplicationManager.getInstance().setSqcPT2(0);
-			ApplicationManager.getInstance().setSqcNT1(0);
-			ApplicationManager.getInstance().setSqcNT2(0);
-
-		}
-	}*/
 
 
 	public void disbalbeAllButtons(){
@@ -785,6 +746,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
 
+		Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
 		switch (Scale.getInstance().getScaleApplication()){
 
@@ -798,6 +760,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonPrint.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setEnabled(true);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonAppSettings.setText("SETTINGS");
@@ -979,6 +942,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAccumulate.setEnabled(true);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(false);
 
@@ -1204,13 +1168,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				break;
 			case PEAK_HOLD_STARTED:
-				//Buttons used by the application
-				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
-				buttonZero.setVisibility(View.VISIBLE);
-				buttonStart.setVisibility(View.VISIBLE);
-				buttonEnd.setVisibility(View.VISIBLE);
-
 
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
@@ -1220,13 +1177,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEnd.setVisibility(View.VISIBLE);
 
 
-				//get PeakHoldMode
 
 
 				//Manual Mode
 				if(PeakHoldMode.equals("1")){
-					buttonStart.setEnabled(true);
-					buttonEnd.setEnabled(false);
+					buttonStart.setEnabled(false);
+					buttonEnd.setEnabled(true);
 
 				}
 
@@ -1235,7 +1191,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(true);
 					//Start PeakHold Measurement
-					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 				}
 
 				//Automatic Mode
@@ -1244,7 +1199,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(false);
 					//Start PeakHold Measurement
-					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
+
 				}
 
 
@@ -1257,46 +1212,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-
 				buttonEndBatch.setVisibility(View.GONE);
-
-				//Manual Mode
-				if(PeakHoldMode.equals("1")){
-					buttonStart.setEnabled(true);
-					buttonEnd.setEnabled(false);
-
-				}
-
-				//Semi Automatic Mode
-				if(PeakHoldMode.equals("2")){
-					buttonStart.setEnabled(false);
-					buttonEnd.setEnabled(true);
-					//Start PeakHold Measurement
-					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
-				}
-
-				//Automatic Mode
-				if(PeakHoldMode.equals("3")){
-
-					buttonStart.setEnabled(false);
-					buttonEnd.setEnabled(false);
-					//Start PeakHold Measurement
-					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
-				}
-
-
-
-				//unused Buttons
-				buttonStatistics.setVisibility(View.GONE);
-				buttonAccumulate.setVisibility(View.GONE);
-				buttonAppSettings.setVisibility(View.GONE);
-				buttonAccept.setVisibility(View.GONE);
-				buttonIngrediantList.setVisibility(View.GONE);
-				buttonNewBatch.setVisibility(View.GONE);
-				buttonShowBatch.setVisibility(View.GONE);
-
-				buttonEndBatch.setVisibility(View.GONE);
-
 
 				break;
 			case PIPETTE_ADJUSTMENT:
@@ -1411,6 +1327,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
+
 
 
 
@@ -1676,10 +1593,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			dialog.setContentView(R.layout.dialog_statistics_totalization);
 			dialog.setOnDismissListener(listener);
 			dialog.setTitle("Statistics:");
-			//           statistic = new SummaryStatistics();
-			//           for (Double value : statisticsArray) {
-			//               statistic.addValue(value);
-			//           }
+
+
+
 			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_sample_number)).setText("" + ApplicationManager.getInstance().getStats().getStatistic().getN());
 			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_average)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()));
 			((TextView) dialog.findViewById(R.id.dialog_statistics_sqc_text_maximum)).setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()));
@@ -1690,38 +1606,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
-/*
-            List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
-            //List<String> entryList= new ArrayList<String>();
 
-
-
-            //double formulationTotal = 0;
-            double formulationTotalTarget = 0;
-            double formulationTotalDifference = 0;
-            int formulationcounter = 0;
-            while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
-                // formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
-                // formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
-
-                entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
-
-
-                formulationcounter++;
-            }*/
-
-
-
-           /* RecipeResultElementAdapter recipeAdapter = new RecipeResultElementAdapter(eContext,new ArrayList<RecipeEntry>());
-            listView.setAdapter(recipeAdapter);
-            for(RecipeEntry recipeEntry:entryList){
-                recipeAdapter.add(recipeEntry);
-
-
-
-
-            }
-*/
 			ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
 
 			ViewGroup.LayoutParams params = listView.getLayoutParams();
@@ -2085,15 +1970,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			}
 
 
-			//arrayAdapter.add(new Item(ApplicationManager.getInstance().getCurrentItem().getItemArticleNumber(),"ssdd"));
-
-
-
-
-			//arrayAdapter.add("Atricle No.    Name       Cost           Weight    Unit");
-			//arrayAdapter.add("Text von Listenelement 2");
-
-
 
 			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_recipe_button_print);
 			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
@@ -2130,9 +2006,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	 ApplicationManager.getInstance().setBatchName("");
 	 ApplicationManager.getInstance().getBatchList().clear();
 
-	 buttonAccumulate.setEnabled(false);
-	 buttonShowBatch.setEnabled(false);
 	 updateBatchListButtonText();
+
+
+
  }
 }
 

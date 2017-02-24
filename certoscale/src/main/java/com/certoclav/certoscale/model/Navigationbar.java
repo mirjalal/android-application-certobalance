@@ -177,7 +177,7 @@ public class Navigationbar {
 
 		arrayAdapterMode = new SpinnerModeAdapter(mActivity, new ArrayList<ScaleApplication>());
 		spinnerMode.setAdapter(arrayAdapterMode);
-		//spinnerMode.setAdapter(spinnerModeAdapter);
+
 
 
 		spinnerMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

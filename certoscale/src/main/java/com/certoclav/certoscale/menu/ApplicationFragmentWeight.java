@@ -455,10 +455,18 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             case PEAK_HOLD_STARTED:
-            case PEAK_HOLD:
-                textInstruction.setText("");
+
+                textValue.setText("");
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
                 double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
+
+                if (PeakHoldMode.equals("3")) {
+                    textInstruction.setText("Automatic Mode");
+                }
+                if (PeakHoldMode.equals("2")) {
+                    textInstruction.setText("Semi Automatic Mode");
+                }
+
 
                 boolean PHstable= Scale.getInstance().isStable();
                 boolean stableonly=false;
@@ -474,11 +482,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         ctime_first = System.nanoTime();
 
                     }
-                   // final String TAG = getClass().getSimpleName();
-                   // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
+                    // final String TAG = getClass().getSimpleName();
+                    // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
 
                     if(ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
-                       ApplicationManager.getInstance().setPeakHoldMaximum(0);
+                        ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
 
@@ -488,14 +496,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 ApplicationManager.getInstance().setPholdWeight(ApplicationManager.getInstance().getTaredValueInGram());
 
 
-                //Semi Automatic
-                //if (ApplicationManager.getInstance().getPeakHoldMaximum()==0 && (PeakHoldMode.equals("2") || PeakHoldMode.equals("3") )){
-                    //Start PeakHold Measurement
-                //    ApplicationManager.getInstance().setPeakHoldActivated(true);
-               // }
-
-                //Display the Maximum Value if PeakHold is activated
-                if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
+               //if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
                     if (PHcurrentvalue>=ApplicationManager.getInstance().getPeakHoldMaximum() && (stableonly==false || PHstable==true)  ){
                         ApplicationManager.getInstance().setPeakHoldMaximum(PHcurrentvalue);
                     }
@@ -503,7 +504,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
                     textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                }else{
+                /*}else{
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText("Press Start");
                     //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -511,7 +512,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
-                }
+                }*/
+            case PEAK_HOLD:
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText("Press Start");
+                //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                ApplicationManager.getInstance().setPeakHoldMaximum(0);
+
 
                 break;
 

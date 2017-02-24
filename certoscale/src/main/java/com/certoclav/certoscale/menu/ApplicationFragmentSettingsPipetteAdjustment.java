@@ -364,7 +364,13 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                         public void onClick(View v) {
                             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_number_edittext);
 
+                        try{
+
                             ApplicationManager.getInstance().setPipette_number(Integer.parseInt(editText.getText().toString()));
+
+                        }catch (NumberFormatException e){
+                            ApplicationManager.getInstance().setPipette_number(0);
+                        }
 
                             dialog.dismiss();
                             onResume();
@@ -412,9 +418,13 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                         public void onClick(View v) {
                             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_number_edittext);
 
-                           // ApplicationManager.getInstance().setPipette_number(Integer.parseInt(editText.getText().toString()));
 
+                            try{
                             ApplicationManager.getInstance().getCurrentLibrary().setPipetteNumberofSamples(Integer.parseInt(editText.getText().toString()));
+
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().getCurrentLibrary().setPipetteNumberofSamples(0);
+                            }
 
                             dialog.dismiss();
                             onResume();
