@@ -462,20 +462,29 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
                 double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
 
-                if (PeakHoldMode.equals("3")) {
-                    textInstruction.setText("Automatic Mode");
+                boolean stableonly=false;
+                if  (prefs.getBoolean(getString(R.string.preferences_peak_stableonly),getResources().getBoolean(R.bool.preferences_peak_stableonly))==true) {
+                    stableonly=true;
                 }
-                if (PeakHoldMode.equals("2")) {
-                    textInstruction.setText("Semi Automatic Mode");
+
+                if (PeakHoldMode.equals("3")) {
+                    textInstruction.setText("Automatic mode");
+                }else if (PeakHoldMode.equals("2")) {
+                    textInstruction.setText("Semi automatic mode");
+                }else{
+                    textInstruction.setText("Manual mode");
+                }
+                if(stableonly){
+                    textInstruction.append(", apply stable weights.");
+                }else{
+                    textInstruction.append(", apply higher weights.");
                 }
 
 
                 boolean PHstable= Scale.getInstance().isStable();
-                boolean stableonly=false;
 
-                if  (prefs.getBoolean(getString(R.string.preferences_peak_stableonly),getResources().getBoolean(R.bool.preferences_peak_stableonly))==true) {
-                    stableonly=true;
-                }
+
+
 
 
 

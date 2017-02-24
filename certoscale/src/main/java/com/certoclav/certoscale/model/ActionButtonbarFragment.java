@@ -248,6 +248,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						//Start PeakHold Measurement
 						Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
 
+
 					}
 					catch (Exception e)
 					{
@@ -1098,20 +1099,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonEnd.setVisibility(View.VISIBLE);
-
+				buttonStart.setEnabled(true);
 
 
 
 				//Manual Mode
 				if(PeakHoldMode.equals("1")){
-					buttonStart.setEnabled(true);
 					buttonEnd.setEnabled(false);
 
 				}
 
 				//Semi Automatic Mode
 				if(PeakHoldMode.equals("2")){
-					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(true);
 					//Start PeakHold Measurement
 					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
@@ -1119,8 +1118,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Automatic Mode
 				if(PeakHoldMode.equals("3")){
-
-					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(false);
 					//Start PeakHold Measurement
 					Scale.getInstance().setScaleApplication(PEAK_HOLD_STARTED);
@@ -1149,31 +1146,27 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonEnd.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(false);
 
 
 
 
 				//Manual Mode
 				if(PeakHoldMode.equals("1")){
-					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(true);
 
 				}
 
 				//Semi Automatic Mode
 				if(PeakHoldMode.equals("2")){
-					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(true);
 					//Start PeakHold Measurement
 				}
 
 				//Automatic Mode
 				if(PeakHoldMode.equals("3")){
-
-					buttonStart.setEnabled(false);
 					buttonEnd.setEnabled(false);
 					//Start PeakHold Measurement
-
 				}
 
 

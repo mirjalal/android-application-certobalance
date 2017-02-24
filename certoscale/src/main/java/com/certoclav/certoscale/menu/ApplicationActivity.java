@@ -302,21 +302,15 @@ protected void onPause() {
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsIngrediantCosting()).commit();
 							break;
 						case STATISTICAL_QUALITY_CONTROL_1_HOME:
-							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
-							break;
 						case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
-							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
-							break;
 						case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
 						case PIPETTE_ADJUSTMENT_1_HOME:
-							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
-							break;
 						case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+						case PIPETTE_ADJUSTMENT_3_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
-
 
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();

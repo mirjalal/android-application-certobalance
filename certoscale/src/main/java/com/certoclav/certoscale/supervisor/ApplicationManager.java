@@ -27,6 +27,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGH
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
+import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
 /**
@@ -988,6 +989,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     @Override
     public void onWeightChanged(Double absweight, String unit) {
         Double weight = ApplicationManager.getInstance().getTaredValueInGram();
+
+            if(Scale.getInstance().getScaleApplication() == PEAK_HOLD_STARTED){
+                //if wei
+            }
 
 
 
