@@ -317,13 +317,13 @@ public class Navigationbar {
 
 			@Override
 			public void onClick(View v) {
+
 				for (ButtonEventListener listener : navigationbarListeners) {
 					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_BACK, false);
 				}
-				//if(navigationbarListeners.isEmpty()){
 
 				mActivity.finish();
-				//}
+
 			}
 		});
 

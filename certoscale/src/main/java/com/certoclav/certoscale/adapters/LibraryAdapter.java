@@ -46,7 +46,7 @@ public class LibraryAdapter extends ArrayAdapter<Library> {
 
 
 	public LibraryAdapter(Context context, List<Library> values) {
-		super(context, R.layout.settings_library_list_item, values);
+		super(context, R.layout.list_element_library, values);
 		this.mContext = context;
 
 
@@ -66,7 +66,7 @@ public class LibraryAdapter extends ArrayAdapter<Library> {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 
-			convertView = inflater.inflate(R.layout.settings_library_list_item, parent, false);
+			convertView = inflater.inflate(R.layout.list_element_library, parent, false);
 			LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
 			actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);

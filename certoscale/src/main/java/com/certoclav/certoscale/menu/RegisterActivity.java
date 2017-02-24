@@ -39,6 +39,10 @@ private EditTextItem editPasswordItemConfirm;
 private EditTextItem editMobile;
 private EditTextItem editFirstName;
 private EditTextItem editLastName;
+	private Navigationbar navigationbar = null;
+
+	private boolean isEditingAdminAccount = false;
+
 
 
 
@@ -50,7 +54,7 @@ private EditTextItem editLastName;
 		super.onCreate(savedInstanceState);
 		Log.e("LoginActivity", "onCreate");
 		setContentView(R.layout.login_register);
-		Navigationbar navigationbar = new Navigationbar(this);
+		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
 		navigationbar.getTextTitle().setText(getString(R.string.register_new_user));
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
@@ -238,12 +242,13 @@ private EditTextItem editLastName;
 			
 			@Override
 			public void onClick(View v) {
-				
 				boolean isEmailAlreadyExists = false;
-				for(User user : databaseService.getUsers()){
-					if(editEmailItem.getText().equals(user.getEmail())){
-						isEmailAlreadyExists = true;
-						Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
+				if(getIntent().hasExtra(AppConstants.INTENT_EXTRA_USER_ID) == false){
+					for (User user : databaseService.getUsers()) {
+						if (editEmailItem.getText().equals(user.getEmail())) {
+							isEmailAlreadyExists = true;
+							Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 				
@@ -276,7 +281,7 @@ private EditTextItem editLastName;
 						return;
 					}
 				}
-					
+
 						User user = new User(
 								editFirstName.getText(), 
 								"",
@@ -289,7 +294,7 @@ private EditTextItem editLastName;
 								"",
 								BCrypt.hashpw(editPasswordItem.getText(), BCrypt.gensalt()),
 								new Date(),
-								false,
+								isEditingAdminAccount,
 								isLocal);
 						
 						databaseService.insertUser(user);
@@ -325,15 +330,30 @@ private EditTextItem editLastName;
 				User user = db.getUserById(getIntent().getExtras().getInt(AppConstants.INTENT_EXTRA_USER_ID));
 				editEmailItem.setText(user.getEmail());
 				editEmailItem.setEnabled(false);
+				editEmailItem.setFocusable(false);
+				editEmailItem.setVisibility(View.INVISIBLE);
+				navigationbar.getTextTitle().setText(user.getEmail());
 				editMobile.setText(user.getMobile());
 				editFirstName.setText(user.getFirstName());
 				editLastName.setText(user.getLastName());		
 				buttonRegister.setText("Apply changes");
+				if(user.getIsAdmin()){
+					isEditingAdminAccount = true;
+				}else{
+					isEditingAdminAccount = false;
+				}
+
+
 			}catch(Exception e){
 				
 			}
 		}else{
 			buttonRegister.setText("Register");
+			navigationbar.getTextTitle().setText("REGISTER NEW USER");
+			editEmailItem.setVisibility(View.VISIBLE);
+			editEmailItem.setEnabled(true);
+			editEmailItem.setFocusable(true);
+			isEditingAdminAccount = false;
 		}
 		super.onResume();
 	}

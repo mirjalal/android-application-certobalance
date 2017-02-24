@@ -1,20 +1,5 @@
 package com.certoclav.certoscale.supervisor;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
-import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
-import com.certoclav.certoscale.adapters.SamplesAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
@@ -33,13 +18,12 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 import com.certoclav.library.application.ApplicationController;
 
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
@@ -606,8 +590,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
         try {
-            int numDezimalPlaces = 4 - (int)Math.round(getCurrentUnit().getExponent());
-            retVal =  String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " "+getCurrentUnit().getName();
+            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+                retVal = String.format("%.0f", gram) + " pcs";
+            }else {
+                int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
+                retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
+            }
         }catch (Exception e){
             retVal = "";
         }
@@ -719,27 +707,35 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
    public String getReferenceWeightAsStringWithUnit() {
         return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(currentLibrary.getReferenceWeight() ));
     }
-    public String getDifferenceAsStringWithUnit() {
-        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
-        double netto=(getSumInGram() - getTareInGram());
+    public Double getDifferenceInGram() {
 
-        double difference=netto-ref;
+        Double retval = 0d;
+        if(Scale.getInstance().getScaleApplication() == DIFFERENTIAL_WEIGHING) {
+            try {
+                Double targetWeight = getCurrentItem().getWeight();
+                Double taredWeight = getTaredValueInGram();
+                Double difference = -(targetWeight - taredWeight);
+                retval = difference;
+            } catch (Exception e) {
+                retval = 0d;
+            }
+        }else{
+            try {
+                Double targetWeight = getTarget();
+                Double taredWeight = getTaredValueInGram();
+                Double difference = -(targetWeight - taredWeight);
+                retval = difference;
+            } catch (Exception e) {
+                retval = 0d;
+            }
+        }
 
-
-        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(difference));
+        return retval;
     }
 
 
 
-    public String getDifferenceAsStringInGram() {
-        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
-        double netto=(getSumInGram() - getTareInGram());
 
-        double difference=netto-ref;
-
-
-        return String.format("%.4f g", difference);
-    }
 
 
     public Double getDifferenceToInitialWeightInGram() {

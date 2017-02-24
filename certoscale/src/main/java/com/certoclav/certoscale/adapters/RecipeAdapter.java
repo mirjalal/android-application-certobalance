@@ -47,7 +47,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
 
 	public RecipeAdapter(Context context, List<Recipe> values) {
-		super(context, R.layout.user_list_row, values);
+		super(context, R.layout.list_element_user, values);
 		this.mContext = context;
 
 

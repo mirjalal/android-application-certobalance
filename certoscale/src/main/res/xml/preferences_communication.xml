@@ -38,6 +38,11 @@
         android:entryValues="@array/preferences_communication_list_devices_values"
         />
 
+    <Preference
+        android:key="@string/preferences_communication_socket_connected"
+        android:title="CertoCloud push notification service"
+        android:summary="Connected" />
+
 </PreferenceScreen>
 
 

@@ -75,6 +75,13 @@
             android:layout_weight="1"
             android:src="@drawable/ic_menu_calibration"
             style="@style/button_image_sidebar"/>
+        <ImageButton
+            android:id="@+id/menu_application_sidebar_button_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_menu_video"
+            style="@style/button_image_sidebar"/>
     </LinearLayout>
 
 </RelativeLayout>

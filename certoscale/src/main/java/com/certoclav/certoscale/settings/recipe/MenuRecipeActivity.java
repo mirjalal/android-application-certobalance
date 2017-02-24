@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -67,7 +68,14 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ApplicationManager.getInstance().setCurrentRecipe(adapter.getItem(position));
-                finish();
+                try {
+                    if (getIntent().getExtras().getBoolean(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
+                        finish();
+                    }
+                }catch (Exception e){
+
+                }
+
             }
         });
 

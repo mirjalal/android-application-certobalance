@@ -25,7 +25,7 @@ public class LanguageAdapter extends ArrayAdapter<Locale> {
 
 
 	public LanguageAdapter(Context context, List<Locale> values) {
-		super(context, R.layout.user_list_row, values);
+		super(context, R.layout.list_element_user, values);
 		this.mContext = context;
 
 	}

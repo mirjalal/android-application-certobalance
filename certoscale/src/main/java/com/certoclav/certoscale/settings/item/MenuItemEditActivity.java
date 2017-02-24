@@ -40,6 +40,47 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
         navigationbar.getTextTitle().setText("EDIT ITEMS");
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
+        navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try
+                {
+                    final Dialog dialog = new Dialog(MenuItemEditActivity.this);
+                    dialog.setContentView(R.layout.dialog_yes_no);
+                    dialog.setTitle("Cancel without saving");
+
+                    // set the custom dialog components - text, image and button
+                    TextView text = (TextView) dialog.findViewById(R.id.text);
+                    text.setText("Do you really want to  go back without saving the current item?");
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+
+                    dialog.show();
+
+
+                }
+                catch (Exception e)
+                {
+
+                    e.printStackTrace();
+                }
+            }
+        });
         listView = (ListView) findViewById(R.id.menu_main_item_edit_list);
 
 

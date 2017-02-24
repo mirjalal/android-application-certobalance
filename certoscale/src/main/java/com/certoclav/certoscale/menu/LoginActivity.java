@@ -261,6 +261,11 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					Scale.getInstance().setUser(listUsers.get(position));
 					currentUser = listUsers.get(position);
 					editTextPassword.setText("");
+					SharedPreferences prefs = getDefaultSharedPreferences(LoginActivity.this);
+					SharedPreferences.Editor editor = prefs.edit();
+					editor.putInt(AppConstants.PREFERENCE_LAST_LOGGED_IN_USER_ID, currentUser.getUserId());
+					editor.commit();
+
 				} catch (IndexOutOfBoundsException e) {
 				}
 
@@ -391,6 +396,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 		listUsers = databaseService.getUsers();
 
+
 		if (getDefaultSharedPreferences(this).getBoolean(
 				getString(R.string.preferences_device_snchronization), false) == true) {
 			textViewNotification.setVisibility(View.GONE);
@@ -425,6 +431,18 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			}
 
 		adapterUserDropdown.notifyDataSetChanged();
+		try {
+			int lastLoggedInUserId = getDefaultSharedPreferences(this).getInt(AppConstants.PREFERENCE_LAST_LOGGED_IN_USER_ID, 0);
+			if (lastLoggedInUserId != 0) {
+				for (User user : listUsers) {
+					if (user.getUserId() == lastLoggedInUserId) {
+						spinner.setSelection(adapterUserDropdown.getPosition(user));
+					}
+				}
+			}
+		}catch (Exception e){
+
+		}
 
 	}
 

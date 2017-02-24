@@ -89,7 +89,7 @@ public class ItemListFragment extends ListFragment {
 		
 		list.addAll(Arrays.asList(getActivity().getResources().getStringArray(R.array.navigationbar_entries)));
 		
-		adapter = new ArrayAdapter<String>(getActivity(),R.layout.settings_list_item,list);
+		adapter = new ArrayAdapter<String>(getActivity(),R.layout.list_element_item,list);
 		setListAdapter(adapter);
         
 
