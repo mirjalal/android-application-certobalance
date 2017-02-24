@@ -548,6 +548,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 break;
 
+            case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+                textInstruction.setText("Press NEW BATCH to creat a new batch");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textSum.setText("");
+
+                break;
+
             case PIPETTE_ADJUSTMENT:
                 textInstruction.setText("");
 

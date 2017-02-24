@@ -55,6 +55,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
+import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.TOTALIZATION;
 
 
@@ -695,7 +696,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				ApplicationManager.getInstance().setSqcPT2(0);
 				ApplicationManager.getInstance().setSqcNT1(0);
 				ApplicationManager.getInstance().setSqcNT2(0);
-				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL_1_HOME);
+				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED);
 			}
 		});
 
@@ -704,7 +705,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonShowBatch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_1_HOME || Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED ){
+				if(Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_1_HOME || Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED ||Scale.getInstance().getScaleApplication() == STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED){
 					showBatchList(getActivity(),null);
 				}
 
@@ -1263,6 +1264,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			case STATISTICAL_QUALITY_CONTROL_1_HOME:
 				//Buttons used by the Applicaiton
+
+				//This functions clears the batchlists
+				resetSqc();
+
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
@@ -1336,6 +1341,45 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				break;
 
+			case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+				//Buttons used by the Applicaiton
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonAccumulate.setVisibility(View.VISIBLE);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setEnabled(true);
+
+				buttonNewBatch.setVisibility(View.VISIBLE);
+				buttonNewBatch.setText("NEW BATCH");
+				buttonShowBatch.setVisibility(View.VISIBLE);
+
+				buttonAccumulate.setEnabled(false);
+
+
+
+				buttonShowBatch.setEnabled(true);
+				updateBatchListButtonText();
+				buttonAccumulate.setEnabled(false);
+
+				//unused Buttons
+				buttonPrint.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+
+
+
+
+
+
+
+				break;
 
 
 

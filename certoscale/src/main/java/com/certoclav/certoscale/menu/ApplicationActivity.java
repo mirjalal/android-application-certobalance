@@ -321,6 +321,9 @@ protected void onPause() {
 						case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
 							break;
+						case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsSQC()).commit();
+							break;
 						case PIPETTE_ADJUSTMENT:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
