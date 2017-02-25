@@ -29,6 +29,16 @@ import java.util.Locale;
 */
 public class ItemAdapter extends ArrayAdapter<Item> {
 
+	public Boolean getHideActionButtons() {
+		return hideActionButtons;
+	}
+
+	public void setHideActionButtons(Boolean hideActionButtons) {
+		this.hideActionButtons = hideActionButtons;
+	}
+
+	private Boolean hideActionButtons = false;
+
 	public interface OnClickButtonListener {
 		 void onClickButtonDelete(Item item);
 		 void onClickButtonEdit(Item item);
@@ -84,6 +94,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems,false);
 		containerItems.addView(actionItemPrint);
 
+
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
 		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
 
@@ -96,10 +107,18 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()));
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ "g");
 
 
-
+		if(hideActionButtons){
+			actionItemPrint.setVisibility(View.INVISIBLE);
+			actionItemDelete.setVisibility(View.INVISIBLE);
+			actionItemEdit.setVisibility(View.INVISIBLE);
+		}else{
+			actionItemPrint.setVisibility(View.VISIBLE);
+			actionItemDelete.setVisibility(View.VISIBLE);
+			actionItemEdit.setVisibility(View.VISIBLE);
+		}
 
 		actionItemEdit.setChecked(false);
 		actionItemEdit.setImageResource(R.drawable.ic_menu_edit);

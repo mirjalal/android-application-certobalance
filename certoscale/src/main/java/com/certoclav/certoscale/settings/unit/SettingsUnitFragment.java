@@ -19,9 +19,6 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.ButtonEventListener;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
-import com.certoclav.certoscale.settings.item.MenuItemActivity;
-import com.certoclav.certoscale.settings.item.MenuItemEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
@@ -50,7 +47,9 @@ public class SettingsUnitFragment extends Fragment implements UnitAdapter.OnClic
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(adapter.getItem(position).getEnabled()) {
                     ApplicationManager.getInstance().setCurrentUnit(adapter.getItem(position));
-                    getActivity().finish();
+                    if(getActivity().getIntent().hasExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK)) {
+                        getActivity().finish();
+                    }
                 }
             }
         });

@@ -42,18 +42,13 @@
 
         <TextView
             android:id="@+id/menu_main_item_edit_element_weight"
-            android:layout_width="120dp"
+            android:layout_width="170dp"
             android:layout_height="60dp"
             style="@style/text_default"
             android:gravity="center_vertical"
             android:text="12.0121"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/text_default"
-            android:gravity="center_vertical"
-            android:text="g" />
+
         </LinearLayout>
 
         <LinearLayout

@@ -221,7 +221,9 @@ public class DatabaseService {
 	public Unit getUnitbyId(int unitID) {
 		try {
 
-			return unitDao.queryForId(unitID);
+			Unit unit =  unitDao.queryForId(unitID);
+			unit.parseUnitJson();
+			return unit;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
 		} catch (Exception e) {
@@ -341,7 +343,15 @@ public class DatabaseService {
 		try {
 
 			/** query for object in the database with id equal profileId */
-			return recipeDao.queryForAll();
+			List<Recipe> recipes=  recipeDao.queryForAll();
+			try {
+				for (Recipe recipe : recipes) {
+					recipe.parseRecipeJson();
+				}
+			}catch (Exception e){
+
+			}
+			return recipes;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
 		} catch (Exception e) {
@@ -354,7 +364,9 @@ public class DatabaseService {
 	public Recipe getRecipeById(int recipeId) {
 		try {
 
-			return recipeDao.queryForId(recipeId);
+			Recipe recipe =  recipeDao.queryForId(recipeId);
+			recipe.parseRecipeJson();
+			return recipe;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
 		} catch (Exception e) {

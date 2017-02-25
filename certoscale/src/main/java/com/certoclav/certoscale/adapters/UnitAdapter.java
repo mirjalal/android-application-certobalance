@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.view.QuickActionItem;
 
@@ -129,6 +128,7 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 
 		actionUnitEdit.setChecked(false);
 		actionUnitEdit.setImageResource(R.drawable.ic_menu_edit);
+
 
 		//actionUnitDelete.setText(getContext().getString(R.string.delete));
 		actionUnitEdit.setOnClickListener(new OnClickListener() {

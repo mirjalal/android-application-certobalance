@@ -77,6 +77,11 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
                 adapter.add(item);
             }
         }
+        if(getIntent().hasExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK)){
+            adapter.setHideActionButtons(true);
+        }else{
+            adapter.setHideActionButtons(false);
+        }
         adapter.notifyDataSetChanged();
     }
 

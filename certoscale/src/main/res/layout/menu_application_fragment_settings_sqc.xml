@@ -32,40 +32,45 @@
     <Button
         android:id="@+id/application_settings_sqc_button_nominal"
         android:text="Nominal Weight"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 
     <Button
         android:id="@+id/application_settings_sqc_button_ptolerance1"
         android:text="+ Tolerance1"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 
     <Button
         android:id="@+id/application_settings_sqc_button_ptolerance2"
         android:text="+ Tolerance2"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 
     <Button
         android:id="@+id/application_settings_sqc_button_ntolerance1"
         android:text="- Tolerance1"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 
     <Button
         android:id="@+id/application_settings_sqc_button_ntolerance2"
         android:text="- Tolerance2"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 

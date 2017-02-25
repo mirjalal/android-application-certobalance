@@ -715,7 +715,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	@Override
 	public void onApplicationChange(ScaleApplication application) {
-
+		updateBatchListButtonText();
+		updateStatsButtonUI();
+		updateIngrediantButtonUI();
 		buttonPrint.setEnabled(true);
 		//get PeakHoldMode
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

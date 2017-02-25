@@ -3,38 +3,30 @@ package com.certoclav.certoscale.settings.unit;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.adapters.ItemEditAdapter;
-import com.certoclav.certoscale.adapters.RecipeElementAdapter;
-import com.certoclav.certoscale.adapters.UnitEditAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
-import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.model.RecipeEntry;
-import com.certoclav.certoscale.settings.item.MenuItemEditActivity;
-import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SettingsUnitEditActivity extends Activity implements ButtonEventListener {
 
     private Navigationbar navigationbar = new Navigationbar(this);
-    private UnitEditAdapter adapter = null;
-    private ListView listView = null;
-    private Unit unitFromDb = null;
+    private Unit unit = null;
+    EditText editTextName = null;
+    EditText editTextDescription = null;
+    EditText editTextFactor = null;
+    EditText editTextExponent = null;
+    boolean overwriteExistingUnit = false;
+
 
     public static final String INTENT_EXTRA_UNIT_ID = "unit_id";
     @Override
@@ -43,15 +35,62 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
         setContentView(R.layout.menu_main_unit_edit_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("EDIT ITEMS");
+        navigationbar.getTextTitle().setText("EDIT UNIT");
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
-        listView = (ListView) findViewById(R.id.menu_main_unit_edit_list);
+        navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try
+                {
+                    final Dialog dialog = new Dialog(SettingsUnitEditActivity.this);
+                    dialog.setContentView(R.layout.dialog_yes_no);
+                    dialog.setTitle("Cancel without saving");
+
+                    // set the custom dialog components - text, image and button
+                    TextView text = (TextView) dialog.findViewById(R.id.text);
+                    text.setText("Do you really want to  go back without saving the current unit?");
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+
+                    dialog.show();
 
 
+                }
+                catch (Exception e)
+                {
 
-        adapter = new UnitEditAdapter(this,new ArrayList<Unit>());
-        listView.setAdapter(adapter);
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        editTextName = (EditText) findViewById(R.id.menu_main_unit_edit_name);
+        editTextDescription = (EditText) findViewById(R.id.menu_main_unit_edit_description);
+        editTextFactor = (EditText) findViewById(R.id.menu_main_unit_edit_factor);
+        editTextExponent = (EditText) findViewById(R.id.menu_main_unit_edit_text_exponent);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+
 
         int extra = 0;
         try {
@@ -60,17 +99,35 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
             extra = 0;
         }
         if(extra != 0) {
-            DatabaseService db = new DatabaseService(this);
-            unitFromDb = db.getUnitbyId(extra);
-            adapter.add(unitFromDb);
+            try {
+                DatabaseService db = new DatabaseService(this);
+                unit = db.getUnitbyId(extra);
+                overwriteExistingUnit = true;
+            }catch (Exception e){
+                overwriteExistingUnit = false;
+            }
         }else{
-            adapter.add(new Unit(unitFromDb.getExponent(),unitFromDb.getFactor(),unitFromDb.getDescription(),unitFromDb.getName(),unitFromDb.getCloudId(),unitFromDb.getEnabled(),true));
+            unit = new Unit(0.0,1.0,"g","gram","",true,true);
+            overwriteExistingUnit = false;
         }
 
-    }
+        editTextName.setHint(unit.getName());
+        editTextDescription.setHint(unit.getDescription());
+        editTextName.setText(unit.getName());
+        editTextDescription.setText(unit.getDescription());
+        editTextFactor.setText(unit.getFactor().toString());
+        editTextExponent.setText(unit.getExponent().toString());
+        try {
+            editTextFactor.setHint(unit.getFactor().toString());
+        }catch (Exception e){
+            editTextFactor.setHint("1.0");
+        }
+        try {
+            editTextExponent.setHint(unit.getFactor().toString());
+        }catch (Exception e){
+            editTextExponent.setHint("0");
+        }
 
-    @Override
-    protected void onResume() {
         super.onResume();
 
         navigationbar.setButtonEventListener(this);
@@ -100,13 +157,43 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
             try
             {
+                if(editTextName.getText().toString().isEmpty()){
+                    Toast.makeText(this,"Please enter the name of the unit", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(editTextDescription.getText().toString().isEmpty()){
+                    Toast.makeText(this,"Please enter a description of the unit", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(editTextExponent.getText().toString().isEmpty()){
+                    Toast.makeText(this,"Please enter a valid exponent", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(editTextFactor.getText().toString().isEmpty()){
+                    Toast.makeText(this,"Please enter a valid factor", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                unit.setDescription(editTextDescription.getText().toString());
+                try {
+                    unit.setFactor(Double.parseDouble(editTextFactor.getText().toString()));
+                }catch (Exception e){
+                    unit.setFactor(1d);
+                }
+                try {
+                    unit.setExponent(Double.parseDouble(editTextExponent.getText().toString()));
+                }catch (Exception e){
+                    unit.setExponent(0d);
+                }
+                unit.setName(editTextName.getText().toString());
+
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
                 dialog.setTitle("Confirm operation");
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you really want to save the custom unit? " + adapter.getItem(0).getName());
+                text.setText("Do you really want to save the unit " + unit.getDescription() + "?");
+
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -115,29 +202,26 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
                         dialog.dismiss();
                     }
                 });
+
                 Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                 // if button is clicked, close the custom dialog
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         DatabaseService db = new DatabaseService(getApplicationContext());
-                        if(unitFromDb != null){
-                            db.deleteUnit(unitFromDb);
+                        if(overwriteExistingUnit){
+                            db.deleteUnit(unit);
+                        }
+                       int retval =  db.insertUnit(unit);
+                        if(retval == 1){
+                            Toast.makeText(SettingsUnitEditActivity.this,"Unit saved", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
+                            finish();
+                        }else{
+                            Toast.makeText(SettingsUnitEditActivity.this,"Saving failed", Toast.LENGTH_LONG).show();
+                            dialog.dismiss();
                         }
 
-                        for(int i = 0; i< adapter.getCount();i++){
-                            Unit unit = adapter.getItem(i);
-                        //    Log.e("MenuItemEditActivity", "item json: "+ unit.getItemJson());
-                        }
-
-                        if(adapter.getCount()>0){
-                            Unit unit = adapter.getItem(0);
-                        //    Log.e("MenuItemEditActivty", "insert item: "+ item.getItemArticleNumber() + item.getName() + item.getWeight());
-                            db.insertUnit(unit);
-                        }
-
-                        dialog.dismiss();
-                        finish();
                     }
                 });
 
