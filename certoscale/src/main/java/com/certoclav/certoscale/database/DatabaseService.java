@@ -30,6 +30,7 @@ public class DatabaseService {
 	Dao<Recipe,Integer> recipeDao;
 	Dao<Item, Integer> itemDao;
 	Dao<Unit, Integer> unitDao;
+	Dao<Protocol,Integer> protocolDao;
 
 	private DatabaseHelper mDatabaseHelper;
 	
@@ -51,6 +52,7 @@ public class DatabaseService {
 		recipeDao = getHelper().getRecipeDao();
 		itemDao = getHelper().getItemDao();
 		unitDao = getHelper().getUnitDao();
+		protocolDao = getHelper().getProtocolDao();
 
 
 	}
@@ -294,6 +296,58 @@ public class DatabaseService {
 	}
 
 
+	public int insertProtocol(Protocol protocol) {
+
+
+		try {
+			protocol.generateProtocolJson();
+			int x =protocolDao.create(protocol);
+			return x;
+
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return -1;
+	}
+
+	public int deleteProtocol(Protocol protocol) {
+		try {
+
+			return protocolDao.delete(protocol);
+		} catch (java.sql.SQLException e) {
+			Log.e(TAG, e.getMessage());
+		}catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+		return -1;
+	}
+
+
+	public List<Protocol> getProtocols() {
+		try {
+			List<Protocol> protocols = protocolDao.queryForAll();
+			try {
+				for (Protocol protocol : protocols) {
+					protocol.parseProtocolJson();
+				}
+			}catch (Exception e){
+
+			}
+			return protocols;
+
+		} catch (SQLException e) {
+			Log.e(TAG, "Database exception", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Database exception", e);
+		}
+
+		return null;
+	}
+
+
 	public int insertUnit(Unit unit) {
 
 		unit.generateUnitJson();
@@ -322,7 +376,6 @@ public class DatabaseService {
 		}
 		return -1;
 	}
-
 
 
 

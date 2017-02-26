@@ -173,7 +173,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case PERCENT_WEIGHING_CALC_REFERENCE:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText( ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-
+                break;
             case ANIMAL_WEIGHING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);

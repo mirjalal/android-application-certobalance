@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	// name of the database file for your application -- change to something appropriate for your app
-	private static final String DATABASE_NAME = "helloAndroid.db";
+	private static final String DATABASE_NAME = "certoclav.db";
 	// any time you make changes to your database objects, you may have to increase the database version
 	private static final int DATABASE_VERSION = 1;
     
@@ -33,7 +33,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<Recipe,Integer> recipeDao = null;
 	private Dao<Item, Integer> itemDao = null;
 	private Dao<Unit, Integer> unitDao = null;
-	
+	private Dao<Protocol, Integer> protocolDao = null;
 	
 	
 	public DatabaseHelper(Context context) {
@@ -55,6 +55,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, Recipe.class);
 			TableUtils.createTable(connectionSource, Item.class);
 			TableUtils.createTable(connectionSource, Unit.class);
+			TableUtils.createTable(connectionSource, Protocol.class);
 			
 		} catch (SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
@@ -89,6 +90,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.dropTable(connectionSource, Recipe.class,true);
 			TableUtils.dropTable(connectionSource, Item.class, true);
 			TableUtils.dropTable(connectionSource, Unit.class, true);
+			TableUtils.dropTable(connectionSource, Protocol.class, true);
 			
 			// after we drop the old databases, we create the new ones
 			onCreate(db, connectionSource);//!
@@ -171,6 +173,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 
+	public Dao<Protocol, Integer> getProtocolDao(){
+		if (protocolDao == null) {
+			try {
+				protocolDao = getDao(Protocol.class);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return protocolDao;
+	}
 	/**
 	 * Close the database connections and clear any cached DAOs.
 	 */
@@ -183,6 +195,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		recipeDao = null;
 		unitDao = null;
 		itemDao = null;
+		protocolDao = null;
 
 
 	}

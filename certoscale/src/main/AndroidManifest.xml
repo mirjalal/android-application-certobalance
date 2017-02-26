@@ -187,6 +187,8 @@
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
         <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 
+        <activity android:name=".settings.protocol.MenuProtocolActivity"
+            android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.calibration.SettingsCalibrationActivity"
             android:screenOrientation="sensorLandscape"></activity>
 

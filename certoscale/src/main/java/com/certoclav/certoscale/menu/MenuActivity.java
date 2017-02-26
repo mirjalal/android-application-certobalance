@@ -46,14 +46,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
 
 
-    private final int INDEX_CALIBRATION = 0;
-    private final int INDEX_APPLICATIONS_USER = 1;
-    private final int INDEX_DEVICE = 2;
-    private final int INDEX_APPLICATIONS = 3;
-    private final int INDEX_WEIGHING_UNITS  = 4;
-    private final int INDEX_GLP = 5;
-    private final int INDEX_LIBRARY =6;
-    private final int INDEX_FACTORY_RESET = 9;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +68,10 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         gridView.setAdapter(menuMainElementAdapter);
         menuMainElementAdapter.add(new MenuElement("Applications".toUpperCase(),R.drawable.ic_menu_weighing, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
         menuMainElementAdapter.add(new MenuElement("Calibration".toUpperCase(),R.drawable.ic_menu_calibration, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
-        menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
-        menuMainElementAdapter.add(new MenuElement("Recipes".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
-        menuMainElementAdapter.add(new MenuElement("Items".toUpperCase(),R.drawable.ic_menu_library, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
+        menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.ic_menu_settings_bar, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
+        menuMainElementAdapter.add(new MenuElement("Recipes".toUpperCase(),R.drawable.ic_menu_document_text, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
+        menuMainElementAdapter.add(new MenuElement("Items".toUpperCase(),R.drawable.ic_menu_list, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
+        menuMainElementAdapter.add(new MenuElement("Protocols".toUpperCase(),R.drawable.ic_menu_protocol,MenuElement.MenuItemId.MENU_ITEM_PROTOCOLS));
         menuMainElementAdapter.add(new MenuElement("Device settings".toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
         menuMainElementAdapter.add(new MenuElement("Application settings".toUpperCase(),R.drawable.ic_menu_app_settings, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
         menuMainElementAdapter.add(new MenuElement("User management".toUpperCase(),R.drawable.ic_menu_settings_user, MenuElement.MenuItemId.MENU_ITEM_USER));

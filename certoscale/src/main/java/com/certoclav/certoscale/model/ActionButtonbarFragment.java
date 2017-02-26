@@ -336,7 +336,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 			switch (Scale.getInstance().getScaleApplication()){
-				case PART_COUNTING:
+				default:
 					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {

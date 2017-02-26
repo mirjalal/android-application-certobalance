@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
@@ -40,6 +41,7 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MenuItemActivity.class);
+                intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK,true);
                 getActivity().startActivity(intent);
             }
         });
