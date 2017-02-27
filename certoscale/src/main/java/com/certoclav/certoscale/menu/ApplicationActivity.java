@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StableListener;
@@ -33,9 +32,8 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.util.ProtocolPrinterUtils;
+import com.certoclav.certoscale.supervisor.ProtocolManager;
 
-import java.util.Calendar;
 import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
@@ -56,7 +54,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.WEIGHING;
 public class ApplicationActivity extends FragmentActivity implements  ButtonEventListener ,ScaleApplicationListener, SharedPreferences.OnSharedPreferenceChangeListener,StableListener{
 
 private Navigationbar navigationbar = new Navigationbar(this);
-private ProtocolPrinterUtils protocolPrinter= new ProtocolPrinterUtils();
+private ProtocolManager protocolPrinter= new ProtocolManager();
 
 
 	public ActionButtonbarFragment actionButtonbarFragment = null;
@@ -330,15 +328,17 @@ protected void onPause() {
 
 
 				break;
-			case ActionButtonbarFragment.BUTTON_PRINT:
+			case ActionButtonbarFragment.BUTTON_PROTOCOL:
 				//Print whole protocol to protocol printer connected on COM 1
 
 				//Print GLP and GMP Data which is independent of the application
 				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-				protocolPrinter.printProtocol();
-				DatabaseService db = new DatabaseService(this);
-				db.insertProtocol(new Protocol("","Protocol name",Scale.getInstance().getUser().getEmail(),Scale.getInstance().getSafetyKey(), Calendar.getInstance().toString(),"private","asdf"));
+
+
+
+
+
 
 				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
 				//Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();

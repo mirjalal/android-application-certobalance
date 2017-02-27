@@ -102,6 +102,12 @@ public class Navigationbar {
 
 	private ImageButton buttonBack = null;
 
+	public ImageButton getButtonDelete() {return buttonDelete;}
+
+	public void setButtonDelete(ImageButton buttonDelete) {this.buttonDelete = buttonDelete;}
+
+	private ImageButton buttonDelete=null;
+
 	public ImageButton getButtonHome() {
 		return buttonHome;
 	}
@@ -326,6 +332,22 @@ public class Navigationbar {
 
 			}
 		});
+
+
+		buttonDelete = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_delete);
+		buttonDelete.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_DELETE, false);
+				}
+
+
+			}
+		});
+
 
 		buttonHome = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_home);
 		buttonHome.setOnClickListener(new OnClickListener() {

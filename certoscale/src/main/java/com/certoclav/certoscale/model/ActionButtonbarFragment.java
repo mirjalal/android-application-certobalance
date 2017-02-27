@@ -22,16 +22,21 @@ import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.adapters.SamplesAdapter;
+import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.ESCPos;
+import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
@@ -58,7 +63,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 	public static final int BUTTON_TARA = 3;
 	public static final int BUTTON_CAL = 4;
-	public static final int BUTTON_PRINT = 5;
+	public static final int BUTTON_PROTOCOL = 5;
 	public static final int BUTTON_APP_SETTINGS = 6;
 	public static final int BUTTON_STATISTICS = 7;
 	public static final int BUTTON_ACCUMULATE = 8;
@@ -79,6 +84,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_SETTINGS_DEVICE = 21;
 	public static final int BUTTON_MORE = 22;
 	public static final int BUTTON_END_BATCH=23;
+	public static final int BUTTON_DELETE=24;
 
 
 
@@ -86,7 +92,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 	private Button buttonTara = null;
 	private Button buttonCal = null;
-	private Button buttonPrint= null;
+	private Button buttonProtocol= null;
 	private Button buttonStatistics = null;
 	private Button buttonAccumulate = null;
 	private Button buttonAnimalStart = null;
@@ -163,12 +169,12 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 		this.buttonCal = buttonCal;
 	}
 
-	public Button getButtonPrint() {
-		return buttonPrint;
+	public Button getbuttonProtocol() {
+		return buttonProtocol;
 	}
 
-	public void setButtonPrint(Button buttonPrint) {
-		this.buttonPrint = buttonPrint;
+	public void setbuttonProtocol(Button buttonProtocol) {
+		this.buttonProtocol = buttonProtocol;
 	}
 
 	public Button getButtonAppSettings() {
@@ -317,13 +323,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			}
 		});
 
-		buttonPrint = (Button) rootView.findViewById(R.id.actionbar_button_print);
-		buttonPrint.setOnClickListener(new View.OnClickListener() {
+		buttonProtocol = (Button) rootView.findViewById(R.id.actionbar_button_protocol);
+		buttonProtocol.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+
+				showProtocol(getActivity(), new DialogInterface.OnDismissListener() {
+					@Override
+					public void onDismiss(DialogInterface dialog) {
+						updateStatsButtonUI();
+					}
+				});
+
 				for(ButtonEventListener listener : navigationbarListeners){
-					listener.onClickNavigationbarButton(BUTTON_PRINT,false);
+					listener.onClickNavigationbarButton(BUTTON_PROTOCOL,false);
 				}
 
 			}
@@ -709,7 +723,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	public void disbalbeAllButtons(){
 		buttonAppSettings.setEnabled(false);
 		buttonCal.setEnabled(false);
-		buttonPrint.setEnabled(false);
+		buttonProtocol.setEnabled(false);
 		buttonTara.setEnabled(false);
 	}
 
@@ -718,7 +732,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		updateBatchListButtonText();
 		updateStatsButtonUI();
 		updateIngrediantButtonUI();
-		buttonPrint.setEnabled(true);
+		buttonProtocol.setEnabled(true);
 		//get PeakHoldMode
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
@@ -734,7 +748,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setText("ADD TO STATS");
 				buttonAccumulate.setEnabled(true);
@@ -758,7 +772,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Button used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 
@@ -783,8 +797,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case PART_COUNTING_CALC_AWP:
 				//Button used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
-				buttonPrint.setEnabled(false);
+				buttonProtocol.setVisibility(View.VISIBLE);
+				buttonProtocol.setEnabled(false);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 
@@ -809,7 +823,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
@@ -834,7 +848,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//Buttons used by the application
 
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 
 				buttonStatistics.setVisibility(View.VISIBLE);
@@ -867,7 +881,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
@@ -893,7 +907,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Buttons used by the applications
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
@@ -915,7 +929,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case TOTALIZATION:
 				// Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
@@ -938,8 +952,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				// Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
-				buttonPrint.setEnabled(true);
+				buttonProtocol.setVisibility(View.VISIBLE);
+				buttonProtocol.setEnabled(true);
 				buttonZero.setVisibility(View.VISIBLE);
 
 
@@ -977,7 +991,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
 				buttonCal.setEnabled(false);
-				buttonPrint.setEnabled(false);
+				buttonProtocol.setEnabled(false);
 				//buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				buttonAppSettings.setVisibility(View.VISIBLE);
@@ -989,8 +1003,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case DIFFERENTIAL_WEIGHING:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
-				buttonPrint.setEnabled(true);
+				buttonProtocol.setVisibility(View.VISIBLE);
+				buttonProtocol.setEnabled(true);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 
@@ -1014,7 +1028,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case INGREDIENT_COSTING:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
@@ -1046,7 +1060,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case DENSITY_DETERMINATION:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
@@ -1072,7 +1086,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			case DENSITY_DETERMINATION_STARTED:
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
@@ -1097,7 +1111,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case PEAK_HOLD:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonEnd.setVisibility(View.VISIBLE);
@@ -1144,7 +1158,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonEnd.setVisibility(View.VISIBLE);
@@ -1188,7 +1202,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case PIPETTE_ADJUSTMENT_1_HOME:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
@@ -1198,6 +1212,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
+				buttonStatistics.setVisibility(View.GONE);
+
 
 
 
@@ -1217,7 +1233,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 				//Buttons used by the application
 				buttonTara.setVisibility(View.VISIBLE);
-				buttonPrint.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
@@ -1264,7 +1280,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setEnabled(false);
 
 				//unused Buttons
-				buttonPrint.setVisibility(View.GONE);
+				buttonProtocol.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
@@ -1293,7 +1309,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.VISIBLE);
 
 				//unused Buttons
-				buttonPrint.setVisibility(View.GONE);
+				buttonProtocol.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
@@ -1332,7 +1348,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setEnabled(false);
 
 				//unused Buttons
-				buttonPrint.setVisibility(View.GONE);
+				buttonProtocol.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
@@ -1364,7 +1380,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		updateStatsButtonUI();
 
-		
+
 	}
 
 
@@ -1620,6 +1636,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
+
+
 			ListView listView = (ListView) dialog.findViewById(R.id.dialog_sample_list);
 
 			ViewGroup.LayoutParams params = listView.getLayoutParams();
@@ -1632,6 +1650,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			for(Double sample:ApplicationManager.getInstance().getStats().getSamples()){
 				sAdapter.add(sample);
+
 			}
 
 
@@ -1648,11 +1667,29 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			});
 
 
-			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
-			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 
+					StringBuilder  sb = new StringBuilder();
+					sb.append("Statistics \n");
+					sb.append("Samples:       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
+					sb.append("Total:         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
+					sb.append("Mean:          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
+					sb.append("Standard dev.: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
+					sb.append("Minimum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
+					sb.append("Maximum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
+					sb.append("Variance:      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
+
+					for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)));
+
+					}
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
 
 
 
@@ -1707,8 +1744,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			// set the custom dialog components - text, image and button
 
 
-			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
-			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 
@@ -1767,15 +1804,32 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				}
 			});
-			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_button_print);
-			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_button_print);
+			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 
 
+					/*
 					ApplicationManager.getInstance().getProtocolPrinter().printTop();
 					ApplicationManager.getInstance().getProtocolPrinter().printStatistics();
 					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+					*/
+					StringBuilder sb = new StringBuilder();
+					sb.append("Statistics \n");
+					sb.append("Samples:       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
+					sb.append("Total:         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
+					sb.append("Mean:          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
+					sb.append("Standard dev.: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
+					sb.append("Minimum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
+					sb.append("Maximum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
+					sb.append("Variance:      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
 
 					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
 				}
@@ -1909,8 +1963,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					dialog.dismiss();
 				}
 			});
-			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
-			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_print);
+			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					ApplicationManager.getInstance().getProtocolPrinter().printTop();
@@ -2024,6 +2078,84 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
  }
+
+
+	public void showProtocol(final Context eContext, final DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_protocol_show);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle("Protocol");
+
+
+
+			final DatabaseService db = new DatabaseService(ApplicationController.getContext());
+
+			//
+			StringBuilder sb = new StringBuilder();
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
+
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+			final Protocol protocol= new Protocol("",Scale.getInstance().getScaleApplication().toString(), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+
+			TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
+			textView.setText(protocol.getContent());
+
+
+
+
+
+
+			Button dialogbuttonPrint = (Button) dialog.findViewById(R.id.dialog_protocol_button_print);
+			dialogbuttonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(protocol.getContent());
+
+					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+				}
+			});
+
+			Button dialogButtonSave = (Button) dialog.findViewById(R.id.dialog_protocol_button_save);
+			dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+					db.insertProtocol(protocol);
+					dialog.dismiss();
+
+				}
+			});
+
+
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_protocol_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+
+
 }
 
 

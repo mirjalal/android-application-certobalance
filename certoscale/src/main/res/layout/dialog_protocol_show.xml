@@ -1,22 +1,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/dialog_edit_number_container"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="@drawable/background_gadient">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_edit_number_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gadient">
+
 
 	<ScrollView
 		android:id="@+id/dialog_protocol_scroll"
 		android:layout_width="match_parent"
-		android:layout_height="200dp">
+		android:layout_height="340dp"
+
+		>
 
 		<TextView
 			android:id="@+id/dialog_protocol_text"
 			android:layout_width="match_parent"
 			android:layout_below="@+id/dialog_ingrediantcosts_header"
 			android:layout_height="wrap_content"
+			android:paddingLeft="100dp"
 			style="@style/text_default"/>
 	</ScrollView>
+
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -24,10 +29,30 @@
 		android:orientation="horizontal"
 		android:layout_below="@+id/dialog_protocol_scroll"
 		>
+		<Button
+			android:id="@+id/dialog_protocol_button_print"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Print"
+			style="@style/button_default"
+			/>
 
 
 		<Button
-			android:id="@+id/dialog_button_close"
+			android:id="@+id/dialog_protocol_button_save"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Save"
+			style="@style/button_default"
+			/>
+
+
+
+
+		<Button
+			android:id="@+id/dialog_protocol_button_close"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"

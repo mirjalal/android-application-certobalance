@@ -4,7 +4,6 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.database.Statistics;
@@ -16,11 +15,9 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.util.ProtocolPrinterUtils;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -53,9 +50,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void setCurrentUnit(Unit currentUnit) {this.currentUnit = currentUnit;}
 
 
-    public ProtocolPrinterUtils getProtocolPrinter() {return protocolPrinter;}
-    public void setProtocolPrinter(ProtocolPrinterUtils protocolPrinter) {this.protocolPrinter = protocolPrinter;}
-    private ProtocolPrinterUtils protocolPrinter=new ProtocolPrinterUtils();
+    public ProtocolManager getProtocolPrinter() {return protocolPrinter;}
+    public void setProtocolPrinter(ProtocolManager protocolPrinter) {this.protocolPrinter = protocolPrinter;}
+    private ProtocolManager protocolPrinter=new ProtocolManager();
 
     private double PeakHoldMaximum=0;
     public double getPeakHoldMaximum() {return PeakHoldMaximum;}
@@ -1035,13 +1032,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         }
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
 
-        ProtocolPrinterUtils protocolPrinterUtils = new ProtocolPrinterUtils();
-        switch (application){
-            case PIPETTE_ADJUSTMENT_3_FINISHED:
-                db.insertProtocol(new Protocol("","PIPETTE ADJUSTMENT",Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",protocolPrinterUtils.getPipetteAdjustmentProtocol()));
+        ProtocolManager protocolPrinterUtils = new ProtocolManager();
 
-                break;
-        }
 
 
         ApplicationManager.getInstance().setIngrediantTotalCost(0);

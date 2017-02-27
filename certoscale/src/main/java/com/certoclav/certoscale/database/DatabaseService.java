@@ -326,6 +326,7 @@ public class DatabaseService {
 	}
 
 
+
 	public List<Protocol> getProtocols() {
 		try {
 			List<Protocol> protocols = protocolDao.queryForAll();
