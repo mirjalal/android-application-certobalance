@@ -1743,9 +1743,30 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			// set the custom dialog components - text, image and button
 
+			StringBuilder sb = new StringBuilder();
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+			//sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getSQCBatch(sqc));
 
-			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+			final Protocol protocol= new Protocol("",Scale.getInstance().getScaleApplication().toString(), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+
+
+			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_save);
 			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final DatabaseService db = new DatabaseService(ApplicationController.getContext());
+
+					db.insertProtocol(protocol);
+
+				}
+			});
+
+
+
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 
@@ -1755,19 +1776,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
 
-					StringBuilder sb = new StringBuilder();
-					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
-					//sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
-					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getSQCBatch(sqc));
 
-					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
 
 
 
 					ESCPos escPos=new ESCPos();
 					escPos.resetToDefault();
 
-					escPos.printString(sb.toString());
+					escPos.printString(protocol.getContent());
 
 
 				}

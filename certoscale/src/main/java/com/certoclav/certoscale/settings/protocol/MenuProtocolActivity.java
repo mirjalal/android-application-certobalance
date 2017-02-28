@@ -2,6 +2,7 @@ package com.certoclav.certoscale.settings.protocol;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -175,7 +176,17 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                             public void onClick(View v) {
                                 final DatabaseService db = new DatabaseService(ApplicationController.getContext());
 
-                                db.getProtocols().removeAll((Collection<Protocol>) db.getProtocols());
+
+                                //db.getProtocols().removeAll((Collection<Protocol>) db.getProtocols());
+                                List <Protocol> protocolList=db.getProtocols();
+
+                                /*for(int i=0; i<protocolList.size();i++) {
+                                    db.deleteProtocol(protocolList.get(i));
+                                }*/
+
+                                for (Protocol protocol:protocolList){
+                                    db.deleteProtocol(protocol);
+                                }
 
                                 dialog.dismiss();
                                 onResume();

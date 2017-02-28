@@ -257,6 +257,16 @@
 		android:layout_below="@+id/dialog_statistics_sqc_table_container"
 		>
 
+
+		<Button
+			android:id="@+id/dialog_statistics_sqc_button_save"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Save"
+			style="@style/button_default"
+			/>
+
 		<Button
 			android:id="@+id/dialog_statistics_sqc_button_print"
 			android:layout_width="match_parent"

@@ -136,7 +136,7 @@
      android:layout_width="80dp"
      android:layout_height="match_parent"
      android:layout_toLeftOf="@+id/naviagationbar_button_more"
-     android:src="@drawable/ic_menu_delete"
+     android:src="@drawable/ic_menu_bin"
      style="@style/button_navigationbar_default"
      />
  
