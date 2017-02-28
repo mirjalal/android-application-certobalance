@@ -712,6 +712,14 @@ public class ProtocolManager implements ScaleApplicationListener {
 
                 break;
 
+            case STATISTICAL_QUALITY_CONTROL_1_HOME:
+            case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
+            case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+
+
+
+                break;
+
 
 
 
@@ -741,6 +749,30 @@ public class ProtocolManager implements ScaleApplicationListener {
         posPrinter.printString("-Tolerance2 "+String.format("%d",sqc.getSqcNT2())+ "   " +String.format("%.1f",((double)sqc.getSqcNT2()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
 
 
+    }
+
+    public String getSQCBatch(SQC sqc){
+
+        StringBuilder sb=new StringBuilder();
+
+        sb.append("Statistics of "+sqc.getName()+"\n");
+        sb.append("Samples "+String.format("%d",sqc.getStatistics().getN())+"\n");
+        sb.append("Average "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMean())+"\n");
+        sb.append("Maximum "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax())+"\n");
+        sb.append("Minimum "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMin())+"\n");
+        sb.append("Range "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax()-sqc.getStatistics().getMin()) +"\n");
+        sb.append("Standard Deviation "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getStandardDeviation())+"\n");
+        sb.append("Total "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getSum())+"\n");
+        sb.append(("\n"));
+
+        sb.append("Nomininal "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getNominal())+"\n");
+
+        sb.append("+Tolerance1 "+String.format("%d",sqc.getSqcPT1())+ "   " +String.format("%.1f",((double)sqc.getSqcPT1()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
+        sb.append("+Tolerance2 "+String.format("%d",sqc.getSqcPT2())+ "   " +String.format("%.1f",((double)sqc.getSqcPT2()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
+        sb.append("-Tolerance1 "+String.format("%d",sqc.getSqcNT1())+ "   " +String.format("%.1f",((double)sqc.getSqcNT1()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
+        sb.append("-Tolerance2 "+String.format("%d",sqc.getSqcNT2())+ "   " +String.format("%.1f",((double)sqc.getSqcNT2()/(double)sqc.getStatistics().getN())*100 )+ "%"+"\n");
+
+        return sb.toString();
     }
 
     public void printStatistics(){

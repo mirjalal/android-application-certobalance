@@ -1683,7 +1683,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					sb.append("Variance:      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
 
 					for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)));
+						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
 
 					}
 					ESCPos escPos=new ESCPos();
@@ -1749,11 +1749,26 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				@Override
 				public void onClick(View v) {
 
-					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					//ApplicationManager.getInstance().getProtocolPrinter().printTop();
 
-					ApplicationManager.getInstance().getProtocolPrinter().printSQCBatch(sqc);
 
-					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					StringBuilder sb = new StringBuilder();
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+					//sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getSQCBatch(sqc));
+
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
+
 
 				}
 			});
@@ -1896,6 +1911,28 @@ public void removeButtonEventListener(ButtonEventListener listener) {
             });*/
 
 
+
+
+			Button dialogButtonPrint = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_print);
+			dialogButtonPrint.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					 StringBuilder sb=new StringBuilder();
+
+					for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
+						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
+
+					}
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
+
+
+				}
+			});
+
 			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_close);
 			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -1967,9 +2004,24 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ApplicationManager.getInstance().getProtocolPrinter().printTop();
-					ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
-					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+					//ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					//ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
+					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+
+					StringBuilder sb = new StringBuilder();
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
+
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
+
+
 
 					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
 				}
@@ -2044,12 +2096,25 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				@Override
 				public void onClick(View v) {
 
+					StringBuilder sb = new StringBuilder();
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
 
-					ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
+
+
+					//ApplicationManager.getInstance().getProtocolPrinter().printTop();
 					//Printing the application data
-					ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
+					//ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
 					//Print Signature liness
-					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
 					dialog.dismiss();
 				}
 			});
