@@ -699,7 +699,13 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                         listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference)+" %"  );
 
                     }
-                }
+
+
+                        listReferenceFields.get(2).getTextName().setText("Scaling factor");
+                        listReferenceFields.get(2).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()) );
+
+
+                    }
 
 
 

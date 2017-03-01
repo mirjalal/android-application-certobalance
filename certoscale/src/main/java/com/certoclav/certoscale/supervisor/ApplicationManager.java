@@ -54,6 +54,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void setProtocolPrinter(ProtocolManager protocolPrinter) {this.protocolPrinter = protocolPrinter;}
     private ProtocolManager protocolPrinter=new ProtocolManager();
 
+
+    private double scalingFactor=1;
+    public double getScalingFactor() {return scalingFactor;}
+    public void setScalingFactor(double scalingFactor) {this.scalingFactor = scalingFactor;}
+
+
     private double PeakHoldMaximum=0;
     public double getPeakHoldMaximum() {return PeakHoldMaximum;}
     public void setPeakHoldMaximum(double peakHoldMaximum) {PeakHoldMaximum = peakHoldMaximum;}
@@ -374,8 +380,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getUnitAsString() {
         switch (Scale.getInstance().getScaleApplication()) {
-            case PART_COUNTING:
-                return "pcs";
+           // case PART_COUNTING:
+           //     return "pcs";
 
             case PERCENT_WEIGHING:
                 return "%";
@@ -589,12 +595,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
         try {
-            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
-                retVal = String.format("%.0f", gram) + " pcs";
-            }else {
+            //if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+           //     retVal = String.format("%.0f", gram) + " pcs";
+           // }else {
                 int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
-            }
+           // }
         }catch (Exception e){
             retVal = "";
         }

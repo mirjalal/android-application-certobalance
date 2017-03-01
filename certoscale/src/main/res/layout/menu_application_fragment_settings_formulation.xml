@@ -1,4 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+** Copyright 2010, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/application_settings_formulation_button_recipe_name"
+            android:text="Recipe name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+        <Button
+            android:id="@+id/application_settings_formulation_button_scaling_factor"
+            android:text="Scaling factor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+<!--
+<?xml version="1.0" encoding="utf-8"?>
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -6,18 +64,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:orientation="horizontal">
+
+
 
 
     <Button
@@ -28,5 +82,13 @@
         android:layout_gravity="bottom"
         style="@style/button_actionbar"/>
 
+        <Button
+            android:id="@+id/application_settings_formulation_button_scaling_factor"
+            android:text="scaling factor"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            style="@style/button_actionbar"/>
+
 </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
