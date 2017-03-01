@@ -53,6 +53,16 @@
     </Preference>
 
 
+    <ListPreference
+        android:key="@string/preferences_device_color_themes"
+        android:title="Color Themes"
+        android:summary="Select the color theme"
+        android:entries="@array/preferences_device_color_themes"
+        android:entryValues="@array/preferences_device_color_themes_values"
+        />
+
+
+
     <CheckBoxPreference
         android:key="@string/preferences_device_bluetooth"
         android:title="@string/bluetooth_on_off"

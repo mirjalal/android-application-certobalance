@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,8 +28,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_animal_weighing,container, false);
 
         buttonAveragingTime = (Button) rootView.findViewById(R.id.application_settings_animal_button_averaging_time);
-
-
+        
         buttonAveragingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

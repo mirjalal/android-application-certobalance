@@ -250,6 +250,7 @@
     <string name="preferences_device_brightness">preferences_device_brightness</string>
     <string name="preferences_device_wlan_manage">preferences_device_wlan_manage</string>
     <string name="preferences_device_bluetooth">preferences_device_bluetooth</string>
+    <string name="preferences_device_color_themes">preferences_device_color_theme</string>
     <string name="preferences_device_snchronization">preferences_device_snchronization</string>
     <string name="preferences_device_language">preferences_device_language</string>
     <string-array name="navigationbar_entries">
@@ -327,6 +328,12 @@
         <item>Other</item>
     </string-array>
 
+
+    <string-array name="preferences_device_color_themes">
+        <item>Dark</item>
+        <item>Bright</item>
+    </string-array>
+
     <string-array name="preferences_sqc_tolerance_mode">
         <item>Weight</item>
         <item>Percent</item>
@@ -353,6 +360,12 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="preferences_device_color_themes_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 
     <string-array name="preferences_sqc_tolerance_mode_values">
         <item>1</item>
