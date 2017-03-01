@@ -492,7 +492,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							ApplicationManager.getInstance().setIngrediantTotalCost(unitCost + totalCost);
 
 
-							Item measuredItem = new Item("",ApplicationManager.getInstance().getCurrentItem().getItemJson());
+							Item measuredItem = new Item(ApplicationManager.getInstance().getCurrentItem().getItemJson());
 
 
 							measuredItem.setWeight(currentWeight);

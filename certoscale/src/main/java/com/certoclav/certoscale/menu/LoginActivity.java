@@ -292,7 +292,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 						postUserLoginService.setOnTaskFinishedListener(LoginActivity.this);
 						postUserLoginService.loginUser(currentUser.getEmail(),
 								editTextPassword.getText().toString(),
-								"01234567891234567S");
+								Scale.getInstance().getSafetyKey());
 					} else {
 						showNotificationForNetworkNavigation();
 						Toast.makeText(LoginActivity.this,

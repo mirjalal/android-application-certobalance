@@ -1,5 +1,7 @@
 package com.certoclav.library.certocloud;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,8 +13,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import android.util.Log;
 
 public class GetUtil {
 
@@ -55,14 +55,10 @@ public class GetUtil {
 					conn.setRequestProperty("X-Access-Token", CloudUser.getInstance().getToken());
 					conn.setRequestProperty("X-Key", CloudUser.getInstance().getEmail());
 					conn.setRequestProperty("Content-Type", "application/json");
-				Log.e("PostUtil", "before conn.getoutputstream");
-			//	OutputStream os = conn.getOutputStream(); //if host not available this function throws unknownhostexteption
-				Log.e("PostUtil", "before os write");
-				//os.write( body.getBytes("UTF-8") );    
-				Log.e("PostUtil", "before os close");
-			//	os.close();
-				Log.e("PostUtil", "before getResponseCode");
-
+				Log.e("PostUtil", "HEADER: X-Access-Token: " + CloudUser.getInstance().getToken());
+				Log.e("PostUtil", "HEADER: X-Key: " + CloudUser.getInstance().getEmail());
+				Log.e("PostUtil", "HEADER: Content-Type: " + "application/json");
+				Log.e("PostUtil", "URL: " + urlpath);
 				
 				// read the response
 				responseCode = -1;
@@ -75,13 +71,13 @@ public class GetUtil {
 				}catch(IOException e){
 					returnval = RETURN_ERROR_UNAUTHORISED_PASSWORD;
 					//this workaround is neccessary, because server doesn't reply with WWW-Authenticate in header in case of Responsecode 401
-					Log.e("PostUtil", "error" + e.toString());	
+					Log.e("GetUtil", "error" + e.toString());
 					
 				}
-				Log.e("PostUtil", "Response code" + responseCode);	
+				Log.e("GetUtil", "Response code" + responseCode);
 				
 				responseMessage = conn.getResponseMessage();
-				Log.e("PostUtil", "Response Message: " + responseMessage);
+				Log.e("GetUtil", "Response Message: " + responseMessage);
 				
 			
 				
@@ -96,7 +92,7 @@ public class GetUtil {
 				responseBody = result.toString();
 				
 
-				Log.e("PostUtil", "Response body" + responseBody);
+				Log.e("GetUtil", "Response body" + responseBody);
 
 	        }catch(Exception e){
 	        	if(e instanceof UnknownHostException){
@@ -106,7 +102,7 @@ public class GetUtil {
 	        	}else{
 	        		
 	        	}
-	        	Log.e("ProstUtil", "Exception " + e.toString());
+	        	Log.e("GetUtil", "Exception " + e.toString());
 	        }
 	        
 	        

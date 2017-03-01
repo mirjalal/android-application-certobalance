@@ -43,16 +43,18 @@ public class Item {
 		JSONObject jsonObjectItem = new JSONObject();
 
 		try {
-			jsonObjectItem.put("name", name).put("weight", weight).put("Cost",Cost).put("artnumber",articleNumber);
+			jsonObjectItem.put("name", name).put("weight", weight).put("Cost",Cost).put("artno",articleNumber);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
 		return jsonObjectItem.toString();
 	}
 
-	public Item(String cloudId, String itemJson) {
-		this.cloudId = cloudId;
+	public Item(String itemJson) {
+
 		this.itemJson = itemJson;
+
+
 	}
 	public Item(String cloudId, String name, Double weight,Double Cost, String articleNumber) {
 		this.cloudId = cloudId;
@@ -62,13 +64,26 @@ public class Item {
 	@DatabaseField(columnName = "cloud_id")
 	private String cloudId;
 
+	public String getItemCloudId() {
+		String retVal = "";
+
+		try {
+			JSONObject recipeJson = new JSONObject(this.itemJson);
+			retVal = recipeJson.getString("_id");
+		}catch (Exception e){
+			retVal = "";
+		}
+		return retVal;
+
+	}
+
 
 	public String getItemArticleNumber() {
 		String retVal = "";
 
 		try {
 			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getString("artnumber");
+			retVal = recipeJson.getString("artno");
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -162,7 +177,7 @@ public class Item {
 
 		try {
 			JSONObject recipeJson = new JSONObject(this.itemJson);
-			recipeJson.put("artnumber",s);
+			recipeJson.put("artno",s);
 			itemJson = recipeJson.toString();
 		}catch (Exception e){
 			e.printStackTrace();

@@ -20,13 +20,14 @@
             android:layout_height="60dp"
             android:text="1300345"
             android:gravity="center_vertical"
-            style="@style/text_default"/>
+            style="@style/text_small"/>
 
         <TextView
             android:id="@+id/menu_main_item_edit_element_name"
             android:layout_width="120dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            android:maxLines="2"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="Screw" />
 
@@ -34,7 +35,7 @@
             android:id="@+id/menu_main_item_edit_element_unit_cost"
             android:layout_width="120dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="1.54" />
 
@@ -44,7 +45,7 @@
             android:id="@+id/menu_main_item_edit_element_weight"
             android:layout_width="170dp"
             android:layout_height="60dp"
-            style="@style/text_default"
+            style="@style/text_small"
             android:gravity="center_vertical"
             android:text="12.0121"/>
 
