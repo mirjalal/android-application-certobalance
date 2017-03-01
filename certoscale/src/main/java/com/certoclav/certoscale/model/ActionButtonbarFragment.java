@@ -2179,7 +2179,48 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
 
-			final Protocol protocol= new Protocol("",Scale.getInstance().getScaleApplication().toString(), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+			String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
+			switch (Scale.getInstance().getScaleApplication()){
+				case PIPETTE_ADJUSTMENT_1_HOME:
+				case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+				case PIPETTE_ADJUSTMENT_3_FINISHED:
+					scaleApplicationName = "PIPETTE ADJUSTMENT";
+					break;
+				case ANIMAL_WEIGHING:
+				case ANIMAL_WEIGHING_CALCULATING:
+					scaleApplicationName = "ANIMAL WEIGHING";
+					break;
+				case DENSITY_DETERMINATION:
+				case DENSITY_DETERMINATION_STARTED:
+					scaleApplicationName = "DENSITIY DETERMINATION";
+					break;
+				case FILLING:
+				case FILLING_CALC_TARGET:
+					scaleApplicationName = "FILLING";
+					break;
+				case FORMULATION:
+				case FORMULATION_RUNNING:
+					scaleApplicationName = "FORMULATION";
+					break;
+				case PEAK_HOLD:
+				case PEAK_HOLD_STARTED:
+					scaleApplicationName = "PEAK HOLD";
+					break;
+				case PART_COUNTING:
+				case PART_COUNTING_CALC_AWP:
+					scaleApplicationName = "PARTS COUNTING";
+					break;
+				case PERCENT_WEIGHING:
+				case PERCENT_WEIGHING_CALC_REFERENCE:
+					scaleApplicationName = "PERCENT WEIGHING";
+					break;
+				case STATISTICAL_QUALITY_CONTROL_1_HOME:
+				case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
+				case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+					scaleApplicationName = "STATISTICAL QUALITY CONTROL";
+					break;
+			}
+			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
 
 			TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
 			textView.setText(protocol.getContent());
