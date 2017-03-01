@@ -162,6 +162,8 @@ public class Protocol {
 	public void setCloudId(String cloudId) {
 		this.cloudId = cloudId;
 	}
+
+
 }
 
 

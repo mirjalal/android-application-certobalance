@@ -61,16 +61,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
 			throw new RuntimeException(e);
 		}
-		
-		
-		
-		
-		
-		
-		
-	
-	
-			
+
+
+
+
+
+
+
+
+
+
 	    
 
 	   

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
-import com.certoclav.certoscale.util.ProtocolPrinterUtils;
+import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.List;
@@ -137,7 +137,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 		actionItemPrint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ProtocolPrinterUtils protocolPrinterUtils = new ProtocolPrinterUtils();
+				ProtocolManager protocolPrinterUtils = new ProtocolManager();
 				protocolPrinterUtils.printText(getItem(position).getContent());
 				Toast.makeText(mContext,"Protocol printed", Toast.LENGTH_LONG).show();
 			}

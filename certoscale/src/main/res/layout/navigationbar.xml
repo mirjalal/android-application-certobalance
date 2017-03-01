@@ -123,11 +123,20 @@
      />
 
  <ImageButton
-     android:id="@+id/naviagationbar_button_save"
+    android:id="@+id/naviagationbar_button_save"
+    android:layout_width="80dp"
+    android:layout_height="match_parent"
+    android:layout_toLeftOf="@+id/naviagationbar_button_more"
+    android:src="@drawable/ic_menu_save"
+    style="@style/button_navigationbar_default"
+    />
+
+ <ImageButton
+     android:id="@+id/naviagationbar_button_delete"
      android:layout_width="80dp"
      android:layout_height="match_parent"
      android:layout_toLeftOf="@+id/naviagationbar_button_more"
-     android:src="@drawable/ic_menu_save"
+     android:src="@drawable/ic_menu_bin"
      style="@style/button_navigationbar_default"
      />
  

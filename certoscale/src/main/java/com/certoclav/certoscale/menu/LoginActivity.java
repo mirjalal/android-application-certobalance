@@ -470,7 +470,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			databaseService.insertItem(new Item("","Item 02",3.2345d,0.1d,"1300235"));
 
 			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
-			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 0.0f, 0.0f,5,1,1,30,0,0,0,100,0,0,new Date(),true,10.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
+			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 0.0f, 10.0f,5,1,1,30,0,0,10 ,100,0,0,new Date(),true,10.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
 
 			// Max regierstriert sich
 			databaseService.insertUser(user1);

@@ -41,6 +41,17 @@
 
 
 		<Button
+			android:id="@+id/dialog_statistics_samples_button_print"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Print"
+			style="@style/button_default"
+
+			/>
+
+
+		<Button
 			android:id="@+id/dialog_statistics_samples_button_close"
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
