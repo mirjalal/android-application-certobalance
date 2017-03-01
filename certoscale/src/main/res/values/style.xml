@@ -44,6 +44,7 @@
         <item name="android:imeOptions">actionDone</item>
     </style>
 
+
     <style name="spinner_default">
         <item name="android:background">@drawable/spinner_background_white</item>
         <item name="android:layout_margin">5dp</item>
@@ -54,6 +55,7 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_margin">5dp</item>
     </style>
+
 
     <style name="text_small">
         <item name="android:textSize">20sp</item>

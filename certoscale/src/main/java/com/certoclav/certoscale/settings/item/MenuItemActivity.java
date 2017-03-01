@@ -3,12 +3,14 @@ package com.certoclav.certoscale.settings.item;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemAdapter;
@@ -19,6 +21,9 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.GetUtil;
+import com.certoclav.library.certocloud.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +75,56 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         adapter.setOnClickButtonListener(this);
         navigationbar.setButtonEventListener(this);
         adapter.clear();
+        new AsyncTask<Boolean, Boolean, Boolean >(){
+
+            @Override
+            protected Boolean  doInBackground(Boolean... params) {
+                ArrayList<String> itemsList = new ArrayList<String>();
+                Items items = new Items();
+                Integer retval = items.getItemsFromCloud();
+                if(retval == GetUtil.RETURN_OK){
+                    if(items.getItemJsonStringArray() != null){
+                        DatabaseService db = new DatabaseService(ApplicationController.getContext());
+                        List<Item> itemsFromDb = db.getItems();
+                        List<Item> itemsFromCloud = new ArrayList<Item>();
+
+                        for(String itemJsonString : items.getItemJsonStringArray()){
+                            itemsFromCloud.add(new Item(itemJsonString));
+                        }
+                        for(Item cloudItem : itemsFromCloud){
+                            boolean cloudItemAlreadyInDb = false;
+                            for(Item dbitem : itemsFromDb){
+                                if(cloudItem.getItemCloudId().equals(dbitem.getItemCloudId())){
+                                    cloudItemAlreadyInDb = true;
+                                    continue;
+                                }
+                            }
+                            if(cloudItemAlreadyInDb == false){
+                                db.insertItem(cloudItem);
+                            }
+                        }
+
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean b) {
+                Toast.makeText(ApplicationController.getContext(), "Items updated", Toast.LENGTH_LONG);
+                DatabaseService db = new DatabaseService(ApplicationController.getContext());
+                List<Item> items = db.getItems();
+                adapter.clear();
+                if(items != null){
+                    for(Item item : items){
+                        adapter.add(item);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+                super.onPostExecute(b);
+            }
+        }.execute();
         DatabaseService db = new DatabaseService(this);
         List<Item> items = db.getItems();
         if(items != null){
