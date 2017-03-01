@@ -737,7 +737,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
 
-		Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
 		switch (Scale.getInstance().getScaleApplication()){
 

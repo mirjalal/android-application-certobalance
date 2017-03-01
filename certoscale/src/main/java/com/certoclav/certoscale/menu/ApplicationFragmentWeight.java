@@ -175,7 +175,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText( ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case ANIMAL_WEIGHING:
-                textInstruction.setText("");
+                textInstruction.setText("Press Start for a new measurement");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getAnimalWeightInGram()));
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
@@ -200,9 +200,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 }else {
                     textInstruction.setText("Press START to begin with the recipe");
                 }
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
                 break;
+
+
             case FORMULATION_RUNNING:
                 textInstruction.setText("");
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
                 break;
             case DIFFERENTIAL_WEIGHING:
                 textInstruction.setText("");
@@ -252,7 +258,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
 
-                if(cmode.equals("1")) {
+                //if(cmode.equals("1")) {
                     textInstruction.setText("");
                     textValue.setTextColor(Color.WHITE);
 
@@ -274,7 +280,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
                     textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
-                }
+                //}
                 if(cmode.equals("2")) {
 
                     textInstruction.setText("");

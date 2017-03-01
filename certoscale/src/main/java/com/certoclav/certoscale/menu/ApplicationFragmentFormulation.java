@@ -42,7 +42,10 @@ private TextView textInstruction = null;
                 currentRecipeStepIndex++;
                 ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
                 if(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size() > currentRecipeStepIndex) {
-                    ApplicationManager.getInstance().setCurrentRecipeEntry(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex));
+
+                    RecipeEntry recipeEntry = ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex);
+                    recipeEntry.setWeight(recipeEntry.getWeight()*ApplicationManager.getInstance().getScalingFactor());
+                    ApplicationManager.getInstance().setCurrentRecipeEntry(recipeEntry);
                     ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
                 }else{
                     Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
@@ -62,7 +65,9 @@ private TextView textInstruction = null;
         Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION_RUNNING);
         if(ApplicationManager.getInstance().getCurrentRecipe()!= null){
            if(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().isEmpty() == false) {
-               ApplicationManager.getInstance().setCurrentRecipeEntry(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex));
+               RecipeEntry recipeEntry = ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex);
+               recipeEntry.setWeight(recipeEntry.getWeight()*ApplicationManager.getInstance().getScalingFactor());
+               ApplicationManager.getInstance().setCurrentRecipeEntry(recipeEntry);
            }else{
                Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
 
@@ -72,7 +77,7 @@ private TextView textInstruction = null;
 
         }
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
+            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
         }
 
         super.onResume();
@@ -93,7 +98,7 @@ private TextView textInstruction = null;
     @Override
     public void onRecipeEntryChanged(RecipeEntry entry) {
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
+            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
         }
     }
 }
