@@ -433,4 +433,39 @@
     <string name="preferences_communication_socket_connected">preferences_communication_socket_connected</string>
 
 
+    <string name="SettingsButton">SETTINGS</string>
+    <string name="SettingsButtonPressed">RETURN TO APPLICATION</string>
+    <string name="New_Batch">NEW BATCH</string>
+    <string name="Add_To_Stats">ADD TO STATS</string>
+    <string name="Batch_Results_Button">RESULTS</string>
+
+    <string name="End_Batch">End Batch</string>
+    <string name="Activate_CertoCloud_Account">Activate CertoCloud Account</string>
+    <string name="Send_Activation_Key_to">"Send activation key to "</string>
+    <string name="Activate_account">Activate account</string>
+    <string name="Internal_Calibration">Internal calibration</string>
+    <string name="completed_in">"completed in: "</string>
+    <string name="Under_limit">Under limit:\n</string>
+    <string name="Over_limit">Over limit:\n</string>
+    <string name="Nominal">Nominal:\n</string>
+    <string name="Tolerance_plus">+ Tolerance:\n</string>
+    <string name="Tolerance_Minus">- Tolerance:\n</string>
+    <string name="Current_Item">Current Item:\n</string>
+    <string name="Click_to_choose_item">Click to choose item</string>
+    <string name="Place_target_weight_on_pan">Place target weight on the pan. Press OK to continue.</string>
+    <string name="Current_Recipe">Current Recipe:\n</string>
+    <string name="Scaling_factor">Scaling Factor</string>
+    <string name="Currency">"Currency: "</string>
+    <string name="Please_Enter_Num_Samples">Please enter the number of samples for the calculation of awp</string>
+    <string name="Sample_size">Sample size:</string>
+    <string name="Please_Enter_The_Under">Please enter the under limit</string>
+    <string name="Please_Enter_The_Over">Please enter the over limit</string>
+    <string name="Please_Enter_The_Target">Please enter the piece target</string>
+    <string name="Place">"Place "</string>
+    <string name="Onto_the_pan">onto the pan</string>
+    <string name="Target">Target:</string>
+    <string name="Refernce_Weight">Reference Weight \n</string>
+    <string name="Reference_Adjustment">Reference Adjustment \n</string>
+
+
 </resources>

@@ -48,9 +48,9 @@ public class ApplicationFragmentSettingsDifferentialWeighing extends Fragment {
     @Override
     public void onResume() {
         if(ApplicationManager.getInstance().getCurrentItem() != null) {
-            buttonChooseItem.setText("Current Item:\n" + ApplicationManager.getInstance().getCurrentItem().getName());
+            buttonChooseItem.setText(getString(R.string.Current_Item)+"\n" + ApplicationManager.getInstance().getCurrentItem().getName());
         }else{
-            buttonChooseItem.setText("Click to choose item");
+            buttonChooseItem.setText(R.string.Click_to_choose_item);
         }
 
 

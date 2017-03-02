@@ -30,7 +30,7 @@ public class AnimationCalibrationActivity extends Activity implements ScaleState
 
             switch(msg.arg1) {
             case DO_UPDATE_TEXT:
-            	textProgress.setText("Internal calibration\ncompleted in: " + String.format("%02d seconds", msg.arg2));	
+            	textProgress.setText(getString(R.string.Internal_Calibration)+"\n"+getString(R.string.completed_in) + String.format("%02d seconds", msg.arg2));
             	break;
             case DO_THAT: break;
             }

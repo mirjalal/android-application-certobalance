@@ -439,15 +439,15 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
 
 
-        button_under_limit.setText("Under limit:\n"+ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
-        button_over_limit.setText("Over limit:\n"+ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit());
+        button_under_limit.setText(getString(R.string.Under_limit)+ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
+        button_over_limit.setText(getString(R.string.Over_limit)+ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit());
 
-        button_nominal.setText("Nominal:\n"+ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
-        button_nominal_tolerance_over.setText("+ Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOverAsStringWithUnit());
-        button_nominal_tolerance_under.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnderAsStringWithUnit());
+        button_nominal.setText(getString(R.string.Nominal)+ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
+        button_nominal_tolerance_over.setText(getString(R.string.Tolerance_plus)+ApplicationManager.getInstance().getCheckNominalToleranceOverAsStringWithUnit());
+        button_nominal_tolerance_under.setText(getString(R.string.Tolerance_Minus)+ApplicationManager.getInstance().getCheckNominalToleranceUnderAsStringWithUnit());
 
-        button_nominal_tolerance_over_percent.setText("+ Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceOverPercent() + " %");
-        button_nominal_tolerance_under_percent.setText("- Tolerance:\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %");
+        button_nominal_tolerance_over_percent.setText(getString(R.string.Tolerance_plus)+"\n"+ApplicationManager.getInstance().getCheckNominalToleranceOverPercent() + " %");
+        button_nominal_tolerance_under_percent.setText(getString(R.string.Tolerance_Minus)+"\n"+ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

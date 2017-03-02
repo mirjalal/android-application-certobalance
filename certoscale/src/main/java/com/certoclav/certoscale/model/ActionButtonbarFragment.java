@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.model;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -449,11 +450,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAppSettings = (Button) rootView.findViewById(R.id.actionbar_button_settings);
 		buttonAppSettings.setOnClickListener(new View.OnClickListener() {
 
+			@SuppressLint("SetTextI18n")
 			@Override
 			public void onClick(View v) {
 
-				if(buttonAppSettings.getText().toString().equals("RETURN TO APPLICATION")){
-					getButtonAppSettings().setText("SETTINGS");
+				if(buttonAppSettings.getText().toString().equals(getString(R.string.SettingsButtonPressed))){
+					getButtonAppSettings().setText(R.string.SettingsButton);
 
 					switch (Scale.getInstance().getScaleApplication()){
 
@@ -466,7 +468,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 
 				}else{
-					getButtonAppSettings().setText("RETURN TO APPLICATION");
+					getButtonAppSettings().setText(getString(R.string.SettingsButtonPressed));
 				}
 
 
@@ -675,7 +677,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				ApplicationManager.getInstance().getStats().getStatistic().clear();
 
 
-				buttonNewBatch.setText("NEW BATCH");
+				buttonNewBatch.setText(R.string.New_Batch);
 				buttonAccumulate.setEnabled(false);
 				buttonShowBatch.setEnabled(true);
 				updateBatchListButtonText();
@@ -750,11 +752,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 				buttonAccumulate.setEnabled(true);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 
 
 
@@ -778,10 +780,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 
 
 				//unused Buttons
@@ -804,7 +806,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 
@@ -827,11 +829,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -853,10 +855,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				// unused Buttons
@@ -886,10 +888,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
-				buttonAccumulate.setText("ADD TO STATS");
+				buttonAccumulate.setText(R.string.Add_To_Stats);
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -912,7 +914,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 
@@ -959,7 +961,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 
 				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
@@ -971,7 +973,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonShowBatch.setEnabled(true);
 				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText("RESULTS");
+				buttonShowBatch.setText(R.string.Batch_Results_Button);
 
 				//unused Buttons
 				buttonStatistics.setVisibility(View.GONE);
@@ -1012,7 +1014,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setEnabled(true);
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -1032,7 +1034,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				if(ApplicationManager.getInstance().getCurrentItem() == null) {
@@ -1066,7 +1068,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				buttonAccept.setVisibility(View.VISIBLE);
@@ -1091,7 +1093,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				buttonAccept.setVisibility(View.VISIBLE);
@@ -1207,7 +1209,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonAccept.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
@@ -1265,11 +1267,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText("NEW BATCH");
+				buttonNewBatch.setText(R.string.New_Batch);
 				buttonShowBatch.setVisibility(View.VISIBLE);
 
 				buttonAccumulate.setEnabled(false);
@@ -1302,7 +1304,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText("END BATCH\n" + ApplicationManager.getInstance().getBatchName());
+				buttonNewBatch.setText(R.string.End_Batch+"\n" + ApplicationManager.getInstance().getBatchName());
 				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
 				buttonShowBatch.setEnabled(false);
@@ -1332,11 +1334,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText("SETTINGS");
+				buttonAppSettings.setText(R.string.SettingsButton);
 				buttonAppSettings.setEnabled(true);
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText("NEW BATCH");
+				buttonNewBatch.setText(R.string.New_Batch);
 				buttonShowBatch.setVisibility(View.VISIBLE);
 
 				buttonAccumulate.setEnabled(false);
