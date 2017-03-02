@@ -71,8 +71,6 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_ZERO = 10;
 	public static final int BUTTON_ACCEPT=11;
 	public static final int BUTTON_INGREDIANTLIST=12;
-	public static final int BUTTON_NEWBATCH=30;
-	public static final int BUTTON_SHOWBATCH=31;
 	public static final int BUTTON_HOME = 13;
 	public static final int BUTTON_SETTINGS = 14;
 	public static final int BUTTON_ADD = 15;
@@ -85,6 +83,9 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_MORE = 22;
 	public static final int BUTTON_END_BATCH=23;
 	public static final int BUTTON_DELETE=24;
+	public static final int BUTTON_NEWBATCH=30;
+	public static final int BUTTON_SHOWBATCH=31;
+
 
 
 
