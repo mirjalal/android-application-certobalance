@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialog_edit_number_container"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
     android:background="@drawable/background_gadient">
 
@@ -46,6 +46,16 @@
 			android:layout_height="50dp"
 			android:layout_weight="1"
 			android:text="Print"
+			style="@style/button_default"
+
+			/>
+
+		<Button
+			android:id="@+id/dialog_statistics_samples_button_save"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="Save"
 			style="@style/button_default"
 
 			/>

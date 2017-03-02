@@ -1866,6 +1866,81 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				}
 			});
 
+			Button dialogButtonSave = (Button) dialog.findViewById(R.id.dialog_statistics_button_save);
+			dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final DatabaseService db = new DatabaseService(ApplicationController.getContext());
+
+					try {
+						//
+						StringBuilder sb = new StringBuilder();
+						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+						sb.append("Statistics \n");
+						sb.append("Samples:       " + ApplicationManager.getInstance().getStats().getStatistic().getN() + "\n");
+						sb.append("Total:         " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum()) + "\n");
+						sb.append("Mean:          " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()) + "\n");
+						sb.append("Standard dev.: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + "\n");
+						sb.append("Minimum:       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin()) + "\n");
+						sb.append("Maximum:       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()) + "\n");
+						sb.append("Variance:      " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance()) + "\n");
+						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
+						switch (Scale.getInstance().getScaleApplication()) {
+							case WEIGHING:
+								scaleApplicationName = "WEIGHING STATISTIC";
+								break;
+							case PIPETTE_ADJUSTMENT_1_HOME:
+							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+							case PIPETTE_ADJUSTMENT_3_FINISHED:
+								scaleApplicationName = "PIPETTE ADJUSTMENT STATISTIC";
+								break;
+							case ANIMAL_WEIGHING:
+							case ANIMAL_WEIGHING_CALCULATING:
+								scaleApplicationName = "ANIMAL WEIGHING STATISTIC";
+								break;
+							case DENSITY_DETERMINATION:
+							case DENSITY_DETERMINATION_STARTED:
+								scaleApplicationName = "DENSITIY DETERMINATION STATISTIC";
+								break;
+							case FILLING:
+							case FILLING_CALC_TARGET:
+								scaleApplicationName = "FILLING STATISTIC";
+								break;
+							case FORMULATION:
+							case FORMULATION_RUNNING:
+								scaleApplicationName = "FORMULATION STATISTIC";
+								break;
+							case PEAK_HOLD:
+							case PEAK_HOLD_STARTED:
+								scaleApplicationName = "PEAK HOLD STATISTIC";
+								break;
+							case PART_COUNTING:
+							case PART_COUNTING_CALC_AWP:
+								scaleApplicationName = "PARTS COUNTING STATISTIC";
+								break;
+							case PERCENT_WEIGHING:
+							case PERCENT_WEIGHING_CALC_REFERENCE:
+								scaleApplicationName = "PERCENT WEIGHING STATISTIC";
+								break;
+							case STATISTICAL_QUALITY_CONTROL_1_HOME:
+							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
+							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+								scaleApplicationName = "STATISTICAL QUALITY CONTROL STATISTIC";
+								break;
+						}
+						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
+
+						db.insertProtocol(protocol);
+					}catch (Exception e){
+						Toast.makeText(eContext, "Couldn't save statistics", Toast.LENGTH_LONG).show();
+					}
+
+					Toast.makeText(eContext, "Statistics saved", Toast.LENGTH_LONG).show();
+				}
+			});
+
 
 			Button dialogButtonSamples = (Button) dialog.findViewById(R.id.dialog_statistics_button_samples);
 			dialogButtonSamples.setOnClickListener(new View.OnClickListener() {
@@ -1945,6 +2020,78 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(sb.toString());
 
+
+				}
+			});
+
+			Button dialogButtonSave = (Button) dialog.findViewById(R.id.dialog_statistics_samples_button_save);
+			dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+					try{
+						final DatabaseService db = new DatabaseService(ApplicationController.getContext());
+
+						StringBuilder sb = new StringBuilder();
+						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+						for (int i = 0; i < ApplicationManager.getInstance().getStats().getSamples().size(); i++) {
+							sb.append("Item " + String.format("%02d", i) + ":    " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)) + " \n");
+
+						}
+						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
+						switch (Scale.getInstance().getScaleApplication()) {
+							case WEIGHING:
+								scaleApplicationName = "WEIGHING SAMPLES";
+								break;
+							case PIPETTE_ADJUSTMENT_1_HOME:
+							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
+							case PIPETTE_ADJUSTMENT_3_FINISHED:
+								scaleApplicationName = "PIPETTE ADJUSTMENT SAMPLES";
+								break;
+							case ANIMAL_WEIGHING:
+							case ANIMAL_WEIGHING_CALCULATING:
+								scaleApplicationName = "ANIMAL WEIGHING SAMPLES";
+								break;
+							case DENSITY_DETERMINATION:
+							case DENSITY_DETERMINATION_STARTED:
+								scaleApplicationName = "DENSITIY DETERMINATION SAMPLES";
+								break;
+							case FILLING:
+							case FILLING_CALC_TARGET:
+								scaleApplicationName = "FILLING SAMPLES";
+								break;
+							case FORMULATION:
+							case FORMULATION_RUNNING:
+								scaleApplicationName = "FORMULATION SAMPLES";
+								break;
+							case PEAK_HOLD:
+							case PEAK_HOLD_STARTED:
+								scaleApplicationName = "PEAK HOLD SAMPLES";
+								break;
+							case PART_COUNTING:
+							case PART_COUNTING_CALC_AWP:
+								scaleApplicationName = "PARTS COUNTING SAMPLES";
+								break;
+							case PERCENT_WEIGHING:
+							case PERCENT_WEIGHING_CALC_REFERENCE:
+								scaleApplicationName = "PERCENT WEIGHING SAMPLES";
+								break;
+							case STATISTICAL_QUALITY_CONTROL_1_HOME:
+							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
+							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
+								scaleApplicationName = "STATISTICAL QUALITY CONTROL SAMPLES";
+								break;
+						}
+						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
+
+						db.insertProtocol(protocol);
+				}catch(Exception e){
+						Toast.makeText(eContext, "Couldn't save samples", Toast.LENGTH_SHORT).show();
+
+				}
+					Toast.makeText(eContext, "Samples save", Toast.LENGTH_SHORT).show();
 
 				}
 			});
@@ -2241,7 +2388,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(protocol.getContent());
 
-					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, "Protocol printed", Toast.LENGTH_LONG).show();
 				}
 			});
 
@@ -2250,9 +2397,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				@Override
 				public void onClick(View v) {
-
-					db.insertProtocol(protocol);
-					dialog.dismiss();
+					try {
+						db.insertProtocol(protocol);
+					}catch(Exception e){
+						Toast.makeText(getActivity(), "Couldn't save protocol", Toast.LENGTH_SHORT).show();
+					}
+						Toast.makeText(getActivity(), "Protocol saved", Toast.LENGTH_SHORT).show();
+						dialog.dismiss();
 
 				}
 			});

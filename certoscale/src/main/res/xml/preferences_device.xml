@@ -53,20 +53,35 @@
     </Preference>
 
 
+
     <ListPreference
-        android:key="@string/preferences_device_color_themes"
+        android:key="@string/preferences_device_theme"
         android:title="Color Themes"
-        android:summary="Select the color theme"
-        android:entries="@array/preferences_device_color_themes"
-        android:entryValues="@array/preferences_device_color_themes_values"
+        android:summary="Tab to choose the color theme model"
+        android:defaultValue="1"
+        android:entries="@array/preferences_device_themes_string_array"
+        android:entryValues="@array/preferences_device_themes_values"
         />
+    <!--
+    <CheckBoxPreference
+        android:key="@string/preferences_device_theme_dark"
+        android:title="Dark Theme"
+        android:defaultValue="true"
+        android:summary="Click to change to dark theme">
+    </CheckBoxPreference>
 
-
+    <CheckBoxPreference
+        android:key="@string/preferences_device_theme_bright"
+        android:title="Bright Theme"
+        android:defaultValue="false"
+        android:summary="Click to change to bright theme">
+    </CheckBoxPreference>
+        -->
 
     <CheckBoxPreference
         android:key="@string/preferences_device_bluetooth"
         android:title="@string/bluetooth_on_off"
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:summary="@string/not_connected">
     </CheckBoxPreference>
 

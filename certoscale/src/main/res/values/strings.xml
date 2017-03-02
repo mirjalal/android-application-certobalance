@@ -248,9 +248,10 @@
     <string name="preferences_device_wlan">preferences_device_wlan</string>
     <string name="preferences_device_volume">preferences_device_volume</string>
     <string name="preferences_device_brightness">preferences_device_brightness</string>
+
     <string name="preferences_device_wlan_manage">preferences_device_wlan_manage</string>
     <string name="preferences_device_bluetooth">preferences_device_bluetooth</string>
-    <string name="preferences_device_color_themes">preferences_device_color_theme</string>
+    <string name="preferences_device_theme">preferences_device_theme</string>
     <string name="preferences_device_snchronization">preferences_device_snchronization</string>
     <string name="preferences_device_language">preferences_device_language</string>
     <string-array name="navigationbar_entries">
@@ -344,6 +345,11 @@
         <item>D&amp;T AY120B</item>
     </string-array>
 
+    <string-array name="preferences_device_themes_string_array">
+        <item>Dark theme</item>
+        <item>Bright theme</item>
+    </string-array>
+
 
     <string-array name="preferences_pipette_liquid_type">
         <item>Water</item>
@@ -372,7 +378,12 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="preferences_communication_list_devices_values">
+        <string-array name="preferences_communication_list_devices_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_device_themes_values">
         <item>1</item>
         <item>2</item>
     </string-array>
