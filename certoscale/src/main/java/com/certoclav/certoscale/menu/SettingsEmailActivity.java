@@ -89,7 +89,7 @@ public class SettingsEmailActivity extends Activity{
 		navigationbar.onCreate();
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-		navigationbar.getTextTitle().setText("CONTACT SUPPORT");
+		navigationbar.getTextTitle().setText(R.string.contact_support);
 
 		buttonSend = (Button) findViewById(R.id.buttonSend);
 		spinnerSubject =  (Spinner) findViewById(R.id.email_spinner);

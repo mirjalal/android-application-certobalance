@@ -35,7 +35,7 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
         setContentView(R.layout.menu_main_unit_edit_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("EDIT UNIT");
+        navigationbar.getTextTitle().setText(R.string.edit_unit);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
@@ -45,11 +45,11 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
                 {
                     final Dialog dialog = new Dialog(SettingsUnitEditActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
-                    dialog.setTitle("Cancel without saving");
+                    dialog.setTitle(R.string.cancel_without_saving);
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText("Do you really want to  go back without saving the current unit?");
+                    text.setText(R.string.do_you_really_want_to_go_back_without_saving_unit);
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -158,19 +158,19 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
             try
             {
                 if(editTextName.getText().toString().isEmpty()){
-                    Toast.makeText(this,"Please enter the name of the unit", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.please_enter_the_name_of_the_unit, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(editTextDescription.getText().toString().isEmpty()){
-                    Toast.makeText(this,"Please enter a description of the unit", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.please_enter_a_description, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(editTextExponent.getText().toString().isEmpty()){
-                    Toast.makeText(this,"Please enter a valid exponent", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.please_enter_a_valid_exponent, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(editTextFactor.getText().toString().isEmpty()){
-                    Toast.makeText(this,"Please enter a valid factor", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.please_enter_a_valid, Toast.LENGTH_LONG).show();
                     return;
                 }
                 unit.setDescription(editTextDescription.getText().toString());
@@ -188,11 +188,11 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
 
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Confirm operation");
+                dialog.setTitle(R.string.confirm_operation);
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you really want to save the unit " + unit.getDescription() + "?");
+                text.setText(getString(R.string.do_you_really_want_to_save_the_unit) + unit.getDescription() + "?");
 
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
@@ -214,11 +214,11 @@ public class SettingsUnitEditActivity extends Activity implements ButtonEventLis
                         }
                        int retval =  db.insertUnit(unit);
                         if(retval == 1){
-                            Toast.makeText(SettingsUnitEditActivity.this,"Unit saved", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SettingsUnitEditActivity.this, R.string.unit_saved, Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                             finish();
                         }else{
-                            Toast.makeText(SettingsUnitEditActivity.this,"Saving failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SettingsUnitEditActivity.this, R.string.saving_failed, Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
 

@@ -37,7 +37,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
         setContentView(R.layout.menu_main_item_edit_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("EDIT ITEMS");
+        navigationbar.getTextTitle().setText(R.string.edit_items_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
@@ -47,11 +47,11 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
                 {
                     final Dialog dialog = new Dialog(MenuItemEditActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
-                    dialog.setTitle("Cancel without saving");
+                    dialog.setTitle(R.string.cancel_without_saving);
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText("Do you really want to  go back without saving the current item?");
+                    text.setText(R.string.do_you_really_want_to_go_back);
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -137,11 +137,11 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             {
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Confirm operation");
+                dialog.setTitle(R.string.confirm_operation);
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you really want to save the item? " + adapter.getItem(0).getName());
+                text.setText(getString(R.string.do_you_really_want_to_save_the_itm) + adapter.getItem(0).getName());
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 

@@ -176,8 +176,8 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText(getString(R.string.Refernce_Weight)+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
-        buttonReferenceAdjust.setText(getString(R.string.Reference_Adjustment)+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
+        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
+        buttonReferenceAdjust.setText(getString(R.string.reference_adjustment)+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 
 

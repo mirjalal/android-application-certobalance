@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">certoscale</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="activate_CertoCloud_account">CertoCloud Account aktivieren</string>
+    <string name="activate_account">Account aktivieren</string>
+    <string name="and_press_accept">und drücken Sie akzeptieren</string>
+    <string name="app_animal_weighing">Dynamisches Wägen</string>
+    <string name="app_check_weighing">Kontrollwägen</string>
+    <string name="app_density_determination">Dichtebestimmung</string>
+    <string name="app_differential_weighing">Differenzialwägen</string>
+    <string name="app_filling">Füllen</string>
+    <string name="app_formulation">Rezeptur</string>
+    <string name="app_ingrediant_costing">Kostenberechnung der Zutaten</string>
+    <string name="app_not_weighing">nicht Wägen</string>
+    <string name="app_part_counting">Stückzählung</string>
+    <string name="app_peak_hold">Spitzenwert halten</string>
+    <string name="app_percent_weighing">Prozentwägen</string>
+    <string name="app_pipette_adjustment">Pipettenabglleich</string>
+    <string name="app_statistical_quality_control">Statistische Qualitätskontrolle</string>
+    <string name="app_totalization">Summieren</string>
+    <string name="app_weighing">Wägen</string>
+</resources>

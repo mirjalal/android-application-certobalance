@@ -85,7 +85,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 	@Override
 	public void onItemSelected(long id) {
 		try {
-			navigationbar.getTextTitle().setText(settingsEntriesList.get((int) id).toUpperCase() + " SETTINGS");
+			navigationbar.getTextTitle().setText(settingsEntriesList.get((int) id).toUpperCase() + R.string.settings);
 		}catch (Exception e){
 
 		}

@@ -60,24 +60,24 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 
 		switch (Scale.getInstance().getState()){
 			case ON_AND_CALIBRATING:
-				textNotificationHead.setText("NOTIFICATION");
-				tv.setText("Calibrating...");
+				textNotificationHead.setText(R.string.notification_capitalized);
+				tv.setText(R.string.calibrating);
 				break;
 			case CABLE_NOT_CONNECTED:
-				textNotificationHead.setText("WARNING");
-				tv.setText("Please plug in the touchscreen and power on the balance.");
+				textNotificationHead.setText(R.string.warning);
+				tv.setText(R.string.please_plug_in_the_touchscreen_and_power_on);
 				break;
 			case ON_AND_MODE_NOT_GRAM:
-				textNotificationHead.setText("NOTIFICATION");
-				tv.setText("Selftest");
+				textNotificationHead.setText(R.string.notification_capitalized);
+				tv.setText(R.string.selftest);
 				break;
 			case DISCONNECTED:
-				textNotificationHead.setText("WARNING");
-				tv.setText("Touchscreen disconnected");
+				textNotificationHead.setText(R.string.warning);
+				tv.setText(R.string.touchscreen_disconnected);
 				break;
 			case OFF:
-				textNotificationHead.setText("WARNING");
-				tv.setText("Balance is powered OFF");
+				textNotificationHead.setText(R.string.warning);
+				tv.setText(R.string.balance_power_off);
 				break;
 			default:
 				finish();

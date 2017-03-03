@@ -56,64 +56,64 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 
 		switch (getItem(position)){
 			case WEIGHING:
-				textMail.setText("Weighing");
+				textMail.setText(R.string.app_weighing);
 				imageApp.setImageResource(R.drawable.ic_menu_weighing);
 				break;
 			case PART_COUNTING:
-				textMail.setText("Part Counting");
+				textMail.setText(R.string.app_part_counting);
 				imageApp.setImageResource(R.drawable.application_icon_partcounting);
 				break;
 			case PERCENT_WEIGHING:
-				textMail.setText("Percent Weighing");
+				textMail.setText(R.string.app_percent_weighing);
 				imageApp.setImageResource(R.drawable.application_icon_percent);
 				break;
 			case CHECK_WEIGHING:
-				textMail.setText("Check Weighing");
+				textMail.setText(R.string.app_check_weighing);
 				imageApp.setImageResource(R.drawable.application_icon_check);
 				break;
 			case ANIMAL_WEIGHING:
-				textMail.setText("Animal Weighing");
+				textMail.setText(R.string.app_animal_weighing);
 				imageApp.setImageResource(R.drawable.application_icon_animal);
 				break;
 			case FILLING:
-				textMail.setText("Filling");
+				textMail.setText(R.string.app_filling);
 				imageApp.setImageResource(R.drawable.application_icon_filling);
 				break;
 			case TOTALIZATION:
-				textMail.setText("Totalization");
+				textMail.setText(R.string.app_totalization);
 				imageApp.setImageResource(R.drawable.application_icon_totalization);
 				break;
 			case FORMULATION:
-				textMail.setText("Formulation");
+				textMail.setText(R.string.app_formulation);
 				imageApp.setImageResource(R.drawable.application_icon_formula2);
 				break;
 			case DIFFERENTIAL_WEIGHING:
-				textMail.setText("Differential Weighing");
+				textMail.setText(R.string.app_differential_weighing);
 				imageApp.setImageResource(R.drawable.application_icon_differential);
 				break;
 			case DENSITY_DETERMINATION:
-				textMail.setText("Density Determination");
+				textMail.setText(R.string.app_density_determination);
 				imageApp.setImageResource(R.drawable.application_icon_density);
 				break;
 			case PEAK_HOLD:
-				textMail.setText("Peak Hold");
+				textMail.setText(R.string.app_peak_hold);
 				imageApp.setImageResource(R.drawable.application_icon_peak_hold);
 				break;
 			case INGREDIENT_COSTING:
-				textMail.setText("Ingrediant Costing");
+				textMail.setText(R.string.app_ingrediant_costing);
 				imageApp.setImageResource(R.drawable.application_icon_costing);
 				break;
 			case PIPETTE_ADJUSTMENT_1_HOME:
-				textMail.setText("Pipette Adjustment");
+				textMail.setText(R.string.app_pipette_adjustment);
 				imageApp.setImageResource(R.drawable.application_icon_pipette);
 				break;
 			case STATISTICAL_QUALITY_CONTROL_1_HOME:
-				textMail.setText("Statistical Quality Control");
+				textMail.setText(R.string.app_statistical_quality_control);
 				imageApp.setImageResource(R.drawable.application_icon_statistic2);
 				break;
 
 			default:
-				textMail.setText("Not weighing");
+				textMail.setText(R.string.app_not_weighing);
 				imageApp.setImageResource(R.drawable.ic_launcher);
 		}
 

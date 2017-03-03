@@ -159,7 +159,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		setContentView(R.layout.login_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText("LOGIN MENU");
+		navigationbar.getTextTitle().setText(R.string.login_menu);
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
@@ -184,7 +184,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		if (AppConstants.IS_IO_SIMULATED == true) {
 
 			textSimulationMode.setTextColor(Color.YELLOW);
-			textSimulationMode.setText("Simulation Mode");
+			textSimulationMode.setText(R.string.simulation_mode);
 
 
 		}else{

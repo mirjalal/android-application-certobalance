@@ -99,12 +99,12 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
     @Override
     public void onResume() {
         if(ApplicationManager.getInstance().getCurrentRecipe() != null) {
-            buttonRecipe.setText(getString(R.string.Current_Recipe) + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+            buttonRecipe.setText(getString(R.string.current_recipe) + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
         }else{
-            buttonRecipe.setText(R.string.Click_to_choose_item);
+            buttonRecipe.setText(R.string.click_to_choose_item);
         }
 
-       buttonScalingFactor.setText(getString(R.string.Scaling_factor)+"\n"+ApplicationManager.getInstance().getScalingFactor());
+       buttonScalingFactor.setText(getString(R.string.scaling_factor)+"\n"+ApplicationManager.getInstance().getScalingFactor());
 
 
         super.onResume();

@@ -41,7 +41,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("EDIT RECIPE");
+        navigationbar.getTextTitle().setText(R.string.edit_recipe_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,11 +50,11 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                 {
                     final Dialog dialog = new Dialog(MenuRecipeEditActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
-                    dialog.setTitle("Cancel without saving");
+                    dialog.setTitle(R.string.cancel_without_saving);
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText("Do you really want to  go back without saving the current resipe?");
+                    text.setText(R.string.do_you_really_want_to_go_back_without_saving_recipe);
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -185,11 +185,11 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
             {
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Confirm deletion");
+                dialog.setTitle(R.string.confirm_deletion);
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you really want to save the recipe?");
+                text.setText(R.string.do_you_really_want_to_save_the_recipe);
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 

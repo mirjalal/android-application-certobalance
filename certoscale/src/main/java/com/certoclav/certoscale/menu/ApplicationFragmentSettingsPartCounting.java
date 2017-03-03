@@ -108,7 +108,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle(R.string.Please_Enter_Num_Samples);
+                    dialog.setTitle(R.string.please_enter_num_samples);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
@@ -158,7 +158,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle(R.string.Please_Enter_The_Under);
+                    dialog.setTitle(R.string.please_enter_the_under);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
@@ -208,7 +208,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle(R.string.Please_Enter_The_Over);
+                    dialog.setTitle(R.string.please_enter_the_over);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
@@ -256,7 +256,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle(R.string.Please_Enter_The_Target);
+                    dialog.setTitle(R.string.please_enter_the_target);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
@@ -310,7 +310,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 button_under_limit.setEnabled(false);
                 button_over_limit.setEnabled(false);
                 button_target.setEnabled(false);
-                textInstruction.setText(getString(R.string.Place) + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + getString(R.string.Onto_the_pan));
+                textInstruction.setText(getString(R.string.place) + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + getString(R.string.onto_the_pan));
                 textInstruction.setVisibility(View.VISIBLE);
                 Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
                 a.reset();
@@ -365,9 +365,9 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
     public void onResume() {
         super.onResume();
         buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit());
-        buttonEditSampleSize.setText(getString(R.string.Sample_size)+"\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-        button_under_limit.setText(R.string.Under_limit+"\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
-        button_over_limit.setText(R.string.Over_limit+"\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
+        buttonEditSampleSize.setText(getString(R.string.sample_size)+"\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
+        button_under_limit.setText(R.string.under_limit+"\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
+        button_over_limit.setText(R.string.over_limit+"\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -390,7 +390,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
             button_under_limit.setVisibility(View.INVISIBLE);
             button_over_limit.setVisibility(View.INVISIBLE);
             button_target.setVisibility(View.VISIBLE);
-            button_target.setText(getString(R.string.Target)+"\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
+            button_target.setText(getString(R.string.target)+"\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
         }
 
     }

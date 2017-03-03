@@ -47,7 +47,7 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("ITEMS");
+        navigationbar.getTextTitle().setText(R.string.items_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_item_edit_list);
 

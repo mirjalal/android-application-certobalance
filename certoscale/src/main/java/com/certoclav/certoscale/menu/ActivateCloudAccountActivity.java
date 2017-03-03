@@ -54,7 +54,7 @@ public class ActivateCloudAccountActivity extends Activity {
 		Navigationbar navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-		navigationbar.getTextTitle().setText(R.string.Activate_CertoCloud_Account);
+		navigationbar.getTextTitle().setText(R.string.activate_CertoCloud_account);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 
 		linEditTextItemContainer = (LinearLayout) findViewById(R.id.register_container_edit_text_items);
@@ -88,7 +88,7 @@ public class ActivateCloudAccountActivity extends Activity {
 
 
 		buttonResendActivationKey = (Button) findViewById(R.id.register_button_resend_mail);
-		buttonResendActivationKey.setText(getString(R.string.Send_Activation_Key_to) + Scale.getInstance().getUser().getEmail());
+		buttonResendActivationKey.setText(getString(R.string.send_activation_key_to) + Scale.getInstance().getUser().getEmail());
 		buttonResendActivationKey.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -136,7 +136,7 @@ public class ActivateCloudAccountActivity extends Activity {
 			}
 		});
 		buttonActivateAccount = (Button) findViewById(R.id.register_button_activate);
-		buttonActivateAccount.setText(R.string.Activate_account);
+		buttonActivateAccount.setText(R.string.activate_account);
 
 		buttonActivateAccount.setOnClickListener(new OnClickListener() {
 
