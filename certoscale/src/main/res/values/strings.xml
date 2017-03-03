@@ -619,6 +619,7 @@
     <string name="app_pipette_adjustment">Pipette Adjustment</string>
     <string name="app_statistical_quality_control">Statistical Quality Control</string>
     <string name="app_not_weighing">Not weighing</string>
+    <string name="please_enter_the_average_piece_weight">Please enter the average piece weight</string>
 
 
 </resources>

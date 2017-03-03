@@ -302,7 +302,7 @@ public class ApplicationFragmentSettingsSQC extends Fragment {
 
     @Override
     public void onResume() {
-        buttonNominal.setText(R.string.nominal +"\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal()));
+        buttonNominal.setText(getString(R.string.nominal)+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal()));
         buttonPTolerance1.setText(getString(R.string.tolerance_plus_1)+"\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance1()));
         buttonPTolerance2.setText(getString(R.string.tolerance_plus_2) +"\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCpTolerance2()));
         buttonNTolerance1.setText(getString(R.string.tolerance_minus_1) + "\n"+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentLibrary().getSQCnTolerance1()));

@@ -112,7 +112,7 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
             buttonCurrency.setText(R.string.currency);
         }
         else{
-            buttonCurrency.setText(R.string.currency+ ApplicationManager.getInstance().getCurrency());
+            buttonCurrency.setText(getString(R.string.currency)+ ApplicationManager.getInstance().getCurrency());
         }
 
         super.onResume();

@@ -58,7 +58,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                        dialog.setTitle("Please enter the average piece weight");
+                        dialog.setTitle(R.string.please_enter_the_average_piece_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -366,8 +366,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         super.onResume();
         buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit());
         buttonEditSampleSize.setText(getString(R.string.sample_size)+"\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-        button_under_limit.setText(R.string.under_limit+"\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
-        button_over_limit.setText(R.string.over_limit+"\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
+        button_under_limit.setText(getString(R.string.under_limit)+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
+        button_over_limit.setText(getString(R.string.over_limit)+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());

@@ -453,7 +453,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
     @Override
     public void onResume() {
 
-        buttonNominal.setText(R.string.nominal+ "\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
+        buttonNominal.setText(getString(R.string.nominal)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
 
         buttonInaccuracy.setText(getString(R.string.inaccuracy)+"\n" +String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+ " %");
         buttonImprecision.setText(getString(R.string.imprecision)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %" );
