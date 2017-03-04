@@ -61,6 +61,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 
 
+
 	public static final int BUTTON_TARA = 3;
 	public static final int BUTTON_CAL = 4;
 	public static final int BUTTON_PROTOCOL = 5;
