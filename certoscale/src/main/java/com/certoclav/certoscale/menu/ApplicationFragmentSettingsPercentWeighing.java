@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.menu;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -172,10 +173,11 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText("Reference Weight \n"+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
-        buttonReferenceAdjust.setText("Reference Adjustment \n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
+        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
+        buttonReferenceAdjust.setText(getString(R.string.reference_adjustment)+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 
 

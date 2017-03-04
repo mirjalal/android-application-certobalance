@@ -64,6 +64,26 @@ public class Items {
 		return success;
 		
 	}
+
+	public int addItemToCloud(){
+		Integer success = 0;
+
+		try{
+
+			if(CloudUser.getInstance().isLoggedIn() ==false){
+				return GetUtil.RETURN_ERROR;
+			}
+
+			GetUtil getUtil = new GetUtil();
+
+
+
+		}catch (Exception e) {
+			return GetUtil.RETURN_ERROR;
+		}
+
+		return success;
+	}
 	
 	
 

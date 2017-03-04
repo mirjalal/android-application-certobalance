@@ -9,7 +9,7 @@
     <color name="orange">#FF8000</color>
     <color name="button_green">#10a54a</color>
 
-
+    <!--<color name="black_temp">#FFFFFF</color>-->
     <color name="black_temp">#000000</color>
     <color name="white">#ffffff</color>
     <color name="bg_gradient_start">#31244e</color>

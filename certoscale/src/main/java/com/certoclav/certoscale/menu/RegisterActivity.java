@@ -336,7 +336,7 @@ private EditTextItem editLastName;
 				editMobile.setText(user.getMobile());
 				editFirstName.setText(user.getFirstName());
 				editLastName.setText(user.getLastName());		
-				buttonRegister.setText("Apply changes");
+				buttonRegister.setText(R.string.apply_changes);
 				if(user.getIsAdmin()){
 					isEditingAdminAccount = true;
 				}else{
@@ -348,8 +348,8 @@ private EditTextItem editLastName;
 				
 			}
 		}else{
-			buttonRegister.setText("Register");
-			navigationbar.getTextTitle().setText("REGISTER NEW USER");
+			buttonRegister.setText(R.string.register);
+			navigationbar.getTextTitle().setText(R.string.register_new_user);
 			editEmailItem.setVisibility(View.VISIBLE);
 			editEmailItem.setEnabled(true);
 			editEmailItem.setFocusable(true);

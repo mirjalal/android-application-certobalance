@@ -336,15 +336,6 @@ protected void onPause() {
 
 
 
-
-
-
-
-				Toast.makeText(ApplicationActivity.this, "Protool printed: ", Toast.LENGTH_LONG).show();
-				//Toast.makeText(ApplicationActivity.this, "Label printed: ", Toast.LENGTH_LONG).show();
-				//Print current weight to label printer connected on COM 2
-				//LabelPrinterUtils.printText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit(),1);
-
 				break;
 			case ActionButtonbarFragment.BUTTON_SETTINGS:
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);

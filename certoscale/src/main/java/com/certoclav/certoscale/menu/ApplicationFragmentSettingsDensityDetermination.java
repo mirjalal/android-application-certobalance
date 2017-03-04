@@ -110,7 +110,8 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the liquid density");
+
+                    dialog.setTitle(R.string.please_enter_the_liquid_density);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" g/cm³");
                     // set the custom dialog components - text, image and button
 
@@ -157,7 +158,7 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the Sinker Volume");
+                    dialog.setTitle(R.string.please_enter_sinker_volume);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" ml");
                     // set the custom dialog components - text, image and button
 
@@ -205,7 +206,7 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the oil density");
+                    dialog.setTitle(R.string.please_enter_oil_density);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" g/cm³");
                     // set the custom dialog components - text, image and button
 
@@ -294,13 +295,13 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
         }
 
 
-        buttonWaterTemp.setText("Water Temperature\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
+        buttonWaterTemp.setText(getString(R.string.water_temperature)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
 
-        buttonLiquid.setText(("Liquid Density\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+" g/cm³" ));
+        buttonLiquid.setText((getString(R.string.liquid_density)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+" g/cm³" ));
 
-        buttonSinkerVolume.setText("Sinker Volume\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume())+" ml" );
+        buttonSinkerVolume.setText(getString(R.string.sinker_volume)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume())+" ml" );
 
-        buttonOilDensity.setText("Oil Density\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getOilDensity())+" g/cm³" );
+        buttonOilDensity.setText(getString(R.string.oil_density)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getOilDensity())+" g/cm³" );
         //buttonWaterTemp.setText("Water Temperature\n"+ String.format("%.8f",ApplicationManager.getInstance().WaterTempInDensity(30.5))+" °C" );
         super.onResume();
 

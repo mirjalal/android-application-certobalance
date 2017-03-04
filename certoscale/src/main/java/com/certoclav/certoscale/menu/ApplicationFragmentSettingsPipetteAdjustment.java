@@ -57,7 +57,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the nominal pipette capacity in ml");
+                    dialog.setTitle(R.string.please_enter_normal_pipette);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("ml");
                     // set the custom dialog components - text, image and button
 
@@ -250,7 +250,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the pressure");
+                    dialog.setTitle(R.string.please_enter_the_pressure);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("ATM");
                     // set the custom dialog components - text, image and button
 
@@ -452,16 +452,18 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
 
     @Override
     public void onResume() {
-        buttonNominal.setText("Nominal \n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
-        buttonInaccuracy.setText("Inacurracy\n" +String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+ " %");
-        buttonImprecision.setText("Imprecision\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %" );
-        buttonWaterTemp.setText("Water Temperature\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+ " °C");
-        buttonPressure.setText("Pressure\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
 
-        buttonPipettename.setText("Pipette Name\n"+ApplicationManager.getInstance().getPipette_name());
-        buttonPipettenumber.setText("Pipette Number\n"+ApplicationManager.getInstance().getPipette_number());
+        buttonNominal.setText(getString(R.string.nominal)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
 
-        buttonNumberofSamples.setText("Number of Samples\n"+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples());
+        buttonInaccuracy.setText(getString(R.string.inaccuracy)+"\n" +String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+ " %");
+        buttonImprecision.setText(getString(R.string.imprecision)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %" );
+        buttonWaterTemp.setText(getString(R.string.water_temp)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+ " °C");
+        buttonPressure.setText(getString(R.string.pressure)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
+
+        buttonPipettename.setText(getString(R.string.pipett_name) + "\n"+ApplicationManager.getInstance().getPipette_name());
+        buttonPipettenumber.setText(getString(R.string.pipette_number)+ "\n"+ApplicationManager.getInstance().getPipette_number());
+
+        buttonNumberofSamples.setText(getString(R.string.number_of_samples)+ "\n"+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples());
         super.onResume();
 
 

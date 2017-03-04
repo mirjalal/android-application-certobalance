@@ -57,7 +57,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("PROTOCOLS");
+        navigationbar.getTextTitle().setText(R.string.protocols_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonDelete().setVisibility(View.VISIBLE);
 
@@ -156,7 +156,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                         final Dialog dialog = new Dialog(this);
                         dialog.setContentView(R.layout.dialog_yes_no);
                         dialog.setTitle("Delete all");
-                        ((TextView)dialog.findViewById(R.id.text)).setText("Do you really want to delete all protocols?");
+                        ((TextView)dialog.findViewById(R.id.text)).setText(R.string.do_you_really_want_to_delete_all_protocols);
                         // set the custom dialog components - text, image and button
 
 

@@ -57,7 +57,7 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
         navigationbar.getButtonHome().setVisibility(View.GONE);
         navigationbar.getSpinnerLib().setVisibility(View.GONE);
         navigationbar.getSpinnerMode().setVisibility(View.GONE);
-        navigationbar.getTextTitle().setText("USER SETTINGS");
+        navigationbar.getTextTitle().setText(R.string.user_settings_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_user_list);
 

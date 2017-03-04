@@ -103,16 +103,16 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
     @Override
     public void onResume() {
         if(ApplicationManager.getInstance().getCurrentItem() != null) {
-            buttonRecipe.setText("Current Item:\n" + ApplicationManager.getInstance().getCurrentItem().getName());
+            buttonRecipe.setText(R.string.current_item+"\n" + ApplicationManager.getInstance().getCurrentItem().getName());
         }else{
-            buttonRecipe.setText("Click to choose item");
+            buttonRecipe.setText(R.string.click_to_choose_item);
         }
 
         if(ApplicationManager.getInstance().getCurrency() == null){
-            buttonCurrency.setText("Currency: ");
+            buttonCurrency.setText(R.string.currency);
         }
         else{
-            buttonCurrency.setText("Currency: " + ApplicationManager.getInstance().getCurrency());
+            buttonCurrency.setText(getString(R.string.currency)+ ApplicationManager.getInstance().getCurrency());
         }
 
         super.onResume();

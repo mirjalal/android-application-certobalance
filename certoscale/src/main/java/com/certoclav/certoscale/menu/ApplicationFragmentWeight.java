@@ -164,7 +164,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ANIMAL_WEIGHING_CALCULATING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText("calculating...");
+                textValue.setText(R.string.calculating);
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
 
@@ -175,30 +175,30 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText( ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case ANIMAL_WEIGHING:
-                textInstruction.setText("Press Start for a new measurement");
+                textInstruction.setText(R.string.press_start_for_a_new_measuremnt);
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getAnimalWeightInGram()));
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             case PART_COUNTING_CALC_AWP:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-                textSum.setText("TARED WEIGHT: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.tared_weight_capitalized).toString()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
             case PART_COUNTING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText(getString(R.string.sum_capitalized)+(": ") + ApplicationManager.getInstance().getSumAsStringWithUnit());
 
                 break;
             case FORMULATION:
                 if(ApplicationManager.getInstance().getCurrentRecipe()==null){
-                textInstruction.setText("Click SETTINGS and choose a recipe first");
+                textInstruction.setText(R.string.click_settings_and_choose_a_recipe);
                 }else {
-                    textInstruction.setText("Press START to begin with the recipe");
+                    textInstruction.setText(R.string.press_start_to_begin_recipe);
                 }
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
@@ -223,7 +223,8 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         textValue.setTextColor(Color.YELLOW);
                     }
                 }
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+
+                textSum.setText("SUM: " +  ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case PERCENT_WEIGHING:
@@ -279,7 +280,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     }
 
 
-                    textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                    textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
                 //}
                 if(cmode.equals("2")) {
 
@@ -288,12 +289,12 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                     if (current<under){
                         textValue.setTextColor(Color.RED);
-                        textValue.setText("Value too low");
+                        textValue.setText(R.string.value_too_low);
                     }
 
                     if (current>over){
                         textValue.setTextColor(Color.RED);
-                        textValue.setText("Value too high");
+                        textValue.setText(R.string.value_too_high);
                     }
 
                     if (current>=under && current<=over){
@@ -322,7 +323,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                 if (ApplicationManager.getInstance().getDensity_step_counter()==0){
                     textValue.setTextColor(Color.WHITE);
-                    textValue.setText("Press Start");
+                    textValue.setText(R.string.press_start);
 
                 }
                 if(ApplicationManager.getInstance().getDensity_step_counter()==1) {
@@ -330,9 +331,9 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     //textSum.setTextColor(Color.YELLOW);
 
-                    textInstruction.setText("Weigh sample in air and press accept");
+                    textInstruction.setText(R.string.weigh_sample_in_air);
                     if (densitymode.equals("2") || densitymode.equals("3")){
-                        textInstruction.setText("Weigh sinker in air and press accept");
+                        textInstruction.setText(R.string.weigh_sinker_in_air);
                     }
                 }
 
@@ -340,19 +341,19 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     //textSum.setTextColor(Color.YELLOW);
-                    textInstruction.setText("Weigh sample in liquid and press accept");
+                    textInstruction.setText(R.string.weigh_sample_in_liquid);
                     if (densitymode.equals("2")){
-                        textInstruction.setText("Weigh sample in liquid (push the sample under water) and press accept");
+                        textInstruction.setText(R.string.weigh_sample_in_liquid_push);
                     }
 
                     if(densitymode.equals("3")){
-                        textInstruction.setText("Weigh the sinker in liquid and press accept");
+                        textInstruction.setText(R.string.weigh_sinker_in_liquid);
                     }
                 }
                 if (ApplicationManager.getInstance().getDensity_step_counter()==4){
                     textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    textInstruction.setText("Weigh sinker in liquid and press accept");
+                    textInstruction.setText(R.string.weigh_sinker_in_liquid_and);
 
                 }
 
@@ -402,10 +403,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     ApplicationManager.getInstance().setDensity(density);
                     //textSum.setTextColor(Color.YELLOW);
                     if (densitymode.equals("1")) {
-                        textInstruction.setText("Density calculated");
+                        textInstruction.setText(R.string.density_calculated);
                     }
                     if (densitymode.equals("2")) {
-                        textInstruction.setText("Density of the liquid calculated");
+                        textInstruction.setText(R.string.density_of_liquid_calculated);
                     }
                 }
                 break;
@@ -416,7 +417,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
-                textInstruction.setText("Fill Status: " + ApplicationManager.getInstance().getPercentFilling()+" %");
+                textInstruction.setText(getString(R.string.fill_status) + ApplicationManager.getInstance().getPercentFilling()+" %");
 
                 loadingbarnormal=false;
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
@@ -453,9 +454,9 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case TOTALIZATION:
                 Boolean isAutoSampleMode = prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode),getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode));
                 if(isAutoSampleMode){
-                    textInstruction.setText("Automatic sample mode ON. Samples will be added automatically.");
+                    textInstruction.setText(R.string.automatic_sample_mode_on);
                 }else{
-                    textInstruction.setText("Manual mode ON. Press ADD TO STATS to add to the total.");
+                    textInstruction.setText(R.string.manual_mode_on);
                 }
 
                 textValue.setTextColor(Color.WHITE);
@@ -474,16 +475,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 }
 
                 if (PeakHoldMode.equals("3")) {
-                    textInstruction.setText("Automatic mode");
+                    textInstruction.setText(R.string.automatic_moce);
                 }else if (PeakHoldMode.equals("2")) {
-                    textInstruction.setText("Semi automatic mode");
+                    textInstruction.setText(R.string.semi_automatic_mode);
                 }else{
-                    textInstruction.setText("Manual mode");
+                    textInstruction.setText(R.string.manual_mode);
                 }
                 if(stableonly){
-                    textInstruction.append(", apply stable weights.");
+                    textInstruction.append(getString(R.string.apply_stable_weights));
                 }else{
-                    textInstruction.append(", apply higher weights.");
+                    textInstruction.append(getString(R.string.apply_higher_weights));
                 }
 
 
@@ -520,14 +521,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
-                    textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textSum.setText(getString(R.string.netto)+": "+  ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+
                 break;
 
             case PEAK_HOLD:
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText("Press Start");
+                textValue.setText(R.string.press_start);
+
                 //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText("NETTO: " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.netto)+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
@@ -543,7 +546,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case STATISTICAL_QUALITY_CONTROL_1_HOME:
-                textInstruction.setText("Press NEW BATCH to creat a new batch");
+                textInstruction.setText(R.string.press_new_batch);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText("");
@@ -559,7 +562,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-                textInstruction.setText("Press NEW BATCH to creat a new batch");
+                textInstruction.setText(R.string.press_new_batch);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText("");
@@ -568,7 +571,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case PIPETTE_ADJUSTMENT_1_HOME:
 
-                textInstruction.setText("Place container on the pan and press START");
+                textInstruction.setText(R.string.place_container_on_the_pan);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
@@ -578,7 +581,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 
-                textInstruction.setText("Dispense sample number" + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+"and press ACCEPT");
+                textInstruction.setText(getString(R.string.dispense_sample_number) + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+getString(R.string.and_press_accept));
 
 
                 textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
@@ -587,7 +590,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case PIPETTE_ADJUSTMENT_3_FINISHED:
-                textInstruction.setText("Pipette Adjustment finished. Press Start to start again.");
+                textInstruction.setText(R.string.pipette_adjustment_finisihed);
 
 
                 textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");

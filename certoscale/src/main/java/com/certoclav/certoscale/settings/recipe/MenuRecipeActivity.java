@@ -50,7 +50,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("RECIPES");
+        navigationbar.getTextTitle().setText(R.string.recipes_capitalized);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
@@ -127,7 +127,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
 
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Confirm deletion");
+                dialog.setTitle(R.string.confirm_deletion);
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);

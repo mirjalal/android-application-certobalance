@@ -107,7 +107,7 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
                 Scale.getInstance().setScaleApplication(ScaleApplication.FILLING_CALC_TARGET); //problem
                 buttonCalculateTarget.setEnabled(false);
                 button_target.setEnabled(false);
-                textInstruction.setText("Place target weight on the pan. Press OK to continue.");
+                textInstruction.setText(R.string.place_target_weight_on_pan);
                 textInstruction.setVisibility(View.VISIBLE);
                 Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
                 a.reset();

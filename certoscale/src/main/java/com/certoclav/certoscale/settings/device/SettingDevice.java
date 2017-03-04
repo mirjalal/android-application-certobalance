@@ -13,6 +13,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -61,6 +62,8 @@ private SharedPreferences prefs = null;
         addPreferencesFromResource(R.xml.preferences_device);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+
 
 
         //Language
@@ -282,12 +285,21 @@ private SharedPreferences prefs = null;
     @Override
     public void onResume() {
 
+
+
+        /*
+        //INIT DEVICE SETTING
+        String key = "preferences_device_themes";
+        Preference devicePref = findPreference(key);
+        devicePref.setSummary(getResources().getStringArray(R.array.preferences_device_themes_string_array)[Integer.parseInt(prefs.getString(key, ""))-1]);
+        */
+
         //Display Language
 
         ((Preference) findPreference(getString(R.string.preferences_device_language))).setSummary(String.format("%s (%s)", toTitleCase(Locale.getDefault().getDisplayLanguage()), toTitleCase(Locale.getDefault().getDisplayCountry())));
 
 
-//show date and time
+        //show date and time
 
         // get the current date and time
         final Calendar c = Calendar.getInstance();
@@ -439,6 +451,20 @@ private SharedPreferences prefs = null;
 
             }
 
+        }
+
+        if(key.equals(getString(R.string.preferences_device_theme))){
+            String theme = prefs.getString(getString(R.string.preferences_device_theme), "1");
+            if (theme.equals("1")){
+                //Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
+
+            }
+            if (theme.equals("2")){
+                //Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
+
+            }
+
+            //Toast.makeText(getActivity(),"3",Toast.LENGTH_LONG).show();
         }
     };
 
