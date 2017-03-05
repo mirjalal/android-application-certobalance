@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -96,7 +97,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
-		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
+		editTextArticleNumber.setText(getItem(position).getArticleNumber());
 
 		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());
@@ -104,7 +105,12 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		TextView editUnitCost =  (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_unit_cost);
 		editUnitCost.setText(String.format(Locale.US,"%.2f",getItem(position).getCost()));
 
-
+		ImageView imageCloud = (ImageView)  convertView.findViewById(R.id.menu_main_item_image_cloud);
+		if(getItem(position).getCloudId().isEmpty()){
+			imageCloud.setImageResource(R.drawable.cloud_no_white);
+		}else{
+			imageCloud.setImageResource(R.drawable.cloud_ok_white);
+		}
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
 		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ "g");

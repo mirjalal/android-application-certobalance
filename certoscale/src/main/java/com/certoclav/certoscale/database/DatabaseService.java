@@ -197,7 +197,11 @@ public class DatabaseService {
 		try {
 
 			/** query for object in the database with id equal profileId */
-			return itemDao.queryForAll();
+			List<Item> items = itemDao.queryForAll();
+			for(Item item : items){
+				item.parseJson();
+			}
+			return items;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
 		} catch (Exception e) {
@@ -210,7 +214,9 @@ public class DatabaseService {
 	public Item getItemById(int itemId) {
 		try {
 
-			return itemDao.queryForId(itemId);
+			Item item = itemDao.queryForId(itemId);
+			item.parseJson();
+			return item;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
 		} catch (Exception e) {
@@ -240,6 +246,7 @@ public class DatabaseService {
 
 	public int insertItem(Item item) {
 
+			item.generateJson();
 		try {
 
 			int x =itemDao.create(item);

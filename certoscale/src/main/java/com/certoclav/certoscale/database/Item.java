@@ -6,6 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import org.json.JSONObject;
 
+import static android.R.attr.visibility;
+
 /**
  * A simple demonstration object we are creating and persisting to the database.
  */
@@ -20,170 +22,212 @@ public class Item {
 	}
 
 
-	public int getItem_id() {
-		return item_id;
+	private final static String JSON_DESCRIPTION = "description";
+	private final static String JSON_DEVICE_KEY = "devicekey";
+	private final static String JSON_DATE = "date";
+	private final static String JSON_VISIBILITY = "visibility";
+	private final static String JSON_ARTICLE_NUMBER = "artno";
+	private final static String JSON_NAME = "name";
+	private final static String JSON_WEIGHT = "weight";
+	private final static String JSON_COST = "cost";
+	private final static String JSON_UNIT = "unit";
+	private final static String JSON_CLOUD_ID = "_id";
+
+	private String name = "";
+	private Double weight = 0d;
+	private Double cost = 0d;
+	private String articleNumber = "";
+	private String date = "";
+	private String description = "";
+	private String deviceKey = "";
+	private String unit = "";
+
+	public String getCloudId() {
+		return cloudId;
+	}
+
+	public void setCloudId(String cloudId) {
+		this.cloudId = cloudId;
+	}
+
+	private String cloudId = "";
+
+	public Item(String json) {
+		setItemJson(json);
 	}
 
 	@DatabaseField(generatedId = true, columnName = "item_id")
 	private int item_id;
 
 
+	@DatabaseField(columnName = "item_json")
+	private String itemJson;
+
+
+
 	public String getItemJson() {
+		generateJson();
 		return itemJson;
 	}
 
 	public void setItemJson(String itemJson) {
 		this.itemJson = itemJson;
+		parseJson();
 	}
-
-	@DatabaseField(columnName = "item_json")
-	private String itemJson;
-
-	public String generateItemJson(String name, Double weight,Double Cost, String articleNumber){
-		JSONObject jsonObjectItem = new JSONObject();
-
-		try {
-			jsonObjectItem.put("name", name).put("weight", weight).put("Cost",Cost).put("artno",articleNumber);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return jsonObjectItem.toString();
-	}
-
-	public Item(String itemJson) {
-
-		this.itemJson = itemJson;
-
-
-	}
-	public Item(String cloudId, String name, Double weight,Double Cost, String articleNumber) {
-		this.cloudId = cloudId;
-		this.itemJson = generateItemJson(name, weight,Cost, articleNumber);
-	}
-
-	@DatabaseField(columnName = "cloud_id")
-	private String cloudId;
-
-	public String getItemCloudId() {
-		String retVal = "";
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getString("_id");
-		}catch (Exception e){
-			retVal = "";
-		}
-		return retVal;
-
-	}
-
-
-	public String getItemArticleNumber() {
-		String retVal = "";
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getString("artno");
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return retVal;
-
-	}
-
 
 	public String getName() {
-		String retVal = "";
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getString("name");
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return retVal;
-
+		return name;
 	}
-
-
-	public void setWeight(Double weight) {
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			recipeJson.put("weight",weight);
-			itemJson = recipeJson.toString();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-
-
-	}
-
-
-	public void setCost(Double Cost) {
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			recipeJson.put("Cost",Cost);
-			itemJson = recipeJson.toString();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-
-
-	}
-
 
 	public void setName(String name) {
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			recipeJson.put("name",name);
-			itemJson = recipeJson.toString();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-
-
+		this.name = name;
 	}
 
 	public Double getWeight() {
-		Double retVal = 0d;
+		return weight;
+	}
+
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+
+	public Double getCost() {
+		return cost;
+	}
+
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	public String getArticleNumber() {
+		return articleNumber;
+	}
+
+	public void setArticleNumber(String articleNumber) {
+		this.articleNumber = articleNumber;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDeviceKey() {
+		return deviceKey;
+	}
+
+	public void setDeviceKey(String deviceKey) {
+		this.deviceKey = deviceKey;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public int getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
+
+	public void generateJson(){
+		JSONObject itemJson = new JSONObject();
 
 		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getDouble("weight");
+			itemJson.put(JSON_NAME, name)
+					.put(JSON_WEIGHT, weight)
+					.put(JSON_COST,cost)
+					.put(JSON_ARTICLE_NUMBER,articleNumber)
+					.put(JSON_DATE,date)
+					.put(JSON_DESCRIPTION,description)
+					.put(JSON_DEVICE_KEY,deviceKey)
+					.put(JSON_UNIT,unit)
+					.put(JSON_VISIBILITY,visibility)
+					.put(JSON_CLOUD_ID,cloudId);
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return retVal;
-
 	}
 
-	public Double getCost(){
-		Double retVal = 0d;
+
+
+	public void parseJson(){
+
+		JSONObject jsonObject = null;
 		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			retVal = recipeJson.getDouble("Cost");
+			jsonObject = new JSONObject(itemJson);
 		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return retVal;
 
-
-	}
-
-	public void setArticleNumber(String s) {
-
-		try {
-			JSONObject recipeJson = new JSONObject(this.itemJson);
-			recipeJson.put("artno",s);
-			itemJson = recipeJson.toString();
-		}catch (Exception e){
-			e.printStackTrace();
 		}
 
+		try {
+			cost = jsonObject.getDouble(JSON_COST);
+		}catch (Exception e){
+			cost = 0d;
+		}
+
+		try {
+			weight = jsonObject.getDouble(JSON_WEIGHT);
+		}catch (Exception e) {
+			weight = 0d;
+		}
+		try {
+			articleNumber = jsonObject.getString(JSON_ARTICLE_NUMBER);
+		}catch (Exception e){
+			articleNumber = "";
+		}
+
+		try {
+			date = jsonObject.getString(JSON_DATE);
+		}catch (Exception e){
+			date = "";
+		}
+
+		try {
+			description = jsonObject.getString(JSON_DESCRIPTION);
+		}catch (Exception e){
+			description = "";
+		}
+
+		try {
+			deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
+		}catch (Exception e){
+			deviceKey = "";
+		}
+
+		try {
+			unit = jsonObject.getString(JSON_UNIT);
+		}catch (Exception e){
+			unit = "";
+		}
+
+		try {
+			 cloudId = jsonObject.getString(JSON_CLOUD_ID);
+		}catch (Exception e){
+			cloudId = "";
+		}
+
 	}
+
+
+
 }
 
 

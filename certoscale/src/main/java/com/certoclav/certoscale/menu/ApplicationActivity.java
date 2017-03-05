@@ -341,6 +341,7 @@ protected void onPause() {
 				Intent intent2 = new Intent(ApplicationActivity.this, SettingsActivity.class);
 				intent2.putExtra(SettingsActivity.INTENT_EXTRA_SUBMENU,Scale.getInstance().getScaleApplication().ordinal());
 				startActivity(intent2);
+
 				break;
 			case ActionButtonbarFragment.BUTTON_SAVE:
 				try{

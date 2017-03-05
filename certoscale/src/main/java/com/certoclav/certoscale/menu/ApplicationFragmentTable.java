@@ -244,7 +244,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 Log.e("AppFragTable", cmode);
                 if (cmode.equals("2")) {
                     if (prefs.getBoolean(getString(R.string.preferences_counting_under_limit_visible), getResources().getBoolean(R.bool.preferences_counting_under_limit_visible)) == true) {
-                        listReferenceFields.get(underlimit).getTextName().setText(R.string.under_limit_capitalized);
+                        listReferenceFields.get(underlimit).getTextName().setText(getString(R.string.under_limit).toUpperCase());
                         listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " PCS");
                     }
 
@@ -256,7 +256,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (cmode.equals("3")) {
                     if (prefs.getBoolean(getString(R.string.preferences_counting_target_visible), getResources().getBoolean(R.bool.preferences_counting_target_visible)) == true) {
-                        listReferenceFields.get(underlimit).getTextName().setText(R.string.target_capitalized);
+                        listReferenceFields.get(underlimit).getTextName().setText(getString(R.string.target).toUpperCase());
                         listReferenceFields.get(underlimit).getTextValue().setText(ApplicationManager.getInstance().getTargetPiecesAsString() + " PCS");
                     }
 
@@ -285,7 +285,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_reference_weight_visible), getResources().getBoolean(R.bool.preferences_percent_reference_weight_visible)) == true) {
-                    listReferenceFields.get(reference_weight).getTextName().setText(R.string.reference_weight_capitalized);
+                    listReferenceFields.get(reference_weight).getTextName().setText("Reference weight".toUpperCase());
                     listReferenceFields.get(reference_weight).getTextValue().setText(ApplicationManager.getInstance().getReferenceWeightAdjustedAsStringWithUnit());
                 }
 
@@ -318,7 +318,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 if (cmode_check.equals("1")) {
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_under_visible), getResources().getBoolean(R.bool.preferences_check_under_visible)) == true) {
-                        listReferenceFields.get(checkunderlimit).getTextName().setText(R.string.under_limit_capitalized);
+                        listReferenceFields.get(checkunderlimit).getTextName().setText(getString(R.string.under_limit).toUpperCase());
                         listReferenceFields.get(checkunderlimit).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_over_visible), getResources().getBoolean(R.bool.preferences_check_over_visible)) == true) {
@@ -330,11 +330,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 if (cmode_check.equals("2")) {
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
-                        listReferenceFields.get(nominal).getTextName().setText(R.string.target_capitalized);
+                        listReferenceFields.get(nominal).getTextName().setText(getString(R.string.target).toUpperCase());
                         listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
-                        listReferenceFields.get(checkundertolerance).getTextName().setText(R.string.under_toleranc_capitalized);
+                        listReferenceFields.get(checkundertolerance).getTextName().setText("Under tolerance".toUpperCase());
                         listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnderAsStringWithUnit());
                     }
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
@@ -345,12 +345,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (cmode_check.equals("3")) {
                     if (prefs.getBoolean(getString(R.string.preferences_check_target_visible), getResources().getBoolean(R.bool.preferences_check_target_visible)) == true) {
-                        listReferenceFields.get(nominal).getTextName().setText(R.string.target_capitalized);
+                        listReferenceFields.get(nominal).getTextName().setText(getString(R.string.target).toUpperCase());
                         listReferenceFields.get(nominal).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
                     }
 
                     if (prefs.getBoolean(getString(R.string.preferences_check_undertolerance_visible), getResources().getBoolean(R.bool.preferences_check_undertolerance_visible)) == true) {
-                        listReferenceFields.get(checkundertolerance).getTextName().setText(R.string.under_toleranc_capitalized);
+                        listReferenceFields.get(checkundertolerance).getTextName().setText("Under tolerance".toUpperCase());
                         listReferenceFields.get(checkundertolerance).getTextValue().setText(ApplicationManager.getInstance().getCheckNominalToleranceUnderPercent() + " %");
                     }
 
@@ -402,15 +402,15 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_filling_target_visible), getResources().getBoolean(R.bool.preferences_filling_target_visible)) == true) {
-                    listReferenceFields.get(FillingTarget).getTextName().setText(R.string.target_capitalized);
+                    listReferenceFields.get(FillingTarget).getTextName().setText(getString(R.string.target).toUpperCase());
                     listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible), getResources().getBoolean(R.bool.preferences_filling_differencew_visible)) == true) {
-                    listReferenceFields.get(FillingDifference).getTextName().setText(R.string.difference_capitalized+": ");
+                    listReferenceFields.get(FillingDifference).getTextName().setText("Difference".toUpperCase()+": ");
                     listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFillingAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible), getResources().getBoolean(R.bool.preferences_filling_differencep_visible)) == true) {
-                    listReferenceFields.get(FillingDifferencePercent).getTextName().setText(R.string.difference_capitalized+"%: ");
+                    listReferenceFields.get(FillingDifferencePercent).getTextName().setText("Difference".toUpperCase()+"%: ");
                     listReferenceFields.get(FillingDifferencePercent).getTextValue().setText(ApplicationManager.getInstance().getFillingDifferenceInPercent() + " %");
                 }
 
@@ -465,17 +465,17 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible)) == true) {
-                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText(R.string.unit_cost_capitalized);
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText("Unit cost".toUpperCase());
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost())+ " " +ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible)) == true) {
-                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextName().setText(R.string.total_weight_capitalized);
+                    listReferenceFields.get(indexTableIngrediantTotalWeight).getTextName().setText("Total weight".toUpperCase());
                     listReferenceFields.get(indexTableIngrediantTotalWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getIngrediantTotalWeight()));
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible)) == true) {
-                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText(R.string.total_cost_capitalized);
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText("Total cost".toUpperCase());
                     listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost())+ " " + ApplicationManager.getInstance().getCurrency());
                 }
 
@@ -497,14 +497,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_watertemp_visible), getResources().getBoolean(R.bool.preferences_density_watertemp_visible)) == true) {
                     if ((densityliquidtype.equals("1") && (densitymode.equals("1") || densitymode.equals("2"))) || densitymode.equals("4")) {
-                        listReferenceFields.get(DensityWaterTemp).getTextName().setText(R.string.water_temp_capitalized);
+                        listReferenceFields.get(DensityWaterTemp).getTextName().setText("Water temperature".toUpperCase());
                         listReferenceFields.get(DensityWaterTemp).getTextValue().setText(String.format("%.1f", ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp()) + " °C");
                     }
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_sinkervolume_visible), getResources().getBoolean(R.bool.preferences_density_sinkervolume_visible)) == true) {
                     if (densitymode.equals("3")) {
-                        listReferenceFields.get(0).getTextName().setText(R.string.sinker_volume_capitalized);
+                        listReferenceFields.get(0).getTextName().setText("Sinker volume".toUpperCase());
                         listReferenceFields.get(0).getTextValue().setText(String.format("%.2f", ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume()) + " ml");
                     }
                 }
@@ -519,12 +519,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_weightair_visible), getResources().getBoolean(R.bool.preferences_density_weightair_visible)) == true) {
-                    listReferenceFields.get(DensityWeightAir).getTextName().setText(R.string.weight_in_air_capitalized);
+                    listReferenceFields.get(DensityWeightAir).getTextName().setText("Weight in air".toUpperCase());
                     listReferenceFields.get(DensityWeightAir).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_air()));
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_weightinliquid_print), getResources().getBoolean(R.bool.preferences_density_weightinliquid_print)) == true) {
-                    listReferenceFields.get(DensityWeightLiquid).getTextName().setText(R.string.weight_in_liquid_capitalized);
+                    listReferenceFields.get(DensityWeightLiquid).getTextName().setText("Weight in liquid".toUpperCase());
                     listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()));
                 }
 
@@ -550,7 +550,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code Why? Whats the benefit? Visibility options are easier to use if the table is filled here
                    if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
-                        listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText(R.string.samples_capitalized);
+                        listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText("Samples".toUpperCase());
                         try {
                             listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN()));
                         } catch (Exception e) {
@@ -558,7 +558,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
 
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_total_visible),getResources().getBoolean(R.bool.preferences_totalization_total_visible))==true) {
-                        listReferenceFields.get(indexTableTotal).getTextName().setText(R.string.total_capitalized);
+                        listReferenceFields.get(indexTableTotal).getTextName().setText("Total".toUpperCase());
                         try {
                             if (ApplicationManager.getInstance().getStats().getStatistic().getSum()==0){
                                 listReferenceFields.get(indexTableTotal).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
@@ -583,7 +583,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
 
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_standarddeviation_visible),getResources().getBoolean(R.bool.preferences_totalization_standarddeviation_visible))==true) {
-                        listReferenceFields.get(standarddeviation).getTextName().setText(R.string.standard_dev_capitalized);
+                        listReferenceFields.get(standarddeviation).getTextName().setText("Standard dev".toUpperCase());
                         try {
                             if (Double.isNaN( ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())){
                                 listReferenceFields.get(standarddeviation).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
@@ -622,7 +622,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                     if  (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible),getResources().getBoolean(R.bool.preferences_totalization_range_visible))==true) {
 
-                        listReferenceFields.get(range).getTextName().setText(R.string.range_capitalized);
+                        listReferenceFields.get(range).getTextName().setText("Range".toUpperCase());
                         try {
                             if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax()-ApplicationManager.getInstance().getStats().getStatistic().getMin())){
                                 listReferenceFields.get(range).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());

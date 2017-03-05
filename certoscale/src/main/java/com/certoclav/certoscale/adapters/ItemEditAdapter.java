@@ -57,7 +57,7 @@ public class ItemEditAdapter extends ArrayAdapter<Item> {
 		}
 
 		EditText editTextArticleNumber = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
-		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
+		editTextArticleNumber.setText(getItem(position).getArticleNumber());
 
 		editTextArticleNumber.addTextChangedListener(new TextWatcher() {
 			@Override

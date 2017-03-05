@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Black.NoTitleBar.Fullscreen.Balance" parent="android:Theme.Black.NoTitleBar.Fullscreen" >
+        <item name="android:colorForeground">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorPrimaryInverse">@android:color/black</item>
+    </style>
+</resources>

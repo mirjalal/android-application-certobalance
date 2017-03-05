@@ -94,7 +94,7 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
                         for(Item cloudItem : itemsFromCloud){
                             boolean cloudItemAlreadyInDb = false;
                             for(Item dbitem : itemsFromDb){
-                                if(cloudItem.getItemCloudId().equals(dbitem.getItemCloudId())){
+                                if(cloudItem.getCloudId().equals(dbitem.getCloudId())){
                                     cloudItemAlreadyInDb = true;
                                     continue;
                                 }

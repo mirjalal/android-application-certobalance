@@ -3,7 +3,6 @@ package com.certoclav.certoscale.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
-import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +72,7 @@ public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
-		editTextArticleNumber.setText(getItem(position).getItemArticleNumber());
+		editTextArticleNumber.setText(getItem(position).getArticleNumber());
 
 		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());
