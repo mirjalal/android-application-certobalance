@@ -6,8 +6,6 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import org.json.JSONObject;
 
-import static android.R.attr.visibility;
-
 /**
  * A simple demonstration object we are creating and persisting to the database.
  */
@@ -21,6 +19,18 @@ public class Item {
 
 	}
 
+	public Item( String name, Double weight, Double cost, String articleNumber, String date, String description, String deviceKey, String unit, String cloudId,String visibility) {
+		this.name = name;
+		this.weight = weight;
+		this.cost = cost;
+		this.articleNumber = articleNumber;
+		this.date = date;
+		this.description = description;
+		this.visibility = visibility;
+		this.deviceKey = deviceKey;
+		this.unit = unit;
+		this.cloudId = cloudId;
+	}
 
 	private final static String JSON_DESCRIPTION = "description";
 	private final static String JSON_DEVICE_KEY = "devicekey";
@@ -41,6 +51,7 @@ public class Item {
 	private String description = "";
 	private String deviceKey = "";
 	private String unit = "";
+	private String visibility = "private";
 
 	public String getCloudId() {
 		return cloudId;
@@ -148,10 +159,10 @@ public class Item {
 	}
 
 	public void generateJson(){
-		JSONObject itemJson = new JSONObject();
+		JSONObject jsonObject = new JSONObject();
 
 		try {
-			itemJson.put(JSON_NAME, name)
+			jsonObject.put(JSON_NAME, name)
 					.put(JSON_WEIGHT, weight)
 					.put(JSON_COST,cost)
 					.put(JSON_ARTICLE_NUMBER,articleNumber)
@@ -164,6 +175,7 @@ public class Item {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+		itemJson = jsonObject.toString();
 	}
 
 
@@ -174,7 +186,13 @@ public class Item {
 		try {
 			jsonObject = new JSONObject(itemJson);
 		}catch (Exception e){
+			return;
+		}
 
+		try {
+			name = jsonObject.getString(JSON_NAME);
+		}catch (Exception e){
+			name = "";
 		}
 
 		try {
@@ -182,7 +200,11 @@ public class Item {
 		}catch (Exception e){
 			cost = 0d;
 		}
-
+		try {
+			visibility = jsonObject.getString(JSON_VISIBILITY);
+		}catch (Exception e){
+			visibility = "private";
+		}
 		try {
 			weight = jsonObject.getDouble(JSON_WEIGHT);
 		}catch (Exception e) {
@@ -223,6 +245,7 @@ public class Item {
 		}catch (Exception e){
 			cloudId = "";
 		}
+		itemJson = jsonObject.toString();
 
 	}
 

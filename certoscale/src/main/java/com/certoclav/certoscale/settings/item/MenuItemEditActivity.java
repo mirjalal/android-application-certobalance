@@ -16,8 +16,10 @@ import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -99,7 +101,8 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             itemFromDb = db.getItemById(extra);
             adapter.add(itemFromDb);
         }else{
-            adapter.add(new Item("","name",1.0d,1.0d, "Item ID"));
+            Date date = new Date();
+            adapter.add(new Item("name",0d,0d,"articlenumber",((Long)date.getTime()).toString(),"description", Scale.getInstance().getSafetyKey(),"g","","private"));
         }
 
     }
@@ -166,7 +169,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
 
                         if(adapter.getCount()>0){
                             Item item = adapter.getItem(0);
-                            Log.e("MenuItemEditActivty", "insert item: "+ item.getItemArticleNumber() + item.getName() + item.getWeight());
+                            Log.e("MenuItemEditActivty", "insert item: "+ item.getArticleNumber() + item.getName() + item.getWeight());
                                 db.insertItem(item);
                         }
 

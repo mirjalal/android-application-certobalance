@@ -34,7 +34,7 @@ public static void printText(String text, Integer numSets){
 		clearCurentBuffer();
 		sendInitConfigToBuffer();
 		sendCertoclavLogoToBuffer(100, 0);
-		sendBarcodeToBuffer(item.getItemArticleNumber(), 64, 50);
+		sendBarcodeToBuffer(item.getArticleNumber(), 64, 50);
 		sendTextToBuffer(item.getName(), 40,110);
 		printBuffer(numSets);
 
