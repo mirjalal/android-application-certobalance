@@ -60,7 +60,7 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 
 		switch (Scale.getInstance().getState()){
 			case ON_AND_CALIBRATING:
-				textNotificationHead.setText(R.string.notification_capitalized);
+				textNotificationHead.setText(getString(R.string.notification).toUpperCase());
 				tv.setText(R.string.calibrating);
 				break;
 			case CABLE_NOT_CONNECTED:
@@ -68,7 +68,7 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 				tv.setText(R.string.please_plug_in_the_touchscreen_and_power_on);
 				break;
 			case ON_AND_MODE_NOT_GRAM:
-				textNotificationHead.setText(R.string.notification_capitalized);
+				textNotificationHead.setText(getString(R.string.notification).toUpperCase());
 				tv.setText(R.string.selftest);
 				break;
 			case DISCONNECTED:

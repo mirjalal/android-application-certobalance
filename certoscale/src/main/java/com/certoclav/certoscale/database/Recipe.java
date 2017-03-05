@@ -48,6 +48,12 @@ public class Recipe {
 		this.recipeName = recipeName;
 		this.recipeEntries = entries;
 	}
+	public Recipe(String recipeJson) {
+
+		this.recipeJson = recipeJson;
+
+
+	}
 
 	public String getCloudId() {
 		return cloudId;

@@ -37,7 +37,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
         setContentView(R.layout.menu_main_item_edit_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(R.string.edit_items_capitalized);
+        navigationbar.getTextTitle().setText(getString(R.string.edit_items).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {

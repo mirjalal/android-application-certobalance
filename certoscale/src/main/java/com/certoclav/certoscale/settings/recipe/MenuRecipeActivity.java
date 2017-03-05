@@ -3,22 +3,29 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.GetUtil;
+import com.certoclav.library.certocloud.Items;
+import com.certoclav.library.certocloud.Recipes;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -50,7 +57,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(R.string.recipes_capitalized);
+        navigationbar.getTextTitle().setText(getString(R.string.recipes).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
@@ -84,9 +91,66 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
     @Override
     protected void onResume() {
         super.onResume();
+        adapter.clear();
+
+
+
+
+
+
+        new AsyncTask<Boolean, Boolean, Boolean >(){
+
+            @Override
+            protected Boolean  doInBackground(Boolean... params) {
+                ArrayList<String> recipeList = new ArrayList<String>();
+                Recipes recipes = new Recipes();
+                Integer retval = recipes.getRecipesFromCloud();
+                if(retval == GetUtil.RETURN_OK){
+                    if(recipes.getRecipeJsonStringArray() != null){
+                        DatabaseService db = new DatabaseService(ApplicationController.getContext());
+                        List<Recipe> recipesFromDb = db.getRecipes();
+                        List<Recipe> recipesFromCloud = new ArrayList<Recipe>();
+
+                        for(String recipeJsonString : recipes.getRecipeJsonStringArray()){
+                            recipesFromCloud.add(new Recipe(recipeJsonString));
+                        }
+                        for(Recipe cloudRecipe : recipesFromCloud){
+                            boolean cloudRecipeAlreadyInDb = false;
+                            for(Recipe dbRecipe : recipesFromDb){
+                                if(cloudRecipe.getCloudId().equals(dbRecipe.getCloudId())){
+                                    cloudRecipeAlreadyInDb = true;
+                                    continue;
+                                }
+                            }
+                            if(cloudRecipeAlreadyInDb == false){
+                                db.insertRecipe(cloudRecipe);
+                            }
+                        }
+
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean b) {
+                Toast.makeText(ApplicationController.getContext(), "Items updated", Toast.LENGTH_LONG);
+                DatabaseService db = new DatabaseService(ApplicationController.getContext());
+                List<Recipe> recipes = db.getRecipes();
+                adapter.clear();
+                if(recipes != null){
+                    for(Recipe recipe : recipes){
+                        adapter.add(recipe);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+
+                super.onPostExecute(b);
+            }
+        }.execute();
         DatabaseService db = new DatabaseService(this);
 
-        adapter.clear();
+
         List<Recipe> recipes = db.getRecipes();
        if(recipes != null) {
            for (Recipe recipe : recipes) {

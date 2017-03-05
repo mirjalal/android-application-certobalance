@@ -41,7 +41,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(R.string.edit_recipe_capitalized);
+        navigationbar.getTextTitle().setText(getString(R.string.edit_recipe).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
             @Override
