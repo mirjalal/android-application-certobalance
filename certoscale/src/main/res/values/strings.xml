@@ -2,11 +2,11 @@
 <resources>
 
     <!--  Strings for possible PreferenceActivity Back/Next buttons -->
-    <string name="back_button_label">Back</string>
-    <string name="next_button_label">Next</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
 
     <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
-    <string name="skip_button_label">Skip</string>
+    <string name="skip">Skip</string>
     
     <string name="app_name">certoscale</string>
     <string name="hello_world">Hello world!</string>
@@ -454,7 +454,7 @@
     <string name="click_to_choose_item">Click to choose item</string>
     <string name="place_target_weight_on_pan">Place target weight on the pan. Press OK to continue.</string>
     <string name="current_recipe">Current Recipe:\n</string>
-    <string name="scaling_factor">Scaling Factor</string>
+    <string name="scaling_factor">scaling factor</string>
     <string name="currency">"Currency: "</string>
     <string name="please_enter_num_samples">Please enter the number of samples for the calculation of awp</string>
     <string name="sample_size">Sample size:</string>
@@ -471,11 +471,11 @@
     <string name="please_enter_oil_density">Please enter the oil density</string>
     <string name="water_temperature">Water Temperature\n</string>
     <string name="liquid_density">Liquid Density\n</string>
-    <string name="sinker_volume">Sinker Volume\n</string>
+    <string name="sinker_volume">sinker volume</string>
     <string name="oil_density">Oil Density\n</string>
     <string name="please_enter_normal_pipette">Please enter the nominal pipette capacity in ml</string>
     <string name="please_enter_the_pressure">Please enter the pressure</string>
-    <string name="imprecision">Imprecision\n</string>
+    <string name="imprecision">Imprecision</string>
     <string name="inaccuracy">Inacurracy</string>
     <string name="water_temp">Water Temperature\n</string>
     <string name="pressure">Pressure\n</string>
@@ -498,11 +498,45 @@
     <string name="load_percent">LOAD [%]</string>
     <string name="piece_weight">PIECE WEIGHT</string>
     <string name="minimum_weight_upper_case">MINIMUM WEIGHT</string>
-      <string name="averaging_time">AVERAGING TIME</string>
-     <string name="total_diff">"TOTAL DIFF: "</string>
-     <string name="calculating">calculating...</string>
+
+    <string name="difference">DIFFERENCE</string>
+    <string name="reference_weight">REFERENCE WEIGHT</string>
+    <string name="under_toleranc">UNDER TOLERANCE</string>
+    <string name="over_tolerance">OVER TOLERANCE</string>
+    <string name="averaging">AVERAGING TIME</string>
+    <string name="unit_cost">unit cost</string>
+    <string name="total_weight">TOTAL WEIGHT</string>
+    <string name="total_cost">TOTAL COST</string>
+    <string name="item_name">item name</string>
+
+    <string name="weight_in_air">WEIGHT IN AIR</string>
+    <string name="weight_in_liquid">WEIGHT IN LIQUID</string>
+
+    <string name="oiled_weight">OILED WEIGHT</string>
+    <string name="samples">SAMPLES</string>
+    <string name="total">TOTAL</string>
+    <string name="average">AVERAGE</string>
+    <string name="standard_dev">STANDARD DEV.</string>
+    <string name="minimum">MINIMUM</string>
+    <string name="maximum">MAXIMUM</string>
+    <string name="range">RANGE</string>
+    <string name="current">"CURRENT "</string>
+    <string name="recipe">RECIPE</string>
+    <string name="no_recipe">NO RECIPE</string>
+    <string name="total_target">"TOTAL TARGET: "</string>
+    <string name="total_actual">"TOTAL ACTUAL: "</string>
+    <string name="total_diff">"TOTAL DIFF: "</string>
+
+    <string name="item">ITEM</string>
+    <string name="final_weight">FINAL WEIGHT</string>
+    <string name="initial_weight">INITIAL WEIGHT</string>
+    <string name="incaccuracy">INACCURACY</string>
+    <string name="barometric_unit">BAROMETRIC UNIT</string>
+    <string name="sum_">SUM</string>
+    <string name="calculating">calculating...</string>
     <string name="press_start_for_a_new_measuremnt">Press Start for a new measurement</string>
-     <string name="click_settings_and_choose_a_recipe">Click SETTINGS and choose a recipe first</string>
+    <string name="tared_weight">"TARED WEIGHT: "</string>
+    <string name="click_settings_and_choose_a_recipe">Click SETTINGS and choose a recipe first</string>
     <string name="press_start_to_begin_recipe">Press START to begin with the recipe</string>
     <string name="value_too_low">Value too low</string>
     <string name="value_too_high">Value too high</string>
@@ -522,7 +556,7 @@
     <string name="semi_automatic_mode">Semi automatic mode</string>
     <string name="manual_mode">Manual mode</string>
     <string name="apply_stable_weights">, apply stable weights.</string>
-    <string name="apply_higher_weights">, apply higher weights.</string>
+    <string name="apply_higher_weights">, apply highear weights.</string>
     <string name="press_new_batch">Press NEW BATCH to create a new batch</string>
     <string name="place_container_on_the_pan">Place container on the pan and press START</string>
     <string name="dispense_sample_number">Dispense sample number</string>
@@ -530,14 +564,21 @@
     <string name="pipette_adjustment_finisihed">Pipette Adjustment finished. Press Start to start again.</string>
     <string name="login_menu">LOGIN MENU</string>
     <string name="simulation_mode">Simulation Mode</string>
-     <string name="cancel_without_saving">Cancel without saving</string>
+    <string name="items">ITEMS</string>
+    <string name="edit_items">EDIT ITEMS</string>
+    <string name="cancel_without_saving">Cancel without saving</string>
     <string name="do_you_really_want_to_go_back">Do you really want to  go back without saving the current item?</string>
     <string name="confirm_operation">Confirm operation</string>
     <string name="do_you_really_want_to_save_the_itm">"Do you really want to save the item? "</string>
-     <string name="do_you_really_want_to_delete_all_protocols">Do you really want to delete all protocols?</string>
+    <string name="protocols">PROTOCOLS</string>
+    <string name="do_you_really_want_to_delete_all_protocols">Do you really want to delete all protocols?</string>
+    <string name="recipes">RECIPES</string>
     <string name="confirm_deletion">Confirm deletion</string>
+    <string name="edit_recipe">EDIT RECIPE</string>
     <string name="do_you_really_want_to_go_back_without_saving_recipe">Do you really want to  go back without saving the current resipe?</string>
     <string name="do_you_really_want_to_save_the_recipe">Do you really want to save the recipe?</string>
+    <string name="user_settings">USER SETTINGS</string>
+    <string name="notification">NOTIFICATION</string>
     <string name="warning">WARNING</string>
     <string name="calibrating">Calibrating...</string>
     <string name="please_plug_in_the_touchscreen_and_power_on">Please plug in the touchscreen and power on the balance.</string>
@@ -573,6 +614,9 @@
     <string name="app_statistical_quality_control">Statistical Quality Control</string>
     <string name="app_not_weighing">Not weighing</string>
     <string name="please_enter_the_average_piece_weight">Please enter the average piece weight</string>
+    <string name="averaging_time">averaging time</string>
+    <string name="barometric_unit_capitalized">BAROMETRIC UNIT</string>
+    
 
 
 </resources>

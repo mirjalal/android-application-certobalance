@@ -449,6 +449,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			}
 		});
 
+
 		buttonAppSettings = (Button) rootView.findViewById(R.id.actionbar_button_settings);
 		buttonAppSettings.setOnClickListener(new View.OnClickListener() {
 

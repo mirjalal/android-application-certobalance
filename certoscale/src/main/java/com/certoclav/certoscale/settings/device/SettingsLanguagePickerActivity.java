@@ -150,7 +150,7 @@ public class SettingsLanguagePickerActivity extends ListActivity{
                 String[] systemLocaleIetfLanguageTags = getAssets().getLocales();
                Arrays.sort(systemLocaleIetfLanguageTags);
                 
-                for (String ietfLanguageTag : systemLocaleIetfLanguageTags) {
+             /*   for (String ietfLanguageTag : systemLocaleIetfLanguageTags) {
                 	  Locale locale = null;
                 	  String[] l = ietfLanguageTag.split("_");
                       if (l.length == 2){
@@ -159,7 +159,10 @@ public class SettingsLanguagePickerActivity extends ListActivity{
                       localesList.add(locale);
                       }
                       
-                }
+                }*/
+            Locale locale=null;
+            localesList.add(locale.US);
+            localesList.add(Locale.GERMANY);
               
 
              

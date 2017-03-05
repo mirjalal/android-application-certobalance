@@ -23,6 +23,7 @@ public class CertocloudConstants {
 	public final static String REST_API_GET_DEVICES = "/api/devices/";//, devices.getAll);
 	public final static String REST_API_GET_CONDITIONS = "/api/conditions/"; //+safetykey
 	public final static String REST_API_GET_IEMS = "/api/balanceitem/"; //+safetykey
+	public final static String REST_API_GET_RECIPES="/api/balancerecipes/"; //+safetykey
 	public final static String REST_API_POST_CONDITIONS_CREATE = "/api/conditions/"; //+safetykey //warning: only create condition if there is no
 	public final static String REST_API_POST_CONDITIONS_UPDATE = "/api/conditions/update/";
 	public final static String REST_API_POST_DEVICE = "/api/devices/";// devices.create);
