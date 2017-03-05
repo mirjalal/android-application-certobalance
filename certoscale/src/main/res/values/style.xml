@@ -8,6 +8,8 @@
         <item name="android:capitalize">characters</item>
         <item name="android:layout_margin">5dp</item>
     </style>
+
+
     <style name="button_navigationbar_default">
         <item name="android:background">@drawable/quickaction_slider_btn_black</item>
         <item name="android:scaleType">centerInside</item>
@@ -15,16 +17,19 @@
         <item name="android:padding">20dp</item>
     </style>
 
+
     <style name="button_image_default">
         <item name="android:background">@drawable/quickaction_slider_btn_black</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+
 
     <style name="button_image_sidebar">
         <item name="android:scaleType">centerInside</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:padding">30dp</item>
     </style>
+
 
     <style name="button_actionbar">
         <item name="android:textSize">18sp</item>
@@ -34,6 +39,7 @@
         <item name="android:capitalize">characters</item>
         <item name="android:layout_margin">1dp</item>
     </style>
+
 
     <style name="edit_text_default">
         <item name="android:textSize">25sp</item>
@@ -65,11 +71,15 @@
         <item name="android:layout_marginRight">1dp</item>
     </style>
 
+
+
     <style name="text_small">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_margin">5dp</item>
     </style>
+
+
 
     <style name="text_default_small">
         <item name="android:textSize">14sp</item>
@@ -77,11 +87,14 @@
         <item name="android:layout_margin">5dp</item>
     </style>
 
+
+
     <style name="text_statistics">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:layout_margin">2dp</item>
     </style>
+
 
 
     <style name="text_inversed">
