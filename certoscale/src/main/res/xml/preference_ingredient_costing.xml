@@ -14,7 +14,7 @@
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_lock"
             android:defaultValue="@bool/preferences_ingrediant_lock"
-            android:title="lock"
+            android:title="@string/lock"
             android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true" >
         </CheckBoxPreference>

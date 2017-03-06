@@ -159,7 +159,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		setContentView(R.layout.login_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText(R.string.login_menu);
+		navigationbar.getTextTitle().setText(getString(R.string.login_menu).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);

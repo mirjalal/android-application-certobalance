@@ -740,6 +740,8 @@
     <string name="weighing_units">Weighing Units</string>
     <string name="communication_menu">Communication menu</string>
     <string name="calibration_menu">Calibration menu</string>
+    <string name="main_menu">Main menu</string>
+    <string name="support">Support</string>
 
 
 </resources>

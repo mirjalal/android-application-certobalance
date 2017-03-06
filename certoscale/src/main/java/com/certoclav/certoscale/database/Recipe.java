@@ -27,6 +27,31 @@ public class Recipe {
 	}
 
 
+	private final static String JSON_DESCRIPTION = "description";
+	private final static String JSON_DEVICE_KEY = "devicekey";
+	private final static String JSON_DATE = "date";
+	private final static String JSON_VISIBILITY = "visibility";
+	private final static String JSON_ARTICLE_NUMBER = "artno";
+	private final static String JSON_NAME = "name";
+	private final static String JSON_WEIGHT = "weight";
+	private final static String JSON_UNIT = "unit";
+	private final static String JSON_CLOUD_ID = "_id";
+
+	private String name = "";
+	private Double weight = 0d;
+	private Double cost = 0d;
+	private String articleNumber = "";
+	private String date = "";
+	private String description = "";
+	private String deviceKey = "";
+	private String unit = "";
+	private String visibility = "private";
+
+	public String getRecipeJson() {
+		generateJson();
+		return recipeJson;
+	}
+
 
 	@DatabaseField(generatedId = true, columnName = "recipe_id")
 	private int recipe_id;
@@ -133,6 +158,26 @@ public class Recipe {
 
 	}
 
+
+	public void generateJson(){
+		JSONObject jsonObject = new JSONObject();
+
+		try {
+			jsonObject.put(JSON_NAME, name)
+					.put(JSON_WEIGHT, weight)
+
+					.put(JSON_ARTICLE_NUMBER,articleNumber)
+					.put(JSON_DATE,date)
+					.put(JSON_DESCRIPTION,description)
+					.put(JSON_DEVICE_KEY,deviceKey)
+					.put(JSON_UNIT,unit)
+					.put(JSON_VISIBILITY,visibility)
+					.put(JSON_CLOUD_ID,cloudId);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		recipeJson = jsonObject.toString();
+	}
 
 
 

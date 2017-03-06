@@ -117,7 +117,7 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
 
             final Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.dialog_yes_no);
-            dialog.setTitle("Confirm deletion");
+            dialog.setTitle(getString(R.string.confirm_deletion));
 
             // set the custom dialog components - text, image and button
             TextView text = (TextView) dialog.findViewById(R.id.text);

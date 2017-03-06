@@ -106,7 +106,11 @@ public class SettingsLanguagePickerActivity extends ListActivity{
 						Locale locale = languageAdapter.getItem(position);
 
 
-                            change_setting_language(locale.getLanguage().toString(), locale.getCountry().toString());
+                        try{
+                        change_setting_language(locale.getLanguage(), locale.getCountry());
+                        }catch (Exception e){
+
+                        }
 
 						setResult(RESULT_OK);
 						finish();
