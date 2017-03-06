@@ -29,8 +29,6 @@ import com.certoclav.certoscale.settings.user.MenuUserActivity;
 import java.util.List;
 
 
-
-
 /**
  * The ProfileAdapter class provides access to the profile data items. <br>
  * ProfileAdapter is also responsible for making a view for each item in the
@@ -70,24 +68,7 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 		ImageView imageView = (ImageView) convertView.findViewById(R.id.menu_main_element_image);
 		imageView.setImageResource(getItem(position).getImageResId());
 
-		switch (getItem(position).getId()){
-			case MENU_ITEM_APPLICATIONS:
-			case MENU_ITEM_CALIBRATION:
-				convertView.setBackgroundResource(R.drawable.quickaction_slider_btn);
-				break;
-			case MENU_ITEM_DEVICE:
-			case MENU_ITEM_GLP:
-			case MENU_ITEM_APPLICATION_SETTINGS:
-			case MENU_ITEM_USER:
-			case MENU_ITEM_WEIGHING_UNITS:
-			case MENU_ITEM_COMMUNICATION:
-			case MENU_ITEM_VIDEO:
-				convertView.setBackgroundResource(R.drawable.menu_btn_tur);
-				break;
-			default:
-				convertView.setBackgroundResource(R.drawable.menu_btn_purple);
-				break;
-		}
+
 
 		convertView.setOnClickListener(new View.OnClickListener() {
 			@Override

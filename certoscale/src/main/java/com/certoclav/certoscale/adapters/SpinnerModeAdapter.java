@@ -57,7 +57,7 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 		switch (getItem(position)){
 			case WEIGHING:
 				textMail.setText(R.string.app_weighing);
-				imageApp.setImageResource(R.drawable.ic_menu_weighing);
+				imageApp.setImageResource(R.drawable.application_icon_weighing);
 				break;
 			case PART_COUNTING:
 				textMail.setText(R.string.app_part_counting);

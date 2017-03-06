@@ -101,6 +101,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
 		editTextArticleNumber.setText(getItem(position).getArticleNumber());
+		editTextArticleNumber.setSelected(true);
 
 		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());
