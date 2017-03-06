@@ -30,7 +30,7 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/settings_filling_button_cancel"
-                android:text="CANCEL"
+                android:text="@string/cancel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -62,7 +62,7 @@
             style="@style/button_actionbar"/>
 
         <Button
-            android:text="Calculate Target Weight"
+            android:text="@string/calculate_target_weight"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/settings_filling_button_calc_target"

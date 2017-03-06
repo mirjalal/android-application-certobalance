@@ -455,7 +455,7 @@
     <string name="place_target_weight_on_pan">Place target weight on the pan. Press OK to continue.</string>
     <string name="current_recipe">Current Recipe:\n</string>
     <string name="scaling_factor">scaling factor</string>
-    <string name="currency">"Currency: "</string>
+    <string name="currency">"Currency"</string>
     <string name="please_enter_num_samples">Please enter the number of samples for the calculation of awp</string>
     <string name="sample_size">Sample size:</string>
     <string name="please_enter_the_under">Please enter the under limit</string>
@@ -464,8 +464,8 @@
     <string name="place">"Place "</string>
     <string name="onto_the_pan">onto the pan</string>
     <string name="target">Target:</string>
-    <string name="refernce_weight">Reference Weight \n</string>
-    <string name="reference_adjustment">Reference Adjustment \n</string>
+    <string name="refernce_weight">Reference Weight</string>
+    <string name="reference_adjustment">Reference Adjustment</string>
     <string name="please_enter_the_liquid_density">Please enter the liquid density</string>
     <string name="please_enter_sinker_volume">Please enter the Sinker Volume</string>
     <string name="please_enter_oil_density">Please enter the oil density</string>
@@ -649,6 +649,33 @@
     <string name="videos">Videos</string>
     <string name="contact_supportcertoclav.com_to_enable_remote_service">Contact support@certoclav.com to enable remote service</string>
     <string name="logout">Logout</string>
+    <string name="calculate_awp">Calculate AWP</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="please_enter_the_reference_weight">Please enter the reference weight</string>
+    <string name="please_enter_an_adjustment_factor_for_the_reference">Please enter an adjustment factor for the reference</string>
+    <string name="please_enter_the_nominal_weight">Please enter the nominal weight</string>
+    <string name="please_enter_the_upper_tolerance_limit_weight">Please enter the upper tolerance limit weight</string>
+    <string name="please_enter_the_under_tolerance_limit_weight">Please enter the under tolerance limit weight</string>
+    <string name="please_enter_the_under_limit">Please enter the under limit</string>
+    <string name="please_enter_the_over_limit">Please enter the over limit</string>
+    <string name="please_enter_the_under_tolerance_limit_in_percent">Please enter the under tolerance limit in percent</string>
+    <string name="please_enter_the_over_tolerance_in_percent">Please enter the over tolerance in percent</string>
+    <string name="please_enter_the_averaging_time">Please enter the averaging time</string>
+    <string name="please_enter_the_target_weight">Please enter the target weight</string>
+    <string name="please_enter_the_scaling_factor">Please enter the scaling factor</string>
+    <string name="calculate_target_weight">Calculate Target Weight</string>
+    <string name="pleas_put">"Please put "</string>
+    <string name="on_the_pan_and_press_next">" on the pan and press NEXT"</string>
+    <string name="g_of">" g of "</string>
+    <string name="please_enter_the_water_temperature">Please enter the water temperature</string>
+    <string name="please_enter_the_name_of_the_currency">Please enter the name of the currency</string>
+    <string name="please_enter_the_water">Please enter the water temperature</string>
+    <string name="please_enter_the_pipette_inaccuracy">Please enter the pipette inaccuracy</string>
+    <string name="please_enter_the_imprecision_of_the_pipette">Please enter the imprecission of the pipette</string>
+    <string name="please_enter_the_pipette_name">Please enter the pipette name</string>
+    <string name="please_enter_the_pipette_number">Please enter the pipette number</string>
+    <string name="please_enter_the_number_of_samples">Please enter the number of samples</string>
+    <string name="balance_setup">Balance setup</string>
 
 
 </resources>

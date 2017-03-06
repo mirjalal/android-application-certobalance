@@ -33,7 +33,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 		//navigationbar.getButtonHome().setText("BACK");
 		navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
 		navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
-		navigationbar.getTextTitle().setText("Application settings".toUpperCase());
+		navigationbar.getTextTitle().setText(getString(R.string.application_settings).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		settingsEntriesList = new ArrayList<String>();
@@ -85,7 +85,7 @@ public class SettingsActivity extends FragmentActivity implements ItemListFragme
 	@Override
 	public void onItemSelected(long id) {
 		try {
-			navigationbar.getTextTitle().setText(settingsEntriesList.get((int) id).toUpperCase() + R.string.settings);
+			navigationbar.getTextTitle().setText(settingsEntriesList.get((int) id).toUpperCase() +"  " + getString(R.string.settings).toUpperCase());
 		}catch (Exception e){
 
 		}

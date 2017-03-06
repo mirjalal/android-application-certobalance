@@ -35,7 +35,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the averaging time");
+                    dialog.setTitle(R.string.please_enter_the_averaging_time);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("s");
                     // set the custom dialog components - text, image and button
 
@@ -84,7 +84,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonAveragingTime.setText("Averaging Time "+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
+        buttonAveragingTime.setText(getString(R.string.averaging_time)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
 
 
         super.onResume();

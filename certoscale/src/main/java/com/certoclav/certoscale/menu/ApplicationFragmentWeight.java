@@ -417,7 +417,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
-                textInstruction.setText(getString(R.string.fill_status) + ApplicationManager.getInstance().getPercentFilling()+" %");
+                textInstruction.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
 
                 loadingbarnormal=false;
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();

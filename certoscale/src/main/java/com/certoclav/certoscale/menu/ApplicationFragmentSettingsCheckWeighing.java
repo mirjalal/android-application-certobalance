@@ -59,7 +59,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the nominal weight");
+                    dialog.setTitle(R.string.please_enter_the_nominal_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
                     // set the custom dialog components - text, image and button
 
@@ -112,7 +112,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the upper tolerance limit weight");
+                    dialog.setTitle(R.string.please_enter_the_upper_tolerance_limit_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -166,7 +166,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the under tolerance limit weight");
+                    dialog.setTitle(R.string.please_enter_the_under_tolerance_limit_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -219,7 +219,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the under limit");
+                    dialog.setTitle(R.string.please_enter_the_under_limit);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -272,7 +272,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the over limit");
+                    dialog.setTitle(R.string.please_enter_the_over_limit);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -324,7 +324,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the under tolerance limit in percent");
+                    dialog.setTitle(R.string.please_enter_the_under_tolerance_limit_in_percent);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
@@ -378,7 +378,7 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the over tolerance in percent");
+                    dialog.setTitle(R.string.please_enter_the_over_tolerance_in_percent);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 

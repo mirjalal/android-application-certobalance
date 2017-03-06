@@ -77,7 +77,7 @@ private TextView textInstruction = null;
 
         }
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
+            textInstruction.setText(getString(R.string.pleas_put) + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + getString(R.string.on_the_pan_and_press_next));
         }
 
         super.onResume();
@@ -98,7 +98,7 @@ private TextView textInstruction = null;
     @Override
     public void onRecipeEntryChanged(RecipeEntry entry) {
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText("Please put " + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + " g of " + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + " on the pan and press NEXT");
+            textInstruction.setText(getString(R.string.pleas_put) + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getName() + getString(R.string.on_the_pan_and_press_next));
         }
     }
 }

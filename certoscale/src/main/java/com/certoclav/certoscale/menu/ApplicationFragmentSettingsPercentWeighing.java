@@ -47,7 +47,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the reference weight");
+                    dialog.setTitle(R.string.please_enter_the_reference_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -98,7 +98,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please adjust the reference");
+                    dialog.setTitle(R.string.please_enter_an_adjustment_factor_for_the_reference);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
@@ -176,8 +176,8 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
-        buttonReferenceAdjust.setText(getString(R.string.reference_adjustment)+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
+        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+"\n"+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
+        buttonReferenceAdjust.setText(getString(R.string.reference_adjustment)+"\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 
 

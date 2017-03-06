@@ -84,7 +84,7 @@ public class SettingsLanguagePickerActivity extends ListActivity{
             navigationbar.getSpinnerLib().setVisibility(View.INVISIBLE);
             navigationbar.getSpinnerMode().setVisibility(View.INVISIBLE);
             navigationbar.getButtonSettings().setVisibility(View.GONE);
-            navigationbar.getTextTitle().setText("Balance setup".toUpperCase());
+            navigationbar.getTextTitle().setText(getString(R.string.balance_setup).toUpperCase());
             navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
 
@@ -104,7 +104,9 @@ public class SettingsLanguagePickerActivity extends ListActivity{
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						Locale locale = languageAdapter.getItem(position);
-						change_setting_language(locale.getLanguage(), locale.getCountry());
+
+
+                            change_setting_language(locale.getLanguage().toString(), locale.getCountry().toString());
 
 						setResult(RESULT_OK);
 						finish();
@@ -160,9 +162,10 @@ public class SettingsLanguagePickerActivity extends ListActivity{
                       }
                       
                 }*/
-            Locale locale=null;
-            localesList.add(locale.US);
+            //Locale locale=new Locale();
+            localesList.add(Locale.US);
             localesList.add(Locale.GERMANY);
+
               
 
              
