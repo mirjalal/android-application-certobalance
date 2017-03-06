@@ -56,7 +56,7 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
                 try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_text);
-                    dialog.setTitle("Please enter the name of the currency");
+                    dialog.setTitle(R.string.please_enter_the_name_of_the_currency);
 
                     // set the custom dialog components - text, image and button
 
@@ -109,10 +109,10 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
         }
 
         if(ApplicationManager.getInstance().getCurrency() == null){
-            buttonCurrency.setText(R.string.currency);
+            buttonCurrency.setText(R.string.currency+":  ");
         }
         else{
-            buttonCurrency.setText(getString(R.string.currency)+ ApplicationManager.getInstance().getCurrency());
+            buttonCurrency.setText(getString(R.string.currency)+":  "+ ApplicationManager.getInstance().getCurrency());
         }
 
         super.onResume();

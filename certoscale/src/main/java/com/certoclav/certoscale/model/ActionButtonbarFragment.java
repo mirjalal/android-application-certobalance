@@ -1412,7 +1412,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	public void updateStatsButtonUI() {
 
-		getButtonStatistics().setText("STATISTICS\n(" + ApplicationManager.getInstance().getStats().getStatistic().getN() + ")");
+		getButtonStatistics().setText(getString(R.string.statistics).toUpperCase()+ "\n(" + ApplicationManager.getInstance().getStats().getStatistic().getN() + ")");
 		if (ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
 			getButtonStatistics().setEnabled(false);
 		}else {

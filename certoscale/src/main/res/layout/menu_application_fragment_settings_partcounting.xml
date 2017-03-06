@@ -78,7 +78,7 @@
         style="@style/button_actionbar"/>
 
     <Button
-        android:text="Calculate AWP"
+        android:text="@string/calculate_awp"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:id="@+id/settings_partcounting_button_calc_awp"

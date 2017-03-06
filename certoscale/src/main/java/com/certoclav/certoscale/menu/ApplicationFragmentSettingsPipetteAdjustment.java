@@ -105,7 +105,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the water temperature");
+                    dialog.setTitle(R.string.please_enter_the_water);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" °C");
                     // set the custom dialog components - text, image and button
 
@@ -152,7 +152,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the pipette inaccuracy");
+                    dialog.setTitle(R.string.please_enter_the_pipette_inaccuracy);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(" %");
                     // set the custom dialog components - text, image and button
 
@@ -202,7 +202,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the imprecission of the pipette");
+                    dialog.setTitle(R.string.please_enter_the_imprecision_of_the_pipette);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
@@ -298,7 +298,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try {
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
-            dialog.setTitle("Please enter the pipette name");
+            dialog.setTitle(R.string.please_enter_the_pipette_name);
 
             // set the custom dialog components - text, image and button
 
@@ -344,7 +344,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please enter the pipette number");
+                    dialog.setTitle(R.string.please_enter_the_pipette_number);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("");
 
                     // set the custom dialog components - text, image and button
@@ -397,7 +397,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
                 try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle("Please enter the number of samples");
+                    dialog.setTitle(R.string.please_enter_the_number_of_samples);
 
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("");
 

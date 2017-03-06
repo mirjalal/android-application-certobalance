@@ -62,7 +62,7 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the water temperature");
+                    dialog.setTitle(R.string.please_enter_the_water_temperature);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("°C");
                     // set the custom dialog components - text, image and button
 

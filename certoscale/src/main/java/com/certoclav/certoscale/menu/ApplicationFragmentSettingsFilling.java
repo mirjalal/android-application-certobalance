@@ -54,7 +54,7 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the target weight");
+                    dialog.setTitle(R.string.please_enter_the_target_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button
@@ -154,7 +154,7 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
         super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         button_target.setVisibility(View.VISIBLE);
-        button_target.setText("Target Weight:\n"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getTarget()) + " g");
+        button_target.setText(getString(R.string.tared_weight)+":\n"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getTarget()) + " g");
 
 
 

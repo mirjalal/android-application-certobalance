@@ -760,7 +760,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if  (prefs.getBoolean(getString(R.string.preferences_pipette_barounit_visible),getResources().getBoolean(R.bool.preferences_pipette_barounit_visible))==true) {
-                    listReferenceFields.get(pipetteBarometric).getTextName().setText(R.string.barometric_unit_capitalized);
+                    listReferenceFields.get(pipetteBarometric).getTextName().setText(getString(R.string.barometric_unit_capitalized).toUpperCase());
                     listReferenceFields.get(pipetteBarometric).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
                 }
 

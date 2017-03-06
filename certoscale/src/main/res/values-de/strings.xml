@@ -57,7 +57,7 @@
     <string name="edit_unit">EINHEITEN EDITIEREN</string>
     <string name="add_to_stats">HINZUFÜGEN</string>
     <string name="end_batch">Charge beenden</string>
-    <string name="fill_status">Füll Status</string>
+    <string name="fill_status">Füll Status: </string>
     <string name="imprecision">Ungenauigkeit</string>
     <string name="inaccuracy">Präzisionsabweichung</string>
     <string name="internal_calibration">Interne Kalibrierung</string>
@@ -74,20 +74,20 @@
     <string name="number_of_samples">Anzahl der Proben</string>
     <string name="oil_density">Öl Dichte</string>
     <string name="onto_the_pan">auf die Waage</string>
-    <string name="over_limit">Oberes Limit</string>
+    <string name="over_limit">Oberes Limit \n</string>
     <string name="piece_weight">STÜCK GEWICHT</string>
     <string name="pipett_name">Pipetten Name</string>
     <string name="pipette_adjustment_finisihed">Pipettenabgleich abgeschlossen. Drücken sie Start um den Vorgang erneut zu starten</string>
     <string name="pipette_number">Pipetten Nummer</string>
     <string name="place">Platzieren</string>
     <string name="place_container_on_the_pan">Platzieren Sie den Behälter auf der Waage und drücken sie START</string>
-    <string name="place_target_weight_on_pan">Platzieren sie das Zielgewicht auf der Waage. Drücken Sie OK um fortzufahren</string>
-    <string name="please_enter_a_description">Geben sie eine Beschreibung der Einheit ein</string>
-    <string name="please_enter_a_valid">"Bitte geben sie einen gültigen Faktor an "</string>
-    <string name="please_enter_a_valid_exponent">Bitte geben sie einen gültigen Exponent ein</string>
-    <string name="please_enter_normal_pipette">Bitte geben sie die nominelle Pipettenkapazität in ml ein</string>
+    <string name="place_target_weight_on_pan">Platzieren Sie das Zielgewicht auf der Waage. Drücken Sie OK um fortzufahren</string>
+    <string name="please_enter_a_description">Geben Sie eine Beschreibung der Einheit ein</string>
+    <string name="please_enter_a_valid">\"Bitte geben Sie einen gültigen Faktor an \"</string>
+    <string name="please_enter_a_valid_exponent">Bitte geben Sie einen gültigen Exponent ein</string>
+    <string name="please_enter_normal_pipette">Bitte geben Sie die nominelle Pipettenkapazität in ml ein</string>
     <string name="please_enter_oil_density">Bitte geben Sie die Dichte des Öls ein</string>
-    <string name="please_enter_num_samples">Bitte geben sie die Anzahl der Proben zur Mittelwertberechnung ein</string>
+    <string name="please_enter_num_samples">Bitte geben Sie die Anzahl der Proben zur Mittelwertberechnung ein</string>
 
     <string name="please_enter_the_average_piece_weight">Bitte geben Sie das durchschnittliche Stückgewicht ein</string>
     <string name="please_enter_the_first_neg_tol">Bitte geben Sie die erste negativ Toleranz ein</string>
@@ -228,4 +228,205 @@
     <string name="user_management">Benutzerverwaltung</string>
     <string name="videos">Videos</string>
     <string name="weigh_sinker_in_liquid">Wiegen Sie das Bleigewicht in Wasser und drücken Sie akzeptieren</string>
+    <string name="statistics">Statistiken</string>
+    <string name="calculate_awp">AWP berechnen</string>
+    <string name="please_enter_an_adjustment_factor_for_the_reference">Bitte geben Sie einen Anpassungsfaktor für das Bezugsgewicht ein</string>
+    <string name="please_enter_the_reference_weight">Bitte geben Sie das Bezugsgewicht ein</string>
+    <string name="please_enter_the_averaging_time">Bitte geben Sie Mittelungszeit ein</string>
+    <string name="please_enter_the_nominal_weight">Bitte geben Sie das Nominalgewicht ein</string>
+    <string name="please_enter_the_over_limit">Bitte geben Sie das obere Limit ein</string>
+    <string name="please_enter_the_over_tolerance_in_percent">Bitte geben Sie die obere Toleranz in Prozent ein</string>
+    <string name="please_enter_the_scaling_factor">Bitte geben sie den Skalierungsfaktor ein</string>
+    <string name="please_enter_the_target_weight">Bitte geben Sie das Zielgewicht ein</string>
+    <string name="please_enter_the_under_limit">Bitte geben Sie die untere Grenze ein</string>
+    <string name="please_enter_the_under_tolerance_limit_in_percent">Bitte geben Sie die untere Grenze in Prozent ein</string>
+    <string name="please_enter_the_under_tolerance_limit_weight">Bitte geben sie die untere Toleranzgrenze ein</string>
+    <string name="please_enter_the_upper_tolerance_limit_weight">Bitte geben Sie die obere Toleranzgrenze ein</string>
+    <string name="calculate_target_weight">Zielgewicht berechnen</string>
+    <string name="g_of">\" g von \"</string>
+    <string name="on_the_pan_and_press_next">auf die Wiegefläche und drücken Sie NÄCHSTE</string>
+    <string name="pleas_put">"Bitte platzieren Sie "</string>
+    <string name="balance_setup">B</string>
+    <string name="please_enter_the_imprecision_of_the_pipette">Bitte geben Sie die Präzisionsabweichung ein</string>
+    <string name="please_enter_the_name_of_the_currency">Bitte geben Sie den Namen der Währung ein</string>
+    <string name="please_enter_the_number_of_samples">Bitte geben Sie die Anzahl der Proben ein</string>
+    <string name="please_enter_the_pipette_inaccuracy">Bitte geben Sie die Ungenauigkeit der Pipette ein</string>
+    <string name="please_enter_the_pipette_name">Bitte geben Sie den Pipettennamen ein</string>
+    <string name="please_enter_the_pipette_number">Bitte geben Sie die Pipettennummer ein</string>
+    <string name="please_enter_the_water">Bitte geben Sie die Wassertemperatur ein</string>
+    <string name="please_enter_the_water_temperature">Bitte geben Sie die Wassertemperatur ein</string>
+
+
+
+
+
+
+    <string-array name="navigationbar_entries">
+        <item>Wägen</item>
+        <item>Stückzählung</item>
+        <item>Prozentwägen</item>
+        <item>Kontrollwägen</item>
+        <item>Dynamisches Wägen</item>
+        <item>Füllen</item>
+        <item>Summieren</item>
+        <item>Rezeptur</item>
+        <item>Differenzialwägen</item>
+        <item>Dichtebestimmung</item>
+        <item>Spitzenwert halten</item>
+        <item>Kostenberechnung der Zutaten</item>
+        <item>Pipettenabgleich</item>
+        <item>Statischtische Qualitätskontrolle</item>
+    </string-array>
+    <string-array name="array_menu_main">
+        <item>Calibration</item>
+        <item>User Settings</item>
+        <item>Balance Setup</item>
+        <item>Application Modes</item>
+        <item>Weighing Units</item>
+        <item>GLP and GMP Data</item>
+        <item>Library</item>
+    </string-array>
+
+
+
+    <string-array name="navigationbar_bib_entries">
+        <item>Library</item>
+    </string-array>
+
+    <string-array name="preferences_counting_modes">
+        <item>Standard Counting</item>
+        <item>Check Counting</item>
+        <item>Fill Counting</item>
+    </string-array>
+
+    <string-array name="preferences_counting_modes_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preferences_check_modes">
+        <item>Over and Under</item>
+        <item>Nominal / Weight Tolerance</item>
+        <item>Nominal / Percent Tolerance</item>
+    </string-array>
+
+
+    <string-array name="preferences_check_modes_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preferences_peak_modes">
+        <item>Manual</item>
+        <item>Semi Automatic</item>
+        <item>Automatic</item>
+    </string-array>
+
+    <string-array name="preferences_density_mode">
+        <item>Solid density higher than Water</item>
+        <item>Solid density lower than Water </item>
+        <item>Liquid Density  </item>
+
+    </string-array>
+
+    <string-array name="preferences_density_liquid_type">
+        <item>Water</item>
+        <item>Other</item>
+    </string-array>
+
+
+    <string-array name="preferences_device_color_themes">
+        <item>Dark</item>
+        <item>Bright</item>
+    </string-array>
+
+    <string-array name="preferences_sqc_tolerance_mode">
+        <item>Weight</item>
+        <item>Percent</item>
+    </string-array>
+
+    <string-array name="preferences_communication_string_array_devices">
+        <item>G&amp;G PLC-6000</item>
+        <item>D&amp;T AY120B</item>
+    </string-array>
+
+    <string-array name="preferences_device_themes_string_array">
+        <item>Dark theme</item>
+        <item>Bright theme</item>
+    </string-array>
+
+
+    <string-array name="preferences_pipette_liquid_type">
+        <item>Water</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="preferences_pipette_liquid_type_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <string-array name="preferences_density_liquid_type_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_device_color_themes_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+
+    <string-array name="preferences_sqc_tolerance_mode_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_communication_list_devices_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_device_themes_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="preferences_density_mode_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
+
+    <string-array name="preferences_peak_modes_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+
+    <string-array name="preferences_check_display_modes">
+        <item>Weight</item>
+        <item>Check Status</item>
+
+    </string-array>
+
+
+    <string-array name="preferences_check_display_modes_value">
+        <item>1</item>
+        <item>2</item>
+
+    </string-array>
+
+
+    <string-array name="preferences_counting_statistics">
+        <item>Off</item>
+        <item>Manual</item>
+        <item>Auto</item>
+    </string-array>
 </resources>
