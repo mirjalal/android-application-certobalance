@@ -184,6 +184,7 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".service.SyncItemsService"></service>
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
         <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 

@@ -602,6 +602,22 @@ public class DatabaseService {
 
 	}
 
+
+	public int updateItemCloudId(Item item, String cloudId) {
+		try {
+			item.setCloudId(cloudId);
+			deleteItem(item);
+			int r = insertItem(item);
+			return r;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+
+	}
+
+
 	public int updateUserPassword(String email_user_id, String newPassword) {
 		try {
 			UpdateBuilder<User, Integer> updateBuilder = userDao

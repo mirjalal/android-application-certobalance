@@ -3,14 +3,13 @@ package com.certoclav.certoscale.settings.item;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemAdapter;
@@ -18,12 +17,13 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.service.SyncItemsService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
-import com.certoclav.library.certocloud.GetUtil;
-import com.certoclav.library.certocloud.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
  * Created by Michael on 12/6/2016.
  */
 
-public class MenuItemActivity extends Activity implements ItemAdapter.OnClickButtonListener, ButtonEventListener{
+public class MenuItemActivity extends Activity implements ItemAdapter.OnClickButtonListener, ButtonEventListener,DatabaseListener{
 
     private Navigationbar navigationbar = new Navigationbar(this);
     private Item item = null;
@@ -75,56 +75,8 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         adapter.setOnClickButtonListener(this);
         navigationbar.setButtonEventListener(this);
         adapter.clear();
-        new AsyncTask<Boolean, Boolean, Boolean >(){
+        Scale.getInstance().setOnDatabaseListener(this);
 
-            @Override
-            protected Boolean  doInBackground(Boolean... params) {
-                ArrayList<String> itemsList = new ArrayList<String>();
-                Items items = new Items();
-                Integer retval = items.getItemsFromCloud();
-                if(retval == GetUtil.RETURN_OK){
-                    if(items.getItemJsonStringArray() != null){
-                        DatabaseService db = new DatabaseService(ApplicationController.getContext());
-                        List<Item> itemsFromDb = db.getItems();
-                        List<Item> itemsFromCloud = new ArrayList<Item>();
-
-                        for(String itemJsonString : items.getItemJsonStringArray()){
-                            itemsFromCloud.add(new Item(itemJsonString));
-                        }
-                        for(Item cloudItem : itemsFromCloud){
-                            boolean cloudItemAlreadyInDb = false;
-                            for(Item dbitem : itemsFromDb){
-                                if(cloudItem.getCloudId().equals(dbitem.getCloudId())){
-                                    cloudItemAlreadyInDb = true;
-                                    continue;
-                                }
-                            }
-                            if(cloudItemAlreadyInDb == false){
-                                db.insertItem(cloudItem);
-                            }
-                        }
-
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean b) {
-                Toast.makeText(ApplicationController.getContext(), "Items updated", Toast.LENGTH_LONG);
-                DatabaseService db = new DatabaseService(ApplicationController.getContext());
-                List<Item> items = db.getItems();
-                adapter.clear();
-                if(items != null){
-                    for(Item item : items){
-                        adapter.add(item);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-
-                super.onPostExecute(b);
-            }
-        }.execute();
         DatabaseService db = new DatabaseService(this);
         List<Item> items = db.getItems();
         if(items != null){
@@ -138,12 +90,17 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
             adapter.setHideActionButtons(false);
         }
         adapter.notifyDataSetChanged();
+
+        Intent intent3 = new Intent(ApplicationController.getContext(), SyncItemsService.class);
+        startService(intent3);
+
     }
 
     @Override
     protected void onPause() {
         adapter.removeOnClickButtonListener(this);
         navigationbar.removeNavigationbarListener(this);
+        Scale.getInstance().removeOnDatabaseListener(this);
         super.onPause();
 
     }
@@ -212,5 +169,24 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
             startActivity(intent);
 
         }
+    }
+
+    @Override
+    public void onDatabaseChanged() {
+        Log.e("MenuItemActivity","onDatabaseChanged()");
+        DatabaseService db = new DatabaseService(this);
+        List<Item> items = db.getItems();
+        adapter.clear();
+        if(items != null){
+            for(Item item : items){
+                adapter.add(item);
+            }
+        }
+        if(getIntent().hasExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK)){
+            adapter.setHideActionButtons(true);
+        }else{
+            adapter.setHideActionButtons(false);
+        }
+        adapter.notifyDataSetChanged();
     }
 }

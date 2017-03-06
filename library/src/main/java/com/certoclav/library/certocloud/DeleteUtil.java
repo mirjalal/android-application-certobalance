@@ -1,5 +1,7 @@
 package com.certoclav.library.certocloud;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,8 +12,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import android.util.Log;
 
 public class DeleteUtil {
 
@@ -37,6 +37,7 @@ public class DeleteUtil {
 	 */
 	public int deleteToCertocloud(String urlpath, boolean auth){
 
+
 	     int returnval = RETURN_UNKNOWN;
 	     	if(auth == true){
 	     		if(CloudUser.getInstance().getToken().isEmpty()){
@@ -57,6 +58,11 @@ public class DeleteUtil {
 				}
 				conn.setRequestProperty("Content-Type", "application/json");
 
+				Log.e("DeleteUtil", "HEADER: X-Access-Token: " + CloudUser.getInstance().getToken());
+				Log.e("DeleteUtil", "HEADER: X-Key: " + CloudUser.getInstance().getEmail());
+				Log.e("DeleteUtil", "HEADER: Content-Type: " + "application/json");
+				Log.e("DeleteUtil", "URL: " + urlpath);
+
 				// read the response
 				int responseCode = -1;
 				try{
@@ -69,21 +75,23 @@ public class DeleteUtil {
 					//this workaround is neccessary, because server doesn't reply with WWW-Authenticate in header in case of Responsecode 401
 				}
 
-				responseMessage = conn.getResponseMessage();
+				try {
+					responseMessage = conn.getResponseMessage();
 
-				
-			
-				
-				InputStream in = new BufferedInputStream(conn.getInputStream());
-				
-				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-				StringBuilder result = new StringBuilder();
-				String line;
-				while((line = reader.readLine()) != null) {
-				    result.append(line);
+
+					InputStream in = new BufferedInputStream(conn.getInputStream());
+
+					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+					StringBuilder result = new StringBuilder();
+					String line;
+					while ((line = reader.readLine()) != null) {
+						result.append(line);
+					}
+					responseBody = result.toString();
+				}catch (Exception e){
+					responseMessage = "";
+					responseBody = "";
 				}
-				responseBody = result.toString();
-				
 
 				Log.e("DeleteProtocolTask", "Response body" + responseBody);
  

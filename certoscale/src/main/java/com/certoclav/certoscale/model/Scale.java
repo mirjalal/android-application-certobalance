@@ -3,6 +3,7 @@ package com.certoclav.certoscale.model;
 import android.util.Log;
 
 import com.certoclav.certoscale.database.User;
+import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.ScaleStateListener;
 import com.certoclav.certoscale.listener.StableListener;
@@ -23,11 +24,13 @@ import android_serialport_api.SerialService;
 public class Scale extends Observable {
 
 
+
 	ArrayList<WeightListener> weightListeners = new ArrayList<WeightListener>();
 	ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
 	ArrayList<WifiListener> wifiListeners = new ArrayList<WifiListener>();
 	ArrayList<ScaleStateListener> scaleStateListeners = new ArrayList<ScaleStateListener>();
 	ArrayList<StableListener> stableListeners = new ArrayList<StableListener>();
+	ArrayList<DatabaseListener> databaseListeners = new ArrayList<DatabaseListener>();
 
 	private SerialService serialServiceScale = null;
 	private SerialService serialServiceLabelPrinter = null;
@@ -169,6 +172,14 @@ public class Scale extends Observable {
 	}
 
 
+	public void setOnDatabaseListener (DatabaseListener listener){
+		this.databaseListeners.add(listener);
+	}
+	public void removeOnDatabaseListener (DatabaseListener listener){
+		this.databaseListeners.remove(listener);
+	}
+
+
 
 	public void setOnScaleStateListener (ScaleStateListener listener){
 		this.scaleStateListeners.add(listener);
@@ -260,5 +271,10 @@ public class Scale extends Observable {
 	}
 
 
+	public void notifyDatabaseChanged() {
+		for(DatabaseListener listener : databaseListeners){
+			listener.onDatabaseChanged();
+		}
+	}
 }
 

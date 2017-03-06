@@ -8,14 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.certocloud.CertocloudConstants;
+import com.certoclav.library.certocloud.DeleteTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +136,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		actionItemEdit.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+
+
+
 				for(OnClickButtonListener listener : onClickButtonListeners){
 					listener.onClickButtonEdit(getItem(position));
 				}
@@ -169,9 +175,15 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			actionItemDelete.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					for(OnClickButtonListener listener : onClickButtonListeners){
-						listener.onClickButtonDelete(getItem(position));
+
+					if(getItem(position).getCloudId().isEmpty() == false){
+						DeleteTask deleteTask = new DeleteTask();
+						deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_ITEM + getItem(position).getCloudId());
 					}
+					DatabaseService db = new DatabaseService(mContext);
+					db.deleteItem(getItem(position));
+					remove(getItem(position));
+					notifyDataSetChanged();
 
 
 
