@@ -23,6 +23,7 @@
 	                android:layout_height="match_parent"
 	                android:scaleType="centerInside"
 	                android:adjustViewBounds="true"
+					android:layout_margin="10dp"
 	                android:src="@drawable/movie" ></ImageView>
 			</FrameLayout>
 			
@@ -33,8 +34,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/square"
                 android:text="Contentdescription of this video"
-                android:textSize="40dp"
-                tools:ignore="HardcodedText" />
+				style="@style/text_default"
+				  />
         
          </RelativeLayout>
 

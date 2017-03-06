@@ -12,7 +12,7 @@
 			android:id="@+id/dialog_sample_list"
 			android:layout_width="wrap_content"
 			android:layout_height="300dp"
-			android:layout_above="@+id/dialog_statistics_samples_button_close"
+			android:layout_above="@+id/dialog_statistics_samples_lin"
 			/>
 
 
@@ -21,6 +21,7 @@
 
 
 	<LinearLayout
+		android:id="@+id/dialog_statistics_samples_lin"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
