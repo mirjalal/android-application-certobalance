@@ -2,27 +2,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
             android:key="@string/preferences_peak_activated"
             android:defaultValue="@bool/preferences_peak_activated"
-            android:title="Activated"
-            android:summary="Turn the application on/off"
+            android:title="@string/activated"
+            android:summary="@string/turn_the_application_on_off"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_peak_lock"
             android:defaultValue="@bool/preferences_peak_lock"
-            android:title="Lock"
-            android:summary="Lock the peak hold settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
         <ListPreference
             android:key="@string/preferences_peak_mode"
-            android:title="Auto Sample Mode"
-            android:summary="Select operation mode"
+            android:title="@string/auto_sample_mode"
+            android:summary="@string/select_operation_mode"
             android:dependency="@string/preferences_peak_lock"
             android:defaultValue="1"
             android:entries="@array/preferences_peak_modes"
@@ -33,8 +33,8 @@
         <CheckBoxPreference
             android:key="@string/preferences_peak_stableonly"
             android:defaultValue="@bool/preferences_peak_stableonly"
-            android:title="Only Stable Weight"
-            android:summary="Turn stable weight only on/off"
+            android:title="@string/only_stable_weights"
+            android:summary="@string/turn_this_feature_on_off"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
@@ -43,42 +43,42 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
 
         <CheckBoxPreference
             android:key="@string/preferences_peak_brutto_visible"
             android:defaultValue="@bool/preferences_peak_brutto_visible"
-            android:title="Brutto"
-            android:summary="Turn the brutto weight visible/invisible"
+            android:title="@string/brutto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_peak_netto_visible"
             android:defaultValue="@bool/preferences_peak_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:title="@string/netto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_peak_tara_visible"
             android:defaultValue="@bool/preferences_peak_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:title="@string/tara"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_peak_print_stableonly"
             android:defaultValue="@bool/preferences_peak_print_stableonly"
-            android:title="Stable Weight only"
-            android:summary="Print only the stable weightyes/no"
+            android:title="@string/only_stable_weights"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_peak_lock" >
         </CheckBoxPreference>
 

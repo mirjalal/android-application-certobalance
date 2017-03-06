@@ -2,12 +2,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
         
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_activated"
 	    	android:defaultValue="@bool/preferences_weigh_activated_default"
-	    	android:title="Activated"
-	    	android:summary="Turn the application on/off"
+	    	android:title="@string/activated"
+
+	    	android:summary="@string/turn_the_application_on_off"
 			android:dependency="@string/preferences_weigh_lock">
     	</CheckBoxPreference>
 
@@ -15,23 +16,23 @@
 			android:key="@string/preferences_weigh_lock"
 			android:defaultValue="@bool/preferences_weigh_lock"
 			android:disableDependentsState="true"
-			android:title="Lock"
-			android:summary="Lock the weighing settings on/off">
+			android:title="@string/lock"
+			android:summary="@string/lock_the_settings_of_this">
 		</CheckBoxPreference>
   
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_minimum"
 	    	android:defaultValue="@bool/preferences_weigh_minimum"
-	    	android:title="Minimum weight"
-	    	android:summary="Turn the minimum weight on/off"
+	    	android:title="@string/minimum_weight"
+	    	android:summary="@string/turn_this_feature_on_off"
 			android:dependency="@string/preferences_weigh_lock">
     	</CheckBoxPreference>
 
 		<CheckBoxPreference
 			android:key="@string/preferences_weigh_auto_mode"
 			android:defaultValue="@bool/preferences_weigh_auto_mode"
-			android:title="Auto mode"
-			android:summary="Turn the auto mode on/off"
+			android:title="@string/auto_mode"
+			android:summary="@string/turn_this_feature_on_off"
 			android:dependency="@string/preferences_weigh_lock">
 		</CheckBoxPreference>
 
@@ -40,14 +41,14 @@
  
    </PreferenceCategory>
    
-   <PreferenceCategory android:title="VISIBILITY"
+   <PreferenceCategory android:title="@string/visibility"
 	   >
    
    		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_load_visible"
 	    	android:defaultValue="@bool/preferences_weigh_load_visible"
-	    	android:title="Load in Percent"
-	    	android:summary="Turn the load in percent line visible/invisible"
+	    	android:title="@string/load_in_percent"
+	    	android:summary="@string/turn_this_value_visible_invisible"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>
  
@@ -55,43 +56,43 @@
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_minimum_visible"
 	    	android:defaultValue="@bool/preferences_weigh_minimum_visible"
-	    	android:title="Minimum weight"
-	    	android:summary="Turn the minimum weight visible/invisible"
+	    	android:title="@string/minimum_weight"
+			android:summary="@string/turn_this_value_visible_invisible"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>	
  
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_brutto_visible"
 	    	android:defaultValue="@bool/preferences_weigh_brutto_visible"
-	    	android:title="Brutto"
-	    	android:summary="Turn the brutto weight visible/invisible"
+	    	android:title="@string/brutto"
+			android:summary="@string/turn_this_value_visible_invisible"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>	
     
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_netto_visible"
 	    	android:defaultValue="@bool/preferences_weigh_netto_visible"
-	    	android:title="Netto"
-	    	android:summary="Turn the netto weight visible/invisible"
+	    	android:title="@string/netto"
+			android:summary="@string/turn_this_value_visible_invisible"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>	
     		
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_tara_visible"
 	    	android:defaultValue="@bool/preferences_weigh_tara_visible"
-	    	android:title="Tara"
-	    	android:summary="Turn the tara weight visible/invisible"
+	    	android:title="@string/tara"
+			android:summary="@string/turn_this_value_visible_invisible"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>	
     			
 </PreferenceCategory>
 
-<PreferenceCategory android:title="PRINTER OPTIONS" >
+<PreferenceCategory android:title="@string/printer_options" >
 		<CheckBoxPreference
 	    	android:key="@string/preferences_weigh_print_min"
 	    	android:defaultValue="@bool/preferences_weigh_print_min"
-	    	android:title="Print Minimum Weight"
-	    	android:summary="Print the minimum weight yes/no"
+	    	android:title="@string/print_minimum_weight"
+			android:summary="@string/print_this_property_yes_no"
 	    	android:dependency="@string/preferences_weigh_lock" >
     	</CheckBoxPreference>
     	

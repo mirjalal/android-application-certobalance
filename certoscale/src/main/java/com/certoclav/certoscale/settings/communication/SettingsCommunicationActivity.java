@@ -25,7 +25,7 @@ public class SettingsCommunicationActivity extends FragmentActivity {
 		setContentView(R.layout.settings_unit_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText("Communication menu".toUpperCase());
+		navigationbar.getTextTitle().setText(getString(R.string.communication_menu).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		

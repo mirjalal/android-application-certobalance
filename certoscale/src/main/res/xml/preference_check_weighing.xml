@@ -11,20 +11,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
         android:key="@string/preferences_check_activated"
         android:defaultValue="@bool/preferences_check_activated"
-        android:title="Activated"
-        android:summary="Turn the application on/off"
+        android:title="@string/activated"
+        android:summary="@string/turn_the_application_on_off"
         android:dependency="@string/preferences_check_lock" >
     </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_lock"
             android:defaultValue="@bool/preferences_check_lock"
-            android:title="Lock"
-            android:summary="Lock the check weighing settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
@@ -33,8 +33,8 @@
             android:defaultValue="1"
             android:entries="@array/preferences_check_modes"
             android:entryValues="@array/preferences_check_modes_value"
-            android:title="Limit Mode"
-            android:summary="Select Limit Settings"
+            android:title="@string/limit_mode"
+            android:summary="@string/select_the_limit_settings"
             android:dependency="@string/preferences_check_lock"
             />
 
@@ -42,40 +42,34 @@
 
         <ListPreference
             android:key="@string/preferences_check_displayoptions"
-            android:title="Display Options"
+            android:title="@string/display_options"
             android:defaultValue="1"
             android:entries="@array/preferences_check_display_modes"
             android:entryValues="@array/preferences_check_display_modes_value"
-            android:summary="Select statistics "
+            android:summary="@string/select_statistics"
             android:dependency="@string/preferences_check_lock"
             />
 
         <CheckBoxPreference
             android:key="@string/preferences_check_auto_mode"
             android:defaultValue="@bool/preferences_check_auto_mode"
-            android:title="Auto Mode"
-            android:summary="Turn the auto sample mode on/off"
+            android:title="@string/auto_mode"
+            android:summary="@string/turn_this_feature_on_off"
             android:dependency="@string/preferences_check_lock"
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
-        <CheckBoxPreference
-            android:key="@string/preferences_check_secondary_visible"
-            android:defaultValue="@bool/preferences_check_secondary_visible"
-            android:title="Secondary Unit"
-            android:summary="Turn the secondary display line visible/invisible"
-            android:dependency="@string/preferences_check_lock">
-        </CheckBoxPreference>
+
 
         <CheckBoxPreference
             android:key="@string/preferences_check_over_visible"
             android:defaultValue="@bool/preferences_check_over_visible"
-            android:title="Over Limit"
-            android:summary="Turn upper limitvisible/invisible"
+            android:title="@string/over_limit"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock" >
         </CheckBoxPreference>
 
@@ -83,83 +77,83 @@
         <CheckBoxPreference
             android:key="@string/preferences_check_under_visible"
             android:defaultValue="@bool/preferences_check_under_visible"
-            android:title="Under Limit"
-            android:summary="Turn lower limit visible/invisible"
+            android:title="@string/under_limit"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_brutto_visible"
             android:defaultValue="@bool/preferences_check_brutto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+            android:title="@string/brutto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_netto_visible"
             android:defaultValue="@bool/preferences_check_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:title="@string/netto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_tara_visible"
             android:defaultValue="@bool/preferences_check_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:title="@string/tara"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_target_visible"
             android:defaultValue="@bool/preferences_check_target_visible"
-            android:title="Target"
-            android:summary="Turn the target weight visible/invisible"
+            android:title="@string/target"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_overtolerance_visible"
             android:defaultValue="@bool/preferences_check_overtolerance_visible"
-            android:title="Over Tolerance"
-            android:summary="Turn Over Tolerance visible/invisible"
+            android:title="@string/over_tolerance"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_undertolerance_visible"
             android:defaultValue="@bool/preferences_check_undertolerance_visible"
-            android:title="Under Tolerance"
-            android:summary="Turn Under Tolerance visible/invisible"
+            android:title="@string/under_toleranc"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_check_print_target"
             android:defaultValue="@bool/preferences_check_print_target"
-            android:title="Target"
-            android:summary="Print the target weight on/off"
+            android:title="@string/target"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_print_overtolerance"
             android:defaultValue="@bool/preferences_check_print_overtolerance"
-            android:title="Over Tolerance"
-            android:summary="Print Over Tolerance on/off"
+            android:title="@string/over_tolerance"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_check_print_undertolerance"
             android:defaultValue="@bool/preferences_check_print_undertolerance"
-            android:title="Under Tolerance"
-            android:summary="Print Under Tolerance on/off"
+            android:title="@string/under_toleranc"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
@@ -167,8 +161,8 @@
         <CheckBoxPreference
             android:key="@string/preferences_check_print_overlimit"
             android:defaultValue="@bool/preferences_check_print_overlimit"
-            android:title="Over Limit"
-            android:summary="Print upper limit on/off"
+            android:title="@string/over_limit"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 
@@ -176,8 +170,8 @@
         <CheckBoxPreference
             android:key="@string/preferences_check_print_underlimit"
             android:defaultValue="@bool/preferences_check_print_underlimit"
-            android:title="Under Limit"
-            android:summary="Print lower limit on/off"
+            android:title="@string/under_limit"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_check_lock">
         </CheckBoxPreference>
 

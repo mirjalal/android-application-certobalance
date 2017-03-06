@@ -2,20 +2,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
             android:key="@string/preferences_totalization_activated"
             android:defaultValue="@bool/preferences_totalization_activated_default"
-            android:title="Activated"
-            android:summary="Turn the application on/off"
+            android:title="@string/activated"
+            android:summary="@string/turn_the_application_on_off"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_lock"
             android:defaultValue="@bool/preferences_totalization_lock"
-            android:title="Lock"
-            android:summary="Lock the totalization settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
@@ -23,21 +23,21 @@
         <CheckBoxPreference
             android:key="@string/preferences_totalization_AutoSampleMode"
             android:defaultValue="@bool/preferences_totalization_AutoSampleMode"
-            android:title="Auto Sample Mode"
-            android:summary="Turn auto sample mode on/off"
+            android:title="@string/auto_sample_mode"
+            android:summary="@string/turn_this_feature_on_off"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
         <CheckBoxPreference
             android:key="@string/preferences_totalizaion_NumberofSamples"
             android:defaultValue="@bool/preferences_totalizaion_NumberofSamples"
-            android:title="Number of Samples"
-            android:summary="Turn the number of weighed samples visible/invisible"
+            android:title="@string/number_of_samples"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
@@ -45,40 +45,40 @@
         <CheckBoxPreference
             android:key="@string/preferences_totalization_average_visible"
             android:defaultValue="@bool/preferences_totalization_average_visible"
-            android:title="Average"
-            android:summary="Turn the average weight visible/invisible"
+            android:title="@string/average"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_standarddeviation_visible"
             android:defaultValue="@bool/preferences_totalization_standarddeviation_visible"
-            android:title="Standard Deviation"
-            android:summary="Turn the standard deviation visible/invisible"
+            android:title="@string/standard_deviation"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_minimum_visible"
             android:defaultValue="@bool/preferences_totalization_minimum_visible"
-            android:title="Minimum"
-            android:summary="Turn the minimum weight visible/invisible"
+            android:title="@string/minimum"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_maximum_visible"
             android:defaultValue="@bool/preferences_totalization_maximum_visible"
-            android:title="Maximum"
-            android:summary="Turn the Maximum weight visible/invisible"
+            android:title="@string/maximum"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_range_visible"
             android:defaultValue="@bool/preferences_totalization_range_visible"
-            android:title="Range"
-            android:summary="Turn the range visible/invisible"
+            android:title="@string/range"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
@@ -87,16 +87,16 @@
         <CheckBoxPreference
             android:key="@string/preferences_totalization_total_visible"
             android:defaultValue="@bool/preferences_totalization_total_visible"
-            android:title="Total"
-            android:summary="Turn the brutto weight visible/invisible"
+            android:title="@string/total"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_current_visible"
             android:defaultValue="@bool/preferences_totalization_current_visible"
-            android:title="Range"
-            android:summary="Turn the brutto weight visible/invisible"
+            android:title="@string/range"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
@@ -128,44 +128,44 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_totalization_print_samples"
             android:defaultValue="@bool/preferences_totalization_print_samples"
-            android:title="Samples"
-            android:summary="Print the number of weighed samples yes/no"
+            android:title="@string/samples"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_print_average"
             android:defaultValue="@bool/preferences_totalization_print_average"
-            android:title="Average"
-            android:summary="Print the average weight yes/no"
+            android:title="@string/average"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
         android:key="@string/preferences_totalization_print_standard"
         android:defaultValue="@bool/preferences_totalization_print_standard"
-        android:title="Standard Deviation"
-        android:summary="Print the standard deviation yes/no"
+        android:title="@string/standard_deviation"
+            android:summary="@string/print_this_property_yes_no"
         android:dependency="@string/preferences_totalization_lock" >
     </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_print_minimum"
             android:defaultValue="@bool/preferences_totalization_print_minimum"
-            android:title="Minimum"
-            android:summary="Print the minimum weight yes/no"
+            android:title="@string/minimum"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_totalization_print_maximum"
             android:defaultValue="@bool/preferences_totalization_print_maximum"
-            android:title="Maximum"
-            android:summary="Print the maximum weight yes/no"
+            android:title="@string/maximum"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>
 

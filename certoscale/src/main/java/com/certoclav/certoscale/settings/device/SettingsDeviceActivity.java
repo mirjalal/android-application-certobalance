@@ -55,7 +55,7 @@ public class SettingsDeviceActivity extends FragmentActivity implements  ButtonE
 		setContentView(R.layout.settings_device_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText("Balance setup".toUpperCase());
+		navigationbar.getTextTitle().setText(getString(R.string.balance_setup).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		
