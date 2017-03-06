@@ -183,7 +183,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case WEIGHING:
 
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible), getResources().getBoolean(R.bool.preferences_weigh_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -214,7 +214,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PART_COUNTING:
                 if (prefs.getBoolean(getString(R.string.preferences_counting_tara_visible), getResources().getBoolean(R.bool.preferences_counting_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -270,7 +270,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PERCENT_WEIGHING:
                 if (prefs.getBoolean(getString(R.string.preferences_percent_tara_visible), getResources().getBoolean(R.bool.preferences_percent_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -302,7 +302,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 String cmode_check = prefs.getString(getString(R.string.preferences_check_limitmode), "1");
                 if (prefs.getBoolean(getString(R.string.preferences_check_tara_visible), getResources().getBoolean(R.bool.preferences_check_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -365,7 +365,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case ANIMAL_WEIGHING:
                 if (prefs.getBoolean(getString(R.string.preferences_animal_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -388,7 +388,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
             case FILLING:
                 if (prefs.getBoolean(getString(R.string.preferences_filling_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -418,7 +418,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
             case PEAK_HOLD_STARTED:
                 if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -432,7 +432,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
             case PEAK_HOLD:
                 if (prefs.getBoolean(getString(R.string.preferences_peak_tara_visible), getResources().getBoolean(R.bool.preferences_animal_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 
@@ -450,7 +450,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
             case INGREDIENT_COSTING:
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_tara_visible), getResources().getBoolean(R.bool.preferences_ingrediant_tara_visible)) == true) {
-                    listReferenceFields.get(indexTableTara).getTextName().setText(R.string.tara);
+                    listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
                 }
 

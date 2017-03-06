@@ -79,7 +79,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"
-			android:text="Clear data"
+			android:text="@string/clear_data"
 			style="@style/button_default"
 			/>
 
@@ -88,7 +88,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"
-			android:text="Close"
+			android:text="@string/close"
 			style="@style/button_default"
 
 			/>

@@ -17,7 +17,7 @@
     android:textSize="18sp"
     android:textColor="@android:color/black"
     android:gravity="center"
-    android:text="Menu item"
+    android:text="@string/menu_item"
     android:maxLines="1"
     android:paddingLeft="20dp"
     />

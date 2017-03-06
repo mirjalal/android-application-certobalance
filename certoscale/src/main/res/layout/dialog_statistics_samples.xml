@@ -45,7 +45,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"
-			android:text="Print"
+			android:text="@string/print"
 			style="@style/button_default"
 
 			/>
@@ -55,7 +55,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"
-			android:text="Save"
+			android:text="@string/save"
 			style="@style/button_default"
 
 			/>
@@ -66,7 +66,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="50dp"
 			android:layout_weight="1"
-			android:text="Close"
+			android:text="@string/close"
 			style="@style/button_default"
 
 			/>

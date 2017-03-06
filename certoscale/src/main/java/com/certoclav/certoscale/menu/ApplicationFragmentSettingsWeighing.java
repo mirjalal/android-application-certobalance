@@ -46,7 +46,7 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
-                    dialog.setTitle("Please enter the under limit weight");
+                    dialog.setTitle(R.string.please_enter_the_under_limit_weight);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(ApplicationManager.getInstance().getCurrentUnit().getName());
 
                     // set the custom dialog components - text, image and button

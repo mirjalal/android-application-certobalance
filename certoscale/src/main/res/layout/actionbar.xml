@@ -17,7 +17,8 @@
 
      <Button
          android:id="@+id/actionbar_button_zero"
-         android:text="ZERO"
+         android:text="@string/zero"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -26,7 +27,8 @@
      
    <Button 
      android:id="@+id/actionbar_button_tara"
-     android:text="TARE"
+     android:text="@string/tare"
+     android:textAllCaps="true"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -34,7 +36,8 @@
      />
     <Button 
      android:id="@+id/actionbar_button_protocol"
-     android:text="PROTOCOL"
+     android:text="@string/protocol"
+     android:textAllCaps="true"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -42,7 +45,8 @@
      />
    <Button 
      android:id="@+id/actionbar_button_cal"
-     android:text="CAL"
+     android:text="@string/cal"
+     android:textAllCaps="true"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -50,7 +54,8 @@
      />
      <Button
          android:id="@+id/actionbar_button_statistics"
-         android:text="STATS\n(0)"
+         android:text="@string/stats_0"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -58,7 +63,8 @@
          />
      <Button
          android:id="@+id/actionbar_button_new_batch"
-         android:text="NEW BATCH"
+         android:text="@string/new_batch"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -66,7 +72,8 @@
          />
      <Button
          android:id="@+id/actionbar_button_end_batch"
-         android:text="END BATCH"
+         android:text="@string/end_batch"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -74,7 +81,8 @@
          />
      <Button
          android:id="@+id/actionbar_button_view_batch"
-         android:text="SHOW"
+         android:text="@string/show"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -85,7 +93,8 @@
 
      <Button
          android:id="@+id/actionbar_button_accumulate"
-         android:text="ADD TO STATS"
+         android:text="@string/add_to_stats"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -94,7 +103,8 @@
 
      <Button
          android:id="@+id/actionbar_button_start"
-         android:text="START"
+         android:text="@string/start"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -107,7 +117,8 @@
 
      <Button
          android:id="@+id/actionbar_button_Ingredient_List"
-         android:text="COST LIST"
+         android:text="@string/cost_list"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -116,7 +127,8 @@
 
      <Button
          android:id="@+id/actionbar_button_accept"
-         android:text="ACCEPT"
+         android:text="@string/accept"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -125,7 +137,8 @@
 
      <Button
          android:id="@+id/actionbar_button_end"
-         android:text="END"
+         android:text="@string/end"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -136,7 +149,8 @@
 
      <Button
          android:id="@+id/actionbar_button_settings"
-         android:text="SETTINGS"
+         android:text="@string/settings"
+         android:textAllCaps="true"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"

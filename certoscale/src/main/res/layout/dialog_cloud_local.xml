@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:text="Create new"
+        android:text="@string/create_new"
          style="@style/button_default"
 
         />
@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="1"
-        android:text="Browse templates"
+        android:text="@string/brows_templates"
               style="@style/button_default"
 
         />

@@ -66,19 +66,19 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         gridView = (GridView) findViewById(R.id.menu_main_grid);
         menuMainElementAdapter = new MenuElementAdapter(this,new ArrayList<MenuElement>());
         gridView.setAdapter(menuMainElementAdapter);
-        menuMainElementAdapter.add(new MenuElement("Applications".toUpperCase(),R.drawable.ic_menu_weighing, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
-        menuMainElementAdapter.add(new MenuElement("Calibration".toUpperCase(),R.drawable.ic_menu_calibration, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
-        menuMainElementAdapter.add(new MenuElement("Library".toUpperCase(),R.drawable.ic_menu_settings_bar, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
-        menuMainElementAdapter.add(new MenuElement("Recipes".toUpperCase(),R.drawable.ic_menu_document_text, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
-        menuMainElementAdapter.add(new MenuElement("Items".toUpperCase(),R.drawable.ic_menu_list, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
-        menuMainElementAdapter.add(new MenuElement("Protocols".toUpperCase(),R.drawable.ic_menu_protocol,MenuElement.MenuItemId.MENU_ITEM_PROTOCOLS));
-        menuMainElementAdapter.add(new MenuElement("Device settings".toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
-        menuMainElementAdapter.add(new MenuElement("Application settings".toUpperCase(),R.drawable.ic_menu_app_settings, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
-        menuMainElementAdapter.add(new MenuElement("User management".toUpperCase(),R.drawable.ic_menu_settings_user, MenuElement.MenuItemId.MENU_ITEM_USER));
-        menuMainElementAdapter.add(new MenuElement("Glp settings".toUpperCase(),R.drawable.ic_menu_settings_glp, MenuElement.MenuItemId.MENU_ITEM_GLP));
-        menuMainElementAdapter.add(new MenuElement("Unit settings".toUpperCase(),R.drawable.ic_menu_unit, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
-        menuMainElementAdapter.add(new MenuElement("Communication settings".toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_COMMUNICATION));
-        menuMainElementAdapter.add(new MenuElement("Videos".toUpperCase(), R.drawable.ic_menu_video, MenuElement.MenuItemId.MENU_ITEM_VIDEO));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.applications).toUpperCase(),R.drawable.ic_menu_weighing, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.calibration).toUpperCase(),R.drawable.ic_menu_calibration, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.library).toUpperCase(),R.drawable.ic_menu_settings_bar, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.recipes).toUpperCase(),R.drawable.ic_menu_document_text, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.items).toUpperCase(),R.drawable.ic_menu_list, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.protocols).toUpperCase(),R.drawable.ic_menu_protocol,MenuElement.MenuItemId.MENU_ITEM_PROTOCOLS));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.device_settings).toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.application_settings).toUpperCase(),R.drawable.ic_menu_app_settings, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.user_management).toUpperCase(),R.drawable.ic_menu_settings_user, MenuElement.MenuItemId.MENU_ITEM_USER));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.glp_settings).toUpperCase(),R.drawable.ic_menu_settings_glp, MenuElement.MenuItemId.MENU_ITEM_GLP));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.unit_settings).toUpperCase(),R.drawable.ic_menu_unit, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.communicaton_settings).toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_COMMUNICATION));
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.videos).toUpperCase(), R.drawable.ic_menu_video, MenuElement.MenuItemId.MENU_ITEM_VIDEO));
 
         ApplicationManager.getInstance();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -137,7 +137,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                     dialogButtonTeamViewer.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(MenuActivity.this, "Contact support@certoclav.com to enable remote service", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MenuActivity.this, R.string.contact_supportcertoclav_com_to_enable_remote_service, Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
                     });
@@ -154,7 +154,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
                     final Dialog dialog = new Dialog(MenuActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
-                    dialog.setTitle("Logout");
+                    dialog.setTitle(R.string.logout);
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
