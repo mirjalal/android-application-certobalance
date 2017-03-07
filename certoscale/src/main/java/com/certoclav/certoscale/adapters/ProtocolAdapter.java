@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,6 +76,15 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 
 		actionItemView = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemView);
+
+
+
+		ImageView imageCloud = (ImageView)  convertView.findViewById(R.id.menu_main_protocol_image_cloud);
+		if(getItem(position).getCloudId().isEmpty()){
+			imageCloud.setImageResource(R.drawable.cloud_no_white);
+		}else{
+			imageCloud.setImageResource(R.drawable.cloud_ok_white);
+		}
 
 		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemDelete);

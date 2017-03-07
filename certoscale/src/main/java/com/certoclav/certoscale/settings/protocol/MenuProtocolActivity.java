@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,11 +17,15 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ProtocolAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncProtocolsService;
 import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -40,7 +45,7 @@ import java.util.List;
  * Created by Michael on 12/6/2016.
  */
 
-public class MenuProtocolActivity extends Activity implements ButtonEventListener {
+public class MenuProtocolActivity extends Activity implements ButtonEventListener,DatabaseListener {
 
     private Navigationbar navigationbar = new Navigationbar(this);
     private ListView listView = null;
@@ -118,6 +123,9 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         List<Protocol> protocols = db.getProtocols();
 
 
+        Scale.getInstance().setOnDatabaseListener(this);
+
+
         List<Protocol> protocolList=db.getProtocols();
         Collections.sort(protocolList, new Comparator<Protocol>(){
             public int compare(Protocol emp1, Protocol emp2) {
@@ -150,6 +158,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     @Override
     protected void onPause() {
         super.onPause();
+        //Scale.getInstance().removeOnDatabaseListener(this);
     }
 
 
@@ -212,6 +221,36 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                     break;
             }
 
+    }
+
+    @Override
+    public void onDatabaseChanged() {
+        Log.e("MenuProtocolActivity","onDatabaseChanged()");
+        DatabaseService db = new DatabaseService(this);
+        List<Protocol> protocols = db.getProtocols();
+
+
+
+        Collections.sort(protocols, new Comparator<Protocol>(){
+            public int compare(Protocol emp1, Protocol emp2) {
+                // ## Ascending order
+
+
+
+                return emp2.getDate().compareTo(emp1.getDate()); // To compare string values
+
+            }
+        });
+
+
+        adapter.clear();
+        if(protocols != null){
+            for(Protocol protocol : protocols){
+                adapter.add(protocol);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 }
 
