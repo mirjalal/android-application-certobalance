@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Recipes {
+public class Protocols {
 
 
 
@@ -15,21 +15,22 @@ public class Recipes {
 	public static final int ID_IF_MAINTENANCE = 3;
 	public static final int ID_IF_ERROR = 2;
 
-	public ArrayList<String> getRecipeJsonStringArray() {
-		return recipeJsonStringArray;	}
-
-	public void setRecipeJsonStringArray(ArrayList<String> recipeJsonStringArray) {
-		this.recipeJsonStringArray = recipeJsonStringArray;
+	public ArrayList<String> getProtocolJsonStringArray() {
+		return protocolJsonStringArray;
 	}
 
-	private ArrayList<String> recipeJsonStringArray = new ArrayList<String>();
+	public void setprotocolJsonStringArray(ArrayList<String> protocolJsonStringArray) {
+		this.protocolJsonStringArray = protocolJsonStringArray;
+	}
 
-	public Recipes() {
+	private ArrayList<String> protocolJsonStringArray = new ArrayList<String>();
+
+	public Protocols() {
 			
 	}	
 	
 
-	public int getRecipesFromCloud(){
+	public int getProtocolsFromCloud(){
 		
 		Integer success = 0;
 		try {
@@ -40,7 +41,7 @@ public class Recipes {
 			
 			
 			GetUtil getUtil = new GetUtil();
-			success = getUtil.getFromCertocloud(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_GET_RECIPES + CloudUser.getInstance().getCurrentDeviceKey());
+			success = getUtil.getFromCertocloud(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_GET_PROTOCOLS + CloudUser.getInstance().getCurrentDeviceKey());
 			
 			if(success == GetUtil.RETURN_OK){
 				
@@ -49,11 +50,11 @@ public class Recipes {
 				CloudUser.getInstance().setPremiumAccount(jsonObjectResult.getBoolean("ispremium"));
 
 				
-				JSONArray jsonRecipeArray = jsonObjectResult.getJSONArray("recipes");
+				JSONArray jsonProtocolArray = jsonObjectResult.getJSONArray("protocols");
 						
 		       //only overwrite content of already existing conditions
-				for(int i = 0; i< jsonRecipeArray.length();i++){
-					recipeJsonStringArray.add(jsonRecipeArray.getJSONObject(i).toString());
+				for(int i = 0; i< jsonProtocolArray.length();i++){
+					protocolJsonStringArray.add(jsonProtocolArray.getJSONObject(i).toString());
 				}
 			}
 
@@ -64,7 +65,7 @@ public class Recipes {
 		
 	}
 
-	public int addRecipeToCloud(){
+	public int addItemToCloud(){
 		Integer success = 0;
 
 		try{

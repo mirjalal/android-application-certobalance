@@ -2,6 +2,7 @@ package com.certoclav.certoscale.settings.protocol;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +21,8 @@ import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.service.SyncProtocolsService;
+import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.AppIndex;
@@ -138,6 +141,10 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
            }
        }
         adapter.notifyDataSetChanged();
+
+        Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
+
+        startService(intent);
     }
 
     @Override

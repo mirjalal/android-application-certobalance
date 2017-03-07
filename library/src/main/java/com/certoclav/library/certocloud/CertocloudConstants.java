@@ -19,12 +19,12 @@ public class CertocloudConstants {
 	 * CertoCloud REST API
 	 * Routes that can be accessed only by autheticated users
 	 */
-	public final static String REST_API_POST_PROTOCOLS = "/api/protocols/";//, devices.getAll);
+	public final static String REST_API_POST_PROTOCOLS = "/api/balanceprotocols/";//, devices.getAll);
 	public final static String REST_API_GET_DEVICES = "/api/devices/";//, devices.getAll);
 	public final static String REST_API_GET_CONDITIONS = "/api/conditions/"; //+safetykey
 	public final static String REST_API_GET_IEMS = "/api/balanceitem/"; //+safetykey
 	public final static String REST_API_GET_RECIPES="/api/balancerecipes/"; //+safetykey
-	public final static String REST_API_POST_RECIPES="/api/balancerecipes/";
+	public final static String REST_API_POST_RECIPES="/api/balancerecipes/";//+recipe_id
 	public final static String REST_API_POST_CONDITIONS_CREATE = "/api/conditions/"; //+safetykey //warning: only create condition if there is no
 	public final static String REST_API_POST_CONDITIONS_UPDATE = "/api/conditions/update/";
 	public final static String REST_API_POST_DEVICE = "/api/devices/";// devices.create);
@@ -35,7 +35,7 @@ public class CertocloudConstants {
 	public final static String REST_API_DELETE_PROFILE = "/api/programs/";// programs.delete);
 	public final static String REST_API_POST_ITEM = "/api/balanceitem/";
 	public final static String REST_API_DELETE_ITEM = "/api/balanceitem/";//+item_id;
-	public final static String REST_API_GET_PROTOCOLS = "/api/protocols/";
+	public final static String REST_API_GET_PROTOCOLS = "/api/balanceprotocols/"; //+safetykey
 
 	public final static String REST_POST_SUPPORT = "/api/support";// support.send); send email to certosupport
 	public final static String REST_API_POST_EMAIL = "/api/support/email/"; //send notification email to a specific email address

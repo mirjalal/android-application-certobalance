@@ -185,6 +185,9 @@
         </activity>
 
         <service android:name=".service.SyncItemsService"></service>
+        <service android:name=".service.SyncRecipesService"></service>
+        <service android:name=".service.SyncProtocolsService"></service>
+
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
         <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 

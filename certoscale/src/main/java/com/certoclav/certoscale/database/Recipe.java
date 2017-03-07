@@ -27,25 +27,24 @@ public class Recipe {
 	}
 
 
-	private final static String JSON_DESCRIPTION = "description";
+	private final static String JSON_CLOUD_ID = "_id";
+	private final static String JSON_NAME = "name";
+	private final static String JSON_USER_ID = "userid";
 	private final static String JSON_DEVICE_KEY = "devicekey";
 	private final static String JSON_DATE = "date";
 	private final static String JSON_VISIBILITY = "visibility";
-	private final static String JSON_ARTICLE_NUMBER = "artno";
-	private final static String JSON_NAME = "name";
-	private final static String JSON_WEIGHT = "weight";
-	private final static String JSON_UNIT = "unit";
-	private final static String JSON_CLOUD_ID = "_id";
+	private final static String JSON_STEPS = "steps";
 
+	private String userid="";
 	private String name = "";
-	private Double weight = 0d;
-	private Double cost = 0d;
-	private String articleNumber = "";
 	private String date = "";
 	private String description = "";
 	private String deviceKey = "";
-	private String unit = "";
 	private String visibility = "private";
+
+	private String steps = "";
+
+
 
 	public String getRecipeJson() {
 		generateJson();
@@ -67,6 +66,70 @@ public class Recipe {
 	}
 	private List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
 	private String recipeName = "";
+
+
+	public void setRecipeJson(String recipeJson) {
+		this.recipeJson = recipeJson;
+		parseJson();
+	}
+
+	public void parseJson(){
+
+		JSONObject jsonObject = null;
+
+		try {
+			jsonObject = new JSONObject(recipeJson);
+		}catch (Exception e){
+			return;
+		}
+
+		try {
+			cloudId = jsonObject.getString(JSON_CLOUD_ID);
+		}catch (Exception e){
+			cloudId = "";
+		}
+
+		try {
+			name = jsonObject.getString(JSON_NAME);
+		}catch (Exception e){
+			name = "";
+		}
+
+		try {
+			userid = jsonObject.getString(JSON_USER_ID);
+		}catch (Exception e){
+			userid = "";
+		}
+
+		try {
+			deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
+		}catch (Exception e){
+			deviceKey = "";
+		}
+
+		try {
+			date = jsonObject.getString(JSON_DATE);
+		}catch (Exception e){
+			date = "";
+		}
+
+		try {
+			visibility = jsonObject.getString(JSON_VISIBILITY);
+		}catch (Exception e){
+			visibility = "private";
+		}
+
+		try{
+			steps = jsonObject.getString(JSON_STEPS);
+		}catch (Exception e){
+			steps="";
+		}
+
+
+		recipeJson = jsonObject.toString();
+
+	}
+
 
 	public Recipe(String cloudId, String recipeName, List<RecipeEntry> entries) {
 		this.cloudId = cloudId;
@@ -163,16 +226,14 @@ public class Recipe {
 		JSONObject jsonObject = new JSONObject();
 
 		try {
-			jsonObject.put(JSON_NAME, name)
-					.put(JSON_WEIGHT, weight)
+			jsonObject.put(JSON_CLOUD_ID,cloudId)
+					  .put(JSON_NAME, name)
+					  .put(JSON_USER_ID,userid)
+					  .put(JSON_DEVICE_KEY,deviceKey)
+					  .put(JSON_DATE,date)
+					  .put(JSON_VISIBILITY,visibility)
+					  .put(JSON_STEPS,steps);
 
-					.put(JSON_ARTICLE_NUMBER,articleNumber)
-					.put(JSON_DATE,date)
-					.put(JSON_DESCRIPTION,description)
-					.put(JSON_DEVICE_KEY,deviceKey)
-					.put(JSON_UNIT,unit)
-					.put(JSON_VISIBILITY,visibility)
-					.put(JSON_CLOUD_ID,cloudId);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

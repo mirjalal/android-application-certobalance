@@ -21,12 +21,18 @@ public class Protocol {
 	private static final String CONTENT = "content";
 
 
+	private String userid="";
 	private String name = "";
 	private String userEmail = "";
 	private String deviceKey = "";
 	private String visibility = "global";
 	private String content = "";
 	private String date = "";
+
+	public String getProtocolJson() {
+		generateJson();
+		return protocolJson;
+	}
 
 
 	@DatabaseField(generatedId = true, columnName = "protocol_id")
@@ -56,9 +62,79 @@ public class Protocol {
 
 	}
 
+	public Protocol( String protocolJson) {
+		setProtocolJson(protocolJson);
+		this.protocolJson = protocolJson;
+	}
+
+
+	public void setProtocolJson(String itemJson) {
+		this.protocolJson = itemJson;
+		parseJson();
+	}
+
+	public void parseJson(){
+
+		JSONObject jsonObject = null;
+		try {
+			jsonObject = new JSONObject(protocolJson);
+		}catch (Exception e){
+			return;
+		}
+
+		try {
+			name = jsonObject.getString(JSON_NAME);
+		}catch (Exception e){
+			name = "";
+		}
+
+
+		try {
+			visibility = jsonObject.getString(JSON_VISIBILITY);
+		}catch (Exception e){
+			visibility = "private";
+		}
 
 
 
+		try {
+			date = jsonObject.getString(JSON_DATE);
+		}catch (Exception e){
+			date = "";
+		}
+
+		try {
+			description = jsonObject.getString(JSON_DESCRIPTION);
+		}catch (Exception e){
+			description = "";
+		}
+
+		try {
+			deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
+		}catch (Exception e){
+			deviceKey = "";
+		}
+
+		try {
+			unit = jsonObject.getString(JSON_UNIT);
+		}catch (Exception e){
+			unit = "";
+		}
+
+		try {
+			cloudId = jsonObject.getString(JSON_CLOUD_ID);
+		}catch (Exception e){
+			cloudId = "";
+		}
+
+		try {
+			content = jsonObject.getString(CONTENT);
+		}catch (Exception e){
+			content = "";
+		}
+		protocolJson = jsonObject.toString();
+
+	}
 
 	public void generateProtocolJson(){
 		JSONObject jsonObject = new JSONObject();
@@ -161,6 +237,46 @@ public class Protocol {
 
 	public void setCloudId(String cloudId) {
 		this.cloudId = cloudId;
+	}
+
+	private final static String JSON_DESCRIPTION = "description";
+	private final static String JSON_DEVICE_KEY = "devicekey";
+	private final static String JSON_DATE = "date";
+	private final static String JSON_VISIBILITY = "visibility";
+	private final static String JSON_ARTICLE_NUMBER = "artno";
+	private final static String JSON_NAME = "name";
+	private final static String JSON_WEIGHT = "weight";
+	private final static String JSON_UNIT = "unit";
+	private final static String JSON_CLOUD_ID = "_id";
+
+
+	private Double weight = 0d;
+	private Double cost = 0d;
+	private String articleNumber = "";
+
+	private String description = "";
+	private String unit = "";
+
+
+	public void generateJson(){
+		JSONObject jsonObject = new JSONObject();
+
+		try {
+			jsonObject.put(JSON_CLOUD_ID,cloudId)
+					.put(JSON_NAME, name)
+					.put(USER_ID,userid)
+					.put(JSON_DEVICE_KEY,deviceKey)
+					.put(JSON_DATE,date)
+					.put(JSON_VISIBILITY,visibility)
+					.put(CONTENT,content);
+
+
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		protocolJson = jsonObject.toString();
 	}
 
 

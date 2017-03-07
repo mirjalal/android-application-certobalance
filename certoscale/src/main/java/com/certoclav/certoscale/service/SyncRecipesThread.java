@@ -54,17 +54,18 @@ public class SyncRecipesThread extends Thread {
 					}
 
 
-					//get all items from db
+
+					//get all recipes from db
 					DatabaseService databaseService = new DatabaseService(ApplicationController.getContext());
 					List<Recipe> listRecipesDb = databaseService.getRecipes();
 					
-					//upload offline items, which have never been successfully uploaded yet
+					//upload offline recipes, which have never been successfully uploaded yet
 						for(Recipe recipe : listRecipesDb){
 							if(recipe.getCloudId().isEmpty()){
 								postRecipeToCertocloud(recipe); //may updates isUploaded and Cloud_id database entries of localProfiles
 							}
 						}
-					Log.e("SyncRecipeThread","uploading items done");
+					Log.e("SyncRecipeThread","uploading recipes done");
 
 
 
@@ -137,6 +138,8 @@ public class SyncRecipesThread extends Thread {
 		ArrayList<String> recipesList = new ArrayList<String>();
 		Recipes recipes = new Recipes();
 		Integer retval = recipes.getRecipesFromCloud();
+
+
 		if(retval == GetUtil.RETURN_OK){
 			if(recipes.getRecipeJsonStringArray()!= null){
 				DatabaseService db = new DatabaseService(ApplicationController.getContext());
@@ -155,6 +158,7 @@ public class SyncRecipesThread extends Thread {
 						}
 					}
 					if(cloudRecipeAlreadyInDb == false){
+						cloudRecipe.generateJson();
 						db.insertRecipe(cloudRecipe);
 					}
 				}
@@ -175,24 +179,27 @@ public class SyncRecipesThread extends Thread {
 	
 
 	private void postRecipeToCertocloud(Recipe recipe) {
-		//syntax:
-		
+
+
+		//Syntax
 		/*
-
-		{
-			"balanceitem": {
-				"devicekey": "93943649346387463",
-				"date": "1431208326916",
-				"visibility": "private",
-				"artno": "Item83883838",
-				"name": "Item from device",
-				"description": "This is an item description posted from device",
-				"weight": 10.7777,
-				"cost": 12.1,
-				"unit": "g"
-		  }
-
-		 */
+		"recipes": [
+    	{
+		  "_id": "58a1c3fff36d2837a7c743ea",
+		  "name": "Saline solution",
+		  "userid": "5881ecd10869c7247c4898e2",
+		  "devicekey": "93943649346387463",
+		  "date": "2014-06-25T00:00:00.000Z",
+		  "visibility": "global",
+		  "steps": [
+			{
+			  "step": 1,
+			  "artno": "",
+			  "description": "",
+			  "weight": 0,
+			  "unit": "",
+			  "instruction": "Please empty the pan an press TARE button"
+        },*/
 		
 	    //PROGRAM OBJECT
     	
@@ -204,11 +211,11 @@ public class SyncRecipesThread extends Thread {
     	JSONObject recipeJsonObject = new JSONObject(recipe.getRecipeJson());
 			recipeJsonObject.remove("_id");
 		JSONObject recipeJsonWrapperObject = new JSONObject();
-			recipeJsonWrapperObject.put("balanceitem",recipeJsonObject);
+			recipeJsonWrapperObject.put("balancerecipe",recipeJsonObject);
 		String body = recipeJsonWrapperObject.toString();
     	
     	PostUtil postUtil = new PostUtil();
-    	int success = postUtil.postToCertocloud(body, CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_POST_ITEM, true);
+    	int success = postUtil.postToCertocloud(body, CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_POST_RECIPES, true);
    
     	if(success == PostUtil.RETURN_OK){ 
     		DatabaseService db = new DatabaseService(ApplicationController.getContext());

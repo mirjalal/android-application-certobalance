@@ -306,7 +306,7 @@ public class DatabaseService {
 
 	public int insertProtocol(Protocol protocol) {
 
-
+		protocol.generateJson();
 		try {
 			protocol.generateProtocolJson();
 			int x =protocolDao.create(protocol);
@@ -623,6 +623,20 @@ public class DatabaseService {
 			recipe.setCloudId(cloudId);
 			deleteRecipe(recipe);
 			int r = insertRecipe(recipe);
+			return r;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+
+	}
+
+	public int updateProtocolCloudId(Protocol protocol, String cloudId) {
+		try {
+			protocol.setCloudId(cloudId);
+			deleteProtocol(protocol);
+			int r = insertProtocol(protocol);
 			return r;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
