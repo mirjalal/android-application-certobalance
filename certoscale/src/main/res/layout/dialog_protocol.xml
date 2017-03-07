@@ -19,13 +19,14 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:layout_below="@+id/dialog_ingrediantcosts_header">
+			android:layout_below="@+id/dialog_ingrediantcosts_header"
+			android:background="@android:color/black">
 
 			<ImageView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
+				android:scaleType="fitXY"
 				android:src="@drawable/protocol_paper_top"/>
 
 			<TextView
@@ -33,13 +34,14 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@android:color/white"
+				android:text="THIS\n is\na\ntest"
 				style="@style/text_protocol"/>
 
 			<ImageView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:adjustViewBounds="true"
-				android:scaleType="fitCenter"
+				android:scaleType="fitXY"
 				android:src="@drawable/protocol_paper_bottom"/>
 
 		</LinearLayout>

@@ -168,6 +168,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             refField.getTextValue().setText("");
         }
 
+
         return rootView;
     }
 
@@ -176,7 +177,6 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     public void onWeightChanged(Double weight, String unit) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
 
 
         switch (Scale.getInstance().getScaleApplication()) {

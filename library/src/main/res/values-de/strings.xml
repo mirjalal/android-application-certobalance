@@ -5,10 +5,10 @@
     <string name="cancel">Abbrechen</string>
 
     <string-array name="email_subjects_array">
-        <item>Anfrage für ein Kundenspezifisches Plugin</item>
+        <item>Anfrage für ein kundenspezifisches Plugin</item>
         <item>Protokollverwaltung</item>
         <item>Benutzerverwaltung</item>
-        <item>Programmverwwaltung</item>
+        <item>Datenverwaltung</item>
         <item>Software Aktualisierung</item>      
     </string-array>
         <string name="do_you_really_want_to_logout">Möchten Sie sich wirklich abmelden?</string>

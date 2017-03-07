@@ -546,7 +546,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 								ApplicationManager.getInstance().setDensity_step_counter(2);
 							}
 						}
-
+					break;
 					case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 
 						if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){

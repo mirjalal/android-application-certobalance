@@ -37,10 +37,9 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Proben"
-        android:textSize="16sp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_1"
@@ -49,9 +48,9 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:text="0"
-        android:textSize="16sp"
         android:background="#444444"
         android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -63,9 +62,8 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="TARA"
-        android:textSize="16sp"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingLeft="10dp"
         android:background="#444444"/>
     <TextView
@@ -76,8 +74,7 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="0.0000 g"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
+        style="@style/text_table"
         android:background="#444444"/>
 </LinearLayout>
 
@@ -91,8 +88,7 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Proben"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"/>
     <TextView
@@ -102,7 +98,7 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:text="0"
-        android:textSize="16sp"
+        style="@style/text_table"
         android:textColor="@android:color/white"
         android:paddingRight="10dp"/>
     <TextView
@@ -115,9 +111,8 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="TARA"
-        android:textSize="16sp"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_4"
@@ -128,7 +123,7 @@ android:orientation="vertical">
         android:paddingRight="10dp"
         android:textColor="@android:color/white"
         android:text="0.0000 g"
-        android:textSize="16sp"/>
+        style="@style/text_table"/>
 
 
 </LinearLayout>
@@ -142,9 +137,8 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Proben"
-        android:textSize="16sp"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingLeft="10dp"
         android:background="#444444"/>
     <TextView
@@ -154,7 +148,7 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:text="0"
-        android:textSize="16sp"
+        style="@style/text_table"
         android:textColor="@android:color/white"
         android:background="#444444"
         android:paddingRight="10dp"/>
@@ -168,10 +162,9 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="TARA"
-        android:textSize="16sp"
         android:gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:background="#444444"/>
     <TextView
         android:id="@+id/reference_val_6"
@@ -181,8 +174,7 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="0.0000 g"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:background="#444444"/>
 </LinearLayout>
 <LinearLayout
@@ -195,9 +187,8 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="Proben"
-        android:textSize="16sp"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_7"
@@ -206,8 +197,7 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         android:gravity="center_vertical|right"
         android:text="0"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingRight="10dp"/>
     <TextView
         android:layout_weight="1"
@@ -219,9 +209,8 @@ android:orientation="vertical">
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:text="TARA"
-        android:textSize="16sp"
         android:gravity="center_vertical"
-        android:textColor="@android:color/white"
+        style="@style/text_table"
         android:paddingLeft="10dp"/>
     <TextView
         android:id="@+id/reference_val_8"
@@ -231,8 +220,8 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:paddingRight="10dp"
         android:text="0.0000 g"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"/>
+        style="@style/text_table"
+/>
 
 
 </LinearLayout>
