@@ -306,9 +306,9 @@ public class DatabaseService {
 
 	public int insertProtocol(Protocol protocol) {
 
-
+		protocol.generateJson();
 		try {
-			protocol.generateProtocolJson();
+			protocol.generateJson();
 			int x =protocolDao.create(protocol);
 			return x;
 
@@ -340,7 +340,7 @@ public class DatabaseService {
 			List<Protocol> protocols = protocolDao.queryForAll();
 			try {
 				for (Protocol protocol : protocols) {
-					protocol.parseProtocolJson();
+					protocol.parseJson();
 				}
 			}catch (Exception e){
 
@@ -617,6 +617,34 @@ public class DatabaseService {
 
 	}
 
+
+	public int updateRecipeloudId(Recipe recipe, String cloudId) {
+		try {
+			recipe.setCloudId(cloudId);
+			deleteRecipe(recipe);
+			int r = insertRecipe(recipe);
+			return r;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+
+	}
+
+	public int updateProtocolCloudId(Protocol protocol, String cloudId) {
+		try {
+			protocol.setCloudId(cloudId);
+			deleteProtocol(protocol);
+			int r = insertProtocol(protocol);
+			return r;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+
+	}
 
 	public int updateUserPassword(String email_user_id, String newPassword) {
 		try {

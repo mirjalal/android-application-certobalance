@@ -57,7 +57,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText("Main menu".toUpperCase());
+        navigationbar.getTextTitle().setText(getString(R.string.main_menu).toUpperCase());
         navigationbar.getButtonLogout().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setImageResource(R.drawable.ic_menu_help);
@@ -108,7 +108,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                     final Dialog dialog = new Dialog(MenuActivity.this);
                     dialog.setCanceledOnTouchOutside(true);
                     dialog.setContentView(R.layout.dialog_support);
-                    dialog.setTitle("Support");
+                    dialog.setTitle(R.string.support);
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_support_button_speech);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {

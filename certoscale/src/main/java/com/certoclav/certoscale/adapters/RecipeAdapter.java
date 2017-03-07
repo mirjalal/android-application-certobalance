@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -77,6 +78,12 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 			containerItems.addView(actionItemEdit);
 
 
+		ImageView imageCloud = (ImageView) convertView.findViewById(R.id.list_element_recipe_image_cloud);
+		if(getItem(position).getCloudId().isEmpty()){
+			imageCloud.setImageResource(R.drawable.cloud_no_white);
+		}else {
+			imageCloud.setImageResource(R.drawable.cloud_ok_white);
+		}
 			
 		TextView firstLine = (TextView) convertView.findViewById(R.id.first_line);
 		firstLine.setText(getItem(position).getRecipeName());

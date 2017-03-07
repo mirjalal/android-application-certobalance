@@ -2,20 +2,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_activated"
             android:defaultValue="@bool/preferences_ingrediant_activated_default"
-            android:title="Activated"
-            android:summary="Turn the application on/off"
+            android:title="@string/activated"
+            android:summary="@string/turn_the_application_on_off"
             android:dependency="@string/preferences_ingrediant_lock">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_lock"
             android:defaultValue="@bool/preferences_ingrediant_lock"
-            android:title="Lock"
-            android:summary="Lock the ingrediant costing settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 
@@ -31,29 +31,29 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_unitcost_visible"
             android:defaultValue="@bool/preferences_ingrediant_unitcost_visible"
-            android:title="Unit Cost"
-            android:summary="Turn the unit cost visible/invisible"
+            android:title="@string/unit_cost"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_totalweight_visible"
             android:defaultValue="@bool/preferences_ingrediant_totalweight_visible"
-            android:title="Total Weight"
-            android:summary="Turn the total weight visible/invisible"
+            android:title="@string/total_weight"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_totalcost_visible"
             android:defaultValue="@bool/preferences_ingrediant_totalcost_visible"
-            android:title="Total Cost"
-            android:summary="Turn total cost visible/invisible"
+            android:title="@string/total_cost"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
@@ -61,43 +61,43 @@
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_brutto_visible"
             android:defaultValue="@bool/preferences_ingrediant_brutto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+            android:title="@string/brutto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_netto_visible"
             android:defaultValue="@bool/preferences_ingrediant_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:title="@string/netto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_tara_visible"
             android:defaultValue="@bool/preferences_ingrediant_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:title="@string/tara"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_print_totalweight"
             android:defaultValue="@bool/preferences_ingrediant_print_totalweight"
-            android:title="Total Weight"
-            android:summary="Print the total weight yes/no"
+            android:title="@string/total_weight"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_ingrediant_print_totalcost"
             android:defaultValue="@bool/preferences_ingrediant_print_totalcost"
-            android:title="Total cost"
-            android:summary="Print the total cost yes/no"
+            android:title="@string/total_cost"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_ingrediant_lock" >
         </CheckBoxPreference>
 

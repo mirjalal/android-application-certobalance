@@ -2,12 +2,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
             android:key="@string/preferences_formulation_activated"
             android:defaultValue="@bool/preferences_formulation_activated_default"
-            android:title="Activated"
-            android:summary="Turn the application on/off"
+            android:title="@string/activated"
+            android:summary="@string/turn_the_application_on_off"
             android:dependency="@string/preferences_formulation_lock" >
         </CheckBoxPreference>
 
@@ -15,8 +15,8 @@
         <CheckBoxPreference
             android:key="@string/preferences_formulation_lock"
             android:defaultValue="@bool/preferences_formulation_lock"
-            android:title="Lock"
-            android:summary="Lock the formulation settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true" >
         </CheckBoxPreference>
 <!--
@@ -39,7 +39,7 @@
 -->
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
         <!--
         <CheckBoxPreference
@@ -54,48 +54,48 @@
         <CheckBoxPreference
             android:key="@string/preferences_formulation_total_visible"
             android:defaultValue="@bool/preferences_formulation_total_visible"
-            android:title="Total"
-            android:summary="Turn total visible/invisible"
+            android:title="@string/total"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_brutto_visible"
             android:defaultValue="@bool/preferences_formulation_brutto_visible"
-            android:title="Brutto"
-            android:summary="Turn the brutto weight visible/invisible"
+            android:title="@string/brutto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_netto_visible"
             android:defaultValue="@bool/preferences_formulation_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:title="@string/netto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_tara_visible"
             android:defaultValue="@bool/preferences_formulation_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:title="@string/tara"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_target_visible"
             android:defaultValue="@bool/preferences_formulation_target_visible"
-            android:title="Target"
-            android:summary="Turn the target weight visible/invisible"
+            android:title="@string/target"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_differencew_visible"
             android:defaultValue="@bool/preferences_formulation_differencew_visible"
-            android:title="Difference weight"
-            android:summary="Turn the difference weight visible/invisible"
+            android:title="@string/difference_weight"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
@@ -103,43 +103,43 @@
         <CheckBoxPreference
             android:key="@string/preferences_formulation_differencep_visible"
             android:defaultValue="@bool/preferences_formulation_differencep_visible"
-            android:title="Difference in Percent"
-            android:summary="Turn the difference in percent visible/invisible"
+            android:title="@string/difference_in_percent"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_formulation_print_total"
             android:defaultValue="@bool/preferences_formulation_print_total"
-            android:title="Total"
-            android:summary="Print total yes/no"
+            android:title="@string/total"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_print_target"
             android:defaultValue="@bool/preferences_formulation_print_target"
-            android:title="Target"
-            android:summary="Print target yes/no"
+            android:title="@string/target"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_print_differencew"
             android:defaultValue="@bool/preferences_formulation_print_differencew"
-            android:title="Difference Weight"
-            android:summary="Print the difference weight yes/no"
+            android:title="@string/difference_weight"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_formulation_print_differencep"
             android:defaultValue="@bool/preferences_formulation_print_differencep"
-            android:title="Difference in Percent"
-            android:summary="Print the difference  in percent weight yes/no"
+            android:title="@string/difference_in_percent"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_formulation_lock"  >
         </CheckBoxPreference>
 

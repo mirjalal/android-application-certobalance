@@ -55,7 +55,7 @@ public class MenuLibraryActivity extends Activity implements ButtonEventListener
         navigationbar.getButtonHome().setVisibility(View.GONE);
         navigationbar.getSpinnerLib().setVisibility(View.GONE);
         navigationbar.getSpinnerMode().setVisibility(View.GONE);
-        navigationbar.getTextTitle().setText("Stored libraries".toUpperCase());
+        navigationbar.getTextTitle().setText(getString(R.string.stored_libraries).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_user_list);
 

@@ -21,6 +21,8 @@ import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.service.SyncItemsService;
+import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.GetUtil;
@@ -97,7 +99,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
 
 
 
-
+/*
         new AsyncTask<Boolean, Boolean, Boolean >(){
 
             @Override
@@ -148,6 +150,9 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
                 super.onPostExecute(b);
             }
         }.execute();
+        */
+
+
         DatabaseService db = new DatabaseService(this);
 
 
@@ -160,6 +165,10 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
        }
         adapter.notifyDataSetChanged();
         adapter.setOnClickButtonListener(this);
+
+        Intent intent = new Intent(ApplicationController.getContext(), SyncRecipesService.class);
+
+        startService(intent);
     }
 
     @Override

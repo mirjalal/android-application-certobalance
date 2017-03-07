@@ -2,28 +2,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="ENABLE / DISABLE FEATURES" >
+    <PreferenceCategory android:title="@string/enable_disable_features" >
         <CheckBoxPreference
         android:key="@string/preferences_animal_activated"
         android:defaultValue="@bool/preferences_animal_activated_default"
-        android:title="Activated"
-        android:summary="Turn the application on/off"
+        android:title="@string/activated"
+        android:summary="@string/turn_the_application_on_off"
         android:dependency="@string/preferences_animal_lock" >
     </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_lock"
             android:defaultValue="@bool/preferences_animal_lock"
-            android:title="Lock"
-            android:summary="Lock the animal weighing settings on/off"
+            android:title="@string/lock"
+            android:summary="@string/lock_the_settings_of_this"
             android:disableDependentsState="true">
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_auto_mode"
             android:defaultValue="@bool/preferences_animal_auto_mode"
-            android:title="Auto Mode"
-            android:summary="Turn the auto sample mode on/off"
+            android:title="@string/auto_mode"
+            android:summary="@string/turn_this_feature_on_off"
             android:dependency="@string/preferences_animal_lock" >
             android:disableDependentsState="true">
         </CheckBoxPreference>
@@ -39,15 +39,15 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="VISIBILITY" >
+    <PreferenceCategory android:title="@string/visibility" >
 
 
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_measuringtime_visible"
             android:defaultValue="@bool/preferences_animal_measuringtime_visible"
-            android:title="Measuring Time"
-            android:summary="Turn measuring time visible/invisible"
+            android:title="@string/measuring_time"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_animal_lock" >
         </CheckBoxPreference>
 
@@ -57,35 +57,35 @@
         <CheckBoxPreference
             android:key="@string/preferences_animal_brutto_visible"
             android:defaultValue="@bool/preferences_animal_brutto_visible"
-            android:title="Brutto"
-            android:summary="Turn the bruto weight visible/invisible"
+            android:title="@string/brutto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_netto_visible"
             android:defaultValue="@bool/preferences_animal_netto_visible"
-            android:title="Netto"
-            android:summary="Turn the netto weight visible/invisible"
+            android:title="@string/netto"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_tara_visible"
             android:defaultValue="@bool/preferences_animal_tara_visible"
-            android:title="Tara"
-            android:summary="Turn the tara weight visible/invisible"
+            android:title="@string/tara"
+            android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="PRINTER OPTIONS" >
+    <PreferenceCategory android:title="@string/printer_options" >
         <CheckBoxPreference
             android:key="@string/preferences_animal_print_measuring"
             android:defaultValue="@bool/preferences_animal_print_measuring"
-            android:title="Measuring Time"
-            android:summary="Print the measuring time yes/no"
+            android:title="@string/measuring_time"
+            android:summary="@string/print_this_property_yes_no"
             android:dependency="@string/preferences_animal_lock"  >
         </CheckBoxPreference>
 
