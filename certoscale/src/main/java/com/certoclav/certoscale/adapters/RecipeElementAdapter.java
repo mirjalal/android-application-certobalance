@@ -79,7 +79,7 @@ public class RecipeElementAdapter extends ArrayAdapter<RecipeEntry> {
 
 
 		EditText editName = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_name);
-		editName.setText(getItem(position).getName());
+		editName.setText(getItem(position).getDescription());
 		editName.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -93,7 +93,7 @@ public class RecipeElementAdapter extends ArrayAdapter<RecipeEntry> {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				getItem(position).setName(s.toString());
+				getItem(position).setDescription(s.toString());
 			}
 		});
 

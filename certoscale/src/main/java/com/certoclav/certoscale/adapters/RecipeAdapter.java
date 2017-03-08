@@ -92,7 +92,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Formation: ");
 		for(RecipeEntry entry : getItem(position).getRecipeEntries()){
-			sb.append(entry.getWeight()).append(" g").append(" ").append(entry.getName()).append(", ");
+			sb.append(entry.getWeight()).append(" g").append(" ").append(entry.getDescription()).append(", ");
 		}
 		secondLine.setText(sb.toString());
 

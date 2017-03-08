@@ -1,15 +1,11 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -75,7 +71,7 @@ public class RecipeResultElementAdapter extends ArrayAdapter<RecipeEntry> {
 
 
         TextView editName = (TextView) convertView.findViewById(R.id.menu_main_recipe_edit_element_name);
-        editName.setText(getItem(position).getName());
+        editName.setText(getItem(position).getDescription());
 
 
         TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_recipe_edit_element_weight);

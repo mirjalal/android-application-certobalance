@@ -4,13 +4,11 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.CertocloudConstants;
 import com.certoclav.library.certocloud.CloudUser;
 import com.certoclav.library.certocloud.GetUtil;
-import com.certoclav.library.certocloud.Items;
 import com.certoclav.library.certocloud.PostUtil;
 import com.certoclav.library.certocloud.Recipes;
 
@@ -140,33 +138,28 @@ public class SyncRecipesThread extends Thread {
 		Integer retval = recipes.getRecipesFromCloud();
 
 
-					if(retval == GetUtil.RETURN_OK){
-						if(recipes.getRecipeJsonStringArray()!= null){
+		if(retval == GetUtil.RETURN_OK){
+			if(recipes.getRecipeJsonStringArray()!= null){
 							DatabaseService db = new DatabaseService(ApplicationController.getContext());
 							List<Recipe> recipesFromDb = db.getRecipes();
 							listRecipesCloud= new ArrayList<Recipe>();
 
 							for(String recipeJsonString : recipes.getRecipeJsonStringArray()){
 								listRecipesCloud.add(new Recipe(recipeJsonString));
-				}
-				for(Recipe cloudRecipe : listRecipesCloud){
-					boolean cloudRecipeAlreadyInDb = false;
-					for(Recipe dbrecipe: recipesFromDb){
-						if(cloudRecipe.getCloudId().equals(dbrecipe.getCloudId())){
-							cloudRecipeAlreadyInDb = true;
-							continue;
+							}
+						for(Recipe cloudRecipe : listRecipesCloud){
+							boolean cloudRecipeAlreadyInDb = false;
+							for(Recipe dbrecipe: recipesFromDb){
+								if(cloudRecipe.getCloudId().equals(dbrecipe.getCloudId())){
+									cloudRecipeAlreadyInDb = true;
+									continue;
+								}
+							}
+							if(cloudRecipeAlreadyInDb == false){
+								db.insertRecipe(cloudRecipe);
+							}
+
 						}
-					}
-					if(cloudRecipeAlreadyInDb == false){
-						cloudRecipe.generateJson();
-						db.insertRecipe(cloudRecipe);
-
-
-						List<Recipe> listRecipesTest=db.getRecipes();
-						listRecipesTest.size();
-					}
-
-				}
 
 			}
 		}else{
