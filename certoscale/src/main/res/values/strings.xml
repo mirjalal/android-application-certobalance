@@ -445,9 +445,9 @@
     <string name="activate_account">Activate account</string>
     <string name="internal_calibration">Internal calibration</string>
     <string name="completed_in">"completed in: "</string>
-    <string name="under_limit">Under limit:\n</string>
-    <string name="over_limit">Over limit:\n</string>
-    <string name="nominal">Nominal:\n</string>
+    <string name="under_limit">Under limit</string>
+    <string name="over_limit">Over limit</string>
+    <string name="nominal">Nominal</string>
     <string name="tolerance_plus">+ Tolerance:\n</string>
     <string name="tolerance_minus">- Tolerance:\n</string>
     <string name="current_item">Current Item:\n</string>
@@ -478,8 +478,8 @@
     <string name="imprecision">Imprecision</string>
     <string name="inaccuracy">Inacurracy</string>
     <string name="water_temp">Water Temperature\n</string>
-    <string name="pressure">Pressure\n</string>
-    <string name="pipett_name">Pipette Name</string>
+    <string name="pressure">Pressure</string>
+    <string name="pipette_name">Pipette Name</string>
     <string name="pipette_number">Pipette Number</string>
     <string name="number_of_samples">Number of Samples</string>
     <string name="tolerance_plus_1">+ Tolerance1</string>
@@ -492,9 +492,9 @@
     <string name="please_enter_the_first_neg_tol">Please enter the first negative tolerance</string>
     <string name="please_enter_the_second_neg_tol">Please enter the second negative tolerance</string>
     <string name="minimum_weight">Minimum Weight</string>
-    <string name="tara">TARA</string>
-    <string name="brutto">BRUTTO</string>
-    <string name="netto">NETTO</string>
+    <string name="tara">Tara</string>
+    <string name="brutto">Brutto</string>
+    <string name="netto">Netto</string>
     <string name="load_percent">LOAD [%]</string>
     <string name="piece_weight">PIECE WEIGHT</string>
     <string name="minimum_weight_upper_case">MINIMUM WEIGHT</string>
@@ -747,6 +747,14 @@
     <string name="you_have_to_choose_a_recipe_first">You have to choose a recipe first</string>
     <string name="scaling_factor_calculated">scaling factor calculated</string>
     <string name="ignore">Ignore</string>
+    <string name="language">Language</string>
+    <string name="language_current">English</string>
+    <string name="protocol_printer">Protocol printer</string>
+    <string name="barcode_or_qr_code_scanner">Barcode or QR-code scanner</string>
+    <string name="balance">Balance</string>
+    <string name="balance_model">Balance model</string>
+    <string name="certocloud_push_notification_service">CertoCloud push notification service</string>
+    <string name="label_printer">Label printer</string>
 
 
 </resources>

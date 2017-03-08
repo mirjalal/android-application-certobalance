@@ -188,11 +188,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_brutto_visible), getResources().getBoolean(R.bool.preferences_weigh_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_netto_visible), getResources().getBoolean(R.bool.preferences_weigh_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -207,7 +207,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum_visible), getResources().getBoolean(R.bool.preferences_weigh_minimum_visible)) == true) {
-                    listReferenceFields.get(minweight).getTextName().setText(R.string.minimum_weight_upper_case);
+                    listReferenceFields.get(minweight).getTextName().setText(getString(R.string.minimum_weight).toUpperCase());
                     listReferenceFields.get(minweight).getTextValue().setText(ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
                 }
 
@@ -219,11 +219,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_counting_brutto_visible), getResources().getBoolean(R.bool.preferences_counting_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_counting_netto_visible), getResources().getBoolean(R.bool.preferences_counting_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -234,7 +234,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
                 if (prefs.getBoolean(getString(R.string.preferences_counting_apw_visible), getResources().getBoolean(R.bool.preferences_counting_apw_visible)) == true) {
-                    listReferenceFields.get(apw).getTextName().setText(R.string.piece_weight);
+                    listReferenceFields.get(apw).getTextName().setText(getString(R.string.piece_weight).toUpperCase());
                     listReferenceFields.get(apw).getTextValue().setText(ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit());
                 }
 
@@ -275,11 +275,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_brutto_visible), getResources().getBoolean(R.bool.preferences_percent_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_netto_visible), getResources().getBoolean(R.bool.preferences_percent_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -307,11 +307,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_check_brutto_visible), getResources().getBoolean(R.bool.preferences_check_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_check_netto_visible), getResources().getBoolean(R.bool.preferences_check_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto));
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -370,16 +370,16 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_animal_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_animal_netto_visible), getResources().getBoolean(R.bool.preferences_animal_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_animal_measuringtime_visible), getResources().getBoolean(R.bool.preferences_animal_measuringtime_visible)) == true) {
-                    listReferenceFields.get(measuringTime).getTextName().setText(R.string.averaging_time);
+                    listReferenceFields.get(measuringTime).getTextName().setText(getString(R.string.averaging_time).toUpperCase());
                     listReferenceFields.get(measuringTime).getTextValue().setText(ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime() + " s");
                 }
 
@@ -393,11 +393,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_filling_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -423,11 +423,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
             case PEAK_HOLD:
@@ -437,11 +437,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_peak_brutto_visible), getResources().getBoolean(R.bool.preferences_animal_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_peak_netto_visible), getResources().getBoolean(R.bool.preferences_filling_netto_visible)) == true) {
-                    listReferenceFields.get(netto).getTextName().setText(R.string.netto);
+                    listReferenceFields.get(netto).getTextName().setText(getString(R.string.netto).toUpperCase());
                     listReferenceFields.get(netto).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
 
@@ -455,7 +455,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_brutto_visible), getResources().getBoolean(R.bool.preferences_ingrediant_brutto_visible)) == true) {
-                    listReferenceFields.get(brutto).getTextName().setText(R.string.brutto);
+                    listReferenceFields.get(brutto).getTextName().setText(getString(R.string.brutto).toUpperCase());
                     listReferenceFields.get(brutto).getTextValue().setText(ApplicationManager.getInstance().getSumAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_netto_visible), getResources().getBoolean(R.bool.preferences_ingrediant_netto_visible)) == true) {

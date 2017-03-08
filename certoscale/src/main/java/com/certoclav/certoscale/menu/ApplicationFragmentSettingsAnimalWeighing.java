@@ -84,7 +84,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
 
     @Override
     public void onResume() {
-        buttonAveragingTime.setText(getString(R.string.averaging_time)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
+        buttonAveragingTime.setText(getString(R.string.averaging_time)+":\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
 
 
         super.onResume();

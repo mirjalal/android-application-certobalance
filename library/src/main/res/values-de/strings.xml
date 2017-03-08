@@ -306,7 +306,11 @@
     
     <string name="please_connect_to_network_first">Bitte verbinden Sie das Gerät mit einem Internetfähigen Netzwerk</string>
     <string name="please_log_in_into_your_certocloud_account_first">Bitte melden Sie sich zuerst mit Ihrem CertoCloud Konto an</string>
-    
+    <string name="install_update_from_usb_flash_drive">Update von USB-Stick installieren</string>
+    <string name="install_update_from_external_sd_card">Update von externer SD-Karte installieren</string>
+    <string name="can_not_read_from_sd_card">SD-Karte kann nicht augselesen werdenDemo</string>
+
+
     <string name="venting">Entlüften</string>
 
     

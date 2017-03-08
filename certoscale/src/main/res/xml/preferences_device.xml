@@ -2,8 +2,8 @@
 
     <Preference
         android:key="@string/preferences_device_language"
-        android:title="Language"
-        android:summary="English"/>
+        android:title="@string/language"
+        android:summary="@string/language_current"/>
 
     <Preference
         android:key="@string/preferences_device_software_update"
