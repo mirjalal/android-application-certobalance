@@ -73,6 +73,11 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
 
         DatabaseService db = new DatabaseService(this);
+
+        List<Protocol> protocols = db.getProtocols();
+        navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  "+protocols.size());
+
+
         adapter = new ProtocolAdapter(this,new ArrayList<Protocol>());
         listView.setAdapter(adapter);
 
@@ -250,7 +255,11 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
             }
         }
 
+        navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  " +protocols.size());
+        navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+
         adapter.notifyDataSetChanged();
+
     }
 }
 

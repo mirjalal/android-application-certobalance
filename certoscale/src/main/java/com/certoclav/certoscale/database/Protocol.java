@@ -213,7 +213,6 @@ public class Protocol {
 		try {
 			jsonObject.put(JSON_CLOUD_ID,cloudId)
 					.put(JSON_NAME, name)
-					.put(JSON_CLOUD_ID,cloudId)
 					.put(JSON_DEVICE_KEY,deviceKey)
 					.put(JSON_DATE,date)
 					.put(JSON_USER_EMAIL, userEmail)

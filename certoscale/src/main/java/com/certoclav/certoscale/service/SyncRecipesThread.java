@@ -140,14 +140,14 @@ public class SyncRecipesThread extends Thread {
 		Integer retval = recipes.getRecipesFromCloud();
 
 
-		if(retval == GetUtil.RETURN_OK){
-			if(recipes.getRecipeJsonStringArray()!= null){
-				DatabaseService db = new DatabaseService(ApplicationController.getContext());
-				List<Recipe> recipesFromDb = db.getRecipes();
-				listRecipesCloud= new ArrayList<Recipe>();
+					if(retval == GetUtil.RETURN_OK){
+						if(recipes.getRecipeJsonStringArray()!= null){
+							DatabaseService db = new DatabaseService(ApplicationController.getContext());
+							List<Recipe> recipesFromDb = db.getRecipes();
+							listRecipesCloud= new ArrayList<Recipe>();
 
-				for(String recipeJsonString : recipes.getRecipeJsonStringArray()){
-					listRecipesCloud.add(new Recipe(recipeJsonString));
+							for(String recipeJsonString : recipes.getRecipeJsonStringArray()){
+								listRecipesCloud.add(new Recipe(recipeJsonString));
 				}
 				for(Recipe cloudRecipe : listRecipesCloud){
 					boolean cloudRecipeAlreadyInDb = false;
@@ -160,7 +160,12 @@ public class SyncRecipesThread extends Thread {
 					if(cloudRecipeAlreadyInDb == false){
 						cloudRecipe.generateJson();
 						db.insertRecipe(cloudRecipe);
+
+
+						List<Recipe> listRecipesTest=db.getRecipes();
+						listRecipesTest.size();
 					}
+
 				}
 
 			}
@@ -223,7 +228,7 @@ public class SyncRecipesThread extends Thread {
     		JSONObject jsonResponseProgram = jsonResponse.getJSONObject("recipe");
     		String cloudId = jsonResponseProgram.getString("_id");
     		Log.e("SyncRecipeThread", "parsed cloud id from response: " + cloudId);
-    		db.updateRecipeloudId(recipe,cloudId);
+    		db.updateRecipeCloudId(recipe,cloudId);
     	}
 		}catch(Exception e){
 			Log.e("SyncProfileThread", "exception: " + e.toString());

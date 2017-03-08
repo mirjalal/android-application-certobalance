@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,10 +18,13 @@ import com.certoclav.certoscale.adapters.RecipeAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncItemsService;
 import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -32,13 +36,15 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by Michael on 12/6/2016.
  */
 
-public class MenuRecipeActivity extends Activity implements ButtonEventListener, RecipeAdapter.OnClickButtonListener {
+public class MenuRecipeActivity extends Activity implements ButtonEventListener, RecipeAdapter.OnClickButtonListener, DatabaseListener {
 
     private Navigationbar navigationbar = new Navigationbar(this);
     private ListView listView = null;
@@ -96,61 +102,10 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         adapter.clear();
 
 
+        Scale.getInstance().setOnDatabaseListener(this);
 
 
 
-/*
-        new AsyncTask<Boolean, Boolean, Boolean >(){
-
-            @Override
-            protected Boolean  doInBackground(Boolean... params) {
-                ArrayList<String> recipeList = new ArrayList<String>();
-                Recipes recipes = new Recipes();
-                Integer retval = recipes.getRecipesFromCloud();
-                if(retval == GetUtil.RETURN_OK){
-                    if(recipes.getRecipeJsonStringArray() != null){
-                        DatabaseService db = new DatabaseService(ApplicationController.getContext());
-                        List<Recipe> recipesFromDb = db.getRecipes();
-                        List<Recipe> recipesFromCloud = new ArrayList<Recipe>();
-
-                        for(String recipeJsonString : recipes.getRecipeJsonStringArray()){
-                            recipesFromCloud.add(new Recipe(recipeJsonString));
-                        }
-                        for(Recipe cloudRecipe : recipesFromCloud){
-                            boolean cloudRecipeAlreadyInDb = false;
-                            for(Recipe dbRecipe : recipesFromDb){
-                                if(cloudRecipe.getCloudId().equals(dbRecipe.getCloudId())){
-                                    cloudRecipeAlreadyInDb = true;
-                                    continue;
-                                }
-                            }
-                            if(cloudRecipeAlreadyInDb == false){
-                                db.insertRecipe(cloudRecipe);
-                            }
-                        }
-
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Boolean b) {
-                Toast.makeText(ApplicationController.getContext(), "Items updated", Toast.LENGTH_LONG);
-                DatabaseService db = new DatabaseService(ApplicationController.getContext());
-                List<Recipe> recipes = db.getRecipes();
-                adapter.clear();
-                if(recipes != null){
-                    for(Recipe recipe : recipes){
-                        adapter.add(recipe);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-
-                super.onPostExecute(b);
-            }
-        }.execute();
-        */
 
 
         DatabaseService db = new DatabaseService(this);
@@ -175,6 +130,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
     protected void onPause() {
         super.onPause();
         adapter.removeOnClickButtonListener(this);
+        Scale.getInstance().removeOnDatabaseListener(this);
     }
 
 
@@ -245,6 +201,26 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         Intent intent = new Intent(MenuRecipeActivity.this, MenuRecipeEditActivity.class);
         intent.putExtra(MenuRecipeEditActivity.INTENT_EXTRA_RECIPE_ID, recipe.getRecipe_id());
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onDatabaseChanged() {
+        Log.e("MenuProtocolActivity","onDatabaseChanged()");
+        DatabaseService db = new DatabaseService(this);
+        List<Recipe> recipes = db.getRecipes();
+
+
+
+        adapter.clear();
+        if(recipes != null){
+            for(Recipe recipe : recipes){
+                adapter.add(recipe);
+            }
+        }
+
+        navigationbar.getTextTitle().setText(getString(R.string.recipes).toUpperCase() + ":  " + recipes.size());
+        adapter.notifyDataSetChanged();
     }
 
 

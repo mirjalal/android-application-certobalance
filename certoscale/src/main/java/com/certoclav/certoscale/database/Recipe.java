@@ -34,7 +34,7 @@ public class Recipe {
 	private final static String JSON_DEVICE_KEY = "devicekey";
 	private final static String JSON_DATE = "date";
 	private final static String JSON_VISIBILITY = "visibility";
-	private final static String JSON_STEPS = "steps";
+	private final static String JSON_ENTRIES = "steps";
 	private final static String JSON_USER_EMAIL = "email";
 
 	private String userid="";
@@ -45,7 +45,7 @@ public class Recipe {
 	private String deviceKey = "";
 	private String visibility = "private";
 
-	private String steps = "";
+
 
 
 
@@ -119,10 +119,18 @@ public class Recipe {
 			visibility = "private";
 		}
 
-		try{
-			steps = jsonObject.getString(JSON_STEPS);
+
+
+		try {
+			JSONArray jsonArrayRecipeEntries = new JSONArray();
+			for (RecipeEntry entry : recipeEntries) {
+				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()).put("measuredWeight",entry.getMeasuredWeight()));
+			}
+
+
+
 		}catch (Exception e){
-			steps="";
+			e.printStackTrace();
 		}
 
 
@@ -225,7 +233,8 @@ public class Recipe {
 		recipeEntries = new ArrayList<RecipeEntry>();
 		try {
 			JSONObject jsonObjectRecipe = new JSONObject(recipeJson);
-			JSONArray jsonArrayEntries = jsonObjectRecipe.getJSONArray("recipeEntries");
+			//JSONArray jsonArrayEntries = jsonObjectRecipe.getJSONArray("recipeEntries");
+			JSONArray jsonArrayEntries = jsonObjectRecipe.getJSONArray("steps");
 			for(int i = 0; i< jsonArrayEntries.length(); i++){
 				recipeEntries.add(new RecipeEntry(jsonArrayEntries.getJSONObject(i).getString("name"),jsonArrayEntries.getJSONObject(i).getDouble("weight"),jsonArrayEntries.getJSONObject(i).getDouble("measuredWeight")));
 			}
@@ -248,7 +257,7 @@ public class Recipe {
 					  .put(JSON_DEVICE_KEY,deviceKey)
 					  .put(JSON_DATE,date)
 					  .put(JSON_VISIBILITY,visibility)
-					  .put(JSON_STEPS,steps);
+					  .put(JSON_ENTRIES,recipeEntries);
 
 		}catch (Exception e){
 			e.printStackTrace();

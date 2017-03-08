@@ -188,5 +188,9 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
             adapter.setHideActionButtons(false);
         }
         adapter.notifyDataSetChanged();
+
+
+
+        navigationbar.getTextTitle().setText(getString(R.string.items).toUpperCase()+":  "+items.size());
     }
 }

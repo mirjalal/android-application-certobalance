@@ -442,6 +442,9 @@ public class DatabaseService {
 
 	public int insertRecipe(Recipe recipe) {
 
+		recipe.generateJson();
+		recipe.generateRecipeJson();
+
 		try {
 
 			int x =recipeDao.create(recipe);
@@ -618,7 +621,7 @@ public class DatabaseService {
 	}
 
 
-	public int updateRecipeloudId(Recipe recipe, String cloudId) {
+	public int updateRecipeCloudId(Recipe recipe, String cloudId) {
 		try {
 			recipe.setCloudId(cloudId);
 			deleteRecipe(recipe);
