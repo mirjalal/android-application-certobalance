@@ -40,7 +40,16 @@
 
         <Button
             android:id="@+id/application_settings_formulation_button_scaling_factor"
-            android:text="Scaling factor"
+            android:text="@string/scaling_factor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+        <Button
+            android:id="@+id/application_settings_formulation_button_calculate_scaling_factor"
+            android:text="@string/calculate_scaling_factor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"

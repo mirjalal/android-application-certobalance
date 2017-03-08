@@ -4,6 +4,7 @@ package com.certoclav.certoscale.database;
 import android.util.Log;
 
 import com.certoclav.certoscale.model.RecipeEntry;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -194,7 +195,15 @@ public class Recipe {
 
 
 
+	public double getRecipeTotalWeight(){
 
+		double totalTarget=0;
+		for(int i=0;i<getRecipeEntries().size();i++){
+			totalTarget = totalTarget + getRecipeEntries().get(i).getWeight();
+		}
+
+		return totalTarget;
+	}
 
 
 

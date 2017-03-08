@@ -742,6 +742,11 @@
     <string name="calibration_menu">Calibration menu</string>
     <string name="main_menu">Main menu</string>
     <string name="support">Support</string>
+    <string name="calculate_scaling_factor">Calculate Scaling Factor</string>
+    <string name="please_enter_the_desired_total_weight_of_the_recipe">Please enter the desired total weight of the recipe</string>
+    <string name="you_have_to_choose_a_recipe_first">You have to choose a recipe first</string>
+    <string name="scaling_factor_calculated">scaling factor calculated</string>
+    <string name="ignore">Ignore</string>
 
 
 </resources>

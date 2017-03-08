@@ -42,7 +42,7 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 		buttonOk = (Button) findViewById(R.id.menu_btn_ok);
 		buttonOk.setVisibility(View.GONE);
 		buttonCancel = (Button) findViewById(R.id.menu_btn_cancel);
-		buttonCancel.setText("Ignore".toUpperCase());
+		buttonCancel.setText(getString(R.string.ignore).toUpperCase());
 		textNotificationHead.setText(R.string.warning);
 		videoView = (VideoView) findViewById(R.id.menu_notification_video);
 		buttonCancel.setOnClickListener(new OnClickListener() {
