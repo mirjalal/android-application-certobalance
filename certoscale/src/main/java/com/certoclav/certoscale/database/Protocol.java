@@ -4,30 +4,31 @@ package com.certoclav.certoscale.database;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-
 
 
 @DatabaseTable(tableName = "protocol")
 public class Protocol {
 
-	private static final String USER_ID = "userid";
-	private static final String NAME = "name";
-	private static final String DEVICEKEY = "devicekey";
-	private static final String DATE = "date";
-	private static final String VISIBILITY = "visibility";
-	private static final String CONTENT = "content";
+
+	private static final String JSON_CONTENT = "content";
+	private final static String JSON_DEVICE_KEY = "devicekey";
+	private final static String JSON_DATE = "date";
+	private final static String JSON_VISIBILITY = "visibility";
+	private final static String JSON_NAME = "name";
+	private final static String JSON_CLOUD_ID = "_id"; //user db id from MongoDb
+	private final static String JSON_USER_EMAIL = "email";
 
 
-	private String userid="";
 	private String name = "";
 	private String userEmail = "";
 	private String deviceKey = "";
 	private String visibility = "global";
 	private String content = "";
 	private String date = "";
+	private String cloudId = "";
+
+
 
 	public String getProtocolJson() {
 		generateJson();
@@ -40,9 +41,6 @@ public class Protocol {
 
 	@DatabaseField(columnName = "protocol_json")
 	private String protocolJson;
-
-	@DatabaseField(columnName = "cloud_id")
-	private String cloudId;
 
 
 
@@ -87,7 +85,11 @@ public class Protocol {
 		}catch (Exception e){
 			name = "";
 		}
-
+		try {
+			userEmail = jsonObject.getString(JSON_USER_EMAIL);
+		}catch (Exception e){
+			userEmail = "";
+		}
 
 		try {
 			visibility = jsonObject.getString(JSON_VISIBILITY);
@@ -103,11 +105,6 @@ public class Protocol {
 			date = "";
 		}
 
-		try {
-			description = jsonObject.getString(JSON_DESCRIPTION);
-		}catch (Exception e){
-			description = "";
-		}
 
 		try {
 			deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
@@ -115,11 +112,6 @@ public class Protocol {
 			deviceKey = "";
 		}
 
-		try {
-			unit = jsonObject.getString(JSON_UNIT);
-		}catch (Exception e){
-			unit = "";
-		}
 
 		try {
 			cloudId = jsonObject.getString(JSON_CLOUD_ID);
@@ -128,7 +120,7 @@ public class Protocol {
 		}
 
 		try {
-			content = jsonObject.getString(CONTENT);
+			content = jsonObject.getString(JSON_CONTENT);
 		}catch (Exception e){
 			content = "";
 		}
@@ -136,36 +128,9 @@ public class Protocol {
 
 	}
 
-	public void generateProtocolJson(){
-		JSONObject jsonObject = new JSONObject();
-			try{
-				jsonObject
-						.put(NAME, name)
-						.put(USER_ID, userEmail)
-						.put(DEVICEKEY, deviceKey)
-						.put(DATE, this.date)
-						.put(VISIBILITY, visibility)
-						.put(CONTENT, content);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		protocolJson = jsonObject.toString();
-	}
 
-	public void parseProtocolJson(){
-		try {
-			JSONObject jsonObject = new JSONObject(protocolJson);
-			name = 		jsonObject.getString(NAME);
-			userEmail = jsonObject.getString(USER_ID);
-			deviceKey = jsonObject.getString(DEVICEKEY);
-			this.date = 		jsonObject.getString(DATE);
-			visibility = jsonObject.getString(VISIBILITY);
-			content = 	jsonObject.getString(CONTENT);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 
-	}
+
 
 
 
@@ -239,23 +204,7 @@ public class Protocol {
 		this.cloudId = cloudId;
 	}
 
-	private final static String JSON_DESCRIPTION = "description";
-	private final static String JSON_DEVICE_KEY = "devicekey";
-	private final static String JSON_DATE = "date";
-	private final static String JSON_VISIBILITY = "visibility";
-	private final static String JSON_ARTICLE_NUMBER = "artno";
-	private final static String JSON_NAME = "name";
-	private final static String JSON_WEIGHT = "weight";
-	private final static String JSON_UNIT = "unit";
-	private final static String JSON_CLOUD_ID = "_id";
 
-
-	private Double weight = 0d;
-	private Double cost = 0d;
-	private String articleNumber = "";
-
-	private String description = "";
-	private String unit = "";
 
 
 	public void generateJson(){
@@ -264,15 +213,12 @@ public class Protocol {
 		try {
 			jsonObject.put(JSON_CLOUD_ID,cloudId)
 					.put(JSON_NAME, name)
-					.put(USER_ID,userid)
+					.put(JSON_CLOUD_ID,cloudId)
 					.put(JSON_DEVICE_KEY,deviceKey)
 					.put(JSON_DATE,date)
+					.put(JSON_USER_EMAIL, userEmail)
 					.put(JSON_VISIBILITY,visibility)
-					.put(CONTENT,content);
-
-
-
-
+					.put(JSON_CONTENT,content);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

@@ -63,6 +63,7 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 	private ImageButton imageButtonSidebarBack = null;
 	private ImageButton imageButtonTimer = null;
 	private ImageButton imageButtonCalculator = null;
+	private ImageButton imageButtonVideo = null;
 	private ImageButton imageButtonCalibration = null;
 
 
@@ -76,6 +77,7 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_actionbar, actionButtonbarFragment).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_display, new ApplicationFragmentWeight()).commit();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table,  new ApplicationFragmentTable()).commit();
+
 		containerMore = (LinearLayout) findViewById(R.id.menu_application_container_more);
 
 		imageButtonCalculator = (ImageButton) findViewById(R.id.menu_application_sidebar_button_calculator);
@@ -88,11 +90,23 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 			}
 		});
 
+
+		imageButtonVideo = (ImageButton) findViewById(R.id.menu_application_sidebar_button_video);
+		imageButtonVideo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				imageButtonSidebarBack.performClick();
+				Intent intent = new Intent(ApplicationActivity.this, VideoActivity.class);
+				startActivity(intent);
+			}
+		});
+
 		imageButtonCalibration = (ImageButton) findViewById(R.id.menu_application_sidebar_button_calibration);
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				ReadAndParseSerialService.getInstance().sendCalibrationCommand();
+				imageButtonSidebarBack.performClick();
 			}
 		});
 		imageButtonTimer = (ImageButton) findViewById(R.id.menu_application_sidebar_button_timer);

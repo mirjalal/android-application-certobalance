@@ -7,6 +7,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -91,6 +92,12 @@ public class UserAdapter extends ArrayAdapter<User> {
 		final TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
 		secondLine.setText(getItem(position).getIsAdmin()?  "Admin account":"Standard account");
 
+		ImageView imageCloud = (ImageView) convertView.findViewById(R.id.list_element_user_image_cloud);
+		if(getItem(position).getIsLocal() == false) {
+			imageCloud.setImageResource(R.drawable.cloud_ok_white);
+		}else{
+			imageCloud.setImageResource(R.drawable.cloud_no_white);
+		}
 
 
 		//make only the own account editable

@@ -9,8 +9,9 @@
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="70dp"
+        android:layout_margin="10dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_menu_library"
+        android:src="@drawable/ic_menu_document_text"
         android:layout_alignParentLeft="true" >
         
     </ImageView>
@@ -40,12 +41,24 @@
 
         </LinearLayout>
 
-        <LinearLayout
+    <ImageView
+        android:id="@+id/list_element_recipe_image_cloud"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/cloud_ok_white"
+        android:layout_toLeftOf="@+id/user_list_element_container_button"
+        android:layout_centerVertical="true">
+    </ImageView>
+
+
+    <LinearLayout
             android:id="@+id/user_list_element_container_button"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_alignParentRight="true"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_height="60dp"
             android:layout_marginRight="20dp" ></LinearLayout>
 
 </RelativeLayout>

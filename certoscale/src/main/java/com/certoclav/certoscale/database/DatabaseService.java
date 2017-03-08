@@ -308,7 +308,7 @@ public class DatabaseService {
 
 		protocol.generateJson();
 		try {
-			protocol.generateProtocolJson();
+			protocol.generateJson();
 			int x =protocolDao.create(protocol);
 			return x;
 
@@ -340,7 +340,7 @@ public class DatabaseService {
 			List<Protocol> protocols = protocolDao.queryForAll();
 			try {
 				for (Protocol protocol : protocols) {
-					protocol.parseProtocolJson();
+					protocol.parseJson();
 				}
 			}catch (Exception e){
 

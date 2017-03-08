@@ -18,6 +18,8 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.certocloud.CertocloudConstants;
+import com.certoclav.library.certocloud.DeleteTask;
 
 import java.util.List;
 
@@ -89,6 +91,13 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemDelete);
 
+		ImageView imageCloud = (ImageView) convertView.findViewById(R.id.list_element_protocol_image_cloud);
+		if(getItem(position).getCloudId().isEmpty()){
+			imageCloud.setImageResource(R.drawable.cloud_no_white);
+		}else{
+			imageCloud.setImageResource(R.drawable.cloud_ok_white);
+		}
+
 		actionItemDelete.setChecked(false);
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
 		actionItemDelete.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +128,10 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 					dialogButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
+							if(getItem(position).getCloudId().isEmpty() == false){
+								DeleteTask deleteTask = new DeleteTask();
+								deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_PROTOCOL + getItem(position).getCloudId());
+							}
 							DatabaseService db = new DatabaseService(mContext);
 							db.deleteProtocol(getItem(position));
 							remove(getItem(position));

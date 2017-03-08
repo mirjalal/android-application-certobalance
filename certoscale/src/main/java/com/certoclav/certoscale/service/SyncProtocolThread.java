@@ -5,14 +5,12 @@ import android.util.Log;
 
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
-import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.CertocloudConstants;
 import com.certoclav.library.certocloud.CloudUser;
 import com.certoclav.library.certocloud.GetUtil;
 import com.certoclav.library.certocloud.PostUtil;
 import com.certoclav.library.certocloud.Protocols;
-import com.certoclav.library.certocloud.Recipes;
 
 import org.json.JSONObject;
 
