@@ -90,14 +90,13 @@ public class Recipe {
 	private final static String JSON_ENTRY_ARTICLE_NUMBER = "artno";
 	private final static String JSON_ENTRY_DESCRIPTION = "description";
 	private final static String JSON_ENTRY_WEIGHT = "weight";
-	private final static String JSON_ENTRY_MEASURED_WEIGHT = "weight";
+	private final static String JSON_ENTRY_MEASURED_WEIGHT = "measured_weight";
 	private final static String JSON_ENTRY_UNIT = "unit";
 	private final static String JSON_ENTRY_INSTRUCTION = "instruction";
 
 	private String userid="";
 	private String userEmail = "";
 	private String cloudId = "";
-	private String name = "";
 	private String date = "";
 	private String description = "";
 	private String deviceKey = "";
@@ -135,6 +134,7 @@ public class Recipe {
 
 		JSONObject jsonObject = null;
 		recipeEntries.clear();
+		Log.e("Recipe", "trying to parse this string now: " + recipeJson.toString());
 
 		try {
 			jsonObject = new JSONObject(recipeJson);
@@ -149,9 +149,9 @@ public class Recipe {
 		}
 
 		try {
-			name = jsonObject.getString(JSON_NAME);
+			recipeName = jsonObject.getString(JSON_NAME);
 		}catch (Exception e){
-			name = "";
+			recipeName = "";
 		}
 
 		try {
@@ -179,78 +179,90 @@ public class Recipe {
 		}
 
 
+		JSONArray jsonArray = new JSONArray();
 		try {
-			JSONArray jsonArray = jsonObject.getJSONArray(JSON_ENTRIES);
+			jsonArray = jsonObject.getJSONArray(JSON_ENTRIES);
+		}catch (Exception e) {
+			jsonArray = new JSONArray();
+		}
 			for(int i = 0; i< jsonArray.length();i++){
-				JSONObject recipeEntry = (JSONObject) jsonArray.get(i);
+				JSONObject recipeEntry = new JSONObject();
+				try {
+					recipeEntry = (JSONObject) jsonArray.get(i);
+				}catch (Exception e) {
+					recipeEntry = new JSONObject();
+				}
+
 				Integer step = 0;
 				try{
-					recipeEntry.getString(JSON_ENTRY_STEP);
+					step = recipeEntry.getInt(JSON_ENTRY_STEP);
 				}catch (Exception e){
 					step = 0;
 				}
 
 				String unit = "";
 				try{
-					recipeEntry.getString(JSON_ENTRY_UNIT);
+					unit = recipeEntry.getString(JSON_ENTRY_UNIT);
 				}catch (Exception e){
 					unit = "";
 				}
 
 				String instruction = "";
 				try{
-					recipeEntry.getString(JSON_ENTRY_INSTRUCTION);
+					instruction = recipeEntry.getString(JSON_ENTRY_INSTRUCTION);
 				}catch (Exception e){
 					instruction = "";
 				}
 
 				String articleNumber = "";
 				try{
-					recipeEntry.getString(JSON_ENTRY_ARTICLE_NUMBER);
+					articleNumber = recipeEntry.getString(JSON_ENTRY_ARTICLE_NUMBER);
 				}catch (Exception e){
 					articleNumber = "";
 				}
 
 				Double weight = 0d;
 				try{
-					recipeEntry.getString(JSON_ENTRY_WEIGHT);
+					weight = recipeEntry.getDouble(JSON_ENTRY_WEIGHT);
 				}catch (Exception e){
 					weight = 0d;
 				}
 
 				Double measuredWeight = 0d;
 				try{
-					recipeEntry.getString(JSON_ENTRY_MEASURED_WEIGHT);
+					measuredWeight = recipeEntry.getDouble(JSON_ENTRY_MEASURED_WEIGHT);
 				}catch (Exception e){
 					measuredWeight = 0d;
 				}
 
 				String description = "";
 				try{
-					recipeEntry.getString(JSON_ENTRY_DESCRIPTION);
+					description = recipeEntry.getString(JSON_ENTRY_DESCRIPTION);
 				}catch (Exception e){
 					description = "";
 				}
 
+				Log.e("Recipe", "PARSED RECIPE ENTRIES: " + description + weight + step + articleNumber + instruction + measuredWeight);
 				recipeEntries.add(new RecipeEntry(description,weight,step,articleNumber,unit,instruction,measuredWeight));
 
 
 			}
-		}catch (Exception e){
-
-		}
 
 
 
-		recipeJson = jsonObject.toString();
 
 	}
 
 
-	public Recipe(String cloudId, String recipeName, List<RecipeEntry> entries) {
+	public Recipe(String cloudId, String recipeName, List<RecipeEntry> entries, String date, String deviceKey, String visibility, String userEmail) {
 		this.cloudId = cloudId;
 		this.recipeName = recipeName;
+		this.date = date;
+		this.deviceKey = deviceKey;
+		this.visibility = visibility;
+		this.userEmail = userEmail;
 		this.recipeEntries = entries;
+		generateJson();
 	}
 
 
@@ -305,15 +317,17 @@ public class Recipe {
 			JSONArray jsonArrayRecipeEntries = new JSONArray();
 
 				for (RecipeEntry entry : recipeEntries) {
-					jsonArrayRecipeEntries.put(new JSONObject()
-							.put(JSON_ENTRY_STEP,entry.getStep())
+					JSONObject jsonObjectEntry = new JSONObject();
+
+					jsonObjectEntry.put(JSON_ENTRY_STEP,entry.getStep())
 							.put(JSON_ENTRY_DESCRIPTION, entry.getDescription())
 							.put(JSON_ENTRY_WEIGHT, entry.getWeight())
 							.put(JSON_ENTRY_MEASURED_WEIGHT,entry.getMeasuredWeight())
 							.put(JSON_ENTRY_ARTICLE_NUMBER,entry.getArticleNumber())
 							.put(JSON_ENTRY_INSTRUCTION,entry.getInstruction())
-							.put(JSON_ENTRY_UNIT,entry.getUnit())
-					);
+							.put(JSON_ENTRY_UNIT,entry.getUnit());
+
+					jsonArrayRecipeEntries.put(jsonObjectEntry);
 				}
 
 			jsonObjectRecipe.put(JSON_NAME, recipeName);
@@ -324,6 +338,7 @@ public class Recipe {
 			jsonObjectRecipe.put(JSON_VISIBILITY,visibility);
 			jsonObjectRecipe.put(JSON_DEVICE_KEY,deviceKey);
 			jsonObjectRecipe.put(JSON_ENTRIES,jsonArrayRecipeEntries);
+			Log.e("Recipe", "generateJson RESULT: " + jsonObjectRecipe.toString());
 
 		}catch (Exception e){
 

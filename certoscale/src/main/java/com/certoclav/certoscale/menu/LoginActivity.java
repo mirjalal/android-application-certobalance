@@ -457,20 +457,21 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				}
 			}
 
-			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
-			entries.add(new RecipeEntry("Calcium",0.10,0.0));
-			entries.add(new RecipeEntry("Water", 9.90,0.0));
+			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 
-			//databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
-			Recipe recipe = new Recipe("","Calcium sol.",entries);
-			recipe.generateRecipeJson();
-			databaseService.insertRecipe(recipe);
+			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
+			entries.add(new RecipeEntry("Tare",0d,1,"","","Please put a bottle with at least 20ml volume onto the pan and press TARE",0d));
+			entries.add(new RecipeEntry("Calcium",0.10,2,"1300232","g","Please put 0.1 gram calcium onto the pan",0d));
+			entries.add(new RecipeEntry("Water", 9.90,3,"","g","Please fill in 9.9 gram water into the bottle",0d));
 
 			Date date = new Date();
+			//databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));
+			Recipe recipe = new Recipe("","Calcium sol.",entries,((Long)date.getTime()).toString(),Scale.getInstance().getSafetyKey(),"private", user1.getEmail());
+			databaseService.insertRecipe(recipe);
+
+
 			databaseService.insertItem(new Item("Item 1",12.0282d,33.21,"article2332",((Long)date.getTime()).toString(),"Item description",Scale.getInstance().getSafetyKey(),"g","","private"));
 			databaseService.insertItem(new Item("Item 2",12.0282d,33.21,"article2332",((Long)date.getTime()).toString(),"Item description",Scale.getInstance().getSafetyKey(),"g","","private"));
-
-			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 			Library library = new Library(user1.getEmail(), ScaleApplication.PART_COUNTING.ordinal(),"",0,"Default config", 0.0f, 10.0f,5,1,1,30,0,0,10 ,100,0,0,new Date(),true,10.0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0);
 
 			// Max regierstriert sich

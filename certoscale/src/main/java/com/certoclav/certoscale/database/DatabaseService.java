@@ -408,7 +408,7 @@ public class DatabaseService {
 			List<Recipe> recipes=  recipeDao.queryForAll();
 			try {
 				for (Recipe recipe : recipes) {
-					recipe.parseRecipeJson();
+					recipe.parseJson();
 				}
 			}catch (Exception e){
 
@@ -427,7 +427,7 @@ public class DatabaseService {
 		try {
 
 			Recipe recipe =  recipeDao.queryForId(recipeId);
-			recipe.parseRecipeJson();
+			recipe.parseJson();
 			return recipe;
 		} catch (SQLException e) {
 			Log.e(TAG, "Database exception", e);
@@ -443,7 +443,6 @@ public class DatabaseService {
 	public int insertRecipe(Recipe recipe) {
 
 		recipe.generateJson();
-		recipe.generateRecipeJson();
 
 		try {
 

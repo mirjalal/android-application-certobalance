@@ -3,7 +3,6 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,33 +10,24 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeAdapter;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.service.SyncItemsService;
 import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
-import com.certoclav.library.certocloud.GetUtil;
-import com.certoclav.library.certocloud.Items;
-import com.certoclav.library.certocloud.Recipes;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -114,7 +104,6 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         List<Recipe> recipes = db.getRecipes();
        if(recipes != null) {
            for (Recipe recipe : recipes) {
-               recipe.parseRecipeJson();
                adapter.add(recipe);
            }
        }

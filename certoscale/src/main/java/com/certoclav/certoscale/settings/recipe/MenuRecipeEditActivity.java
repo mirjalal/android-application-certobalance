@@ -16,8 +16,10 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
+import com.certoclav.certoscale.model.Scale;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,12 +96,12 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
            int recipeId = getIntent().getExtras().getInt(INTENT_EXTRA_RECIPE_ID);
            DatabaseService db = new DatabaseService(this);
            recipe = db.getRecipeById(recipeId);
-           recipe.parseRecipeJson();
        }catch (Exception e){
             ArrayList<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
-            recipeEntries.add(new RecipeEntry("H2O",100d,0.0));
-            recipeEntries.add(new RecipeEntry("NaCl",0.9,0.0));
-            recipe = new Recipe("","My recipe", recipeEntries);
+            recipeEntries.add(new RecipeEntry("H2O",100d,1,"1300131","g","Please tare the balance and place 100g H2O onto the pan and press NEXT",0d));
+            recipeEntries.add(new RecipeEntry("NaCl",0.9,2,"4827383", "g", "Please add 0,9g NaCl and press NEXT",0d));
+           Date date = new Date();
+           recipe = new Recipe("","My recipe", recipeEntries,((Long)date.getTime()).toString(), Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());
        }
         textRecipeName.setText(recipe.getRecipeName());
 
@@ -142,7 +144,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
 
             // set the custom dialog components - text, image and button
             TextView text = (TextView) dialog.findViewById(R.id.text);
-            text.setText(getString(R.string.do_you_really_want_to_delete) + " " + recipeEntry.getName());
+            text.setText(getString(R.string.do_you_really_want_to_delete) + " " + recipeEntry.getDescription());
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -177,7 +179,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
-            adapter.add(new RecipeEntry("",0d,0.0));
+            adapter.add(new RecipeEntry("",0d,0,"","","",0d));
             adapter.notifyDataSetChanged();
         }
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
@@ -212,8 +214,8 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                         for(int i = 0; i< adapter.getCount();i++){
                             recipeEntries.add(adapter.getItem(i));
                         }
-                        recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries);
-                        recipe.generateRecipeJson();
+                        Date date = new Date();
+                        recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries,((Long)date.getTime()).toString(),Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());
                         db.insertRecipe(recipe);
                         dialog.dismiss();
                         finish();

@@ -439,7 +439,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                     while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
 
 
-                        sb.append(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getName() + "\n");
+                        sb.append(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getDescription() + "\n");
 
                         formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
                         formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
