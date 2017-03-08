@@ -25,7 +25,7 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
 
     private LinearLayout containerSettingsButtons = null;
-    private Button buttonRecipe = null;
+    private Button buttonItem = null;
     private Button buttonCurrency = null;
 
     @Override
@@ -34,10 +34,10 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
 
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_ingrediant_costing,container, false);
 
-        buttonRecipe = (Button) rootView.findViewById(R.id.application_settings_ingrediant_button_item_name);
+        buttonItem = (Button) rootView.findViewById(R.id.application_settings_ingrediant_button_item_name);
         buttonCurrency = (Button) rootView.findViewById(R.id.application_settings_ingrediant_button_Edit_Currency);
 
-        buttonRecipe.setOnClickListener(new View.OnClickListener() {
+        buttonItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MenuItemActivity.class);
@@ -103,9 +103,9 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
     @Override
     public void onResume() {
         if(ApplicationManager.getInstance().getCurrentItem() != null) {
-            buttonRecipe.setText(R.string.current_item+"\n" + ApplicationManager.getInstance().getCurrentItem().getName());
+            buttonItem.setText(getString(R.string.current_item)+"\n" + ApplicationManager.getInstance().getCurrentItem().getName());
         }else{
-            buttonRecipe.setText(R.string.click_to_choose_item);
+            buttonItem.setText(R.string.click_to_choose_item);
         }
 
         if(ApplicationManager.getInstance().getCurrency() == null){

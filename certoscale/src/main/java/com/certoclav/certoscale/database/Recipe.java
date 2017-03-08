@@ -4,6 +4,7 @@ package com.certoclav.certoscale.database;
 import android.util.Log;
 
 import com.certoclav.certoscale.model.RecipeEntry;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -34,8 +35,10 @@ public class Recipe {
 	private final static String JSON_DATE = "date";
 	private final static String JSON_VISIBILITY = "visibility";
 	private final static String JSON_STEPS = "steps";
+	private final static String JSON_USER_EMAIL = "email";
 
 	private String userid="";
+	private String userEmail = "";
 	private String name = "";
 	private String date = "";
 	private String description = "";
@@ -68,10 +71,7 @@ public class Recipe {
 	private String recipeName = "";
 
 
-	public void setRecipeJson(String recipeJson) {
-		this.recipeJson = recipeJson;
-		parseJson();
-	}
+
 
 	public void parseJson(){
 
@@ -96,9 +96,9 @@ public class Recipe {
 		}
 
 		try {
-			userid = jsonObject.getString(JSON_USER_ID);
+			userEmail = jsonObject.getString(JSON_USER_EMAIL);
 		}catch (Exception e){
-			userid = "";
+			userEmail = "";
 		}
 
 		try {
@@ -136,12 +136,20 @@ public class Recipe {
 		this.recipeName = recipeName;
 		this.recipeEntries = entries;
 	}
+
+
+
 	public Recipe(String recipeJson) {
-
+		setRecipeJson(recipeJson);
 		this.recipeJson = recipeJson;
-
-
 	}
+
+	public void setRecipeJson(String recipeJson) {
+		this.recipeJson = recipeJson;
+		parseJson();
+	}
+
+
 
 	public String getCloudId() {
 		return cloudId;
@@ -198,7 +206,15 @@ public class Recipe {
 
 
 
+	public double getRecipeTotalWeight(){
 
+		double totalTarget=0;
+		for(int i=0;i<getRecipeEntries().size();i++){
+			totalTarget = totalTarget + getRecipeEntries().get(i).getWeight();
+		}
+
+		return totalTarget;
+	}
 
 
 

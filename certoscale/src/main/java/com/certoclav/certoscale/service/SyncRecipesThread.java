@@ -71,9 +71,9 @@ public class SyncRecipesThread extends Thread {
 
 				
 					
-					//get all items stored in certocloud
-					//saves all items in db if not there already
-					//saves all items from cloud in listItemsCloud array
+					//get all recipes stored in certocloud
+					//saves all recipes in db if not there already
+					//saves all recipes from cloud in listItemsCloud array
 					boolean success = getAndParseRecipesFromCertocloud();
 					if(success == false){
 						Log.e("SyncRecipeThread", "getAndParseRecipes failed -> return");

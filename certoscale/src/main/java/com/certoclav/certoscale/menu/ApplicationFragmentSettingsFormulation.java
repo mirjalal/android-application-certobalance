@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
@@ -23,6 +24,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
     private LinearLayout containerSettingsButtons = null;
     private Button buttonRecipe = null;
     private Button buttonScalingFactor=null;
+    private Button buttonCalculateScalingFactor=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +88,72 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
                 catch (Exception e)
                 {
                     e.printStackTrace();
+                }
+
+            }
+        });
+
+        buttonCalculateScalingFactor = (Button) rootView.findViewById(R.id.application_settings_formulation_button_calculate_scaling_factor);
+        buttonCalculateScalingFactor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ApplicationManager.getInstance().getCurrentRecipe()!=null) {
+                try{
+                    final Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_edit_float);
+                    dialog.setTitle(R.string.please_enter_the_desired_total_weight_of_the_recipe);
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(String.format(ApplicationManager.getInstance().getCurrentUnit().getName()));
+
+                    // set the custom dialog components - text, image and button
+
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_number_button_ok);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+
+
+                                    Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+
+                                    Double totalTarget = ApplicationManager.getInstance().getCurrentRecipe().getRecipeTotalWeight();
+
+                                    ApplicationManager.getInstance().setScalingFactor(inputval / totalTarget);
+
+                                    Toast.makeText(getActivity(), R.string.scaling_factor_calculated, Toast.LENGTH_LONG).show();
+
+
+
+
+                            }catch (NumberFormatException e){
+                                ApplicationManager.getInstance().setScalingFactor(1);
+                            }
+                            dialog.dismiss();
+                            onResume();
+
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                }else{
+                    Toast.makeText(getActivity(), R.string.you_have_to_choose_a_recipe_first, Toast.LENGTH_LONG).show();
+                    ApplicationManager.getInstance().setScalingFactor(1);
                 }
 
             }

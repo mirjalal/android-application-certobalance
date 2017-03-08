@@ -439,8 +439,8 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
 
 
-        button_under_limit.setText(getString(R.string.under_limit)+ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
-        button_over_limit.setText(getString(R.string.over_limit)+ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit());
+        button_under_limit.setText(getString(R.string.under_limit)+"\n" +ApplicationManager.getInstance().getUnderLimitCheckWeighingAsStringWithUnit());
+        button_over_limit.setText(getString(R.string.over_limit)+"\n"+ApplicationManager.getInstance().getOverLimitCheckWeighingAsStringWithUnit());
 
         button_nominal.setText(getString(R.string.nominal)+ApplicationManager.getInstance().getCheckNominalAsStringWithUnit());
         button_nominal_tolerance_over.setText(getString(R.string.tolerance_plus)+ApplicationManager.getInstance().getCheckNominalToleranceOverAsStringWithUnit());

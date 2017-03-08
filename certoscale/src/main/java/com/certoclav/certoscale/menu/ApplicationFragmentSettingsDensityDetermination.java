@@ -295,11 +295,11 @@ public class ApplicationFragmentSettingsDensityDetermination extends Fragment {
         }
 
 
-        buttonWaterTemp.setText(getString(R.string.water_temperature)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
+        buttonWaterTemp.setText(getString(R.string.water_temperature)+": "+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp())+" °C" );
 
-        buttonLiquid.setText((getString(R.string.liquid_density)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+" g/cm³" ));
+        buttonLiquid.setText((getString(R.string.liquid_density)+": "+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity())+" g/cm³" ));
 
-        buttonSinkerVolume.setText(getString(R.string.sinker_volume)+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume())+" ml" );
+        buttonSinkerVolume.setText(getString(R.string.sinker_volume)+": "+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume())+" ml" );
 
         buttonOilDensity.setText(getString(R.string.oil_density)+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getOilDensity())+" g/cm³" );
         //buttonWaterTemp.setText("Water Temperature\n"+ String.format("%.8f",ApplicationManager.getInstance().WaterTempInDensity(30.5))+" °C" );

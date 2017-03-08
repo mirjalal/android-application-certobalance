@@ -79,6 +79,8 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 		actionItemView = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemView);
 
+		
+
 		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
 		containerItems.addView(actionItemDelete);
 
