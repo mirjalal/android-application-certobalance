@@ -180,7 +180,11 @@ public class Recipe {
 		try {
 			JSONArray jsonArrayRecipeEntries = new JSONArray();
 			for (RecipeEntry entry : recipeEntries) {
-				jsonArrayRecipeEntries.put(new JSONObject().put("name", entry.getName()).put("weight", entry.getWeight()).put("measuredWeight",entry.getMeasuredWeight()));
+				jsonArrayRecipeEntries
+						.put(new JSONObject()
+						.put("name", entry.getName())
+						.put("weight", entry.getWeight())
+						.put("measuredWeight",entry.getMeasuredWeight()));
 			}
 			jsonObjectRecipe.put("recipeName", recipeName);
 			jsonObjectRecipe.put("recipeEntries",jsonArrayRecipeEntries);
