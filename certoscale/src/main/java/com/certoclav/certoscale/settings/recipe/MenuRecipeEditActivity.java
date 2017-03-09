@@ -179,7 +179,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
-            adapter.add(new RecipeEntry("",0d,0,"","","",0d));
+            adapter.add(new RecipeEntry(" ",0d,0," "," "," ",0d));
             adapter.notifyDataSetChanged();
         }
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){

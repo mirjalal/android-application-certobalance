@@ -460,9 +460,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 
 			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
-			entries.add(new RecipeEntry("Tare",0d,1,"","","Please put a bottle with at least 20ml volume onto the pan and press TARE",0d));
+			entries.add(new RecipeEntry("Tare",0d,1," "," ","Please put a bottle with at least 20ml volume onto the pan and press TARE",0d));
 			entries.add(new RecipeEntry("Calcium",0.10,2,"1300232","g","Please put 0.1 gram calcium onto the pan",0d));
-			entries.add(new RecipeEntry("Water", 9.90,3,"","g","Please fill in 9.9 gram water into the bottle",0d));
+			entries.add(new RecipeEntry("Water", 9.90,3," ","g","Please fill in 9.9 gram water into the bottle",0d));
 
 			Date date = new Date();
 			//databaseService.insertRecipe(new Recipe("","Calcium recipe",entries));

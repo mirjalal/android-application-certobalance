@@ -40,10 +40,10 @@ public class RecipeEntry {
 	}
 
 	private int step = 0;
-	private String articleNumber = "";
-	private String unit = "";
-	private String instruction = "";
-	private Double measuredWeight = -1d;
+	private String articleNumber = " ";
+	private String unit = " ";
+	private String instruction = " ";
+	private Double measuredWeight = 0d;
 
 
 

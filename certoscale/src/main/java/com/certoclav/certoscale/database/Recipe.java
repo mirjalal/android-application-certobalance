@@ -98,7 +98,6 @@ public class Recipe {
 	private String userEmail = "";
 	private String cloudId = "";
 	private String date = "";
-	private String description = "";
 	private String deviceKey = "";
 	private String visibility = "private";
 	private List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
@@ -200,25 +199,25 @@ public class Recipe {
 					step = 0;
 				}
 
-				String unit = "";
+				String unit = " ";
 				try{
 					unit = recipeEntry.getString(JSON_ENTRY_UNIT);
 				}catch (Exception e){
-					unit = "";
+					unit = " ";
 				}
 
-				String instruction = "";
+				String instruction = " ";
 				try{
 					instruction = recipeEntry.getString(JSON_ENTRY_INSTRUCTION);
 				}catch (Exception e){
-					instruction = "";
+					instruction = " ";
 				}
 
-				String articleNumber = "";
+				String articleNumber = " ";
 				try{
 					articleNumber = recipeEntry.getString(JSON_ENTRY_ARTICLE_NUMBER);
 				}catch (Exception e){
-					articleNumber = "";
+					articleNumber = " ";
 				}
 
 				Double weight = 0d;
@@ -235,11 +234,11 @@ public class Recipe {
 					measuredWeight = 0d;
 				}
 
-				String description = "";
+				String description = " ";
 				try{
 					description = recipeEntry.getString(JSON_ENTRY_DESCRIPTION);
 				}catch (Exception e){
-					description = "";
+					description = " ";
 				}
 
 				Log.e("Recipe", "PARSED RECIPE ENTRIES: " + description + weight + step + articleNumber + instruction + measuredWeight);
