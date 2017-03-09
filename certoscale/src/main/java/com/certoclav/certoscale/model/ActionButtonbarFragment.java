@@ -1867,7 +1867,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(sb.toString());
 
-					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, getString(R.string.statistics_printed), Toast.LENGTH_LONG).show();
 				}
 			});
 
@@ -1977,7 +1977,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_statistics_samples);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle(getString(R.string.statistics));
+			dialog.setTitle(getString(R.string.samples));
 			//           statistic = new SummaryStatistics();
 			//           for (Double value : statisticsArray) {
 			//               statistic.addValue(value);
