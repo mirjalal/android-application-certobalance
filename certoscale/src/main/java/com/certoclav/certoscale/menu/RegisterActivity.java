@@ -331,7 +331,11 @@ private EditTextItem editLastName;
 				editEmailItem.setText(user.getEmail());
 				editEmailItem.setEnabled(false);
 				editEmailItem.setFocusable(false);
-				editEmailItem.setVisibility(View.INVISIBLE);
+				if(user.getIsAdmin() == true){
+					editEmailItem.setVisibility(View.VISIBLE);
+				}else {
+					editEmailItem.setVisibility(View.INVISIBLE);
+				}
 				navigationbar.getTextTitle().setText(user.getEmail());
 				editMobile.setText(user.getMobile());
 				editFirstName.setText(user.getFirstName());

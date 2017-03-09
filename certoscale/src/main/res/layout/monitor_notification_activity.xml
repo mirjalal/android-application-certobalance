@@ -65,11 +65,8 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:background="@drawable/quickaction_slider_btn_black"
+            style="@style/button_alert"
             android:text="@string/ok"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" 
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@+id/menu_notification_headtext_background"
             android:layout_alignTop="@+id/menu_notification_headtext_background"/>
@@ -79,11 +76,9 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_margin="20dp"
-            android:background="@drawable/quickaction_slider_btn_black"
+            style="@style/button_alert"
             android:text="@string/cancel"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:textStyle="bold" 
+
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/menu_notification_headtext_background"
             android:layout_alignTop="@+id/menu_notification_headtext_background"/>

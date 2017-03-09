@@ -1,15 +1,12 @@
 package com.certoclav.certoscale.settings.item;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemAdapter;
@@ -28,6 +25,8 @@ import com.certoclav.library.application.ApplicationController;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.certoclav.certoscale.R.string.items;
+
 /**
  * Created by Michael on 12/6/2016.
  */
@@ -43,11 +42,11 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_main_item_edit_activity);
+        setContentView(R.layout.menu_main_item_activity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(getString(R.string.items).toUpperCase());
+        navigationbar.getTextTitle().setText(getString(items).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_item_edit_list);
 
@@ -93,6 +92,7 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
 
         Intent intent3 = new Intent(ApplicationController.getContext(), SyncItemsService.class);
         startService(intent3);
+        updateTitleText();
 
     }
 
@@ -110,47 +110,8 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
 
     @Override
     public void onClickButtonDelete(final Item item) {
-        try
-        {
+        updateTitleText();
 
-
-
-            final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_yes_no);
-            dialog.setTitle(getString(R.string.confirm_deletion));
-
-            // set the custom dialog components - text, image and button
-            TextView text = (TextView) dialog.findViewById(R.id.text);
-            text.setText(getString(R.string.do_you_really_want_to_delete) + " " + item.getName());
-            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
-            dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-            // if button is clicked, close the custom dialog
-            dialogButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatabaseService db = new DatabaseService(MenuItemActivity.this);
-                    db.deleteItem(item);
-                    adapter.remove(item);
-                    adapter.notifyDataSetChanged();
-                    dialog.dismiss();
-                }
-            });
-
-            dialog.show();
-
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
     }
 
@@ -189,8 +150,12 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         }
         adapter.notifyDataSetChanged();
 
+        updateTitleText();
 
 
-        navigationbar.getTextTitle().setText(getString(R.string.items).toUpperCase()+":  "+items.size());
+    }
+
+    public void updateTitleText(){
+        navigationbar.getTextTitle().setText(getString(items).toUpperCase()+":  "+adapter.getCount());
     }
 }

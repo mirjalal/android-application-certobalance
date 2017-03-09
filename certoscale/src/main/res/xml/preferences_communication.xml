@@ -1,33 +1,32 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="preferences_communication_lims"
         android:title="LIMS"
-        android:summary="Connected on COM 2" />
+        android:summary="Assigned to: COM 2, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="preferences_communication_labelprinter"
         android:title="@string/label_printer"
-        android:summary="Connected on COM 1">
-    </CheckBoxPreference>
+        android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
 
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="preferences_communication_protocolprinter"
         android:title="@string/protocol_printer"
-        android:summary="Connected on COM 3">
-    </CheckBoxPreference>
+        android:summary="Assigned to: COM 3, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none">
+    </ListPreference>
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="preferences_communication_scanner"
         android:title="@string/barcode_or_qr_code_scanner"
-        android:summary="Connected on USB HOST">
-    </CheckBoxPreference>
+        android:summary="Assigned to: USB host">
+    </ListPreference>
 
-    <CheckBoxPreference
+    <ListPreference
         android:key="preferences_communication_balance"
         android:title="@string/balance"
-        android:summary="Connected to COM 4" />
+        android:summary="Assigned to: COM 4, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
     <ListPreference
         android:key="preferences_communication_list_devices"

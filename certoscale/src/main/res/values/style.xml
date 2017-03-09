@@ -12,6 +12,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="button_alert">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">@android:color/black</item>
+        <item name="android:capitalize">characters</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
     <style name="button_navigationbar_default">
         <item name="android:background">@drawable/quickaction_slider_btn_black</item>
