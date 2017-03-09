@@ -55,7 +55,7 @@
     <string name="do_you_really_want_to_save_the_unit">Möchten sie die Einheit wirklich speichern?</string>
 
     <string name="edit_unit">EINHEITEN EDITIEREN</string>
-    <string name="add_to_stats">HINZUFÜGEN</string>
+    <string name="add_to_stats">Hinzufügen</string>
     <string name="end_batch">Charge beenden</string>
     <string name="fill_status">Füll Status: </string>
     <string name="imprecision">Präzisionsabweichung</string>
@@ -127,7 +127,7 @@
     <string name="semi_automatic_mode">Semi automatischer Modus</string>
     <string name="send_activation_key_to">Aktiverungscode schicken</string>
     <string name="settings_button">Mehr</string>
-    <string name="settings_button_pressed">ZURÜCK ZUR ANWENDUNG</string>
+    <string name="settings_button_pressed">Zurück zur Anwendung</string>
     <string name="simulation_mode">Simulations Modus</string>
     <string name="sinker_volume">Bleichgewicht Volumen</string>
     <string name="under_limit">"Untere Grenze"</string>
@@ -186,7 +186,7 @@
     <string name="show">Anzeigen</string>
     <string name="speech_not_supported">Entschuldigung! Ihr Gerät unterstützt Spracheingabe nicht.</string>
     <string name="speech_prompt">Sagen Sie etwas</string>
-    <string name="stats_0">STATISTIK (0)</string>
+    <string name="stats_0">Statistik (0)</string>
     <string name="tap_on_mic">Drücken Sie auf das Mikro um zu sprechen</string>
     <string name="tare">Tara</string>
     <string name="target">Ziel:</string>
@@ -540,4 +540,23 @@
     <string name="user_name">Benutzername</string>
     <string name="verified_by">verifiziert durch</string>
     <string name="yes">Ja</string>
+    <string name="weight">Gewicht</string>
+    <string name="Description">Beschreibung</string>
+    <string name="article_number">Artikelnummer</string>
+    <string name="cost">Kosten</string>
+    <string name="Statistics">Statistik</string>
+    <string name="couldnt_save_protocol">Protokoll konnte nicht gespeichert werden</string>
+    <string name="couldnt_save_samples">Proben konnten nicht gespeichert werden</string>
+    <string name="couldnt_save_statistics">Statistik konnte nicht gespeichert werden</string>
+    <string name="ingrediant_costs">Kostenberechnung der Zutaten</string>
+    <string name="protocol_printed">Protokoll gedruckt</string>
+    <string name="protocol_saved">Protokoll gespeichert</string>
+    <string name="result_of_recipe">Ergebnis des Rezepts</string>
+    <string name="samples_saved">Proben gespeichert</string>
+    <string name="statistics_printed">Statistik gedruckt</string>
+    <string name="statistics_saved">Statistik gespeichert</string>
+    <string name="variance">Varianz</string>
+    <string name="batch_list">Chargenliste</string>
+    <string name="pipette_adjustment_results">Pipettenabgleichergebnisse</string>
+    <string name="pipettesample">Pipettenprobe</string>
 </resources>

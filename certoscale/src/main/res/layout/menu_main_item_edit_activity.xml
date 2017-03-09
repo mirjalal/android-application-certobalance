@@ -46,7 +46,7 @@
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="@string/description"/>
+				android:hint="@string/Description"/>
 
 			<EditText
 				android:id="@+id/menu_main_item_edit_cost"

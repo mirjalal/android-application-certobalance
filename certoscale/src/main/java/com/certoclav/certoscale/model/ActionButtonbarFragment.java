@@ -1401,7 +1401,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	public void updateIngrediantButtonUI() {
 
-		buttonIngrediantList.setText("COST LIST\n(" + ApplicationManager.getInstance().getIngrediantCostList().size() + ")");
+		buttonIngrediantList.setText(getString(R.string.cost_list).toUpperCase()+"\n(" + ApplicationManager.getInstance().getIngrediantCostList().size() + ")");
 		if (ApplicationManager.getInstance().getIngrediantCostList().size() == 0){
 			buttonIngrediantList.setEnabled(false);
 		}else {
@@ -1437,7 +1437,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_batchlist);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Batch List");
+			dialog.setTitle(R.string.batch_list);
 
 
 
@@ -1505,7 +1505,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_pipette_results);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Pipette Adjustment Results");
+			dialog.setTitle(R.string.pipette_adjustment_results);
 
 
 
@@ -1513,34 +1513,34 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(eContext,R.layout.dialog_pipette_row,R.id.menu_main_pipette_edit_text);
 			listView.setAdapter(adapter);
 
-			adapter.add("Inaccuracy: \n");
+			adapter.add(getString(R.string.inaccuracy)+": \n");
 
 			double meanError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getMean()-ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal());
-			adapter.add("Mean Error: "+String.format("%.4f",meanError)+" ml\n");
+			adapter.add(getString(R.string.mean_error)+": "+String.format("%.4f",meanError)+" ml\n");
 			double meanErrorPercent=Math.abs(meanError/ApplicationManager.getInstance().getStats().getStatistic().getMean())*100;
-			adapter.add("Mean Error %: "+String.format("%.4f",meanErrorPercent)+" %\n");
-			adapter.add("Limit %: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
+			adapter.add(getString(R.string.mean_error)+"%: "+String.format("%.4f",meanErrorPercent)+" %\n");
+			adapter.add(getString(R.string.limit)+" %: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %\n");
 
 
 			adapter.add("\n");
-			adapter.add("Impreccision:\n");
-			adapter.add("Standard Deviation: "+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
+			adapter.add(getString(R.string.imprecision)+":\n");
+			adapter.add(getString(R.string.standard_deviation)+": "+String.format("%.4f",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+" ml\n");
 			double standardError=Math.abs(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()/ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())*100;
-			adapter.add("Error CS%: "+String.format("%.4f",standardError)+" %\n");
-			adapter.add("Limit CV: "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
+			adapter.add(getString(R.string.error_cs)+"%: "+String.format("%.4f",standardError)+" %\n");
+			adapter.add(getString(R.string.limit_cv)+": "+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %\n");
 
 			if (meanErrorPercent<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy() && standardError<=ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()){
 				adapter.add("\n");
-				adapter.add("Result: Pass");
+				adapter.add(getString(R.string.result)+": "+getString(R.string.pass));
 				adapter.add("\n");
 			}else{
 				adapter.add("\n");
-				adapter.add("Result: Fail");
+				adapter.add(getString(R.string.result)+": "+getString(R.string.mean_error));
 				adapter.add("\n");
 			}
 
 			adapter.add("\n");
-			adapter.add("Number of Samples"+ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()+"\n");
+			adapter.add(getString(R.string.number_of_samples)+ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()+"\n");
 
 			double standardDeviation=ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation();
 			double mean=ApplicationManager.getInstance().getStats().getStatistic().getMean();
@@ -1581,9 +1581,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			adapter.add("\n");
 
 
-			adapter.add("---Sample Data---\n");
+			adapter.add("---"+getString(R.string.sample_data)+"---\n");
 			for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-				adapter.add("PipetteSample "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
+				adapter.add(getString(R.string.pipettesample)+" "+String.format("%d",i)+" "+String.format("%.4f",ApplicationManager.getInstance().getStats().getSamples().get(i))+" g\n");
 
 			}
 
@@ -1626,7 +1626,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_statistics_totalization);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Statistics:");
+			dialog.setTitle(getString(R.string.statistics)+":");
 
 
 
@@ -1678,17 +1678,17 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				public void onClick(View v) {
 
 					StringBuilder  sb = new StringBuilder();
-					sb.append("Statistics \n");
-					sb.append("Samples:       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
-					sb.append("Total:         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
-					sb.append("Mean:          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
-					sb.append("Standard dev.: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
-					sb.append("Minimum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
-					sb.append("Maximum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
-					sb.append("Variance:      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
+					sb.append(getString(R.string.statistics)+" \n");
+					sb.append(getString(R.string.samples)+":       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
+					sb.append(getString(R.string.total)+":         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
+					sb.append(getString(R.string.mean)+":          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
+					sb.append(getString(R.string.standard_dev)+".: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
+					sb.append(getString(R.string.minimum)+":       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
+					sb.append(getString(R.string.maximum)+":       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
+					sb.append(getString(R.string.variance)+":      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
 
 					for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
+						sb.append(getString(R.string.item)+" "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
 
 					}
 					ESCPos escPos=new ESCPos();
@@ -1724,7 +1724,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			SummaryStatistics statistic =sqc.getStatistics();
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_statistics_sqc);
-			dialog.setTitle("Statistics of "+sqc.getName());
+			dialog.setTitle(getString(R.string.statistics_of)+sqc.getName());
 			//           statistic = new SummaryStatistics();
 			//           for (Double value : statisticsArray) {
 			//               statistic.addValue(value);
@@ -1814,7 +1814,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_statistics);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Statistics");
+			dialog.setTitle(getString(R.string.Statistics));
 			//           statistic = new SummaryStatistics();
 			//           for (Double value : statisticsArray) {
 			//               statistic.addValue(value);
@@ -1852,14 +1852,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					ApplicationManager.getInstance().getProtocolPrinter().printBottom();
 					*/
 					StringBuilder sb = new StringBuilder();
-					sb.append("Statistics \n");
-					sb.append("Samples:       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
-					sb.append("Total:         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
-					sb.append("Mean:          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
-					sb.append("Standard dev.: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
-					sb.append("Minimum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
-					sb.append("Maximum:       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
-					sb.append("Variance:      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
+					sb.append(getString(R.string.statistics)+" \n");
+					sb.append(getString(R.string.samples)+":       "+ApplicationManager.getInstance().getStats().getStatistic().getN()+"\n");
+					sb.append(getString(R.string.total)+":         "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum())+"\n");
+					sb.append(getString(R.string.mean)+":          "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean())+"\n");
+					sb.append(getString(R.string.standard_deviation)+".: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())+"\n");
+					sb.append(getString(R.string.minimum)+":       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin())+"\n");
+					sb.append(getString(R.string.maximum)+":       "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax())+"\n");
+					sb.append(getString(R.string.variance)+":      "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance())+"\n");
 
 
 					ESCPos escPos=new ESCPos();
@@ -1881,68 +1881,68 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						//
 						StringBuilder sb = new StringBuilder();
 						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
-						sb.append("Statistics \n");
-						sb.append("Samples:       " + ApplicationManager.getInstance().getStats().getStatistic().getN() + "\n");
-						sb.append("Total:         " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum()) + "\n");
-						sb.append("Mean:          " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()) + "\n");
-						sb.append("Standard dev.: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + "\n");
-						sb.append("Minimum:       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin()) + "\n");
-						sb.append("Maximum:       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()) + "\n");
-						sb.append("Variance:      " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance()) + "\n");
+						sb.append(getString(R.string.statistics)+ "\n");
+						sb.append(getString(R.string.samples)+":       " + ApplicationManager.getInstance().getStats().getStatistic().getN() + "\n");
+						sb.append(getString(R.string.total)+":         " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getSum()) + "\n");
+						sb.append(getString(R.string.mean)+":          " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMean()) + "\n");
+						sb.append(getString(R.string.standard_deviation)+".: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + "\n");
+						sb.append(getString(R.string.minimum)+":       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMin()) + "\n");
+						sb.append(getString(R.string.maximum)+":       " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getMax()) + "\n");
+						sb.append(getString(R.string.variance)+":      " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getStatistic().getVariance()) + "\n");
 						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
 
 						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
 						switch (Scale.getInstance().getScaleApplication()) {
 							case WEIGHING:
-								scaleApplicationName = "WEIGHING STATISTIC";
+								scaleApplicationName  = getString(R.string.app_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case PIPETTE_ADJUSTMENT_1_HOME:
 							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 							case PIPETTE_ADJUSTMENT_3_FINISHED:
-								scaleApplicationName = "PIPETTE ADJUSTMENT STATISTIC";
+								scaleApplicationName= getString(R.string.app_pipette_adjustment).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case ANIMAL_WEIGHING:
 							case ANIMAL_WEIGHING_CALCULATING:
-								scaleApplicationName = "ANIMAL WEIGHING STATISTIC";
+								scaleApplicationName = getString(R.string.app_animal_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case DENSITY_DETERMINATION:
 							case DENSITY_DETERMINATION_STARTED:
-								scaleApplicationName = "DENSITIY DETERMINATION STATISTIC";
+								scaleApplicationName = getString(R.string.app_density_determination).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case FILLING:
 							case FILLING_CALC_TARGET:
-								scaleApplicationName = "FILLING STATISTIC";
+								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case FORMULATION:
 							case FORMULATION_RUNNING:
-								scaleApplicationName = "FORMULATION STATISTIC";
+								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case PEAK_HOLD:
 							case PEAK_HOLD_STARTED:
-								scaleApplicationName = "PEAK HOLD STATISTIC";
+								scaleApplicationName = getString(R.string.app_peak_hold).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case PART_COUNTING:
 							case PART_COUNTING_CALC_AWP:
-								scaleApplicationName = "PARTS COUNTING STATISTIC";
+								scaleApplicationName = getString(R.string.app_part_counting).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case PERCENT_WEIGHING:
 							case PERCENT_WEIGHING_CALC_REFERENCE:
-								scaleApplicationName = "PERCENT WEIGHING STATISTIC";
+								scaleApplicationName =getString(R.string.app_percent_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 							case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-								scaleApplicationName = "STATISTICAL QUALITY CONTROL STATISTIC";
+								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
 						}
 						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
 
 						db.insertProtocol(protocol);
 					}catch (Exception e){
-						Toast.makeText(eContext, "Couldn't save statistics", Toast.LENGTH_LONG).show();
+						Toast.makeText(eContext, R.string.couldnt_save_statistics, Toast.LENGTH_LONG).show();
 					}
 
-					Toast.makeText(eContext, "Statistics saved", Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, R.string.statistics_saved, Toast.LENGTH_LONG).show();
 				}
 			});
 
@@ -1977,7 +1977,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_statistics_samples);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Statistics");
+			dialog.setTitle(getString(R.string.statistics));
 			//           statistic = new SummaryStatistics();
 			//           for (Double value : statisticsArray) {
 			//               statistic.addValue(value);
@@ -2016,7 +2016,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					 StringBuilder sb=new StringBuilder();
 
 					for(int i=0;i<ApplicationManager.getInstance().getStats().getSamples().size();i++){
-						sb.append("Item "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
+						sb.append(getString(R.string.item)+" "+String.format("%02d",i)+":    "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i))+" \n");
 
 					}
 
@@ -2040,7 +2040,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						StringBuilder sb = new StringBuilder();
 						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
 						for (int i = 0; i < ApplicationManager.getInstance().getStats().getSamples().size(); i++) {
-							sb.append("Item " + String.format("%02d", i) + ":    " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)) + " \n");
+							sb.append(getString(R.string.item)+" " + String.format("%02d", i) + ":    " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)) + " \n");
 
 						}
 						sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
@@ -2048,55 +2048,56 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
 						switch (Scale.getInstance().getScaleApplication()) {
 							case WEIGHING:
-								scaleApplicationName = "WEIGHING SAMPLES";
+								scaleApplicationName = getString(R.string.app_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+
 								break;
 							case PIPETTE_ADJUSTMENT_1_HOME:
 							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 							case PIPETTE_ADJUSTMENT_3_FINISHED:
-								scaleApplicationName = "PIPETTE ADJUSTMENT SAMPLES";
+								scaleApplicationName = getString(R.string.app_pipette_adjustment).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case ANIMAL_WEIGHING:
 							case ANIMAL_WEIGHING_CALCULATING:
-								scaleApplicationName = "ANIMAL WEIGHING SAMPLES";
+								scaleApplicationName = getString(R.string.app_animal_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case DENSITY_DETERMINATION:
 							case DENSITY_DETERMINATION_STARTED:
-								scaleApplicationName = "DENSITIY DETERMINATION SAMPLES";
+								scaleApplicationName = getString(R.string.app_density_determination).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case FILLING:
 							case FILLING_CALC_TARGET:
-								scaleApplicationName = "FILLING SAMPLES";
+								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case FORMULATION:
 							case FORMULATION_RUNNING:
-								scaleApplicationName = "FORMULATION SAMPLES";
+								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case PEAK_HOLD:
 							case PEAK_HOLD_STARTED:
-								scaleApplicationName = "PEAK HOLD SAMPLES";
+								scaleApplicationName = getString(R.string.app_peak_hold).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case PART_COUNTING:
 							case PART_COUNTING_CALC_AWP:
-								scaleApplicationName = "PARTS COUNTING SAMPLES";
+								scaleApplicationName = getString(R.string.app_part_counting).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case PERCENT_WEIGHING:
 							case PERCENT_WEIGHING_CALC_REFERENCE:
-								scaleApplicationName = "PERCENT WEIGHING SAMPLES";
+								scaleApplicationName = getString(R.string.app_percent_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 							case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-								scaleApplicationName = "STATISTICAL QUALITY CONTROL SAMPLES";
+								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
 								break;
 						}
 						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
 
 						db.insertProtocol(protocol);
 				}catch(Exception e){
-						Toast.makeText(eContext, "Couldn't save samples", Toast.LENGTH_SHORT).show();
+						Toast.makeText(eContext, R.string.couldnt_save_samples, Toast.LENGTH_SHORT).show();
 
 				}
-					Toast.makeText(eContext, "Samples save", Toast.LENGTH_SHORT).show();
+					Toast.makeText(eContext, R.string.samples_saved, Toast.LENGTH_SHORT).show();
 
 				}
 			});
@@ -2123,7 +2124,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_ingrediantcosts);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Ingredient Costs");
+			dialog.setTitle(R.string.ingrediant_costs);
 			//           statistic = new SummaryStatistics();
 			//           for (Double value : statisticsArray) {
 			//               statistic.addValue(value);
@@ -2191,7 +2192,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
-					Toast.makeText(eContext, "Statistics printed", Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, R.string.statistics_printed, Toast.LENGTH_LONG).show();
 				}
 			});
 			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_ingrediant_button_close);
@@ -2215,7 +2216,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_recipe_results);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Result of Recipe: ");// + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+			dialog.setTitle(R.string.result_of_recipe);// + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
 
 
 
@@ -2393,7 +2394,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(protocol.getContent());
 
-					Toast.makeText(eContext, "Protocol printed", Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
 				}
 			});
 
@@ -2405,9 +2406,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					try {
 						db.insertProtocol(protocol);
 					}catch(Exception e){
-						Toast.makeText(getActivity(), "Couldn't save protocol", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), R.string.couldnt_save_protocol, Toast.LENGTH_SHORT).show();
 					}
-						Toast.makeText(getActivity(), "Protocol saved", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), R.string.protocol_saved, Toast.LENGTH_SHORT).show();
 						dialog.dismiss();
 
 				}
