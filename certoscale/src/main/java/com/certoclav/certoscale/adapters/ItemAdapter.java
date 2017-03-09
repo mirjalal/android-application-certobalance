@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -159,9 +161,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			public void onClick(View v) {
 				LabelPrinterUtils.printItem(getItem(position));
 				Toast.makeText(mContext,"Item printed", Toast.LENGTH_LONG).show();
-				for(OnClickButtonListener listener : onClickButtonListeners){
-				//	listener.onClickButtonPrint(getItem(position));
-				}
+
 
 
 
@@ -177,14 +177,57 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 				@Override
 				public void onClick(View v) {
 
-					if(getItem(position).getCloudId().isEmpty() == false){
-						DeleteTask deleteTask = new DeleteTask();
-						deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_ITEM + getItem(position).getCloudId());
+
+					try
+					{
+
+
+
+						final Dialog dialog = new Dialog(mContext);
+						dialog.setContentView(R.layout.dialog_yes_no);
+						dialog.setTitle(mContext.getString(R.string.confirm_deletion));
+
+						// set the custom dialog components - text, image and button
+						TextView text = (TextView) dialog.findViewById(R.id.text);
+						text.setText(mContext.getString(R.string.do_you_really_want_to_delete) + " " + getItem(position).getName());
+						Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+						dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								dialog.dismiss();
+							}
+						});
+						Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+						// if button is clicked, close the custom dialog
+						dialogButton.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								if(getItem(position).getCloudId().isEmpty() == false){
+									DeleteTask deleteTask = new DeleteTask();
+									deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_ITEM + getItem(position).getCloudId());
+								}
+								DatabaseService db = new DatabaseService(mContext);
+								db.deleteItem(getItem(position));
+								remove(getItem(position));
+								notifyDataSetChanged();
+								dialog.dismiss();
+								for(OnClickButtonListener listener : onClickButtonListeners){
+									listener.onClickButtonDelete(getItem(position));
+								}
+							}
+						});
+
+						dialog.show();
+
+
 					}
-					DatabaseService db = new DatabaseService(mContext);
-					db.deleteItem(getItem(position));
-					remove(getItem(position));
-					notifyDataSetChanged();
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+
+
 
 
 

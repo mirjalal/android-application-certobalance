@@ -13,64 +13,72 @@
     	android:layout_width="match_parent"
     	android:layout_below="@+id/navigationbar">
 
+		<ScrollView
+			android:layout_width="400dp"
+			android:layout_height="match_parent"
+			android:layout_centerHorizontal="true">
+
+
 
 		<LinearLayout
 			android:id="@+id/menu_main_item_edit_titlebar_container"
 			android:layout_width="match_parent"
-			android:layout_height="60dp"
-			android:orientation="horizontal"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
 			android:background="@drawable/background_gadient">
-			<TextView
-				android:id="@+id/menu_main_item_edit_element_artnumber"
-				android:layout_width="120dp"
+
+			<EditText
+				android:id="@+id/menu_main_item_edit_artnumber"
+				android:layout_width="match_parent"
 				android:layout_height="60dp"
-				android:text="Art. No."
-				android:gravity="center_vertical"
-				android:textStyle="bold"
-				style="@style/text_default"/>
+				android:hint="Article number"
+				android:maxLines="1"
+				style="@style/edit_text_default"/>
 
-			<TextView
-				android:id="@+id/menu_main_item_edit_element_name"
-				android:layout_width="120dp"
+			<EditText
+				android:id="@+id/menu_main_item_edit_name"
+				android:layout_width="match_parent"
 				android:layout_height="60dp"
-				style="@style/text_default"
-				android:gravity="center_vertical"
-				android:text="Name"
-				android:textStyle="bold"/>
-
-			<TextView
-				android:id="@+id/menu_main_item_edit_element_unit_cost"
-				android:layout_width="80dp"
+				style="@style/edit_text_default"
+				android:maxLines="1"
+				android:hint="Name"/>
+			<EditText
+				android:id="@+id/menu_main_item_edit_description"
+				android:layout_width="match_parent"
 				android:layout_height="60dp"
-				style="@style/text_default"
-				android:gravity="center_vertical"
-				android:text="Cost"
-				android:textStyle="bold"/>
+				style="@style/edit_text_default"
+				android:maxLines="1"
+				android:hint="Description"/>
 
-
-
-
-			<TextView
-				android:id="@+id/menu_main_item_edit_element_weight"
-				android:layout_width="120dp"
+			<EditText
+				android:id="@+id/menu_main_item_edit_cost"
+				android:layout_width="match_parent"
 				android:layout_height="60dp"
-				style="@style/text_default"
-				android:gravity="center_vertical"
-				android:text="Weight"
-				android:textStyle="bold"/>
+				style="@style/edit_text_default"
+				android:maxLines="1"
+				android:hint="Cost" />
+
+			<EditText
+				android:id="@+id/menu_main_item_edit_weight"
+				android:layout_width="match_parent"
+				android:layout_height="60dp"
+				style="@style/edit_text_default"
+				android:maxLines="1"
+				android:hint="Weight" />
+
+			<EditText
+				android:id="@+id/menu_main_item_edit_unit"
+				android:layout_width="match_parent"
+				android:layout_height="60dp"
+				style="@style/edit_text_default"
+				android:maxLines="1"
+				android:hint="Unit" />
 
 
 		</LinearLayout>
+		</ScrollView>
 
-<ListView
-    android:id="@+id/menu_main_item_edit_list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-	android:layout_below="@+id/menu_main_item_edit_titlebar_container">
-</ListView>
-
-
-    </RelativeLayout>
+	</RelativeLayout>
     
     <include layout="@layout/navigationbar"
         android:id="@+id/navigationbar"></include>
