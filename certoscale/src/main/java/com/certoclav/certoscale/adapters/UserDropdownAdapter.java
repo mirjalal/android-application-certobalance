@@ -53,7 +53,13 @@ public class UserDropdownAdapter extends ArrayAdapter<User> {
 		}
 
 		CheckedTextView textMail = (CheckedTextView) convertView.findViewById(R.id.login_dopdown_text_mail);
-		textMail.setText(getItem(position).getEmail());
+
+
+		if(getItem(position).getIsAdmin() == true && !getItem(position).getEmail().equals("Admin")){
+			textMail.setText(getItem(position).getEmail() + " " + "(" + "admin" + ")");
+		}else{
+			textMail.setText(getItem(position).getEmail());
+		}
 		
 		
 		ImageView imageCloud = (ImageView) convertView.findViewById(R.id.login_dopdown_image_cloud);

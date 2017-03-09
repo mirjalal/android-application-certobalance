@@ -508,4 +508,9 @@
     <string name="language_current">Deutsch</string>
     <string name="protocol_printer">Protokolldrucker</string>
     <string name="label_printer">Labeldrucker</string>
+    <string name="article_number">Article number</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="cost">Cost</string>
+    <string name="weight">Weight</string>
 </resources>

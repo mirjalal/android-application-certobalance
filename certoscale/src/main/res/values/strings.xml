@@ -626,13 +626,13 @@
     <string name="accept">ACCEPT</string>
     <string name="end">END</string>
     <string name="please_enter_the_under_limit_weight">Please enter the under limit weight</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel">Cancel</string>
     <string name="clear_data">Clear data</string>
     <string name="close">Close</string>
     <string name="create_new">Create new</string>
     <string name="brows_templates">Browse templates</string>
-    <string name="unit">UNIT</string>
-    <string name="save">SAVE</string>
+    <string name="unit">Unit</string>
+    <string name="save">Save</string>
     <string name="print">Print</string>
     <string name="screen_sharing">Screen sharing</string>
     <string name="send_mail">Send email</string>
@@ -755,6 +755,11 @@
     <string name="balance_model">Balance model</string>
     <string name="certocloud_push_notification_service">CertoCloud push notification service</string>
     <string name="label_printer">Label printer</string>
+    <string name="article_number">Article number</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="cost">Cost</string>
+    <string name="weight">Weight</string>
 
 
 </resources>

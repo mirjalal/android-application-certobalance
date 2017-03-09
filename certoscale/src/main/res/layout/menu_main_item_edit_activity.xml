@@ -18,8 +18,6 @@
 			android:layout_height="match_parent"
 			android:layout_centerHorizontal="true">
 
-
-
 		<LinearLayout
 			android:id="@+id/menu_main_item_edit_titlebar_container"
 			android:layout_width="match_parent"
@@ -31,7 +29,7 @@
 				android:id="@+id/menu_main_item_edit_artnumber"
 				android:layout_width="match_parent"
 				android:layout_height="60dp"
-				android:hint="Article number"
+				android:hint="@string/article_number"
 				android:maxLines="1"
 				style="@style/edit_text_default"/>
 
@@ -41,14 +39,14 @@
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="Name"/>
+				android:hint="@string/name"/>
 			<EditText
 				android:id="@+id/menu_main_item_edit_description"
 				android:layout_width="match_parent"
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="Description"/>
+				android:hint="@string/description"/>
 
 			<EditText
 				android:id="@+id/menu_main_item_edit_cost"
@@ -56,7 +54,7 @@
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="Cost" />
+				android:hint="@string/cost" />
 
 			<EditText
 				android:id="@+id/menu_main_item_edit_weight"
@@ -64,7 +62,7 @@
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="Weight" />
+				android:hint="@string/weight" />
 
 			<EditText
 				android:id="@+id/menu_main_item_edit_unit"
@@ -72,7 +70,7 @@
 				android:layout_height="60dp"
 				style="@style/edit_text_default"
 				android:maxLines="1"
-				android:hint="Unit" />
+				android:hint="@string/unit" />
 
 
 		</LinearLayout>

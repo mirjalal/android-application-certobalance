@@ -181,6 +181,7 @@ public class Navigationbar {
 
 		spinnerMode = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_mode);
 
+
 		arrayAdapterMode = new SpinnerModeAdapter(mActivity, new ArrayList<ScaleApplication>());
 		spinnerMode.setAdapter(arrayAdapterMode);
 
