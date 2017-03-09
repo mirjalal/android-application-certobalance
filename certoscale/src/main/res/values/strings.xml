@@ -813,6 +813,7 @@
     <string name="library_could_not_be_saved">Library could not be saved</string>
     <string name="please_chose_a_item_first">Please Choose a Item first</string>
     <string name="please_enter_the_number_of_samples_first">Please Enter the number of samples first</string>
+    <string name="labels">Labels</string>
 
 
 </resources>

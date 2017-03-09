@@ -7,13 +7,13 @@
 
 
 	<TableLayout
-		android:layout_centerHorizontal="true"
 		android:id="@+id/dialog_statistics_table_container"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_margin="5dp"
 		android:gravity="center_horizontal"
-		android:layout_gravity="center_horizontal">
+		android:layout_gravity="center_horizontal"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true">
 		<TableRow
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content">

@@ -18,7 +18,8 @@ public class MenuElement {
 		MENU_ITEM_CALIBRATION,
 		MENU_ITEM_GLP,
 		MENU_ITEM_COMMUNICATION,
-		MENU_ITEM_VIDEO
+		MENU_ITEM_VIDEO,
+		MENU_ITEM_LABELS
 	}
 
 	public MenuElement(String menuText, int imageResId, MenuItemId id) {
