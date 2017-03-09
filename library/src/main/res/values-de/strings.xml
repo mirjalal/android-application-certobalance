@@ -123,7 +123,7 @@
 		<string name="intro_account_created">Benutzerkonto erstellt</string>
         <string name="temperature">Temperatur</string>
         <string name="time_in_minutes">Minuten</string>
-        <string name="settings">EINSTELLUNGEN</string>
+        <string name="settings">Einstellungen</string>
         <string name="do_you_really_want_to_start">Programm starten: </string>
         <string name="request_a_call">Rückruf anfordern</string>
         <string name="ignore">Später</string>

@@ -18,7 +18,7 @@
      <Button
          android:id="@+id/actionbar_button_zero"
          android:text="@string/zero"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -28,7 +28,7 @@
    <Button 
      android:id="@+id/actionbar_button_tara"
      android:text="@string/tare"
-     android:textAllCaps="true"
+
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -37,7 +37,7 @@
     <Button 
      android:id="@+id/actionbar_button_protocol"
      android:text="@string/protocol"
-     android:textAllCaps="true"
+
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -46,7 +46,7 @@
    <Button 
      android:id="@+id/actionbar_button_cal"
      android:text="@string/cal"
-     android:textAllCaps="true"
+
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:layout_weight="1"
@@ -55,7 +55,7 @@
      <Button
          android:id="@+id/actionbar_button_statistics"
          android:text="@string/stats_0"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -64,7 +64,7 @@
      <Button
          android:id="@+id/actionbar_button_new_batch"
          android:text="@string/new_batch"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -73,7 +73,7 @@
      <Button
          android:id="@+id/actionbar_button_end_batch"
          android:text="@string/end_batch"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -82,7 +82,7 @@
      <Button
          android:id="@+id/actionbar_button_view_batch"
          android:text="@string/show"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -94,7 +94,7 @@
      <Button
          android:id="@+id/actionbar_button_accumulate"
          android:text="@string/add_to_stats"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -104,7 +104,7 @@
      <Button
          android:id="@+id/actionbar_button_start"
          android:text="@string/start"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -118,7 +118,7 @@
      <Button
          android:id="@+id/actionbar_button_Ingredient_List"
          android:text="@string/cost_list"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -128,7 +128,7 @@
      <Button
          android:id="@+id/actionbar_button_accept"
          android:text="@string/accept"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -138,7 +138,7 @@
      <Button
          android:id="@+id/actionbar_button_end"
          android:text="@string/end"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"
@@ -150,7 +150,7 @@
      <Button
          android:id="@+id/actionbar_button_settings"
          android:text="@string/settings"
-         android:textAllCaps="true"
+
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_weight="1"

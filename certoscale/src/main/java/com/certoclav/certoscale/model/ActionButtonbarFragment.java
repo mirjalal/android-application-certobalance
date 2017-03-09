@@ -458,7 +458,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 
 				if(buttonAppSettings.getText().toString().equals(getString(R.string.settings_button_pressed))){
-					getButtonAppSettings().setText(R.string.settings_button);
+					getButtonAppSettings().setText(getString(R.string.settings_button).toUpperCase());
 
 					switch (Scale.getInstance().getScaleApplication()){
 
@@ -471,7 +471,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 
 				}else{
-					getButtonAppSettings().setText(getString(R.string.settings_button_pressed));
+					getButtonAppSettings().setText(getString(R.string.settings_button_pressed).toUpperCase());
 				}
 
 
@@ -495,7 +495,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					case INGREDIENT_COSTING:
 
 						if (ApplicationManager.getInstance().getCurrentItem()==null) {
-							Toast.makeText(getActivity(), "Please Choose Item first", Toast.LENGTH_LONG).show();
+							Toast.makeText(getActivity(), R.string.please_chose_a_item_first, Toast.LENGTH_LONG).show();
 						}else {
 							double Cost = ApplicationManager.getInstance().getCurrentItem().getCost();
 							double unitWeight = ApplicationManager.getInstance().getCurrentItem().getWeight();
@@ -550,7 +550,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 
 						if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
-							Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+							Toast.makeText(getActivity(), R.string.please_enter_the_number_of_samples_first, Toast.LENGTH_SHORT).show();
 							ApplicationManager.getInstance().setPipette_current_sample(0);
 							ApplicationManager.getInstance().getStats().getStatistic().clear();
 							updateStatsButtonUI();
@@ -616,7 +616,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				try {
 					final Dialog dialog = new Dialog(getActivity());
 					dialog.setContentView(R.layout.dialog_edit_text);
-					dialog.setTitle("Please enter the batch name");
+					dialog.setTitle(R.string.please_enter_the_batch_name);
 
 					// set the custom dialog components - text, image and button
 
@@ -744,6 +744,25 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		//Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
+
+		buttonZero.setText(buttonZero.getText().toString().toUpperCase());
+		buttonTara.setText(buttonTara.getText().toString().toUpperCase());
+		buttonProtocol.setText(buttonProtocol.getText().toString().toUpperCase());
+		buttonCal.setText(buttonCal.getText().toString().toUpperCase());
+		buttonStatistics.setText(buttonStatistics.getText().toString().toUpperCase());
+		buttonNewBatch.setText(buttonNewBatch.getText().toString().toUpperCase());
+		buttonEndBatch.setText(buttonEndBatch.getText().toString().toUpperCase());
+		buttonShowBatch.setText(buttonShowBatch.getText().toString().toUpperCase());
+		buttonAccumulate.setText(buttonAccumulate.getText().toString().toUpperCase());
+		buttonStart.setText(buttonStart.getText().toString().toUpperCase());
+		buttonIngrediantList.setText(buttonIngrediantList.getText().toString().toUpperCase());
+		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
+		buttonEnd.setText(buttonEnd.getText().toString().toUpperCase());
+		buttonAppSettings.setText(buttonAppSettings.getText().toString().toUpperCase());
+
+
+		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
+
 		switch (Scale.getInstance().getScaleApplication()){
 
 			case WEIGHING:
@@ -755,11 +774,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 				buttonAccumulate.setEnabled(true);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 
 
 
@@ -783,10 +802,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 
 
 				//unused Buttons
@@ -809,7 +828,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 
@@ -832,11 +851,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -858,10 +877,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				// unused Buttons
@@ -891,10 +910,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
-				buttonAccumulate.setText(R.string.add_to_stats);
+				buttonAccumulate.setText(getString(R.string.add_to_stats).toUpperCase());
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -917,7 +936,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 
@@ -964,7 +983,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 
 				if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
 					buttonStart.setEnabled(true);
@@ -1017,7 +1036,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setEnabled(true);
 
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
@@ -1037,7 +1056,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				if(ApplicationManager.getInstance().getCurrentItem() == null) {
@@ -1071,7 +1090,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				buttonAccept.setVisibility(View.VISIBLE);
@@ -1096,7 +1115,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				buttonAccept.setVisibility(View.VISIBLE);
@@ -1212,7 +1231,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAccept.setVisibility(View.VISIBLE);
 				buttonAccept.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
@@ -1270,11 +1289,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText(R.string.new_batch);
+				buttonNewBatch.setText(getString(R.string.new_batch).toUpperCase());
 				buttonShowBatch.setVisibility(View.VISIBLE);
 
 				buttonAccumulate.setEnabled(false);
@@ -1307,7 +1326,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText(R.string.end_batch+"\n" + ApplicationManager.getInstance().getBatchName());
+				buttonNewBatch.setText(getString(R.string.end_batch).toUpperCase()+"\n" + ApplicationManager.getInstance().getBatchName());
 				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(true);
 				buttonShowBatch.setEnabled(false);
@@ -1337,11 +1356,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonAccumulate.setVisibility(View.VISIBLE);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonAppSettings.setText(R.string.settings_button);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 				buttonAppSettings.setEnabled(true);
 
 				buttonNewBatch.setVisibility(View.VISIBLE);
-				buttonNewBatch.setText(R.string.new_batch);
+				buttonNewBatch.setText(getString(R.string.new_batch).toUpperCase());
 				buttonShowBatch.setVisibility(View.VISIBLE);
 
 				buttonAccumulate.setEnabled(false);
@@ -1391,7 +1410,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	public void updateBatchListButtonText() {
 
-		buttonShowBatch.setText("BATCH LIST\n(" + ApplicationManager.getInstance().getBatchList().size() + ")");
+
+		buttonShowBatch.setText(getString(R.string.batch_list).toUpperCase()+"\n(" + ApplicationManager.getInstance().getBatchList().size() + ")");
 		//if there is no batch to show, hide the button
 		if(ApplicationManager.getInstance().getBatchList().size() == 0){
 			buttonShowBatch.setEnabled(false);

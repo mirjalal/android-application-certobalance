@@ -361,7 +361,7 @@ protected void onPause() {
 				try{
 					final Dialog dialog = new Dialog(ApplicationActivity.this);
 					dialog.setContentView(R.layout.dialog_edit_text);
-					dialog.setTitle("Please enter a name for the library");
+					dialog.setTitle(getString(R.string.please_enter_a_name_for_the_library));
 
 					Button dialogButtonCansel = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
 					dialogButtonCansel.setOnClickListener(new View.OnClickListener() {
@@ -380,15 +380,15 @@ protected void onPause() {
 							DatabaseService db = new DatabaseService(ApplicationActivity.this);
 
 							if (name.length()==0){
-								Toast.makeText(ApplicationActivity.this, "Please enter a name for the library", Toast.LENGTH_LONG).show();
+								Toast.makeText(ApplicationActivity.this, getString(R.string.please_enter_a_name_for_the_library), Toast.LENGTH_LONG).show();
 
 							}else{
 								ApplicationManager.getInstance().getCurrentLibrary().setName(name);
 								int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
 								if (retval == 1) {
-									Toast.makeText(ApplicationActivity.this, "Library " + name + " successfully saved" + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this,getString(R.string.library)+ name + getString(R.string.saved) + retval, Toast.LENGTH_LONG).show();
 								} else {
-									Toast.makeText(ApplicationActivity.this, "Library could not be saved" + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this, getString(R.string.library_could_not_be_saved) + retval, Toast.LENGTH_LONG).show();
 								}
 								refreshSpinnerLibrary();
 								try {

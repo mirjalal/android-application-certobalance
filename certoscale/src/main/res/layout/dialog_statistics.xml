@@ -26,7 +26,7 @@
 			<TextView
 				android:layout_height="wrap_content"
 				android:layout_width="match_parent"
-				android:text="            Value"
+				android:text="@string/value"
 				android:gravity="right"
 				android:textStyle="bold"
 				style="@style/text_statistics"/>

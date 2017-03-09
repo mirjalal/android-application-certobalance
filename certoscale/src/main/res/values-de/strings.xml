@@ -67,7 +67,7 @@
     <string name="manual_mode">Manueller Modus</string>
     <string name="manual_mode_on">Manueller Modus aktiviert. Drücken sie HINZUFÜGEN um den akutellen Wert hinzuzufügen</string>
     <string name="minimum_weight">Minimales Gewicht</string>
-    <string name="minimum_weight_upper_case">MINIMALES GEW:</string>
+    <string name="minimum_weight_upper_case">Minimales Gew:</string>
     <string name="netto">Netto</string>
     <string name="new_batch">NEUE CHARGE</string>
     <string name="nominal">Nominell</string>
@@ -105,7 +105,7 @@
     <string name="water_temperature">Wasser Temperatur</string>
 
     <string name="water_temp">Wasser Temperatur</string>
-    <string name="warning">WARNUNG</string>
+    <string name="warning">Warnung</string>
     <string name="value_too_low">Wert zu gering</string>
     <string name="value_too_high">Wert zu hoch</string>
 
@@ -559,4 +559,11 @@
     <string name="batch_list">Chargenliste</string>
     <string name="pipette_adjustment_results">Pipettenabgleichergebnisse</string>
     <string name="pipettesample">Pipettenprobe</string>
+    <string name="value">Wert</string>
+    <string name="library_could_not_be_saved">Bibliothek konnte nicht gespeichert werden</string>
+    <string name="please_chose_a_item_first">Bitte wählen Sie zuerst ein Item aus</string>
+    <string name="please_enter_a_name_for_the_library">Bitte geben sie einen Namen für die Bibliothek ein</string>
+    <string name="please_enter_the_batch_name">Bitte geben Sie einen Chargennamen ein</string>
+    <string name="please_enter_the_number_of_samples_first">Bitte geben Sie zuerst die Anzahl der Proben ein</string>
+    <string name="saved">gespeichert</string>
 </resources>

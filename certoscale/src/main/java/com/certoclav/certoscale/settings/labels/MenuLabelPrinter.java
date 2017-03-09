@@ -52,7 +52,7 @@ public class MenuLabelPrinter extends Activity implements ButtonEventListener, U
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
+        navigationbar.getButtonAdd().setVisibility(View.GONE);
         navigationbar.getButtonSettings().setVisibility(View.GONE);
         navigationbar.getButtonHome().setVisibility(View.GONE);
         navigationbar.getSpinnerLib().setVisibility(View.GONE);
