@@ -184,13 +184,13 @@
     <string name="preferences_statistic_mode">preferences_statistic_mode</string>
     <string name="preferences_print_header">preferences_statistic_mode</string>
 
-    <string name="preferences_print_balance_name">preferences_statistic_mode</string>
-    <string name="preferences_print_project_name">preferences_statistic_mode</string>
-    <string name="preferences_print_application_name">preferences_statistic_mode</string>
-    <string name="preferences_print_signature">preferences_statistic_mode</string>
-    <string name="preferences_print_date">preferences_statistic_mode</string>
-    <string name="preferences_print_balance_id">preferences_statistic_mode</string>
-    <string name="preferences_print_user_name">preferences_statistic_mode</string>
+    <string name="preferences_print_balance_name">preferences_print_balance_name</string>
+    <string name="preferences_print_project_name">preferences_print_project_name</string>
+    <string name="preferences_print_application_name">preferences_print_application_name</string>
+    <string name="preferences_print_signature">preferences_print_signature</string>
+    <string name="preferences_print_date">preferences_print_date</string>
+    <string name="preferences_print_balance_id">preferences_print_balance_id</string>
+    <string name="preferences_print_user_name">preferences_print_user_name</string>
 
     <string name="preferences_statistic_numbatches_visible">preferences_statistic_numbatches_visible</string>
     <string name="preferences_statistic_numsamples_visible">preferences_statistic_numsamples_visible</string>
@@ -755,6 +755,38 @@
     <string name="balance_model">Balance model</string>
     <string name="certocloud_push_notification_service">CertoCloud push notification service</string>
     <string name="label_printer">Label printer</string>
+    <string name="application">Application</string>
+    <string name="signature">Signature</string>
+    <string name="verified_by">Verified by</string>
+    <string name="serialnumber">Serialnumber</string>
+    <string name="balance_name">Balance Name</string>
+    <string name="user_name">User Name</string>
+    <string name="project_name">Project Name</string>
+    <string name="result">Result</string>
+    <string name="statistics_of">Statistics of</string>
+    <string name="percentage">Percentage</string>
+    <string name="under">Under</string>
+    <string name="over">Over</string>
+    <string name="sample_data">Sample Data</string>
+    <string name="actual">Actual</string>
+    <string name="diff">Diff</string>
+    <string name="solid">Solid</string>
+    <string name="liquid">Liquid</string>
+    <string name="density_determ">Denisty Determ</string>
+    <string name="peak_weight">Peak Weight</string>
+    <string name="stable_only">Stable only</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="item_cost">Item cost</string>
+    <string name="item_weight">Item weight</string>
+    <string name="total_items">Total Items</string>
+    <string name="mean_error">Mean Error</string>
+    <string name="limit">Limit</string>
+    <string name="error_cs">Error CS</string>
+    <string name="pass">Pass</string>
+    <string name="fail">Fail</string>
+    <string name="limit_cv">Limit CV</string>
+    <string name="mean">Mean</string>
 
 
 </resources>
