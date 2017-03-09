@@ -457,7 +457,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			@Override
 			public void onClick(View v) {
 
-				if(buttonAppSettings.getText().toString().equals(getString(R.string.settings_button_pressed))){
+				if(buttonAppSettings.getText().toString().equals(getString(R.string.settings_button_pressed).toUpperCase())){
 					getButtonAppSettings().setText(getString(R.string.settings_button).toUpperCase());
 
 					switch (Scale.getInstance().getScaleApplication()){
@@ -616,7 +616,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				try {
 					final Dialog dialog = new Dialog(getActivity());
 					dialog.setContentView(R.layout.dialog_edit_text);
-					dialog.setTitle(R.string.please_enter_the_batch_name);
+					dialog.setTitle("Please enter the batch name");
 
 					// set the custom dialog components - text, image and button
 
