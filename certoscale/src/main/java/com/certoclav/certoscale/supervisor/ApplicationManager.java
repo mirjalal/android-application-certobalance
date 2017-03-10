@@ -527,12 +527,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public String getTaredValueAsStringInGram() {
-        switch (Scale.getInstance().getScaleApplication()) {
-            case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
-            default:
+       // switch (Scale.getInstance().getScaleApplication()) {
+       //     case PART_COUNTING:
+       //         return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
+       //     default:
                 return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
-        }
+        //}
     }
 
     public void accumulateStatistics() {
@@ -575,7 +575,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public String getAveragePieceWeightAsStringWithUnit() {
-        return getTransformedWeightAsStringWithUnit(currentLibrary.getAveragePieceWeight());
+        String retVal = "";
+
+        int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
+        retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " " + getCurrentUnit().getName();
+
+        return retVal;
+
     }
 
     public String getAveragePieceWeightAsStringInGram() {
@@ -595,12 +601,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
         try {
-            //if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
-           //     retVal = String.format("%.0f", gram) + " pcs";
-           // }else {
+            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+                retVal = String.format("%.0f", gram) + " pcs";
+            }else {
                 int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
-           // }
+            }
         }catch (Exception e){
             retVal = "";
         }

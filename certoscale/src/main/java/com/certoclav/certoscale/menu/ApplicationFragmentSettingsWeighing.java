@@ -40,6 +40,7 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
         Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_settings_weighing,container, false);
 
+        buttonMinimumWeight = (Button) rootView.findViewById(R.id.application_settings_weighing_button_minimum);
         buttonMinimumWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

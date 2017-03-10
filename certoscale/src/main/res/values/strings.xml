@@ -535,7 +535,7 @@
     <string name="sum_">Sum</string>
     <string name="calculating">calculating...</string>
     <string name="press_start_for_a_new_measuremnt">Press Start for a new measurement</string>
-    <string name="tared_weight">\"Tared weight: \"</string>
+    <string name="tared_weight">Tared weight</string>
     <string name="click_settings_and_choose_a_recipe">Click SETTINGS and choose a recipe first</string>
     <string name="press_start_to_begin_recipe">Press START to begin with the recipe</string>
     <string name="value_too_low">Value too low</string>
@@ -814,6 +814,7 @@
     <string name="please_chose_a_item_first">Please Choose a Item first</string>
     <string name="please_enter_the_number_of_samples_first">Please Enter the number of samples first</string>
     <string name="labels">Labels</string>
+    <string name="custom_label_editor">Custom label editor</string>
 
 
 </resources>

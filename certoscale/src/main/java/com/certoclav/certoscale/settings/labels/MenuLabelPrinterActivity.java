@@ -94,7 +94,7 @@ public class MenuLabelPrinterActivity extends Activity implements ButtonEventLis
         navigationbar.getButtonHome().setVisibility(View.GONE);
         navigationbar.getSpinnerLib().setVisibility(View.GONE);
         navigationbar.getSpinnerMode().setVisibility(View.GONE);
-        navigationbar.getTextTitle().setText(getString(R.string.label_printer).toUpperCase());
+        navigationbar.getTextTitle().setText(getString(R.string.custom_label_editor).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
 
@@ -131,7 +131,7 @@ public class MenuLabelPrinterActivity extends Activity implements ButtonEventLis
             public void onClick(View v) {
                 try{
 
-                    LabelPrinterUtils.printCustomLabel(editText1.getText().toString(),editText2.getText().toString());
+                    LabelPrinterUtils.printCustomLabel(editText1.getText().toString(),editText2.getText().toString(),1);
 
                 }
                 catch (Exception e)

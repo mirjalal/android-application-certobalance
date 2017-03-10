@@ -184,15 +184,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringInGram());
 
                 break;
             case PART_COUNTING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText(getString(R.string.sum_).toUpperCase()+(": ") + ApplicationManager.getInstance().getSumAsStringWithUnit());
-
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringInGram());
                 break;
             case FORMULATION:
                 if(ApplicationManager.getInstance().getCurrentRecipe()==null){

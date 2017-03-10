@@ -40,8 +40,8 @@ public static void printText(String text, Integer numSets){
 
 	}
 
-	public static void printCustomLabel(String line1,String line2){
-		int numSets = 1;
+	public static void printCustomLabel(String line1,String line2,int numsets){
+
 		clearCurentBuffer();
 		sendInitConfigToBuffer();
 		sendTextToBuffer(line1,40,40);

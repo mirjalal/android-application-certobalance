@@ -180,7 +180,7 @@
     <string name="skip">Überspringen</string>
     <string name="standard_dev">Standard dev.</string>
     <string name="sum_">Summe</string>
-    <string name="tara">Tara</string>
+    <string name="tara">Tare</string>
     <string name="tared_weight">Tariertes Gewicht</string>
     <string name="protocol">Protokoll</string>
     <string name="show">Anzeigen</string>
@@ -566,4 +566,5 @@
     <string name="please_enter_the_batch_name">Bitte geben Sie einen Chargennamen ein</string>
     <string name="please_enter_the_number_of_samples_first">Bitte geben Sie zuerst die Anzahl der Proben ein</string>
     <string name="saved">gespeichert</string>
+    <string name="custom_label_editor">Custom label editor</string>
 </resources>
