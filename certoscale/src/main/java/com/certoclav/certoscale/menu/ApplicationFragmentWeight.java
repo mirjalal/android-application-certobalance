@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -73,7 +74,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_pick_unit);
-                    dialog.setTitle("Pick a unit");
+                    dialog.setTitle(R.string.pick_a_unit);
                     ListView listView = (ListView) dialog.findViewById(R.id.dialog_pick_unit_list);
                     final UnitAdapter adapter = new UnitAdapter(getActivity(),new ArrayList<Unit>());
                     listView.setAdapter(adapter);
@@ -108,6 +109,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     adapter.notifyDataSetChanged();
                     Log.e("SettingsUnitFragment", "notifydatasetchanged" + adapter.getCount());
 
+                    Button buttonClose = (Button) dialog.findViewById(R.id.dialog_pick_unit_close);
+                    buttonClose.setOnClickListener(new View.OnClickListener() {
+
+                           @Override
+                           public void onClick(View v) {
+                            dialog.dismiss();
+                           }
+                       });
 
                     dialog.show();
 

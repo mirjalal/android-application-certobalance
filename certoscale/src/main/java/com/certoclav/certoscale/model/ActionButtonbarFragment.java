@@ -268,7 +268,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				if(Scale.getInstance().getScaleApplication()==PIPETTE_ADJUSTMENT_1_HOME || Scale.getInstance().getScaleApplication() == PIPETTE_ADJUSTMENT_3_FINISHED){
 					if (ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples()==0){
-						Toast.makeText(getActivity(), "Please Enter the number of samples first", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), getString(R.string.please_enter_the_number_of_samples_first), Toast.LENGTH_SHORT).show();
 					}else{
 						//start at pipette sample one and reset all statistics
 						ApplicationManager.getInstance().setPipette_current_sample(1);
@@ -616,7 +616,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				try {
 					final Dialog dialog = new Dialog(getActivity());
 					dialog.setContentView(R.layout.dialog_edit_text);
-					dialog.setTitle("Please enter the batch name");
+					dialog.setTitle(getString(R.string.please_enter_the_batch_name));
 
 					// set the custom dialog components - text, image and button
 
@@ -1594,7 +1594,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			adapter.add("> +2s:"+pstandard2+"\n");
 			adapter.add("> +2s:"+pstandard1+"\n");
-			adapter.add("*+1S > Mean > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
+			adapter.add("*+1S"  +getString(R.string.mean)+" > –1S:"+(ApplicationManager.getInstance().getStats().getSamples().size()-pstandard1-pstandard2-nstandard1-nstandard2)+"\n");
 			adapter.add("< -2s:"+nstandard1+"\n");
 			adapter.add("< -2s:"+nstandard2+"\n");
 
@@ -2339,7 +2339,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			final Dialog dialog = new Dialog(eContext);
 			dialog.setContentView(R.layout.dialog_protocol_show);
 			dialog.setOnDismissListener(listener);
-			dialog.setTitle("Protocol");
+			dialog.setTitle(getString(R.string.protocol));
 
 
 

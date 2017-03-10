@@ -2,7 +2,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
         
 
-    <PreferenceCategory android:title="@string/enable_disable_features" >
+    <PreferenceCategory android:title="@string/enable_disable_features"
+        >
 		<CheckBoxPreference
 			android:key="@string/preferences_counting_activated"
 			android:defaultValue="@bool/preferences_counting_activated_default"
@@ -97,7 +98,7 @@
               <CheckBoxPreference
                   android:key="@string/preferences_counting_target_visible"
                   android:defaultValue="@bool/preferences_counting_target_visible"
-                  android:title="@string/target"
+                  android:title="@string/target_weight"
                   android:summary="@string/turn_the_target_weight_visible_invisble_used_for"
                   android:dependency="@string/preferences_counting_lock">
               </CheckBoxPreference>

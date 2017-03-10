@@ -56,7 +56,7 @@ public class ItemEditAdapter extends ArrayAdapter<Item> {
 			convertView = inflater.inflate(R.layout.menu_main_item_edit_element, parent, false);
 		}
 
-		EditText editTextArticleNumber = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
+		EditText editTextArticleNumber = (EditText) convertView.findViewById(R.id.menu_main_item_edit_element_adapter_artnumber);
 		editTextArticleNumber.setText(getItem(position).getArticleNumber());
 
 		editTextArticleNumber.addTextChangedListener(new TextWatcher() {

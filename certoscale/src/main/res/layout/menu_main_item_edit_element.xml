@@ -12,12 +12,16 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"  >
         <EditText
-            android:id="@+id/menu_main_item_edit_element_artnumber"
+            android:id="@+id/menu_main_item_edit_element_adapter_artnumber"
             android:layout_width="120dp"
             android:layout_height="60dp"
             android:text="1300345"
             android:singleLine="true"
-            style="@style/edit_text_default"/>
+            android:inputType="textPassword"
+            style="@style/edit_text_default"
+
+
+            />
 
         <EditText
             android:id="@+id/menu_main_item_edit_element_name"
@@ -35,7 +39,9 @@
             style="@style/edit_text_default"
             android:numeric="decimal"
             android:singleLine="true"
-            android:text="1.99" />
+            android:text="1.99"
+            android:inputType="text"
+            />
 
 
         <EditText
@@ -45,7 +51,9 @@
             style="@style/edit_text_default"
             android:numeric="decimal"
             android:singleLine="true"
-            android:text="12.0121"/>
+            android:text="12.0121"
+            android:inputType="text"
+            />
 
         <TextView
             android:layout_width="wrap_content"

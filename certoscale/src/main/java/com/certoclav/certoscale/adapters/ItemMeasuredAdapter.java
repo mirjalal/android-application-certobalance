@@ -1,9 +1,11 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -73,6 +75,8 @@ public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 
 		TextView editTextArticleNumber = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_artnumber);
 		editTextArticleNumber.setText(getItem(position).getArticleNumber());
+		editTextArticleNumber.setInputType(InputType.TYPE_CLASS_TEXT);
+		editTextArticleNumber.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 		TextView editName = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_name);
 		editName.setText(getItem(position).getName());

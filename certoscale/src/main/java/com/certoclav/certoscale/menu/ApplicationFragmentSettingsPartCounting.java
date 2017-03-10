@@ -158,7 +158,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 try{
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_number);
-                    dialog.setTitle(R.string.please_enter_the_under);
+                    dialog.setTitle(R.string.please_enter_the_under_limit);
                     ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("pcs");
                     // set the custom dialog components - text, image and button
 
@@ -249,7 +249,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         });
 
 
-        button_target = (Button) rootView.findViewById(R.id.settings_partcounting_button_under_limit);
+        button_target = (Button) rootView.findViewById(R.id.settings_partcounting_button_target);
         button_target.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -366,29 +366,29 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         super.onResume();
         buttonEditAveragePieceWeight.setText("AWP:\n" + ApplicationManager.getInstance().getAveragePieceWeightAsStringWithUnit());
         buttonEditSampleSize.setText(getString(R.string.sample_size)+"\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-        button_under_limit.setText(getString(R.string.under_limit)+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
-        button_over_limit.setText(getString(R.string.over_limit)+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
+        button_under_limit.setText(getString(R.string.under_limit)+"\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
+        button_over_limit.setText(getString(R.string.over_limit)+"\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
 
         if(cmode.equals("1")){
-            button_under_limit.setVisibility(View.INVISIBLE);
-            button_over_limit.setVisibility(View.INVISIBLE);
-            button_target.setVisibility(View.INVISIBLE);
+            button_under_limit.setVisibility(View.GONE);
+            button_over_limit.setVisibility(View.GONE);
+            button_target.setVisibility(View.GONE);
 
         }
         if(cmode.equals("2")){
-            button_target.setVisibility(View.INVISIBLE);
+            button_target.setVisibility(View.GONE);
             button_under_limit.setVisibility(View.VISIBLE);
             button_over_limit.setVisibility(View.VISIBLE);
 
         }
 
         if(cmode.equals("3")){
-            button_under_limit.setVisibility(View.INVISIBLE);
-            button_over_limit.setVisibility(View.INVISIBLE);
+            button_under_limit.setVisibility(View.GONE);
+            button_over_limit.setVisibility(View.GONE);
             button_target.setVisibility(View.VISIBLE);
             button_target.setText(getString(R.string.target)+"\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
         }

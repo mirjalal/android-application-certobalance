@@ -463,7 +463,7 @@
     <string name="please_enter_the_target">Please enter the piece target</string>
     <string name="place">"Place "</string>
     <string name="onto_the_pan">onto the pan</string>
-    <string name="target">Target:</string>
+    <string name="target">Target</string>
     <string name="refernce_weight">Reference Weight</string>
     <string name="reference_adjustment">Reference Adjustment</string>
     <string name="please_enter_the_liquid_density">Please enter the liquid density</string>
@@ -493,8 +493,8 @@
     <string name="please_enter_the_second_neg_tol">Please enter the second negative tolerance</string>
     <string name="minimum_weight">Minimum Weight</string>
     <string name="tara">Tara</string>
-    <string name="brutto">Brutto</string>
-    <string name="netto">Netto</string>
+    <string name="brutto">Gross</string>
+    <string name="netto">Net</string>
     <string name="load_percent">LOAD [%]</string>
     <string name="piece_weight">Piece weight</string>
     <string name="minimum_weight_upper_case">Minimum weight</string>
@@ -689,7 +689,7 @@
     <string name="turn_the_brutto_weight_visible_invisible">Turn the brutto weight visible/invisible</string>
     <string name="turn_the_netto_weight_visible_invisible">Turn the netto weight visible/invisible</string>
     <string name="turn_the_tara_weight_visible_invisible">Turn the tara weight visible/invisible</string>
-    <string name="enable_disable_features">Enable / disable features</string>
+    <string name="enable_disable_features">ENABLE / DISABLE FEATURES</string>
     <string name="visibility">VISIBILITY</string>
     <string name="printer_options">Printer Options</string>
     <string name="print_minimum_weight">Print Minimum Weight</string>
@@ -815,6 +815,8 @@
     <string name="please_enter_the_number_of_samples_first">Please Enter the number of samples first</string>
     <string name="labels">Labels</string>
     <string name="custom_label_editor">Custom label editor</string>
+    <string name="please_enter_the_batch_name">Please enter the batch name</string>
+    <string name="pick_a_unit">Pick a unit</string>
 
 
 </resources>

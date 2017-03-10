@@ -26,6 +26,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
 
             android:gravity="center_vertical"
             style="@style/text_small"/>
@@ -39,7 +42,10 @@
             android:singleLine="true"
             style="@style/text_small"
             android:gravity="center_vertical"
-            android:text="Screw" />
+            android:text="Screw"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            />
 
         <TextView
             android:id="@+id/menu_main_item_edit_element_unit_cost"
@@ -49,7 +55,10 @@
             android:gravity="center_vertical"
             android:text="1.54"
             android:scrollHorizontally="true"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            />
 
 
 
@@ -61,7 +70,10 @@
             android:gravity="center_vertical"
             android:text="12.0121"
             android:scrollHorizontally="true"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            />
 
 
 
