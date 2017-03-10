@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,6 +28,8 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.EditTextItem;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -48,12 +51,35 @@ public class MenuLabelPrinterActivity extends Activity implements ButtonEventLis
     private Navigationbar navigationbar = new Navigationbar(this);
     private ArrayAdapter<String> arrayAdapter = null;
     private ListView listView = null;
-    private UserAdapter adapter = null;
+
+    private Button buttonPrint = null;
+    private ImageView Barcode=null;
+    private EditText editText1=null;
+    private EditText editText2=null;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
+    }
 
 
     @Override
@@ -72,58 +98,50 @@ public class MenuLabelPrinterActivity extends Activity implements ButtonEventLis
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
 
+        final ImageView Barcode = (ImageView)  findViewById(R.id.imageViewBarcode);
+        final EditText editText1 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line1);
+        final EditText editText2 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line2);
 
-        ImageView Barcode = (ImageView)  findViewById(R.id.imageViewBarcode);
-
+        //Create an initial Barcode
         com.google.zxing.Writer writer = new QRCodeWriter();
-
         String finaldata = Uri.encode("test", "utf-8");
-
-
         try {
             //BitMatrix bm = writer.encode(finaldata, BarcodeFormat.QR_CODE, 150, 150);
             BitMatrix bm = new Code128Writer().encode("123456789", BarcodeFormat.CODE_128, 350, 120, null);
 
-        Bitmap barcodeBitmap = Bitmap.createBitmap(350, 120, Bitmap.Config.ARGB_8888);
 
+
+        Bitmap barcodeBitmap = Bitmap.createBitmap(350, 120, Bitmap.Config.ARGB_8888);
         for (int i = 0; i < 350; i++) {//width
             for (int j = 0; j < 120; j++) {//height
                 barcodeBitmap.setPixel(i, j, bm.get(i, j) ? Color.BLACK: Color.WHITE);
             }
         }
-
-        //Bitmap barcodeBitmap = encodeAsBitmap("test", BarcodeFormat.QR_CODE, 150, 150);
-
         Barcode.setImageBitmap(barcodeBitmap);
-
-
         }catch (Exception e){
 
         }
 
-        EditText editText1 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line1);
-
-
-        EditText editText2 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line1);
 
 
 
+        buttonPrint =  (Button) findViewById(R.id.menu_main_label_button_print);
+        buttonPrint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+
+                    LabelPrinterUtils.printCustomLabel(editText1.getText().toString(),editText2.getText().toString());
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        final ImageView Barcode = (ImageView)  findViewById(R.id.imageViewBarcode);
-        final EditText editText1 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line1);
-
-
-        EditText editText2 = (EditText)  findViewById(R.id.dialog_label_text_edittext_line1);
 
         editText1.addTextChangedListener(new TextWatcher() {
 
@@ -169,6 +187,29 @@ public class MenuLabelPrinterActivity extends Activity implements ButtonEventLis
             }
 
         });
+
+
+
+
+
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+
+
+
+
+
+
 
 
 

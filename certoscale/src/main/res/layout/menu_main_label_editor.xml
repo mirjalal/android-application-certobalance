@@ -13,8 +13,8 @@
 
 	<RelativeLayout
     	android:id="@+id/contentOfActivity"
-    	android:layout_height="300dp"
-    	android:layout_width="500dp"
+    	android:layout_height="250dp"
+    	android:layout_width="550dp"
     	android:layout_below="@+id/navigationbar"
 		android:layout_centerInParent="true"
 		android:gravity="center_horizontal"
@@ -27,11 +27,14 @@
 		android:layout_width="match_parent"
 		android:layout_margin="15dp"
 		android:layout_height="40dp"
+		android:textSize="40dp"
+		android:textScaleX="1.375"
 
 		android:layout_weight="1"
 		android:hint="Label"
 		android:text="Text1"
-		android:gravity="center_horizontal"
+		android:maxLength="15"
+		android:gravity="left"
 		android:singleLine="true"
 		/>
 
@@ -42,22 +45,26 @@
             android:layout_width="match_parent"
             android:layout_margin="15dp"
             android:layout_height="40dp"
+			android:textSize="40dp"
+			android:textScaleX="1.375"
 
             android:layout_weight="1"
             android:hint="Label"
             android:text="Text2"
-            android:gravity="center_horizontal"
+			android:maxLength="15"
+			android:gravity="left"
             android:singleLine="true"
             />
 
 	<ImageView
         android:layout_below="@+id/dialog_label_text_edittext_line2"
-		android:layout_margin="30dp"
+		android:layout_margin="10dp"
 		android:id="@+id/imageViewBarcode"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
 
-		android:layout_centerHorizontal="true"
+
 		/>
 	</RelativeLayout>
 

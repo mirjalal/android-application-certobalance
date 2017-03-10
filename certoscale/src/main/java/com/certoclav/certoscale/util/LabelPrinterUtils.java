@@ -40,6 +40,18 @@ public static void printText(String text, Integer numSets){
 
 	}
 
+	public static void printCustomLabel(String line1,String line2){
+		int numSets = 1;
+		clearCurentBuffer();
+		sendInitConfigToBuffer();
+		sendTextToBuffer(line1,40,40);
+		sendTextToBuffer(line2,40,90);
+		sendBarcodeToBuffer(line1,40,140);
+		printBuffer(1);
+
+
+	}
+
 public static void printLabel(Date dateExpiration, String serialAutoclave, int cycleNumber, int numSets){
 	if(numSets>5){
 		numSets = 5;
@@ -137,7 +149,7 @@ public static void sendBarcodeToBuffer(String text, int xCoordinate, int yCoordi
 
 	
 	//size of barcode. can be between 48 and 110		
-	 String s="48";
+	 String s="70";
 
 	
 	//Barcode should also be printed as plaintext, otherwise readable = '0'
