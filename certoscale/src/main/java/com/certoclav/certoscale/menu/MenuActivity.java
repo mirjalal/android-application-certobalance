@@ -24,6 +24,12 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.teamviewer.sdk.screensharing.api.TVConfigurationID;
+import com.teamviewer.sdk.screensharing.api.TVCreationError;
+import com.teamviewer.sdk.screensharing.api.TVSession;
+import com.teamviewer.sdk.screensharing.api.TVSessionConfiguration;
+import com.teamviewer.sdk.screensharing.api.TVSessionCreationCallback;
+import com.teamviewer.sdk.screensharing.api.TVSessionFactory;
 
 import java.util.ArrayList;
 
@@ -139,6 +145,27 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(MenuActivity.this, R.string.contact_supportcertoclav_com_to_enable_remote_service, Toast.LENGTH_LONG).show();
+                            String appToken = "23888b86-8e66-e941-79f0-1d9ee0b8651c";
+                            final TVSessionConfiguration config =
+                                    new TVSessionConfiguration.Builder(
+                                            new TVConfigurationID("pff75tf"))
+                                            .setServiceCaseName("NAME_FOR_SERVICE_CASE")
+                                            .setServiceCaseDescription("DESCRIPTION_FOR_SERVICE_CASE")
+                                            .build();
+
+                    TVSessionFactory.createTVSession(MenuActivity.this, appToken,
+                            new TVSessionCreationCallback() {
+                                @Override
+                                public void onTVSessionCreationSuccess(TVSession session) {
+                                    session.start(config);
+                                }
+
+                                @Override
+                                public void onTVSessionCreationFailed(TVCreationError error) {
+                                }
+                            });
+
+
                             dialog.dismiss();
                         }
                     });
