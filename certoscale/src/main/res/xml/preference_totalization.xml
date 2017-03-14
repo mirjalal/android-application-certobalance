@@ -95,7 +95,7 @@
         <CheckBoxPreference
             android:key="@string/preferences_totalization_current_visible"
             android:defaultValue="@bool/preferences_totalization_current_visible"
-            android:title="@string/range"
+            android:title="@string/current"
             android:summary="@string/turn_this_value_visible_invisible"
             android:dependency="@string/preferences_totalization_lock" >
         </CheckBoxPreference>

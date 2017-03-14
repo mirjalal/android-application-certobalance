@@ -370,12 +370,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					});
 					break;
 				case TOTALIZATION:
-					showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
+					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							updateStatsButtonUI();
 						}
 					});
+					/*showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							updateStatsButtonUI();
+						}
+					});*/
 					break;
 			}
 
@@ -899,6 +905,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
 				buttonStart.setEnabled(false);
+				//buttonEnd.setVisibility(View.VISIBLE);
+				//buttonEnd.setEnabled(true);
 				buttonEndBatch.setVisibility(View.GONE);
 				break;
 			case ANIMAL_WEIGHING:

@@ -51,7 +51,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle(R.string.please_enter_the_scaling_factor);
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText(String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()));
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("Curr: "+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()));
 
                     // set the custom dialog components - text, image and button
 

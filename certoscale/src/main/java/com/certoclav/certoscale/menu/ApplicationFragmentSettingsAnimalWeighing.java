@@ -87,6 +87,7 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
         buttonAveragingTime.setText(getString(R.string.averaging_time)+":\n"+ String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getAveragingTime())+"s");
 
 
+
         super.onResume();
 
 
