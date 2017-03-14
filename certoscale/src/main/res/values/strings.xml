@@ -180,7 +180,7 @@
     <string name="preferences_statistic_activated">preferences_statistic_activated</string>
     <string name="preferences_statistic_lock">preferences_statistic_lock</string>
     <string name="preferences_statistic_numberofsample">preferences_statistic_numberofsample</string>
-    <string name="preferences_statistic_liquidtype">preferences_statistic_liquidtype</string>
+    <string name="preferences_statistic_tolerance_mode">preferences_statistic_tolerance_mode</string>
     <string name="preferences_statistic_mode">preferences_statistic_mode</string>
     <string name="preferences_print_header">preferences_statistic_mode</string>
 
@@ -450,11 +450,11 @@
     <string name="nominal">Nominal</string>
     <string name="tolerance_plus">+ Tolerance:\n</string>
     <string name="tolerance_minus">- Tolerance:\n</string>
-    <string name="current_item">Current Item:\n</string>
+    <string name="current_item">Current Item</string>
     <string name="click_to_choose_item">Click to choose item</string>
     <string name="place_target_weight_on_pan">Place target weight on the pan. Press OK to continue.</string>
     <string name="current_recipe">Current Recipe:\n</string>
-    <string name="scaling_factor">scaling factor</string>
+    <string name="scaling_factor">Scaling factor</string>
     <string name="currency">"Currency"</string>
     <string name="please_enter_num_samples">Please enter the number of samples for the calculation of awp</string>
     <string name="sample_size">Sample size:</string>
@@ -477,7 +477,7 @@
     <string name="please_enter_the_pressure">Please enter the pressure</string>
     <string name="imprecision">Imprecision</string>
     <string name="inaccuracy">Inacurracy</string>
-    <string name="water_temp">Water Temperature\n</string>
+    <string name="water_temp">Water Temperature</string>
     <string name="pressure">Pressure</string>
     <string name="pipette_name">Pipette Name</string>
     <string name="pipette_number">Pipette Number</string>
@@ -492,7 +492,7 @@
     <string name="please_enter_the_first_neg_tol">Please enter the first negative tolerance</string>
     <string name="please_enter_the_second_neg_tol">Please enter the second negative tolerance</string>
     <string name="minimum_weight">Minimum Weight</string>
-    <string name="tara">Tara</string>
+    <string name="tara">Tare</string>
     <string name="brutto">Gross</string>
     <string name="netto">Net</string>
     <string name="load_percent">LOAD [%]</string>
@@ -817,6 +817,7 @@
     <string name="custom_label_editor">Custom label editor</string>
     <string name="please_enter_the_batch_name">Please enter the batch name</string>
     <string name="pick_a_unit">Pick a unit</string>
+    <string name="please_enter_the_nominal_weight_first">Please enter the nominal weight first</string>
 
 
 </resources>

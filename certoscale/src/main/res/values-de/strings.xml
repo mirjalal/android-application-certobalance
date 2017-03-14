@@ -40,7 +40,7 @@
     <string name="contact_support">KONTAKTIEREN SIE DEN  SUPPORT</string>
     <string name="currency">Währung</string>
 
-    <string name="current_item">"Aktuelles Item: "</string>
+    <string name="current_item">"Aktuelles Item"</string>
     <string name="current_recipe">"Aktuelles Rezept: "</string>
     <string name="density_calculated">Dichte berechnet</string>
     <string name="density_of_liquid_calculated">Dichte der Flüssigkeit berechnet</string>

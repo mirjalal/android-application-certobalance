@@ -29,7 +29,7 @@
 
 
         <ListPreference
-            android:key="@string/preferences_statistic_liquidtype"
+            android:key="@string/preferences_statistic_tolerance_mode"
             android:title="@string/tolerance"
             android:summary="@string/tolerance_used_during_measurement"
             android:dependency="@string/preferences_statistic_lock"
