@@ -14,7 +14,7 @@
     	android:layout_below="@+id/navigationbar">
 
 		<ScrollView
-			android:layout_width="400dp"
+			android:layout_width="500dp"
 			android:layout_height="match_parent"
 			android:layout_centerHorizontal="true">
 
@@ -25,52 +25,138 @@
 			android:orientation="vertical"
 			android:background="@drawable/background_gadient">
 
-			<EditText
-				android:id="@+id/menu_main_item_edit_artnumber"
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_article_num"
 				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				android:hint="@string/article_number"
-				android:maxLines="1"
-				style="@style/edit_text_default"/>
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
 
-			<EditText
-				android:id="@+id/menu_main_item_edit_name"
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/article_number"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+
+				<EditText
+					android:id="@+id/menu_main_item_edit_artnumber"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					android:hint="@string/article_number"
+					android:maxLines="1"
+					style="@style/edit_text_default"/>
+				</LinearLayout>
+
+
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_name"
 				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				style="@style/edit_text_default"
-				android:maxLines="1"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/name"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+				<EditText
+					android:id="@+id/menu_main_item_edit_name"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					style="@style/edit_text_default"
+					android:maxLines="1"
 				android:hint="@string/name"/>
-			<EditText
-				android:id="@+id/menu_main_item_edit_description"
-				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				style="@style/edit_text_default"
-				android:maxLines="1"
-				android:hint="@string/Description"/>
+			</LinearLayout>
 
-			<EditText
-				android:id="@+id/menu_main_item_edit_cost"
-				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				style="@style/edit_text_default"
-				android:maxLines="1"
-				android:hint="@string/cost" />
 
-			<EditText
-				android:id="@+id/menu_main_item_edit_weight"
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_description"
 				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				style="@style/edit_text_default"
-				android:maxLines="1"
-				android:hint="@string/weight" />
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
 
-			<EditText
-				android:id="@+id/menu_main_item_edit_unit"
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/Description"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+				<EditText
+					android:id="@+id/menu_main_item_edit_description"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					style="@style/edit_text_default"
+					android:maxLines="1"
+					android:hint="@string/Description"/>
+			</LinearLayout>
+
+
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_cost"
 				android:layout_width="match_parent"
-				android:layout_height="60dp"
-				style="@style/edit_text_default"
-				android:maxLines="1"
-				android:hint="@string/unit" />
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/cost"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+
+				<EditText
+					android:id="@+id/menu_main_item_edit_cost"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					style="@style/edit_text_default"
+					android:maxLines="1"
+					android:hint="@string/cost" />
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_weight"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/weight"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+
+				<EditText
+					android:id="@+id/menu_main_item_edit_weight"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					style="@style/edit_text_default"
+					android:maxLines="1"
+					android:hint="@string/weight" />
+			</LinearLayout>
+
+
+			<LinearLayout
+				android:id="@+id/menu_main_recipe_edit_container_Unit"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_width="200dp"
+					android:layout_height="match_parent"
+					android:text="@string/unit"
+					android:gravity="center_vertical"
+					style="@style/text_default"/>
+				<EditText
+					android:id="@+id/menu_main_item_edit_unit"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					style="@style/edit_text_default"
+					android:maxLines="1"
+					android:hint="@string/unit" />
+				</LinearLayout>
 
 
 		</LinearLayout>

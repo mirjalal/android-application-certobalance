@@ -46,6 +46,7 @@ private SharedPreferences prefs = null;
         Preference devicePref = findPreference(key);
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
 
+
         key = getActivity().getString(R.string.preferences_communication_socket_connected);
         devicePref = findPreference(key);
         String summary = "";
