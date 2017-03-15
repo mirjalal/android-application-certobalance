@@ -98,7 +98,7 @@ private TextView textInstruction = null;
     @Override
     public void onRecipeEntryChanged(RecipeEntry entry) {
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText(getString(R.string.pleas_put) + ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor() + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + getString(R.string.on_the_pan_and_press_next));
+            textInstruction.setText(getString(R.string.pleas_put) + String.format("%.4f",(ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor())) + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + getString(R.string.on_the_pan_and_press_next));
         }
     }
 }

@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
+import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -298,10 +300,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 				try{
 
-
-					// End PeakHold Measurenment
-					ApplicationManager.getInstance().setPeakHoldActivated(false);
-					Scale.getInstance().setScaleApplication(PEAK_HOLD);
+					if (Scale.getInstance().getScaleApplication()==PEAK_HOLD) {
+						// End PeakHold Measurenment
+						ApplicationManager.getInstance().setPeakHoldActivated(false);
+						Scale.getInstance().setScaleApplication(PEAK_HOLD);
+					}
+					if (Scale.getInstance().getScaleApplication()==ANIMAL_WEIGHING_CALCULATING){
+						Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
+					}
 
 
 				}
@@ -370,12 +376,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					});
 					break;
 				case TOTALIZATION:
-					showStatisticsNotification(getActivity(), new DialogInterface.OnDismissListener() {
-						@Override
-						public void onDismiss(DialogInterface dialog) {
-							updateStatsButtonUI();
-						}
-					});
 					/*showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -689,13 +689,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setText(R.string.new_batch);
 				buttonAccumulate.setEnabled(false);
 				buttonShowBatch.setEnabled(true);
+
 				updateBatchListButtonText();
+
+				showStatisticsSQC(getActivity(),currentBatch);
+
 
 				ApplicationManager.getInstance().setSqcPT1(0);
 				ApplicationManager.getInstance().setSqcPT2(0);
 				ApplicationManager.getInstance().setSqcNT1(0);
 				ApplicationManager.getInstance().setSqcNT2(0);
 				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED);
+
+
+
+
 			}
 		});
 
@@ -905,8 +913,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
 				buttonStart.setEnabled(false);
-				//buttonEnd.setVisibility(View.VISIBLE);
-				//buttonEnd.setEnabled(true);
+				buttonEnd.setVisibility(View.VISIBLE);
+				buttonEnd.setEnabled(true);
 				buttonEndBatch.setVisibility(View.GONE);
 				break;
 			case ANIMAL_WEIGHING:

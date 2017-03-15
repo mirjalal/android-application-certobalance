@@ -421,11 +421,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case FILLING:
                 textInstruction.setText("");
-                textSum.setText("");
+                textSum.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
-                textInstruction.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
+                //textInstruction.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
 
                 loadingbarnormal=false;
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();

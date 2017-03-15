@@ -469,10 +469,10 @@
     <string name="please_enter_the_liquid_density">Please enter the liquid density</string>
     <string name="please_enter_sinker_volume">Please enter the Sinker Volume</string>
     <string name="please_enter_oil_density">Please enter the oil density</string>
-    <string name="water_temperature">Water Temperature\n</string>
-    <string name="liquid_density">Liquid Density\n</string>
-    <string name="sinker_volume">sinker volume</string>
-    <string name="oil_density">Oil Density\n</string>
+    <string name="water_temperature">Water Temperature</string>
+    <string name="liquid_density">Liquid Density</string>
+    <string name="sinker_volume">Sinker Volume</string>
+    <string name="oil_density">Oil Density</string>
     <string name="please_enter_normal_pipette">Please enter the nominal pipette capacity in ml</string>
     <string name="please_enter_the_pressure">Please enter the pressure</string>
     <string name="imprecision">Imprecision</string>
@@ -609,7 +609,7 @@
     <string name="app_differential_weighing">Differential Weighing</string>
     <string name="app_density_determination">Density Determination</string>
     <string name="app_peak_hold">Peak Hold</string>
-    <string name="app_ingrediant_costing">Ingrediant Costing</string>
+    <string name="app_ingrediant_costing">Ingredient Costing</string>
     <string name="app_pipette_adjustment">Pipette Adjustment</string>
     <string name="app_statistical_quality_control">Statistical Quality Control</string>
     <string name="app_not_weighing">Not weighing</string>
@@ -818,6 +818,7 @@
     <string name="please_enter_the_batch_name">Please enter the batch name</string>
     <string name="pick_a_unit">Pick a unit</string>
     <string name="please_enter_the_nominal_weight_first">Please enter the nominal weight first</string>
+    <string name="click_to_choose_a_recipe">Click to choose a recipe</string>
 
 
 </resources>
