@@ -110,6 +110,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 	private Button buttonNewBatch = null;
 	private Button buttonShowBatch = null;
+	private Button buttonResult=null;
 
 
 
@@ -716,6 +717,21 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					showBatchList(getActivity(),null);
 				}
 
+
+
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_SHOWBATCH,false);
+				}
+
+			}
+		});
+
+		buttonResult = (Button) rootView.findViewById(R.id.actionbar_button_results);
+		buttonResult.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+
 				if (Scale.getInstance().getScaleApplication()==FORMULATION){
 					showRecipeResults(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
@@ -731,6 +747,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			}
 		});
+
+
 
 
 		return rootView;
@@ -773,6 +791,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
 		buttonEnd.setText(buttonEnd.getText().toString().toUpperCase());
 		buttonAppSettings.setText(buttonAppSettings.getText().toString().toUpperCase());
+		buttonResult.setText(buttonResult.getText().toString().toUpperCase());
 
 
 		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
@@ -797,6 +816,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				//unused Buttons
+				buttonResult.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
@@ -823,6 +843,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				//unused Buttons
+				buttonResult.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
@@ -848,6 +869,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				//unused Buttons
+				buttonResult.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
@@ -873,6 +895,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setEnabled(true);
 
 				//unused Buttons
+				buttonResult.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
@@ -898,6 +921,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setEnabled(true);
 
 				// unused Buttons
+				buttonResult.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
@@ -916,6 +940,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(true);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 				break;
 			case ANIMAL_WEIGHING:
 
@@ -941,6 +966,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
 				buttonEnd.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 				break;
 
 			case FILLING:
@@ -964,6 +990,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 				break;
 
 			case TOTALIZATION:
@@ -985,6 +1012,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 				break;
 
@@ -1009,19 +1037,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					buttonStart.setVisibility(View.VISIBLE);
 				}
 
-				buttonShowBatch.setEnabled(true);
-				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText(getString(R.string.batch_results_Button).toUpperCase());
+				buttonResult.setEnabled(true);
+				buttonResult.setVisibility(View.VISIBLE);
+
 
 				//unused Buttons
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
-
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
 
 
 
@@ -1035,10 +1063,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText(getString(R.string.batch_results_Button).toUpperCase());
-				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setEnabled(false);
+
+				buttonResult.setVisibility(View.VISIBLE);
+				buttonResult.setEnabled(false);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
 				break;
 
 
@@ -1065,6 +1094,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
+
 				break;
 
 			case INGREDIENT_COSTING:
@@ -1095,6 +1126,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonStart.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 
 				break;
@@ -1124,6 +1156,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEnd.setVisibility(View.GONE);
 				buttonAccept.setEnabled(false);
 				buttonStart.setEnabled(true);
+				buttonResult.setVisibility(View.GONE);
 				break;
 
 			case DENSITY_DETERMINATION_STARTED:
@@ -1148,6 +1181,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonAccept.setEnabled(true);
 				buttonStart.setEnabled(false);
+				buttonResult.setVisibility(View.GONE);
 				break;
 
 			case PEAK_HOLD:
@@ -1193,7 +1227,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 
-
+				buttonResult.setVisibility(View.GONE);
 
 				break;
 			case PEAK_HOLD_STARTED:
@@ -1238,6 +1272,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 				break;
 			case PIPETTE_ADJUSTMENT_3_FINISHED:
@@ -1269,6 +1304,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEnd.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 				break;
 
@@ -1291,6 +1327,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 
 
@@ -1331,6 +1368,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 
 				break;
@@ -1359,6 +1397,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
 
 
 
@@ -1396,7 +1435,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEnd.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
-
+				buttonResult.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
 

@@ -460,7 +460,7 @@ public class ApplicationFragmentSettingsPipetteAdjustment extends Fragment {
         buttonWaterTemp.setText(getString(R.string.water_temp)+":\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+ " °C");
         buttonPressure.setText(getString(R.string.pressure)+":\n"+String.format("%.2f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
 
-        buttonPipettename.setText(getString(R.string.pipette_name)+":\n" + "\n"+ApplicationManager.getInstance().getPipette_name());
+        buttonPipettename.setText(getString(R.string.pipette_name)+":\n" +ApplicationManager.getInstance().getPipette_name());
         buttonPipettenumber.setText(getString(R.string.pipette_number)+ ":\n"+ApplicationManager.getInstance().getPipette_number());
 
         buttonNumberofSamples.setText(getString(R.string.number_of_samples)+ ":\n"+ ApplicationManager.getInstance().getCurrentLibrary().getPipetteNumberofSamples());

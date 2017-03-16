@@ -448,8 +448,8 @@
     <string name="under_limit">Under limit</string>
     <string name="over_limit">Over limit</string>
     <string name="nominal">Nominal</string>
-    <string name="tolerance_plus">+ Tolerance:\n</string>
-    <string name="tolerance_minus">- Tolerance:\n</string>
+    <string name="tolerance_plus">+ Tolerance</string>
+    <string name="tolerance_minus">- Tolerance</string>
     <string name="current_item">Current Item</string>
     <string name="click_to_choose_item">Click to choose item</string>
     <string name="place_target_weight_on_pan">Place target weight on the pan. Press OK to continue.</string>
