@@ -44,6 +44,8 @@
 					android:layout_height="60dp"
 					android:hint="@string/article_number"
 					android:maxLines="1"
+					android:imeOptions="actionDone"
+					android:singleLine="true"
 					style="@style/edit_text_default"/>
 				</LinearLayout>
 
@@ -66,6 +68,8 @@
 					android:layout_height="60dp"
 					style="@style/edit_text_default"
 					android:maxLines="1"
+					android:imeOptions="actionDone"
+					android:singleLine="true"
 				android:hint="@string/name"/>
 			</LinearLayout>
 
@@ -88,7 +92,9 @@
 					android:layout_height="60dp"
 					style="@style/edit_text_default"
 					android:maxLines="1"
-					android:hint="@string/Description"/>
+					android:hint="@string/Description"
+					android:imeOptions="actionDone"
+					android:singleLine="true"/>
 			</LinearLayout>
 
 
@@ -111,7 +117,9 @@
 					android:layout_height="60dp"
 					style="@style/edit_text_default"
 					android:maxLines="1"
-					android:hint="@string/cost" />
+					android:hint="@string/cost"
+					android:imeOptions="actionDone"
+					android:singleLine="true"/>
 			</LinearLayout>
 
 			<LinearLayout
@@ -133,7 +141,9 @@
 					android:layout_height="60dp"
 					style="@style/edit_text_default"
 					android:maxLines="1"
-					android:hint="@string/weight" />
+					android:hint="@string/weight"
+					android:imeOptions="actionDone"
+					android:singleLine="true"/>
 			</LinearLayout>
 
 
@@ -155,7 +165,10 @@
 					android:layout_height="60dp"
 					style="@style/edit_text_default"
 					android:maxLines="1"
-					android:hint="@string/unit" />
+					android:hint="@string/unit"
+					android:imeOptions="actionDone"
+					android:singleLine="true"
+					/>
 				</LinearLayout>
 
 

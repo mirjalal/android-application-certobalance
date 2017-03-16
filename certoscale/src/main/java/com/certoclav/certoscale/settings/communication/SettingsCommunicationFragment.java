@@ -43,8 +43,10 @@ private SharedPreferences prefs = null;
 
         //INIT DEVICE SETTING
         String key = "preferences_communication_list_devices";
+
+
         Preference devicePref = findPreference(key);
-        devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
+//        devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
 
 
         key = getActivity().getString(R.string.preferences_communication_socket_connected);
@@ -55,7 +57,7 @@ private SharedPreferences prefs = null;
         }else{
             summary = "not connected";
         }
-        devicePref.setSummary(summary);
+//        devicePref.setSummary(summary);
 
 
         super.onResume();

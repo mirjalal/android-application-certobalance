@@ -1,35 +1,35 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ListPreference
-        android:key="preferences_communication_lims"
+        android:key="@string/preferences_communication_lims"
         android:title="LIMS"
-        android:summary="Assigned to: COM 2, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
+        android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
     <ListPreference
-        android:key="preferences_communication_labelprinter"
+        android:key="@string/preferences_communication_labelprinter"
         android:title="@string/label_printer"
         android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
 
 
     <ListPreference
-        android:key="preferences_communication_protocolprinter"
+        android:key="@string/preferences_communication_protocolprinter"
         android:title="@string/protocol_printer"
         android:summary="Assigned to: COM 3, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none">
     </ListPreference>
 
     <ListPreference
-        android:key="preferences_communication_scanner"
+        android:key="@string/preferences_communication_scanner"
         android:title="@string/barcode_or_qr_code_scanner"
         android:summary="Assigned to: USB host">
     </ListPreference>
 
     <ListPreference
-        android:key="preferences_communication_balance"
+        android:key="@string/preferences_communication_balance"
         android:title="@string/balance"
         android:summary="Assigned to: COM 4, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
     <ListPreference
-        android:key="preferences_communication_list_devices"
+        android:key="@string/preferences_communication_list_devices"
         android:title="@string/balance_model"
         android:summary="Tab to choose connected model"
         android:defaultValue="1"

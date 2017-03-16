@@ -35,7 +35,9 @@
 		android:text="Text1"
 		android:maxLength="15"
 		android:gravity="left"
+		android:imeOptions="actionDone"
 		android:singleLine="true"
+
 		/>
 
         <EditText
@@ -53,7 +55,9 @@
             android:text="Text2"
 			android:maxLength="15"
 			android:gravity="left"
-            android:singleLine="true"
+			android:imeOptions="actionDone"
+			android:singleLine="true"
+
             />
 
 	<ImageView

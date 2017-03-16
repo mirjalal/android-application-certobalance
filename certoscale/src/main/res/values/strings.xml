@@ -819,6 +819,12 @@
     <string name="pick_a_unit">Pick a unit</string>
     <string name="please_enter_the_nominal_weight_first">Please enter the nominal weight first</string>
     <string name="click_to_choose_a_recipe">Click to choose a recipe</string>
+    <string name="preferences_communication_list_devices">preferences_communication_list_devices</string>
+    <string name="preferences_communication_balance">preferences_communication_balance</string>
+    <string name="preferences_communication_scanner">preferences_communication_scanner</string>
+    <string name="preferences_communication_protocolprinter">preferences_communication_protocolprinter</string>
+    <string name="preferences_communication_labelprinter">preferences_communication_labelprinter</string>
+    <string name="preferences_communication_lims">preferences_communication_lims</string>
 
 
 </resources>
