@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.certoclav.certoscale"
-        minSdkVersion 14
+        minSdkVersion 10
         targetSdkVersion 22
     }
 
