@@ -1011,7 +1011,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonShowBatch.setEnabled(true);
 				buttonShowBatch.setVisibility(View.VISIBLE);
-				buttonShowBatch.setText(R.string.batch_results_Button);
+				buttonShowBatch.setText(getString(R.string.batch_results_Button).toUpperCase());
 
 				//unused Buttons
 				buttonStatistics.setVisibility(View.GONE);
@@ -1035,6 +1035,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				//buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonShowBatch.setText(getString(R.string.batch_results_Button).toUpperCase());
+				buttonShowBatch.setVisibility(View.VISIBLE);
 				buttonShowBatch.setEnabled(false);
 				buttonEndBatch.setVisibility(View.GONE);
 				break;
