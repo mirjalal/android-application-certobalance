@@ -1,29 +1,29 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <ListPreference
+    <Preference
         android:key="@string/preferences_communication_lims"
         android:title="LIMS"
         android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
-    <ListPreference
+    <Preference
         android:key="@string/preferences_communication_labelprinter"
         android:title="@string/label_printer"
         android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
 
 
-    <ListPreference
+    <Preference
         android:key="@string/preferences_communication_protocolprinter"
         android:title="@string/protocol_printer"
         android:summary="Assigned to: COM 3, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none">
-    </ListPreference>
+    </Preference>
 
-    <ListPreference
+    <Preference
         android:key="@string/preferences_communication_scanner"
         android:title="@string/barcode_or_qr_code_scanner"
         android:summary="Assigned to: USB host">
-    </ListPreference>
+    </Preference>
 
-    <ListPreference
+    <Preference
         android:key="@string/preferences_communication_balance"
         android:title="@string/balance"
         android:summary="Assigned to: COM 4, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
