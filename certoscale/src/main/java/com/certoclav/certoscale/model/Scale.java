@@ -18,7 +18,7 @@ import android_serialport_api.SerialService;
 
 
 /**
- * This class is the Autoclave class model. It is a singleton class. 
+ * This class is the Scale class model. It is a singleton class.
  * 
  */
 public class Scale extends Observable {

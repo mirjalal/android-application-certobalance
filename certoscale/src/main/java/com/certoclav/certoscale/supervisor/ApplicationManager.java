@@ -35,6 +35,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
 
+    long nanoTimeSinceStable=1000000000;
 
     boolean returnFromSubMenu=false;
     public boolean isReturnFromSubMenu() {return returnFromSubMenu;}
@@ -1001,12 +1002,25 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void onWeightChanged(Double absweight, String unit) {
         Double weight = ApplicationManager.getInstance().getTaredValueInGram();
 
-            if(Scale.getInstance().getScaleApplication() == PEAK_HOLD_STARTED){
-                //if wei
-            }
+
+
+        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0002) {
+
+            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L))
+
+                        Scale.getInstance().setStable(true);
+
+        } else {
+                nanoTimeSinceStable=System.nanoTime();
+                Scale.getInstance().setStable(false);
+        }
+        weighOld = weight;
 
 
 
+
+        //Samplingrate Depended stability calculation
+        /*
             if (Math.abs(weighOld - weight) <= 0.0001) {
 
                // Log.e("Diff",String.format("%.4f",Math.abs(weighOld - weight)) );
@@ -1029,6 +1043,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 }
             }
             weighOld = weight;
+        */
         }
 
 
