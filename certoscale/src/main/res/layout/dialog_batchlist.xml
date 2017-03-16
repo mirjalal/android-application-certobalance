@@ -15,7 +15,7 @@
 
 		<TextView
 			android:id="@+id/menu_main_sqc_edit_batch_name"
-			android:layout_width="140dp"
+			android:layout_width="120dp"
 			android:layout_height="60dp"
 			style="@style/text_default"
 			android:gravity="center_vertical"
@@ -24,7 +24,7 @@
 
 		<TextView
 			android:id="@+id/menu_main_item_edit_element_unit_cost"
-			android:layout_width="140dp"
+			android:layout_width="120dp"
 			android:layout_height="60dp"
 			style="@style/text_default"
 			android:gravity="center_vertical"
@@ -36,7 +36,16 @@
 
 		<TextView
 			android:id="@+id/menu_main_item_edit_element_weight"
-			android:layout_width="140dp"
+			android:layout_width="80dp"
+			android:layout_height="60dp"
+			style="@style/text_default"
+			android:gravity="center_vertical"
+			android:text="Minimum"
+			android:textStyle="bold"/>
+
+		<TextView
+			android:id="@+id/menu_main_item_edit_element_unit"
+			android:layout_width="100dp"
 			android:layout_height="60dp"
 			style="@style/text_default"
 			android:gravity="center_vertical"

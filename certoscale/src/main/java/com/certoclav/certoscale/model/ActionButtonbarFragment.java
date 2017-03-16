@@ -376,14 +376,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						}
 					});
 					break;
-				case TOTALIZATION:
+				//case TOTALIZATION:
 					/*showStatisticsTotalization(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
 							updateStatsButtonUI();
 						}
 					});*/
-					break;
+					//break;
 			}
 
 

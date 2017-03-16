@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +70,7 @@ public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
 
-		convertView = inflater.inflate(R.layout.menu_main_item_element, parent, false);
+		convertView = inflater.inflate(R.layout.menu_main_item_element_measured, parent, false);
 		LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
 
@@ -82,12 +84,18 @@ public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 		editName.setText(getItem(position).getName());
 
 		TextView editUnitCost =  (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_unit_cost);
-		editUnitCost.setText(String.format(Locale.US,"%.2f",getItem(position).getCost()));
+		editUnitCost.setText(String.format(Locale.US,"%.2f",getItem(position).getCost())+" "+ ApplicationManager.getInstance().getCurrency());
 
 
-
-		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()));
+		try {
+			TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
+			editWeight.setText(String.format(Locale.US, "%.4f", getItem(position).getWeight())+" "+getItem(position).getUnit());
+		}catch (Exception e){
+			TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
+			editWeight.setText(String.format(Locale.US, "%.4f", getItem(position).getWeight())+" g");
+		}
+		//TextView editUnit = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_unit);
+		//editUnit.setText("g");
 
 
 
