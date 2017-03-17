@@ -825,6 +825,8 @@
     <string name="preferences_communication_protocolprinter">preferences_communication_protocolprinter</string>
     <string name="preferences_communication_labelprinter">preferences_communication_labelprinter</string>
     <string name="preferences_communication_lims">preferences_communication_lims</string>
+    <string name="assigned_to_com">Assigned to: COM</string>
+    <string name="lims">LIMS</string>
 
 
 </resources>

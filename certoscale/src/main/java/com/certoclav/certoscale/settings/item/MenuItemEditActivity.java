@@ -7,16 +7,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -174,24 +178,39 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
                         if(itemFromDb != null){
                             db.deleteItem(itemFromDb);
                         }
-                        Date date = new Date();
-                        db.insertItem(new Item(editName.getText().toString(),
-                                Double.parseDouble(editWeight.getText().toString()),
-                                Double.parseDouble(editCost.getText().toString()),
-                                editArticleNumber.getText().toString(),
-                                ((Long)date.getTime()).toString(),
-                                editDescription.getText().toString(),
-                                Scale.getInstance().getSafetyKey(),
-                                editUnit.getText().toString(),
-                                "",
-                                "private"
-                                )
 
-                        );
+                        boolean unitParsed=false;
+                        List<Unit> units = db.getUnits();
+                        for (Unit unit : units) {
+                            if(editUnit.getText().toString().equals(unit.getName())){
+                                unitParsed=true;
+                            }
+
+                        }
+
+                        if (unitParsed==true) {
+                            Date date = new Date();
+                            db.insertItem(new Item(editName.getText().toString(),
+                                            Double.parseDouble(editWeight.getText().toString()),
+                                            Double.parseDouble(editCost.getText().toString()),
+                                            editArticleNumber.getText().toString(),
+                                            ((Long) date.getTime()).toString(),
+                                            editDescription.getText().toString(),
+                                            Scale.getInstance().getSafetyKey(),
+                                            editUnit.getText().toString(),
+                                            "",
+                                            "private"
+                                    )
+
+                            );
+                            dialog.dismiss();
+                            finish();
+                        }else{
+                            Toast.makeText(ApplicationController.getContext(), "Item Unit is not valid" , Toast.LENGTH_SHORT).show();
+                        }
 
 
-                        dialog.dismiss();
-                        finish();
+
                     }
                 });
 

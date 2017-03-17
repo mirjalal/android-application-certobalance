@@ -2,13 +2,13 @@
 
     <Preference
         android:key="@string/preferences_communication_lims"
-        android:title="LIMS"
+        android:title="@string/lims"
         android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
     <Preference
         android:key="@string/preferences_communication_labelprinter"
         android:title="@string/label_printer"
-        android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
+        android:summary="Assigned to: COM 2, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
 
 
     <Preference

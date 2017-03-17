@@ -119,7 +119,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		}
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ "g");
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ getItem(position).getUnit().toString());
 
 
 		if(hideActionButtons){

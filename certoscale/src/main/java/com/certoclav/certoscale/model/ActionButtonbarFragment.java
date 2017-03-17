@@ -1990,6 +1990,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							case FILLING_CALC_TARGET:
 								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
+
 							case FORMULATION:
 							case FORMULATION_RUNNING:
 								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();

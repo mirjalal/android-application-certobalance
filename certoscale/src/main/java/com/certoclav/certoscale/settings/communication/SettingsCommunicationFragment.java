@@ -1,14 +1,32 @@
 package com.certoclav.certoscale.settings.communication;
 
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Protocol;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
+import com.certoclav.certoscale.settings.device.SettingsLanguagePickerActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.ESCPos;
+import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.SocketService;
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
+import java.util.Calendar;
+
+import android_serialport_api.SerialService;
 
 
 public class SettingsCommunicationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -29,6 +47,49 @@ private SharedPreferences prefs = null;
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                try {
+
+                    final Dialog dialog = new Dialog(getContext());
+                    dialog.setContentView(R.layout.dialog_communication_config);
+                    dialog.setTitle(getString(R.string.lims));
+
+
+                    Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_communication_config_button_save);
+                    dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    });
+
+
+                    Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_communication_config_button_close);
+                    dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        });
+
+        SerialService serialService=Scale.getInstance().getSerialsServiceSics();
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +"1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+
+
 
     }
 
@@ -41,14 +102,18 @@ private SharedPreferences prefs = null;
     public void onResume() {
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
-        //INIT DEVICE SETTING
-        String key = "preferences_communication_list_devices";
 
 
-        Preference devicePref = findPreference(key);
+
+
+
+
+
 //        devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
 
-
+        //INIT DEVICE SETTING
+        String key = "preferences_communication_list_devices";
+        Preference devicePref = findPreference(key);
         key = getActivity().getString(R.string.preferences_communication_socket_connected);
         devicePref = findPreference(key);
         String summary = "";

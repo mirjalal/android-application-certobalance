@@ -197,6 +197,13 @@ public class Scale extends Observable {
 		return serialServiceScale;
 		}
 
+	public void getSerialsServiceScale(SerialService serialService) {
+
+			serialServiceScale = serialService;
+			serialServiceScale.setStringTerminatin("\n");
+
+	}
+
 	public SerialService getSerialsServiceLabelPrinter() {
 		if(serialServiceLabelPrinter == null){
 			serialServiceLabelPrinter = new SerialService("/dev/ttymxc1",9600);//COM2
@@ -204,11 +211,19 @@ public class Scale extends Observable {
 		return serialServiceLabelPrinter;
 		}
 
+	public void getSerialsServiceLabelPrinter(SerialService serialService) {
+			serialServiceLabelPrinter = serialService;
+	}
+
 	public SerialService getSerialsServiceProtocolPrinter() {
 		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM1
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM3
 		}
 		return serialServiceProtocolPrinter;
+	}
+
+	public void setSerialsServiceProtocolPrinter(SerialService serialService) {
+		serialServiceProtocolPrinter=serialService;
 	}
 
 	public SerialService getSerialsServiceSics() {
@@ -218,6 +233,9 @@ public class Scale extends Observable {
 		return serialServiceProtocolPrinter;
 	}
 
+	public void  setSerialsServiceSics(SerialService serialService) {
+		serialServiceProtocolPrinter=serialService;
+	}
 
 	public void setValue(Double value, String rawresponse) {
 		setWeightInGram(value);
