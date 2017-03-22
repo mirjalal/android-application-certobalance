@@ -15,6 +15,8 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
@@ -26,7 +28,6 @@ import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGH
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
-import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
 /**
@@ -34,6 +35,9 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
  */
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
+
+
+
 
     long nanoTimeSinceStable=1000000000;
 
@@ -607,7 +611,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
                 retVal = String.format("%.0f", gram) + " pcs";
             }else {
-                int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
+                int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
             }
         }catch (Exception e){

@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.model;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
@@ -10,6 +12,7 @@ import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -38,6 +41,18 @@ public class Scale extends Observable {
 	private SerialService serialServiceSics = null;
 
 
+
+	private ScaleModel scaleModel=null;
+
+
+
+
+	public ScaleModel getScaleModel() {return scaleModel;}
+	public void setScaleModel(ScaleModel scaleModel) {this.scaleModel = scaleModel;}
+
+
+
+
 	public boolean isStable() {
 		return stable;
 	}
@@ -55,6 +70,7 @@ public class Scale extends Observable {
 	}
 
 	private boolean stable = false;
+
 
 
 

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
@@ -108,6 +110,8 @@ public class UserAdapter extends ArrayAdapter<User> {
 			actionItemDelete.setVisibility(View.VISIBLE);
 			actionItemEdit.setVisibility(View.VISIBLE);
 		}
+
+
 
 		//if admin is logged in, then make all accounts editable
 		if(Scale.getInstance().getUser().getIsAdmin()){

@@ -15,6 +15,10 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelDandT;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.settings.device.SettingsLanguagePickerActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -62,6 +66,37 @@ private SharedPreferences prefs = null;
 
         ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +"1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
 
+/*
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_devices))).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                String key = "preferences_communication_list_devices";
+                String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+                switch (modelValue) {
+                    case "1":
+                        ScaleModelGandG modelGandG=new ScaleModelGandG();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+
+                    case "2":
+                        ScaleModelDandT modelDandT=new ScaleModelDandT();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+
+                    case "3":
+                        ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+                }
+
+
+                return true;
+            }
+        });*/
 
 
     }
@@ -73,6 +108,10 @@ private SharedPreferences prefs = null;
 
     @Override
     public void onResume() {
+
+
+
+
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
 

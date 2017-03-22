@@ -45,6 +45,10 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelDandT;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.supervisor.StateMachine;
@@ -164,6 +168,30 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
 		navigationbar.getButtonCompanyLogo().setVisibility(View.VISIBLE);
+		String key = "preferences_communication_list_devices";
+		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+		switch (modelValue) {
+			case "1":
+				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
+				ScaleModelGandG modelGandG=new ScaleModelGandG();
+				Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
+				Scale.getInstance().getScaleModel().initializeParameters();
+				break;
+
+			case "2":
+				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
+				ScaleModelDandT modelDandT=new ScaleModelDandT();
+				Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
+				Scale.getInstance().getScaleModel().initializeParameters();
+				break;
+
+			case "3":
+				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
+				ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
+				Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
+				Scale.getInstance().getScaleModel().initializeParameters();
+				break;
+		}
 
 
 

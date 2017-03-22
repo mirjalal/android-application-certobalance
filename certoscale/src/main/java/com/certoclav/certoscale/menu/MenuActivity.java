@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -18,8 +19,13 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.MenuElement;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelDandT;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -69,6 +75,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setImageResource(R.drawable.ic_menu_help);
 
+
         //Set up menu items
         gridView = (GridView) findViewById(R.id.menu_main_grid);
         menuMainElementAdapter = new MenuElementAdapter(this,new ArrayList<MenuElement>());
@@ -97,6 +104,34 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
     @Override
     protected void onResume() {
+
+
+
+        String key = "preferences_communication_list_devices";
+        String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+        switch (modelValue) {
+            case "1":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
+                ScaleModelGandG modelGandG=new ScaleModelGandG();
+                Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
+                Scale.getInstance().getScaleModel().initializeParameters();
+                break;
+
+            case "2":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
+                ScaleModelDandT modelDandT=new ScaleModelDandT();
+                Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
+                Scale.getInstance().getScaleModel().initializeParameters();
+                break;
+
+            case "3":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
+                ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
+                Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
+                Scale.getInstance().getScaleModel().initializeParameters();
+                break;
+        }
+        
         super.onResume();
     }
 
