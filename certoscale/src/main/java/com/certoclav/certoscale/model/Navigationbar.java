@@ -3,6 +3,7 @@ package com.certoclav.certoscale.model;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -69,6 +70,15 @@ public class Navigationbar {
 	}
 
 	private ImageButton buttonMore = null;
+
+	public ImageButton getButtonCompanyLogo() {
+		return buttonCompanyLogo;
+	}
+
+	public void setButtonCompanyLogo(ImageButton buttonCompanyLogo) {
+		this.buttonCompanyLogo = buttonCompanyLogo;
+	}
+
 	private ImageButton buttonSettingsDevice = null;
 
 
@@ -101,6 +111,7 @@ public class Navigationbar {
 	}
 
 	private ImageButton buttonBack = null;
+	private ImageButton buttonCompanyLogo =null;
 
 	public ImageButton getButtonDelete() {return buttonDelete;}
 
@@ -330,6 +341,15 @@ public class Navigationbar {
 				}
 
 				mActivity.finish();
+
+			}
+		});
+
+		buttonCompanyLogo=(ImageButton) mActivity.findViewById(R.id.naviagationbar_button_company_logo);
+		buttonCompanyLogo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
 
 			}
 		});

@@ -104,7 +104,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			final Dialog dialog = new Dialog(LoginActivity.this);
 			dialog.setContentView(R.layout.dialog_yes_no);
 			dialog.setCanceledOnTouchOutside(true);
-			dialog.setTitle("Login failed");
+			dialog.setTitle(R.string.login_failed);
 			TextView text = (TextView) dialog.findViewById(R.id.text);
 			text.setText(loginFailedMessage);
 			text.append(getString(R.string.do_you_want_to_switch_to_offline_mode_));
@@ -163,6 +163,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
+		navigationbar.getButtonCompanyLogo().setVisibility(View.VISIBLE);
+
 
 
 

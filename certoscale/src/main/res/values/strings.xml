@@ -892,6 +892,7 @@
     <string name="tab_to_choose_the_flow_control_mode">Tab to choose the flow control mode</string>
     <string name="handshake">Handshake</string>
     <string name="preferences_communication_list_handshake">preferences_communication_list_handshake</string>
+    <string name="login_failed">Login failed</string>
 
 
 </resources>
