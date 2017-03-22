@@ -120,9 +120,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		}
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ ApplicationManager.getInstance().getCurrentUnit().toString());
+		try {
+			editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ ApplicationManager.getInstance().getCurrentUnit().getName().toString());
+		}catch (Exception e){
 
-		String test=ApplicationManager.getInstance().getCurrentUnit().toString();
+		}
+
+
+
 
 		if(hideActionButtons){
 			actionItemPrint.setVisibility(View.INVISIBLE);
@@ -210,13 +215,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 									deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_ITEM + getItem(position).getCloudId());
 								}
 								DatabaseService db = new DatabaseService(mContext);
+								for(OnClickButtonListener listener : onClickButtonListeners){
+									listener.onClickButtonDelete(getItem(position));
+								}
 								db.deleteItem(getItem(position));
 								remove(getItem(position));
 								notifyDataSetChanged();
 								dialog.dismiss();
-								for(OnClickButtonListener listener : onClickButtonListeners){
-									listener.onClickButtonDelete(getItem(position));
-								}
+
 							}
 						});
 

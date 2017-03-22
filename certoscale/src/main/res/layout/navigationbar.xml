@@ -52,7 +52,7 @@
      android:layout_marginLeft="80dp"
      android:layout_height="match_parent"
      android:layout_alignParentLeft="true"
-     android:src="@drawable/ae_adam_logo_small"
+     android:src="@drawable/logo_ae_adam_small"
      style="@style/button_navigationbar_default"
 
      />

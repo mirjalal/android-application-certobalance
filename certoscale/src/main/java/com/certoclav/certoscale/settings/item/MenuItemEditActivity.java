@@ -193,19 +193,30 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
 
 
                         if (unitParsed==true) {
-
-                            double weight=Double.parseDouble(editWeight.getText().toString());
+                            double weight;
+                            try {
+                                weight = Double.parseDouble(editWeight.getText().toString());
+                            }catch (Exception e){
+                                weight=0;
+                            }
                             weight= weight/(currentUnit.getFactor()*Math.pow(10,currentUnit.getExponent()));
+
+                            double cost;
+                            try {
+                                cost = Double.parseDouble(editCost.getText().toString());
+                            }catch (Exception e){
+                                cost=0;
+                            }
 
                             Date date = new Date();
                             db.insertItem(new Item(editName.getText().toString(),
                                             weight,
-                                            Double.parseDouble(editCost.getText().toString()),
+                                            cost,
                                             editArticleNumber.getText().toString(),
                                             ((Long) date.getTime()).toString(),
                                             editDescription.getText().toString(),
                                             Scale.getInstance().getSafetyKey(),
-                                            editUnit.getText().toString(),
+                                            currentUnit.toString(),//editUnit.getText().toString(),
                                             "",
                                             "private"
                                     )

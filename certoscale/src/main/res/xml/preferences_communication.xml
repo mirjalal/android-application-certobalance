@@ -28,6 +28,7 @@
         android:title="@string/balance"
         android:summary="Assigned to: COM 4, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
+
     <ListPreference
         android:key="@string/preferences_communication_list_devices"
         android:title="@string/balance_model"
