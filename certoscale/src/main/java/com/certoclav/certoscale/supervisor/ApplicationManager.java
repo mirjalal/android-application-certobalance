@@ -595,7 +595,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
-    private Double transformGramToCurrentUnit(double gram) {
+    public Double transformGramToCurrentUnit(double gram) {
         return gram * currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent());
     }
 

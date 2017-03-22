@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.certocloud.CertocloudConstants;
@@ -119,8 +120,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		}
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ getItem(position).getUnit().toString());
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ ApplicationManager.getInstance().getCurrentUnit().toString());
 
+		String test=ApplicationManager.getInstance().getCurrentUnit().toString();
 
 		if(hideActionButtons){
 			actionItemPrint.setVisibility(View.INVISIBLE);

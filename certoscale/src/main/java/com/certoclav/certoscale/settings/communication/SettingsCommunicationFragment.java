@@ -52,35 +52,8 @@ private SharedPreferences prefs = null;
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                try {
-
-                    final Dialog dialog = new Dialog(getContext());
-                    dialog.setContentView(R.layout.dialog_communication_config);
-                    dialog.setTitle(getString(R.string.lims));
 
 
-                    Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_communication_config_button_save);
-                    dialogbuttonProtocol.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-
-
-                    Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_communication_config_button_close);
-                    dialogButtonClose.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    dialog.show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
                 return false;
             }
         });

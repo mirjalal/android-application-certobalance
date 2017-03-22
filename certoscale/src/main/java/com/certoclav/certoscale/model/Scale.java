@@ -37,6 +37,7 @@ public class Scale extends Observable {
 	private SerialService serialServiceProtocolPrinter = null;
 	private SerialService serialServiceSics = null;
 
+
 	public boolean isStable() {
 		return stable;
 	}
@@ -202,6 +203,7 @@ public class Scale extends Observable {
 			serialServiceScale = serialService;
 			serialServiceScale.setStringTerminatin("\n");
 
+
 	}
 
 	public SerialService getSerialsServiceLabelPrinter() {
@@ -225,6 +227,7 @@ public class Scale extends Observable {
 	public void setSerialsServiceProtocolPrinter(SerialService serialService) {
 		serialServiceProtocolPrinter=serialService;
 	}
+
 
 	public SerialService getSerialsServiceSics() {
 		if(serialServiceProtocolPrinter == null){
