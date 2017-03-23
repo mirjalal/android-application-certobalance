@@ -39,6 +39,9 @@ public abstract class ScaleModel {
 	abstract public int pressTara();
 	abstract public int pressZero();
 
+	abstract public double parseRecievedMessage(String message);
+
+
 
     //Set mod to weighing, unit to gramm...
     abstract public int initializeScale();

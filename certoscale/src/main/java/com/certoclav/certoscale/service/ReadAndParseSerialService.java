@@ -214,34 +214,11 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	@Override
 	public void onMessageReceived(String message) {
 		Log.e("ReadAndParse", "received: " + message);
-		int sign=1;
-		if(message.length()>5) {
-			rawResponse = message;
-			Log.e("ReadAndParse", "received: " + message);
-			String[] arguments = message.split(" ");
-			if (arguments.length != 0) {
-				for (String arg : arguments) {
 
-					if (arg.equals("-")){
-						sign=-1;
-					}
+				rawResponse=message;
+				value=Scale.getInstance().getScaleModel().parseRecievedMessage(message);
+				handler.sendEmptyMessage(0);
 
-
-					if (arg.length() > 2 && arg.contains(".")) {
-						try {
-							value = Double.parseDouble(arg);
-						} catch (Exception e) {
-							value = 0d;
-							Log.e("ReadAndParseSerialServ", "Error parsing Double");
-						}
-					}
-				}
-				value=value*sign;
-			}else{
-				value = 0d;
-			}
-			handler.sendEmptyMessage(0);
-		}
 	}
 
 	private void simulateMessage(){
