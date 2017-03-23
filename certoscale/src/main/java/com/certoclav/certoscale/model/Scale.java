@@ -42,8 +42,10 @@ public class Scale extends Observable {
 
 
 
-	private ScaleModel scaleModel=null;
-
+	//private ScaleModel scaleModel=null;
+	//ScaleModelDandT modelDandT =new ScaleModelDandT();
+	//scaleModel=(ScaleModel) modelDandT;
+	private  ScaleModel scaleModel =(ScaleModel) new ScaleModelDandT();
 
 
 

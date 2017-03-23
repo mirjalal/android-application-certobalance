@@ -13,6 +13,27 @@ public class ScaleModelAEAdam extends ScaleModel{
     public int initializeParameters() {
         maximumCapazity=600;
         decimalPlaces=2;
+        comBaudrate=4800;
+        comDataBits=8;
+        comStopBits=1;
+        return 0;
+    }
+
+    @Override
+    public int sendOnOffCommand() {
+        return 0;
+    }
+
+    @Override
+    public int sendModeCommand() {
+
+        return 0;
+    }
+
+    @Override
+    public int sendPrintCommand() {
+
+        Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
         return 0;
     }
 
@@ -22,13 +43,16 @@ public class ScaleModelAEAdam extends ScaleModel{
     }
 
     @Override
-    void pressTara() {
-
+    public int pressTara() {
+        Scale.getInstance().getSerialsServiceScale().sendMessage("T\r\n");
+        return 0;
     }
 
     @Override
-    void pressZero() {
+    public int pressZero() {
 
+        Scale.getInstance().getSerialsServiceScale().sendMessage("Z\r\n");
+        return 0;
     }
 
     @Override

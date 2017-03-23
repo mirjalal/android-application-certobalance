@@ -47,7 +47,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		return instance;
 	}
 
-	private ArrayList<String> getCommandQueue() {
+	public ArrayList<String> getCommandQueue() {
 		return commandQueue;
 	}
 
@@ -95,6 +95,30 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					simulateMessage();
 				}else {
 
+
+					try {
+
+						if (commandQueue.size() >0) {
+							Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+							commandQueue.remove(0);
+						} else {
+
+							//mPrinter.write(0x1B);
+							//mPrinter.write(0x70);
+							//byte[] bytes = {27,112};
+							//byte[] bytes = hexStringToByteArray2("1B70");
+							//Log.e("SerialService", "SEND: " + new String(bytes));
+							//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
+							Scale.getInstance().getScaleModel().sendPrintCommand();
+						}
+
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				/*
+
 					//check current model
 					String key = "preferences_communication_list_devices";
 					String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
@@ -141,6 +165,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 							break;
 					}
 
+					*/
 				}
 
 
@@ -150,6 +175,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 		}
 	});
@@ -166,7 +192,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			}
 		}
 	}
-	
+
 	public void startParseSerialThread(){
 
 		if(!serialThread.isAlive()){
@@ -175,7 +201,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 		}
 
-		
+
 	}
 
 	@Override
@@ -202,7 +228,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			handler.sendEmptyMessage(0);
 		}
 	}
-	
+
 	private void simulateMessage(){
 		 	counter++;
 
@@ -230,7 +256,9 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	}
 
 
+	/*
 	public void sendOnOffCommand() {
+
 		String key = "preferences_communication_list_devices";
 		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
@@ -243,9 +271,13 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 				break;
 		}
 
-	}
+		Scale.getInstance().getScaleModel().sendOnOffCommand();
 
+	}
+	*/
+	/*
 	public void sendModeCommand() {
+
 		String key = "preferences_communication_list_devices";
 		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
@@ -258,9 +290,10 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 				break;
 		}
 
+		Scale.getInstance().getScaleModel().sendModeCommand();
 
 
-	}
+	}*/
 
 	public static byte[] hexStringToByteArray2(String s) {
 		int len = s.length();

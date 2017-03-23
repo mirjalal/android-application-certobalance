@@ -27,12 +27,19 @@ public abstract class ScaleModel {
 
 	abstract public int initializeParameters();
 
+	abstract public int sendOnOffCommand();
+	abstract public int sendModeCommand();
+	abstract public int sendPrintCommand();
+
+
+	abstract public int pressTara();
+	abstract public int pressZero();
+
 
     //Set mod to weighing, unit to gramm...
     abstract public int initializeScale();
 
-    abstract void pressTara();
-    abstract void pressZero();
+
 
     abstract void internalCalibration();
     abstract void externelCalibration();

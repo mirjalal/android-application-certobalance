@@ -131,7 +131,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().getScaleModel().initializeParameters();
                 break;
         }
-        
+
         super.onResume();
     }
 

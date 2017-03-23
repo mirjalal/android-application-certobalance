@@ -1,5 +1,7 @@
 package com.certoclav.certoscale.model;
 
+import com.certoclav.certoscale.service.ReadAndParseSerialService;
+
 /**
  * Created by Enrico on 22.03.2017.
  */
@@ -21,18 +23,39 @@ public class ScaleModelDandT extends ScaleModel {
     }
 
     @Override
+    public int sendOnOffCommand() {
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("O\r\n");
+        return 0;
+    }
+
+    @Override
+    public int sendModeCommand() {
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
+        return 0;
+    }
+
+    @Override
+    public int sendPrintCommand() {
+        Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
+
+        return 0;
+    }
+
+    @Override
     public int initializeScale() {
         return 1;
     }
 
     @Override
-    void pressTara() {
+    public int pressTara() {
 
+        return 0;
     }
 
     @Override
-    void pressZero() {
-
+    public int pressZero() {
+        Scale.getInstance().getSerialsServiceScale().sendMessage("T\r\n");
+        return 0;
     }
 
     @Override
