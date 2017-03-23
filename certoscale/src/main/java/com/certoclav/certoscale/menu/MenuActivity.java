@@ -115,6 +115,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 ScaleModelGandG modelGandG=new ScaleModelGandG();
                 Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
                 Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().pressZero();
                 break;
 
             case "2":
@@ -122,6 +123,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 ScaleModelDandT modelDandT=new ScaleModelDandT();
                 Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
                 Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().pressZero();
                 break;
 
             case "3":
@@ -129,6 +131,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
                 Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
                 Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().pressZero();
                 break;
         }
 

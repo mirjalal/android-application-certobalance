@@ -32,6 +32,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
+
 
 public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
     private FrameLayout barload = null;
@@ -619,7 +621,12 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
             //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
-            int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+            int fwidth=0;
+            if (IS_IO_SIMULATED) {
+                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+            }else{
+                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+            }
             if(fwidth<0){
                 fwidth = 0;
             }

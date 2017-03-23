@@ -1499,6 +1499,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	@Override
 	public void onWeightChanged(Double weight, String unit) {
+
+		if(Scale.getInstance().getScaleModel().hasZerobutton==false){
+			buttonZero.setVisibility(View.GONE);
+		}
 		if(ApplicationManager.getInstance().getTareInGram() != 0){
 			buttonZero.setEnabled(true);
 		}else{

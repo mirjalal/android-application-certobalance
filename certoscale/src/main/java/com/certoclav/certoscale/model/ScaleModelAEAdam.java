@@ -16,6 +16,9 @@ public class ScaleModelAEAdam extends ScaleModel{
         comBaudrate=4800;
         comDataBits=8;
         comStopBits=1;
+
+        hasZerobutton=true;
+
         return 0;
     }
 

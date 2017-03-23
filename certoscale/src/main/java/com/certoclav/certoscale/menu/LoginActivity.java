@@ -176,6 +176,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				ScaleModelGandG modelGandG=new ScaleModelGandG();
 				Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
 				Scale.getInstance().getScaleModel().initializeParameters();
+				Scale.getInstance().getScaleModel().pressZero();
 				break;
 
 			case "2":
@@ -183,6 +184,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				ScaleModelDandT modelDandT=new ScaleModelDandT();
 				Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
 				Scale.getInstance().getScaleModel().initializeParameters();
+				Scale.getInstance().getScaleModel().pressZero();
 				break;
 
 			case "3":
@@ -190,6 +192,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
 				Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
 				Scale.getInstance().getScaleModel().initializeParameters();
+				Scale.getInstance().getScaleModel().pressZero();
 				break;
 		}
 

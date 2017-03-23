@@ -199,20 +199,34 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			serialThread.start();
 			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
 		}
 
 
+
+	}
+
+	public void pauseParseSerialThread(){
+
+		serialThread.interrupt();
 	}
 
 	@Override
 	public void onMessageReceived(String message) {
 		Log.e("ReadAndParse", "received: " + message);
+		int sign=1;
 		if(message.length()>5) {
 			rawResponse = message;
 			Log.e("ReadAndParse", "received: " + message);
 			String[] arguments = message.split(" ");
 			if (arguments.length != 0) {
 				for (String arg : arguments) {
+
+					if (arg.equals("-")){
+						sign=-1;
+					}
+
+
 					if (arg.length() > 2 && arg.contains(".")) {
 						try {
 							value = Double.parseDouble(arg);
@@ -222,6 +236,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 						}
 					}
 				}
+				value=value*sign;
 			}else{
 				value = 0d;
 			}

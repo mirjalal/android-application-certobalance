@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
@@ -428,14 +429,21 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getSumAsStringWithUnit() {
 
+
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces()) + " " + "pcs";
             default:
-                return getTransformedWeightAsStringWithUnit(getSumInGram());
+                return getTransformedWeightAsStringWithUnit(getSumInGram()+getTareInGram());
         }
 
+
     }
+    public double getSum() {
+        return getSumInGram()+getTareInGram();
+    }
+
+
 
     public String getSumAsString() {
         return String.format("%.4f", getSumInGram());
@@ -444,13 +452,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getTaredValueAsStringWithUnit() {
 
-        switch (Scale.getInstance().getScaleApplication()) {
-            case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
-            default:
-                return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
+            switch (Scale.getInstance().getScaleApplication()) {
+                case PART_COUNTING:
+                    return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
+                default:
+                    return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
 
-        }
+            }
 
     }
 
@@ -483,7 +491,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public Double getTaredValueInGram() {
-        return getSumInGram() - getTareInGram();
+
+        if (IS_IO_SIMULATED) {
+            return getSumInGram() - getTareInGram();
+        }else{
+            return getSumInGram();
+        }
+
     }
 
     public boolean getPeakHoldActivated(){

@@ -25,6 +25,10 @@ public abstract class ScaleModel {
 	String endLineCommand;
 
 
+
+	boolean hasZerobutton;
+
+
 	abstract public int initializeParameters();
 
 	abstract public int sendOnOffCommand();

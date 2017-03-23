@@ -19,6 +19,8 @@ public class ScaleModelDandT extends ScaleModel {
         maximumCapazity=120;
         decimalPlaces=4;
 
+        hasZerobutton=true;
+
         return 1;
     }
 
@@ -48,6 +50,7 @@ public class ScaleModelDandT extends ScaleModel {
 
     @Override
     public int pressTara() {
+
 
         return 0;
     }
