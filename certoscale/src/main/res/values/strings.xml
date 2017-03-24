@@ -895,6 +895,16 @@
     <string name="handshake">Handshake</string>
     <string name="preferences_communication_list_handshake">preferences_communication_list_handshake</string>
     <string name="login_failed">Login failed</string>
+    <string name="please_choose_calibration_weight">Please Choose Calibration weight</string>
+    <string name="user_calibration">User calibration</string>
+    <string name="calibration_test">Calibration test</string>
+    <string name="span_calibration">Span calibration</string>
+    <string name="automatic_calibration_adjustment">Automatic calibration adjustment</string>
+    <string name="turn_automatic_calibration_on_off">Turn automatic calibration ON/OFF</string>
+    <string name="preferences_calibration_adjustment">preferences_calibration_adjustment</string>
+    <string name="preferences_calibration_span">preferences_calibration_span</string>
+    <string name="preferences_calibration_user">preferences_calibration_user</string>
+    <string name="preferences_calibration_test">preferences_calibration_test</string>
 
 
 </resources>

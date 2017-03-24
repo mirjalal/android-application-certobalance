@@ -1,5 +1,6 @@
 package com.certoclav.certoscale.model;
 
+import android.content.Context;
 import android.util.Log;
 
 /**
@@ -99,7 +100,8 @@ public class ScaleModelAEAdam extends ScaleModel{
     }
 
     @Override
-    void externelCalibration() {
+    public int externelCalibration(Context context) {
 
+        return 0;
     }
 }

@@ -2,34 +2,34 @@
 
     <Preference
         android:key="@string/preferences_calibration_internal"
-        android:title="Calibrate the balance"
+        android:title="@string/internal_calibration"
         android:summary="Only possible after warm up and with empty pan" />
 
 
 
     <CheckBoxPreference
         android:key="@string/preferences_calibration_automatic"
-        android:title="Turn automatic calibration ON/OFF"
+        android:title="@string/turn_automatic_calibration_on_off"
         android:summary="Calibrate the balance every hour automatically" />
 
     <Preference
-        android:key="preferences_calibration_adjustment"
-        android:title="Automatic calibration adjustment"
+        android:key="@string/preferences_calibration_adjustment"
+        android:title="@string/automatic_calibration_adjustment"
         android:summary="Adjust the zero calibration point" />
 
     <Preference
-        android:key="preferences_calibration_span"
-        android:title="Span calibration"
+        android:key="@string/preferences_calibration_span"
+        android:title="@string/span_calibration"
         android:summary="Calibration with two calibration points. Follow the screen instructions." />
 
     <Preference
-        android:key="preferences_calibration_user"
-        android:title="User calibration"
+        android:key="@string/preferences_calibration_user"
+        android:title="@string/user_calibration"
         android:summary="Calibrate the balance using a user defined mass. Follow the screen instructions" />
 
     <Preference
-        android:key="preferences_calibration_test"
-        android:title="Calibration test"
+        android:key="@string/preferences_calibration_test"
+        android:title="@string/calibration_test"
         android:summary="Compare known calibration weight against stored span calibration data" />
 
 </PreferenceScreen>

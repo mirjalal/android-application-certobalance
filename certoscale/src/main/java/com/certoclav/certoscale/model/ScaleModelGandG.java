@@ -1,6 +1,16 @@
 package com.certoclav.certoscale.model;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 /**
  * Created by Enrico on 22.03.2017.
@@ -102,7 +112,7 @@ public class ScaleModelGandG extends ScaleModel {
                 int sign=1;
         double value=0;
         if(message.length()>5) {
-            Log.e("ReadAndParse", "received: " + message);
+            //Log.e("ReadAndParse", "received: " + message);
             String[] arguments = message.split(" ");
             if (arguments.length != 0) {
                 for (String arg : arguments) {
@@ -117,7 +127,7 @@ public class ScaleModelGandG extends ScaleModel {
                             value = Double.parseDouble(arg);
                         } catch (Exception e) {
                             value = 0d;
-                            Log.e("ReadAndParseSerialServ", "Error parsing Double");
+                            //Log.e("ReadAndParseSerialServ", "Error parsing Double");
                         }
                     }
                 }
@@ -136,7 +146,67 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
     @Override
-    void externelCalibration() {
+    public int externelCalibration(Context context) {
 
+        ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+
+        try{
+            Thread.sleep(200);
+        }catch(Exception e){
+
+        }
+
+        try{
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.dialog_instruction);
+            dialog.setTitle(R.string.please_choose_calibration_weight);
+            ((TextView)dialog.findViewById(R.id.dialog_instruction_text)).setText(R.string.please_choose_calibration_weight);
+
+            // set the custom dialog components - text, image and button
+
+            Button dialogButton1 = (Button) dialog.findViewById(R.id.dialog_edit_instruction_button_1);
+            dialogButton1.setText("2000 g");
+            dialogButton1.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+
+                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
+                    try{
+                        Thread.sleep(100);
+                    }catch (Exception e){
+
+                    }
+                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
+
+                }
+            });
+
+            Button dialogButton2 = (Button) dialog.findViewById(R.id.dialog_edit_instruction_button_2);
+
+            dialogButton2.setText("5000g");
+            dialogButton2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
+
+                }
+            });
+
+            dialog.show();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+        ReadAndParseSerialService.getInstance().startParseSerialThread();
+
+        return 0;
     }
 }

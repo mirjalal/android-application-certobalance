@@ -1,5 +1,7 @@
 package com.certoclav.certoscale.model;
 
+import android.content.Context;
+
 /**
  * Created by Enrico on 22.03.2017.
  */
@@ -21,6 +23,7 @@ public abstract class ScaleModel {
 	int comBaudrate;
 	int comDataBits;
 	int comStopBits;
+	int comParity;
 
 	String endLineCommand;
 
@@ -42,6 +45,8 @@ public abstract class ScaleModel {
 	abstract public double parseRecievedMessage(String message);
 
 
+	abstract public int externelCalibration(Context context);
+
 
     //Set mod to weighing, unit to gramm...
     abstract public int initializeScale();
@@ -49,7 +54,7 @@ public abstract class ScaleModel {
 
 
     abstract void internalCalibration();
-    abstract void externelCalibration();
+
 
 
 }
