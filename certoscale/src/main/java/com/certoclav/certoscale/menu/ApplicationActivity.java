@@ -36,6 +36,7 @@ import com.certoclav.certoscale.supervisor.ProtocolManager;
 
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
@@ -247,7 +248,7 @@ protected void onPause() {
 				startActivity(intent);
 				break;
 			case ActionButtonbarFragment.BUTTON_ZERO:
-				if (IS_IO_SIMULATED) {
+				if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
 					ApplicationManager.getInstance().setTareInGram(0d);
 				}else{
 					Scale.getInstance().getScaleModel().pressZero();
@@ -255,7 +256,7 @@ protected void onPause() {
 				break;
 
 			case ActionButtonbarFragment.BUTTON_TARA:
-				if (IS_IO_SIMULATED) {
+				if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
 					ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
 				}else{
 					ApplicationManager.getInstance().setTareInGram(ApplicationManager.getInstance().getTareInGram()+ApplicationManager.getInstance().getTaredValueInGram());

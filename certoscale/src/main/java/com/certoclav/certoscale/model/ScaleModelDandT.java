@@ -41,6 +41,7 @@ public class ScaleModelDandT extends ScaleModel {
 
     @Override
     public int sendPrintCommand() {
+
         Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
 
         return 0;
@@ -54,6 +55,7 @@ public class ScaleModelDandT extends ScaleModel {
     @Override
     public int pressTara() {
 
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("T\r\n");
 
         return 0;
     }

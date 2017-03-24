@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
@@ -492,7 +493,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public Double getTaredValueInGram() {
 
-        if (IS_IO_SIMULATED) {
+        if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
             return getSumInGram() - getTareInGram();
         }else{
             return getSumInGram();

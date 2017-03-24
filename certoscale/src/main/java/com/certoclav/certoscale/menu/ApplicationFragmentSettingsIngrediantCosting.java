@@ -56,7 +56,7 @@ public class ApplicationFragmentSettingsIngrediantCosting extends Fragment {
                 try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_text);
-                    dialog.setTitle(R.string.please_enter_the_name_of_the_currency);
+                    dialog.setTitle(getString(R.string.please_enter_the_name_of_the_currency));
 
                     // set the custom dialog components - text, image and button
 

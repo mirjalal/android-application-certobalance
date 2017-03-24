@@ -342,7 +342,7 @@
 
     <string-array name="preferences_communication_string_array_devices">
         <item>G&amp;G PLC-6000</item>
-        <item>D&amp;T AY120B</item>
+        <item>KERN AET Series</item>
         <item>AE ADAM HCB 602</item>
     </string-array>
 
@@ -905,6 +905,7 @@
     <string name="preferences_calibration_span">preferences_calibration_span</string>
     <string name="preferences_calibration_user">preferences_calibration_user</string>
     <string name="preferences_calibration_test">preferences_calibration_test</string>
+    <string name="on_the_pan">on the pan</string>
 
 
 </resources>

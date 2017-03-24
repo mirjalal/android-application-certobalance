@@ -109,6 +109,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 							//byte[] bytes = hexStringToByteArray2("1B70");
 							//Log.e("SerialService", "SEND: " + new String(bytes));
 							//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
+
 							Scale.getInstance().getScaleModel().sendPrintCommand();
 						}
 
@@ -213,11 +214,17 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	@Override
 	public void onMessageReceived(String message) {
-		Log.e("ReadAndParse", "received: " + message);
 
-				rawResponse=message;
-				value=Scale.getInstance().getScaleModel().parseRecievedMessage(message);
+
+
+
+			if(message.length()>5) {
+				rawResponse = message;
+				Log.e("ReadAndParse", "received: " + message);
+
+				value = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
 				handler.sendEmptyMessage(0);
+			}
 
 	}
 

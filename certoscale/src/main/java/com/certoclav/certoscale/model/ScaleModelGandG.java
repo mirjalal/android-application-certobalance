@@ -61,7 +61,7 @@ public class ScaleModelGandG extends ScaleModel {
     public int pressTara() {
 
         ReadAndParseSerialService.getInstance().pauseParseSerialThread();
-        try {
+      /*  try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -91,7 +91,8 @@ public class ScaleModelGandG extends ScaleModel {
             e.printStackTrace();
         }
         Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-
+    */
+      ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -156,6 +157,100 @@ public class ScaleModelGandG extends ScaleModel {
 
         }
 
+        double chosenValue=0;
+
+
+                final Dialog dialog3 = new Dialog(context);
+            dialog3.setContentView(R.layout.dialog_instruction);
+            dialog3.setTitle("Plase place" +Double.toString(chosenValue) +context.getString(R.string.on_the_pan));
+            ((TextView)dialog3.findViewById(R.id.dialog_instruction_text)).setText("Plase place" +Double.toString(chosenValue) +context.getString(R.string.on_the_pan));
+
+            // set the custom dialog components - text, image and button
+
+            Button dialogButton13 = (Button) dialog3.findViewById(R.id.dialog_edit_instruction_button_1);
+            dialogButton13.setText(R.string.cancel);
+            dialogButton13.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    pressTara();
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog3.dismiss();
+
+                }
+            });
+
+            Button dialogButton23 = (Button) dialog3.findViewById(R.id.dialog_edit_instruction_button_2);
+
+            dialogButton23.setText(R.string.ok);
+            dialogButton23.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    pressTara();
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog3.dismiss();
+                }
+            });
+
+
+            final Dialog dialog2 = new Dialog(context);
+            dialog2.setContentView(R.layout.dialog_instruction);
+            dialog2.setTitle("Plase place" +Double.toString(chosenValue) +context.getString(R.string.on_the_pan));
+            ((TextView)dialog2.findViewById(R.id.dialog_instruction_text)).setText("Plase place" +Double.toString(chosenValue) +context.getString(R.string.on_the_pan));
+
+            // set the custom dialog components - text, image and button
+
+            Button dialogButton11 = (Button) dialog2.findViewById(R.id.dialog_edit_instruction_button_1);
+            dialogButton11.setText(R.string.cancel);
+            dialogButton11.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    pressTara();
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog2.dismiss();
+                    try {
+                        dialog3.show();
+                    }catch(Exception e){
+
+                    }
+
+                }
+            });
+
+            Button dialogButton22 = (Button) dialog2.findViewById(R.id.dialog_edit_instruction_button_2);
+
+            dialogButton22.setText(R.string.ok);
+            dialogButton22.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    pressTara();
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog2.dismiss();
+                    try {
+                        dialog3.show();
+                    }catch(Exception e){
+
+                    }
+
+                }
+            });
+
+
+
+
+
+
+
+
+
+
         try{
             final Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.dialog_instruction);
@@ -171,14 +266,17 @@ public class ScaleModelGandG extends ScaleModel {
                 @Override
                 public void onClick(View v) {
 
-
-                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
-                    try{
-                        Thread.sleep(100);
-                    }catch (Exception e){
+                    double chosenValue=2000;
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog.dismiss();
+                    try {
+                        dialog2.show();
+                    }catch(Exception e) {
 
                     }
-                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
 
                 }
             });
@@ -190,8 +288,17 @@ public class ScaleModelGandG extends ScaleModel {
                 @Override
                 public void onClick(View v) {
 
-                    Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bq");
 
+                    double chosenValue=5000;
+                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+                    dialog.dismiss();
+                    try{
+                    dialog2.show();
+                    }catch(Exception e){
+
+                    }
                 }
             });
 
@@ -205,8 +312,14 @@ public class ScaleModelGandG extends ScaleModel {
 
 
 
+
+
+
+
         ReadAndParseSerialService.getInstance().startParseSerialThread();
 
         return 0;
     }
+
+
 }
