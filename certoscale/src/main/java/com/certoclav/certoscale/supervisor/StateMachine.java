@@ -90,7 +90,7 @@ public class StateMachine implements WeightListener {
 
 
         //STATE PARSER
-            //after 30 seconds of communications failures, set state of microcontroller to disconnected
+            //after 30 seconds of communications failures, set state to disconnected
             String rawResponseTransformed = Scale.getInstance().getRawResponseFromBalance().replace("\n","").replace("\r","").replaceAll("\\p{C}", "?");
             Log.e("StateMachine", "rawresp: " + rawResponseTransformed);
 
@@ -128,7 +128,8 @@ public class StateMachine implements WeightListener {
                     //Turn the balance on
                     if ((System.nanoTime() - nanoTimeAtLastONOFFCommand) > (1000000000L * 20)){
                         nanoTimeAtLastONOFFCommand = System.nanoTime();
-                        ReadAndParseSerialService.getInstance().sendOnOffCommand();
+                        //ReadAndParseSerialService.getInstance().sendOnOffCommand();
+                        Scale.getInstance().getScaleModel().sendOnOffCommand();
                         Log.e("StateMachine", "Added O to commandqueue");
                      }
                     break;
@@ -157,7 +158,8 @@ public class StateMachine implements WeightListener {
                         ApplicationController.getContext().startActivity(intent);
                     }
                     //change mode until mode is gram
-                    ReadAndParseSerialService.getInstance().sendModeCommand();
+                    //ReadAndParseSerialService.getInstance().sendModeCommand();
+                    Scale.getInstance().getScaleModel().sendModeCommand();
                     Log.e("StateMachine", "Added M to commandqueue");
                     break;
 

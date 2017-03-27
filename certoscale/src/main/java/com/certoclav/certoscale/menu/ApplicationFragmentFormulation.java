@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 
@@ -33,24 +36,34 @@ private TextView textInstruction = null;
             @Override
             public void onClick(View v) {
 
-                //set measured Weight
-                Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(currentWeight);
-                Log.e("MeasuredWeight",String.format("%.4f",ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).getMeasuredWeight()));
+                if (Scale.getInstance().isStable()) {
+                    //set measured Weight
+                    Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+                    ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).setMeasuredWeight(currentWeight);
+                    Log.e("MeasuredWeight", String.format("%.4f", ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex).getMeasuredWeight()));
 
 
-                currentRecipeStepIndex++;
-                ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
-                if(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size() > currentRecipeStepIndex) {
+                    currentRecipeStepIndex++;
+                    ApplicationManager.getInstance().getCurrentRecipeEntry().setMeasuredWeight(ApplicationManager.getInstance().getTaredValueInGram());
+                    if (ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size() > currentRecipeStepIndex) {
 
-                    RecipeEntry recipeEntry = ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex);
-                    recipeEntry.setWeight(recipeEntry.getWeight()*ApplicationManager.getInstance().getScalingFactor());
-                    ApplicationManager.getInstance().setCurrentRecipeEntry(recipeEntry);
-                    ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+                        RecipeEntry recipeEntry = ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(currentRecipeStepIndex);
+
+
+                        recipeEntry.setWeight(recipeEntry.getWeight() * ApplicationManager.getInstance().getScalingFactor());
+                        ApplicationManager.getInstance().setCurrentRecipeEntry(recipeEntry);
+                        ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+                    } else {
+                        Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
+                        ApplicationManager.getInstance().setTareInGram(0d);
+                        currentRecipeStepIndex = 0;
+                    }
                 }else{
-                    Scale.getInstance().setScaleApplication(ScaleApplication.FORMULATION);
-                    ApplicationManager.getInstance().setTareInGram(0d);
-                    currentRecipeStepIndex = 0;
+                    if (ApplicationManager.getInstance().getTaredValueInGram()==0.0){
+                        Toast.makeText(getActivity(), R.string.the_value_must_be_higher_than_zero, Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(getActivity(), getString(R.string.wait_until_the_weight_is_stable), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -77,8 +90,9 @@ private TextView textInstruction = null;
 
         }
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText(getString(R.string.pleas_put) + String.format("%.4f",(ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor())) + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + getString(R.string.on_the_pan_and_press_next));
+            textInstruction.setText(getString(R.string.pleas_put)+" " + String.format("%.4f",(ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight()*ApplicationManager.getInstance().getScalingFactor())) + getString(R.string.g_of) + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription()+" " + getString(R.string.on_the_pan_and_press_next));
         }
+
 
         super.onResume();
 

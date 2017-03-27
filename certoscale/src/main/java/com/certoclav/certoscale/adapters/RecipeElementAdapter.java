@@ -78,8 +78,31 @@ public class RecipeElementAdapter extends ArrayAdapter<RecipeEntry> {
 		textStepNumber.setText("Step" + " " + (position+1));
 
 
+		EditText editArticleNumber = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_article_number);
+		if (getItem(position).getArticleNumber()!=" ") {
+			editArticleNumber.setText(getItem(position).getArticleNumber());
+		}
+		editArticleNumber.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				getItem(position).setArticleNumber(s.toString());
+			}
+		});
+
 		EditText editName = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_name);
-		editName.setText(getItem(position).getDescription());
+		if (getItem(position).getDescription()!=" ") {
+			editName.setText(getItem(position).getDescription());
+		}
 		editName.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -36,6 +36,8 @@ import com.certoclav.certoscale.supervisor.ProtocolManager;
 
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
+import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING;
@@ -105,7 +107,8 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ReadAndParseSerialService.getInstance().sendCalibrationCommand();
+				//ReadAndParseSerialService.getInstance().sendCalibrationCommand();
+				Scale.getInstance().getScaleModel().internalCalibration();
 				imageButtonSidebarBack.performClick();
 			}
 		});
@@ -246,12 +249,21 @@ protected void onPause() {
 				startActivity(intent);
 				break;
 			case ActionButtonbarFragment.BUTTON_ZERO:
-				ApplicationManager.getInstance().setTareInGram(0d);
+				if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
+					ApplicationManager.getInstance().setTareInGram(0d);
+				}else{
+					Scale.getInstance().getScaleModel().pressZero();
+				}
 				break;
 
 			case ActionButtonbarFragment.BUTTON_TARA:
-				ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
-				break;
+				if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
+					ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
+				}else{
+					ApplicationManager.getInstance().setTareInGram(ApplicationManager.getInstance().getTareInGram()+ApplicationManager.getInstance().getTaredValueInGram());
+					Scale.getInstance().getScaleModel().pressTara();
+				}
+					break;
 			case ActionButtonbarFragment.BUTTON_STATISTICS:
 
 
@@ -295,12 +307,14 @@ protected void onPause() {
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
 							break;
 						case ANIMAL_WEIGHING:
+						case ANIMAL_WEIGHING_CALCULATING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
 							break;
 						case FILLING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
 							break;
 						case FORMULATION:
+						case FORMULATION_RUNNING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFormulation()).commit();
 							break;
 						case DIFFERENTIAL_WEIGHING:
@@ -386,9 +400,9 @@ protected void onPause() {
 								ApplicationManager.getInstance().getCurrentLibrary().setName(name);
 								int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
 								if (retval == 1) {
-									Toast.makeText(ApplicationActivity.this,getString(R.string.library)+ name + getString(R.string.saved) + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this,getString(R.string.library) + " "+ name+ " " + getString(R.string.saved) , Toast.LENGTH_LONG).show();
 								} else {
-									Toast.makeText(ApplicationActivity.this, getString(R.string.library_could_not_be_saved) + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this, getString(R.string.library_could_not_be_saved), Toast.LENGTH_LONG).show();
 								}
 								refreshSpinnerLibrary();
 								try {

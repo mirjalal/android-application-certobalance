@@ -243,9 +243,9 @@
     <string name="please_enter_the_under_tolerance_limit_weight">Bitte geben sie die untere Toleranzgrenze ein</string>
     <string name="please_enter_the_upper_tolerance_limit_weight">Bitte geben Sie die obere Toleranzgrenze ein</string>
     <string name="calculate_target_weight">Zielgewicht berechnen</string>
-    <string name="g_of">\" g von \"</string>
+    <string name="g_of">" g von  "</string>
     <string name="on_the_pan_and_press_next">auf die Wiegefläche und drücken Sie NÄCHSTE</string>
-    <string name="pleas_put">"Bitte platzieren Sie "</string>
+    <string name="pleas_put">Bitte platzieren Sie</string>
     <string name="please_enter_the_imprecision_of_the_pipette">Bitte geben Sie die Präzisionsabweichung ein</string>
     <string name="please_enter_the_name_of_the_currency">Bitte geben Sie den Namen der Währung ein</string>
     <string name="please_enter_the_number_of_samples">Bitte geben Sie die Anzahl der Proben ein</string>
@@ -348,7 +348,8 @@
 
     <string-array name="preferences_communication_string_array_devices">
         <item>G&amp;G PLC-6000</item>
-        <item>D&amp;T AY120B</item>
+        <item>KERN AET Serie</item>
+        <item>AE ADAM HCB 602</item>
     </string-array>
 
     <string-array name="preferences_device_themes_string_array">
@@ -387,6 +388,7 @@
     <string-array name="preferences_communication_list_devices_values">
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="preferences_device_themes_values">
@@ -569,4 +571,26 @@
     <string name="custom_label_editor">Custom label editor</string>
     <string name="labels">Labels</string>
     <string name="pick_a_unit">Wählen Sie eine Einheit</string>
+    <string name="assigned_to_com">Zugeordnet: COM</string>
+    <string name="automatic_calibration_adjustment">Automatische Kalibrierungsanpassung</string>
+    <string name="baudrate">Baudrate</string>
+    <string name="calibration_test">Kalibrierungstest</string>
+    <string name="click_to_choose_a_recipe">Klicken um ein Rezept auszuwählen</string>
+    <string name="communication_config">Kommunikationseinstellungen</string>
+    <string name="handshake">Handshake</string>
+    <string name="lims">LIMS</string>
+    <string name="login_failed">Login fehlgeschlagen</string>
+    <string name="on_the_pan">auf die Messplatte</string>
+    <string name="please_choose_calibration_weight">Bitte wählen Sie ein Kalibrierungsgewicht</string>
+    <string name="please_enter_the_nominal_weight_first">Bitte geben Sie erst ein Zielgewicht ein</string>
+    <string name="span_calibration">Bereichskalibrierung</string>
+    <string name="tab_to_choose_baudrate">Klicken um die Baudrate auszuwählen</string>
+    <string name="tab_to_choose_connected_model">Klicken um das Waagenmodell zu wählen</string>
+    <string name="tab_to_choose_the_data_bits_stop_bits_and_parity">Klicken um Daten und Stopbits auszuwählen</string>
+    <string name="tab_to_choose_the_flow_control_mode">Klicken um den Flow Control Modus auszuwählen</string>
+    <string name="transmission_standard">Übertragungsstandard</string>
+    <string name="turn_automatic_calibration_on_off">Automatische Kalibrierung  EIN / AUS</string>
+    <string name="user_calibration">Benutzerkalibrierung</string>
+    <string name="wait_until_the_weight_is_stable">Warten Sie bis der Wert stabil ist</string>
+    <string name="the_value_must_be_higher_than_zero">Der Wert muss größer als Null sein</string>
 </resources>

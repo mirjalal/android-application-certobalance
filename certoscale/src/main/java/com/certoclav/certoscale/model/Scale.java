@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.model;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
@@ -10,6 +12,7 @@ import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -37,6 +40,21 @@ public class Scale extends Observable {
 	private SerialService serialServiceProtocolPrinter = null;
 	private SerialService serialServiceSics = null;
 
+
+
+	//private ScaleModel scaleModel=null;
+	//ScaleModelDandT modelDandT =new ScaleModelDandT();
+	//scaleModel=(ScaleModel) modelDandT;
+	private  ScaleModel scaleModel =(ScaleModel) new ScaleModelDandT();
+
+
+
+	public ScaleModel getScaleModel() {return scaleModel;}
+	public void setScaleModel(ScaleModel scaleModel) {this.scaleModel = scaleModel;}
+
+
+
+
 	public boolean isStable() {
 		return stable;
 	}
@@ -54,6 +72,7 @@ public class Scale extends Observable {
 	}
 
 	private boolean stable = false;
+
 
 
 
@@ -197,6 +216,14 @@ public class Scale extends Observable {
 		return serialServiceScale;
 		}
 
+	public void getSerialsServiceScale(SerialService serialService) {
+
+			serialServiceScale = serialService;
+			serialServiceScale.setStringTerminatin("\n");
+
+
+	}
+
 	public SerialService getSerialsServiceLabelPrinter() {
 		if(serialServiceLabelPrinter == null){
 			serialServiceLabelPrinter = new SerialService("/dev/ttymxc1",9600);//COM2
@@ -204,12 +231,21 @@ public class Scale extends Observable {
 		return serialServiceLabelPrinter;
 		}
 
+	public void getSerialsServiceLabelPrinter(SerialService serialService) {
+			serialServiceLabelPrinter = serialService;
+	}
+
 	public SerialService getSerialsServiceProtocolPrinter() {
 		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM1
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM3
 		}
 		return serialServiceProtocolPrinter;
 	}
+
+	public void setSerialsServiceProtocolPrinter(SerialService serialService) {
+		serialServiceProtocolPrinter=serialService;
+	}
+
 
 	public SerialService getSerialsServiceSics() {
 		if(serialServiceProtocolPrinter == null){
@@ -218,6 +254,9 @@ public class Scale extends Observable {
 		return serialServiceProtocolPrinter;
 	}
 
+	public void  setSerialsServiceSics(SerialService serialService) {
+		serialServiceProtocolPrinter=serialService;
+	}
 
 	public void setValue(Double value, String rawresponse) {
 		setWeightInGram(value);

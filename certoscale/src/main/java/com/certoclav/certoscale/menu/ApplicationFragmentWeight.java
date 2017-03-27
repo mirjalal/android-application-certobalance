@@ -32,6 +32,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
+import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
+
 
 public class ApplicationFragmentWeight extends Fragment implements WeightListener, StableListener {
     private FrameLayout barload = null;
@@ -592,7 +595,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText(getString(R.string.dispense_sample_number) + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+getString(R.string.and_press_accept));
 
 
-                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+
+                //Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
+                double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+                pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
+                double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
+
+
+
+                textValue.setText(String.format("%.4f",pipetteML)+ " ml");
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
@@ -618,7 +629,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         //Update Loading bar
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
-            int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
+            //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
+            int fwidth=0;
+            if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
+                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+            }else{
+                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+            }
             if(fwidth<0){
                 fwidth = 0;
             }
@@ -633,7 +650,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             barloadbackground.setLayoutParams(params2);
 
 
-            if(ApplicationManager.getInstance().getSumInGram() > 100){
+            if(ApplicationManager.getInstance().getSumInGram() > (0.8*Scale.getInstance().getScaleModel().getMaximumCapazity())){
                 barload.setBackgroundColor(Color.RED);
 
             }else{

@@ -46,7 +46,16 @@
      />
 
 
- 
+ <ImageButton
+     android:id="@+id/naviagationbar_button_company_logo"
+     android:layout_width="200dp"
+     android:layout_marginLeft="80dp"
+     android:layout_height="match_parent"
+     android:layout_alignParentLeft="true"
+     android:src="@drawable/logo_ae_adam_small"
+     style="@style/button_navigationbar_default"
+
+     />
 
 
 
@@ -57,10 +66,10 @@
      android:layout_toRightOf="@+id/naviagationbar_button_home"
      android:layout_toLeftOf="@+id/naviagationbar_button_save"
      android:orientation="horizontal">
-     
-     
-     
- <Spinner 
+
+
+
+ <Spinner
      android:id="@+id/naviagationbar_spinner_mode"
      android:entries="@array/navigationbar_entries"
      android:layout_width="match_parent"

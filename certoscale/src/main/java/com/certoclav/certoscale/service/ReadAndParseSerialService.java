@@ -47,25 +47,12 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		return instance;
 	}
 
-	private ArrayList<String> getCommandQueue() {
+	public ArrayList<String> getCommandQueue() {
 		return commandQueue;
 	}
 
-	public void sendCalibrationCommand(){
-		//check current model
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
-		switch (modelValue) {
-			case "1": // G&G
-				getCommandQueue().add("\u001Bq");
-				break;
-			case "2": // D&T
-				getCommandQueue().add("C\r\n");
-				break;
-		}
 
-	}
 
 	private ArrayList<String> commandQueue = new ArrayList<String>();
 	
@@ -95,50 +82,19 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					simulateMessage();
 				}else {
 
-					//check current model
-					String key = "preferences_communication_list_devices";
-					String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
-					switch (modelValue){
-						case "1": // G&G
-							try {
+					try {
 
-								if (commandQueue.size() >0) {
-									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-									commandQueue.remove(0);
-								} else {
-
-									//mPrinter.write(0x1B);
-									//mPrinter.write(0x70);
-									//byte[] bytes = {27,112};
-									//byte[] bytes = hexStringToByteArray2("1B70");
-									//Log.e("SerialService", "SEND: " + new String(bytes));
-									//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
-									Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bp");
-								}
+						if (commandQueue.size() >0) {
+							Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+							commandQueue.remove(0);
+						} else {
+							Scale.getInstance().getScaleModel().sendPrintCommand();
+						}
 
 
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							break;
-						case "2": //D&T
-							try {
-
-								if (commandQueue.size() >0) {
-									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-									commandQueue.remove(0);
-								} else {
-									Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
-								}
-
-
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							break;
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 
 				}
@@ -150,6 +106,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 		}
 	});
@@ -166,43 +123,41 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			}
 		}
 	}
-	
+
 	public void startParseSerialThread(){
 
 		if(!serialThread.isAlive()){
 			serialThread.start();
 			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
 		}
 
-		
+
+
+	}
+
+	public void pauseParseSerialThread(){
+
+		serialThread.interrupt();
 	}
 
 	@Override
 	public void onMessageReceived(String message) {
-		Log.e("ReadAndParse", "received: " + message);
-		if(message.length()>5) {
-			rawResponse = message;
-			Log.e("ReadAndParse", "received: " + message);
-			String[] arguments = message.split(" ");
-			if (arguments.length != 0) {
-				for (String arg : arguments) {
-					if (arg.length() > 2 && arg.contains(".")) {
-						try {
-							value = Double.parseDouble(arg);
-						} catch (Exception e) {
-							value = 0d;
-							Log.e("ReadAndParseSerialServ", "Error parsing Double");
-						}
-					}
-				}
-			}else{
-				value = 0d;
+
+
+
+
+			if(message.length()>5) {
+				rawResponse = message;
+				Log.e("ReadAndParse", "received: " + message);
+
+				value = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
+				handler.sendEmptyMessage(0);
 			}
-			handler.sendEmptyMessage(0);
-		}
+
 	}
-	
+
 	private void simulateMessage(){
 		 	counter++;
 
@@ -220,44 +175,16 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 			rawResponse = "+ 0.0000 g";
-			value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.002)));
+
+
+			value = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5* Math.sin(((double)counter)*0.002)));
 
 		    handler.sendEmptyMessage(0);
 
 	}
 
 
-	public void sendOnOffCommand() {
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
-		switch (modelValue) {
-			case "1": // G&G
-
-				break;
-			case "2": // D&T
-				getCommandQueue().add("O\r\n");
-				break;
-		}
-
-	}
-
-	public void sendModeCommand() {
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
-
-		switch (modelValue) {
-			case "1": // G&G
-				getCommandQueue().add("\u001Bs");
-				break;
-			case "2": // D&T
-				getCommandQueue().add("M\r\n");
-				break;
-		}
-
-
-
-	}
 
 	public static byte[] hexStringToByteArray2(String s) {
 		int len = s.length();

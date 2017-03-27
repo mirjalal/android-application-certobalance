@@ -342,7 +342,35 @@
 
     <string-array name="preferences_communication_string_array_devices">
         <item>G&amp;G PLC-6000</item>
-        <item>D&amp;T AY120B</item>
+        <item>KERN AET Series</item>
+        <item>AE ADAM HCB 602</item>
+    </string-array>
+
+    <string-array name="preferences_communication_string_array_transmission_standard">
+
+        <item>7 EVEN 1 </item>
+        <item>7 ODD 1</item>
+        <item>7	NONE 1 </item>
+        <item>8	NONE 1</item>
+        <item>7 EVEN 2 </item>
+        <item>7 ODD 2</item>
+        <item>7	NONE 2 </item>
+        <item>8	NONE 2</item>
+
+    </string-array>
+
+    <string-array name="preferences_communication_string_array_flow_control">
+        <item>NONE </item>
+        <item>XON-XOFF </item>
+        <item>HARDWARE</item>
+    </string-array>
+
+    <string-array name="preferences_communication_string_array_baudrate">
+        <item>2400 bps</item>
+        <item>4800 bps</item>
+        <item>9600 bps</item>
+        <item>19200 bps</item>
+        <item>38400 bps</item>
     </string-array>
 
     <string-array name="preferences_device_themes_string_array">
@@ -381,6 +409,34 @@
         <string-array name="preferences_communication_list_devices_values">
         <item>1</item>
         <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preferences_communication_list_transmission_standard_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+
+    </string-array>
+
+
+    <string-array name="preferences_communication_list_flow_control_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="preferences_communication_list_baudrate_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="preferences_device_themes_values">
@@ -434,7 +490,7 @@
 
 
     <string name="settings_button">Settings</string>
-    <string name="settings_button_pressed">Return to applicaiton</string>
+    <string name="settings_button_pressed">Return to application</string>
     <string name="new_batch">New Batch</string>
     <string name="add_to_stats">Add to stats</string>
     <string name="batch_results_Button">Results</string>
@@ -664,8 +720,8 @@
     <string name="please_enter_the_target_weight">Please enter the target weight</string>
     <string name="please_enter_the_scaling_factor">Please enter the scaling factor</string>
     <string name="calculate_target_weight">Calculate Target Weight</string>
-    <string name="pleas_put">"Please put "</string>
-    <string name="on_the_pan_and_press_next">" on the pan and press NEXT"</string>
+    <string name="pleas_put">"Please put"</string>
+    <string name="on_the_pan_and_press_next">on the pan and press NEXT</string>
     <string name="g_of">" g of "</string>
     <string name="please_enter_the_water_temperature">Please enter the water temperature</string>
     <string name="please_enter_the_name_of_the_currency">Please enter the name of the currency</string>
@@ -825,6 +881,33 @@
     <string name="preferences_communication_protocolprinter">preferences_communication_protocolprinter</string>
     <string name="preferences_communication_labelprinter">preferences_communication_labelprinter</string>
     <string name="preferences_communication_lims">preferences_communication_lims</string>
+    <string name="assigned_to_com">Assigned to: COM</string>
+    <string name="lims">LIMS</string>
+    <string name="communication_config">Communication Config</string>
+    <string name="baudrate">Baudrate</string>
+    <string name="tab_to_choose_connected_model">Tab to choose connected model</string>
+    <string name="tab_to_choose_baudrate">Tab to choose baudrate</string>
+    <string name="tab_to_choose_the_data_bits_stop_bits_and_parity">Tab to choose the data bits, stop bit, and parity</string>
+    <string name="transmission_standard">Transmission_standard</string>
+    <string name="preferences_communication_list_baudrate">preferences_communication_list_baudrate</string>
+    <string name="preferences_communication_list_transmission_standard">preferences_communication_list_transmission_standard</string>
+    <string name="tab_to_choose_the_flow_control_mode">Tab to choose the flow control mode</string>
+    <string name="handshake">Handshake</string>
+    <string name="preferences_communication_list_handshake">preferences_communication_list_handshake</string>
+    <string name="login_failed">Login failed</string>
+    <string name="please_choose_calibration_weight">Please Choose Calibration weight</string>
+    <string name="user_calibration">User calibration</string>
+    <string name="calibration_test">Calibration test</string>
+    <string name="span_calibration">Span calibration</string>
+    <string name="automatic_calibration_adjustment">Automatic calibration adjustment</string>
+    <string name="turn_automatic_calibration_on_off">Turn automatic calibration ON/OFF</string>
+    <string name="preferences_calibration_adjustment">preferences_calibration_adjustment</string>
+    <string name="preferences_calibration_span">preferences_calibration_span</string>
+    <string name="preferences_calibration_user">preferences_calibration_user</string>
+    <string name="preferences_calibration_test">preferences_calibration_test</string>
+    <string name="on_the_pan">on the pan</string>
+    <string name="wait_until_the_weight_is_stable">Wait until the weight is stable</string>
+    <string name="the_value_must_be_higher_than_zero">The value must be higher than zero</string>
 
 
 </resources>

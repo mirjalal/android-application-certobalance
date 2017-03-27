@@ -278,6 +278,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						ApplicationManager.getInstance().getStats().getStatistic().clear();
 						ApplicationManager.getInstance().getStats().getSamples().clear();
 						Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
+						getButtonTara().performClick();
 						updateStatsButtonUI();
 
 					}
@@ -570,7 +571,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
 							double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
 
-							ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
+							ApplicationManager.getInstance().setPipetteCalculatedML(pipetteML);
 							ApplicationManager.getInstance().accumulateStatistics();
 							updateStatsButtonUI();
 							ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
@@ -939,7 +940,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setEnabled(false);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(true);
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+
+
 				buttonEndBatch.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
 				buttonResult.setVisibility(View.GONE);
 				break;
 			case ANIMAL_WEIGHING:
@@ -1066,8 +1078,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonResult.setVisibility(View.VISIBLE);
 				buttonResult.setEnabled(false);
+
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
+
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+
 				break;
 
 
@@ -1182,6 +1204,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAccept.setEnabled(true);
 				buttonStart.setEnabled(false);
 				buttonResult.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+
+				buttonResult.setVisibility(View.GONE);
 				break;
 
 			case PEAK_HOLD:
@@ -1239,6 +1269,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(false);
+
+
+				//unused Buttons
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonAppSettings.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+
+				buttonResult.setVisibility(View.GONE);
 
 
 
@@ -1328,6 +1371,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonResult.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 
 
 
@@ -1499,6 +1544,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 	@Override
 	public void onWeightChanged(Double weight, String unit) {
+
+		if(Scale.getInstance().getScaleModel().hasZerobutton==false){
+			buttonZero.setVisibility(View.GONE);
+		}
 		if(ApplicationManager.getInstance().getTareInGram() != 0){
 			buttonZero.setEnabled(true);
 		}else{
@@ -1990,6 +2039,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							case FILLING_CALC_TARGET:
 								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
 								break;
+
 							case FORMULATION:
 							case FORMULATION_RUNNING:
 								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();

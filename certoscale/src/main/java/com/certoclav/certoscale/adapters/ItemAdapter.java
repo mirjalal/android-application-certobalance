@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.certocloud.CertocloudConstants;
@@ -119,7 +120,13 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		}
 
 		TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ "g");
+		try {
+			editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()) + " "+ ApplicationManager.getInstance().getCurrentUnit().getName().toString());
+		}catch (Exception e){
+
+		}
+
+
 
 
 		if(hideActionButtons){
@@ -208,13 +215,14 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 									deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_ITEM + getItem(position).getCloudId());
 								}
 								DatabaseService db = new DatabaseService(mContext);
+								for(OnClickButtonListener listener : onClickButtonListeners){
+									listener.onClickButtonDelete(getItem(position));
+								}
 								db.deleteItem(getItem(position));
 								remove(getItem(position));
 								notifyDataSetChanged();
 								dialog.dismiss();
-								for(OnClickButtonListener listener : onClickButtonListeners){
-									listener.onClickButtonDelete(getItem(position));
-								}
+
 							}
 						});
 

@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_edit_number_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_gadient">
+
+<LinearLayout 
+	    android:layout_height="wrap_content"
+    	android:layout_width="match_parent"
+    	android:orientation="vertical">
+
+
+
+	    	<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+
+	    	<TextView
+				android:id="@+id/dialog_instruction_text"
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="50dp"
+	    	    android:layout_weight="1"
+	    	    android:singleLine="true"
+	    	    android:text="Text"
+				style="@style/text_default"/>
+  
+	    	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_below="@+id/dialog_container_text"
+		>
+		<Button
+			android:id="@+id/dialog_edit_instruction_button_1"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="@string/cancel"
+			style="@style/button_default"
+			/>
+
+
+		<Button
+			android:id="@+id/dialog_edit_instruction_button_2"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_weight="1"
+			android:text="OK"
+			style="@style/button_default"
+
+			/>
+
+
+	</LinearLayout>
+	        </LinearLayout>
+
+</RelativeLayout>

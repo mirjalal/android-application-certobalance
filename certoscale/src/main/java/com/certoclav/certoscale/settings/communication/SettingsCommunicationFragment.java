@@ -1,14 +1,36 @@
 package com.certoclav.certoscale.settings.communication;
 
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Protocol;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelDandT;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
+import com.certoclav.certoscale.settings.device.SettingsLanguagePickerActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.ESCPos;
+import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.SocketService;
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
+import java.util.Calendar;
+
+import android_serialport_api.SerialService;
 
 
 public class SettingsCommunicationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -29,6 +51,53 @@ private SharedPreferences prefs = null;
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+
+
+                return false;
+            }
+        });
+
+        SerialService serialService=Scale.getInstance().getSerialsServiceSics();
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +"1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+
+/*
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_devices))).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                String key = "preferences_communication_list_devices";
+                String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+                switch (modelValue) {
+                    case "1":
+                        ScaleModelGandG modelGandG=new ScaleModelGandG();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+
+                    case "2":
+                        ScaleModelDandT modelDandT=new ScaleModelDandT();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+
+                    case "3":
+                        ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
+                        Scale.getInstance().getScaleModel().initializeParameters();
+                        break;
+                }
+
+
+                return true;
+            }
+        });*/
+
 
     }
 
@@ -39,16 +108,24 @@ private SharedPreferences prefs = null;
 
     @Override
     public void onResume() {
+
+
+
+
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
+
+
+
+
+
+
+
+//        devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
 
         //INIT DEVICE SETTING
         String key = "preferences_communication_list_devices";
-
-
         Preference devicePref = findPreference(key);
-//        devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString(key, ""))-1]);
-
-
         key = getActivity().getString(R.string.preferences_communication_socket_connected);
         devicePref = findPreference(key);
         String summary = "";

@@ -1,4 +1,4 @@
-package com.certoclav.certoscale.settings.item;
+package com.certoclav.certoscale.settings.communication;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,49 +17,38 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.settings.item.MenuItemEditActivity;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Michael on 12/6/2016.
+ * Created by Enrico on 17.03.2017.
  */
 
-public class MenuItemEditActivity extends Activity implements ButtonEventListener{
+public class SettingsCommunicationEditActivity extends Activity implements ButtonEventListener{
 
     private Navigationbar navigationbar = new Navigationbar(this);
-    private Item itemFromDb = null;
-    private EditText editName = null;
-    private EditText editCost = null;
-    private EditText editArticleNumber = null;
-    private EditText editWeight = null;
-    private EditText editDescription = null;
-    private EditText editUnit = null;
+
 
     public static final String INTENT_EXTRA_ITEM_ID = "item_id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_main_item_edit_activity);
+        setContentView(R.layout.menu_main_communication_edit_acitivity);
         navigationbar.onCreate();
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(getString(R.string.edit_items).toUpperCase());
+        navigationbar.getTextTitle().setText(R.string.communication_config);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonSave().setVisibility(View.VISIBLE);
-        editName = (EditText) findViewById(R.id.menu_main_item_edit_name);
-        editCost = (EditText) findViewById(R.id.menu_main_item_edit_cost);
-        editArticleNumber = (EditText) findViewById(R.id.menu_main_item_edit_artnumber);
-        editWeight = (EditText) findViewById(R.id.menu_main_item_edit_weight);
-        editDescription = (EditText) findViewById(R.id.menu_main_item_edit_description);
-        editUnit = (EditText) findViewById(R.id.menu_main_item_edit_unit);
 
         navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try
                 {
-                    final Dialog dialog = new Dialog(MenuItemEditActivity.this);
+                    final Dialog dialog = new Dialog(SettingsCommunicationEditActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
                     dialog.setTitle(R.string.cancel_without_saving);
 
@@ -104,21 +93,8 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             extra = 0;
         }
         if(extra != 0) {
-            DatabaseService db = new DatabaseService(this);
-            itemFromDb = db.getItemById(extra);
-            editWeight.setText(itemFromDb.getWeight().toString());
-            editCost.setText(itemFromDb.getCost().toString());
-            editArticleNumber.setText(itemFromDb.getArticleNumber());
-            editName.setText(itemFromDb.getName());
-            editUnit.setText(itemFromDb.getUnit());
-            editDescription.setText(itemFromDb.getDescription());
+
         }else{
-            editWeight.setText("");
-            editCost.setText("");
-            editArticleNumber.setText("");
-            editName.setText("");
-            editDescription.setText("");
-            editUnit.setText("");
         }
 
     }
@@ -160,7 +136,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText(getString(R.string.do_you_really_want_to_save_the_itm) + editName.getText().toString());
+                text.setText(getString(R.string.do_you_really_want_to_save_the_itm) );
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -174,60 +150,6 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
                 dialogButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatabaseService db = new DatabaseService(MenuItemEditActivity.this);
-                        if(itemFromDb != null){
-                            db.deleteItem(itemFromDb);
-                        }
-
-                        boolean unitParsed=false;
-                        Unit currentUnit=null;
-                        List<Unit> units = db.getUnits();
-                        for (Unit unit : units) {
-                            if(editUnit.getText().toString().equals(unit.getName())){
-                                unitParsed=true;
-                                currentUnit=unit;
-                            }
-
-                        }
-
-
-
-                        if (unitParsed==true) {
-                            double weight;
-                            try {
-                                weight = Double.parseDouble(editWeight.getText().toString());
-                            }catch (Exception e){
-                                weight=0;
-                            }
-                            weight= weight/(currentUnit.getFactor()*Math.pow(10,currentUnit.getExponent()));
-
-                            double cost;
-                            try {
-                                cost = Double.parseDouble(editCost.getText().toString());
-                            }catch (Exception e){
-                                cost=0;
-                            }
-
-                            Date date = new Date();
-                            db.insertItem(new Item(editName.getText().toString(),
-                                            weight,
-                                            cost,
-                                            editArticleNumber.getText().toString(),
-                                            ((Long) date.getTime()).toString(),
-                                            editDescription.getText().toString(),
-                                            Scale.getInstance().getSafetyKey(),
-                                            currentUnit.toString(),//editUnit.getText().toString(),
-                                            "",
-                                            "private"
-                                    )
-
-                            );
-                            dialog.dismiss();
-                            finish();
-                        }else{
-                            Toast.makeText(ApplicationController.getContext(), "Item Unit is not valid" , Toast.LENGTH_SHORT).show();
-                        }
-
 
 
                     }
@@ -243,4 +165,5 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
             }
         }
     }
+
 }

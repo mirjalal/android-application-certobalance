@@ -15,18 +15,21 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.model.ScaleModel;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
+import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
-import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_CALC_REFERENCE;
 
 /**
@@ -34,6 +37,9 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
  */
 
 public class ApplicationManager implements WeightListener , ScaleApplicationListener {
+
+
+
 
     long nanoTimeSinceStable=1000000000;
 
@@ -424,14 +430,21 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getSumAsStringWithUnit() {
 
+
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces()) + " " + "pcs";
             default:
-                return getTransformedWeightAsStringWithUnit(getSumInGram());
+                return getTransformedWeightAsStringWithUnit(getSumInGram()+getTareInGram());
         }
 
+
     }
+    public double getSum() {
+        return getSumInGram()+getTareInGram();
+    }
+
+
 
     public String getSumAsString() {
         return String.format("%.4f", getSumInGram());
@@ -440,13 +453,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getTaredValueAsStringWithUnit() {
 
-        switch (Scale.getInstance().getScaleApplication()) {
-            case PART_COUNTING:
-                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
-            default:
-                return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
+            switch (Scale.getInstance().getScaleApplication()) {
+                case PART_COUNTING:
+                    return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
+                default:
+                    return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
 
-        }
+            }
 
     }
 
@@ -479,7 +492,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public Double getTaredValueInGram() {
-        return getSumInGram() - getTareInGram();
+
+        if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
+            return getSumInGram() - getTareInGram();
+        }else{
+            return getSumInGram();
+        }
+
     }
 
     public boolean getPeakHoldActivated(){
@@ -595,9 +614,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
-    private Double transformGramToCurrentUnit(double gram) {
+    public Double transformGramToCurrentUnit(double gram) {
         return gram * currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent());
     }
+
+
 
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
@@ -605,7 +626,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
                 retVal = String.format("%.0f", gram) + " pcs";
             }else {
-                int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
+                int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
             }
         }catch (Exception e){
@@ -1004,9 +1025,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
-        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0002) {
+        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0004) {
 
-            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L))
+            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L*Scale.getInstance().getScaleModel().getStabilisationTime()))
 
                         Scale.getInstance().setStable(true);
 
