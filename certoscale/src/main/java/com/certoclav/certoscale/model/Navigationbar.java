@@ -247,11 +247,63 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
-		for(int i = 0; i< arrayAdapterMode.getCount();i++){
+
+		int index = 0;
+		switch (Scale.getInstance().getScaleApplication()){
+			case WEIGHING: index = 0; break;
+
+			case PART_COUNTING: index = 1; break;
+			case PART_COUNTING_CALC_AWP: index=1; break;
+
+			case PERCENT_WEIGHING: index = 2; break;
+			case PERCENT_WEIGHING_CALC_REFERENCE: index=2; break;
+
+
+			case CHECK_WEIGHING: index = 3; break;
+
+
+			case ANIMAL_WEIGHING: index = 4; break;
+			case ANIMAL_WEIGHING_CALCULATING: index=4; break;
+
+
+			case FILLING: index = 5; break;
+			case FILLING_CALC_TARGET: index=5; break;
+
+			case TOTALIZATION: index = 6; break;
+
+			case FORMULATION: index = 7; break;
+			case FORMULATION_RUNNING: index=7;break;
+
+			case DIFFERENTIAL_WEIGHING: index = 8; break;
+
+			case DENSITY_DETERMINATION: index = 9; break;
+			case DENSITY_DETERMINATION_STARTED: index=9; break;
+
+
+			case PEAK_HOLD: index = 10; break;
+			case PEAK_HOLD_STARTED: index= 10; break;
+
+			case INGREDIENT_COSTING: index = 11; break;
+
+			case PIPETTE_ADJUSTMENT_1_HOME: index = 12; break;
+			case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES: index=12; break;
+			case PIPETTE_ADJUSTMENT_3_FINISHED:index=12;break;
+
+
+
+			case STATISTICAL_QUALITY_CONTROL_1_HOME: index = 13; break;
+			case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:index=13;break;
+			case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:index=13;break;
+
+
+		}
+
+		spinnerMode.setSelection(index);
+		/*for(int i = 0; i< arrayAdapterMode.getCount();i++){
 			if(Scale.getInstance().getScaleApplication() == arrayAdapterMode.getItem(i)){
 				spinnerMode.setSelection(i);
 			}
-		}
+		}*/
 
 		spinnerLib = (Spinner) mActivity.findViewById(R.id.naviagationbar_spinner_lib);
 

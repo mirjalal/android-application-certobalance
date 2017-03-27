@@ -307,12 +307,14 @@ protected void onPause() {
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
 							break;
 						case ANIMAL_WEIGHING:
+						case ANIMAL_WEIGHING_CALCULATING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
 							break;
 						case FILLING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
 							break;
 						case FORMULATION:
+						case FORMULATION_RUNNING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFormulation()).commit();
 							break;
 						case DIFFERENTIAL_WEIGHING:
