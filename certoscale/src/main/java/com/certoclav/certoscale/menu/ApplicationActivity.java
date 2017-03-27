@@ -107,7 +107,8 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ReadAndParseSerialService.getInstance().sendCalibrationCommand();
+				//ReadAndParseSerialService.getInstance().sendCalibrationCommand();
+				Scale.getInstance().getScaleModel().internalCalibration();
 				imageButtonSidebarBack.performClick();
 			}
 		});
@@ -397,9 +398,9 @@ protected void onPause() {
 								ApplicationManager.getInstance().getCurrentLibrary().setName(name);
 								int retval = db.insertLibrary(ApplicationManager.getInstance().getCurrentLibrary());
 								if (retval == 1) {
-									Toast.makeText(ApplicationActivity.this,getString(R.string.library)+ name + getString(R.string.saved) + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this,getString(R.string.library) + " "+ name+ " " + getString(R.string.saved) , Toast.LENGTH_LONG).show();
 								} else {
-									Toast.makeText(ApplicationActivity.this, getString(R.string.library_could_not_be_saved) + retval, Toast.LENGTH_LONG).show();
+									Toast.makeText(ApplicationActivity.this, getString(R.string.library_could_not_be_saved), Toast.LENGTH_LONG).show();
 								}
 								refreshSpinnerLibrary();
 								try {

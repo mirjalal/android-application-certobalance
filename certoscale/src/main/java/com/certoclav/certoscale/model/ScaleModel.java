@@ -8,6 +8,11 @@ import android.content.Context;
 
 public abstract class ScaleModel {
 
+	double stabilisationTime;
+	public double getStabilisationTime() {return stabilisationTime;}
+	public void setStabilisationTime(double stabilisationTime) {this.stabilisationTime = stabilisationTime;}
+
+
 
 	double maximumCapazity;
 	public double getMaximumCapazity() {return maximumCapazity;}
@@ -47,14 +52,10 @@ public abstract class ScaleModel {
 
 	abstract public int externelCalibration(Context context);
 
+	abstract public int internalCalibration();
 
     //Set mod to weighing, unit to gramm...
     abstract public int initializeScale();
-
-
-
-    abstract void internalCalibration();
-
 
 
 }

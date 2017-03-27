@@ -12,6 +12,7 @@ public class ScaleModelAEAdam extends ScaleModel{
     public void ScaleModelAEAdam(){
         maximumCapazity=600;
         decimalPlaces=2;
+        stabilisationTime=2;
     }
     public int initializeParameters() {
         maximumCapazity=600;
@@ -95,8 +96,9 @@ public class ScaleModelAEAdam extends ScaleModel{
     }
 
     @Override
-    void internalCalibration() {
+    public int internalCalibration() {
 
+        return 0;
     }
 
     @Override

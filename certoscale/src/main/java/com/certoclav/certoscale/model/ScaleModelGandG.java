@@ -22,6 +22,7 @@ public class ScaleModelGandG extends ScaleModel {
     public void ScaleModelGandG(){
         maximumCapazity=5000;
         decimalPlaces=1;
+        stabilisationTime=1;
     }
 
 
@@ -61,38 +62,8 @@ public class ScaleModelGandG extends ScaleModel {
     public int pressTara() {
 
         ReadAndParseSerialService.getInstance().pauseParseSerialThread();
-      /*  try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bt");
-    */
-      ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
+
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
@@ -142,8 +113,9 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
     @Override
-    void internalCalibration() {
-
+    public int  internalCalibration() {
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+        return 0;
     }
 
     @Override

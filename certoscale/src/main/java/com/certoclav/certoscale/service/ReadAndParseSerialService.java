@@ -51,21 +51,8 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		return commandQueue;
 	}
 
-	public void sendCalibrationCommand(){
-		//check current model
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
 
-		switch (modelValue) {
-			case "1": // G&G
-				getCommandQueue().add("\u001Bq");
-				break;
-			case "2": // D&T
-				getCommandQueue().add("C\r\n");
-				break;
-		}
 
-	}
 
 	private ArrayList<String> commandQueue = new ArrayList<String>();
 	
@@ -102,14 +89,6 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 							Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
 							commandQueue.remove(0);
 						} else {
-
-							//mPrinter.write(0x1B);
-							//mPrinter.write(0x70);
-							//byte[] bytes = {27,112};
-							//byte[] bytes = hexStringToByteArray2("1B70");
-							//Log.e("SerialService", "SEND: " + new String(bytes));
-							//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
-
 							Scale.getInstance().getScaleModel().sendPrintCommand();
 						}
 
@@ -118,60 +97,11 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 						e.printStackTrace();
 					}
 
-				/*
-
-					//check current model
-					String key = "preferences_communication_list_devices";
-					String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
-
-					switch (modelValue){
-						case "1": // G&G
-							try {
-
-								if (commandQueue.size() >0) {
-									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-									commandQueue.remove(0);
-								} else {
-
-									//mPrinter.write(0x1B);
-									//mPrinter.write(0x70);
-									//byte[] bytes = {27,112};
-									//byte[] bytes = hexStringToByteArray2("1B70");
-									//Log.e("SerialService", "SEND: " + new String(bytes));
-									//Scale.getInstance().getSerialsServiceScale().sendBytes(bytes);
-									Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bp");
-								}
-
-
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							break;
-						case "2": //D&T
-							try {
-
-								if (commandQueue.size() >0) {
-									Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-									commandQueue.remove(0);
-								} else {
-									Scale.getInstance().getSerialsServiceScale().sendMessage("P\r\n");
-								}
-
-
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-
-							break;
-					}
-
-					*/
 				}
 
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(200);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -247,7 +177,6 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			rawResponse = "+ 0.0000 g";
 
 
-			//value = (Double) (60 + (60.0* Math.sin(((double)counter)*0.002)));
 			value = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5* Math.sin(((double)counter)*0.002)));
 
 		    handler.sendEmptyMessage(0);
@@ -255,44 +184,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	}
 
 
-	/*
-	public void sendOnOffCommand() {
 
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
-
-		switch (modelValue) {
-			case "1": // G&G
-
-				break;
-			case "2": // D&T
-				getCommandQueue().add("O\r\n");
-				break;
-		}
-
-		Scale.getInstance().getScaleModel().sendOnOffCommand();
-
-	}
-	*/
-	/*
-	public void sendModeCommand() {
-
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
-
-		switch (modelValue) {
-			case "1": // G&G
-				getCommandQueue().add("\u001Bs");
-				break;
-			case "2": // D&T
-				getCommandQueue().add("M\r\n");
-				break;
-		}
-
-		Scale.getInstance().getScaleModel().sendModeCommand();
-
-
-	}*/
 
 	public static byte[] hexStringToByteArray2(String s) {
 		int len = s.length();

@@ -21,6 +21,7 @@ public class ScaleModelDandT extends ScaleModel {
     public int initializeParameters() {
         maximumCapazity=120;
         decimalPlaces=4;
+        stabilisationTime=2;
 
         hasZerobutton=true;
 
@@ -100,8 +101,10 @@ public class ScaleModelDandT extends ScaleModel {
     }
 
     @Override
-    void internalCalibration() {
+    public int  internalCalibration() {
 
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
+        return 0;
     }
 
     @Override

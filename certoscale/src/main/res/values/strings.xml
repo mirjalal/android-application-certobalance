@@ -490,7 +490,7 @@
 
 
     <string name="settings_button">Settings</string>
-    <string name="settings_button_pressed">Return to applicaiton</string>
+    <string name="settings_button_pressed">Return to application</string>
     <string name="new_batch">New Batch</string>
     <string name="add_to_stats">Add to stats</string>
     <string name="batch_results_Button">Results</string>
@@ -720,8 +720,8 @@
     <string name="please_enter_the_target_weight">Please enter the target weight</string>
     <string name="please_enter_the_scaling_factor">Please enter the scaling factor</string>
     <string name="calculate_target_weight">Calculate Target Weight</string>
-    <string name="pleas_put">"Please put "</string>
-    <string name="on_the_pan_and_press_next">" on the pan and press NEXT"</string>
+    <string name="pleas_put">"Please put"</string>
+    <string name="on_the_pan_and_press_next">on the pan and press NEXT</string>
     <string name="g_of">" g of "</string>
     <string name="please_enter_the_water_temperature">Please enter the water temperature</string>
     <string name="please_enter_the_name_of_the_currency">Please enter the name of the currency</string>
@@ -906,6 +906,8 @@
     <string name="preferences_calibration_user">preferences_calibration_user</string>
     <string name="preferences_calibration_test">preferences_calibration_test</string>
     <string name="on_the_pan">on the pan</string>
+    <string name="wait_until_the_weight_is_stable">Wait until the weight is stable</string>
+    <string name="the_value_must_be_higher_than_zero">The value must be higher than zero</string>
 
 
 </resources>

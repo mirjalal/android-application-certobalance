@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeElementAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
@@ -179,7 +180,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
-            adapter.add(new RecipeEntry(" ",0d,0," "," "," ",0d));
+            adapter.add(new RecipeEntry(" ",0d,0," ","g"," ",0d));
             adapter.notifyDataSetChanged();
         }
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
@@ -212,7 +213,9 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                         }
                         List<RecipeEntry> recipeEntries = new ArrayList<RecipeEntry>();
                         for(int i = 0; i< adapter.getCount();i++){
-                            recipeEntries.add(adapter.getItem(i));
+                            RecipeEntry recipeEntry=adapter.getItem(i);
+                           recipeEntry.setInstruction(getString(R.string.pleas_put)+" "+recipeEntry.getWeight()+getString(R.string.g_of)+recipeEntry.getDescription()+" "+getString(R.string.on_the_pan_and_press_next));
+                            recipeEntries.add(recipeEntry);
                         }
                         Date date = new Date();
                         recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries,((Long)date.getTime()).toString(),Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());

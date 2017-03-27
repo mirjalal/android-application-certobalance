@@ -1025,9 +1025,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
 
-        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0002) {
+        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0004) {
 
-            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L))
+            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L*Scale.getInstance().getScaleModel().getStabilisationTime()))
 
                         Scale.getInstance().setStable(true);
 
