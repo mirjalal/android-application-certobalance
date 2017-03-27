@@ -278,6 +278,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						ApplicationManager.getInstance().getStats().getStatistic().clear();
 						ApplicationManager.getInstance().getStats().getSamples().clear();
 						Scale.getInstance().setScaleApplication(PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES);
+						getButtonTara().performClick();
 						updateStatsButtonUI();
 
 					}
@@ -570,7 +571,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
 							double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
 
-							ApplicationManager.getInstance().setPipetteCalculatedML(-pipetteML);
+							ApplicationManager.getInstance().setPipetteCalculatedML(pipetteML);
 							ApplicationManager.getInstance().accumulateStatistics();
 							updateStatsButtonUI();
 							ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
@@ -1328,6 +1329,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonResult.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
 
 
 

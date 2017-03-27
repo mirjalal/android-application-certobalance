@@ -595,7 +595,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText(getString(R.string.dispense_sample_number) + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+getString(R.string.and_press_accept));
 
 
-                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+
+                //Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
+                double pipetteDensity = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp());
+                pipetteDensity = pipetteDensity + (ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure() - 1) * 0.046;
+                double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
+
+
+
+                textValue.setText(String.format("%.4f",pipetteML)+ " ml");
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
