@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.certoclav.certoscale"
-    android:versionCode="2"
-    android:versionName="2.0" >
+    android:versionCode="1"
+    android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="22"
-        tools:overrideLibrary="com.teamviewer.sdk.screensharing"/>
+        android:minSdkVersion="9"
+        android:targetSdkVersion="22" />
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -156,20 +154,9 @@
             android:launchMode="singleInstance">
         </activity>
 
-        <activity android:name=".menu.VideoActivity"
-            android:screenOrientation="sensorLandscape"
-            android:launchMode="singleInstance">
-        </activity>
-
-        <activity android:name=".menu.VideoFullscreenActivity"
-            android:screenOrientation="sensorLandscape"
-            android:launchMode="singleInstance">
-        </activity>
-
-        <activity android:name=".settings.unit.SettingsUnitActivity"
+        <activity android:name=".settings.calibration.SettingsCalibrationActivity"
             android:screenOrientation="sensorLandscape"
             ></activity>
-
         <activity android:name=".menu.AddCloudAccountActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
@@ -186,38 +173,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.SyncItemsService"></service>
-        <service android:name=".service.SyncRecipesService"></service>
-        <service android:name=".service.SyncProtocolsService"></service>
-
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
-        <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 
-        <activity android:name=".settings.protocol.MenuProtocolActivity"
-        android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".settings.labels.MenuLabelPrinterActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".settings.calibration.SettingsCalibrationActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
-        <activity android:name=".settings.communication.SettingsCommunicationActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
-        <activity android:name=".settings.recipe.MenuRecipeEditActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".settings.recipe.MenuRecipeActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
-        <activity android:name=".settings.item.MenuItemEditActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
-        <activity android:name=".settings.item.MenuItemActivity"
-            android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.unit.SettingsUnitActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
-
-        <activity android:name=".settings.unit.SettingsUnitEditActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
         <activity android:name=".settings.glp.SettingsGlpActivity"
