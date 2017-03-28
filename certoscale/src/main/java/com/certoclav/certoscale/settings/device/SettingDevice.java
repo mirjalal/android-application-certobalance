@@ -72,9 +72,11 @@ private SharedPreferences prefs = null;
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-
-                Intent intent = new Intent(getActivity(), SettingsLanguagePickerActivity.class);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("com.android.settings", "com.android.settings.LanguageSettings");
                 getActivity().startActivity(intent);
+               // Intent intent = new Intent(getActivity(), SettingsLanguagePickerActivity.class);
+               // getActivity().startActivity(intent);
 
                 return false;
             }

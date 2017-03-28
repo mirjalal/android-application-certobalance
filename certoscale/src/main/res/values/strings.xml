@@ -720,8 +720,8 @@
     <string name="please_enter_the_target_weight">Please enter the target weight</string>
     <string name="please_enter_the_scaling_factor">Please enter the scaling factor</string>
     <string name="calculate_target_weight">Calculate Target Weight</string>
-    <string name="pleas_put">"Please put"</string>
-    <string name="on_the_pan_and_press_next">on the pan and press NEXT</string>
+    <string name="pleas_put">"Please put "</string>
+    <string name="on_the_pan_and_press_next"> on the pan and press NEXT</string>
     <string name="g_of">" g of "</string>
     <string name="please_enter_the_water_temperature">Please enter the water temperature</string>
     <string name="please_enter_the_name_of_the_currency">Please enter the name of the currency</string>
