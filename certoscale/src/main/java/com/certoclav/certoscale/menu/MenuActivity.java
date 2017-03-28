@@ -114,7 +114,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
                 ScaleModelGandG modelGandG=new ScaleModelGandG();
                 Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-                Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
                 break;
 
@@ -122,7 +122,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
                 ScaleModelDandT modelDandT=new ScaleModelDandT();
                 Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
-                Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
                 Scale.getInstance().getScaleModel().pressZero();
                 break;
 
@@ -130,7 +130,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
                 ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
                 Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
-                Scale.getInstance().getScaleModel().initializeParameters();
+                Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
                 break;
         }

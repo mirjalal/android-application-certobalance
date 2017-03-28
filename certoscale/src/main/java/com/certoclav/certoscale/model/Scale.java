@@ -211,6 +211,7 @@ public class Scale extends Observable {
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
 			serialServiceScale = new SerialService("/dev/ttymxc3",9600); //COM4
+
 			serialServiceScale.setStringTerminatin("\n");
 		}
 		return serialServiceScale;
@@ -226,6 +227,7 @@ public class Scale extends Observable {
 
 	public SerialService getSerialsServiceLabelPrinter() {
 		if(serialServiceLabelPrinter == null){
+
 			serialServiceLabelPrinter = new SerialService("/dev/ttymxc1",9600);//COM2
 		}
 		return serialServiceLabelPrinter;

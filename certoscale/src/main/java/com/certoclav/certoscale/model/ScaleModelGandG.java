@@ -25,7 +25,7 @@ public class ScaleModelGandG extends ScaleModel {
         stabilisationTime=1;
     }
 
-
+    /*
     @Override
     public int initializeParameters() {
         maximumCapazity=5000;
@@ -33,6 +33,24 @@ public class ScaleModelGandG extends ScaleModel {
 
         hasZerobutton=false;
         return 1;
+    }
+    */
+
+    @Override
+    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
+        this.maximumCapazity=maximumCapazity;
+        this.decimalPlaces=decimalPlaces;
+        this.stabilisationTime=stabilisationTime;
+
+        this.comBaudrate=comBaudrate;
+        this.comDataBits=comDataBits;
+        this.comParity=comParity;
+        this.comStopBits=comStopBits;
+
+        this.hasZerobutton=hasZerobutton;
+
+
+        return 0;
     }
 
     @Override

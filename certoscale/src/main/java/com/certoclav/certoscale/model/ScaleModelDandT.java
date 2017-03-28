@@ -16,7 +16,7 @@ public class ScaleModelDandT extends ScaleModel {
         decimalPlaces=4;
     }
 
-
+    /*
     @Override
     public int initializeParameters() {
         maximumCapazity=120;
@@ -26,7 +26,25 @@ public class ScaleModelDandT extends ScaleModel {
         hasZerobutton=true;
 
         return 1;
+    }*/
+
+    @Override
+    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
+        this.maximumCapazity=maximumCapazity;
+        this.decimalPlaces=decimalPlaces;
+        this.stabilisationTime=stabilisationTime;
+
+        this.comBaudrate=comBaudrate;
+        this.comDataBits=comDataBits;
+        this.comParity=comParity;
+        this.comStopBits=comStopBits;
+
+        this.hasZerobutton=hasZerobutton;
+
+
+        return 0;
     }
+
 
     @Override
     public int sendOnOffCommand() {

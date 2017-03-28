@@ -14,6 +14,7 @@ public class ScaleModelAEAdam extends ScaleModel{
         decimalPlaces=2;
         stabilisationTime=2;
     }
+    /*
     public int initializeParameters() {
         maximumCapazity=600;
         decimalPlaces=2;
@@ -22,6 +23,24 @@ public class ScaleModelAEAdam extends ScaleModel{
         comStopBits=1;
 
         hasZerobutton=true;
+
+        return 0;
+    }*/
+
+
+    @Override
+    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
+        this.maximumCapazity=maximumCapazity;
+        this.decimalPlaces=decimalPlaces;
+        this.stabilisationTime=stabilisationTime;
+
+        this.comBaudrate=comBaudrate;
+        this.comDataBits=comDataBits;
+        this.comParity=comParity;
+        this.comStopBits=comStopBits;
+
+        this.hasZerobutton=hasZerobutton;
+
 
         return 0;
     }

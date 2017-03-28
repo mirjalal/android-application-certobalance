@@ -37,7 +37,7 @@ public abstract class ScaleModel {
 	boolean hasZerobutton;
 
 
-	abstract public int initializeParameters();
+	abstract public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime,  int comBaudrate, int comDataBits,int comParity,int comStopBits,boolean hasZerobutton);
 
 	abstract public int sendOnOffCommand();
 	abstract public int sendModeCommand();
