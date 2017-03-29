@@ -39,6 +39,8 @@ import com.teamviewer.sdk.screensharing.api.TVSessionFactory;
 
 import java.util.ArrayList;
 
+import android_serialport_api.SerialService;
+
 /**
  * Created by Michael on 12/6/2016.
  */
@@ -116,6 +118,11 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
                 Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
+                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+                Scale.getInstance().getSerialsServiceScale().resetConnection();
+                Scale.getInstance().setSerialsServiceScale();
+                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
                 break;
 
             case "2":
@@ -124,6 +131,10 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
                 Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
                 Scale.getInstance().getScaleModel().pressZero();
+                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+                Scale.getInstance().getSerialsServiceScale().resetConnection();
+                Scale.getInstance().setSerialsServiceScale();
+                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
                 break;
 
             case "3":
@@ -132,6 +143,9 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
                 Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
+                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+                Scale.getInstance().setSerialsServiceScale();
+                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
                 break;
         }
 

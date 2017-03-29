@@ -26,9 +26,22 @@ public abstract class ScaleModel {
 	boolean sendsPeriodical;
 
 	int comBaudrate;
+	public int getComBaudrate() {return comBaudrate;}
+	public void setComBaudrate(int comBaudrate) {this.comBaudrate = comBaudrate;}
+
 	int comDataBits;
+	public int getComDataBits() {return comDataBits;}
+	public void setComDataBits(int comDataBits) {this.comDataBits = comDataBits;}
+
 	int comStopBits;
+	public int getComStopBits() {return comStopBits;}
+	public void setComStopBits(int comStopBits) {this.comStopBits = comStopBits;}
+
 	int comParity;
+	public int getComParity() {return comParity;}
+	public void setComParity(int comParity) {this.comParity = comParity;}
+
+
 
 	String endLineCommand;
 
