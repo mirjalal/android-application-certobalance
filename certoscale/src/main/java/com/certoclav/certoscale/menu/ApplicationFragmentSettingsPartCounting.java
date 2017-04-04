@@ -48,6 +48,8 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
       //  buttonSave = (Button) rootView.findViewById(R.id.settings_partcounting_button_save);
         buttonCancel = (Button) rootView.findViewById(R.id.settings_partcounting_button_cancel);
         buttonCancel.setVisibility(View.INVISIBLE);
+        buttonCancel.setText(getString(R.string.cancel));
+        
         textInstruction = (TextView) rootView.findViewById(R.id.settings_partcounting_text_instruction);
         textInstruction.setVisibility(View.INVISIBLE);
         buttonCalculateAwp = (Button) rootView.findViewById(R.id.settings_partcounting_button_calc_awp);

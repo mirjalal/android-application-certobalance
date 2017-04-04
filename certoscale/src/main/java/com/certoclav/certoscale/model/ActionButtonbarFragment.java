@@ -1545,6 +1545,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 	@Override
 	public void onWeightChanged(Double weight, String unit) {
 
+		//Use this Code to show/hide the zero button depending if the scale model has a zero button or not
+
+		/*
 		if(Scale.getInstance().getScaleModel().hasZerobutton==false){
 			buttonZero.setVisibility(View.GONE);
 		}
@@ -1553,6 +1556,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		}else{
 			buttonZero.setEnabled(false);
 		}
+		*/
 	}
 
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTOM;
+import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTON;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
@@ -434,7 +434,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces()) + " " + "pcs";
             default:
-                return getTransformedWeightAsStringWithUnit(getSumInGram()+getTareInGram());
+                if (INTERNAL_TARA_ZERO_BUTTON){
+                    return getTransformedWeightAsStringWithUnit(getSumInGram());
+                }else {
+                    return getTransformedWeightAsStringWithUnit(getSumInGram() + getTareInGram());
+                }
         }
 
 
@@ -492,7 +496,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public Double getTaredValueInGram() {
 
-        if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTOM) {
+        if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
             return getSumInGram() - getTareInGram();
         }else{
             return getSumInGram();
@@ -1027,7 +1031,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         } else {
 
-            if (Math.abs(weighOld - weight) <= 0.0001 && weight >= 0.0004) {
+            if (Math.abs(weighOld - weight) <= 0.0001 && Math.abs(weight) >= 0.0004) {
 
                 if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L * Scale.getInstance().getScaleModel().getStabilisationTime()))
 
