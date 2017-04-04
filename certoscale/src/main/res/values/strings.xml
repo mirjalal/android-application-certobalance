@@ -791,7 +791,7 @@
     <string name="tolerance_used_during_measurement">Tolerance used during measurements</string>
     <string name="tolerance">Tolerance</string>
     <string name="number_of_batches">Number of Batches</string>
-    <string name="standard_deviation">Standard Deviation</string>
+    <string name="standard_deviation">Standard Dev</string>
     <string name="stored_libraries">Stored libraries</string>
     <string name="weighing_units">Weighing Units</string>
     <string name="communication_menu">Communication menu</string>

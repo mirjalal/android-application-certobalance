@@ -2,12 +2,11 @@ package com.certoclav.certoscale.service;
 
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.library.application.ApplicationController;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
 
 import java.util.ArrayList;
 
@@ -47,6 +46,8 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		return instance;
 	}
 
+	private double lastWeightReceived = 0;
+
 	public ArrayList<String> getCommandQueue() {
 		return commandQueue;
 	}
@@ -57,14 +58,19 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	private ArrayList<String> commandQueue = new ArrayList<String>();
 	
     Double value = 0d;
+	Double valueDiff = 0d;
     String rawResponse = "default";
 
 	private Handler handler = new Handler() {
 		 
         public void handleMessage(Message msg) {
-             
-        	
+
+			valueDiff = lastWeightReceived - value;
+        	value = lastWeightReceived - (valueDiff/3.0);
         	Scale.getInstance().setValue(value, rawResponse);
+			if(Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam) {
+				Scale.getInstance().setStable(Scale.getInstance().getScaleModel().isStable());
+			}
 			
 	
 	
@@ -82,15 +88,20 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					simulateMessage();
 				}else {
 
+					handler.sendEmptyMessage(0); //update current weight
+
+
 
 					try {
 
-						if (commandQueue.size() >0) {
-							Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
-							commandQueue.remove(0);
-						} else {
-							Scale.getInstance().getScaleModel().sendPrintCommand();
-						}
+							if (commandQueue.size() >0) {
+								Scale.getInstance().getSerialsServiceScale().sendMessage(commandQueue.get(0));
+								commandQueue.remove(0);
+							} else {
+								if(Scale.getInstance().getScaleModel().isCommandResponse() == true) {
+									Scale.getInstance().getScaleModel().sendPrintCommand();
+								}
+							}
 
 
 					} catch (Exception e) {
@@ -144,16 +155,12 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	@Override
 	public void onMessageReceived(String message) {
+		Log.e("ReadAndParse", "onMessageReceived(): " + message);
 
-
-
-
-			if(message.length()>5) {
+		  if(message.length()>5) {
 				rawResponse = message;
-				Log.e("ReadAndParse", "received: " + message);
+				lastWeightReceived = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
 
-				value = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
-				handler.sendEmptyMessage(0);
 			}
 
 	}

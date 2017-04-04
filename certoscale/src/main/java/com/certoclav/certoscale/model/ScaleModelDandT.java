@@ -54,6 +54,11 @@ public class ScaleModelDandT extends ScaleModel {
     }
 
     @Override
+    public boolean isCommandResponse() {
+        return true;
+    }
+
+    @Override
     public int pressTara() {
 
         ReadAndParseSerialService.getInstance().getCommandQueue().add("T\r\n");
