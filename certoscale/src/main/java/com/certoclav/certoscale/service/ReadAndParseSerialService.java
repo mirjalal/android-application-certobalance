@@ -65,8 +65,12 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		 
         public void handleMessage(Message msg) {
 
+			Log.e("ReadAndParseSerialSe", "upate value " + value);
+			Log.e("ReadAndParseSerialSe", "upate lastweight " + lastWeightReceived);
+
 			valueDiff = lastWeightReceived - value;
         	value = lastWeightReceived - (valueDiff/3.0);
+
         	Scale.getInstance().setValue(value, rawResponse);
 			if(Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam) {
 				Scale.getInstance().setStable(Scale.getInstance().getScaleModel().isStable());
@@ -184,7 +188,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			rawResponse = "+ 0.0000 g";
 
 
-			value = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5* Math.sin(((double)counter)*0.002)));
+			lastWeightReceived = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5* Math.sin(((double)counter)*0.002)));
 
 		    handler.sendEmptyMessage(0);
 
