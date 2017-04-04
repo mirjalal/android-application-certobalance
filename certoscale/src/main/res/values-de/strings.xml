@@ -605,4 +605,12 @@
     <string name="sign_up_account_failed">Accountanmeldung fehlgeschlagen</string>
     <string name="the_weight_values_must_be_higher_than_zero">Die Gewichtswerte müssen größer als Null sein</string>
     <string name="these_changes_will_be_applied_in_the_next_release">Diese Änderungen werden erst im nächsten Release angewandt</string>
+    <string name="color_themes">Farbschemas</string>
+    <string name="tap_to_choose_the_color_theme_model">" Klicken um das Farbschema auszuwählen"</string>
+    <string name="Compare_known_calibration_weight_against_stored_span_calibration_data">Bekanntes Kalibrierungsgewicht mit gespeicherten Kalibrierungsdaten vergleichen</string>
+    <string name="adjust_the_zero_calibration_point">Nullpunkt kalibrieren</string>
+    <string name="calibrate_the_balance_every_hour_automatically">Die Waage jede Stunde automatisch kalibrieren</string>
+    <string name="calibrate_the_balance_using_a_user_defined_mass">Die Waage mit einem benutzerdefiniertem Gewicht kalibrieren</string>
+    <string name="calibration_with_two_calibration_points_follow_the_screen_instructions">Kalibrierung mit 2 Kalibrierungspunkten. Folgen Sie den Displayanweisungen</string>
+    <string name="only_possible_after_warm_up_and_with_empty_pan">Nur möglich nach der Aufwärmphase.</string>
 </resources>

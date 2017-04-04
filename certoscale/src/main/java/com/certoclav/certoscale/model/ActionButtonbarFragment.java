@@ -950,7 +950,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
-				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setVisibility(View.GONE);
 				buttonStart.setEnabled(true);
 				buttonResult.setVisibility(View.GONE);
 				break;

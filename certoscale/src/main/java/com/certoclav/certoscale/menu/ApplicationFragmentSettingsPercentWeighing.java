@@ -37,6 +37,8 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
         buttonReferenceWeight =  (Button) rootView.findViewById(R.id.application_settings_percent_weighing_button_reference);
         buttonCancel = (Button) rootView.findViewById(R.id.application_settings_percentage_button_cancel);
         buttonCancel.setVisibility(View.INVISIBLE);
+        buttonCancel.setText(getString(R.string.cancel).toUpperCase());
+
         buttonOK = (Button) rootView.findViewById(R.id.application_settings_percentage_button_ok);
         buttonOK.setVisibility(View.INVISIBLE);
         textInstruction = (TextView) rootView.findViewById(R.id.application_settings_percentage_text);
@@ -161,6 +163,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
+                        onResume();
                     }
                 });
             }

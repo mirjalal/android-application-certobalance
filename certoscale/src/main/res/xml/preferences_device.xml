@@ -56,8 +56,8 @@
 
     <ListPreference
         android:key="@string/preferences_device_theme"
-        android:title="Color Themes"
-        android:summary="Tab to choose the color theme model"
+        android:title="@string/color_themes"
+        android:summary="@string/tap_to_choose_the_color_theme_model"
         android:defaultValue="1"
         android:entries="@array/preferences_device_themes_string_array"
         android:entryValues="@array/preferences_device_themes_values"

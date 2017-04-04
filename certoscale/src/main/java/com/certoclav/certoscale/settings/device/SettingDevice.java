@@ -65,6 +65,14 @@ private SharedPreferences prefs = null;
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 
+        ((Preference) findPreference(getString(R.string.preferences_device_theme))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Toast.makeText(getContext(), getString(R.string.these_changes_will_be_applied_in_the_next_release), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
 
 
         //Language
@@ -89,11 +97,10 @@ private SharedPreferences prefs = null;
             }
         });
 
-//Device Key
-
+        //Device Key
         ((Preference) findPreference(getString(R.string.preferences_device_key))).setSummary(Scale.getInstance().getSafetyKey());
 
-//Check for updates
+        //Check for updates
         ((Preference) findPreference(getString(R.string.preferences_device_software_update))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override

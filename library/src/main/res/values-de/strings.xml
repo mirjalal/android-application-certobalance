@@ -324,6 +324,10 @@
     <string name="firmware_version">Firmware Version</string>
     <string name="network_not_connected">Netzwerk nicht verbunden</string>
     <string name="not_able_to_connect_to_certocloud">Verbindung mit der CertoCloud nicht möglich</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="path_video_place_item"></string>
+    <string name="sensor_kalibrierung">Sensor Kalibrierung</string>
+    <string name="title_notification"></string>
 
 
 </resources>

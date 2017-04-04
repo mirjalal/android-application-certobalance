@@ -308,6 +308,7 @@ protected void onPause() {
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsWeighing()).commit();
 							break;
 						case PERCENT_WEIGHING:
+						case PERCENT_WEIGHING_CALC_REFERENCE:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPercentWeighing()).commit();
 							break;
 						case ANIMAL_WEIGHING:

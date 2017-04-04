@@ -920,6 +920,14 @@
     <string name="sign_up_account_failed">Sign up account failed</string>
     <string name="the_weight_values_must_be_higher_than_zero">The weight values must be higher than zero</string>
     <string name="these_changes_will_be_applied_in_the_next_release">These changes will be applied in the next release</string>
+    <string name="color_themes">Color Themes</string>
+    <string name="tap_to_choose_the_color_theme_model">Tab to choose the color theme model</string>
+    <string name="only_possible_after_warm_up_and_with_empty_pan">Only possible after warm up and with empty pan</string>
+    <string name="calibrate_the_balance_every_hour_automatically">Calibrate the balance every hour automatically</string>
+    <string name="adjust_the_zero_calibration_point">Adjust the zero calibration point</string>
+    <string name="calibration_with_two_calibration_points_follow_the_screen_instructions">Calibration with two calibration points. Follow the screen instructions.</string>
+    <string name="calibrate_the_balance_using_a_user_defined_mass">Calibrate the balance using a user defined mass. Follow the screen instructions</string>
+    <string name="Compare_known_calibration_weight_against_stored_span_calibration_data">Compare known calibration weight against stored span calibration data</string>
 
 
 </resources>
