@@ -20,15 +20,7 @@
             android:layout_width="120dp"
             android:layout_height="60dp"
             android:text="1300345"
-            android:scrollHorizontally="true"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit ="marquee_forever"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
 
             android:gravity="center_vertical"
             style="@style/text_small"/>
@@ -37,14 +29,10 @@
             android:id="@+id/menu_main_item_edit_element_name"
             android:layout_width="120dp"
             android:layout_height="60dp"
-            android:maxLines="2"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
+            android:maxLines="1"
             style="@style/text_small"
             android:gravity="center_vertical"
             android:text="Screw"
-            android:inputType="text"
-            android:imeOptions="actionDone"
             />
 
         <TextView
@@ -54,10 +42,7 @@
             style="@style/text_small"
             android:gravity="center_vertical"
             android:text="1.54"
-            android:scrollHorizontally="true"
             android:singleLine="true"
-            android:inputType="text"
-            android:imeOptions="actionDone"
             />
 
 
@@ -69,10 +54,7 @@
             style="@style/text_small"
             android:gravity="center_vertical"
             android:text="12.0121"
-            android:scrollHorizontally="true"
             android:singleLine="true"
-            android:inputType="text"
-            android:imeOptions="actionDone"
             />
 
 
@@ -90,6 +72,7 @@
 
         <LinearLayout
             android:id="@+id/user_list_element_container_button"
+            android:descendantFocusability="blocksDescendants"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
