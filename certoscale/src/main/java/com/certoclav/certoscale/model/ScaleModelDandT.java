@@ -38,6 +38,7 @@ public class ScaleModelDandT extends ScaleModel {
         this.comDataBits=comDataBits;
         this.comParity=comParity;
         this.comStopBits=comStopBits;
+        setPeriodicMessagingEnabled(true);
 
         this.hasZerobutton=hasZerobutton;
 

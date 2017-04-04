@@ -919,6 +919,7 @@
     <string name="mobile_number">Mobile number</string>
     <string name="sign_up_account_failed">Sign up account failed</string>
     <string name="the_weight_values_must_be_higher_than_zero">The weight values must be higher than zero</string>
+    <string name="changing_weighign_unit">Changing weighing unit...</string>
 
 
 </resources>

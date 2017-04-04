@@ -8,14 +8,11 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.menu.AnimationCalibrationActivity;
 import com.certoclav.certoscale.menu.NotificationActivity;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.service.CloudSocketService;
-import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.service.ReadAndParseSerialSicsService;
 import com.certoclav.library.application.ApplicationController;
 
 import static com.certoclav.certoscale.model.ScaleState.CABLE_NOT_CONNECTED;
-import static com.certoclav.certoscale.model.ScaleState.ON_AND_CALIBRATING;
 import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_GRAM;
 import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_NOT_GRAM;
 
@@ -89,30 +86,32 @@ public class StateMachine implements WeightListener {
 
 
 
+
+
         //STATE PARSER
             //after 30 seconds of communications failures, set state to disconnected
             String rawResponseTransformed = Scale.getInstance().getRawResponseFromBalance().replace("\n","").replace("\r","").replaceAll("\\p{C}", "?");
             Log.e("StateMachine", "rawresp: " + rawResponseTransformed);
 
+            Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
+
 
             if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
                     Scale.getInstance().setScaleState(CABLE_NOT_CONNECTED);
             }else{
-                if(rawResponseTransformed.contains("g") && !rawResponseTransformed.contains("??")){
-                    delaycounter = 0;
-                    Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
-                }else if(rawResponseTransformed.contains("?????")){
-                    Scale.getInstance().setScaleState(ON_AND_CALIBRATING);
-                }else if(rawResponseTransformed.contains("????")){
-                    delaycounter++;
-                    if(delaycounter> 10)
-                    Scale.getInstance().setScaleState(ScaleState.OFF); //for example: "+   ????  g"
-                }else{
-                    delaycounter++;
-                    if(delaycounter> 10)
+                if (rawResponseTransformed.contains("lb") ||
+                        rawResponseTransformed.contains("ct") ||
+                        rawResponseTransformed.contains("dwt")||
+                        rawResponseTransformed.contains("oz")||
+                        rawResponseTransformed.contains("lb")||
+                        rawResponseTransformed.contains("GN")||
+                        rawResponseTransformed.contains("gn")) {
                     Scale.getInstance().setScaleState(ON_AND_MODE_NOT_GRAM);
+                }else {
+                    Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
                 }
             }
+
 
 
 

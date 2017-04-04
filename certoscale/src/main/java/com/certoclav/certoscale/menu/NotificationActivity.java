@@ -69,7 +69,7 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 				break;
 			case ON_AND_MODE_NOT_GRAM:
 				textNotificationHead.setText(getString(R.string.notification).toUpperCase());
-				tv.setText(R.string.selftest);
+				tv.setText(R.string.changing_weighign_unit);
 				break;
 			case DISCONNECTED:
 				textNotificationHead.setText(R.string.warning);

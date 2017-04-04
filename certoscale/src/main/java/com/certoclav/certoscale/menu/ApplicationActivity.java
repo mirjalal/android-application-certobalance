@@ -29,7 +29,6 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
@@ -107,8 +106,8 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//ReadAndParseSerialService.getInstance().sendCalibrationCommand();
-				Scale.getInstance().getScaleModel().internalCalibration();
+
+				Scale.getInstance().getScaleModel().externelCalibration(ApplicationActivity.this);
 				imageButtonSidebarBack.performClick();
 			}
 		});

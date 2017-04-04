@@ -14,6 +14,9 @@ public class ScaleModelAEAdam extends ScaleModel{
         decimalPlaces=2;
         stabilisationTime=2;
     }
+
+
+
     /*
     public int initializeParameters() {
         maximumCapazity=600;
@@ -100,13 +103,14 @@ public class ScaleModelAEAdam extends ScaleModel{
                     if (arg.contains("-")){
                         sign=-1;
                     }
+
                     if(arg.contains("US")){
                         stable = false;
                     }
+
                     if(arg.contains("ST")){
                         stable = true;
                     }
-
 
                     if (arg.length() > 2 && arg.contains(".") && arg.matches("[0-9.]*") ) {
                         try {
@@ -116,6 +120,7 @@ public class ScaleModelAEAdam extends ScaleModel{
                             Log.e("ReadAndParseSerialServ", "Error parsing following Double: " + arg);
                         }
                     }
+
                 }
                 value=value*sign;
             }else{

@@ -16,6 +16,7 @@ import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
@@ -1023,7 +1024,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         Double weight = ApplicationManager.getInstance().getTaredValueInGram();
 
 
-        if (Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam) {
+        if (Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam || Scale.getInstance().getScaleModel() instanceof ScaleModelGandG) {
 
         } else {
 
