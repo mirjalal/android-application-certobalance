@@ -2,6 +2,7 @@ package com.certoclav.certoscale.model;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -95,6 +96,9 @@ public class ScaleModelGandG extends ScaleModel {
         return 0;
     }
 
+    public void pressMode(){
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+    }
     @Override
     public double parseRecievedMessage(String message) {
         int sign=1;
@@ -187,6 +191,7 @@ public class ScaleModelGandG extends ScaleModel {
 
 
 
+
             final PutCalibrationWeightDialog dialogPutCalibrationWeight = new PutCalibrationWeightDialog(context);
             dialogPutCalibrationWeight.setContentView(R.layout.dialog_instruction);
             dialogPutCalibrationWeight.setTitle(context.getString(R.string.external_calibration));
@@ -217,21 +222,23 @@ public class ScaleModelGandG extends ScaleModel {
             final Button dialogButton22 = (Button) dialogPutCalibrationWeight.findViewById(R.id.dialog_edit_instruction_button_2);
 
             dialogButton22.setText(R.string.ok);
+            dialogButton22.setEnabled(Scale.getInstance().isStable());
             dialogButton22.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     if(Scale.getInstance().isStable()) {
                         pressTara();
+                        dialogPutCalibrationWeight.dismiss();
+                        try {
+                            dialogTareBalance.show();
+                        }catch(Exception e){
+
+                        }
                     }else{
                        Toast.makeText(context, "Wait until weight is stable", Toast.LENGTH_LONG).show();
                    }
-                    dialogPutCalibrationWeight.dismiss();
-                    try {
-                        dialogTareBalance.show();
-                    }catch(Exception e){
 
-                    }
 
 
                 }
@@ -239,12 +246,19 @@ public class ScaleModelGandG extends ScaleModel {
 
             dialogPutCalibrationWeight.setOnStableListener(new StableListener() {
                 @Override
-                public void onStableChanged(boolean isStable) {
-                    if(isStable){
-                        dialogButton22.setEnabled(true);
-                    }else{
-                        dialogButton22.setEnabled(false);
+                public void onStableChanged(final boolean isStable) {
+                    try{
+
+                                if(isStable){
+                                    dialogButton22.setEnabled(true);
+                                }else {
+                                    dialogButton22.setEnabled(false);
+                                }
+
+                    }catch (Exception e){
+                        Log.e("ScaleModelGandG",e.toString());
                     }
+                    Log.e("ScaleModelGANDG", "CALLBACK IS STABLE: " + isStable);
                 }
             });
 
@@ -274,8 +288,11 @@ public class ScaleModelGandG extends ScaleModel {
                 public void onClick(View v) {
 
                     chosenValue=2000;
-                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
-                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+
+                    pressTara();
+                    pressMode();
+                    pressMode();
+
                     dialogChooseCalibrationWeight.dismiss();
                     try {
                         dialogPutCalibrationWeight.show();
@@ -295,8 +312,8 @@ public class ScaleModelGandG extends ScaleModel {
 
 
                     chosenValue=5000;
-
-                    ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+                    pressTara();
+                    pressMode();
                     dialogChooseCalibrationWeight.dismiss();
                     try{
                     dialogPutCalibrationWeight.show();
