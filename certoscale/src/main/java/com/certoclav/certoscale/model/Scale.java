@@ -46,7 +46,9 @@ public class Scale extends Observable {
 
 
 
-	public ScaleModel getScaleModel() {return scaleModel;}
+	public ScaleModel getScaleModel() {
+		return scaleModel;
+	}
 	public void setScaleModel(ScaleModel scaleModel) {this.scaleModel = scaleModel;}
 
 

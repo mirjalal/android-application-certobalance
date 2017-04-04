@@ -1,35 +1,21 @@
 package com.certoclav.certoscale.settings.communication;
 
 
-import android.app.Dialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModel;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.certoscale.model.ScaleModelDandT;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
-import com.certoclav.certoscale.settings.device.SettingsLanguagePickerActivity;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.util.ESCPos;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.SocketService;
-
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
-
-import java.util.Calendar;
 
 import android_serialport_api.SerialService;
 
@@ -203,6 +189,40 @@ private SharedPreferences prefs = null;
 
                 Preference devicePref = findPreference(key);
                 devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(sharedPreferences.getString(key, ""))-1]);
+
+
+                String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+                switch (modelValue) {
+                    case "1":
+                        ScaleModelGandG modelGandG=new ScaleModelGandG();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
+                        Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
+                      //  Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+                        break;
+
+                    case "2":
+                        ScaleModelDandT modelDandT=new ScaleModelDandT();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
+                        Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
+                        Scale.getInstance().getScaleModel().pressZero();
+                        Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+                        //Scale.getInstance().getSerialsServiceScale().resetConnection();
+                        //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+                        break;
+
+                    case "3":
+                        ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
+                        Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
+                        Scale.getInstance().getScaleModel().pressZero();
+                        Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+
+                        //Scale.getInstance().getSerialsServiceScale().resetConnection();
+                        //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
+
+                        break;
+                }
 
 
 

@@ -15,6 +15,7 @@ import com.certoclav.certoscale.service.ReadAndParseSerialService;
 
 public class ScaleModelGandG extends ScaleModel {
 
+    double lastValue = 0;
 
     public void ScaleModelGandG(){
         maximumCapazity=5000;
@@ -44,7 +45,6 @@ public class ScaleModelGandG extends ScaleModel {
         this.comDataBits=comDataBits;
         this.comParity=comParity;
         this.comStopBits=comStopBits;
-        setPeriodicMessagingEnabled(true);
         this.hasZerobutton=hasZerobutton;
 
 
@@ -94,7 +94,7 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public double parseRecievedMessage(String message) {
         int sign=1;
-        double value=0;
+        double value=lastValue;
         if(message.length()>5) {
             try {
                 if (message.contains("-")) {
@@ -121,16 +121,18 @@ public class ScaleModelGandG extends ScaleModel {
                             value = Double.parseDouble(arg);
                             break;
                         } catch (Exception e) {
-                            value = 0d;
+                            value = lastValue;
                         }
                     }
                 }
                 value=value*sign;
             }else{
-                value = 0d;
+                value = lastValue;
             }
 
             }
+            lastValue = value;
+
         return value;
     }
 

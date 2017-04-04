@@ -92,16 +92,21 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		@Override
 		public void run() {
 			while (true) {
-				if (AppConstants.IS_IO_SIMULATED == true) {
-					simulateMessage();
-				} else {
-					handler.sendEmptyMessage(0); //update current weight
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+
+				try {
+					if (AppConstants.IS_IO_SIMULATED == true) {
+						simulateMessage();
+					} else {
+						handler.sendEmptyMessage(0); //update current weight
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
 					}
+				}catch (Exception e){
 
 				}
 			}
@@ -150,6 +155,9 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	private ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
+
+		Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
 		if(!communicationThread.isAlive()){
 			communicationThread.start();
 			if(AppConstants.IS_IO_SIMULATED == false) {
@@ -170,6 +178,9 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		  if(message.length()>5) {
 				rawResponse = message;
 				lastWeightReceived = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
+			  if(lastWeightReceived== 0){
+				  lastWeightReceived = +0;
+			  }
 
 			}
 
