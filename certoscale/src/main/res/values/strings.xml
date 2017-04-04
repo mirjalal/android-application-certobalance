@@ -931,6 +931,7 @@
     <string name="changing_weighing_unit">Changing_weighing_unit</string>
     <string name="start_the_internal_calibration_of_the_balance">Start the internal calibration of the balance</string>
     <string name="this_function_will_be_available_in_the_next_release">This function will be available in the next release</string>
+    <string name="external_calibration">External Calibration</string>
 
 
 </resources>

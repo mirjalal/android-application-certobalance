@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_gadient"
+	android:descendantFocusability="blocksDescendants"
     >
 
     
@@ -12,11 +13,13 @@
     	android:layout_height="match_parent"
     	android:layout_width="match_parent"
     	android:layout_below="@+id/navigationbar"
-		android:clickable="false"
+		android:descendantFocusability="blocksDescendants">
+		<!--android:clickable="false"
 		android:descendantFocusability="blocksDescendants"
 		android:focusable="false"
 		android:focusableInTouchMode="false"
-		>
+-->
+
 
 
 		<LinearLayout
@@ -24,7 +27,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="60dp"
 			android:orientation="horizontal"
-			android:background="@drawable/background_gadient">
+			android:background="@drawable/background_gadient"
+			android:descendantFocusability="blocksDescendants">
 			<TextView
 				android:id="@+id/menu_main_item_edit_element_artnumber"
 				android:layout_width="120dp"
@@ -33,6 +37,9 @@
 				android:gravity="center_vertical"
 				android:textStyle="bold"
 				android:inputType="text"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
 				style="@style/text_default"/>
 
 			<TextView
@@ -43,6 +50,9 @@
 				android:gravity="center_vertical"
 				android:text="Name"
 				android:inputType="text"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
 				android:textStyle="bold"/>
 
 			<TextView
@@ -53,6 +63,9 @@
 				android:gravity="center_vertical"
 				android:text="Cost"
 				android:inputType="text"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
 				android:textStyle="bold"/>
 
 
@@ -66,6 +79,9 @@
 				android:gravity="center_vertical"
 				android:text="Weight"
 				android:inputType="text"
+				android:clickable="false"
+				android:focusable="false"
+				android:focusableInTouchMode="false"
 				android:textStyle="bold"/>
 
 

@@ -398,6 +398,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				//Scale.getInstance().getSerialsServiceScale().resetConnection();
 				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
+				break;
 
 			case "2":
 				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
@@ -422,8 +423,15 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
 
+
+
 				break;
+
+
+
 		}
+
+		//Toast.makeText(this, modelValue, Toast.LENGTH_LONG).show();
 
 		fillDatabaseIfEmpty();
 
