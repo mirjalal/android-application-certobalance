@@ -20,6 +20,7 @@ public class ScaleModelGandG extends ScaleModel {
         maximumCapazity=5000;
         decimalPlaces=1;
         stabilisationTime=1;
+        setPeriodicMessagingEnabled(true);
     }
 
     /*
@@ -43,7 +44,7 @@ public class ScaleModelGandG extends ScaleModel {
         this.comDataBits=comDataBits;
         this.comParity=comParity;
         this.comStopBits=comStopBits;
-
+        setPeriodicMessagingEnabled(true);
         this.hasZerobutton=hasZerobutton;
 
 
@@ -92,25 +93,35 @@ public class ScaleModelGandG extends ScaleModel {
 
     @Override
     public double parseRecievedMessage(String message) {
-                int sign=1;
+        int sign=1;
         double value=0;
         if(message.length()>5) {
-            //Log.e("ReadAndParse", "received: " + message);
+            try {
+                if (message.contains("-")) {
+                    sign = -1;
+                }
+
+                if (message.contains("g")) {
+                    stable = true;
+                } else {
+                     stable = false;
+                }
+            }catch (Exception e){
+
+            }
+
             String[] arguments = message.split(" ");
             if (arguments.length != 0) {
                 for (String arg : arguments) {
 
-                    if (arg.equals("-")){
-                        sign=-1;
-                    }
 
 
                     if (arg.length() > 2 && arg.contains(".")) {
                         try {
                             value = Double.parseDouble(arg);
+                            break;
                         } catch (Exception e) {
                             value = 0d;
-                            //Log.e("ReadAndParseSerialServ", "Error parsing Double");
                         }
                     }
                 }
@@ -125,6 +136,7 @@ public class ScaleModelGandG extends ScaleModel {
 
     @Override
     public int  internalCalibration() {
+
         ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
         return 0;
     }
@@ -132,12 +144,8 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int externelCalibration(Context context) {
 
+        setPeriodicMessagingEnabled(false);
 
-        try{
-            Thread.sleep(200);
-        }catch(Exception e){
-
-        }
 
         double chosenValue=0;
 
@@ -157,6 +165,7 @@ public class ScaleModelGandG extends ScaleModel {
                 public void onClick(View v) {
                     pressTara();
                     dialog3.dismiss();
+                    setPeriodicMessagingEnabled(true);
 
                 }
             });
@@ -169,6 +178,7 @@ public class ScaleModelGandG extends ScaleModel {
                 public void onClick(View v) {
                     pressTara();
                     dialog3.dismiss();
+                    setPeriodicMessagingEnabled(true);
                 }
             });
 
@@ -240,10 +250,8 @@ public class ScaleModelGandG extends ScaleModel {
                 public void onClick(View v) {
 
                     double chosenValue=2000;
-//                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
- //                   ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog.dismiss();
                     try {
                         dialog2.show();
@@ -263,9 +271,8 @@ public class ScaleModelGandG extends ScaleModel {
 
 
                     double chosenValue=5000;
-               //     ReadAndParseSerialService.getInstance().startParseSerialThread();
+
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
-               //     ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog.dismiss();
                     try{
                     dialog2.show();

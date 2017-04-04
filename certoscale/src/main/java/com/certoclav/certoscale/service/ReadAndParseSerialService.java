@@ -7,6 +7,7 @@ import android.util.Log;
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
+import com.certoclav.certoscale.model.ScaleModelGandG;
 
 import java.util.ArrayList;
 
@@ -65,14 +66,13 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 		 
         public void handleMessage(Message msg) {
 
-			Log.e("ReadAndParseSerialSe", "upate value " + value);
-			Log.e("ReadAndParseSerialSe", "upate lastweight " + lastWeightReceived);
+			Log.e("ReadAndParseSerialSe", " "+ value);
 
 			valueDiff = lastWeightReceived - value;
         	value = lastWeightReceived - (valueDiff/3.0);
 
         	Scale.getInstance().setValue(value, rawResponse);
-			if(Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam) {
+			if(Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam || Scale.getInstance().getScaleModel() instanceof ScaleModelGandG) {
 				Scale.getInstance().setStable(Scale.getInstance().getScaleModel().isStable());
 			}
 			
@@ -122,7 +122,9 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 								commandQueue.remove(0);
 							} else {
 								if(Scale.getInstance().getScaleModel().isCommandResponse() == true) {
-									Scale.getInstance().getScaleModel().sendPrintCommand(); //send print command every 300ms
+									if(Scale.getInstance().getScaleModel().isPeriodicMessagingEnabled()) {
+										Scale.getInstance().getScaleModel().sendPrintCommand(); //send print command every 300ms
+									}
 								}
 							}
 

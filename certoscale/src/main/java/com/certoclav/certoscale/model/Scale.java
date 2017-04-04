@@ -1,9 +1,7 @@
 package com.certoclav.certoscale.model;
 
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
@@ -12,7 +10,6 @@ import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.listener.WifiListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
-import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -93,6 +90,7 @@ public class Scale extends Observable {
 	private ScaleState state = ScaleState.OFF; //default init state is READY_AND_WAITING_FOR_LOGIN
 
 	private Double weightInGram = 0d; //raw value reiceived from Serial port of the balance
+
 
 
 	public User getUser() {

@@ -55,6 +55,15 @@ public abstract class ScaleModel {
 
 
 	boolean hasZerobutton;
+	public boolean isPeriodicMessagingEnabled() {
+		return isPeriodicMessagingEnabled;
+	}
+
+	public void setPeriodicMessagingEnabled(boolean periodicMessagingEnabled) {
+		isPeriodicMessagingEnabled = periodicMessagingEnabled;
+	}
+
+	private boolean isPeriodicMessagingEnabled = false;
 
 
 	abstract public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime,  int comBaudrate, int comDataBits,int comParity,int comStopBits,boolean hasZerobutton);
@@ -62,6 +71,7 @@ public abstract class ScaleModel {
 	abstract public int sendOnOffCommand();
 	abstract public int sendModeCommand();
 	abstract public int sendPrintCommand();
+
 
 
 	abstract public int pressTara();
