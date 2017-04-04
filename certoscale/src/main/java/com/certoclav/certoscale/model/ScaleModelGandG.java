@@ -81,16 +81,7 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int pressTara() {
 
-        ReadAndParseSerialService.getInstance().pauseParseSerialThread();
-
         ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ReadAndParseSerialService.getInstance().startParseSerialThread();
-
         return 0;
     }
 
@@ -141,7 +132,6 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int externelCalibration(Context context) {
 
-        ReadAndParseSerialService.getInstance().pauseParseSerialThread();
 
         try{
             Thread.sleep(200);
@@ -165,10 +155,7 @@ public class ScaleModelGandG extends ScaleModel {
 
                 @Override
                 public void onClick(View v) {
-
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     pressTara();
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog3.dismiss();
 
                 }
@@ -180,9 +167,7 @@ public class ScaleModelGandG extends ScaleModel {
             dialogButton23.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     pressTara();
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog3.dismiss();
                 }
             });
@@ -202,9 +187,7 @@ public class ScaleModelGandG extends ScaleModel {
                 @Override
                 public void onClick(View v) {
 
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     pressTara();
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog2.dismiss();
                     try {
                         dialog3.show();
@@ -221,9 +204,7 @@ public class ScaleModelGandG extends ScaleModel {
             dialogButton22.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     pressTara();
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog2.dismiss();
                     try {
                         dialog3.show();
@@ -259,10 +240,10 @@ public class ScaleModelGandG extends ScaleModel {
                 public void onClick(View v) {
 
                     double chosenValue=2000;
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+//                    ReadAndParseSerialService.getInstance().startParseSerialThread();
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+ //                   ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog.dismiss();
                     try {
                         dialog2.show();
@@ -282,9 +263,9 @@ public class ScaleModelGandG extends ScaleModel {
 
 
                     double chosenValue=5000;
-                    ReadAndParseSerialService.getInstance().startParseSerialThread();
+               //     ReadAndParseSerialService.getInstance().startParseSerialThread();
                     ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
-                    ReadAndParseSerialService.getInstance().pauseParseSerialThread();
+               //     ReadAndParseSerialService.getInstance().pauseParseSerialThread();
                     dialog.dismiss();
                     try{
                     dialog2.show();
@@ -308,7 +289,6 @@ public class ScaleModelGandG extends ScaleModel {
 
 
 
-        ReadAndParseSerialService.getInstance().startParseSerialThread();
 
         return 0;
     }

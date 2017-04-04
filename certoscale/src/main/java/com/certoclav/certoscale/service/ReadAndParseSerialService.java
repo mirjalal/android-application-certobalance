@@ -83,18 +83,37 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	private int counter = 0;
 	private int counter2 = 0;
 
+	/*
+	*
+	* This thread sends every 100ms the interpolated current weight to the Scale model
+	*
+	 */
+	private Thread interpolationThread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while (true) {
+				if (AppConstants.IS_IO_SIMULATED == true) {
+					simulateMessage();
+				} else {
+					handler.sendEmptyMessage(0); //update current weight
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-	private Thread serialThread = new Thread(new Runnable() {
+				}
+			}
+		}
+	});
+
+
+
+	private Thread communicationThread = new Thread(new Runnable() {
 		@Override
 		public void run() {
 			while(true) {
-				if(AppConstants.IS_IO_SIMULATED == true){
-					simulateMessage();
-				}else {
-
-					handler.sendEmptyMessage(0); //update current weight
-
-
 
 					try {
 
@@ -103,7 +122,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 								commandQueue.remove(0);
 							} else {
 								if(Scale.getInstance().getScaleModel().isCommandResponse() == true) {
-									Scale.getInstance().getScaleModel().sendPrintCommand();
+									Scale.getInstance().getScaleModel().sendPrintCommand(); //send print command every 300ms
 								}
 							}
 
@@ -112,11 +131,10 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 						e.printStackTrace();
 					}
 
-				}
 
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(300);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -130,32 +148,18 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 	private ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
-		if(!serialThread.isAlive()){
-			serialThread.start();
+		if(!communicationThread.isAlive()){
+			communicationThread.start();
 			if(AppConstants.IS_IO_SIMULATED == false) {
 				Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 				Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 			}
 		}
-	}
-
-	public void startParseSerialThread(){
-
-		if(!serialThread.isAlive()){
-			serialThread.start();
-			Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
-			Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
+		if(!interpolationThread.isAlive()){
+			interpolationThread.start();
 		}
-
-
-
 	}
 
-	public void pauseParseSerialThread(){
-
-		serialThread.interrupt();
-	}
 
 	@Override
 	public void onMessageReceived(String message) {
