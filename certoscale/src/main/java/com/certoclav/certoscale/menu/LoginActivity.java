@@ -66,8 +66,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android_serialport_api.SerialService;
-
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class LoginActivity extends Activity implements ButtonEventListener, PutUserLoginTaskFinishedListener {
@@ -179,7 +177,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
 				Scale.getInstance().getScaleModel().initializeParameters(6000,1,1,9600,8,0,1,false);
 				Scale.getInstance().getScaleModel().pressZero();
-				Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
+				Scale.getInstance().getSerialsServiceScale();//.setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
 				//Scale.getInstance().getSerialsServiceScale().resetConnection();
 				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 				break;
@@ -210,7 +208,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				break;
 		}
 
-
+        ReadAndParseSerialService.getInstance();
 
 
 
