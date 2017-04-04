@@ -3,7 +3,7 @@
     <Preference
         android:key="@string/preferences_calibration_internal"
         android:title="@string/internal_calibration"
-        android:summary="@string/only_possible_after_warm_up_and_with_empty_pan" />
+        android:summary="@string/start_the_internal_calibration_of_the_balance" />
 
 
 

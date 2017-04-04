@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
@@ -37,6 +38,68 @@ private SharedPreferences prefs = null;
                 return false;
             }
         });
+
+
+
+        ((Preference) findPreference(getString(R.string.preferences_calibration_internal))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                    Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+        ((Preference) findPreference(getString(R.string.preferences_calibration_automatic))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+        ((Preference) findPreference(getString(R.string.preferences_calibration_automatic))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+        ((Preference) findPreference(getString(R.string.preferences_calibration_span))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+
+        ((Preference) findPreference(getString(R.string.preferences_calibration_test))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
 
     }
 

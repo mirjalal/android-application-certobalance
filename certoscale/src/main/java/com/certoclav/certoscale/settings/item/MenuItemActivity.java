@@ -53,6 +53,9 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
 
 
         adapter = new ItemAdapter(this,new ArrayList<Item>());
+
+
+
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
