@@ -221,6 +221,8 @@ private SharedPreferences prefs = null;
                         //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
 
+
+
                         break;
                 }
 
