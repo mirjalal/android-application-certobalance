@@ -98,7 +98,7 @@
         <string name="title_choose_language">SPACHE WÄHLEN</string>
         <string name="title_change_date_time">DATUM &amp; UHRZEIT ÄNDERN</string>
         <string name="step_by_step_guide">SCHRITT FÜR SCHRITT ASSISTENT</string>
-        <string name="settings_storage">SPEICHER</string>
+        <string name="settings_storage">Speicher</string>
         <string name="settings_date_and_time">Datum &amp; Uhrzeit</string>
         <string name="settings_factory_reset">Werkszustand wiederherstellen</string>
         <string name="settings_restore_device_to_its_original_manufacturer_setting">Setze das Gerät in seinen ursprünglichen Werkszustand zurück</string>
@@ -312,7 +312,18 @@
 
 
     <string name="venting">Entlüften</string>
+    <string name="by_email">via E-Mail</string>
+    <string name="by_sms">via SMS</string>
+    <string name="can_not_read_usb_flash_disk">Es wurde kein USB-Stick erkannt</string>
+    <string name="changes_could_not_be_saved">Änderungen konnten nicht gespeichert</string>
+    <string name="changes_successfully_saved">Änderungen wurden übernommen</string>
+    <string name="choose_a_program_from">"Wählen Sie ein Programm "</string>
+    <string name="connected">Verbunden</string>
+    <string name="create_new_program">Neues Programm erstellen</string>
+    <string name="define_a_new_program">Definieren Sie ein neues Programm</string>
+    <string name="firmware_version">Firmware Version</string>
+    <string name="network_not_connected">Netzwerk nicht verbunden</string>
+    <string name="not_able_to_connect_to_certocloud">Verbindung mit der CertoCloud nicht möglich</string>
 
-    
 
 </resources>

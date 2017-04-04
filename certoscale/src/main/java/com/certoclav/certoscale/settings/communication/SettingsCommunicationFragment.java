@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
@@ -62,6 +63,43 @@ private SharedPreferences prefs = null;
             }
         });
 
+
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_baudrate))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.these_changes_will_be_applied_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_transmission_standard))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.these_changes_will_be_applied_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_handshake))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.these_changes_will_be_applied_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+
+
+
         SerialService serialService=Scale.getInstance().getSerialsServiceSics();
 
         ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +"1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
@@ -105,6 +143,16 @@ private SharedPreferences prefs = null;
             }
         });
 
+        ((Preference) findPreference(getString(R.string.preferences_communication_socket_connected))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Toast.makeText(getActivity(), R.string.these_changes_will_be_applied_in_the_next_release, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
 
     }
 

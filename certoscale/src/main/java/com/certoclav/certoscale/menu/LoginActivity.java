@@ -357,6 +357,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 						protected void onPreExecute() {
 							buttonLogin.setEnabled(false);
 							progressBar.setVisibility(View.VISIBLE);
+
 							super.onPreExecute();
 						}
 
