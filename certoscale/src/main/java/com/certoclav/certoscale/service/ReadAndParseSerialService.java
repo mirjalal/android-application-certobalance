@@ -98,14 +98,15 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 						simulateMessage();
 					} else {
 						handler.sendEmptyMessage(0); //update current weight
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
 					}
+
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}catch (Exception e){
 
 				}
@@ -193,10 +194,12 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 				counter--;
 				counter2++;
+				Scale.getInstance().getScaleModel().setStable(true);
 			}
 			if (counter2>25){
 				counter++;
 				counter2=0;
+				Scale.getInstance().getScaleModel().setStable(false);
 			}
 
 
