@@ -19,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -72,11 +73,17 @@ private SharedPreferences prefs = null;
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Intent intent = new Intent(Intent.ACTION_MAIN);
+           /*     Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.setClassName("com.android.settings", "com.android.settings.LanguageSettings");
                 getActivity().startActivity(intent);
                // Intent intent = new Intent(getActivity(), SettingsLanguagePickerActivity.class);
                // getActivity().startActivity(intent);
+            */
+
+                Intent i = new Intent();
+                i.setAction(android.provider.Settings.ACTION_LOCALE_SETTINGS);
+                i.addCategory(Intent.CATEGORY_DEFAULT);
+                getActivity().startActivity(i);
 
                 return false;
             }

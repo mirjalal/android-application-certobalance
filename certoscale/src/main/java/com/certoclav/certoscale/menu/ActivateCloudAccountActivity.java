@@ -145,7 +145,7 @@ public class ActivateCloudAccountActivity extends Activity {
 
 
 				if (!editActivationKeyItem.hasValidString()) {
-					Toast.makeText(ActivateCloudAccountActivity.this, "Entered code is not valid", Toast.LENGTH_LONG).show();
+					Toast.makeText(ActivateCloudAccountActivity.this, R.string.entered_code_is_not_valid, Toast.LENGTH_LONG).show();
 					return;
 				}
 
@@ -185,10 +185,10 @@ public class ActivateCloudAccountActivity extends Activity {
 					protected void onPostExecute(Boolean result) {
 						buttonActivateAccount.setEnabled(true);
 						if (result) {
-							Toast.makeText(ActivateCloudAccountActivity.this, "Account successfully activiated", Toast.LENGTH_LONG).show();
+							Toast.makeText(ActivateCloudAccountActivity.this, R.string.account_successfully_activated, Toast.LENGTH_LONG).show();
 							finish();
 						} else {
-							Toast.makeText(ActivateCloudAccountActivity.this, "Account activation failed", Toast.LENGTH_LONG).show();
+							Toast.makeText(ActivateCloudAccountActivity.this, R.string.account_activation_failed, Toast.LENGTH_LONG).show();
 						}
 						super.onPostExecute(result);
 					}

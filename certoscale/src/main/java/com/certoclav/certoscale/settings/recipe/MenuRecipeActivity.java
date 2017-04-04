@@ -100,6 +100,7 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
 
         DatabaseService db = new DatabaseService(this);
 
+        navigationbar.getTextTitle().setText(getString(R.string.recipes).toUpperCase()+" "+db.getRecipes().size());
 
         List<Recipe> recipes = db.getRecipes();
        if(recipes != null) {

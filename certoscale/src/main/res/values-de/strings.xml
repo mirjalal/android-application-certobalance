@@ -593,4 +593,15 @@
     <string name="user_calibration">Benutzerkalibrierung</string>
     <string name="wait_until_the_weight_is_stable">Warten Sie bis der Wert stabil ist</string>
     <string name="the_value_must_be_higher_than_zero">Der Wert muss größer als Null sein</string>
+    <string name="account_activation_failed">Accountaktivierung fehlgeschlagen</string>
+    <string name="account_successfully_activated">Account erfolgreich aktiviert</string>
+    <string name="entered_code_is_not_valid">Der eingegebene Code ist nicht gültig</string>
+    <string name="email_already_exists">E-Mail existiert bereits</string>
+    <string name="failed_to_apply_changes">Änderungen konnten nicht übernommen werde</string>
+    <string name="first_name">Vorname</string>
+    <string name="last_name">Nachname</string>
+    <string name="mobile">Mobil</string>
+    <string name="mobile_number">Mobilnummer</string>
+    <string name="sign_up_account_failed">Accountanmeldung fehlgeschlagen</string>
+    <string name="the_weight_values_must_be_higher_than_zero">Die Gewichtswerte müssen größer als Null sein</string>
 </resources>

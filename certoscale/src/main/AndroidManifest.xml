@@ -207,7 +207,9 @@
         <activity android:name=".settings.protocol.MenuProtocolActivity"
             android:screenOrientation="sensorLandscape"></activity>
         <activity android:name=".settings.labels.MenuLabelPrinterActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustResize"
+            ></activity>
 
         <activity android:name=".menu.VideoActivity"
         android:screenOrientation="sensorLandscape"
