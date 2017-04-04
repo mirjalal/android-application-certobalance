@@ -42,6 +42,8 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
       //  buttonSave = (Button) rootView.findViewById(R.id.settings_filling_button_save);
         buttonCancel = (Button) rootView.findViewById(R.id.settings_filling_button_cancel);
         buttonCancel.setVisibility(View.INVISIBLE);
+        buttonCancel.setText(getString(R.string.cancel).toUpperCase());
+
         textInstruction = (TextView) rootView.findViewById(R.id.settings_filling_text_instruction);
         textInstruction.setVisibility(View.INVISIBLE);
         buttonCalculateTarget = (Button) rootView.findViewById(R.id.settings_filling_button_calc_target);

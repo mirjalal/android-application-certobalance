@@ -469,10 +469,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					getButtonAppSettings().setText(getString(R.string.settings_button).toUpperCase());
 
 					switch (Scale.getInstance().getScaleApplication()){
-
+						/*
 						case PART_COUNTING_CALC_AWP:
 							Scale.getInstance().setScaleApplication(PART_COUNTING);
-							break;
+							break;*/
 						case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							break;
 
@@ -953,6 +953,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setVisibility(View.GONE);
 				buttonStart.setEnabled(true);
 				buttonResult.setVisibility(View.GONE);
+				buttonAppSettings.setEnabled(false);
 				break;
 			case ANIMAL_WEIGHING:
 

@@ -163,6 +163,7 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Scale.getInstance().setScaleApplication(ScaleApplication.PERCENT_WEIGHING);
+
                         onResume();
                     }
                 });
