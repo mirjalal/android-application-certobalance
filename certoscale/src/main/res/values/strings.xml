@@ -928,6 +928,7 @@
     <string name="calibration_with_two_calibration_points_follow_the_screen_instructions">Calibration with two calibration points. Follow the screen instructions.</string>
     <string name="calibrate_the_balance_using_a_user_defined_mass">Calibrate the balance using a user defined mass. Follow the screen instructions</string>
     <string name="Compare_known_calibration_weight_against_stored_span_calibration_data">Compare known calibration weight against stored span calibration data</string>
+    <string name="changing_weighing_unit">Changing_weighing_unit</string>
 
 
 </resources>
