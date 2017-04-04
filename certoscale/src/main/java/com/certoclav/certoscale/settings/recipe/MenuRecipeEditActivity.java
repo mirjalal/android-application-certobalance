@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeElementAdapter;
@@ -18,6 +19,7 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -180,7 +182,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         if(buttonId == ActionButtonbarFragment.BUTTON_ADD){
-            adapter.add(new RecipeEntry(" ",0d,0," ","g"," ",0d));
+            adapter.add(new RecipeEntry(" ",1.0d,0," ","g"," ",0d));
             adapter.notifyDataSetChanged();
         }
         if(buttonId == ActionButtonbarFragment.BUTTON_SAVE){
@@ -216,6 +218,10 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                             RecipeEntry recipeEntry=adapter.getItem(i);
                            recipeEntry.setInstruction(getString(R.string.pleas_put)+" "+recipeEntry.getWeight()+getString(R.string.g_of)+recipeEntry.getDescription()+" "+getString(R.string.on_the_pan_and_press_next));
                             recipeEntries.add(recipeEntry);
+                            if (recipeEntry.getWeight()==0){
+                                Toast.makeText(ApplicationController.getContext(),getString(R.string.the_weight_values_must_be_higher_than_zero), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                         }
                         Date date = new Date();
                         recipe = new Recipe("",textRecipeName.getText().toString(),recipeEntries,((Long)date.getTime()).toString(),Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());

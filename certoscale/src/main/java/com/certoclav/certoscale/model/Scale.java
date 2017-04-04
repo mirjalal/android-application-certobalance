@@ -45,7 +45,7 @@ public class Scale extends Observable {
 	//private ScaleModel scaleModel=null;
 	//ScaleModelDandT modelDandT =new ScaleModelDandT();
 	//scaleModel=(ScaleModel) modelDandT;
-	private  ScaleModel scaleModel =(ScaleModel) new ScaleModelDandT();
+	private  ScaleModel scaleModel =(ScaleModel) new ScaleModelAEAdam();
 
 
 
@@ -208,9 +208,16 @@ public class Scale extends Observable {
 	}
 
 
+	public void setSerialsServiceScale(){
+		serialServiceScale = new SerialService("/dev/ttymxc3",getScaleModel().comBaudrate); //COM4
+
+		serialServiceScale.setStringTerminatin("\n");
+	}
+
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
-			serialServiceScale = new SerialService("/dev/ttymxc3",9600); //COM4
+			serialServiceScale = new SerialService("/dev/ttymxc3",getScaleModel().comBaudrate); //COM4
+
 			serialServiceScale.setStringTerminatin("\n");
 		}
 		return serialServiceScale;
@@ -226,6 +233,7 @@ public class Scale extends Observable {
 
 	public SerialService getSerialsServiceLabelPrinter() {
 		if(serialServiceLabelPrinter == null){
+
 			serialServiceLabelPrinter = new SerialService("/dev/ttymxc1",9600);//COM2
 		}
 		return serialServiceLabelPrinter;

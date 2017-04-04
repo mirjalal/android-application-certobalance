@@ -280,8 +280,12 @@ protected void onPause() {
 
 				break;
 			case ActionButtonbarFragment.BUTTON_ACCUMULATE:
-				ApplicationManager.getInstance().accumulateStatistics();
-				actionButtonbarFragment.updateStatsButtonUI();
+				if (Scale.getInstance().isStable()) {
+					ApplicationManager.getInstance().accumulateStatistics();
+					actionButtonbarFragment.updateStatsButtonUI();
+				}else {
+					Toast.makeText(this, getString(R.string.wait_until_the_weight_is_stable), Toast.LENGTH_SHORT).show();
+				}
 				break;
 			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {

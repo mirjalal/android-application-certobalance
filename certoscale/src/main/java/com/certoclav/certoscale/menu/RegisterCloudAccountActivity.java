@@ -100,7 +100,7 @@ private EditTextItem editLastName;
 		
 		
 		editFirstName = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
-		editFirstName.setHint("First name");	
+		editFirstName.setHint(getString(R.string.first_name));
 		editFirstName.addTextChangedListner(new TextWatcher() {
 			
 			@Override
@@ -127,7 +127,7 @@ private EditTextItem editLastName;
 		
 	
 		editLastName = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
-		editLastName.setHint("Last name");	
+		editLastName.setHint(getString(R.string.last_name));
 		editLastName.addTextChangedListner(new TextWatcher() {
 			
 			@Override
@@ -153,7 +153,7 @@ private EditTextItem editLastName;
 		
 		
 		editMobile = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
-		editMobile.setHint("Mobile number");	
+		editMobile.setHint(getString(R.string.mobile_number));
 		editMobile.addTextChangedListner(new TextWatcher() {
 			
 			@Override
@@ -254,7 +254,7 @@ private EditTextItem editLastName;
 				for(User user : databaseService.getUsers()){
 					if(editEmailItem.getText().equals(user.getEmail())){
 						isEmailAlreadyExists = true;
-						Toast.makeText(RegisterCloudAccountActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
+						Toast.makeText(RegisterCloudAccountActivity.this, getString(R.string.email_already_exists), Toast.LENGTH_LONG).show();
 					}
 				}
 				
@@ -334,7 +334,7 @@ private EditTextItem editLastName;
 			                      Toast.LENGTH_LONG).show();
 							finish();
 						}else{
-							Toast.makeText(getApplicationContext(), "Sign up account failed",
+							Toast.makeText(getApplicationContext(), R.string.sign_up_account_failed,
 				                      Toast.LENGTH_LONG).show();	
 						}
 						super.onPostExecute(result);

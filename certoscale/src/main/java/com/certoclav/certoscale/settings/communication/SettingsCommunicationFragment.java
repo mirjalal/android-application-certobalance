@@ -66,37 +66,44 @@ private SharedPreferences prefs = null;
 
         ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +"1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
 
-/*
-        ((Preference) findPreference(getString(R.string.preferences_communication_list_devices))).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_list_baudrate))).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-
-                String key = "preferences_communication_list_devices";
+/*
+                String key = getString(R.string.preferences_communication_list_baudrate);
                 String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+                int baudrate=9600;
                 switch (modelValue) {
                     case "1":
-                        ScaleModelGandG modelGandG=new ScaleModelGandG();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-                        Scale.getInstance().getScaleModel().initializeParameters();
+                        baudrate=2400;
                         break;
 
                     case "2":
-                        ScaleModelDandT modelDandT=new ScaleModelDandT();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
-                        Scale.getInstance().getScaleModel().initializeParameters();
+                        baudrate=4800;
                         break;
 
                     case "3":
-                        ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
-                        Scale.getInstance().getScaleModel().initializeParameters();
+                        baudrate=9600;
+                        break;
+                    case "4":
+                        baudrate=19200;
+                        break;
+                    case "5":
+                        baudrate=38400;
                         break;
                 }
 
 
+                Scale.getInstance().getSerialsServiceLabelPrinter().setBaudrate(baudrate);
+                Scale.getInstance().getSerialsServiceLabelPrinter().resetConnection();
+
+                Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(baudrate);
+                Scale.getInstance().getSerialsServiceProtocolPrinter().resetConnection();
+*/
                 return true;
             }
-        });*/
+        });
 
 
     }

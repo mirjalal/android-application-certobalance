@@ -81,6 +81,9 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         Scale.getInstance().setOnDatabaseListener(this);
 
         DatabaseService db = new DatabaseService(this);
+
+        navigationbar.getTextTitle().setText(getString(items).toUpperCase()+" "+db.getItems().size());
+
         List<Item> items = db.getItems();
         if(items != null){
             for(Item item : items){

@@ -148,7 +148,7 @@ private EditTextItem editLastName;
 		
 		
 		editMobile = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
-		editMobile.setHint("mobile");
+		editMobile.setHint(getString(R.string.mobile));
 		editMobile.addTextChangedListner(new TextWatcher() {
 			
 			@Override
@@ -247,7 +247,7 @@ private EditTextItem editLastName;
 					for (User user : databaseService.getUsers()) {
 						if (editEmailItem.getText().equals(user.getEmail())) {
 							isEmailAlreadyExists = true;
-							Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_LONG).show();
+							Toast.makeText(RegisterActivity.this, R.string.email_already_exists, Toast.LENGTH_LONG).show();
 						}
 					}
 				}
@@ -277,7 +277,7 @@ private EditTextItem editLastName;
 					DatabaseService db = new DatabaseService(RegisterActivity.this);
 					int retval = db.deleteUser(db.getUserById(getIntent().getExtras().getInt(AppConstants.INTENT_EXTRA_USER_ID)));
 					if(retval != 1){
-						Toast.makeText(RegisterActivity.this, "Failed to apply changes", Toast.LENGTH_LONG).show();
+						Toast.makeText(RegisterActivity.this, R.string.failed_to_apply_changes, Toast.LENGTH_LONG).show();
 						return;
 					}
 				}
