@@ -12,6 +12,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="button_transparent">
+        <item name="android:background">@drawable/btn_transparent</item>
+    </style>
+
+
     <style name="button_alert">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">#ffffff</item>

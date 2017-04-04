@@ -93,12 +93,21 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 		LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.user_list_element_container_button);
 			
 		actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+		actionItemDelete.setFocusableInTouchMode(false);
+		actionItemDelete.setFocusable(false);
+
 		containerItems.addView(actionItemDelete);
 
 		actionItemEdit = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+		actionItemEdit.setFocusableInTouchMode(false);
+		actionItemEdit.setFocusable(false);
+
 		containerItems.addView(actionItemEdit);
 		
 		actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems,false);
+		actionItemPrint.setFocusableInTouchMode(false);
+		actionItemPrint.setFocusable(false);
+
 		containerItems.addView(actionItemPrint);
 
 

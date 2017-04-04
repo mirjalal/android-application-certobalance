@@ -33,8 +33,7 @@
 		android:textScaleX="1.375"
 
 		android:layout_weight="1"
-		android:hint="Label"
-		android:text="Text1"
+		android:hint="Barcode"
 		android:maxLength="15"
 		android:gravity="left"
 		android:imeOptions="actionDone"
@@ -51,10 +50,8 @@
             android:layout_height="40dp"
 			android:textSize="40dp"
 			android:textScaleX="1.375"
-
             android:layout_weight="1"
-            android:hint="Label"
-            android:text="Text2"
+            android:hint="Text"
 			android:maxLength="15"
 			android:gravity="left"
 			android:imeOptions="actionDone"
@@ -76,14 +73,13 @@
 
 	<Button
 		android:id="@+id/menu_main_label_button_print"
-		android:layout_width="match_parent"
-		android:layout_height="50dp"
+		android:layout_width="150dp"
+		android:layout_height="70dp"
 		android:layout_weight="1"
 		android:text="@string/print"
 		style="@style/button_default"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true"
-		android:layout_alignParentEnd="true" />
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
 

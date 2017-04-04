@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.menu.VideoActivity;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.MenuElement;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.settings.calibration.SettingsCalibrationActivity;
@@ -21,7 +20,6 @@ import com.certoclav.certoscale.settings.communication.SettingsCommunicationActi
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.settings.glp.SettingsGlpActivity;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
-import com.certoclav.certoscale.settings.labels.MenuLabelPrinterActivity;
 import com.certoclav.certoscale.settings.labels.MenuLabelPrinterActivity;
 import com.certoclav.certoscale.settings.library.MenuLibraryActivity;
 import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
@@ -68,8 +66,8 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 		}
 		TextView textView = (TextView) convertView.findViewById(R.id.menu_main_element_text);
 		textView.setText(getItem(position).getMenuText());
-		ImageView imageView = (ImageView) convertView.findViewById(R.id.menu_main_element_image);
-		imageView.setImageResource(getItem(position).getImageResId());
+		ImageView ImageView = (ImageView) convertView.findViewById(R.id.menu_main_element_image);
+		ImageView.setImageResource(getItem(position).getImageResId());
 
 
 
