@@ -171,13 +171,13 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
 		navigationbar.getButtonCompanyLogo().setVisibility(View.VISIBLE);
 		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
 		switch (modelValue) {
 			case "1":
 				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
 				ScaleModelGandG modelGandG=new ScaleModelGandG();
 				Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-				Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
+				Scale.getInstance().getScaleModel().initializeParameters(6000,1,1,9600,8,0,1,false);
 				Scale.getInstance().getScaleModel().pressZero();
 				Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
 				//Scale.getInstance().getSerialsServiceScale().resetConnection();

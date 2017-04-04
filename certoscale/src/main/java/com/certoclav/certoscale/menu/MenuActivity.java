@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -110,17 +111,17 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
 
         String key = "preferences_communication_list_devices";
-        String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "");
+        String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
         switch (modelValue) {
             case "1":
                 navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
                 ScaleModelGandG modelGandG=new ScaleModelGandG();
                 Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-                Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
+                Scale.getInstance().getScaleModel().initializeParameters(6000,1,1,9600,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
                 Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                Scale.getInstance().getSerialsServiceScale().resetConnection();
-                Scale.getInstance().setSerialsServiceScale();
+                //Scale.getInstance().getSerialsServiceScale().resetConnection();
+                //Scale.getInstance().setSerialsServiceScale();
                 //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
                 break;
@@ -132,8 +133,8 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
                 Scale.getInstance().getScaleModel().pressZero();
                 Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                Scale.getInstance().getSerialsServiceScale().resetConnection();
-                Scale.getInstance().setSerialsServiceScale();
+                //Scale.getInstance().getSerialsServiceScale().resetConnection();
+                //Scale.getInstance().setSerialsServiceScale();
                 //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
                 break;
 
@@ -144,8 +145,10 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                 Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
                 Scale.getInstance().getScaleModel().pressZero();
                 Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                Scale.getInstance().setSerialsServiceScale();
-                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+
+                break;
+            default:
+                    Toast.makeText(this,"Model Value Error", Toast.LENGTH_LONG).show();
                 break;
         }
 
