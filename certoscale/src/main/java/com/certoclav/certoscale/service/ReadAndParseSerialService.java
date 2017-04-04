@@ -156,7 +156,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	private ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
 
-		Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
+		//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
 		if(!communicationThread.isAlive()){
 			communicationThread.start();

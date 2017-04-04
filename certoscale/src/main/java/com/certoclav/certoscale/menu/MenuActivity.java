@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -20,6 +21,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -99,6 +101,21 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     @Override
     protected void onResume() {
 
+        String key = "preferences_communication_list_devices";
+        String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
+        switch (modelValue) {
+            case "1":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
+                break;
+
+            case "2":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
+                break;
+
+            case "3":
+                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
+                break;
+        }
         super.onResume();
     }
 
