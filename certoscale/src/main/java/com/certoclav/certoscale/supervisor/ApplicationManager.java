@@ -15,8 +15,7 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.model.ScaleModel;
-import com.certoclav.certoscale.model.ScaleModelGandG;
+import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
@@ -1024,48 +1023,24 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         Double weight = ApplicationManager.getInstance().getTaredValueInGram();
 
 
-
-        if (Math.abs(weighOld - weight) <= 0.0001 && weight>=0.0004) {
-
-            if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L*Scale.getInstance().getScaleModel().getStabilisationTime()))
-
-                        Scale.getInstance().setStable(true);
+        if (Scale.getInstance().getScaleModel() instanceof ScaleModelAEAdam) {
 
         } else {
-                nanoTimeSinceStable=System.nanoTime();
-                Scale.getInstance().setStable(false);
-        }
-        weighOld = weight;
 
+            if (Math.abs(weighOld - weight) <= 0.0001 && weight >= 0.0004) {
 
+                if ((System.nanoTime() - nanoTimeSinceStable) > (1000000000L * Scale.getInstance().getScaleModel().getStabilisationTime()))
 
+                    Scale.getInstance().setStable(true);
 
-        //Samplingrate Depended stability calculation
-        /*
-            if (Math.abs(weighOld - weight) <= 0.0001) {
-
-               // Log.e("Diff",String.format("%.4f",Math.abs(weighOld - weight)) );
-                if (Scale.getInstance().isStable() == false) {
-                    stableCounter = stableCounter + 1;
-                    if (stableCounter >= 8 && Math.abs(weight) > 0.002) {
-                        if (Math.abs(lastStableweight - weight) > 0.002) {
-                            Scale.getInstance().setStable(true);
-                            stableCounter = 0;
-                            lastStableweight = weight;
-                            // Log.e("Stable", "Stable Stable Stable Stable Stable Stable Stable Stable Stable Stable");
-                        }
-                    }
-                }
             } else {
-
-                stableCounter = 0;
-                if (Scale.getInstance().isStable() == true) {
-                    Scale.getInstance().setStable(false);
-                }
+                nanoTimeSinceStable = System.nanoTime();
+                Scale.getInstance().setStable(false);
             }
             weighOld = weight;
-        */
+
         }
+    }
 
 
     @Override

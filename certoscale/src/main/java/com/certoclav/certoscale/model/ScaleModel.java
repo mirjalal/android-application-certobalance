@@ -12,8 +12,6 @@ public abstract class ScaleModel {
 	public double getStabilisationTime() {return stabilisationTime;}
 	public void setStabilisationTime(double stabilisationTime) {this.stabilisationTime = stabilisationTime;}
 
-
-
 	double maximumCapazity;
 	public double getMaximumCapazity() {return maximumCapazity;}
 	public void setMaximumCapazity(double maximumCapazity) {this.maximumCapazity = maximumCapazity;}
@@ -25,6 +23,15 @@ public abstract class ScaleModel {
 
 	boolean sendsPeriodical;
 
+	public boolean isStable() {
+		return stable;
+	}
+
+	public void setStable(boolean stable) {
+		this.stable = stable;
+	}
+
+	boolean stable;
 	int comBaudrate;
 	public int getComBaudrate() {return comBaudrate;}
 	public void setComBaudrate(int comBaudrate) {this.comBaudrate = comBaudrate;}
@@ -61,8 +68,6 @@ public abstract class ScaleModel {
 	abstract public int pressZero();
 
 	abstract public double parseRecievedMessage(String message);
-
-
 	abstract public int externelCalibration(Context context);
 
 	abstract public int internalCalibration();
@@ -70,6 +75,8 @@ public abstract class ScaleModel {
     //Set mod to weighing, unit to gramm...
     abstract public int initializeScale();
 
+
+	abstract public boolean isCommandResponse();
 
 }
 

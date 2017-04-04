@@ -2,15 +2,12 @@ package com.certoclav.certoscale.model;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 /**
  * Created by Enrico on 22.03.2017.
@@ -74,6 +71,11 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int initializeScale() {
         return 1;
+    }
+
+    @Override
+    public boolean isCommandResponse() {
+        return true;
     }
 
     @Override

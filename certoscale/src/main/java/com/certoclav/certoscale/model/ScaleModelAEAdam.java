@@ -19,8 +19,10 @@ public class ScaleModelAEAdam extends ScaleModel{
         maximumCapazity=600;
         decimalPlaces=2;
         comBaudrate=4800;
+        stable = false;
         comDataBits=8;
         comStopBits=1;
+        Scale.getInstance().getSerialsServiceScale().setStringTerminatin("\r\n\r\n\r\n");
 
         hasZerobutton=true;
 
@@ -69,6 +71,11 @@ public class ScaleModelAEAdam extends ScaleModel{
     }
 
     @Override
+    public boolean isCommandResponse() {
+        return false;
+    }
+
+    @Override
     public int pressTara() {
         Scale.getInstance().getSerialsServiceScale().sendMessage("T\r\n");
         return 0;
@@ -77,7 +84,7 @@ public class ScaleModelAEAdam extends ScaleModel{
     @Override
     public int pressZero() {
 
-        Scale.getInstance().getSerialsServiceScale().sendMessage("Z\r\n");
+       Scale.getInstance().getSerialsServiceScale().sendMessage("Z\r\n");
         return 0;
     }
 
@@ -86,22 +93,27 @@ public class ScaleModelAEAdam extends ScaleModel{
         int sign=1;
         double value=0;
         if(message.length()>5) {
-            Log.e("ReadAndParse", "received: " + message);
-            String[] arguments = message.split(" ");
+             String[] arguments = message.split(" ");
             if (arguments.length != 0) {
                 for (String arg : arguments) {
 
-                    if (arg.equals("-")){
+                    if (arg.contains("-")){
                         sign=-1;
+                    }
+                    if(arg.contains("US")){
+                        stable = false;
+                    }
+                    if(arg.contains("ST")){
+                        stable = true;
                     }
 
 
-                    if (arg.length() > 2 && arg.contains(".")) {
+                    if (arg.length() > 2 && arg.contains(".") && arg.matches("[0-9.]*") ) {
                         try {
                             value = Double.parseDouble(arg);
                         } catch (Exception e) {
                             value = 0d;
-                            Log.e("ReadAndParseSerialServ", "Error parsing Double");
+                            Log.e("ReadAndParseSerialServ", "Error parsing following Double: " + arg);
                         }
                     }
                 }
@@ -113,6 +125,7 @@ public class ScaleModelAEAdam extends ScaleModel{
             }
         return value;
     }
+
 
     @Override
     public int internalCalibration() {
