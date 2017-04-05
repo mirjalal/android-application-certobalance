@@ -32,7 +32,7 @@
         android:title="Firmware version" />
     <Preference
         android:key="@string/preferences_device_serial_number"
-        android:title="Serial number" />
+        android:title="@string/serial_number" />
     <Preference
         android:key="@string/preferences_device_storage"
         android:title="@string/settings_storage" />

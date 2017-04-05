@@ -284,7 +284,7 @@ public class ScaleModelGandG extends ScaleModel {
         final Dialog dialogTareBalance = new Dialog(context);
         dialogTareBalance.setContentView(R.layout.dialog_instruction);
         dialogTareBalance.setTitle(context.getString(R.string.external_calibration));
-        ((TextView)dialogTareBalance.findViewById(R.id.dialog_instruction_text)).setText("Remove the calibration weight from the pan");
+        ((TextView)dialogTareBalance.findViewById(R.id.dialog_instruction_text)).setText(R.string.remove_the_calibration_weight_from_the_pan);
 
         Button dialogButton13 = (Button) dialogTareBalance.findViewById(R.id.dialog_edit_instruction_button_1);
         dialogButton13.setText(R.string.cancel);

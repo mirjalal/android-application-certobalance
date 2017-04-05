@@ -2203,46 +2203,58 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
 						switch (Scale.getInstance().getScaleApplication()) {
 							case WEIGHING:
-								scaleApplicationName = getString(R.string.app_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_weighing)+" " +getString(R.string.samples);
+								break;
 
+							case CHECK_WEIGHING:
+								scaleApplicationName = getString(R.string.app_check_weighing) +" " +getString(R.string.samples);
+								break;
+
+							case TOTALIZATION:
+								scaleApplicationName = getString(R.string.app_check_weighing) +" " +getString(R.string.samples);
+								break;
+							case INGREDIENT_COSTING:
+								sc
+								break;
+							case DIFFERENTIAL_WEIGHING:
 								break;
 							case PIPETTE_ADJUSTMENT_1_HOME:
 							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 							case PIPETTE_ADJUSTMENT_3_FINISHED:
-								scaleApplicationName = getString(R.string.app_pipette_adjustment).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_pipette_adjustment)+" " +getString(R.string.samples);
 								break;
 							case ANIMAL_WEIGHING:
 							case ANIMAL_WEIGHING_CALCULATING:
-								scaleApplicationName = getString(R.string.app_animal_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_animal_weighing)+" " +getString(R.string.samples);
 								break;
 							case DENSITY_DETERMINATION:
 							case DENSITY_DETERMINATION_STARTED:
-								scaleApplicationName = getString(R.string.app_density_determination).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_density_determination)+" " +getString(R.string.samples);
 								break;
 							case FILLING:
 							case FILLING_CALC_TARGET:
-								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_filling)+" " +getString(R.string.samples);
 								break;
 							case FORMULATION:
 							case FORMULATION_RUNNING:
-								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_formulation)+" " +getString(R.string.samples);
 								break;
 							case PEAK_HOLD:
 							case PEAK_HOLD_STARTED:
-								scaleApplicationName = getString(R.string.app_peak_hold).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_peak_hold)+" " +getString(R.string.samples);
 								break;
 							case PART_COUNTING:
 							case PART_COUNTING_CALC_AWP:
-								scaleApplicationName = getString(R.string.app_part_counting).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_part_counting)+" " +getString(R.string.samples);
 								break;
 							case PERCENT_WEIGHING:
 							case PERCENT_WEIGHING_CALC_REFERENCE:
-								scaleApplicationName = getString(R.string.app_percent_weighing).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_percent_weighing)+" " +getString(R.string.samples);
 								break;
 							case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.samples).toUpperCase();
+								scaleApplicationName = getString(R.string.app_statistical_quality_control)+" " +getString(R.string.samples);
 								break;
 						}
 						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());

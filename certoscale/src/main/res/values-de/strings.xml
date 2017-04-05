@@ -647,4 +647,6 @@
     <string name="set_the_balance_identification">Wagenname eingeben</string>
     <string name="set_the_project_name">Projektname eingeben</string>
     <string name="the_batch_hasnt_been_saved_because_it_was_empty">Die Charge wurde nicht gespeichert weil Sie leer war</string>
+    <string name="serial_number">Seriennummer</string>
+    <string name="remove_the_calibration_weight_from_the_pan">Nehmen Sie das Kalibrierungsgewicht von der Waage</string>
 </resources>

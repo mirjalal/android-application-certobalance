@@ -963,6 +963,8 @@
     <string name="print_header_on_off">Print the header on/off</string>
     <string name="glp_header">GLP Header</string>
     <string name="the_batch_hasnt_been_saved_because_it_was_empty">The batch hasn\'t been saved because it was empty</string>
+    <string name="serial_number">Serial number</string>
+    <string name="remove_the_calibration_weight_from_the_pan">Remove the calibration weight from the pan</string>
 
 
 </resources>
