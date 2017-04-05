@@ -69,7 +69,7 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 	private ImageButton imageButtonVideo = null;
 	private ImageButton imageButtonCalibration = null;
 
-
+	private Toast toast=null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -289,7 +289,17 @@ protected void onPause() {
 					ApplicationManager.getInstance().accumulateStatistics();
 					actionButtonbarFragment.updateStatsButtonUI();
 				}else {
-					Toast.makeText(this, getString(R.string.wait_until_the_weight_is_stable), Toast.LENGTH_SHORT).show();
+
+
+					//public void showAToast (String message){
+					if (toast != null) {
+						toast.cancel();
+					}
+					toast = Toast.makeText(this, getString(R.string.wait_until_the_weight_is_stable), Toast.LENGTH_SHORT);
+					toast.show();
+					//}
+
+					//Toast.makeText(this, getString(R.string.wait_until_the_weight_is_stable), Toast.LENGTH_SHORT).show();
 				}
 				break;
 			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:

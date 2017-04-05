@@ -180,7 +180,7 @@
     <string name="skip">Überspringen</string>
     <string name="standard_dev">Standard dev.</string>
     <string name="sum_">Summe</string>
-    <string name="tara">Tare</string>
+    <string name="tara">Tara</string>
     <string name="tared_weight">Tariertes Gewicht</string>
     <string name="protocol">Protokoll</string>
     <string name="show">Anzeigen</string>
@@ -245,7 +245,7 @@
     <string name="calculate_target_weight">Zielgewicht berechnen</string>
     <string name="g_of">" g von  "</string>
     <string name="on_the_pan_and_press_next">auf die Wiegefläche und drücken Sie NÄCHSTE</string>
-    <string name="pleas_put">Bitte platzieren Sie </string>
+    <string name="pleas_put">Bitte platzieren Sie</string>
     <string name="please_enter_the_imprecision_of_the_pipette">Bitte geben Sie die Präzisionsabweichung ein</string>
     <string name="please_enter_the_name_of_the_currency">Bitte geben Sie den Namen der Währung ein</string>
     <string name="please_enter_the_number_of_samples">Bitte geben Sie die Anzahl der Proben ein</string>
@@ -277,13 +277,13 @@
         <item>Statischtische Qualitätskontrolle</item>
     </string-array>
     <string-array name="array_menu_main">
-        <item>Calibration</item>
-        <item>User Settings</item>
-        <item>Balance Setup</item>
-        <item>Application Modes</item>
-        <item>Weighing Units</item>
-        <item>GLP and GMP Data</item>
-        <item>Library</item>
+        <item>Kalibrierung</item>
+        <item>Benutzereinstellungen</item>
+        <item>Wagensetup</item>
+        <item>Applikationen</item>
+        <item>Wägeeinheiten</item>
+        <item>GLP und GMP Daten</item>
+        <item>Bibliothek</item>
     </string-array>
 
 
@@ -293,9 +293,9 @@
     </string-array>
 
     <string-array name="preferences_counting_modes">
-        <item>Standard Counting</item>
-        <item>Check Counting</item>
-        <item>Fill Counting</item>
+        <item>Stückzählung - Standard</item>
+        <item>Stückzählung - Prüfen</item>
+        <item>Stückzählung - Füllen</item>
     </string-array>
 
     <string-array name="preferences_counting_modes_values">
@@ -305,9 +305,9 @@
     </string-array>
 
     <string-array name="preferences_check_modes">
-        <item>Over and Under</item>
-        <item>Nominal / Weight Tolerance</item>
-        <item>Nominal / Percent Tolerance</item>
+        <item>Unter und Obere Grenze</item>
+        <item>Nominell / Gewichtstoleranz</item>
+        <item>Nominell / Prozenttoleranz</item>
     </string-array>
 
 
@@ -318,32 +318,32 @@
     </string-array>
 
     <string-array name="preferences_peak_modes">
-        <item>Manual</item>
-        <item>Semi Automatic</item>
-        <item>Automatic</item>
+        <item>Manuell</item>
+        <item>Halbautomatisch</item>
+        <item>Automatisch</item>
     </string-array>
 
     <string-array name="preferences_density_mode">
-        <item>Solid density higher than Water</item>
-        <item>Solid density lower than Water </item>
-        <item>Liquid Density  </item>
+        <item>Fest - größere Dichte als Wasser</item>
+        <item>Fest - kleinere Dichte als Wasser</item>
+        <item>Flüssigkeitsdichte </item>
 
     </string-array>
 
     <string-array name="preferences_density_liquid_type">
-        <item>Water</item>
-        <item>Other</item>
+        <item>Wasser</item>
+        <item>Andere</item>
     </string-array>
 
 
     <string-array name="preferences_device_color_themes">
-        <item>Dark</item>
-        <item>Bright</item>
+        <item>Dunkel</item>
+        <item>Hell</item>
     </string-array>
 
     <string-array name="preferences_sqc_tolerance_mode">
-        <item>Weight</item>
-        <item>Percent</item>
+        <item>Gewicht</item>
+        <item>Prozent</item>
     </string-array>
 
     <string-array name="preferences_communication_string_array_devices">
@@ -353,14 +353,14 @@
     </string-array>
 
     <string-array name="preferences_device_themes_string_array">
-        <item>Dark theme</item>
-        <item>Bright theme</item>
+        <item>Dunkles Farbschema</item>
+        <item>Helles Farbschema</item>
     </string-array>
 
 
     <string-array name="preferences_pipette_liquid_type">
-        <item>Water</item>
-        <item>Other</item>
+        <item>Wasser</item>
+        <item>Andere</item>
     </string-array>
 
     <string-array name="preferences_pipette_liquid_type_values">
@@ -412,8 +412,8 @@
 
 
     <string-array name="preferences_check_display_modes">
-        <item>Weight</item>
-        <item>Check Status</item>
+        <item>Gewicht</item>
+        <item>Kontrollstatus</item>
 
     </string-array>
 
@@ -426,9 +426,9 @@
 
 
     <string-array name="preferences_counting_statistics">
-        <item>Off</item>
-        <item>Manual</item>
-        <item>Auto</item>
+        <item>Aus</item>
+        <item>Manuell</item>
+        <item>Automatisch</item>
     </string-array>
     <string name="activated">Aktiviert</string>
     <string name="auto_mode">Automatischer Modus</string>
@@ -499,7 +499,6 @@
     <string name="calculate_scaling_factor">Skalierungsfaktor berechnen</string>
     <string name="please_enter_the_desired_total_weight_of_the_recipe">Bitte geben Sie das gewünschte Gesamtgewicht des Rezepts an</string>
     <string name="support">Support</string>
-    <string name="scaling_factor_calculated">Skalierungsfaktor berechnet</string>
     <string name="you_have_to_choose_a_recipe_first">Sie müssen zuerst ein Rezept auswählen</string>
     <string name="ignore">Ingorieren</string>
     <string name="balance">Waage</string>
@@ -626,4 +625,25 @@
     <string name="the_item_unit_is_not_valid">Die Gewichtseinheit ist nicht gültig</string>
     <string name="update_failed">Update fehlgeschlagen</string>
     <string name="update_successfull">Update erfolgreich</string>
+    <string name="calculated_and_updated">berechnet</string>
+    <string name="header">Header</string>
+    <string name="glp_header">GLP Kopfszeile</string>
+    <string name="print_application_name">Applikationsname drucken</string>
+    <string name="print_balance_id">WagenID druckenadmi</string>
+    <string name="print_balance_id_on_off">WagenID drucken ein/aus</string>
+    <string name="print_balance_name">"Wagenname drucken "</string>
+    <string name="print_data_on_off">Datum drucken ein/aus</string>
+    <string name="print_date">Datum drucken</string>
+    <string name="print_header">Kopzeile drucken</string>
+    <string name="print_header_on_off">Kopfzeile drucken ein/aus</string>
+    <string name="print_project_name">Projektname drucken</string>
+    <string name="print_signature_line">Signatur drucken</string>
+    <string name="print_signature_line_on_off">Signatur drucken ein/aus</string>
+    <string name="print_the_application_name_on_off">Applikationsname drucken ein/aus</string>
+    <string name="print_the_balance_name_on_off">Wagenname drucken ein/aus</string>
+    <string name="print_the_project_name_on_off">Projektname drucken ein/aus</string>
+    <string name="print_the_user_name_on_off">Benutzername drucken ein/aus</string>
+    <string name="print_user_name">Benutzername drucken</string>
+    <string name="set_the_balance_identification">Wagenname eingeben</string>
+    <string name="set_the_project_name">Projektname eingeben</string>
 </resources>

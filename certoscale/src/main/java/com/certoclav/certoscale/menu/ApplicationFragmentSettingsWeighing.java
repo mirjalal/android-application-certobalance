@@ -68,7 +68,8 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                             try {
                                 Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
                                 Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
-                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(inputvalTransformed);
+                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(ApplicationManager.getInstance().transformCurrentUnitToGram(inputvalTransformed));
+
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(0);

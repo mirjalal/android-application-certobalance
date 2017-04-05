@@ -119,6 +119,7 @@
 					android:maxLines="1"
 					android:hint="@string/cost"
 					android:imeOptions="actionDone"
+					android:numeric="decimal"
 					android:singleLine="true"/>
 			</LinearLayout>
 
@@ -142,6 +143,7 @@
 					style="@style/edit_text_default"
 					android:maxLines="1"
 					android:hint="@string/weight"
+					android:numeric="decimal"
 					android:imeOptions="actionDone"
 					android:singleLine="true"/>
 			</LinearLayout>

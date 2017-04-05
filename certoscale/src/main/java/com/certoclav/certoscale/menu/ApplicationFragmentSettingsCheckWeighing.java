@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -321,11 +322,14 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
         button_nominal_tolerance_under_percent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                if(ApplicationManager.getInstance().getCheckNominaldouble()==0){
+                    Toast.makeText(getActivity(), getString(R.string.please_enter_the_nominal_weight_first), Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle(R.string.please_enter_the_under_tolerance_limit_in_percent);
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
+                    ((TextView) dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -344,12 +348,12 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                             try {
                                 ApplicationManager.getInstance().setCheckNominalToleranceUnderPercent(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
-                            }catch (NumberFormatException e){
+                            } catch (NumberFormatException e) {
                                 ApplicationManager.getInstance().setCheckNominalToleranceUnderPercent(0);
 
-                            }dialog.dismiss();
+                            }
+                            dialog.dismiss();
                             onResume();
-
 
 
                         }
@@ -357,11 +361,10 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
                     dialog.show();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
             }
         });
 
@@ -375,11 +378,14 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
         button_nominal_tolerance_over_percent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
+                if(ApplicationManager.getInstance().getCheckNominaldouble()==0){
+                    Toast.makeText(getActivity(), getString(R.string.please_enter_the_nominal_weight_first), Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle(R.string.please_enter_the_over_tolerance_in_percent);
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
+                    ((TextView) dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("%");
                     // set the custom dialog components - text, image and button
 
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_number_button_cancel);
@@ -398,12 +404,15 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
                             try {
                                 ApplicationManager.getInstance().setCheckNominalToleranceOverPercent(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
 
-                            }catch (NumberFormatException e){
+                                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+
+                            } catch (NumberFormatException e) {
                                 ApplicationManager.getInstance().setCheckNominalToleranceOverPercent(0);
 
-                            }dialog.dismiss();
+                                Toast.makeText(getActivity(), "Exception", Toast.LENGTH_SHORT).show();
+                            }
+                            dialog.dismiss();
                             onResume();
-
 
 
                         }
@@ -411,11 +420,10 @@ public class ApplicationFragmentSettingsCheckWeighing extends Fragment {
 
                     dialog.show();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
             }
         });
 
