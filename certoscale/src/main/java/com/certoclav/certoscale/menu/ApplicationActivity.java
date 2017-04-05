@@ -39,6 +39,8 @@ import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
+import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
@@ -158,6 +160,9 @@ protected void onResume() {
 
 		refreshSpinnerLibrary();
 
+		if(Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION_STARTED){
+			Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION);
+		}
 
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);
 		navigationbar.setButtonEventListener(this);
@@ -298,6 +303,7 @@ protected void onPause() {
 
 					switch (Scale.getInstance().getScaleApplication()){
 						case PART_COUNTING:
+						case PART_COUNTING_CALC_AWP:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPartCounting()).commit();
 							break;
 						case CHECK_WEIGHING:
@@ -315,6 +321,7 @@ protected void onPause() {
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAnimalWeighing()).commit();
 							break;
 						case FILLING:
+						case FILLING_CALC_TARGET:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFilling()).commit();
 							break;
 						case FORMULATION:
