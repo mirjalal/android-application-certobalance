@@ -712,7 +712,7 @@ public class ProtocolManager implements ScaleApplicationListener {
 
 
             default:
-                Toast.makeText(ApplicationController.getContext(), "Not implemented", Toast.LENGTH_LONG).show();
+                Toast.makeText(ApplicationController.getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show();
                 break;
 
 

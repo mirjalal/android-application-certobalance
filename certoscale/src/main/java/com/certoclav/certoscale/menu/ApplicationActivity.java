@@ -162,6 +162,7 @@ protected void onResume() {
 
 		if(Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION_STARTED){
 			Scale.getInstance().setScaleApplication(DENSITY_DETERMINATION);
+			ApplicationManager.getInstance().setDensity_step_counter(0);
 		}
 
 		PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).registerOnSharedPreferenceChangeListener(this);

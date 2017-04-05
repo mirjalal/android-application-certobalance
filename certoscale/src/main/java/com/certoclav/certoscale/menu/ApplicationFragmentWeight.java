@@ -113,6 +113,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     Log.e("SettingsUnitFragment", "notifydatasetchanged" + adapter.getCount());
 
                     Button buttonClose = (Button) dialog.findViewById(R.id.dialog_pick_unit_close);
+
                     buttonClose.setOnClickListener(new View.OnClickListener() {
 
                            @Override

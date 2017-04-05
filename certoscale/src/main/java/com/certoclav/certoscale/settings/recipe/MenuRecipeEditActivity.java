@@ -104,7 +104,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
             recipeEntries.add(new RecipeEntry("H2O",100d,1,"1300131","g","Please tare the balance and place 100g H2O onto the pan and press NEXT",0d));
             recipeEntries.add(new RecipeEntry("NaCl",0.9,2,"4827383", "g", "Please add 0,9g NaCl and press NEXT",0d));
            Date date = new Date();
-           recipe = new Recipe("","My recipe", recipeEntries,((Long)date.getTime()).toString(), Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());
+           recipe = new Recipe("",getString(R.string.my_recipe), recipeEntries,((Long)date.getTime()).toString(), Scale.getInstance().getSafetyKey(),"private",Scale.getInstance().getUser().getEmail());
        }
         textRecipeName.setText(recipe.getRecipeName());
 

@@ -26,7 +26,7 @@ public class SettingsGlpActivity extends FragmentActivity implements  ButtonEven
 		setContentView(R.layout.settings_unit_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText("GLP and GMP data".toUpperCase());
+		navigationbar.getTextTitle().setText(getString(R.string.glp_and_gmp_data).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
 		

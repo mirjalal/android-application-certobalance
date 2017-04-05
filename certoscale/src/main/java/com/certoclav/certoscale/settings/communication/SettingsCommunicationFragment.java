@@ -171,9 +171,9 @@ private SharedPreferences prefs = null;
         devicePref = findPreference(key);
         String summary = "";
         if( SocketService.getInstance().getSocket().connected()){
-            summary = "connected";
+            summary = getString(R.string.connected);
         }else{
-            summary = "not connected";
+            summary = getString(R.string.not_connected);
         }
 //        devicePref.setSummary(summary);
 

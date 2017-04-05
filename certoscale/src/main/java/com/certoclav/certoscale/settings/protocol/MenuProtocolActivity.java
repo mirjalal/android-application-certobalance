@@ -176,7 +176,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                     try{
                         final Dialog dialog = new Dialog(this);
                         dialog.setContentView(R.layout.dialog_yes_no);
-                        dialog.setTitle("Delete all");
+                        dialog.setTitle(getString(R.string.delete_all));
                         ((TextView)dialog.findViewById(R.id.text)).setText(R.string.do_you_really_want_to_delete_all_protocols);
                         // set the custom dialog components - text, image and button
 

@@ -225,7 +225,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
                             dialog.dismiss();
                             finish();
                         }else{
-                            Toast.makeText(ApplicationController.getContext(), "Item Unit is not valid" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ApplicationController.getContext(), getString(R.string.the_item_unit_is_not_valid) , Toast.LENGTH_SHORT).show();
                         }
 
 

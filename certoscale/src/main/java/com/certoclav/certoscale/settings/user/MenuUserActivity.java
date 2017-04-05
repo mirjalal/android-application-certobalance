@@ -149,7 +149,7 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
     @Override
     public void onClickButtonDelete(final User user) {
         if(user.getIsAdmin()){
-            Toast.makeText(MenuUserActivity.this, "Admin account can not be deleted", Toast.LENGTH_LONG).show();
+            Toast.makeText(MenuUserActivity.this, R.string.the_admin_account_can_not_be_deleted, Toast.LENGTH_LONG).show();
             return;
         }
 

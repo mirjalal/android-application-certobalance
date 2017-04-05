@@ -493,7 +493,7 @@
     <string name="communication_menu">Kommunikationsmenü</string>
     <string name="display_options">Bildschirmeinstellungen</string>
     <string name="stored_libraries">Gespeicherte Bibliotheken</string>
-    <string name="weighing_units">Wägeeinheiten</string>
+    <string name="weighing_units">Gewichtseinheiten</string>
     <string name="main_menu">Hauptmenü</string>
     <string name="balance_setup">Geräteeinstellungen</string>
     <string name="calculate_scaling_factor">Skalierungsfaktor berechnen</string>
@@ -614,4 +614,16 @@
     <string name="calibration_with_two_calibration_points_follow_the_screen_instructions">Kalibrierung mit 2 Kalibrierungspunkten. Folgen Sie den Displayanweisungen</string>
     <string name="start_the_internal_calibration_of_the_balance">Die interne Kalibrierung der Waage starten</string>
     <string name="this_function_will_be_available_in_the_next_release">Dies Funktion ist erst im nächsten Release enthalten</string>
+    <string name="changing_weighing_unit">Gewichtseinheit ändern</string>
+    <string name="delete_all">Alle löschen</string>
+    <string name="delete_library_object">Bibliotheksobjekt löschen</string>
+    <string name="do_you_want_to_delete_the_following_library_object">Möchten sie das nachfolgende Bibliotheksobjekt wirklich löschen?</string>
+    <string name="external_calibration">Externe Kalibrierung</string>
+    <string name="glp_and_gmp_data">GLP und GMP Daten</string>
+    <string name="my_recipe">Mein Rezept</string>
+    <string name="not_implemented">Nicht implementiert</string>
+    <string name="the_admin_account_can_not_be_deleted">Der Administratoraccount kann nicht gelöscht werden</string>
+    <string name="the_item_unit_is_not_valid">Die Gewichtseinheit ist nicht gültig</string>
+    <string name="update_failed">Update fehlgeschlagen</string>
+    <string name="update_successfull">Update erfolgreich</string>
 </resources>

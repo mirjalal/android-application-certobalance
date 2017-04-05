@@ -932,6 +932,16 @@
     <string name="start_the_internal_calibration_of_the_balance">Start the internal calibration of the balance</string>
     <string name="this_function_will_be_available_in_the_next_release">This function will be available in the next release</string>
     <string name="external_calibration">External Calibration</string>
+    <string name="update_successfull">Update successfull</string>
+    <string name="update_failed">Update failed</string>
+    <string name="glp_and_gmp_data">GLP and GMP data</string>
+    <string name="the_item_unit_is_not_valid">The item unit is not valid</string>
+    <string name="delete_library_object">Delete library object</string>
+    <string name="do_you_want_to_delete_the_following_library_object">Do you want to delete the following library object:</string>
+    <string name="delete_all">Delete all</string>
+    <string name="my_recipe">My recipe</string>
+    <string name="the_admin_account_can_not_be_deleted">The admin account can not be deleted</string>
+    <string name="not_implemented">Not implemented</string>
 
 
 </resources>

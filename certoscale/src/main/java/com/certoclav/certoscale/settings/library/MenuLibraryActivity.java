@@ -151,11 +151,11 @@ public class MenuLibraryActivity extends Activity implements ButtonEventListener
 
                 final Dialog dialog = new Dialog(this);
                 dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Delete library object");
+                dialog.setTitle(getString(R.string.delete_library_object));
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you want to delete following library object:"+" " + library.getName() + "?");
+                text.setText(getString(R.string.do_you_want_to_delete_the_following_library_object)+" " + library.getName() + "?");
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 

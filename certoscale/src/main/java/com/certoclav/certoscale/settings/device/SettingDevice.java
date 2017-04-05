@@ -137,9 +137,9 @@ private SharedPreferences prefs = null;
                         success = false;
                     }
                     if(success){
-                        Toast.makeText(getActivity(), "Update successfull", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(getActivity(), "Update failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
                     }
                 }
                 preference.setEnabled(true);
@@ -167,9 +167,9 @@ private SharedPreferences prefs = null;
                         success = false;
                     }
                     if(success){
-                        Toast.makeText(getActivity(), "Update successfull", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(getActivity(), "Update failed", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
                     }
                 }
                 preference.setEnabled(true);
@@ -195,7 +195,7 @@ private SharedPreferences prefs = null;
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText("WARNING:" + " "+ getString(R.string.do_you_really_want_to) +" "+ getString(R.string.delete_all_data_));
+                    text.setText(getString(R.string.warning).toUpperCase()+":" + " "+ getString(R.string.do_you_really_want_to) +" "+ getString(R.string.delete_all_data_));
                     ImageView image = (ImageView) dialog.findViewById(R.id.dialog_image);
                     image.setVisibility(View.GONE);
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
