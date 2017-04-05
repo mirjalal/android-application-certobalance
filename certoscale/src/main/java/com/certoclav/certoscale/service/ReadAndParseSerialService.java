@@ -176,16 +176,21 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	@Override
 	public void onMessageReceived(String message) {
 		Log.e("ReadAndParse", "onMessageReceived(): " + message);
-		StateMachine.getInstance().notifyMessageRecieved();
 
-		  if(message.length()>5) {
+		try {
+			StateMachine.getInstance().notifyMessageRecieved();
+
+			if (message.length() > 5) {
 				rawResponse = message;
 				lastWeightReceived = Scale.getInstance().getScaleModel().parseRecievedMessage(message);
-			  if(lastWeightReceived== 0){
-				  lastWeightReceived = +0;
-			  }
+				if (lastWeightReceived == 0) {
+					lastWeightReceived = +0;
+				}
 
 			}
+		}catch (Exception e){
+
+		}
 
 	}
 

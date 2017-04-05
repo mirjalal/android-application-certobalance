@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,6 +67,20 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 			case CABLE_NOT_CONNECTED:
 				textNotificationHead.setText(R.string.warning);
 				tv.setText(R.string.please_plug_in_the_touchscreen_and_power_on);
+				try{
+
+							videoView.setVideoPath(getString(R.string.video_power));
+							videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+								@Override
+								public void onPrepared(MediaPlayer mp) {
+									mp.setLooping(true);
+								}
+							});
+							videoView.start();
+
+				}catch(Exception e){
+
+				}
 				break;
 			case ON_AND_MODE_NOT_GRAM:
 				textNotificationHead.setText(getString(R.string.notification).toUpperCase());
