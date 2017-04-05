@@ -3,6 +3,7 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -114,6 +115,19 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         Intent intent = new Intent(ApplicationController.getContext(), SyncRecipesService.class);
 
         startService(intent);
+
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                try {
+                    navigationbar.getTextTitle().setText(getString(R.string.recipes).toUpperCase() + " " + adapter.getCount());
+                    super.onChanged();
+                }catch (Exception e){
+
+                }
+            }
+        });
+
     }
 
     @Override

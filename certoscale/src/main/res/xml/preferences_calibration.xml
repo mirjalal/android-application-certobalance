@@ -3,19 +3,22 @@
     <Preference
         android:key="@string/preferences_calibration_internal"
         android:title="@string/internal_calibration"
-        android:summary="@string/start_the_internal_calibration_of_the_balance" />
+        android:summary="@string/start_the_internal_calibration_of_the_balance"
+        android:enabled="false"/>
 
 
 
     <CheckBoxPreference
         android:key="@string/preferences_calibration_automatic"
         android:title="@string/turn_automatic_calibration_on_off"
-        android:summary="@string/calibrate_the_balance_every_hour_automatically" />
+        android:summary="@string/calibrate_the_balance_every_hour_automatically"
+        android:enabled="false"/>
 
     <Preference
         android:key="@string/preferences_calibration_adjustment"
         android:title="@string/automatic_calibration_adjustment"
-        android:summary="@string/adjust_the_zero_calibration_point" />
+        android:summary="@string/adjust_the_zero_calibration_point"
+        android:enabled="false"/>
 
     <Preference
         android:key="@string/preferences_calibration_span"
@@ -25,12 +28,14 @@
     <Preference
         android:key="@string/preferences_calibration_user"
         android:title="@string/user_calibration"
-        android:summary="@string/calibrate_the_balance_using_a_user_defined_mass" />
+        android:summary="@string/calibrate_the_balance_using_a_user_defined_mass"
+        android:enabled="false"/>
 
     <Preference
         android:key="@string/preferences_calibration_test"
         android:title="@string/calibration_test"
-        android:summary="@string/Compare_known_calibration_weight_against_stored_span_calibration_data" />
+        android:summary="@string/Compare_known_calibration_weight_against_stored_span_calibration_data"
+        android:enabled="false"/>
 
 </PreferenceScreen>
 

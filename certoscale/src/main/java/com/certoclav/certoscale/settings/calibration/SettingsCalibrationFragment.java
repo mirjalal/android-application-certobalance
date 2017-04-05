@@ -81,7 +81,7 @@ private SharedPreferences prefs = null;
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Toast.makeText(getActivity(), R.string.this_function_will_be_available_in_the_next_release, Toast.LENGTH_LONG).show();
+                Scale.getInstance().getScaleModel().externelCalibration(getActivity());
 
                 return false;
             }

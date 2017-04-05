@@ -2,6 +2,7 @@ package com.certoclav.certoscale.settings.item;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,6 +101,20 @@ public class MenuItemActivity extends Activity implements ItemAdapter.OnClickBut
         }
         adapter.notifyDataSetChanged();
         adapter.setOnClickButtonListener(this);
+
+
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                try {
+                    navigationbar.getTextTitle().setText(getString(R.string.items).toUpperCase() + " " + adapter.getCount());
+                    super.onChanged();
+                }catch (Exception e){
+                    
+                }
+            }
+        });
+
 
         Intent intent3 = new Intent(ApplicationController.getContext(), SyncItemsService.class);
         startService(intent3);
