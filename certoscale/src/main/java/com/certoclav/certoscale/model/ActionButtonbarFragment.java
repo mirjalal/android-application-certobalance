@@ -302,10 +302,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 				try{
 
-					if (Scale.getInstance().getScaleApplication()==PEAK_HOLD) {
+					if (Scale.getInstance().getScaleApplication()==PEAK_HOLD_STARTED || Scale.getInstance().getScaleApplication()==PEAK_HOLD) {
 						// End PeakHold Measurenment
 						ApplicationManager.getInstance().setPeakHoldActivated(false);
 						Scale.getInstance().setScaleApplication(PEAK_HOLD);
+						ApplicationManager.getInstance().setPeakHoldMaximum(0);
+						//Toast.makeText(getActivity(), ApplicationManager.getInstance().getPeakHoldMaximum()).show();
+
 					}
 					if (Scale.getInstance().getScaleApplication()==ANIMAL_WEIGHING_CALCULATING){
 						Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
@@ -677,31 +680,40 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonEndBatch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SQC currentBatch= new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(),ApplicationManager.getInstance().getBatchName(),
-						ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
-						ApplicationManager.getInstance().getSqcPT1(),ApplicationManager.getInstance().getSqcPT2(),ApplicationManager.getInstance().getSqcNT1(),
-						ApplicationManager.getInstance().getSqcNT2());
-				//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
-				//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
-				ApplicationManager.getInstance().getBatchList().add(currentBatch);
-				ApplicationManager.getInstance().getStats().getStatistic().clear();
+					SQC currentBatch = new SQC(ApplicationManager.getInstance().getStats().getStatistic().copy(), ApplicationManager.getInstance().getBatchName(),
+							ApplicationManager.getInstance().getCurrentLibrary().getSQCNominal(),
+							ApplicationManager.getInstance().getSqcPT1(), ApplicationManager.getInstance().getSqcPT2(), ApplicationManager.getInstance().getSqcNT1(),
+							ApplicationManager.getInstance().getSqcNT2());
+					//currentBatch.setName(ApplicationManager.getInstance().getBatchName());
+					//currentBatch.setStatistics(ApplicationManager.getInstance().getStatistic());
 
-
-				buttonNewBatch.setText(R.string.new_batch);
-				buttonAccumulate.setEnabled(false);
-				buttonShowBatch.setEnabled(true);
-
-				updateBatchListButtonText();
-
-				showStatisticsSQC(getActivity(),currentBatch);
+					if (ApplicationManager.getInstance().getStats().getStatistic().getN()!=0) {
+						ApplicationManager.getInstance().getBatchList().add(currentBatch);
+						showStatisticsSQC(getActivity(), currentBatch);
+					}else{
+						Toast.makeText(getContext(), getString(R.string.the_batch_hasnt_been_saved_because_it_was_empty), Toast.LENGTH_SHORT).show();
+					}
 
 
-				ApplicationManager.getInstance().setSqcPT1(0);
-				ApplicationManager.getInstance().setSqcPT2(0);
-				ApplicationManager.getInstance().setSqcNT1(0);
-				ApplicationManager.getInstance().setSqcNT2(0);
-				Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED);
+					ApplicationManager.getInstance().getStats().getStatistic().clear();
+
+
+
+					buttonNewBatch.setText(R.string.new_batch);
+					buttonAccumulate.setEnabled(false);
+					buttonShowBatch.setEnabled(true);
+
+					updateBatchListButtonText();
+
+
+
+
+					ApplicationManager.getInstance().setSqcPT1(0);
+					ApplicationManager.getInstance().setSqcPT2(0);
+					ApplicationManager.getInstance().setSqcNT1(0);
+					ApplicationManager.getInstance().setSqcNT2(0);
+					Scale.getInstance().setScaleApplication(STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED);
 
 
 
@@ -1283,7 +1295,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 
 				buttonResult.setVisibility(View.GONE);
-
 
 
 
@@ -1886,7 +1897,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getSQCBatch(sqc));
 
 			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
-			final Protocol protocol= new Protocol("",Scale.getInstance().getScaleApplication().toString(), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+			final Protocol protocol= new Protocol("",getString(R.string.app_statistical_quality_control), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
 
 
 			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_save);
@@ -1896,7 +1907,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					final DatabaseService db = new DatabaseService(ApplicationController.getContext());
 
 					db.insertProtocol(protocol);
-
+                    Toast.makeText(eContext, getString(R.string.protocol_saved), Toast.LENGTH_LONG).show();
 				}
 			});
 
@@ -2026,46 +2037,57 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
 						switch (Scale.getInstance().getScaleApplication()) {
 							case WEIGHING:
-								scaleApplicationName  = getString(R.string.app_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName  = getString(R.string.app_weighing)+" " +getString(R.string.statistics);
+								break;
+							case CHECK_WEIGHING:
+								scaleApplicationName  = getString(R.string.app_check_weighing)+" " +getString(R.string.statistics);
+								break;
+							case INGREDIENT_COSTING:
+								scaleApplicationName  = getString(R.string.app_ingrediant_costing)+" " +getString(R.string.statistics);
+								break;
+							case DIFFERENTIAL_WEIGHING:
+								scaleApplicationName = getString(R.string.app_differential_weighing)+" " +getString(R.string.statistics);
+							case TOTALIZATION:
+								scaleApplicationName = getString(R.string.app_totalization)+" " +getString(R.string.statistics);
 								break;
 							case PIPETTE_ADJUSTMENT_1_HOME:
 							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 							case PIPETTE_ADJUSTMENT_3_FINISHED:
-								scaleApplicationName= getString(R.string.app_pipette_adjustment).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName= getString(R.string.app_pipette_adjustment)+" " +getString(R.string.statistics);
 								break;
 							case ANIMAL_WEIGHING:
 							case ANIMAL_WEIGHING_CALCULATING:
-								scaleApplicationName = getString(R.string.app_animal_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_animal_weighing)+" " +getString(R.string.statistics);
 								break;
 							case DENSITY_DETERMINATION:
 							case DENSITY_DETERMINATION_STARTED:
-								scaleApplicationName = getString(R.string.app_density_determination).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_density_determination)+" " +getString(R.string.statistics);
 								break;
 							case FILLING:
 							case FILLING_CALC_TARGET:
-								scaleApplicationName = getString(R.string.app_filling).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_filling)+" " +getString(R.string.statistics);
 								break;
 
 							case FORMULATION:
 							case FORMULATION_RUNNING:
-								scaleApplicationName = getString(R.string.app_formulation).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_formulation)+" " +getString(R.string.statistics);
 								break;
 							case PEAK_HOLD:
 							case PEAK_HOLD_STARTED:
-								scaleApplicationName = getString(R.string.app_peak_hold).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_peak_hold)+" " +getString(R.string.statistics);
 								break;
 							case PART_COUNTING:
 							case PART_COUNTING_CALC_AWP:
-								scaleApplicationName = getString(R.string.app_part_counting).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_part_counting)+" " +getString(R.string.statistics);
 								break;
 							case PERCENT_WEIGHING:
 							case PERCENT_WEIGHING_CALC_REFERENCE:
-								scaleApplicationName =getString(R.string.app_percent_weighing).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName =getString(R.string.app_percent_weighing)+" " +getString(R.string.statistics);
 								break;
 							case STATISTICAL_QUALITY_CONTROL_1_HOME:
 							case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 							case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.statistics).toUpperCase();
+								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.statistics);
 								break;
 						}
 						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
@@ -2467,43 +2489,63 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
 			switch (Scale.getInstance().getScaleApplication()){
+				case WEIGHING:
+					scaleApplicationName = getString(R.string.app_weighing);
+					break;
+
+				case CHECK_WEIGHING:
+					scaleApplicationName = getString(R.string.app_check_weighing);
+					break;
+
+				case TOTALIZATION:
+					scaleApplicationName = getString(R.string.app_totalization);
+					break;
+
+				case DIFFERENTIAL_WEIGHING:
+					scaleApplicationName = getString(R.string.app_differential_weighing);
+					break;
+
+				case INGREDIENT_COSTING:
+					scaleApplicationName = getString(R.string.app_ingrediant_costing);
+					break;
+
 				case PIPETTE_ADJUSTMENT_1_HOME:
 				case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 				case PIPETTE_ADJUSTMENT_3_FINISHED:
-					scaleApplicationName = "PIPETTE ADJUSTMENT";
+					scaleApplicationName = getString(R.string.app_pipette_adjustment);
 					break;
 				case ANIMAL_WEIGHING:
 				case ANIMAL_WEIGHING_CALCULATING:
-					scaleApplicationName = "ANIMAL WEIGHING";
+					scaleApplicationName = getString(R.string.app_animal_weighing);
 					break;
 				case DENSITY_DETERMINATION:
 				case DENSITY_DETERMINATION_STARTED:
-					scaleApplicationName = "DENSITIY DETERMINATION";
+					scaleApplicationName = getString(R.string.app_density_determination);
 					break;
 				case FILLING:
 				case FILLING_CALC_TARGET:
-					scaleApplicationName = "FILLING";
+					scaleApplicationName = getString(R.string.app_filling);
 					break;
 				case FORMULATION:
 				case FORMULATION_RUNNING:
-					scaleApplicationName = "FORMULATION";
+					scaleApplicationName = getString(R.string.app_formulation);
 					break;
 				case PEAK_HOLD:
 				case PEAK_HOLD_STARTED:
-					scaleApplicationName = "PEAK HOLD";
+					scaleApplicationName = getString(R.string.app_peak_hold);
 					break;
 				case PART_COUNTING:
 				case PART_COUNTING_CALC_AWP:
-					scaleApplicationName = "PARTS COUNTING";
+					scaleApplicationName = getString(R.string.app_part_counting);
 					break;
 				case PERCENT_WEIGHING:
 				case PERCENT_WEIGHING_CALC_REFERENCE:
-					scaleApplicationName = "PERCENT WEIGHING";
+					scaleApplicationName = getString(R.string.app_percent_weighing);
 					break;
 				case STATISTICAL_QUALITY_CONTROL_1_HOME:
 				case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 				case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-					scaleApplicationName = "STATISTICAL QUALITY CONTROL";
+					scaleApplicationName = getString(R.string.app_statistical_quality_control);
 					break;
 			}
 			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());

@@ -646,4 +646,5 @@
     <string name="print_user_name">Benutzername drucken</string>
     <string name="set_the_balance_identification">Wagenname eingeben</string>
     <string name="set_the_project_name">Projektname eingeben</string>
+    <string name="the_batch_hasnt_been_saved_because_it_was_empty">Die Charge wurde nicht gespeichert weil Sie leer war</string>
 </resources>
