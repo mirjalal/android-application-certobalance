@@ -80,6 +80,7 @@
 					android:id="@+id/menu_main_unit_edit_factor"
 					android:layout_width="match_parent"
 					android:layout_height="60dp"
+					android:inputType="numberDecimal"
 					android:singleLine="true"
 					style="@style/edit_text_default"/>
 
@@ -104,6 +105,7 @@
 					android:id="@+id/menu_main_unit_edit_text_exponent"
 					android:layout_width="match_parent"
 					android:layout_height="60dp"
+					android:inputType="number|numberSigned"
 					android:singleLine="true"
 					style="@style/edit_text_default"/>
 

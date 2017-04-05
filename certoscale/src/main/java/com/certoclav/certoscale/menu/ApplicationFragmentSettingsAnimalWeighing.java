@@ -1,7 +1,6 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -53,7 +52,14 @@ public class ApplicationFragmentSettingsAnimalWeighing extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                ApplicationManager.getInstance().getCurrentLibrary().setAveragingTime(Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString()));
+                                Double averagingTime = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                if(averagingTime < 1){
+                                    averagingTime = 1d;
+                                }
+                                if(averagingTime > 600){
+                                    averagingTime = 600d;
+                                }
+                                ApplicationManager.getInstance().getCurrentLibrary().setAveragingTime(averagingTime);
 
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setAveragingTime(10);

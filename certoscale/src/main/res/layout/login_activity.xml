@@ -67,7 +67,8 @@
         android:textSize="30sp"
         android:textColor="@android:color/white"
         android:gravity="center"
-        android:text="Simulation Mode"/>
+        android:text="Simulation Mode"
+        android:visibility="gone"/>
 
 
 

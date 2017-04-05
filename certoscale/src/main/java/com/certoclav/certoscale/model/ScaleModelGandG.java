@@ -113,6 +113,11 @@ public class ScaleModelGandG extends ScaleModel {
         double value=lastValue;
         if(message.length()>5) {
             try {
+
+                if (message.contains("-.H")) { //overweight
+                    return maximumCapazity;
+                }
+
                 if (message.contains("-")) {
                     sign = -1;
                 }

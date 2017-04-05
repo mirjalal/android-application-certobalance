@@ -631,6 +631,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 retVal = String.format("%.0f", gram) + " pcs";
             }else {
                 int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
+                if(numDezimalPlaces < 0){
+                    numDezimalPlaces = 0;
+                }
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
             }
         }catch (Exception e){

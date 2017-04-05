@@ -21,9 +21,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_below="@+id/menu_main_bar"
 android:layout_width="match_parent"
-android:layout_marginLeft="50dp"
-android:layout_marginRight="50dp"
 android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
 android:orientation="vertical">
 
 <LinearLayout
@@ -52,9 +52,8 @@ android:orientation="vertical">
         android:textColor="@android:color/white"
         style="@style/text_table"
         android:paddingRight="10dp"/>
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:layout_width="10dp"
         android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/reference_text_2"
@@ -90,7 +89,8 @@ android:orientation="vertical">
         android:text="Proben"
         style="@style/text_table"
         android:gravity="center_vertical"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:background="#222222"/>
     <TextView
         android:id="@+id/reference_val_3"
         android:layout_weight="2"
@@ -100,10 +100,10 @@ android:orientation="vertical">
         android:text="0"
         style="@style/text_table"
         android:textColor="@android:color/white"
-        android:paddingRight="10dp"/>
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:paddingRight="10dp"
+        android:background="#222222"/>
+    <FrameLayout
+        android:layout_width="10dp"
         android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/reference_text_4"
@@ -113,7 +113,8 @@ android:orientation="vertical">
         android:text="TARA"
         android:gravity="center_vertical"
         style="@style/text_table"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:background="#222222"/>
     <TextView
         android:id="@+id/reference_val_4"
         android:layout_weight="2"
@@ -123,7 +124,8 @@ android:orientation="vertical">
         android:paddingRight="10dp"
         android:textColor="@android:color/white"
         android:text="0.0000 g"
-        style="@style/text_table"/>
+        style="@style/text_table"
+        android:background="#222222"/>
 
 
 </LinearLayout>
@@ -152,9 +154,8 @@ android:orientation="vertical">
         android:textColor="@android:color/white"
         android:background="#444444"
         android:paddingRight="10dp"/>
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:layout_width="10dp"
         android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/reference_text_6"
@@ -189,7 +190,8 @@ android:orientation="vertical">
         android:text="Proben"
         android:gravity="center_vertical"
         style="@style/text_table"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:background="#222222"/>
     <TextView
         android:id="@+id/reference_val_7"
         android:layout_weight="2"
@@ -198,10 +200,10 @@ android:orientation="vertical">
         android:gravity="center_vertical|right"
         android:text="0"
         style="@style/text_table"
-        android:paddingRight="10dp"/>
+        android:paddingRight="10dp"
+        android:background="#222222"/>
     <TextView
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="10dp"
         android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/reference_text_8"
@@ -211,7 +213,8 @@ android:orientation="vertical">
         android:text="TARA"
         android:gravity="center_vertical"
         style="@style/text_table"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:background="#222222"/>
     <TextView
         android:id="@+id/reference_val_8"
         android:layout_weight="2"
@@ -221,6 +224,7 @@ android:orientation="vertical">
         android:paddingRight="10dp"
         android:text="0.0000 g"
         style="@style/text_table"
+        android:background="#222222"
 />
 
 
