@@ -14,6 +14,7 @@
         android:ellipsize="marquee"
         android:paddingLeft="10dp"
         android:layout_toRightOf="@+id/login_dopdown_image_cloud"
+        android:paddingRight="20dp"
         android:text="Library"
         android:textColor="@android:color/white"
         android:textAllCaps="true"/>

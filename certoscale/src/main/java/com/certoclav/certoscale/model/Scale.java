@@ -309,11 +309,12 @@ public class Scale extends Observable {
 	} //savetykey of certobalance W01.0001
 
 	public String getFirmwareVersion() {
-		return "1.0";
+		return "2.0";
 	}
 
 	public String getSerialnumber() {
-		return "Serialnumber";
+
+		return "K000000001";
 	}
 
 

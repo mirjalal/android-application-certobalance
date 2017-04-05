@@ -90,6 +90,7 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 				Intent intent = new Intent();
 				intent.setComponent(new ComponentName("com.moblynx.calculatorjb","com.android.calculator2.Calculator"));
 				startActivity(intent);
+				imageButtonSidebarBack.performClick();
 			}
 		});
 
@@ -120,6 +121,7 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 				Intent intent = new Intent();
 				intent.setComponent(new ComponentName("org.ilumbo.ovo","org.ilumbo.ovo.TimerActivity"));
 				startActivity(intent);
+				imageButtonSidebarBack.performClick();
 			}
 		});
 		imageButtonSidebarBack = (ImageButton) findViewById(R.id.menu_application_sidebar_button_back);

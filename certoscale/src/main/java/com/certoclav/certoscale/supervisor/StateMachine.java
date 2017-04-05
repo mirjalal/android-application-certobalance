@@ -171,10 +171,13 @@ public class StateMachine implements WeightListener {
     }
 
 
+    public void notifyMessageRecieved(){
+        nanoTimeAtLastMessageReceived = System.nanoTime();
+    }
 
     @Override
     public void onWeightChanged(Double weight, String unit) {
-        nanoTimeAtLastMessageReceived = System.nanoTime();
+
     }
 }
 

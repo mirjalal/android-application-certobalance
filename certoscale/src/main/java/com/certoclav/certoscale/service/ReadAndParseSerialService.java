@@ -8,6 +8,7 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.certoscale.model.ScaleModelGandG;
+import com.certoclav.certoscale.supervisor.StateMachine;
 
 import java.util.ArrayList;
 
@@ -101,7 +102,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					}
 
 					try {
-						Thread.sleep(100);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -175,6 +176,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	@Override
 	public void onMessageReceived(String message) {
 		Log.e("ReadAndParse", "onMessageReceived(): " + message);
+		StateMachine.getInstance().notifyMessageRecieved();
 
 		  if(message.length()>5) {
 				rawResponse = message;

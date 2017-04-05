@@ -14,6 +14,7 @@
     android:layout_height="match_parent"
     android:ellipsize="marquee"
 	android:paddingLeft="10dp"
+	android:paddingRight="20dp"
 	android:layout_toRightOf="@+id/login_dopdown_image_cloud"
     android:text="Weighing"
 	android:textColor="@android:color/white"
