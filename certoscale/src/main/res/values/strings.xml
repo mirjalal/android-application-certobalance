@@ -720,7 +720,7 @@
     <string name="please_enter_the_target_weight">Please enter the target weight</string>
     <string name="please_enter_the_scaling_factor">Please enter the scaling factor</string>
     <string name="calculate_target_weight">Calculate Target Weight</string>
-    <string name="pleas_put">"Please put "</string>
+    <string name="pleas_put">"Please put"</string>
     <string name="on_the_pan_and_press_next"> on the pan and press NEXT</string>
     <string name="g_of">" g of "</string>
     <string name="please_enter_the_water_temperature">Please enter the water temperature</string>
@@ -801,7 +801,6 @@
     <string name="calculate_scaling_factor">Calculate Scaling Factor</string>
     <string name="please_enter_the_desired_total_weight_of_the_recipe">Please enter the desired total weight of the recipe</string>
     <string name="you_have_to_choose_a_recipe_first">You have to choose a recipe first</string>
-    <string name="scaling_factor_calculated">scaling factor calculated</string>
     <string name="ignore">Ignore</string>
     <string name="language">Language</string>
     <string name="language_current">English</string>
@@ -942,6 +941,27 @@
     <string name="my_recipe">My recipe</string>
     <string name="the_admin_account_can_not_be_deleted">The admin account can not be deleted</string>
     <string name="not_implemented">Not implemented</string>
+    <string name="calculated_and_updated">calculated and updated</string>
+    <string name="header">Header</string>
+    <string name="print_header">Print Header</string>
+    <string name="print_date">Print Date</string>
+    <string name="print_balance_id">Print Balance ID</string>
+    <string name="print_balance_name">Print Balance Name</string>
+    <string name="print_user_name">Print User Name</string>
+    <string name="print_project_name">Print Project Name</string>
+    <string name="print_application_name">Print Application Name</string>
+    <string name="print_signature_line">Print Signature Line</string>
+    <string name="print_signature_line_on_off">Print the signature line on/off</string>
+    <string name="print_the_application_name_on_off">Print the application name on/off</string>
+    <string name="print_the_project_name_on_off">Print the project name on/off</string>
+    <string name="set_the_project_name">Set the project name</string>
+    <string name="print_the_user_name_on_off">Print the user name on/off</string>
+    <string name="print_the_balance_name_on_off">Print the balance name on/off</string>
+    <string name="set_the_balance_identification">Set the balance identification</string>
+    <string name="print_balance_id_on_off">Print balance id on/off</string>
+    <string name="print_data_on_off">Print date on/off</string>
+    <string name="print_header_on_off">Print the header on/off</string>
+    <string name="glp_header">GLP Header</string>
 
 
 </resources>

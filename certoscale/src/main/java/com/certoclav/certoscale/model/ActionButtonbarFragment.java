@@ -1357,7 +1357,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setVisibility(View.VISIBLE);
 				buttonProtocol.setVisibility(View.VISIBLE);
 				buttonZero.setVisibility(View.VISIBLE);
-				buttonStatistics.setVisibility(View.VISIBLE);
+
 				buttonAppSettings.setVisibility(View.VISIBLE);
 				buttonAppSettings.setEnabled(true);
 				buttonStart.setVisibility(View.VISIBLE);
@@ -1374,6 +1374,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonResult.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
 
 
 

@@ -129,7 +129,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
 
                                     ApplicationManager.getInstance().setScalingFactor(inputval / totalTarget);
 
-                                    Toast.makeText(getActivity(), R.string.scaling_factor_calculated, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), getString(R.string.scaling_factor)+"= "+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor())+" "+getString(R.string.calculated_and_updated), Toast.LENGTH_LONG).show();
 
 
 
@@ -172,7 +172,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
             buttonRecipe.setText(getString(R.string.click_to_choose_a_recipe));
         }
 
-       buttonScalingFactor.setText(getString(R.string.scaling_factor)+"\n"+ApplicationManager.getInstance().getScalingFactor());
+       buttonScalingFactor.setText(getString(R.string.scaling_factor)+"\n"+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()));
 
 
         super.onResume();
