@@ -1,6 +1,10 @@
 package com.certoclav.certoscale.model;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
+
+import com.certoclav.certoscale.R;
+import com.certoclav.library.application.ApplicationController;
 
 /**
  * Created by Enrico on 22.03.2017.
@@ -88,6 +92,19 @@ public abstract class ScaleModel {
 
 	abstract public boolean isCommandResponse();
 
+	public String getScaleModelName() {
+		String modelName = "";
+		try {
+			String key = "preferences_communication_list_devices";
+			String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
+			modelName = ApplicationController.getContext().getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(modelValue) - 1];
+
+		}catch (Exception e){
+			modelName = "";
+		}
+		return modelName;
+
+	}
 }
 
 

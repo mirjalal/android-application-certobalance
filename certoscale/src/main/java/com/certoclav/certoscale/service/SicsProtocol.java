@@ -2,7 +2,6 @@ package com.certoclav.certoscale.service;
 
 import android.os.AsyncTask;
 
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
@@ -130,11 +129,11 @@ public class SicsProtocol {
 
 
         String[] commandArray = command.split(" ");
-        String commandId = commandArray[0];
+        String commandId = new String(commandArray[0].replace("\r","").replace("\n",""));
         ArrayList<SicsResponseLine> responseLines = new ArrayList<SicsResponseLine>();
 
         switch (commandId){
-            case COMMAND_LIST:
+            case COMMAND_LIST: // comamnd is with zero
                 responseLines.add(new SicsResponseLine(commandId,REPLY_OK_NOT_ENDED,LEVEL_0,    COMMAND_LIST));
                 responseLines.add(new SicsResponseLine(commandId,REPLY_OK_NOT_ENDED,LEVEL_0,    COMMAND_LEVEL));
                 responseLines.add(new SicsResponseLine(commandId,REPLY_OK_NOT_ENDED,LEVEL_0,    COMMAND_MODEL));
@@ -152,7 +151,7 @@ public class SicsProtocol {
                 responseLines.add(new SicsResponseLine(commandId,REPLY_OK_END,"0123",LEVEL_0_VERSION,LEVEL_1_VERSION,LEVEL_2_VERSION,LEVEL_3_VERSION));
                 break;
             case COMMAND_MODEL:
-                responseLines.add(new SicsResponseLine(commandId, REPLY_OK_END, AppConstants.MODEL_SCALE));
+                responseLines.add(new SicsResponseLine(commandId, REPLY_OK_END, Scale.getInstance().getScaleModel().getScaleModelName()));
                 break;
             case COMMAND_VERSION_BALANCE:
                 try {
@@ -165,7 +164,7 @@ public class SicsProtocol {
                 responseLines.add(new SicsResponseLine(commandId,REPLY_OK_END, Scale.getInstance().getSerialnumber()));
                 break;
             case COMMAND_VERSION_SCREEN:
-                responseLines.add(new SicsResponseLine(commandId, REPLY_OK_END, AppConstants.MODEL_TABLET));
+                responseLines.add(new SicsResponseLine(commandId, REPLY_OK_END, "CertoControl 4.3"));
                 break;
             case COMMAND_WEIGHT_STABLE:
                 isSendingPeriodically = false;

@@ -34,9 +34,13 @@ public class ReadAndParseSerialSicsService extends Service implements MessageRec
 	public void onMessageReceived(String message) {
 
 
-		Log.e("ReadAndParsSicsService", "RECEIVED: " + message);
-		String reply = SicsProtocol.getInstance().processCommand(message);
-		Scale.getInstance().getSerialsServiceSics().sendMessage(reply);
+		try {
+			Log.e("ReadAndParsSicsService", "RECEIVED: " + message);
+			String reply = SicsProtocol.getInstance().processCommand(message);
+			Scale.getInstance().getSerialsServiceSics().sendMessage(reply);
+		}catch (Exception e){
+			Log.e("ReadParseSicsService", e.toString());
+		}
 
 	}
 	
