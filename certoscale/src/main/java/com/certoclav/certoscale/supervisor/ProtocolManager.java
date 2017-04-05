@@ -69,6 +69,9 @@ public class ProtocolManager implements ScaleApplicationListener {
 
         if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_balance_name),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_balance_name))==true) {
             String balanceName=prefs.getString("preferences_glp_balance_name","");
+            if(balanceName.isEmpty()){
+                balanceName = Scale.getInstance().getScaleModel().getScaleModelName();
+            }
             sb.append(ApplicationController.getContext().getString(R.string.balance_name)+":" + " "+balanceName + "\n");
         }
 

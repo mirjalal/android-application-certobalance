@@ -3,23 +3,18 @@ package com.certoclav.certoscale.settings.protocol;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.net.wifi.WifiConfiguration;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ProtocolAdapter;
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.DatabaseListener;
@@ -27,19 +22,16 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncProtocolsService;
-import com.certoclav.certoscale.service.SyncRecipesService;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
+
+import static com.certoclav.certoscale.R.string.protocols;
 
 /**
  * Created by Michael on 12/6/2016.
@@ -65,9 +57,10 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase());
+        navigationbar.getTextTitle().setText(getString(protocols).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getButtonDelete().setVisibility(View.VISIBLE);
+
 
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
 
@@ -75,10 +68,16 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         DatabaseService db = new DatabaseService(this);
 
         List<Protocol> protocols = db.getProtocols();
-        navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  "+protocols.size());
-
 
         adapter = new ProtocolAdapter(this,new ArrayList<Protocol>());
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  " +adapter.getCount());
+                navigationbar.getTextTitle().setVisibility(View.VISIBLE);
+            }
+        });
         listView.setAdapter(adapter);
 
 
@@ -239,9 +238,6 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         Collections.sort(protocols, new Comparator<Protocol>(){
             public int compare(Protocol emp1, Protocol emp2) {
                 // ## Ascending order
-
-
-
                 return emp2.getDate().compareTo(emp1.getDate()); // To compare string values
 
             }
@@ -254,9 +250,6 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                 adapter.add(protocol);
             }
         }
-
-        navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  " +protocols.size());
-        navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 
         adapter.notifyDataSetChanged();
 

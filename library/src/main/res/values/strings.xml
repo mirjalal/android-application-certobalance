@@ -36,6 +36,7 @@
         <string name="path_video_place_item">/sdcard/Download/animation_place_item.mp4</string>
         <string name="video_open_lid_description">Please open the lid</string>
         <string name="video_place_item_descripton">Please place items into the vessel</string>
+        <string name="video_power">/sdcard/Download/animation_power.mp4</string>
         <string name="video_close_lid_path">/sdcard/Download/animation_close_lid.mp4</string>
         <string name="video_lock_description">Please close and lock the lid</string>
         <string name="start_program">Start Program</string>
