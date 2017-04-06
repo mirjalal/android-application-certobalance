@@ -59,7 +59,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setText(getString(protocols).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-        navigationbar.getButtonDelete().setVisibility(View.VISIBLE);
+        //navigationbar.getButtonDelete().setVisibility(View.VISIBLE);
 
 
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);

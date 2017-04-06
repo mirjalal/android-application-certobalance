@@ -45,7 +45,6 @@ import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CA
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
-import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
@@ -2205,18 +2204,17 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 							case WEIGHING:
 								scaleApplicationName = getString(R.string.app_weighing)+" " +getString(R.string.samples);
 								break;
-
 							case CHECK_WEIGHING:
 								scaleApplicationName = getString(R.string.app_check_weighing) +" " +getString(R.string.samples);
 								break;
-
 							case TOTALIZATION:
-								scaleApplicationName = getString(R.string.app_check_weighing) +" " +getString(R.string.samples);
+								scaleApplicationName = getString(R.string.app_totalization) +" " +getString(R.string.samples);
 								break;
 							case INGREDIENT_COSTING:
-								sc
+								scaleApplicationName = getString(R.string.app_ingrediant_costing) +" " +getString(R.string.samples);
 								break;
 							case DIFFERENTIAL_WEIGHING:
+								scaleApplicationName = getString(R.string.app_differential_weighing) +" " +getString(R.string.samples);
 								break;
 							case PIPETTE_ADJUSTMENT_1_HOME:
 							case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
