@@ -494,12 +494,12 @@ public class ProtocolManager implements ScaleApplicationListener {
 
                         sb.append(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getDescription() + "\n");
 
-                        formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+                        formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight();
                         formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
-                        double currentdifference = Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight() - ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) / Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight());
+                        double currentdifference = Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight() - ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) / Math.abs(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight());
                         currentdifference = currentdifference * 100;
 
-                        sb.append(ApplicationController.getContext().getString(R.string.target)+": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight()) + "\n");
+                        sb.append(ApplicationController.getContext().getString(R.string.target)+": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight()) + "\n");
                         sb.append(ApplicationController.getContext().getString(R.string.actual)+": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight()) + "\n");
                         sb.append(ApplicationController.getContext().getString(R.string.diff)+"(%): " + String.format("%.2f", currentdifference) + " %\n");
 

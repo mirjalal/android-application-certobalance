@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.menu.AnimationCalibrationActivity;
 import com.certoclav.certoscale.menu.NotificationActivity;
@@ -23,16 +24,13 @@ import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_NOT_GRAM;
 
 public class StateMachine implements WeightListener {
 
-    public boolean isIgnoreErrors() {
-        return ignoreErrors;
-    }
 
-    public void setIgnoreErrors(boolean ignoreErrors) {
-        this.ignoreErrors = ignoreErrors;
+    public void setIgnoreErrors() {
+        nanoTimeIgnoreErrorsPushed = System.nanoTime();
     }
 
     private int delaycounter =0;
-    private boolean ignoreErrors = false;
+
 
     private StateMachine(){
         Scale.getInstance().setOnWeightListener(this);
@@ -50,6 +48,8 @@ public class StateMachine implements WeightListener {
 
 
     private long nanoTimeAtLastMessageReceived = 0;
+    private long nanoTimeIgnoreErrorsPushed = 0;
+
     //state machine callback thread
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
@@ -95,20 +95,24 @@ public class StateMachine implements WeightListener {
 
             Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
 
+            if(AppConstants.IS_IO_SIMULATED){
+                Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
+            }else {
 
-            if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
+                if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
                     Scale.getInstance().setScaleState(CABLE_NOT_CONNECTED);
-            }else{
-                if (rawResponseTransformed.contains("lb") ||
-                        rawResponseTransformed.contains("ct") ||
-                        rawResponseTransformed.contains("dwt")||
-                        rawResponseTransformed.contains("oz")||
-                        rawResponseTransformed.contains("lb")||
-                        rawResponseTransformed.contains("GN")||
-                        rawResponseTransformed.contains("gn")) {
-                    Scale.getInstance().setScaleState(ON_AND_MODE_NOT_GRAM);
-                }else {
-                    Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
+                } else {
+                    if (rawResponseTransformed.contains("lb") ||
+                            rawResponseTransformed.contains("ct") ||
+                            rawResponseTransformed.contains("dwt") ||
+                            rawResponseTransformed.contains("oz") ||
+                            rawResponseTransformed.contains("lb") ||
+                            rawResponseTransformed.contains("GN") ||
+                            rawResponseTransformed.contains("gn")) {
+                        Scale.getInstance().setScaleState(ON_AND_MODE_NOT_GRAM);
+                    } else {
+                        Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
+                    }
                 }
             }
 
@@ -118,7 +122,7 @@ public class StateMachine implements WeightListener {
         //ISSUE HANDLER
             switch (Scale.getInstance().getState()) {
                 case OFF:
-                    if(ignoreErrors == false) {
+                    if((System.nanoTime() - nanoTimeIgnoreErrorsPushed) > (1000000000L * 30)) {
                         Intent intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -133,7 +137,7 @@ public class StateMachine implements WeightListener {
                      }
                     break;
                 case CABLE_NOT_CONNECTED:
-                    if(ignoreErrors == false) {
+                    if((System.nanoTime() - nanoTimeIgnoreErrorsPushed) > (1000000000L * 30)) {
                         Intent intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -150,7 +154,7 @@ public class StateMachine implements WeightListener {
                     ApplicationController.getContext().startActivity(intent);
                     break;
                 case ON_AND_MODE_NOT_GRAM:
-                    if(ignoreErrors == false) {
+                    if((System.nanoTime() - nanoTimeIgnoreErrorsPushed) > (1000000000L * 30)) {
                         intent = new Intent(ApplicationController.getContext(), NotificationActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

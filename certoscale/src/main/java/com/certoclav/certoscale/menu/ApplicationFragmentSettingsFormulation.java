@@ -51,7 +51,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_edit_float);
                     dialog.setTitle(R.string.please_enter_the_scaling_factor);
-                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("Cur: "+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()));
+                    ((TextView)dialog.findViewById(R.id.dialog_edit_number_text_unit)).setText("");
 
                     // set the custom dialog components - text, image and button
 
@@ -69,11 +69,11 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
                         @Override
                         public void onClick(View v) {
                             try {
-                                Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
-                                ApplicationManager.getInstance().setScalingFactor(inputval);
+                                Double scalingFactor = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                ApplicationManager.getInstance().setScalingFactor(scalingFactor);
 
                             }catch (NumberFormatException e){
-                                ApplicationManager.getInstance().setScalingFactor(1);
+                                ApplicationManager.getInstance().setScalingFactor(1d);
                             }
                             dialog.dismiss();
                             onResume();
@@ -123,13 +123,15 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
                             try {
 
 
-                                    Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                    Double targetWeightInCurrentUnit = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
+                                    Double targetWeightInGram = ApplicationManager.getInstance().transformCurrentUnitToGram(targetWeightInCurrentUnit);
 
-                                    Double totalTarget = ApplicationManager.getInstance().getCurrentRecipe().getRecipeTotalWeight();
+                                    Double totalWeightOfRecipeInGram = ApplicationManager.getInstance().getCurrentRecipe().getRecipeTotalWeight();
 
-                                    ApplicationManager.getInstance().setScalingFactor(inputval / totalTarget);
 
-                                    Toast.makeText(getActivity(), getString(R.string.scaling_factor)+"= "+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor())+" "+getString(R.string.calculated_and_updated), Toast.LENGTH_LONG).show();
+                                    ApplicationManager.getInstance().setScalingFactor(targetWeightInGram / totalWeightOfRecipeInGram);
+
+                                    Toast.makeText(getActivity(), getString(R.string.scaling_factor)+" = "+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor())+" "+getString(R.string.calculated_and_updated), Toast.LENGTH_LONG).show();
 
 
 

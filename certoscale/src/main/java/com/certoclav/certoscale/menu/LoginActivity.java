@@ -66,8 +66,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android_serialport_api.SerialService;
-
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class LoginActivity extends Activity implements ButtonEventListener, PutUserLoginTaskFinishedListener {
@@ -169,7 +167,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
-		navigationbar.getButtonCompanyLogo().setVisibility(View.VISIBLE);
+		navigationbar.getButtonCompanyLogo().setVisibility(View.GONE);
 
 
 

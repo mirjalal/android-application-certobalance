@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.model;
 
 
+import com.certoclav.certoscale.supervisor.ApplicationManager;
+
 public class RecipeEntry {
 
 
@@ -76,6 +78,17 @@ public class RecipeEntry {
 
 	public Double getWeight() {
 		return weight;
+	}
+	public Double getScaledWeight(){
+		Double scaledWeight = 0d;
+
+		try {
+			scaledWeight = weight * ApplicationManager.getInstance().getScalingFactor();
+		}catch (Exception e){
+			scaledWeight = weight;
+		}
+
+		return scaledWeight;
 	}
 
 	public void setWeight(Double weight) {

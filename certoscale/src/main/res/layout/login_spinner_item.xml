@@ -12,6 +12,7 @@
     android:layout_height="match_parent"
 	android:gravity="center_vertical"
     android:text="max.mustermann@mail.de"
+	android:layout_toLeftOf="@+id/login_dopdown_image_cloud"
 	android:textStyle="bold"
 	style="@style/text_inversed"/>
 
@@ -19,9 +20,19 @@
     android:id="@+id/login_dopdown_image_cloud"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:layout_alignParentRight="true"
 	android:layout_centerVertical="true"
+	android:layout_toLeftOf="@+id/login_dopdown_image_dropdown"
     android:src="@drawable/icon_cloud_ok"
 	android:layout_marginRight="20dp"/>
+
+	<ImageView
+		android:id="@+id/login_dopdown_image_dropdown"
+		android:layout_width="20dp"
+		android:layout_height="20dp"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:src="@drawable/quickaction_arrow_dow_dark"
+		android:layout_marginRight="20dp"/>
+
     
 </RelativeLayout>

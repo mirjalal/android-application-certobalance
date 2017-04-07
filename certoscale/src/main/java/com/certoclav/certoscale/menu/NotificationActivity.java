@@ -50,7 +50,7 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 			
 			@Override
 			public void onClick(View v) {
-				StateMachine.getInstance().setIgnoreErrors(true);
+				StateMachine.getInstance().setIgnoreErrors();
 				finish();
 			}
 		});

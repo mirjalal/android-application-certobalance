@@ -243,7 +243,7 @@
     <string name="please_enter_the_under_tolerance_limit_weight">Bitte geben sie die untere Toleranzgrenze ein</string>
     <string name="please_enter_the_upper_tolerance_limit_weight">Bitte geben Sie die obere Toleranzgrenze ein</string>
     <string name="calculate_target_weight">Zielgewicht berechnen</string>
-    <string name="g_of">" g von  "</string>
+    <string name="g_of">" g von "</string>
     <string name="on_the_pan_and_press_next">auf die Wiegefläche und drücken Sie NÄCHSTE</string>
     <string name="pleas_put">Bitte platzieren Sie</string>
     <string name="please_enter_the_imprecision_of_the_pipette">Bitte geben Sie die Präzisionsabweichung ein</string>
@@ -649,4 +649,5 @@
     <string name="the_batch_hasnt_been_saved_because_it_was_empty">Die Charge wurde nicht gespeichert weil Sie leer war</string>
     <string name="serial_number">Seriennummer</string>
     <string name="remove_the_calibration_weight_from_the_pan">Nehmen Sie das Kalibrierungsgewicht von der Waage</string>
+    <string name="of">von</string>
 </resources>
