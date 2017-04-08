@@ -16,6 +16,7 @@ import com.certoclav.library.application.ApplicationController;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 public class ProtocolManager implements ScaleApplicationListener {
@@ -610,14 +611,14 @@ public class ProtocolManager implements ScaleApplicationListener {
                 for(int i=0; i<costList.size();i++){
                     sb.append( costList.get(i).getName()+"\n");
                     sb.append(ApplicationController.getContext().getString(R.string.item_weight)+": "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(costList.get(i).getWeight())+"\n");
-                    sb.append(ApplicationController.getContext().getString(R.string.item_cost)+": "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(costList.get(i).getCost())+"\n");
+                    sb.append(ApplicationController.getContext().getString(R.string.item_cost)+": "+ String.format(Locale.US,"%.2f",costList.get(i).getCost())+ " "+ ApplicationManager.getInstance().getCurrency() + "\n");
                 }
 
 
                 sb.append("------------------\n");
                 sb.append(ApplicationController.getContext().getString(R.string.total_items)+": " +costList.size()+"\n");
                 sb.append(ApplicationController.getContext().getString(R.string.total_weight)+": " +ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getIngrediantTotalWeight())+"\n");
-                sb.append(ApplicationController.getContext().getString(R.string.total_cost)+": " +ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getIngrediantTotalCost())+"\n");
+                sb.append(ApplicationController.getContext().getString(R.string.total_cost)+": " +String.format(Locale.US,"%.2f",ApplicationManager.getInstance().getIngrediantTotalCost())+ " "+ ApplicationManager.getInstance().getCurrency() +"\n");
 
 
                 break;

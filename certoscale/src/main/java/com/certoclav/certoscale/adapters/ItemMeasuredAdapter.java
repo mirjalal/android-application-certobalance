@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,10 +88,10 @@ public class ItemMeasuredAdapter extends ArrayAdapter<Item> {
 
 		try {
 			TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-			editWeight.setText(String.format(Locale.US, "%.4f", getItem(position).getWeight())+" "+getItem(position).getUnit());
+			editWeight.setText("");
+			editWeight.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(getItem(position).getWeight()));
 		}catch (Exception e){
-			TextView editWeight = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_weight);
-			editWeight.setText(String.format(Locale.US, "%.4f", getItem(position).getWeight())+" g");
+
 		}
 		//TextView editUnit = (TextView) convertView.findViewById(R.id.menu_main_item_edit_element_unit);
 		//editUnit.setText("g");
