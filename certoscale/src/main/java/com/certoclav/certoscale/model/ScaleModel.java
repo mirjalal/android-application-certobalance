@@ -17,7 +17,7 @@ public abstract class ScaleModel {
 	public void setStabilisationTime(double stabilisationTime) {this.stabilisationTime = stabilisationTime;}
 
 	double maximumCapazity;
-	public double getMaximumCapazity() {return maximumCapazity;}
+	public double getMaximumCapazityInGram() {return maximumCapazity;}
 	public void setMaximumCapazity(double maximumCapazity) {this.maximumCapazity = maximumCapazity;}
 
 	int decimalPlaces;

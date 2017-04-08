@@ -1,6 +1,5 @@
 package com.certoclav.certoscale.supervisor;
 
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
@@ -424,7 +423,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public int getLoadInPercent() {
-        return (int) Math.round((Scale.getInstance().getWeightInGram() / AppConstants.WEIGHT_MAX_IN_GRAM) * 100.0);
+        return (int) Math.round((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * 100.0);
     }
 
 
@@ -471,7 +470,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTareAsStringWithUnit() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
-                return String.format("%d", getTareInPieces()) + " " + getUnitAsString();
+                return String.format("%d", getTareInPieces()) + " " + "pcs";
             default:
                 return getTransformedWeightAsStringWithUnit(getTareInGram());
         }

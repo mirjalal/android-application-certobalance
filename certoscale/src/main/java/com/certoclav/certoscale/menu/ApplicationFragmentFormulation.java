@@ -84,8 +84,12 @@ private TextView textInstruction = null;
 
         }
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText(getString(R.string.pleas_put)+" " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipeEntry().getScaledWeight()) + " " +getString(R.string.of)+" " + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription()+" " + getString(R.string.on_the_pan_and_press_next));
-        }
+            if(ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight() == 0){
+                textInstruction.setText(ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + " - " +getString(R.string.press_next));
+            }else {
+                textInstruction.setText(getString(R.string.pleas_put) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipeEntry().getScaledWeight()) + " " + getString(R.string.of) + " " + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + " " + getString(R.string.on_the_pan_and_press_next));
+            }
+            }
 
 
         super.onResume();
@@ -106,7 +110,11 @@ private TextView textInstruction = null;
     @Override
     public void onRecipeEntryChanged(RecipeEntry entry) {
         if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null){
-            textInstruction.setText(getString(R.string.pleas_put)+ " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipeEntry().getScaledWeight()) + " " +getString(R.string.of)+" " + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription()+" " + getString(R.string.on_the_pan_and_press_next));
-        }
+            if(ApplicationManager.getInstance().getCurrentRecipeEntry().getWeight() == 0){
+                textInstruction.setText(ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + " - " +getString(R.string.press_next));
+            }else {
+                textInstruction.setText(getString(R.string.pleas_put) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentRecipeEntry().getScaledWeight()) + " " + getString(R.string.of) + " " + ApplicationManager.getInstance().getCurrentRecipeEntry().getDescription() + " " + getString(R.string.on_the_pan_and_press_next));
+            }
+            }
     }
 }

@@ -2,6 +2,7 @@ package com.certoclav.certoscale.model;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -104,8 +105,21 @@ public class ScaleModelGandG extends ScaleModel {
         return 0;
     }
 
-    public void pressMode(){
+    public void pressCalibrationButton(){
         ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+    }
+
+    public void pressUnitButton(){
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
+    }
+
+    public void pressCountingButton(){
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Br");
+    }
+
+
+    public void pressLightButton(){
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bu");
     }
     @Override
     public double parseRecievedMessage(String message) {
@@ -227,6 +241,12 @@ public class ScaleModelGandG extends ScaleModel {
         dialogChooseCalibrationWeight.setContentView(R.layout.dialog_instruction);
         dialogChooseCalibrationWeight.setTitle(R.string.please_choose_calibration_weight);
         ((TextView)dialogChooseCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(R.string.please_choose_calibration_weight);
+        dialogChooseCalibrationWeight.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                setPeriodicMessagingEnabled(true);
+            }
+        });
 
         // set the custom dialog components - text, image and button
 
@@ -240,8 +260,8 @@ public class ScaleModelGandG extends ScaleModel {
                 setChosenValue(2000d);
 
                 pressTara();
-                pressMode();
-                pressMode();
+                pressCalibrationButton();
+                pressCalibrationButton();
 
                 dialogChooseCalibrationWeight.dismiss();
                 try {
@@ -255,7 +275,7 @@ public class ScaleModelGandG extends ScaleModel {
 
         Button dialogButton2 = (Button) dialogChooseCalibrationWeight.findViewById(R.id.dialog_edit_instruction_button_2);
 
-        dialogButton2.setText("5000g");
+        dialogButton2.setText("5000 g");
         dialogButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -263,7 +283,7 @@ public class ScaleModelGandG extends ScaleModel {
 
                 setChosenValue(5000);
                 pressTara();
-                pressMode();
+                pressCalibrationButton();
                 dialogChooseCalibrationWeight.dismiss();
                 try{
                     showPutCalibrationWeightDialog(context);
@@ -285,6 +305,13 @@ public class ScaleModelGandG extends ScaleModel {
         dialogTareBalance.setContentView(R.layout.dialog_instruction);
         dialogTareBalance.setTitle(context.getString(R.string.external_calibration));
         ((TextView)dialogTareBalance.findViewById(R.id.dialog_instruction_text)).setText(R.string.remove_the_calibration_weight_from_the_pan);
+        dialogTareBalance.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                pressTara();
+                setPeriodicMessagingEnabled(true);
+            }
+        });
 
         Button dialogButton13 = (Button) dialogTareBalance.findViewById(R.id.dialog_edit_instruction_button_1);
         dialogButton13.setText(R.string.cancel);
@@ -323,10 +350,16 @@ public class ScaleModelGandG extends ScaleModel {
         final PutCalibrationWeightDialog dialogPutCalibrationWeight = new PutCalibrationWeightDialog(context);
         dialogPutCalibrationWeight.setContentView(R.layout.dialog_instruction);
         dialogPutCalibrationWeight.setTitle(context.getString(R.string.external_calibration));
-        ((TextView)dialogPutCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(context.getString(R.string.place) + " "+ getChosenValue() + " " +context.getString(R.string.on_the_pan));
+        ((TextView)dialogPutCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(context.getString(R.string.place) + " "+ getChosenValue() + " g " +context.getString(R.string.on_the_pan));
         // set the custom dialog components - text, image and button
         // set the custom dialog components - text, image and button
-
+        dialogPutCalibrationWeight.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                pressTara();
+                setPeriodicMessagingEnabled(true);
+            }
+        });
 
 
         Button dialogButton11 = (Button) dialogPutCalibrationWeight.findViewById(R.id.dialog_edit_instruction_button_1);
@@ -336,8 +369,8 @@ public class ScaleModelGandG extends ScaleModel {
             @Override
             public void onClick(View v) {
 
-                pressTara();
-                setPeriodicMessagingEnabled(true);
+               pressTara();
+               setPeriodicMessagingEnabled(true);
                 dialogPutCalibrationWeight.dismiss();
 
 

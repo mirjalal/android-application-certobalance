@@ -48,9 +48,11 @@ android:text="instruction"/>
             android:layout_alignParentRight="true"
             android:gravity="right"
             android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
             android:textStyle="bold"
             android:textSize="80sp"
-            android:text="0.0001 g" />
+            android:text="0.0001 g"
+            android:background="@drawable/btn_transparent"/>
         <ImageView
             android:id="@+id/menu_main_image_stable"
             android:layout_width="40dp"

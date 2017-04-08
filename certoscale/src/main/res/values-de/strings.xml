@@ -50,7 +50,7 @@
     <string name="do_you_really_want_to_go_back">Möchten Sie wirklich zurück gehen ohne das aktuelle Item zu speichern</string>
     <string name="do_you_really_want_to_go_back_without_saving_recipe">MöchtenSie wirklich zurück gehen ohne das aktuelle Rezept zu speichern</string>
     <string name="do_you_really_want_to_go_back_without_saving_unit">Möchten Sie wirklich zurück gehen ohne die aktuelle Einheit zu speichern</string>
-    <string name="do_you_really_want_to_save_the_itm">Möchten Sie das Item wirklich speichern?</string>
+    <string name="do_you_really_want_to_save_the_itm">Möchten Sie das Objekt wirklich speichern?</string>
     <string name="do_you_really_want_to_save_the_recipe">Möchten Sie das Rezept wirklich speichern?</string>
     <string name="do_you_really_want_to_save_the_unit">Möchten sie die Einheit wirklich speichern?</string>
 
@@ -79,7 +79,7 @@
     <string name="pipette_name">Pipetten Name</string>
     <string name="pipette_adjustment_finisihed">Pipettenabgleich abgeschlossen. Drücken sie Start um den Vorgang erneut zu starten</string>
     <string name="pipette_number">Pipetten Nummer</string>
-    <string name="place">Platzieren</string>
+    <string name="place">Platzieren Sie</string>
     <string name="place_container_on_the_pan">Platzieren Sie den Behälter auf der Waage und drücken sie START</string>
     <string name="place_target_weight_on_pan">Platzieren Sie das Zielgewicht auf der Waage. Drücken Sie OK um fortzufahren</string>
     <string name="please_enter_a_description">Geben Sie eine Beschreibung der Einheit ein</string>
@@ -195,7 +195,7 @@
     <string name="cal">Kal</string>
     <string name="cancel">Abbrechen</string>
     <string name="clear_data">Löschen</string>
-    <string name="close">Schließen</string>
+    <string name="close">Schliessen</string>
     <string name="cost_list">Kostenliste</string>
     <string name="create_new">Neu erstellen</string>
     <string name="accept">Akzeptieren</string>
@@ -204,7 +204,7 @@
     <string name="print">Drucken</string>
     <string name="save">Speichern</string>
     <string name="screen_sharing">Bildschirm teilen</string>
-    <string name="send_mail">Mail senden</string>
+    <string name="send_mail">E-Mail senden</string>
     <string name="unit">Einheit</string>
     <string name="please_enter_the_nominal">Bitte geben Sie das Nominalgewicht ein</string>
     <string name="please_enter_the_over">Bitte geben Sie das obere Limit ein</string>
@@ -214,7 +214,7 @@
     <string name="please_enter_the_target">Bitte geben Sie das Zielgewicht ein</string>
     <string name="please_enter_the_under">Bitte geben Sie die untere Grenze an</string>
     <string name="please_enter_the_under_limit_weight">Bitte geben Sie die untere Grenze ein</string>
-    <string name="please_plug_in_the_touchscreen_and_power_on">Bitte schließen Sie den Touchscreen an und schalten Sie ihn ein</string>
+    <string name="please_plug_in_the_touchscreen_and_power_on">Bitte verbinden Sie den CertoControl mit der Waage</string>
     <string name="application_settings">Anwendungs-Einstellungen</string>
     <string name="applications">Andwendungen</string>
     <string name="calibration">Kalibrierung</string>
@@ -602,7 +602,7 @@
     <string name="mobile">Mobil</string>
     <string name="mobile_number">Mobilnummer</string>
     <string name="sign_up_account_failed">Accountanmeldung fehlgeschlagen</string>
-    <string name="the_weight_values_must_be_higher_than_zero">Die Gewichtswerte müssen größer als Null sein</string>
+    <string name="the_weight_values_must_be_non_negative">Die Gewichtswerte müssen größer oder gleich Null sein</string>
     <string name="these_changes_will_be_applied_in_the_next_release">Diese Änderungen werden erst im nächsten Release angewandt</string>
     <string name="color_themes">Farbschemas</string>
     <string name="tap_to_choose_the_color_theme_model">" Klicken um das Farbschema auszuwählen"</string>
@@ -650,4 +650,8 @@
     <string name="serial_number">Seriennummer</string>
     <string name="remove_the_calibration_weight_from_the_pan">Nehmen Sie das Kalibrierungsgewicht von der Waage</string>
     <string name="of">von</string>
+    <string name="press_next">Drücke NÄCHSTE</string>
+    <string name="start_teamviewer_session">Starte eine Teamviewer Session mit CertoSupport (support@certoclav.com).</string>
+    <string name="send_an_email_to_certosupport">Sende eine E-Mail an CertoSupport</string>
+    <string name="pieces">Stück</string>
 </resources>

@@ -19,6 +19,7 @@ import com.certoclav.certoscale.view.QuickActionItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -121,7 +122,7 @@ public class RecipeElementAdapter extends ArrayAdapter<RecipeEntry> {
 		});
 
 		EditText editWeight = (EditText) convertView.findViewById(R.id.menu_main_recipe_edit_element_weight);
-		editWeight.setText(String.format("%.4f",getItem(position).getWeight()));
+		editWeight.setText(String.format(Locale.US,"%.4f",getItem(position).getWeight()));
 
 		editWeight.addTextChangedListener(new TextWatcher() {
 			@Override

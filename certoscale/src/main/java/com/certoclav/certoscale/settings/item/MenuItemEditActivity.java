@@ -160,7 +160,7 @@ public class MenuItemEditActivity extends Activity implements ButtonEventListene
 
                 // set the custom dialog components - text, image and button
                 TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText(getString(R.string.do_you_really_want_to_save_the_itm) + editName.getText().toString());
+                text.setText(getString(R.string.do_you_really_want_to_save_the_itm) + " " + editName.getText().toString());
                 Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                 dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 

@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.RecipeElementAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
@@ -218,8 +217,8 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                             RecipeEntry recipeEntry=adapter.getItem(i);
                            recipeEntry.setInstruction(getString(R.string.pleas_put)+" "+recipeEntry.getWeight()+getString(R.string.g_of)+recipeEntry.getDescription()+" "+getString(R.string.on_the_pan_and_press_next));
                             recipeEntries.add(recipeEntry);
-                            if (recipeEntry.getWeight()==0){
-                                Toast.makeText(ApplicationController.getContext(),getString(R.string.the_weight_values_must_be_higher_than_zero), Toast.LENGTH_SHORT).show();
+                            if (recipeEntry.getWeight()<0){
+                                Toast.makeText(ApplicationController.getContext(),getString(R.string.the_weight_values_must_be_non_negative), Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -243,49 +242,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
         }
 
 
-/*
-        if(buttonId == ActionButtonbarFragment.BUTTON_BACK){
-            try
-            {
-                final Dialog dialog = new Dialog(this);
-                dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle("Return");
 
-                // set the custom dialog components - text, image and button
-                TextView text = (TextView) dialog.findViewById(R.id.text);
-                text.setText("Do you really want to return without saving");
-                Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
-                dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DatabaseService db = new DatabaseService(MenuRecipeEditActivity.this);
-
-
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-
-                dialog.show();
-
-
-            }
-            catch (Exception e)
-            {
-
-                e.printStackTrace();
-            }
-        }
-*/
 
 
     }

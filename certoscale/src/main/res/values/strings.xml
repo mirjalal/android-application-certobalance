@@ -637,7 +637,7 @@
     <string name="notification">Notification</string>
     <string name="warning">Warning</string>
     <string name="calibrating">Calibrating...</string>
-    <string name="please_plug_in_the_touchscreen_and_power_on">Please plug in the touchscreen and power on the balance.</string>
+    <string name="please_plug_in_the_touchscreen_and_power_on">Connect the CertoControl with the balance</string>
     <string name="selftest">Selftest</string>
     <string name="touchscreen_disconnected">Touchscreen disconnected</string>
     <string name="balance_power_off">Balance is powered OFF</string>
@@ -917,7 +917,7 @@
     <string name="last_name">Last name</string>
     <string name="mobile_number">Mobile number</string>
     <string name="sign_up_account_failed">Sign up account failed</string>
-    <string name="the_weight_values_must_be_higher_than_zero">The weight values must be higher than zero</string>
+    <string name="the_weight_values_must_be_non_negative">The weight values must non negative</string>
     <string name="these_changes_will_be_applied_in_the_next_release">These changes will be applied in the next release</string>
     <string name="color_themes">Color Themes</string>
     <string name="tap_to_choose_the_color_theme_model">Tab to choose the color theme model</string>
@@ -966,6 +966,10 @@
     <string name="serial_number">Serial number</string>
     <string name="remove_the_calibration_weight_from_the_pan">Remove the calibration weight from the pan</string>
     <string name="of">of</string>
+    <string name="press_next">Press NEXT</string>
+    <string name="start_teamviewer_session">Start Teamviewer session with CertoSupport (support@certoclav.com).</string>
+    <string name="send_an_email_to_certosupport">Send an email to CertoSupport</string>
+    <string name="pieces">pieces</string>
 
 
 </resources>

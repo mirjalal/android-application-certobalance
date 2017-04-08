@@ -215,7 +215,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 			rawResponse = "+ 0.0000 g";
 
 
-			lastWeightReceived = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazity()*0.5* Math.sin(((double)counter)*0.002)));
+			lastWeightReceived = (Double) (Scale.getInstance().getScaleModel().getMaximumCapazityInGram()*0.5+ (Scale.getInstance().getScaleModel().getMaximumCapazityInGram()*0.5* Math.sin(((double)counter)*0.002)));
 
 		    handler.sendEmptyMessage(0);
 

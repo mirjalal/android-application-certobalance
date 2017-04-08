@@ -8,7 +8,7 @@
     <Preference
         android:key="@string/preferences_communication_labelprinter"
         android:title="@string/label_printer"
-        android:summary="Assigned to: COM 2, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none"/>
+        android:summary="Assigned to: COM 2, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
 
 
     <Preference
@@ -38,39 +38,11 @@
         android:entryValues="@array/preferences_communication_list_devices_values"
         />
 
-    <ListPreference
-        android:key="@string/preferences_communication_list_baudrate"
-        android:title="@string/baudrate"
-        android:summary="@string/tab_to_choose_baudrate"
-        android:defaultValue="5"
-        android:entries="@array/preferences_communication_string_array_baudrate"
-        android:entryValues="@array/preferences_communication_list_baudrate_values"
-        />
 
 
-    <ListPreference
-    android:key="@string/preferences_communication_list_transmission_standard"
-    android:title="@string/transmission_standard"
-    android:summary="@string/tab_to_choose_the_data_bits_stop_bits_and_parity"
-    android:defaultValue="4"
-    android:entries="@array/preferences_communication_string_array_transmission_standard"
-    android:entryValues="@array/preferences_communication_list_transmission_standard_values"
-    />
-
-    <ListPreference
-        android:key="@string/preferences_communication_list_handshake"
-        android:title="@string/handshake"
-        android:summary="@string/tab_to_choose_the_flow_control_mode"
-        android:defaultValue="1"
-        android:entries="@array/preferences_communication_string_array_flow_control"
-        android:entryValues="@array/preferences_communication_list_flow_control_values"
-        />
 
 
-    <Preference
-        android:key="@string/preferences_communication_socket_connected"
-        android:title="@string/certocloud_push_notification_service"
-        android:summary="@string/connected" />
+
 
 </PreferenceScreen>
 

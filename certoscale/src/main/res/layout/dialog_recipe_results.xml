@@ -28,7 +28,7 @@
 			android:layout_height="60dp"
 			style="@style/text_default"
 			android:gravity="center_vertical"
-			android:text="Target"
+			android:text="@string/target"
 			android:textStyle="bold"/>
 
 
@@ -40,7 +40,7 @@
 			android:layout_height="60dp"
 			style="@style/text_default"
 			android:gravity="center_vertical"
-			android:text="Actual"
+			android:text="@string/actual"
 			android:textStyle="bold"/>
 
 		<TextView

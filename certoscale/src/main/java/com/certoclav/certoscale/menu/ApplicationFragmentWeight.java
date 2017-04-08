@@ -16,11 +16,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UnitAdapter;
-import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.listener.StableListener;
@@ -114,6 +112,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     Log.e("SettingsUnitFragment", "notifydatasetchanged" + adapter.getCount());
 
                     Button buttonClose = (Button) dialog.findViewById(R.id.dialog_pick_unit_close);
+                    buttonClose.setText(getString(R.string.close));
 
                     buttonClose.setOnClickListener(new View.OnClickListener() {
 
@@ -191,21 +190,21 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ANIMAL_WEIGHING:
                 textInstruction.setText(R.string.press_start_for_a_new_measuremnt);
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getAnimalWeightInGram()));
+                textValue.setText(ApplicationManager.getInstance().getAnimalWeightAsStringWithUnit());
                 textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             case PART_COUNTING_CALC_AWP:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
             case PART_COUNTING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringInGram());
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case FORMULATION:
                 if(ApplicationManager.getInstance().getCurrentRecipe()==null){
@@ -634,9 +633,9 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
             int fwidth=0;
             if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
-                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
             }else{
-                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazity()) * WIDTH_LOADING_BAR_TOTAL));
+                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
             }
             if(fwidth<0){
                 fwidth = 0;
@@ -652,7 +651,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             barloadbackground.setLayoutParams(params2);
 
 
-            if(ApplicationManager.getInstance().getSumInGram() > (0.8*Scale.getInstance().getScaleModel().getMaximumCapazity())){
+            if(ApplicationManager.getInstance().getSumInGram() > (0.8*Scale.getInstance().getScaleModel().getMaximumCapazityInGram())){
                 barload.setBackgroundColor(Color.RED);
 
             }else{

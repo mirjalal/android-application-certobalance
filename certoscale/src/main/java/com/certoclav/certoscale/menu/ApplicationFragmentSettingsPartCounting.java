@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
@@ -312,7 +313,7 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 button_under_limit.setEnabled(false);
                 button_over_limit.setEnabled(false);
                 button_target.setEnabled(false);
-                textInstruction.setText(getString(R.string.place) + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " pcs. " + getString(R.string.onto_the_pan));
+                textInstruction.setText(getString(R.string.place) + " " + ApplicationManager.getInstance().getAwpCalcSampleSize()+ " "+getString(R.string.pieces) + " " + getString(R.string.onto_the_pan));
                 textInstruction.setVisibility(View.VISIBLE);
                 Animation a = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in);
                 a.reset();
@@ -322,19 +323,22 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
                 buttonOK.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ApplicationManager.getInstance().setAveragePieceWeightInGram(ApplicationManager.getInstance().getTaredValueInGram()/(double)ApplicationManager.getInstance().getAwpCalcSampleSize());
-                        buttonOK.setVisibility(View.INVISIBLE);
-                        buttonCancel.setVisibility(View.INVISIBLE);
-                        textInstruction.setVisibility(View.INVISIBLE);
-                        buttonEditSampleSize.setEnabled(true);
-                        buttonEditAveragePieceWeight.setEnabled(true);
-                        buttonCalculateAwp.setEnabled(true);
-                        button_under_limit.setEnabled(true);
-                        button_over_limit.setEnabled(true);
-                        button_target.setEnabled(true);
-                        Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
-
-                        onResume();
+                        if (Scale.getInstance().isStable()){
+                            ApplicationManager.getInstance().setAveragePieceWeightInGram(ApplicationManager.getInstance().getTaredValueInGram() / (double) ApplicationManager.getInstance().getAwpCalcSampleSize());
+                            buttonOK.setVisibility(View.INVISIBLE);
+                            buttonCancel.setVisibility(View.INVISIBLE);
+                            textInstruction.setVisibility(View.INVISIBLE);
+                            buttonEditSampleSize.setEnabled(true);
+                            buttonEditAveragePieceWeight.setEnabled(true);
+                            buttonCalculateAwp.setEnabled(true);
+                            button_under_limit.setEnabled(true);
+                            button_over_limit.setEnabled(true);
+                            button_target.setEnabled(true);
+                            Scale.getInstance().setScaleApplication(ScaleApplication.PART_COUNTING);
+                            onResume();
+                    }else{
+                            Toast.makeText(getActivity(), getString(R.string.wait_until_the_weight_is_stable),Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
                 buttonCancel.setVisibility(View.VISIBLE);
