@@ -970,6 +970,11 @@
     <string name="start_teamviewer_session">Start Teamviewer session with CertoSupport (support@certoclav.com).</string>
     <string name="send_an_email_to_certosupport">Send an email to CertoSupport</string>
     <string name="pieces">pieces</string>
+    <string name="net_weight">Net weight</string>
+    <string name="time_left">Time left</string>
+    <string name="art_no">Art. No.</string>
+    <string name="name">Name</string>
+    <string name="enter_a_valid_weight">Enter a valid weight</string>
 
 
 </resources>

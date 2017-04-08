@@ -178,9 +178,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(R.string.calculating);
-                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
-
-
+                textSum.setText(getString(R.string.net_weight).toUpperCase() + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
 
             case PERCENT_WEIGHING_CALC_REFERENCE:
@@ -191,7 +189,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText(R.string.press_start_for_a_new_measuremnt);
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAnimalWeightAsStringWithUnit());
-                textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText(getString(R.string.net_weight).toUpperCase() + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case PART_COUNTING_CALC_AWP:
                 textInstruction.setText("");
@@ -294,7 +292,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                     textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
                 //}
-                if(cmode.equals("2")) {
+                if(cmode.equals("2")) { //Nominal +- weight tolerance
 
                     textInstruction.setText("");
 
@@ -315,7 +313,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     }
 
 
-                    textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                    textSum.setText(getString(R.string.net_weight).toUpperCase() +": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
                 break;
             case DENSITY_DETERMINATION_STARTED:

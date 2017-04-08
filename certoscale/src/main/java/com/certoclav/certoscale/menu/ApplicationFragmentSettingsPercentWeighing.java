@@ -1,9 +1,9 @@
 package com.certoclav.certoscale.menu;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,9 +69,10 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
                         public void onClick(View v) {
                             try {
                                 Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
-                                Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
-                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(inputvalTransformed);
-                            }catch (NumberFormatException e){
+                                Double inputvalInGram = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
+                                Log.e("FragmentPercWeigh", "inputval in gram: " + inputvalInGram);
+                                ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(inputvalInGram);
+                            }catch (Exception e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setReferenceWeight(0);
                             }
                             dialog.dismiss();
@@ -177,10 +178,10 @@ public class ApplicationFragmentSettingsPercentWeighing extends Fragment {
 
 
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     public void onResume() {
-        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+"\n"+ String.format(ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit()));
+        buttonReferenceWeight.setText(getString(R.string.refernce_weight)+"\n"+ ApplicationManager.getInstance().getReferenceWeightAsStringWithUnit());
         buttonReferenceAdjust.setText(getString(R.string.reference_adjustment)+"\n"+ String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getReferenceweightAdjustment())+ " %");
         super.onResume();
 

@@ -523,12 +523,12 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_weightair_visible), getResources().getBoolean(R.bool.preferences_density_weightair_visible)) == true) {
                     listReferenceFields.get(DensityWeightAir).getTextName().setText(getString(R.string.weight_in_air).toUpperCase());
-                    listReferenceFields.get(DensityWeightAir).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_air()));
+                    listReferenceFields.get(DensityWeightAir).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDensity_weight_air()));
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_density_weightinliquid_print), getResources().getBoolean(R.bool.preferences_density_weightinliquid_print)) == true) {
                     listReferenceFields.get(DensityWeightLiquid).getTextName().setText(getString(R.string.weight_in_liquid).toUpperCase());
-                    listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getDensity_weight_liquid()));
+                    listReferenceFields.get(DensityWeightLiquid).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDensity_weight_liquid()));
                 }
 
                 if (densitymode.equals("4")) {

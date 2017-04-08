@@ -378,7 +378,7 @@ public class Library {
 	}
 
 	public double getReferenceWeight(){
-		return referenceweight;
+		return this.referenceweight;
 	}
 
 	public double getReferenceweightAdjustment(){

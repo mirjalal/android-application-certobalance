@@ -308,8 +308,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append(ApplicationController.getContext().getString(R.string.result)+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit() +"\n");
                 sb.append(ApplicationController.getContext().getString(R.string.brutto)+": "+ ApplicationManager.getInstance().getSumAsStringWithUnit()+"\n");
                 sb.append(ApplicationController.getContext().getString(R.string.tara)+": "+  ApplicationManager.getInstance().getTareAsStringWithUnit()+"\n");
-                sb.append(ApplicationController.getContext().getString(R.string.serialnumber)+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
-
+                sb.append(ApplicationController.getContext().getString(R.string.netto)+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit()+"\n");
                 if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_weigh_print_min),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_weigh_print_min))==true) {
                     sb.append(ApplicationController.getContext().getString(R.string.minimum_weight)+": "+ ApplicationManager.getInstance().getUnderLimitAsStringWithUnit()+"\n");
                 }

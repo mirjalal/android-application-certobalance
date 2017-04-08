@@ -21,6 +21,7 @@ import com.certoclav.library.application.ApplicationController;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTON;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
@@ -622,6 +623,25 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
+    public String getTransformedWeightAsString(double gram) {
+        String retVal = "";
+        try {
+            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+                retVal = String.format("%.0f", gram);
+            }else {
+                int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
+                if(numDezimalPlaces < 0){
+                    numDezimalPlaces = 0;
+                }
+                retVal = String.format(Locale.US,"%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram));
+            }
+        }catch (Exception e){
+            retVal = "";
+        }
+        return retVal;
+
+
+    }
 
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
@@ -736,15 +756,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
-    public String getReferenceWeightAsStringInGram() {
-        return String.format("%.4f", (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)) + " " + "g";
-    }
+
     public String getReferenceWeightAdjustedAsStringWithUnit() {
-        return getTransformedWeightAsStringWithUnit((transformGramToCurrentUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100)));
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
     }
 
    public String getReferenceWeightAsStringWithUnit() {
-        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(currentLibrary.getReferenceWeight() ));
+        return getTransformedWeightAsStringWithUnit(getCurrentLibrary().getReferenceWeight());
     }
     public Double getDifferenceInGram() {
 
@@ -825,7 +843,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getDifferenceFillingAsStringWithUnit(){
 
-        return getTransformedWeightAsStringWithUnit(transformGramToCurrentUnit(getTaredValueInGram()-currentLibrary.getTarget()));
+        return getTransformedWeightAsStringWithUnit(getTaredValueInGram()-currentLibrary.getTarget());
     }
 
 

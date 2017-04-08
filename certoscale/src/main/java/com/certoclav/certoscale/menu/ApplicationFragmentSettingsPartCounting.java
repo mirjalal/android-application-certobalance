@@ -374,10 +374,11 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
         buttonEditSampleSize.setText(getString(R.string.sample_size)+"\n" + ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
         button_under_limit.setText(getString(R.string.under_limit)+"\n"+ApplicationManager.getInstance().getUnderLimitPiecesAsString() + " pcs");
         button_over_limit.setText(getString(R.string.over_limit)+"\n"+ApplicationManager.getInstance().getOverlimitPiecesAsString() + " pcs");
+        button_target.setText(getString(R.string.target)+"\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
 
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"");
+        String cmode = prefs.getString(getString(R.string.preferences_counting_mode),"1");
 
         if(cmode.equals("1")){
             button_under_limit.setVisibility(View.GONE);
@@ -396,7 +397,6 @@ public class ApplicationFragmentSettingsPartCounting extends Fragment {
             button_under_limit.setVisibility(View.GONE);
             button_over_limit.setVisibility(View.GONE);
             button_target.setVisibility(View.VISIBLE);
-            button_target.setText(getString(R.string.target)+"\n"+ApplicationManager.getInstance().getTargetPiecesAsString() + " pcs");
         }
 
     }

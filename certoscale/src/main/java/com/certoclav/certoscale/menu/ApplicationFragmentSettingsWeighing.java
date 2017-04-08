@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-
-import java.io.IOException;
-import java.text.ParseException;
 
 
 /**
@@ -68,9 +66,7 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
                             try {
                                 Double inputval = Double.parseDouble(((EditText) dialog.findViewById(R.id.dialog_edit_number_edittext)).getText().toString());
                                 Double inputvalTransformed = ApplicationManager.getInstance().transformCurrentUnitToGram(inputval);
-                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(ApplicationManager.getInstance().transformCurrentUnitToGram(inputvalTransformed));
-
-
+                                ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(inputvalTransformed);
                             }catch (NumberFormatException e){
                                 ApplicationManager.getInstance().getCurrentLibrary().setUnderLimit(0);
                             }
@@ -97,6 +93,13 @@ public class ApplicationFragmentSettingsWeighing extends Fragment {
 
     @Override
     public void onResume() {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(prefs.getBoolean(getString(R.string.preferences_weigh_minimum), getResources().getBoolean(R.bool.preferences_weigh_minimum)) == true) {
+            buttonMinimumWeight.setVisibility(View.VISIBLE);
+        }else{
+            buttonMinimumWeight.setVisibility(View.GONE);
+        }
         buttonMinimumWeight.setText(getString(R.string.minimum_weight)+ "\n"+ ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
         super.onResume();
 

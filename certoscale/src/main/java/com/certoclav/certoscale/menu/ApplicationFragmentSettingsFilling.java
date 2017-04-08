@@ -156,7 +156,7 @@ public class ApplicationFragmentSettingsFilling extends Fragment {
         super.onResume();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         button_target.setVisibility(View.VISIBLE);
-        button_target.setText(getString(R.string.target_weight)+":\n"+String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getTarget()) + " g");
+        button_target.setText(getString(R.string.target_weight)+":\n"+ApplicationManager.getInstance().getTargetAsStringWithUnit());
 
 
 

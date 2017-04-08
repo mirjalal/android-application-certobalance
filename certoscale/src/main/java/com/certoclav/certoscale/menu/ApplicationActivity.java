@@ -307,8 +307,6 @@ protected void onPause() {
 			case ActionButtonbarFragment.BUTTON_APP_SETTINGS:
 				if(appSettingsVisible == true) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentTable()).commit();
-
-
 					appSettingsVisible = false;
 
 				}else{
