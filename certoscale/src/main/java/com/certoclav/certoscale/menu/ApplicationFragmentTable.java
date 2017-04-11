@@ -710,12 +710,62 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                     }
 
-
-
-
-
-
                     break;
+
+
+
+            case FORMULATION_FREE:
+                listReferenceFields.get(indexTableRecipeName).getTextName().setText(getString(R.string.recipe).toUpperCase());
+                if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+                } else {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(getString(R.string.no_recipe).toUpperCase());
+                }
+                if(ApplicationManager.getInstance().getCurrentRecipe()!= null){
+                    double formulationTotal = 0;
+                    double formulationTotalTarget = 0;
+                    double formulationTotalDifference = 0;
+                    int formulationcounter = 0;
+                    while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+                        formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight();
+                        formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+                        formulationcounter++;
+                    }
+
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
+                        listReferenceFields.get(indexFormulationTotalTarget).getTextName().setText(getString(R.string.total_target).toUpperCase());
+                        listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotalTarget));
+
+
+                    }
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+                        listReferenceFields.get(indexFormulationTotal).getTextName().setText(getString(R.string.total_actual).toUpperCase());
+                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal) );
+
+
+                    }
+
+                    if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
+                        formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
+                        formulationTotalDifference = formulationTotalDifference * 100;
+
+
+
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextName().setText(getString(R.string.total_diff).toUpperCase());
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference)+" %"  );
+
+                    }
+
+
+
+
+                }
+
+                break;
+
             case DIFFERENTIAL_WEIGHING:
                 listReferenceFields.get(indexTableItemName).getTextName().setText(getString(R.string.item).toUpperCase());
                 if(ApplicationManager.getInstance().getCurrentItem() != null) {

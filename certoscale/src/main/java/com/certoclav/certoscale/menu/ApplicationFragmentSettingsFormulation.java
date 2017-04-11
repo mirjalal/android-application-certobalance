@@ -15,8 +15,14 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.model.ActionButtonbarFragment;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 
 
 public class ApplicationFragmentSettingsFormulation extends Fragment {
@@ -25,6 +31,7 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
     private Button buttonRecipe = null;
     private Button buttonScalingFactor=null;
     private Button buttonCalculateScalingFactor=null;
+    private Button buttonSwitchFormulationMode=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -162,6 +169,32 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
         });
 
 
+
+        buttonSwitchFormulationMode = (Button) rootView.findViewById(R.id.application_settings_formulation_button_switch_formulation_mode);
+        buttonSwitchFormulationMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+                  if (Scale.getInstance().getScaleApplication()==FORMULATION || Scale.getInstance().getScaleApplication()==FORMULATION_RUNNING){
+                        Scale.getInstance().setScaleApplication(FORMULATION_FREE);
+
+
+                  }else{
+                        Scale.getInstance().setScaleApplication(FORMULATION);
+
+                  }
+
+                }
+                catch (Exception e)
+                {
+
+                }
+
+            }
+        });
+
+
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
@@ -175,6 +208,19 @@ public class ApplicationFragmentSettingsFormulation extends Fragment {
         }
 
        buttonScalingFactor.setText(getString(R.string.scaling_factor)+"\n"+String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()));
+
+
+        if (Scale.getInstance().getScaleApplication()==FORMULATION || Scale.getInstance().getScaleApplication()==FORMULATION_RUNNING){
+            buttonSwitchFormulationMode.setText(getString(R.string.switch_to_free_formulation));
+            buttonCalculateScalingFactor.setVisibility(View.VISIBLE);
+            buttonRecipe.setVisibility(View.VISIBLE);
+            buttonScalingFactor.setVisibility(View.VISIBLE);
+        }else{
+            buttonSwitchFormulationMode.setText(getString(R.string.switch_to_recipe_mode));
+            buttonCalculateScalingFactor.setVisibility(View.GONE);
+            buttonRecipe.setVisibility(View.GONE);
+            buttonScalingFactor.setVisibility(View.GONE);
+        }
 
 
         super.onResume();

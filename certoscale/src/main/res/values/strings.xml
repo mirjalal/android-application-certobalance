@@ -975,6 +975,9 @@
     <string name="art_no">Art. No.</string>
     <string name="name">Name</string>
     <string name="enter_a_valid_weight">Enter a valid weight</string>
+    <string name="switch_to_free_formulation">Switch to free formulation</string>
+    <string name="switch_to_recipe_mode">Switch to recipe mode</string>
+    <string name="press_start_to_begin_with_a_free_formulation">Press START to begin with a free formulation</string>
 
 
 </resources>

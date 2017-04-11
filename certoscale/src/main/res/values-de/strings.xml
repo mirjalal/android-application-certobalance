@@ -659,4 +659,6 @@
     <string name="art_no">Art. Nr.</string>
     <string name="name">Name</string>
     <string name="enter_a_valid_weight">Enter a valid weight</string>
+    <string name="switch_to_free_formulation">Freie Rezeptur</string>
+    <string name="switch_to_recipe_mode">Rezeptur-basiert</string>
 </resources>

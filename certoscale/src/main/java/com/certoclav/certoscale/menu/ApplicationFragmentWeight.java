@@ -214,6 +214,13 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setTextColor(Color.WHITE);
                 break;
 
+            case FORMULATION_FREE:
+
+                textInstruction.setText(getString(R.string.press_start_to_begin_with_a_free_formulation));
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                break;
+
 
             case FORMULATION_RUNNING:
                 textInstruction.setText("");

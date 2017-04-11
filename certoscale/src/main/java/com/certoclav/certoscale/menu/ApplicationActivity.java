@@ -219,6 +219,12 @@ protected void onPause() {
 						getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulation()).commit();
 
 				}
+
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION_FREE){
+					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulationFree()).commit();
+				}
+
+
 				break;
 			case ActionButtonbarFragment.BUTTON_MORE:
 
@@ -337,6 +343,8 @@ protected void onPause() {
 							break;
 						case FORMULATION:
 						case FORMULATION_RUNNING:
+						case FORMULATION_FREE:
+						case FORMULATION_FREE_RUNNING:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsFormulation()).commit();
 							break;
 						case DIFFERENTIAL_WEIGHING:

@@ -57,6 +57,17 @@
             style="@style/button_actionbar"/>
 
 
+        <Button
+            android:id="@+id/application_settings_formulation_button_switch_formulation_mode"
+            android:text="@string/switch_to_free_formulation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            style="@style/button_actionbar"/>
+
+
+
 
     </LinearLayout>
 

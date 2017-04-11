@@ -788,6 +788,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		//Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
+		Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
 		buttonZero.setText(buttonZero.getText().toString().toUpperCase());
 		buttonTara.setText(buttonTara.getText().toString().toUpperCase());
@@ -1103,6 +1104,66 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonNewBatch.setVisibility(View.GONE);
 
 				break;
+
+
+			case FORMULATION_FREE:
+
+				// Buttons used by the application
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonProtocol.setVisibility(View.VISIBLE);
+				buttonProtocol.setEnabled(true);
+				buttonZero.setVisibility(View.VISIBLE);
+
+
+				buttonAppSettings.setVisibility(View.VISIBLE);
+				buttonAppSettings.setEnabled(true);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
+
+				buttonStart.setEnabled(true);
+				buttonStart.setVisibility(View.VISIBLE);
+
+
+				buttonResult.setEnabled(true);
+				buttonResult.setVisibility(View.VISIBLE);
+
+
+				//unused Buttons
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+
+				break;
+
+			case FORMULATION_FREE_RUNNING:
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
+				buttonCal.setEnabled(false);
+				buttonProtocol.setEnabled(false);
+				//buttonTara.setEnabled(false);
+				buttonAppSettings.setEnabled(false);
+				buttonAppSettings.setVisibility(View.VISIBLE);
+
+				buttonResult.setVisibility(View.VISIBLE);
+				buttonResult.setEnabled(false);
+
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+
+				buttonStatistics.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+
+				break;
+
 
 
 			case DIFFERENTIAL_WEIGHING:
