@@ -43,6 +43,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINAT
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
@@ -222,6 +223,7 @@ protected void onPause() {
 
 				if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION_FREE){
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulationFree()).commit();
+
 				}
 
 
@@ -468,7 +470,8 @@ protected void onPause() {
 				application == PERCENT_WEIGHING_CALC_REFERENCE ||
 				application == ANIMAL_WEIGHING_CALCULATING ||
 				application == FILLING_CALC_TARGET ||
-				application == FORMULATION_RUNNING){
+				application == FORMULATION_RUNNING ||
+				application == FORMULATION_FREE_RUNNING){
 			return;
 		}
 

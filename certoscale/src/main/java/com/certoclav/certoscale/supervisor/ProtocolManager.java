@@ -483,6 +483,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 break;
 
             case FORMULATION:
+            case FORMULATION_FREE:
                 if(ApplicationManager.getInstance().getCurrentRecipeEntry() != null) {
                     sb.append(ApplicationController.getContext().getString(R.string.name)+": " + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName() + "\n");
                     double formulationTotal = 0;

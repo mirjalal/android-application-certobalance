@@ -146,7 +146,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
 
             // set the custom dialog components - text, image and button
             TextView text = (TextView) dialog.findViewById(R.id.text);
-            text.setText(getString(R.string.do_you_really_want_to_delete) + " " + recipeEntry.getDescription());
+            text.setText(getString(R.string.do_you_really_want_to_delete_the_following_entry) + " " + recipeEntry.getDescription());
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 

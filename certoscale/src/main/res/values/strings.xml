@@ -978,6 +978,7 @@
     <string name="switch_to_free_formulation">Switch to free formulation</string>
     <string name="switch_to_recipe_mode">Switch to recipe mode</string>
     <string name="press_start_to_begin_with_a_free_formulation">Press START to begin with a free formulation</string>
+    <string name="do_you_really_want_to_delete_the_following_entry">Do you really want to delete the following entry?</string>
 
 
 </resources>

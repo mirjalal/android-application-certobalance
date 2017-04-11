@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -30,6 +31,8 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
+import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.ESCPos;
 import com.certoclav.library.application.ApplicationController;
@@ -45,6 +48,8 @@ import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CA
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
@@ -311,6 +316,18 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 					if (Scale.getInstance().getScaleApplication()==ANIMAL_WEIGHING_CALCULATING){
 						Scale.getInstance().setScaleApplication(ANIMAL_WEIGHING);
+					}
+
+					if (Scale.getInstance().getScaleApplication()==FORMULATION_FREE_RUNNING){
+						Scale.getInstance().setScaleApplication(FORMULATION_FREE);
+						DatabaseService db = new DatabaseService(getContext());
+
+						db.insertRecipe(ApplicationManager.getInstance().getCurrentRecipe());
+
+						Intent intent = new Intent(getActivity(), MenuRecipeEditActivity.class);
+						intent.putExtra(MenuRecipeEditActivity.INTENT_EXTRA_RECIPE_ID, ApplicationManager.getInstance().getCurrentRecipe().getRecipe_id());
+						startActivity(intent);
+
 					}
 
 
@@ -786,8 +803,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
 
-		//Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
-
 		Toast.makeText(getContext(), Scale.getInstance().getScaleApplication().toString(), Toast.LENGTH_SHORT).show();
 
 		buttonZero.setText(buttonZero.getText().toString().toUpperCase());
@@ -947,6 +962,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 			case ANIMAL_WEIGHING_CALCULATING:
+
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonAccumulate.setEnabled(false);
 				buttonStart.setEnabled(false);
@@ -967,6 +983,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonResult.setVisibility(View.GONE);
 				buttonAppSettings.setEnabled(false);
 				break;
+
 			case ANIMAL_WEIGHING:
 
 				//Buttons used by the application
@@ -1140,8 +1157,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				break;
 
 			case FORMULATION_FREE_RUNNING:
-				buttonStart.setVisibility(View.VISIBLE);
-				buttonStart.setEnabled(true);
+
 				buttonCal.setEnabled(false);
 				buttonProtocol.setEnabled(false);
 				//buttonTara.setEnabled(false);
@@ -1149,7 +1165,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonAppSettings.setVisibility(View.VISIBLE);
 
 				buttonResult.setVisibility(View.VISIBLE);
+				buttonEnd.setVisibility(View.VISIBLE);
 				buttonResult.setEnabled(false);
+
+
+				buttonStart.setVisibility(View.GONE);
 
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
@@ -1157,7 +1177,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
-				buttonEnd.setVisibility(View.GONE);
+
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
