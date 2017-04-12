@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
+import com.certoclav.certoscale.adapters.RecipeFreeFormulationElementAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.adapters.SamplesAdapter;
@@ -320,13 +321,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					if (Scale.getInstance().getScaleApplication()==FORMULATION_FREE_RUNNING){
 						Scale.getInstance().setScaleApplication(FORMULATION_FREE);
-						DatabaseService db = new DatabaseService(getContext());
 
-						db.insertRecipe(ApplicationManager.getInstance().getCurrentRecipe());
+						showFreeFormulationResults(getActivity(), new DialogInterface.OnDismissListener() {
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								updateStatsButtonUI();
+							}
+						});
 
-						Intent intent = new Intent(getActivity(), MenuRecipeEditActivity.class);
-						intent.putExtra(MenuRecipeEditActivity.INTENT_EXTRA_RECIPE_ID, ApplicationManager.getInstance().getCurrentRecipe().getRecipe_id());
-						startActivity(intent);
 
 					}
 
@@ -761,7 +763,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 
 
-				if (Scale.getInstance().getScaleApplication()==FORMULATION){
+				if (Scale.getInstance().getScaleApplication()==FORMULATION || Scale.getInstance().getScaleApplication()==FORMULATION_FREE){
 					showRecipeResults(getActivity(), new DialogInterface.OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
@@ -2531,6 +2533,128 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					//Print Signature liness
 					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
 					dialog.dismiss();
+				}
+			});
+
+			Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_recipe_button_close);
+			dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
+			dialog.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+	public void showFreeFormulationResults(final Context eContext, DialogInterface.OnDismissListener listener) {
+		try {
+			final Dialog dialog = new Dialog(eContext);
+			dialog.setContentView(R.layout.dialog_recipe_results_free_formulation);
+			dialog.setOnDismissListener(listener);
+			dialog.setTitle(R.string.result_of_recipe);// + ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+
+
+
+			ListView listView = listView = (ListView) dialog.findViewById(R.id.dialog_batch_List);
+
+
+
+			// This is the array adapter, it takes the context of the activity as a
+			// first parameter, the type of list view as a second parameter and your
+			// array as a third parameter.
+
+			List<RecipeEntry> entryList=new ArrayList<RecipeEntry>();
+			//List<String> entryList= new ArrayList<String>();
+
+
+
+			//double formulationTotal = 0;
+			double formulationTotalTarget = 0;
+			double formulationTotalDifference = 0;
+			int formulationcounter = 0;
+			while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
+				// formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getWeight();
+				// formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
+
+				entryList.add(ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter));
+
+
+				formulationcounter++;
+			}
+
+
+
+
+
+			RecipeFreeFormulationElementAdapter recipeAdapter = new RecipeFreeFormulationElementAdapter(eContext,new ArrayList<RecipeEntry>());
+			listView.setAdapter(recipeAdapter);
+			for(RecipeEntry recipeEntry:entryList){
+				recipeAdapter.add(recipeEntry);
+			}
+
+
+
+			Button dialogButtonClear = (Button) dialog.findViewById(R.id.dialog_recipe_button_print);
+			dialogButtonClear.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+					StringBuilder sb = new StringBuilder();
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
+
+					sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
+
+
+
+					ESCPos escPos=new ESCPos();
+					escPos.resetToDefault();
+
+					escPos.printString(sb.toString());
+
+
+					//ApplicationManager.getInstance().getProtocolPrinter().printTop();
+					//Printing the application data
+					//ApplicationManager.getInstance().getProtocolPrinter().printApplicationData();
+					//Print Signature liness
+					//ApplicationManager.getInstance().getProtocolPrinter().printBottom();
+					dialog.dismiss();
+				}
+			});
+
+			Button dialogButtonSave= (Button) dialog.findViewById(R.id.dialog_recipe_button_save_recipe);
+			dialogButtonSave.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DatabaseService db = new DatabaseService(getContext());
+
+					db.insertRecipe(ApplicationManager.getInstance().getCurrentRecipe());
+					Toast.makeText(eContext, getString(R.string.recipe_saved), Toast.LENGTH_LONG).show();
+					dialog.dismiss();
+
+				}
+			});
+
+			Button dialogButtonEdit= (Button) dialog.findViewById(R.id.dialog_recipe_button_edit_recipe);
+			dialogButtonEdit.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					DatabaseService db = new DatabaseService(getContext());
+
+					db.insertRecipe(ApplicationManager.getInstance().getCurrentRecipe());
+
+					Intent intent = new Intent(getActivity(), MenuRecipeEditActivity.class);
+					intent.putExtra(MenuRecipeEditActivity.INTENT_EXTRA_RECIPE_ID, ApplicationManager.getInstance().getCurrentRecipe().getRecipe_id());
+					startActivity(intent);
+
 				}
 			});
 
