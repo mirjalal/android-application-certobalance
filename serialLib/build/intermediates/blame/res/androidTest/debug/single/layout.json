@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\console.xml",
+        "source": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\bundles\\debug\\res\\layout\\console.xml"
+    },
+    {
+        "merged": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\sending01010101.xml",
+        "source": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\bundles\\debug\\res\\layout\\sending01010101.xml"
+    },
+    {
+        "merged": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\loopback.xml",
+        "source": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\bundles\\debug\\res\\layout\\loopback.xml"
+    },
+    {
+        "merged": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\console_item.xml",
+        "source": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\bundles\\debug\\res\\layout\\console_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\main.xml",
+        "source": "C:\\Users\\Enrico\\Desktop\\CertoBalance\\serialLib\\build\\intermediates\\bundles\\debug\\res\\layout\\main.xml"
+    }
+]

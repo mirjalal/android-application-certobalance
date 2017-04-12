@@ -1,2 +1,3 @@
 include ':library', ':ScreenSharingSDK'
 include ':certoscale'
+include ':serialLib'
