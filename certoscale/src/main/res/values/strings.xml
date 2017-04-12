@@ -981,6 +981,11 @@
     <string name="do_you_really_want_to_delete_the_following_entry">Do you really want to delete the following entry?</string>
     <string name="save_recipe">Save recipe</string>
     <string name="recipe_saved">Recipe_saved</string>
+    <string name="preferences_communication_list_baudrate_lims">preferences_communication_list_baudrate_lims</string>
+    <string name="preferences_communication_list_baudrate_protocol">preferences_communication_list_baudrate_protocol</string>
+    <string name="preferences_communication_list_transmission_standard_protocol">preferences_communication_list_transmission_standard_protocol</string>
+    <string name="preferences_communication_list_handshake_protocol">preferences_communication_list_handshake_protocol</string>
+    <string name="preferences_communication_list_baudrate_label">preferences_communication_list_baudrate_label</string>
 
 
 </resources>

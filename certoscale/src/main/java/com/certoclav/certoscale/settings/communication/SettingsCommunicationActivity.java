@@ -1,11 +1,13 @@
 package com.certoclav.certoscale.settings.communication;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.settings.calibration.SettingsCalibrationFragment;
 
 
@@ -16,6 +18,8 @@ public class SettingsCommunicationActivity extends FragmentActivity {
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
 	 */
+
+	PreferenceFragment preferenceFragment=null;
 
 	private Navigationbar navigationbar = null;
 
@@ -28,7 +32,22 @@ public class SettingsCommunicationActivity extends FragmentActivity {
 		navigationbar.getTextTitle().setText(getString(R.string.communication_menu).toUpperCase());
 		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 		navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-		
+
+		navigationbar.getButtonBack().setOnClickListener(new View.OnClickListener() {
+
+
+			@Override
+			public void onClick(View v) {
+				String tag=getSupportFragmentManager().findFragmentById(R.id.settings_unit_container_fragment).getTag();
+
+				if(tag!="MainFragment"){
+					getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsCommunicationFragment(),"MainFragment").commit();
+				}else{
+					finish();
+				}
+			}
+		});
+
 
 
 	}
@@ -55,7 +74,7 @@ public class SettingsCommunicationActivity extends FragmentActivity {
 		}catch(Exception e){
 			
 		}
-		getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsCommunicationFragment()).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsCommunicationFragment(),"MainFragment").commit();
 	}
 
 

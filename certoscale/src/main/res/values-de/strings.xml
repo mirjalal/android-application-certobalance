@@ -663,4 +663,6 @@
     <string name="switch_to_recipe_mode">Rezeptur-basiert</string>
     <string name="do_you_really_want_to_delete_the_following_entry">Möchten Sie diesen Eintrag wirklich löschen?</string>
     <string name="press_start_to_begin_with_a_free_formulation">"Drücken Sie Start um eine freie Rezeptur "</string>
+    <string name="recipe_saved">Rezept gespeichert</string>
+    <string name="save_recipe">Rezept speichern</string>
 </resources>

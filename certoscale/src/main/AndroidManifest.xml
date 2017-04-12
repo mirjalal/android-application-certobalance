@@ -248,17 +248,6 @@
         <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
 
 
-
-
-
-
-
-
-
-
-        <activity android:name=".settings.communication.SettingsCommunicationEditActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
         <activity android:name=".menu.RegisterActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
