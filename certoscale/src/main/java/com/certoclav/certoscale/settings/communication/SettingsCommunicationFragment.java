@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
@@ -33,7 +34,7 @@ private SharedPreferences prefs = null;
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) +" 2, "+Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
         ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
@@ -46,7 +47,7 @@ private SharedPreferences prefs = null;
             }
         });
 
-        ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 2, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
         ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
@@ -59,7 +60,7 @@ private SharedPreferences prefs = null;
             }
         });
 
-        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceSics().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceSics().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
         ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
@@ -89,7 +90,11 @@ private SharedPreferences prefs = null;
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString("preferences_communication_list_devices", "1"))-1]);
 
         ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceSics().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
 
+
+        //Toast.makeText(getContext(), String.valueOf(Scale.getInstance().getSerialsServiceSics().getBaudrate()), Toast.LENGTH_SHORT).show();
 
 
         getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);

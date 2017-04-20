@@ -162,6 +162,8 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 		if(!communicationThread.isAlive()){
 			communicationThread.start();
+
+
 			if(AppConstants.IS_IO_SIMULATED == false) {
 				Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 				Scale.getInstance().getSerialsServiceScale().startReadSerialThread();

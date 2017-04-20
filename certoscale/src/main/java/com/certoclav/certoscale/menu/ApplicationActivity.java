@@ -161,6 +161,10 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 protected void onResume() {
 		Scale.getInstance().setOnStableListener(this);
 
+
+
+
+
 		refreshSpinnerLibrary();
 
 		if(Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION_STARTED){

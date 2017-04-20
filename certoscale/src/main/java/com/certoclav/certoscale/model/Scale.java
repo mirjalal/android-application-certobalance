@@ -209,6 +209,7 @@ public class Scale extends Observable {
 
 
 	public void setSerialsServiceScale(){
+
 		serialServiceScale = new SerialService("/dev/ttymxc3",getScaleModel().comBaudrate); //COM4
 
 		serialServiceScale.setStringTerminatin("\n");
@@ -216,6 +217,7 @@ public class Scale extends Observable {
 
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
+
 			serialServiceScale = new SerialService("/dev/ttymxc3",getScaleModel().comBaudrate); //COM4
 			serialServiceScale.setStringTerminatin("\n");
 		}
@@ -238,14 +240,17 @@ public class Scale extends Observable {
 		return serialServiceLabelPrinter;
 		}
 
-	public void getSerialsServiceLabelPrinter(SerialService serialService) {
+	public void setSerialsServiceLabelPrinter(SerialService serialService) {
 			serialServiceLabelPrinter = serialService;
 	}
 
 	public SerialService getSerialsServiceProtocolPrinter() {
 		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc2",9600);//COM3
+
+			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc0",9600);//COM1
 		}
+
+
 		return serialServiceProtocolPrinter;
 	}
 
@@ -255,14 +260,14 @@ public class Scale extends Observable {
 
 
 	public SerialService getSerialsServiceSics() {
-		if(serialServiceProtocolPrinter == null){
-			serialServiceProtocolPrinter = new SerialService("/dev/ttymxc0",9600);//COM1
+		if(serialServiceSics == null){
+			serialServiceSics = new SerialService("/dev/ttymxc2",9600);//COM3
 		}
-		return serialServiceProtocolPrinter;
+		return serialServiceSics;
 	}
 
 	public void  setSerialsServiceSics(SerialService serialService) {
-		serialServiceProtocolPrinter=serialService;
+		serialServiceSics=serialService;
 	}
 
 	public void setValue(Double value, String rawresponse) {

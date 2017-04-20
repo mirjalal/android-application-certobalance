@@ -15,6 +15,7 @@ public class ReadAndParseSerialSicsService extends Service implements MessageRec
 
 	@Override
 	public void onCreate(){
+
 		Scale.getInstance().getSerialsServiceSics().setOnMessageReceivedListener(this);
 		Scale.getInstance().getSerialsServiceSics().startReadSerialThread();
 		Log.e("Service","SerialSics oncreate()");
