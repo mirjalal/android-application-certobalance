@@ -986,6 +986,10 @@
     <string name="preferences_communication_list_transmission_standard_protocol">preferences_communication_list_transmission_standard_protocol</string>
     <string name="preferences_communication_list_handshake_protocol">preferences_communication_list_handshake_protocol</string>
     <string name="preferences_communication_list_baudrate_label">preferences_communication_list_baudrate_label</string>
+    <string name="preferences_communication_list_transmission_standard_label">preferences_communication_list_transmission_standard_label</string>
+    <string name="preferences_communication_list_transmission_standard_lims">preferences_communication_list_transmission_standard_lims</string>
+    <string name="preferences_communication_list_handshake_label">preferences_communication_list_handshake_label</string>
+    <string name="preferences_communication_list_handshake_lims">preferences_communication_list_handshake_lims</string>
 
 
 </resources>

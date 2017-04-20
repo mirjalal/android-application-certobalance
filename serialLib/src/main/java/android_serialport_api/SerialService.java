@@ -110,6 +110,33 @@ public class SerialService  {
 			Log.e("SerialService", e.toString());
 		}
 	}
+
+
+
+	public SerialService(String deviceName, int baudrate,int databits,int stopbits,int parity, int flowcontrol) {
+		mApplication = new SerialApplication();
+		try {
+
+			mDeviceName = deviceName;
+			mBaudrate = baudrate;
+
+			/*
+			mDatabits=8;
+			mParity=0;
+			mStopbits=1;
+			mFlowControl=0;
+			*/
+
+			mSerialPort = mApplication.getSerialPort(deviceName,baudrate,databits,stopbits,parity,flowcontrol);
+			mOutputStream = mSerialPort.getOutputStream();
+			mInputStream = mSerialPort.getInputStream();
+
+		} catch (Exception e){
+			Log.e("SerialService", e.toString());
+		}
+	}
+
+
     
    public void startReadSerialThread(){
     	readSerialThread = new ReadSerialThread();

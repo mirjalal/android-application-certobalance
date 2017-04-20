@@ -14,7 +14,7 @@
 
 
     <ListPreference
-    android:key="preferences_communication_list_transmission_standard"
+    android:key="@string/preferences_communication_list_transmission_standard_label"
     android:title="@string/transmission_standard"
     android:summary="@string/tab_to_choose_the_data_bits_stop_bits_and_parity"
     android:defaultValue="4"
@@ -23,7 +23,7 @@
     />
 
     <ListPreference
-        android:key="@string/preferences_communication_list_handshake"
+        android:key="@string/preferences_communication_list_handshake_label"
         android:title="@string/handshake"
         android:summary="@string/tab_to_choose_the_flow_control_mode"
         android:defaultValue="1"

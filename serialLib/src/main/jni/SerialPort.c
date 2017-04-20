@@ -126,7 +126,7 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 		if (databits==8) {
 			cfg.c_cflag = (cfg.c_cflag & ~CSIZE) | CS8;  //7 Databits
 		}
-
+		/*
 		if (parity==0) {
 			// no parity
 			cfg.c_cflag &= ~(PARENB);
@@ -150,6 +150,17 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 		if (stopbits==2) {
 			cfg.c_cflag |= CSTOPB; //2 stop bits
 		}
+
+        if(flowcontrol==0){
+
+        }
+        if(flowcontrol==1){
+
+        }
+        if(flowcontrol==2){
+
+        }
+		*/
 
 
 

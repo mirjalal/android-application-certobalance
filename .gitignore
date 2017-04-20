@@ -1,4 +1,5 @@
 certoscale/build/*
+serialLib/build/*
 build/*
 library/build/*
 
