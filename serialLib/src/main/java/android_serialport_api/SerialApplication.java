@@ -30,7 +30,7 @@ public class SerialApplication{// extends android.app.Application {
 	public SerialApplication() {
 	}
 
-	public SerialPort getSerialPort(String path, int baudrate) throws SecurityException, IOException, InvalidParameterException {
+	public SerialPort getSerialPort(String path, int baudrate, int databits, int stopbits,int parity, int flowcontrol ) throws SecurityException, IOException, InvalidParameterException {
 		if (mSerialPort == null) {
   
 			/* Check parameters */
@@ -41,7 +41,7 @@ public class SerialApplication{// extends android.app.Application {
 			}
 
 			/* Open the serial port */
-			mSerialPort = new SerialPort(new File(path), baudrate, 0);
+			mSerialPort = new SerialPort(new File(path), baudrate, 0,databits,stopbits,parity,flowcontrol);
 		}
 		return mSerialPort;
 	}

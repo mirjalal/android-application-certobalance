@@ -47,6 +47,28 @@ public class SerialService  {
 	public int getBaudrate() {return mBaudrate;}
 	public void setBaudrate(int mBaudrate) {this.mBaudrate = mBaudrate;}
 
+	private int mDatabits;
+	public int getmDatabits() {return mDatabits;}
+	public void setmDatabits(int mDatabits) {this.mDatabits = mDatabits;}
+
+
+	private int mStopbits;
+	public int getmStopbits() {return mStopbits;}
+	public void setmStopbits(int mStopbits) {this.mStopbits = mStopbits;}
+
+
+	private int mParity;
+	public int getmParity() {return mParity;}
+	public void setmParity(int mParity) {this.mParity = mParity;}
+
+
+	private int mFlowControl;
+	public int getmFlowControl() {return mFlowControl;}
+	public void setmFlowControl(int mFlowControl) {this.mFlowControl = mFlowControl;}
+
+
+
+
 
 	
     public Boolean getIsDirectForwarding() {
@@ -71,14 +93,19 @@ public class SerialService  {
     public SerialService(String deviceName, int baudrate) {
 		mApplication = new SerialApplication();
 		try {
+
 			mDeviceName = deviceName;
 			mBaudrate = baudrate;
-			mSerialPort = mApplication.getSerialPort(deviceName,baudrate);
+
+			mDatabits=8;
+			mParity=0;
+			mStopbits=1;
+			mFlowControl=0;
+
+			mSerialPort = mApplication.getSerialPort(deviceName,baudrate,mDatabits,mStopbits,mParity,mFlowControl);
 			mOutputStream = mSerialPort.getOutputStream();
 			mInputStream = mSerialPort.getInputStream();
-			
 
-			
 		} catch (Exception e){
 			Log.e("SerialService", e.toString());
 		}
@@ -117,7 +144,7 @@ public class SerialService  {
 		   if(mInputStream != null){
 			   mInputStream.close();
 		   }
-			mSerialPort = mApplication.getSerialPort(mDeviceName,mBaudrate);
+			mSerialPort = mApplication.getSerialPort(mDeviceName,mBaudrate,mDatabits,mStopbits,mParity,mFlowControl);
 			mOutputStream = mSerialPort.getOutputStream();
 			mInputStream = mSerialPort.getInputStream();
 	} catch (Exception e) {

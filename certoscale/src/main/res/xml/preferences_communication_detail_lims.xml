@@ -7,7 +7,7 @@
         android:key="@string/preferences_communication_list_baudrate_lims"
         android:title="@string/baudrate"
         android:summary="@string/tab_to_choose_baudrate"
-        android:defaultValue="5"
+        android:defaultValue="3"
         android:entries="@array/preferences_communication_string_array_baudrate"
         android:entryValues="@array/preferences_communication_list_baudrate_values"
         />
