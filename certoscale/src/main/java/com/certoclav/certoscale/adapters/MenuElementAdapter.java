@@ -22,6 +22,7 @@ import com.certoclav.certoscale.settings.glp.SettingsGlpActivity;
 import com.certoclav.certoscale.settings.item.MenuItemActivity;
 import com.certoclav.certoscale.settings.labels.MenuLabelPrinterActivity;
 import com.certoclav.certoscale.settings.library.MenuLibraryActivity;
+import com.certoclav.certoscale.settings.lockout.SettingsLockoutActivity;
 import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
@@ -92,6 +93,10 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 						break;
 					case MENU_ITEM_DEVICE:
 						intent = new Intent(mContext, SettingsDeviceActivity.class);
+						mContext.startActivity(intent);
+						break;
+					case MENU_ITEM_LOCKOUT:
+						intent = new Intent(mContext, SettingsLockoutActivity.class);
 						mContext.startActivity(intent);
 						break;
 					case MENU_ITEM_LIBRARY:

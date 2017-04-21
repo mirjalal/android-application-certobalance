@@ -992,4 +992,35 @@
     <string name="preferences_communication_list_handshake_lims">preferences_communication_list_handshake_lims</string>
 
 
+
+
+    <string name="preferences_lockout_calibration">preferences_lockout_calibration</string>
+    <string name="preferences_lockout_user_settings">preferences_lockout_user_settings</string>
+    <string name="preferences_lockout_balance_setup">preferences_lockout_balance_setup</string>
+    <string name="preferences_lockout_application_modes">preferences_lockout_application_modes</string>
+    <string name="preferences_lockout_weighing_units">preferences_lockout_weighing_units</string>
+    <string name="preferences_lockout_glp">preferences_lockout_glp</string>
+    <string name="preferences_lockout_communication">preferences_lockout_communication</string>
+    <string name="preferences_lockout_library">preferences_lockout_library</string>
+    <string name="preferences_lockout_io_settings">preferences_lockout_io_settings</string>
+    <string name="preferences_lockout_factory_reset">preferences_lockout_io_settings</string>
+    <string name="lockout">Lockout</string>
+    <string name="lockout_settings">Lockout settings</string>
+    <string name="lock_the_calibration">Lock the calibration</string>
+    <string name="lock_the_user_settings">Lock the user settings</string>
+    <string name="lock_the_balance_setup">Lock the balance setup</string>
+    <string name="application_modes">Application modes</string>
+    <string name="lock_the_application_modes">Lock the application modes</string>
+    <string name="lock_the_weighing_units">Lock the weighing units</string>
+    <string name="lock_the_glp_and_gmp_data">Lock the GLP and GMP data</string>
+    <string name="communication">Communication</string>
+    <string name="lock_the_communication_settings">Lock the communication settings</string>
+    <string name="lock_the_library">Lock the library</string>
+    <string name="i_o_settings">I/O Settings</string>
+    <string name="lock_the_i_o_settings">Lock the I/O settings</string>
+    <string name="lock_the_factory_reset">Lock the factory reset</string>
+    <string name="factory_reset_menu">Factory reset menu</string>
+    <string name="only_the_admin_can_change_the_lockout_settings">Only the admin can change the lockout settings</string>
+
+
 </resources>

@@ -1,0 +1,87 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_calibration"
+        android:defaultValue="@bool/preferences_lockout_calibration"
+        android:title="@string/calibration"
+        android:summary="@string/lock_the_calibration"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_user_settings"
+        android:defaultValue="@bool/preferences_lockout_user_settings"
+        android:title="@string/user_settings"
+        android:summary="@string/lock_the_user_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_balance_setup"
+        android:defaultValue="@bool/preferences_lockout_balance_setup"
+        android:title="@string/balance_setup"
+        android:summary="@string/lock_the_balance_setup"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_application_modes"
+        android:defaultValue="@bool/preferences_lockout_application_modes"
+        android:title="@string/application_modes"
+        android:summary="@string/lock_the_application_modes"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_weighing_units"
+        android:defaultValue="@bool/preferences_lockout_weighing_units"
+        android:title="@string/weighing_units"
+        android:summary="@string/lock_the_weighing_units"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_glp"
+        android:defaultValue="@bool/preferences_lockout_glp"
+        android:title="@string/glp_and_gmp_data"
+        android:summary="@string/lock_the_glp_and_gmp_data"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_communication"
+        android:defaultValue="@bool/preferences_lockout_communication"
+        android:title="@string/communication"
+        android:summary="@string/lock_the_communication_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_library"
+        android:defaultValue="@bool/preferences_lockout_library"
+        android:title="@string/library"
+        android:summary="@string/lock_the_library"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_io_settings"
+        android:defaultValue="@bool/preferences_lockout_io_settings"
+        android:title="@string/i_o_settings"
+        android:summary="@string/lock_the_i_o_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_factory_reset"
+        android:defaultValue="@bool/preferences_lockout_factory_reset"
+        android:title="@string/factory_reset_menu"
+        android:summary="@string/lock_the_factory_reset"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+
+</PreferenceScreen>
+
+
+

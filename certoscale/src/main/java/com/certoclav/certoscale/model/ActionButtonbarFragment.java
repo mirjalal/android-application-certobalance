@@ -2780,7 +2780,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 					ESCPos escPos=new ESCPos();
-					escPos.resetToDefault();
+					//escPos.resetToDefault();
 
 					escPos.printString(protocol.getContent());
 

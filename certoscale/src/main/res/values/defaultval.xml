@@ -289,4 +289,16 @@
 
 
 
+    <bool name="preferences_lockout_calibration">false</bool>
+    <bool name="preferences_lockout_user_settings">false</bool>
+    <bool name="preferences_lockout_balance_setup">false</bool>
+    <bool name="preferences_lockout_application_modes">false</bool>
+    <bool name="preferences_lockout_weighing_units">false</bool>
+    <bool name="preferences_lockout_glp">false</bool>
+    <bool name="preferences_lockout_communication">false</bool>
+    <bool name="preferences_lockout_library">false</bool>
+    <bool name="preferences_lockout_io_settings">false</bool>
+    <bool name="preferences_lockout_factory_reset">false</bool>
+
+
 </resources>

@@ -665,4 +665,21 @@
     <string name="press_start_to_begin_with_a_free_formulation">"Drücken Sie Start um eine freie Rezeptur "</string>
     <string name="recipe_saved">Rezept gespeichert</string>
     <string name="save_recipe">Rezept speichern</string>
+    <string name="lockout">Sperren</string>
+    <string name="lockout_settings">Sperreinstellungen</string>
+    <string name="application_modes">Applikationen</string>
+    <string name="communication">Kommunikation</string>
+    <string name="only_the_admin_can_change_the_lockout_settings">Nur der Administrator kann die Sperreinstellungen ändern</string>
+    <string name="factory_reset_menu">Werkszustand wiederherstellen</string>
+    <string name="i_o_settings">I/O Einstellungen</string>
+    <string name="lock_the_application_modes">Die Applikationsauswahl sperren</string>
+    <string name="lock_the_balance_setup">Die Geräteeinstellungen sperren</string>
+    <string name="lock_the_calibration">Die Kalibrierung sperren</string>
+    <string name="lock_the_communication_settings">Die Kommunikationseinstellungen sperren</string>
+    <string name="lock_the_weighing_units">Die Gewichtseinheiten sperren</string>
+    <string name="lock_the_factory_reset">Werkszustand wiederherstellen sperren</string>
+    <string name="lock_the_glp_and_gmp_data">Die GLP und GMP Daten sperren</string>
+    <string name="lock_the_i_o_settings">Die I/O Einstellungen sperren</string>
+    <string name="lock_the_library">Die Bibliothek sperren</string>
+    <string name="lock_the_user_settings">Die Benutzereinstelllungen sperren</string>
 </resources>

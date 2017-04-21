@@ -183,6 +183,12 @@
         <activity android:name=".settings.glp.SettingsGlpActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
+
+        <activity android:name=".settings.lockout.SettingsLockoutActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+
         <activity android:name=".menu.SettingsEmailActivity"
             android:screenOrientation="sensorLandscape">
         </activity>

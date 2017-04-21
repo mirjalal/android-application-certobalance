@@ -23,7 +23,8 @@
     <Preference
         android:key="@string/preferences_calibration_span"
         android:title="@string/span_calibration"
-        android:summary="@string/calibration_with_two_calibration_points_follow_the_screen_instructions" />
+        android:summary="@string/calibration_with_two_calibration_points_follow_the_screen_instructions"
+        />
 
     <Preference
         android:key="@string/preferences_calibration_user"

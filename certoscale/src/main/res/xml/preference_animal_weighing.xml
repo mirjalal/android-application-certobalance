@@ -12,12 +12,12 @@
     </CheckBoxPreference>
 
         <CheckBoxPreference
-            android:key="@string/preferences_animal_lock"
-            android:defaultValue="@bool/preferences_animal_lock"
-            android:title="@string/lock"
-            android:summary="@string/lock_the_settings_of_this"
-            android:disableDependentsState="true">
-        </CheckBoxPreference>
+        android:key="@string/preferences_animal_lock"
+        android:defaultValue="@bool/preferences_animal_lock"
+        android:title="@string/lock"
+        android:summary="@string/lock_the_settings_of_this"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
 
         <CheckBoxPreference
             android:key="@string/preferences_animal_auto_mode"
