@@ -1,5 +1,6 @@
 certoscale/build/*
 serialLib/build/*
+serialLib/.externalNativeBuild/
 build/*
 library/build/*
 

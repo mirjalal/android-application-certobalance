@@ -94,29 +94,29 @@ private SharedPreferences prefs = null;
                 switch (baudProtocol) {
                     case "1":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(2400);
-                        serialService =new SerialService("/dev/ttymxc0",2400);
-                        Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
+                       // serialService =new SerialService("/dev/ttymxc0",2400);
+                       // Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
                         break;
                     case "2":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(4800);
-                        serialService =new SerialService("/dev/ttymxc0",4800);
-                        Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
+                        //serialService =new SerialService("/dev/ttymxc0",4800);
+                        //Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
                         break;
                     case "3":
 
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(9600);
-                        serialService =new SerialService("/dev/ttymxc0",9600);
-                        Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
+                        //serialService =new SerialService("/dev/ttymxc0",9600);
+                        //Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
                         break;
                     case "4":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(19200);
-                        serialService =new SerialService("/dev/ttymxc0",19200);
-                        Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
+                        //serialService =new SerialService("/dev/ttymxc0",19200);
+                        //Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
                         break;
                     case "5":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(38400);
-                        serialService =new SerialService("/dev/ttymxc0",38400);
-                        Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
+                        //serialService =new SerialService("/dev/ttymxc0",38400);
+                        //Scale.getInstance().setSerialsServiceProtocolPrinter(serialService);
                         break;
                 }
             break;
@@ -202,26 +202,44 @@ private SharedPreferences prefs = null;
                 String transmissionProtocol = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
                 switch (transmissionProtocol) {
                     case "1":
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(2);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(1);
+                        break;
+
+                    case "2":
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(1);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(1);
+                        break;
+
+                    case "3":
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(0);
+                        Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(1);
+                        break;
+
+                    case "4":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(1);
                         break;
-                    case "2":
+                    case "5":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(2);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(2);
                         break;
-                    case "3":
+                    case "6":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(1);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(2);
                         break;
-                    case "4":
+                    case "7":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(2);
                         break;
-                    case "5":
+                    case "8":
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(2);
@@ -234,27 +252,46 @@ private SharedPreferences prefs = null;
             case "preferences_communication_list_transmission_standard_label":
                 String transmissionLabel = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
                 switch (transmissionLabel) {
+
                     case "1":
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(2);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(1);
+                        break;
+
+                    case "2":
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(1);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(1);
+                        break;
+
+                    case "3":
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(0);
+                        Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(1);
+                        break;
+
+                    case "4":
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(1);
                         break;
-                    case "2":
+                    case "5":
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(2);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(2);
                         break;
-                    case "3":
+                    case "6":
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(1);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(2);
                         break;
-                    case "4":
+                    case "7":
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(2);
                         break;
-                    case "5":
+                    case "8":
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(0);
                         Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(2);
@@ -268,27 +305,46 @@ private SharedPreferences prefs = null;
             case "preferences_communication_list_transmission_standard_lims":
                 String transmissionLims = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
                 switch (transmissionLims) {
+
                     case "1":
+                        Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceSics().setmParity(2);
+                        Scale.getInstance().getSerialsServiceSics().setmStopbits(1);
+                        break;
+
+                    case "2":
+                        Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceSics().setmParity(1);
+                        Scale.getInstance().getSerialsServiceSics().setmStopbits(1);
+                        break;
+
+                    case "3":
+                        Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
+                        Scale.getInstance().getSerialsServiceSics().setmParity(0);
+                        Scale.getInstance().getSerialsServiceSics().setmStopbits(1);
+                        break;
+
+                    case "4":
                         Scale.getInstance().getSerialsServiceSics().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceSics().setmParity(0);
                         Scale.getInstance().getSerialsServiceSics().setmStopbits(1);
                         break;
-                    case "2":
+                    case "5":
                         Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceSics().setmParity(2);
                         Scale.getInstance().getSerialsServiceSics().setmStopbits(2);
                         break;
-                    case "3":
+                    case "6":
                         Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceSics().setmParity(1);
                         Scale.getInstance().getSerialsServiceSics().setmStopbits(2);
                         break;
-                    case "4":
+                    case "7":
                         Scale.getInstance().getSerialsServiceSics().setmDatabits(7);
                         Scale.getInstance().getSerialsServiceSics().setmParity(0);
                         Scale.getInstance().getSerialsServiceSics().setmStopbits(2);
                         break;
-                    case "5":
+                    case "8":
                         Scale.getInstance().getSerialsServiceSics().setmDatabits(8);
                         Scale.getInstance().getSerialsServiceSics().setmParity(0);
                         Scale.getInstance().getSerialsServiceSics().setmStopbits(2);
@@ -351,16 +407,10 @@ private SharedPreferences prefs = null;
         }
 
 
-        SerialService serialServiceProtocol = new SerialService("/dev/ttymxc2",Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate(),
-                8,
-                1,
-                0,
-                0
-        );
-        Scale.getInstance().setSerialsServiceProtocolPrinter(serialServiceProtocol);
 
-        /*
-        SerialService serialServiceProtocol = new SerialService("/dev/ttymxc2",Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate(),
+
+
+        SerialService serialServiceProtocol = new SerialService("/dev/ttymxc0",Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate(),
                 Scale.getInstance().getSerialsServiceProtocolPrinter().getmDatabits(),
                 Scale.getInstance().getSerialsServiceProtocolPrinter().getmStopbits(),
                 Scale.getInstance().getSerialsServiceProtocolPrinter().getmParity(),
@@ -368,8 +418,8 @@ private SharedPreferences prefs = null;
         );
         Scale.getInstance().setSerialsServiceProtocolPrinter(serialServiceProtocol);
 
-
-        SerialService serialServiceLabel = new SerialService("/dev/ttymxc2",Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate(),
+    /*
+        SerialService serialServiceLabel = new SerialService("/dev/ttymxc1",Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate(),
                 Scale.getInstance().getSerialsServiceLabelPrinter().getmDatabits(),
                 Scale.getInstance().getSerialsServiceLabelPrinter().getmStopbits(),
                 Scale.getInstance().getSerialsServiceLabelPrinter().getmParity(),

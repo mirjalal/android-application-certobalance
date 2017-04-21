@@ -24,7 +24,7 @@
 
 #include "SerialPort.h"
 
-#include "android/log.h"
+#include <android/log.h>
 static const char *TAG="serial_port";
 #define LOGI(fmt, args...) __android_log_print(ANDROID_LOG_INFO,  TAG, fmt, ##args)
 #define LOGD(fmt, args...) __android_log_print(ANDROID_LOG_DEBUG, TAG, fmt, ##args)
@@ -85,7 +85,7 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 		speed = getBaudrate(baudrate);
 		if (speed == -1) {
 			/* TODO: throw an exception */
-//			LOGE("Invalid baudrate");
+			LOGE("Invalid baudrate");
 			return NULL;
 		}
 	}
@@ -94,14 +94,14 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 	{
 		jboolean iscopy;
 		const char *path_utf = (*env)->GetStringUTFChars(env, path, &iscopy);
-//		LOGD("Opening serial port %s with flags 0x%x", path_utf, O_RDWR | flags);
+		LOGD("Opening serial port %s with flags 0x%x", path_utf, O_RDWR | flags);
 		fd = open(path_utf, O_RDWR | flags);
-//		LOGD("open() fd = %d", fd);
+		LOGD("open() fd = %d", fd);
 		(*env)->ReleaseStringUTFChars(env, path, path_utf);
 		if (fd == -1)
 		{
 			/* Throw an exception */
-//			LOGE("Cannot open port");
+			LOGE("Cannot open port");
 			/* TODO: throw an exception */
 			return NULL;
 		}
@@ -110,63 +110,70 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 	/* Configure device */
 	{
 		struct termios cfg;
-//		LOGD("Configuring serial port");
+		LOGD("Configuring serial port");
 		if (tcgetattr(fd, &cfg))
 		{
-//			LOGE("tcgetattr() failed");
+			LOGE("tcgetattr() failed");
 			close(fd);
 			/* TODO: throw an exception */
 			return NULL;
 		}
 
 
-		if (databits==7) {
-			cfg.c_cflag = (cfg.c_cflag & ~CSIZE) | CS7;  //7 Databi{ts
-		}
-		if (databits==8) {
-			cfg.c_cflag = (cfg.c_cflag & ~CSIZE) | CS8;  //7 Databits
-		}
-		/*
-		if (parity==0) {
-			// no parity
-			cfg.c_cflag &= ~(PARENB);
-		}
 
-		if (parity==1) {
-			//odd parity
-			cfg.c_cflag |= PARENB;
-			cfg.c_cflag |= PARODD;
-		}
+        cfsetispeed(&cfg, speed);
+        cfsetospeed(&cfg, speed);
 
-		if (parity==2) {
-			//even parity
-			cfg.c_cflag |= PARENB;
-			cfg.c_cflag &= ~PARODD;
-		}
-
-		if (stopbits==1) {
-			cfg.c_cflag &= ~CSTOPB; // 1  stop bit
-		}
-		if (stopbits==2) {
-			cfg.c_cflag |= CSTOPB; //2 stop bits
-		}
-
-        if(flowcontrol==0){
+        switch (databits){
+            case 7:
+                cfg.c_cflag |= CS7;
+                break;
+            case 8:cfg.c_cflag |= CS8;
+                break;
 
         }
-        if(flowcontrol==1){
+
+        switch (parity){
+            case 0:
+                // no parity
+                cfg.c_cflag &= ~(PARENB);
+                break;
+            case 1:
+                //odd parity
+                cfg.c_cflag |= PARENB;
+                cfg.c_cflag |= PARODD;
+                break;
+            case 2:
+                //even parity
+                cfg.c_cflag |= PARENB;
+                cfg.c_cflag &= ~PARODD;
+                break;
 
         }
-        if(flowcontrol==2){
 
+        switch(stopbits){
+            case 1:
+                cfg.c_cflag &= ~CSTOPB; // 1  stop bit
+                break;
+            case 2:
+                cfg.c_cflag |= CSTOPB; //2 stop bits
+                break;
         }
-		*/
+
+        switch(flowcontrol){
+            case 1:
+                cfg.c_iflag |= (IXON | IXOFF | IXANY);  //XON - XOFF flow control
+                break;
+            case 2:
+                cfg.c_cflag |= CRTSCTS;    /* Also called CRTSCTS */
+                break;
+        }
+
 
 
 
 		cfmakeraw(&cfg);
-		cfsetispeed(&cfg, speed);
-		cfsetospeed(&cfg, speed);
+
 
 		if (tcsetattr(fd, TCSANOW, &cfg))
 		{
@@ -206,7 +213,7 @@ JNIEXPORT void JNICALL Java_android_1serialport_1api_SerialPort_close
 	jobject mFd = (*env)->GetObjectField(env, thiz, mFdID);
 	jint descriptor = (*env)->GetIntField(env, mFd, descriptorID);
 
-//	LOGD("close(fd = %d)", descriptor);
+	LOGD("close(fd = %d)", descriptor);
 	close(descriptor);
 }
 

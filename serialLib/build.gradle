@@ -9,6 +9,7 @@ android {
 
         ndk {
             moduleName "serial_port"
+            ldLibs "log"
         }
     }
 
@@ -16,6 +17,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
         }
     }
 }

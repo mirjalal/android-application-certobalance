@@ -120,12 +120,12 @@ public class SerialService  {
 			mDeviceName = deviceName;
 			mBaudrate = baudrate;
 
-			/*
-			mDatabits=8;
-			mParity=0;
-			mStopbits=1;
-			mFlowControl=0;
-			*/
+
+			mDatabits=databits;
+			mParity=parity;
+			mStopbits=stopbits;
+			mFlowControl=flowcontrol;
+
 
 			mSerialPort = mApplication.getSerialPort(deviceName,baudrate,databits,stopbits,parity,flowcontrol);
 			mOutputStream = mSerialPort.getOutputStream();
