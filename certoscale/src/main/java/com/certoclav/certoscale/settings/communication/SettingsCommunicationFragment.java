@@ -86,6 +86,7 @@ private SharedPreferences prefs = null;
     @Override
     public void onResume() {
 
+
         Preference devicePref = findPreference("preferences_communication_list_devices");
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString("preferences_communication_list_devices", "1"))-1]);
 

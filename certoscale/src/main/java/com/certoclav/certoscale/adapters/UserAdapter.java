@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +19,7 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModel;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,25 +126,31 @@ public class UserAdapter extends ArrayAdapter<User> {
 		if(getItem(position).getIsAdmin()){
 			actionItemDelete.setVisibility(View.INVISIBLE);
 		}
-		
-		
+
+
+
+
 		actionItemDelete.setChecked(false);
+
 		actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
 
 			//actionItemDelete.setText(getContext().getString(R.string.delete));
 			actionItemDelete.setOnClickListener(new OnClickListener() {	
 				@Override
 				public void onClick(View v) {
-					for(OnClickButtonListener listener : onClickButtonListeners){
-						listener.onClickButtonDelete(getItem(position));
-					}
+
+
+
+						for (OnClickButtonListener listener : onClickButtonListeners) {
+							listener.onClickButtonDelete(getItem(position));
+						}
 
 
 
 				}
 			});
 
-		
+
 			actionItemEdit.setChecked(false);
 			actionItemEdit.setImageResource(R.drawable.ic_menu_edit);
 
@@ -157,6 +166,16 @@ public class UserAdapter extends ArrayAdapter<User> {
 
 					}
 				});
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_user_settings), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_user_settings))==true) {
+
+			actionItemDelete.setEnabled(false);
+			actionItemEdit.setEnabled(false);
+		}else {
+			actionItemDelete.setEnabled(true);
+			actionItemEdit.setEnabled(true);
+		}
 		
 		return convertView;
 	}

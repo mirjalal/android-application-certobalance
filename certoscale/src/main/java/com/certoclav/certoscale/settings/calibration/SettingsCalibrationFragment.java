@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
+import com.certoclav.library.application.ApplicationController;
 
 
 public class SettingsCalibrationFragment extends PreferenceFragment {
@@ -26,7 +27,10 @@ private SharedPreferences prefs = null;
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_calibration);
 
+
+
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
 
         ((Preference) findPreference(getString(R.string.preferences_calibration_user))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -111,6 +115,13 @@ private SharedPreferences prefs = null;
     @Override
     public void onResume() {
         super.onResume();
+
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_calibration), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_calibration))==true) {
+            Toast.makeText(getContext(), R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
+            getPreferenceScreen().findPreference(getString(R.string.preferences_calibration_span)).setEnabled(false);
+        }else{
+            getPreferenceScreen().findPreference(getString(R.string.preferences_calibration_span)).setEnabled(true);
+        }
     }
 
 

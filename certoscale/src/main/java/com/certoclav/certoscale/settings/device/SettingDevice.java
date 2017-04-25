@@ -301,6 +301,13 @@ private SharedPreferences prefs = null;
     @Override
     public void onResume() {
 
+        if(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_balance_setup), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_balance_setup))==true) {
+            Toast.makeText(getContext(), R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
+            getPreferenceScreen().setEnabled(false);
+        }else{
+            getPreferenceScreen().setEnabled(true);
+        }
+
 
 
         /*

@@ -815,7 +815,7 @@
     <string name="verified_by">Verified by</string>
     <string name="serialnumber">Serialnumber</string>
     <string name="balance_name">Balance Name</string>
-    <string name="user_name">User Name</string>
+    <string name="user_name">User</string>
     <string name="project_name">Project Name</string>
     <string name="result">Result</string>
     <string name="statistics_of">Statistics of</string>
@@ -1021,6 +1021,9 @@
     <string name="lock_the_factory_reset">Lock the factory reset</string>
     <string name="factory_reset_menu">Factory reset menu</string>
     <string name="only_the_admin_can_change_the_lockout_settings">Only the admin can change the lockout settings</string>
+    <string name="preferences_glp_header">preferences_glp_header</string>
+    <string name="these_settings_are_locked_by_the_admin">These Settings are locked by the admin</string>
+    <string name="the_calibration_has_been_locked_by_the_admin">The calibration has been locked by the admin</string>
 
 
 </resources>

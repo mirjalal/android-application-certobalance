@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <EditTextPreference
-        android:key="preferences_glp_header"
+        android:key="@string/preferences_glp_header"
         android:title="@string/header"
         android:summary="@string/glp_header" />
 
@@ -47,12 +47,15 @@
     </CheckBoxPreference>
 
 
+    <!--
     <CheckBoxPreference
         android:key="preferences_print_user_name"
         android:defaultValue="@bool/preferences_print_user_name"
         android:title="@string/print_user_name"
         android:summary="@string/print_the_user_name_on_off"
        />
+    -->
+
 
     <EditTextPreference
         android:key="preferences_glp_project_name"

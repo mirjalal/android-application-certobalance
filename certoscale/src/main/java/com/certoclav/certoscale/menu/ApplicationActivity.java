@@ -32,6 +32,7 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.List;
 
@@ -110,9 +111,16 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
+ 				if(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_calibration), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_calibration))==true) {
+					Toast.makeText(ApplicationActivity.this, R.string.the_calibration_has_been_locked_by_the_admin, Toast.LENGTH_SHORT).show();
+				}else{
+					Scale.getInstance().getScaleModel().externelCalibration(ApplicationActivity.this);
+					imageButtonSidebarBack.performClick();
+				}
 
-				Scale.getInstance().getScaleModel().externelCalibration(ApplicationActivity.this);
-				imageButtonSidebarBack.performClick();
+
+
 			}
 		});
 		imageButtonTimer = (ImageButton) findViewById(R.id.menu_application_sidebar_button_timer);

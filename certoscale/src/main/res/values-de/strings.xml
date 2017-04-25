@@ -538,7 +538,7 @@
     <string name="statistics_of">Statistics von</string>
     <string name="total_items">Stückanzahl</string>
     <string name="under">Untere</string>
-    <string name="user_name">Benutzername</string>
+    <string name="user_name">Benutzer</string>
     <string name="verified_by">Verifiziert durch</string>
     <string name="yes">Ja</string>
     <string name="weight">Gewicht</string>
@@ -626,7 +626,7 @@
     <string name="update_failed">Update fehlgeschlagen</string>
     <string name="update_successfull">Update erfolgreich</string>
     <string name="calculated_and_updated">berechnet</string>
-    <string name="header">Header</string>
+    <string name="header">Kopfzeile</string>
     <string name="glp_header">GLP Kopfszeile</string>
     <string name="print_application_name">Applikationsname drucken</string>
     <string name="print_balance_id">WagenID druckenadmi</string>
@@ -682,4 +682,5 @@
     <string name="lock_the_i_o_settings">Die I/O Einstellungen sperren</string>
     <string name="lock_the_library">Die Bibliothek sperren</string>
     <string name="lock_the_user_settings">Die Benutzereinstelllungen sperren</string>
+    <string name="these_settings_are_locked_by_the_admin">Diese Einstellungen wurden vom Administrator gesperrt</string>
 </resources>

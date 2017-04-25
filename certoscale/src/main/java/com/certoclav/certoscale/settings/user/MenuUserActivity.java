@@ -3,8 +3,10 @@ package com.certoclav.certoscale.settings.user;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,9 +20,11 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ButtonEventListener;
+import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -52,7 +56,12 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_user_settings), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_user_settings))==true) {
+            navigationbar.getButtonAdd().setVisibility(View.GONE);
+        }else {
+            navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
+        }
         navigationbar.getButtonSettings().setVisibility(View.GONE);
         navigationbar.getButtonHome().setVisibility(View.GONE);
         navigationbar.getSpinnerLib().setVisibility(View.GONE);

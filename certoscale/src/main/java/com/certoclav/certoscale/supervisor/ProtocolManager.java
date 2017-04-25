@@ -76,10 +76,13 @@ public class ProtocolManager implements ScaleApplicationListener {
             sb.append(ApplicationController.getContext().getString(R.string.balance_name)+":" + " "+balanceName + "\n");
         }
 
-        if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_user_name),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_user_name))==true) {
+        /*if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_user_name),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_user_name))==true) {
             sb.append(ApplicationController.getContext().getString(R.string.user_name)+": " + " "+ Scale.getInstance().getUser().getFirstName() + " " +Scale.getInstance().getUser().getLastName() + "\n");
 
-        }
+        }*/
+        sb.append(ApplicationController.getContext().getString(R.string.user_name)+": " + " "+ Scale.getInstance().getUser().getEmail()  + "\n");
+
+
         if  (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_project_name),ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_project_name))==true) {
             String projectName=prefs.getString("preferences_glp_project_name","");
             sb.append(ApplicationController.getContext().getString(R.string.project_name)+": "+projectName+ "\n");

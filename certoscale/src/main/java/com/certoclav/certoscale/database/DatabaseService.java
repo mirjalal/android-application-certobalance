@@ -88,6 +88,7 @@ public class DatabaseService {
 		} catch (java.sql.SQLException e) {
 			Log.e(DatabaseHelper.class.getName(), "Can't drop databases", e);
 			//throw new RuntimeException(e);
+
 		}
 		
 	}
