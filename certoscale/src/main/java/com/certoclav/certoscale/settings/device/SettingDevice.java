@@ -251,6 +251,16 @@ private SharedPreferences prefs = null;
                 return false;
             }
         });
+
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_factory_reset), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_factory_reset))==true) {
+
+            getPreferenceScreen().findPreference(getString(R.string.preferences_device_reset)).setEnabled(false);
+        }else{
+            getPreferenceScreen().findPreference(getString(R.string.preferences_device_reset)).setEnabled(true);
+        }
+
+
+
 //Date and Time
 
 

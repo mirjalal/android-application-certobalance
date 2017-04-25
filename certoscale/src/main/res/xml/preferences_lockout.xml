@@ -65,10 +65,26 @@
     </CheckBoxPreference>
 
     <CheckBoxPreference
-        android:key="@string/preferences_lockout_io_settings"
-        android:defaultValue="@bool/preferences_lockout_io_settings"
-        android:title="@string/i_o_settings"
-        android:summary="@string/lock_the_i_o_settings"
+        android:key="@string/preferences_lockout_items"
+        android:defaultValue="@bool/preferences_lockout_items"
+        android:title="@string/items"
+        android:summary="@string/lock_the_item_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_recipes"
+        android:defaultValue="@bool/preferences_lockout_recipes"
+        android:title="@string/recipes"
+        android:summary="@string/lock_the_recipe_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_protocols"
+        android:defaultValue="@bool/preferences_lockout_protocols"
+        android:title="@string/protocols"
+        android:summary="@string/lock_the_protocol_settings"
         android:disableDependentsState="true">
     </CheckBoxPreference>
 

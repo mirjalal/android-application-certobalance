@@ -2,6 +2,8 @@ package com.certoclav.certoscale.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +22,7 @@ import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.CertocloudConstants;
 import com.certoclav.library.certocloud.DeleteTask;
 
@@ -247,11 +250,20 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
 
 
-
 				}
 			});
 
-		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_items), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_items))==true) {
+			actionItemDelete.setEnabled(false);
+			actionItemEdit.setEnabled(false);
+
+		}else {
+			actionItemDelete.setEnabled(true);
+			actionItemEdit.setEnabled(true);
+		}
+
+
 		return convertView;
 	}
 }

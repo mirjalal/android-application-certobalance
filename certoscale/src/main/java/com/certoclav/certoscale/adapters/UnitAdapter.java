@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +18,7 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,6 +167,18 @@ public class UnitAdapter extends ArrayAdapter<Unit> {
 			});
 
 
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_weighing_units), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_weighing_units))==true) {
+
+			actionUnitDelete.setEnabled(false);
+			actionUnitEdit.setEnabled(false);
+			cbEnabled.setEnabled(false);
+
+		}else {
+			actionUnitDelete.setEnabled(true);
+			actionUnitEdit.setEnabled(true);
+			cbEnabled.setEnabled(true);
+		}
 
 		
 		return convertView;

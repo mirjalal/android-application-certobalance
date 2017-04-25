@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
+import com.certoclav.library.application.ApplicationController;
 
 
 public class SettingsLockoutFragment extends PreferenceFragment {
@@ -28,6 +29,13 @@ private SharedPreferences prefs = null;
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+        if (Scale.getInstance().getUser().getIsAdmin() == false) {
+            Toast.makeText(getContext(), R.string.only_the_admin_can_change_the_lockout_settings, Toast.LENGTH_LONG).show();
+            getPreferenceScreen().setEnabled(false);
+        }else{
+            getPreferenceScreen().setEnabled(true);
+        }
+        /*
        getPreferenceScreen().findPreference(getString(R.string.preferences_lockout_calibration)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -119,8 +127,30 @@ private SharedPreferences prefs = null;
             }
         });
 
+        getPreferenceScreen().findPreference(getString(R.string.preferences_lockout_items)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if(Scale.getInstance().getUser().getIsAdmin() == false) {
+                    Toast.makeText(getContext(), R.string.only_the_admin_can_change_the_lockout_settings, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                return true;
+            }
+        });
 
-        getPreferenceScreen().findPreference(getString(R.string.preferences_lockout_io_settings)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+
+        getPreferenceScreen().findPreference(getString(R.string.preferences_lockout_recipes)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if(Scale.getInstance().getUser().getIsAdmin() == false) {
+                    Toast.makeText(getContext(), R.string.only_the_admin_can_change_the_lockout_settings, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                return true;
+            }
+        });
+
+        getPreferenceScreen().findPreference(getString(R.string.preferences_lockout_protocols)).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if(Scale.getInstance().getUser().getIsAdmin() == false) {
@@ -141,7 +171,7 @@ private SharedPreferences prefs = null;
                 return true;
             }
         });
-
+    */
 
     }
 

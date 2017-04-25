@@ -87,6 +87,15 @@ private SharedPreferences prefs = null;
     public void onResume() {
 
 
+
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_communication), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_communication))==true) {
+            Toast.makeText(getContext(), R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
+            getPreferenceScreen().setEnabled(false);
+        }else{
+            getPreferenceScreen().setEnabled(true);
+        }
+
+
         Preference devicePref = findPreference("preferences_communication_list_devices");
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString("preferences_communication_list_devices", "1"))-1]);
 

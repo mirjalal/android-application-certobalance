@@ -1002,8 +1002,10 @@
     <string name="preferences_lockout_glp">preferences_lockout_glp</string>
     <string name="preferences_lockout_communication">preferences_lockout_communication</string>
     <string name="preferences_lockout_library">preferences_lockout_library</string>
-    <string name="preferences_lockout_io_settings">preferences_lockout_io_settings</string>
-    <string name="preferences_lockout_factory_reset">preferences_lockout_io_settings</string>
+    <string name="preferences_lockout_items">preferences_lockout_items</string>
+    <string name="preferences_lockout_recipes">preferences_lockout_recipes</string>
+    <string name="preferences_lockout_protocols">preferences_lockout_protocols</string>
+    <string name="preferences_lockout_factory_reset">preferences_lockout_factory_reset</string>
     <string name="lockout">Lockout</string>
     <string name="lockout_settings">Lockout settings</string>
     <string name="lock_the_calibration">Lock the calibration</string>
@@ -1024,6 +1026,9 @@
     <string name="preferences_glp_header">preferences_glp_header</string>
     <string name="these_settings_are_locked_by_the_admin">These Settings are locked by the admin</string>
     <string name="the_calibration_has_been_locked_by_the_admin">The calibration has been locked by the admin</string>
+    <string name="lock_the_item_settings">Lock the item settings</string>
+    <string name="lock_the_recipe_settings">Lock the recipe settings</string>
+    <string name="lock_the_protocol_settings">Lock the protocol settings</string>
 
 
 </resources>
