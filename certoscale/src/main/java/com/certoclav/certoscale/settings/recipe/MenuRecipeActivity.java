@@ -3,8 +3,10 @@ package com.certoclav.certoscale.settings.recipe;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -55,7 +57,14 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
-        navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_recipes), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_recipes))==true) {
+            navigationbar.getButtonAdd().setVisibility(View.GONE);
+        }else{
+            navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
+        }
+
         navigationbar.getTextTitle().setText(getString(R.string.recipes).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
 

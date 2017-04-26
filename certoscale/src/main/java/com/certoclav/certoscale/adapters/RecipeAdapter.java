@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +17,7 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.view.QuickActionItem;
+import com.certoclav.library.application.ApplicationController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,6 +135,16 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 
 					}
 				});
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+		if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_recipes), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_recipes))==true) {
+			actionItemDelete.setEnabled(false);
+			actionItemEdit.setEnabled(false);
+
+		}else {
+			actionItemDelete.setEnabled(true);
+			actionItemEdit.setEnabled(true);
+		}
 		
 		return convertView;
 	}
