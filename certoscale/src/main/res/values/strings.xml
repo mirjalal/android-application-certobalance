@@ -1037,6 +1037,11 @@
     <string name="preferences_reset_communication">preferences_reset_communication</string>
     <string name="preferences_reset_complete">preferences_reset_complete</string>
     <string name="reset_all">Reset all</string>
+    <string name="do_you_really_want_to_reset_the">Do you really want to reset the</string>
+    <string name="do_you_really_want_to_perform_a_complete_factory_reset">Do you really want to perform a complete factory reset?</string>
+    <string name="preferences_glp_balance_name">preferences_glp_balance_name</string>
+    <string name="preferences_glp_project_name">preferences_glp_project_name</string>
+    <string name="reset_successful">Reset successful</string>
 
 
 </resources>
