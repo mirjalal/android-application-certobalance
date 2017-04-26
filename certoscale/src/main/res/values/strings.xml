@@ -1029,6 +1029,14 @@
     <string name="lock_the_item_settings">Lock the item settings</string>
     <string name="lock_the_recipe_settings">Lock the recipe settings</string>
     <string name="lock_the_protocol_settings">Lock the protocol settings</string>
+    <string name="preferences_reset_user_settings">preferences_reset_user_settings</string>
+    <string name="preferences_reset_device_settings">preferences_reset_device_settings</string>
+    <string name="preferences_reset_application">preferences_reset_application</string>
+    <string name="preferences_reset_units">preferences_reset_units</string>
+    <string name="preferences_reset_glp">preferences_reset_glp</string>
+    <string name="preferences_reset_communication">preferences_reset_communication</string>
+    <string name="preferences_reset_complete">preferences_reset_complete</string>
+    <string name="reset_all">Reset all</string>
 
 
 </resources>

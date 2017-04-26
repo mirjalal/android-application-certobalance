@@ -25,6 +25,7 @@ import com.certoclav.certoscale.settings.library.MenuLibraryActivity;
 import com.certoclav.certoscale.settings.lockout.SettingsLockoutActivity;
 import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
+import com.certoclav.certoscale.settings.reset.SettingsFactoryResetActivity;
 import com.certoclav.certoscale.settings.unit.SettingsUnitActivity;
 import com.certoclav.certoscale.settings.user.MenuUserActivity;
 
@@ -97,6 +98,10 @@ public class MenuElementAdapter extends ArrayAdapter<MenuElement> {
 						break;
 					case MENU_ITEM_LOCKOUT:
 						intent = new Intent(mContext, SettingsLockoutActivity.class);
+						mContext.startActivity(intent);
+						break;
+					case MENU_ITEM_RESET:
+						intent = new Intent(mContext, SettingsFactoryResetActivity.class);
 						mContext.startActivity(intent);
 						break;
 					case MENU_ITEM_LIBRARY:

@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference
+        android:key="@string/preferences_reset_user_settings"
+        android:title="@string/user_settings"
+        />
+
+    <Preference
+        android:key="@string/preferences_reset_device_settings"
+        android:title="@string/device_settings"
+    />
+
+
+    <Preference
+        android:key="@string/preferences_reset_application"
+        android:title="@string/application_settings"
+        >
+    </Preference>
+
+    <Preference
+        android:key="@string/preferences_reset_units"
+        android:title="@string/weighing_units"
+        >
+    </Preference>
+
+    <Preference
+        android:key="@string/preferences_reset_glp"
+        android:title="@string/glp_and_gmp_data"
+         />
+
+    <Preference
+        android:key="@string/preferences_reset_communication"
+        android:title="@string/communication"
+        />
+
+    <Preference
+        android:key="@string/preferences_reset_complete"
+        android:title="@string/reset_all"
+        />
+
+
+
+
+
+
+
+
+
+
+</PreferenceScreen>
+
+
+
