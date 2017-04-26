@@ -1042,6 +1042,7 @@
     <string name="preferences_glp_balance_name">preferences_glp_balance_name</string>
     <string name="preferences_glp_project_name">preferences_glp_project_name</string>
     <string name="reset_successful">Reset successful</string>
+    <string name="assigned_to">Assigned to</string>
 
 
 </resources>

@@ -147,22 +147,15 @@ private SharedPreferences prefs = null;
                     dialogButtonYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-/*
+
                             SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getContext());
-                            prefs.edit().remove(getResources().getString(R.string.preferences_glp_header)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_header)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_date)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_balance_id)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_glp_balance_name)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_balance_name)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_glp_project_name)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_project_name)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_application_name)).apply();
-                            prefs.edit().remove(getResources().getString(R.string.preferences_print_signature)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_device_theme)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_device_bluetooth)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_device_snchronization)).apply();
 
-                            PreferenceManager.setDefaultValues(getContext(), R.xml.preferences_glp, true);
+                            PreferenceManager.setDefaultValues(getContext(), R.xml.preferences_device, true);
 
-*/
+
                             Toast.makeText(getActivity(), R.string.reset_successful, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
@@ -352,7 +345,7 @@ private SharedPreferences prefs = null;
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText(getString(R.string.do_you_really_want_to_reset_the) + " " + getString(R.string.glp_and_gmp_data)  );
+                    text.setText(getString(R.string.do_you_really_want_to_reset_the) + " " + getString(R.string.glp_and_gmp_data) +"?" );
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                     dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -430,6 +423,12 @@ private SharedPreferences prefs = null;
                     dialogButtonYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getContext());
+                            prefs.edit().remove(getResources().getString(R.string.preferences_communication_list_devices)).apply();
+
+
+                            PreferenceManager.setDefaultValues(getContext(), R.xml.preferences_communication, true);
 
                             Toast.makeText(getActivity(), R.string.reset_successful, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

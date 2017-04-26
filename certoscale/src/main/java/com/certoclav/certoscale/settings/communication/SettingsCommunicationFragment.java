@@ -99,9 +99,11 @@ private SharedPreferences prefs = null;
         Preference devicePref = findPreference("preferences_communication_list_devices");
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString("preferences_communication_list_devices", "1"))-1]);
 
-        ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
-        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceSics().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
-        ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
+        ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate()+ " baud, "+ Scale.getInstance().getSerialsServiceProtocolPrinter().getmDatabits()+" data bits, parity: "+getParityString(Scale.getInstance().getSerialsServiceProtocolPrinter().getmParity())+" , "+Scale.getInstance().getSerialsServiceProtocolPrinter().getmStopbits()+" stop bit, flow control: "+getFlowControlString(Scale.getInstance().getSerialsServiceProtocolPrinter().getmFlowControl()));
+        ((Preference) findPreference(getString(R.string.preferences_communication_lims))).setSummary(getString(R.string.assigned_to_com) +" 1, "+Scale.getInstance().getSerialsServiceSics().getBaudrate()+" baud, "+ Scale.getInstance().getSerialsServiceSics().getmDatabits()+"data bits, parity: "+getParityString(Scale.getInstance().getSerialsServiceSics().getmParity())+" , "+Scale.getInstance().getSerialsServiceSics().getmStopbits()+" stop bit, flow control: "+ getFlowControlString(Scale.getInstance().getSerialsServiceSics().getmFlowControl()));
+        ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, "+ Scale.getInstance().getSerialsServiceLabelPrinter().getmDatabits()+ " data bits, parity: "+getParityString(Scale.getInstance().getSerialsServiceLabelPrinter().getmParity())+" , "+Scale.getInstance().getSerialsServiceLabelPrinter().getmStopbits()+" stop bit, flow control: "+ getFlowControlString(Scale.getInstance().getSerialsServiceLabelPrinter().getmFlowControl()));
+
+        ((Preference) findPreference(getString(R.string.preferences_communication_scanner))).setSummary(getString(R.string.assigned_to) +", USB host");
 
 
         //Toast.makeText(getContext(), String.valueOf(Scale.getInstance().getSerialsServiceSics().getBaudrate()), Toast.LENGTH_SHORT).show();
@@ -160,6 +162,32 @@ private SharedPreferences prefs = null;
 
 
 
+        }
+    }
+
+    private String getParityString (int parity){
+        switch (parity){
+            case 0:
+                return "none";
+            case 1:
+                return "odd";
+            case 2:
+                return "even";
+            default:
+                return "none";
+        }
+    }
+
+    private String getFlowControlString(int flowControl){
+        switch (flowControl){
+            case 0:
+                return "none";
+            case 1:
+                return "Xon-Xoff" ;
+            case 2:
+                return"hardware";
+            default:
+                return "none";
         }
     }
 }

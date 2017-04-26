@@ -89,6 +89,7 @@
     <CheckBoxPreference
         android:key="@string/preferences_device_snchronization"
         android:title="@string/online_mode"
+        android:defaultValue="ture"
         android:summary="@string/synchronize_data_with_www_certocloud_com">
     </CheckBoxPreference>
 
