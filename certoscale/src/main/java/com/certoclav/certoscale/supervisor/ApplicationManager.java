@@ -1,5 +1,7 @@
 package com.certoclav.certoscale.supervisor;
 
+import android.util.Base64;
+
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
@@ -18,6 +20,10 @@ import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.library.application.ApplicationController;
 
+import java.math.BigInteger;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -1102,5 +1108,45 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
+    // Calculate the MD5 Hash of the protocol string
+    public static String calculateMD5(String s)
+    {
+        MessageDigest digest;
+        try
+        {
+            digest = MessageDigest.getInstance("MD5");
+            digest.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+            byte[] magnitude = digest.digest();
+            BigInteger bi = new BigInteger(1, magnitude);
+            String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
+            return hash;
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    public static String calculateSHA256(String s){
+
+        try
+        {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+            md.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+            byte[] digest = md.digest();
+
+            BigInteger bi = new BigInteger(1, digest);
+            String hash = String.format("%0" + (digest.length << 1) + "x", bi);
+            return hash;
+
+        }
+        catch (NoSuchAlgorithmException e){
+
+        }
+       return "";
+    }
 
 }

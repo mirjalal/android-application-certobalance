@@ -62,8 +62,14 @@ import com.certoclav.library.util.SettingsDeviceUtils;
 
 import org.json.JSONObject;
 
+import java.security.GeneralSecurityException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -356,7 +362,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 						}
 
 					}.execute(editTextPassword.getText().toString());
-					
+
 
 				}
 
@@ -514,7 +520,37 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				}
 			}
 
-			User user1 = new User("Admin", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
+			/*
+
+			KeyPair keyPair = null;
+			try {
+				// get instance of rsa cipher
+				KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+				keyGen.initialize(1024);            // initialize key generator
+				keyPair = keyGen.generateKeyPair(); // generate pair of keys
+			} catch(GeneralSecurityException e) {
+				System.out.println(e);
+			}
+
+			KeyStore ks = KeyStore.getInstance("AndroidKeyStore");
+			ks.load(null);
+			Enumeration<String> aliases = ks.aliases();
+
+			ks.load(null);
+			KeyStore.Entry entry = ks.getEntry(aliases., null);
+			if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
+
+			}
+
+			Signature s = Signature.getInstance("SHA256withECDSA");
+			s.initSign(((KeyStore.PrivateKeyEntry) entry).getPrivateKey());
+			s.update(data);
+			byte[] signature = s.sign();
+
+			*/
+
+
+			User user1 = new User("", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 
 			List<RecipeEntry> entries= new ArrayList<RecipeEntry>();
 			entries.add(new RecipeEntry("Tare",0d,1," "," ","Please put a bottle with at least 20ml volume onto the pan and press TARE",0d));

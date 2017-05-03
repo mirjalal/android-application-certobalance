@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +42,12 @@ import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.R.attr.data;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
@@ -51,6 +55,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINAT
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE_RUNNING;
+import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD;
 import static com.certoclav.certoscale.model.ScaleApplication.PEAK_HOLD_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME;
@@ -330,6 +335,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 						});
 
 
+					}
+
+					if (Scale.getInstance().getScaleApplication()==FORMULATION_RUNNING){
+						Scale.getInstance().setScaleApplication(FORMULATION);
 					}
 
 
@@ -1100,14 +1109,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				break;
 			case FORMULATION_RUNNING:
-				buttonStart.setVisibility(View.VISIBLE);
+
 				buttonStart.setEnabled(true);
 				buttonCal.setEnabled(false);
 				buttonProtocol.setEnabled(false);
 				//buttonTara.setEnabled(false);
 				buttonAppSettings.setEnabled(false);
 				buttonAppSettings.setVisibility(View.VISIBLE);
-
+				buttonEnd.setVisibility(View.VISIBLE);
 				buttonResult.setVisibility(View.VISIBLE);
 				buttonResult.setEnabled(false);
 
@@ -1117,7 +1126,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
 				buttonEndBatch.setVisibility(View.GONE);
-				buttonEnd.setVisibility(View.GONE);
+
+				buttonStart.setVisibility(View.GONE);
 				buttonAccept.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
@@ -2763,6 +2773,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					scaleApplicationName = getString(R.string.app_statistical_quality_control);
 					break;
 			}
+
+			//Hash of the Protocol
+			//String md5Hash=ApplicationManager.getInstance().calculateMD5(sb.toString());
+
+
+
+
 			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
 
 			TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
@@ -2784,7 +2801,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(protocol.getContent());
 
-					Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
+					//Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
+
+					//Toast.makeText(eContext,ApplicationManager.getInstance().calculateMD5("test"), Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext,ApplicationManager.getInstance().calculateSHA256("test"),Toast.LENGTH_LONG).show();
+
 				}
 			});
 

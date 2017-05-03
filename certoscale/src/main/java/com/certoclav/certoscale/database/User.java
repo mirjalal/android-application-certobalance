@@ -62,8 +62,16 @@ public class User {
 	private Boolean isAdmin;	
 	
 	@DatabaseField(columnName = "is_visible")
-	private Boolean isVisible;	
-	
+	private Boolean isVisible;
+/*
+	@DatabaseField(columnName = "Public_Key")
+	private String publicKey;
+
+
+	@DatabaseField(columnName = "Private_Key")
+	private String privateKey;
+*/
+
 	@DatabaseField(columnName = FIELD_USER_LOCAL)
 	private Boolean isLocal;	
 

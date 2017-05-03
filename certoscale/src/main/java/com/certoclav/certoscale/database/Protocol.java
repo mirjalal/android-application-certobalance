@@ -18,6 +18,7 @@ public class Protocol {
 	private final static String JSON_NAME = "name";
 	private final static String JSON_CLOUD_ID = "_id"; //user db id from MongoDb
 	private final static String JSON_USER_EMAIL = "email";
+	private final static String JSON_SIGNATURE ="signature";
 
 
 	private String name = "";
@@ -27,6 +28,7 @@ public class Protocol {
 	private String content = "";
 	private String date = "";
 	private String cloudId = "";
+	private String signature= "";
 
 
 
@@ -203,6 +205,11 @@ public class Protocol {
 	public void setCloudId(String cloudId) {
 		this.cloudId = cloudId;
 	}
+
+	public String getSignature() {return signature;}
+
+	public void setSignature(String signature) {this.signature = signature;}
+
 
 
 
