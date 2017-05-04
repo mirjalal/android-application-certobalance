@@ -22,6 +22,7 @@ import com.certoclav.library.application.ApplicationController;
 
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -1141,6 +1142,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             BigInteger bi = new BigInteger(1, digest);
             String hash = String.format("%0" + (digest.length << 1) + "x", bi);
             return hash;
+
 
         }
         catch (NoSuchAlgorithmException e){

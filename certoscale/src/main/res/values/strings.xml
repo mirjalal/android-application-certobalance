@@ -43,7 +43,6 @@
     <string name="preferences_density_mode">preferences_density_mode</string>
     <string name="preferences_density_liquidtyp">preferences_density_liquidtyp</string>
     <string name="preferences_density_porous">preferences_density_porous</string>
-    <string name="preferences_density_autoprint">preferences_density_autoprint</string>
     <string name="preferences_density_autosample">preferences_density_autosample</string>
     <string name="preferences_denisty_Liquid_visible">preferences_denisty_Liquid_visible</string>
     <string name="preferences_density_watertemp_visible">preferences_density_watertemp_visible</string>

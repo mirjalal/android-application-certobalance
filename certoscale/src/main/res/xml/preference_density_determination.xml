@@ -45,13 +45,7 @@
             />
 
 
-        <CheckBoxPreference
-            android:key="@string/preferences_density_autoprint"
-            android:defaultValue="@bool/preferences_density_autoprint"
-            android:title="@string/auto_print_results"
-            android:summary="@string/turn_this_feature_on_off"
-            android:dependency="@string/preferences_density_lock" >
-        </CheckBoxPreference>
+
 
         <CheckBoxPreference
             android:key="@string/preferences_density_autosample"

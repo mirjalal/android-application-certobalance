@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +32,10 @@ import com.certoclav.library.bcrypt.BCrypt;
 import com.certoclav.library.certocloud.CertocloudConstants;
 import com.certoclav.library.certocloud.DeleteTask;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class SettingsFactoryResetFragment extends PreferenceFragment {
@@ -156,8 +162,29 @@ private SharedPreferences prefs = null;
                             PreferenceManager.setDefaultValues(getContext(), R.xml.preferences_device, true);
 
 
+
+                            /*
+                            // Reset language
+                            Resources res = getContext().getResources();
+                            // Change locale settings in the app.
+                            DisplayMetrics dm = res.getDisplayMetrics();
+                            android.content.res.Configuration conf = res.getConfiguration();
+                            conf.locale= Locale.US;
+                            // Use conf.locale = new Locale(...) if targeting lower versions
+                            res.updateConfiguration(conf, dm);
+
+                            Intent intent = getActivity().getIntent();
+                            getActivity().finish();
+                            startActivity(intent);
+                            */
+
+
+
+
+
                             Toast.makeText(getActivity(), R.string.reset_successful, Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
                         }
                     });
 
@@ -206,6 +233,256 @@ private SharedPreferences prefs = null;
                     dialogButtonYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            //Weighing
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_minimum)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_auto_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_minimum_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_print_min)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_weigh_load_visible)).apply();
+
+                            //PartCounting
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_auto_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_auto_optimization)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_apw_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_target_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_difference_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_over_limit_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_under_limit_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_apw)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_sample_size)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_target)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_difference)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_over_limit)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_counting_print_under_limit)).apply();
+
+                            //Percent Weighing
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_reference_weight_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_difference_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_difference_percent_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_print_reference)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_print_difference)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_percent_print_difference_percent)).apply();
+
+                            //Check Weighing
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_auto_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_over_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_under_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_target_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_overtolerance_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_undertolerance_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_print_target)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_print_overtolerance)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_print_undertolerance)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_print_overlimit)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_print_underlimit)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_limitmode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_check_displayoptions)).apply();
+
+
+                            //Animal Weighing
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_auto_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_measuringtime_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_animal_print_measuring)).apply();
+
+
+                            //Filling
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_auto_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_target_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_differencew_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_differencep_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_print_target)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_print_differencew)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_filling_print_differencep)).apply();
+
+                            //Totalization
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_AutoSampleMode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalizaion_NumberofSamples)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_average_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_standarddeviation_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_minimum_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_maximum_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_range_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_total_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_current_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_print_samples)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_print_average)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_print_standard)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_print_minimum)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_totalization_print_maximum)).apply();
+
+
+                            //Formulation
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_formulationmode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_filter)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_total_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_target_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_differencew_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_differencep_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_print_total)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_print_target)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_print_differencew)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_formulation_print_differencep)).apply();
+
+
+                            //Differential
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_autoMode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_initial_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_final_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_differencew_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_differencep_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_print_initial)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_print_final)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_print_differencew)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_differential_print_differencep)).apply();
+
+
+                            //Density Determination
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_liquidtyp)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_porous)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_autosample)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_denisty_Liquid_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_watertemp_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_oildensity_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_weightair_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_oiledweight_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_weightliquid_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_sinkervolume_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_porous_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_liquidtype_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_liquiddensity_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_watertemp_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_weightair_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_density_weightinliquid_print)).apply();
+
+                            //Peak Hold
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_stableonly)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_peak_print_stableonly)).apply();
+
+
+                            //Ingrediant Costing
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_unitcost_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_totalweight_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_totalcost_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_brutto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_netto_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_tara_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_print_totalweight)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_ingrediant_print_totalcost)).apply();
+
+
+                            //Pipette Adjustment
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_autosamplemode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_liquidtype)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_liquidtype)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_presureunit)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_volumeunit)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_secondary_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_nominal_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_inacc_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_imprec_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_liquiddensity_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_barounit_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_watertemp_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_nominal_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_inacc_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_imprec_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_liquiddensity_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_barounit_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_pipette_watertemp_print)).apply();
+
+
+                            //SQC
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_activated)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_lock)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_numberofsample)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_tolerance_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_mode)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_numbatches_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_numsamples_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_average_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_total_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_minimum_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_maximum_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_range_visible)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_numbatches_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_numsamples_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_average_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_total_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_minimum_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_maximum_print)).apply();
+                            prefs.edit().remove(getResources().getString(R.string.preferences_statistic_range_print)).apply();
+
+
+
+                            PreferenceManager.setDefaultValues(getContext(), R.xml.preferences_device, true);
 
 
                             Toast.makeText(getActivity(), R.string.reset_successful, Toast.LENGTH_SHORT).show();
@@ -423,6 +700,25 @@ private SharedPreferences prefs = null;
                     dialogButtonYes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            Scale.getInstance().getSerialsServiceProtocolPrinter().setBaudrate(9600);
+                            Scale.getInstance().getSerialsServiceProtocolPrinter().setmDatabits(8);
+                            Scale.getInstance().getSerialsServiceProtocolPrinter().setmStopbits(1);
+                            Scale.getInstance().getSerialsServiceProtocolPrinter().setmParity(0);
+                            Scale.getInstance().getSerialsServiceProtocolPrinter().setmFlowControl(0);
+
+                            Scale.getInstance().getSerialsServiceSics().setBaudrate(9600);
+                            Scale.getInstance().getSerialsServiceSics().setmDatabits(8);
+                            Scale.getInstance().getSerialsServiceSics().setmStopbits(1);
+                            Scale.getInstance().getSerialsServiceSics().setmParity(0);
+                            Scale.getInstance().getSerialsServiceSics().setmFlowControl(0);
+
+                            Scale.getInstance().getSerialsServiceLabelPrinter().setBaudrate(9600);
+                            Scale.getInstance().getSerialsServiceLabelPrinter().setmDatabits(8);
+                            Scale.getInstance().getSerialsServiceLabelPrinter().setmStopbits(1);
+                            Scale.getInstance().getSerialsServiceLabelPrinter().setmParity(0);
+                            Scale.getInstance().getSerialsServiceLabelPrinter().setmFlowControl(0);
+
 
                             SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(getContext());
                             prefs.edit().remove(getResources().getString(R.string.preferences_communication_list_devices)).apply();
