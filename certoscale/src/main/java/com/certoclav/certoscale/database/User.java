@@ -5,6 +5,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.security.KeyPair;
 import java.util.Date;
 
 /**
@@ -56,21 +57,22 @@ public class User {
 	
 	
 	@DatabaseField(columnName = "date",dataType = DataType.DATE)
-	private Date date;	
+	private Date date;
+
 	
 	@DatabaseField(columnName = "isAdmin")
 	private Boolean isAdmin;	
 	
 	@DatabaseField(columnName = "is_visible")
 	private Boolean isVisible;
-/*
+
 	@DatabaseField(columnName = "Public_Key")
 	private String publicKey;
 
-
 	@DatabaseField(columnName = "Private_Key")
 	private String privateKey;
-*/
+
+
 
 	@DatabaseField(columnName = FIELD_USER_LOCAL)
 	private Boolean isLocal;	
@@ -115,6 +117,8 @@ public class User {
 		this.isAdmin = isAdmin;
 		this.isVisible = true;
 		this.isLocal = isLocal;
+		this.publicKey="";
+		this.privateKey="";
 	}
 
 	public int getVersion() {
@@ -239,6 +243,14 @@ public class User {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public String getPublicKey(){return this.publicKey;}
+
+	public void setPublicKey(String publicKey){this.publicKey=publicKey;}
+
+	public String getPrivateKey(){return this.privateKey;}
+
+	public void setPrivateKey(String privateKey){this.privateKey=privateKey;}
 
 	
 }

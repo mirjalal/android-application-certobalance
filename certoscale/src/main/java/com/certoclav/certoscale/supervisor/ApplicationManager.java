@@ -5,6 +5,7 @@ import android.util.Base64;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Library;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.database.Statistics;
@@ -22,10 +23,20 @@ import com.certoclav.library.application.ApplicationController;
 
 import java.math.BigInteger;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
 import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -1137,6 +1148,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             MessageDigest md = MessageDigest.getInstance("SHA-256");
 
             md.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+
             byte[] digest = md.digest();
 
             BigInteger bi = new BigInteger(1, digest);
@@ -1149,6 +1161,78 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         }
        return "";
+    }
+
+    public static Boolean verifyProtocol (Protocol protocol){
+
+        String hash=ApplicationManager.getInstance().calculateSHA256(protocol.getContent());
+
+        try {
+
+            Signature signature = Signature.getInstance("NONEwithRSA");
+
+            PublicKey publicKey = ApplicationManager.getInstance().loadPublicKey(Scale.getInstance().getUser().getPublicKey());
+
+            signature.initVerify(publicKey);
+            signature.update(hash.getBytes());
+
+
+            byte[] signatureBytes=Base64.decode(protocol.getSignature(),Base64.DEFAULT);
+            Boolean test=signature.verify(signatureBytes);
+
+
+            return test;
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+
+    public static PrivateKey loadPrivateKey(String key64) throws GeneralSecurityException {
+        byte[] clear = Base64.decode(key64,Base64.DEFAULT);
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(clear);
+        KeyFactory fact = KeyFactory.getInstance("RSA");
+        PrivateKey priv = fact.generatePrivate(keySpec);
+        Arrays.fill(clear, (byte) 0);
+        return priv;
+
+    }
+
+
+    public static PublicKey loadPublicKey(String stored) throws GeneralSecurityException {
+        byte[] data = Base64.decode(stored,Base64.DEFAULT);
+        X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
+        KeyFactory fact = KeyFactory.getInstance("RSA");
+        return fact.generatePublic(spec);
+    }
+
+    public static String savePrivateKey(PrivateKey priv) throws GeneralSecurityException {
+        KeyFactory fact = KeyFactory.getInstance("RSA");
+        PKCS8EncodedKeySpec spec = fact.getKeySpec(priv,
+                PKCS8EncodedKeySpec.class);
+        byte[] packed = spec.getEncoded();
+        String key64 = Base64.encodeToString(packed,Base64.DEFAULT);
+
+        Arrays.fill(packed, (byte) 0);
+        return key64;
+    }
+
+
+    public static String savePublicKey(PublicKey publ) throws GeneralSecurityException {
+        KeyFactory fact = KeyFactory.getInstance("RSA");
+        X509EncodedKeySpec spec = fact.getKeySpec(publ,
+                X509EncodedKeySpec.class);
+        return Base64.encodeToString(spec.getEncoded(),Base64.DEFAULT);
     }
 
 }

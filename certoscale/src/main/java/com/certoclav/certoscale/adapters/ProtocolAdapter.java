@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
@@ -110,7 +111,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 
 					// set the custom dialog components - text, image and button
 					TextView text = (TextView) dialog.findViewById(R.id.text);
-					text.setText(mContext.getString(R.string.do_you_really_want_to_delete) + " " + getItem(position).getName());
+					text.setText(mContext.getString(R.string.do_you_really_want_to_delete_this_protocol) + " " + getItem(position).getName());
 					Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
 					dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -129,6 +130,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 								deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_PROTOCOL + getItem(position).getCloudId());
 							}
 							DatabaseService db = new DatabaseService(mContext);
+							
 							db.deleteProtocol(getItem(position));
 							remove(getItem(position));
 							notifyDataSetChanged();

@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.database;
 
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -21,6 +22,7 @@ public class Protocol {
 	private final static String JSON_SIGNATURE ="signature";
 
 
+
 	private String name = "";
 	private String userEmail = "";
 	private String deviceKey = "";
@@ -28,7 +30,9 @@ public class Protocol {
 	private String content = "";
 	private String date = "";
 	private String cloudId = "";
-	private String signature= "";
+
+	@DatabaseField(columnName = JSON_SIGNATURE,dataType = DataType.STRING_BYTES)
+	private String signature;
 
 
 
@@ -126,6 +130,12 @@ public class Protocol {
 		}catch (Exception e){
 			content = "";
 		}
+		try {
+			signature=jsonObject.getString(JSON_SIGNATURE);
+
+		}catch (Exception e){
+
+		}
 		protocolJson = jsonObject.toString();
 
 	}
@@ -141,7 +151,7 @@ public class Protocol {
 		this.protocolJson = protocolJson;
 	}
 
-	public Protocol(String cloudId, String name, String userEmail, String deviceKey, String date, String visibility, String content) {
+	public Protocol(String cloudId, String name, String userEmail, String deviceKey, String date, String visibility, String content,String signature) {
 		this.cloudId = cloudId;
 		this.name = name;
 		this.userEmail = userEmail;
@@ -149,6 +159,7 @@ public class Protocol {
 		this.date = date;
 		this.visibility = visibility;
 		this.content = content;
+		this.signature = signature;
 	}
 
 
@@ -208,7 +219,7 @@ public class Protocol {
 
 	public String getSignature() {return signature;}
 
-	public void setSignature(String signature) {this.signature = signature;}
+	//public void setSignature(String signature) {this.signature = signature;}
 
 
 
@@ -224,7 +235,8 @@ public class Protocol {
 					.put(JSON_DATE,date)
 					.put(JSON_USER_EMAIL, userEmail)
 					.put(JSON_VISIBILITY,visibility)
-					.put(JSON_CONTENT,content);
+					.put(JSON_CONTENT,content)
+					.put(JSON_SIGNATURE,signature);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

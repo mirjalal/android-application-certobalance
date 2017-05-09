@@ -1042,6 +1042,7 @@
     <string name="preferences_glp_project_name">preferences_glp_project_name</string>
     <string name="reset_successful">Reset successful</string>
     <string name="assigned_to">Assigned to</string>
+    <string name="do_you_really_want_to_delete_this_protocol">Do you really want to delete this protocol</string>
 
 
 </resources>

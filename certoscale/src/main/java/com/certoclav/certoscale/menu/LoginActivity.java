@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -51,6 +52,7 @@ import com.certoclav.certoscale.model.ScaleModelDandT;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -63,11 +65,18 @@ import com.certoclav.library.util.SettingsDeviceUtils;
 import org.json.JSONObject;
 
 import java.security.GeneralSecurityException;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.Signature;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -265,6 +274,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 		// adapterUserDropdown.setDropDownViewResource(R.layout.spinner_dropdown_item_large);
 		spinner.setAdapter(adapterUserDropdown);
+		spinner.setAdapter(adapterUserDropdown);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -293,7 +303,61 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		buttonLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-					if (getDefaultSharedPreferences(
+				//Code for testing
+				//Delete if the implementation is done
+						/*
+						try {
+							if(KeyStore.getInstance("AndroidKeyStore").containsAlias(currentUser.getEmail())){
+
+                            }else{
+								KeyPair keyPair=generateKeyPair();
+								KeyStore.getInstance("AndroidKeyStore").store(keyPair);
+							}
+						} catch (KeyStoreException e) {
+							e.printStackTrace();
+						}*/
+
+											/*		currentUser.setPublicKey(keyPair.getPublic().toString());
+							currentUser.setPrivateKey(keyPair.getPrivate().toString());
+
+
+
+							try {
+								String test=savePublicKey(keyPair.getPublic());
+								PublicKey testKey=loadPublicKey(test);
+								Toast.makeText(ApplicationController.getContext(), testKey.toString(), Toast.LENGTH_LONG).show();
+								if (keyPair.getPublic().equals(testKey)){
+									Toast.makeText(ApplicationController.getContext(), "Correct!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_LONG).show();
+
+								}else{
+									Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
+								}
+							} catch (GeneralSecurityException e) {
+								e.printStackTrace();
+							}
+						*/
+
+				if (currentUser.getPublicKey().equals("")){
+					KeyPair keyPair=generateKeyPair();
+					Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
+					try {
+						currentUser.setPublicKey(ApplicationManager.getInstance().savePublicKey(keyPair.getPublic()));
+					} catch (GeneralSecurityException e) {
+						e.printStackTrace();
+					}
+
+					try {
+						currentUser.setPrivateKey(ApplicationManager.getInstance().savePrivateKey(keyPair.getPrivate()));
+					} catch (GeneralSecurityException e) {
+						e.printStackTrace();
+					}
+					databaseService.deleteUser(currentUser);
+					databaseService.insertUser(currentUser);
+
+				}
+
+
+				if (getDefaultSharedPreferences(
 						LoginActivity.this).getBoolean(
 							getString(R.string.preferences_device_snchronization), false) == true) {
 					if (ApplicationController.getInstance().isNetworkAvailable()) {
@@ -317,7 +381,15 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 
 
-					new AsyncTask<String, Boolean, Boolean>() {
+
+
+
+
+
+
+
+
+						new AsyncTask<String, Boolean, Boolean>() {
 
 						@Override
 						protected void onPreExecute() {
@@ -520,13 +592,13 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				}
 			}
 
-			/*
 
+			/*
 			KeyPair keyPair = null;
 			try {
 				// get instance of rsa cipher
 				KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-				keyGen.initialize(1024);            // initialize key generator
+				keyGen.initialize(2048);            // initialize key generator
 				keyPair = keyGen.generateKeyPair(); // generate pair of keys
 			} catch(GeneralSecurityException e) {
 				System.out.println(e);
@@ -546,9 +618,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 			s.initSign(((KeyStore.PrivateKeyEntry) entry).getPrivateKey());
 			s.update(data);
 			byte[] signature = s.sign();
-
 			*/
-
 
 			User user1 = new User("", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 
@@ -772,6 +842,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				editor.putBoolean(getString(R.string.preferences_device_snchronization),
 						false);
 				editor.commit();
+
+
+
+
 				Intent intent = new Intent(LoginActivity.this,
 						RegisterActivity.class);
 				startActivity(intent);
@@ -914,4 +988,28 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 		}
 	}
+
+	private KeyPair generateKeyPair(){
+
+
+
+
+		KeyPair keyPair = null;
+		try {
+			// get instance of rsa cipher
+			KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+			keyGen.initialize(2048);            // initialize key generator
+			keyPair = keyGen.generateKeyPair(); // generate pair of keys
+
+		} catch(GeneralSecurityException e) {
+			System.out.println(e);
+		}
+
+		return keyPair;
+
+	}
+
+
+
+
 }
