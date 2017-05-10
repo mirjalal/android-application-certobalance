@@ -1,13 +1,14 @@
 package com.certoclav.certoscale.settings.application;
-        import android.content.SharedPreferences;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-        import android.widget.Toast;
+import android.widget.Toast;
 
-        import com.certoclav.certoscale.R;
-        import com.certoclav.certoscale.model.Scale;
-        import com.certoclav.library.application.ApplicationController;
+import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.model.Scale;
+import com.certoclav.library.application.ApplicationController;
 
 /**
  * Created by Enrico on 06.12.2016.

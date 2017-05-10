@@ -1,8 +1,5 @@
 package com.certoclav.certoscale.settings.application;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -11,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.certoclav.certoscale.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 

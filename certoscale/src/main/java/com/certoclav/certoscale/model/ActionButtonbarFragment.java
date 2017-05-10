@@ -6,12 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-//import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +33,13 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.ESCPos;
 import com.certoclav.library.application.ApplicationController;
 
-import org.apache.commons.math3.optim.nonlinear.scalar.noderiv.BOBYQAOptimizer;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-import java.security.KeyPair;
-import java.security.KeyStore;
-import java.security.KeyPairGenerator;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -54,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static android.R.attr.data;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
@@ -71,6 +63,8 @@ import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED;
+
+
 
 
 public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener, WeightListener{
@@ -2844,7 +2838,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			String encryptedByteValue = Base64.encodeToString(signatureBytes,Base64.DEFAULT);
 			byte[] signaturetest=Base64.decode(signatureString,Base64.DEFAULT);
 
-            Toast.makeText(eContext,signatureBytes.toString(),Toast.LENGTH_LONG).show();
 
 
 
@@ -2857,9 +2850,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 			signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
 			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString(),signatureString);
-
 			Boolean test=ApplicationManager.getInstance().verifyProtocol(protocol);
-			Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
+			//Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
 
 			TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
 			textView.setText(protocol.getContent());
@@ -2882,8 +2874,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
 
-					//Toast.makeText(eContext,ApplicationManager.getInstance().calculateMD5("test"), Toast.LENGTH_LONG).show();
-					//Toast.makeText(eContext,ApplicationManager.getInstance().calculateSHA256("test"),Toast.LENGTH_LONG).show();
 
 				}
 			});

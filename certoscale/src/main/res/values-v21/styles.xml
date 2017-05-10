@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Black.NoTitleBar.Fullscreen.Balance" parent="android:Theme.Black.NoTitleBar.Fullscreen">
+    <style name="Theme.Black" parent="android:Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:colorPrimary">@android:color/black</item>
         <item name="android:colorPrimaryDark">@android:color/black</item>
         <item name="android:colorForeground">@android:color/white</item>

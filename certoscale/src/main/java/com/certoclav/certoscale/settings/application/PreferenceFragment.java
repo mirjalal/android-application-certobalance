@@ -16,9 +16,6 @@
 
 package com.certoclav.certoscale.settings.application;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +35,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.certoclav.certoscale.R;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public abstract class PreferenceFragment extends Fragment implements
 		PreferenceManagerCompat.OnPreferenceTreeClickListener {

@@ -692,4 +692,5 @@
     <string name="reset_successful">Zurücksetzen erfolgreich</string>
     <string name="the_calibration_has_been_locked_by_the_admin">Die Kalibrierung wurde vom Administrator gesperrt</string>
     <string name="assigned_to">"Zugeordnet: "</string>
+    <string name="do_you_really_want_to_delete_this_protocol">Möchten Sie diese Protokoll wirklich löschen?</string>
 </resources>

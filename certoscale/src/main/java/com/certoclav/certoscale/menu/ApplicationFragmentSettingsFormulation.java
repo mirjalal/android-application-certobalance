@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;

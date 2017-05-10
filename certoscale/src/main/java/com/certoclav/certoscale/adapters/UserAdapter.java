@@ -16,8 +16,6 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleModel;
-import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
 

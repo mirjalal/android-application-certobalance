@@ -3,14 +3,12 @@ package com.certoclav.certoscale.settings.lockout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
-import com.certoclav.library.application.ApplicationController;
 
 
 public class SettingsLockoutFragment extends PreferenceFragment {

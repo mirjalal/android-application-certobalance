@@ -12,7 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Base64;
+import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -25,6 +25,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -65,20 +66,10 @@ import com.certoclav.library.util.SettingsDeviceUtils;
 import org.json.JSONObject;
 
 import java.security.GeneralSecurityException;
-import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.Signature;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -175,6 +166,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		super.setTheme(R.style.the);
+
 		setContentView(R.layout.login_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
@@ -184,6 +178,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
 		navigationbar.getButtonCompanyLogo().setVisibility(View.GONE);
 
+		//View view = this.getWindow().getDecorView();
+		//view.setBackgroundColor(Color.WHITE);
 
 
 
@@ -303,43 +299,11 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		buttonLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Code for testing
-				//Delete if the implementation is done
-						/*
-						try {
-							if(KeyStore.getInstance("AndroidKeyStore").containsAlias(currentUser.getEmail())){
 
-                            }else{
-								KeyPair keyPair=generateKeyPair();
-								KeyStore.getInstance("AndroidKeyStore").store(keyPair);
-							}
-						} catch (KeyStoreException e) {
-							e.printStackTrace();
-						}*/
-
-											/*		currentUser.setPublicKey(keyPair.getPublic().toString());
-							currentUser.setPrivateKey(keyPair.getPrivate().toString());
-
-
-
-							try {
-								String test=savePublicKey(keyPair.getPublic());
-								PublicKey testKey=loadPublicKey(test);
-								Toast.makeText(ApplicationController.getContext(), testKey.toString(), Toast.LENGTH_LONG).show();
-								if (keyPair.getPublic().equals(testKey)){
-									Toast.makeText(ApplicationController.getContext(), "Correct!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_LONG).show();
-
-								}else{
-									Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
-								}
-							} catch (GeneralSecurityException e) {
-								e.printStackTrace();
-							}
-						*/
 
 				if (currentUser.getPublicKey().equals("")){
 					KeyPair keyPair=generateKeyPair();
-					Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
+					//Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
 					try {
 						currentUser.setPublicKey(ApplicationManager.getInstance().savePublicKey(keyPair.getPublic()));
 					} catch (GeneralSecurityException e) {
@@ -451,6 +415,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 	@Override
 	protected void onResume() {
+
+
+
 		ReadAndParseSerialService.getInstance();
 		GraphService.getInstance();
 		Log.e("LoginActivity", "onresume called");
@@ -591,34 +558,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					return;
 				}
 			}
-
-
-			/*
-			KeyPair keyPair = null;
-			try {
-				// get instance of rsa cipher
-				KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-				keyGen.initialize(2048);            // initialize key generator
-				keyPair = keyGen.generateKeyPair(); // generate pair of keys
-			} catch(GeneralSecurityException e) {
-				System.out.println(e);
-			}
-
-			KeyStore ks = KeyStore.getInstance("AndroidKeyStore");
-			ks.load(null);
-			Enumeration<String> aliases = ks.aliases();
-
-			ks.load(null);
-			KeyStore.Entry entry = ks.getEntry(aliases., null);
-			if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-
-			}
-
-			Signature s = Signature.getInstance("SHA256withECDSA");
-			s.initSign(((KeyStore.PrivateKeyEntry) entry).getPrivateKey());
-			s.update(data);
-			byte[] signature = s.sign();
-			*/
 
 			User user1 = new User("", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 

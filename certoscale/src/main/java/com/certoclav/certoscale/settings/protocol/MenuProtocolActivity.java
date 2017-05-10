@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ProtocolAdapter;
@@ -23,12 +22,10 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncProtocolsService;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -156,8 +153,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                adapter.add(protocol);
 
 
-               Boolean test= ApplicationManager.getInstance().verifyProtocol(protocol);
-               Toast.makeText(ApplicationController.getContext(),test.toString(),Toast.LENGTH_LONG).show();
+
 
 
            }

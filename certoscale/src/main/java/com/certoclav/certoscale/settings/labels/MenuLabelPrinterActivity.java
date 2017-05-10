@@ -1,7 +1,6 @@
 package com.certoclav.certoscale.settings.labels;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -17,21 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UserAdapter;
-import com.certoclav.certoscale.constants.AppConstants;
-import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.LabelPrinterUtils;
-import com.certoclav.certoscale.view.EditTextItem;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -40,8 +33,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.oned.Code128Writer;
 import com.google.zxing.qrcode.QRCodeWriter;
-
-import java.util.List;
 
 /**
  * Created by Michael on 12/6/2016.

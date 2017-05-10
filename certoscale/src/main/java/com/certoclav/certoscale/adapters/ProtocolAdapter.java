@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;

@@ -2,7 +2,6 @@ package com.certoclav.certoscale.menu;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Recipe;
-import com.certoclav.certoscale.listener.RecipeEntryListener;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.ArrayList;
