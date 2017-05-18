@@ -1,5 +1,7 @@
 package com.certoclav.library.certocloud;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,8 +14,6 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import android.util.Log;
 
 public class PostUtil {
 
@@ -63,13 +63,10 @@ public class PostUtil {
 						conn.setRequestProperty("X-Key", CloudUser.getInstance().getEmail());
 					}
 					conn.setRequestProperty("Content-Type", "application/json");
-					Log.e("PostUtil", "before conn.getoutputstream");
 					OutputStream os = conn.getOutputStream(); //if host not available this function throws unknownhostexteption
-					Log.e("PostUtil", "before os write");
-					os.write( body.getBytes("UTF-8") );    
-					Log.e("PostUtil", "before os close");
+					os.write( body.getBytes("UTF-8") );
 					os.close();
-					Log.e("PostUtil", "before getResponseCode");
+
 	
 					
 					// read the response
