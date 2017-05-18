@@ -20,7 +20,6 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.listener.ButtonEventListener;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;

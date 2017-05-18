@@ -15,11 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-
-import java.io.IOException;
-import java.text.ParseException;
 
 
 /**

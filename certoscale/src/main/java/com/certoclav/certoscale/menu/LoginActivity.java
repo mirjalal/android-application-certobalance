@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -24,6 +25,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +53,7 @@ import com.certoclav.certoscale.model.ScaleModelDandT;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
@@ -65,11 +68,8 @@ import org.json.JSONObject;
 import java.security.GeneralSecurityException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
-import java.security.KeyStore;
-import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -166,6 +166,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		super.setTheme(R.style.the);
+
 		setContentView(R.layout.login_activity);
 		navigationbar = new Navigationbar(this);
 		navigationbar.onCreate();
@@ -175,6 +178,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
 		navigationbar.getButtonCompanyLogo().setVisibility(View.GONE);
 
+		//View view = this.getWindow().getDecorView();
+		//view.setBackgroundColor(Color.WHITE);
 
 
 
@@ -265,6 +270,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 		// adapterUserDropdown.setDropDownViewResource(R.layout.spinner_dropdown_item_large);
 		spinner.setAdapter(adapterUserDropdown);
+		spinner.setAdapter(adapterUserDropdown);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
@@ -293,7 +299,29 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 		buttonLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-					if (getDefaultSharedPreferences(
+
+
+				if (currentUser.getPublicKey().equals("")){
+					KeyPair keyPair=generateKeyPair();
+					//Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
+					try {
+						currentUser.setPublicKey(ApplicationManager.getInstance().savePublicKey(keyPair.getPublic()));
+					} catch (GeneralSecurityException e) {
+						e.printStackTrace();
+					}
+
+					try {
+						currentUser.setPrivateKey(ApplicationManager.getInstance().savePrivateKey(keyPair.getPrivate()));
+					} catch (GeneralSecurityException e) {
+						e.printStackTrace();
+					}
+					databaseService.deleteUser(currentUser);
+					databaseService.insertUser(currentUser);
+
+				}
+
+
+				if (getDefaultSharedPreferences(
 						LoginActivity.this).getBoolean(
 							getString(R.string.preferences_device_snchronization), false) == true) {
 					if (ApplicationController.getInstance().isNetworkAvailable()) {
@@ -317,7 +345,15 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 
 
-					new AsyncTask<String, Boolean, Boolean>() {
+
+
+
+
+
+
+
+
+						new AsyncTask<String, Boolean, Boolean>() {
 
 						@Override
 						protected void onPreExecute() {
@@ -379,6 +415,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 	@Override
 	protected void onResume() {
+
+
+
 		ReadAndParseSerialService.getInstance();
 		GraphService.getInstance();
 		Log.e("LoginActivity", "onresume called");
@@ -519,36 +558,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 					return;
 				}
 			}
-
-			/*
-
-			KeyPair keyPair = null;
-			try {
-				// get instance of rsa cipher
-				KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-				keyGen.initialize(1024);            // initialize key generator
-				keyPair = keyGen.generateKeyPair(); // generate pair of keys
-			} catch(GeneralSecurityException e) {
-				System.out.println(e);
-			}
-
-			KeyStore ks = KeyStore.getInstance("AndroidKeyStore");
-			ks.load(null);
-			Enumeration<String> aliases = ks.aliases();
-
-			ks.load(null);
-			KeyStore.Entry entry = ks.getEntry(aliases., null);
-			if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-
-			}
-
-			Signature s = Signature.getInstance("SHA256withECDSA");
-			s.initSign(((KeyStore.PrivateKeyEntry) entry).getPrivateKey());
-			s.update(data);
-			byte[] signature = s.sign();
-
-			*/
-
 
 			User user1 = new User("", "", "","Admin", "", "", "","", "", BCrypt.hashpw("admin",BCrypt.gensalt()), new Date(), true,true);
 
@@ -772,6 +781,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 				editor.putBoolean(getString(R.string.preferences_device_snchronization),
 						false);
 				editor.commit();
+
+
+
+
 				Intent intent = new Intent(LoginActivity.this,
 						RegisterActivity.class);
 				startActivity(intent);
@@ -914,4 +927,28 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 		}
 	}
+
+	private KeyPair generateKeyPair(){
+
+
+
+
+		KeyPair keyPair = null;
+		try {
+			// get instance of rsa cipher
+			KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+			keyGen.initialize(2048);            // initialize key generator
+			keyPair = keyGen.generateKeyPair(); // generate pair of keys
+
+		} catch(GeneralSecurityException e) {
+			System.out.println(e);
+		}
+
+		return keyPair;
+
+	}
+
+
+
+
 }

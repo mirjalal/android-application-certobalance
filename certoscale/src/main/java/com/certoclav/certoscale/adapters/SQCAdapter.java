@@ -3,7 +3,6 @@ package com.certoclav.certoscale.adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.SQC;
-import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 
 import java.util.List;

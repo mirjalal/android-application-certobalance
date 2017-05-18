@@ -147,9 +147,15 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
 
 
+
        if(protocols != null) {
            for (Protocol protocol : protocolList) {
                adapter.add(protocol);
+
+
+
+
+
            }
        }
         adapter.notifyDataSetChanged();
@@ -206,6 +212,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
                                 for (Protocol protocol:protocolList){
                                     db.deleteProtocol(protocol);
+
                                 }
 
                                 dialog.dismiss();

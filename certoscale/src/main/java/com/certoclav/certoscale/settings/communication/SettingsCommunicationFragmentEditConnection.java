@@ -3,24 +3,14 @@ package com.certoclav.certoscale.settings.communication;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleModel;
-import com.certoclav.certoscale.model.ScaleModelAEAdam;
-import com.certoclav.certoscale.model.ScaleModelDandT;
-import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.library.application.ApplicationController;
 
 import android_serialport_api.SerialService;
-
-import static com.certoclav.certoscale.R.id.navigationbar;
 
 
 public class SettingsCommunicationFragmentEditConnection extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{

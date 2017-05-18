@@ -8,21 +8,6 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.settings.application.ItemListFragment;
-import com.certoclav.certoscale.settings.application.SettingAnimalWeighing;
-import com.certoclav.certoscale.settings.application.SettingDensityDetermination;
-import com.certoclav.certoscale.settings.application.SettingDifferentialWeighing;
-import com.certoclav.certoscale.settings.application.SettingFilling;
-import com.certoclav.certoscale.settings.application.SettingFormulation;
-import com.certoclav.certoscale.settings.application.SettingIngredientCosting;
-import com.certoclav.certoscale.settings.application.SettingPeakHold;
-import com.certoclav.certoscale.settings.application.SettingPipetteAdjustment;
-import com.certoclav.certoscale.settings.application.SettingStatisticalQualityControl;
-import com.certoclav.certoscale.settings.application.SettingTotalization;
-import com.certoclav.certoscale.settings.application.SettingsCheckWeighing;
-import com.certoclav.certoscale.settings.application.SettingsCounting;
-import com.certoclav.certoscale.settings.application.SettingsPercentWeighing;
-import com.certoclav.certoscale.settings.application.SettingsWeighing;
 
 /**
  * An activity representing a list of Items. This activity has different

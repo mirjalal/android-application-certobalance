@@ -5,20 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.adapters.ItemAdapter;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Unit;
 import com.certoclav.certoscale.database.User;
@@ -26,16 +21,10 @@ import com.certoclav.certoscale.menu.LoginActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
-import com.certoclav.certoscale.settings.communication.SettingsCommunicationFragmentEditConnection;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
-import com.certoclav.library.certocloud.CertocloudConstants;
-import com.certoclav.library.certocloud.DeleteTask;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.Locale;
 
 
 public class SettingsFactoryResetFragment extends PreferenceFragment {

@@ -6,11 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
-import com.certoclav.certoscale.settings.recipe.MenuRecipeActivity;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.ESCPos;
@@ -42,12 +40,13 @@ import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import static android.R.attr.data;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
@@ -64,6 +63,8 @@ import static com.certoclav.certoscale.model.ScaleApplication.PIPETTE_ADJUSTMENT
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED;
+
+
 
 
 public class ActionButtonbarFragment extends Fragment implements ScaleApplicationListener, WeightListener{
@@ -831,9 +832,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonEnd.setText(buttonEnd.getText().toString().toUpperCase());
 		buttonAppSettings.setText(buttonAppSettings.getText().toString().toUpperCase());
 		buttonResult.setText(buttonResult.getText().toString().toUpperCase());
-
-
 		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
+
 
 		switch (Scale.getInstance().getScaleApplication()){
 
@@ -1989,7 +1989,22 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getSQCBatch(sqc));
 
 			sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
-			final Protocol protocol= new Protocol("",getString(R.string.app_statistical_quality_control), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+
+
+            String hash=ApplicationManager.getInstance().calculateSHA256(sb.toString());
+            PrivateKey privateKey= ApplicationManager.getInstance().loadPrivateKey(Scale.getInstance().getUser().getPrivateKey());
+
+
+            Signature signature = Signature.getInstance("NONEwithRSA");
+            signature.initSign(privateKey);
+            signature.update(hash.getBytes());
+			byte[] signatureBytes = signature.sign();
+
+			String signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+
+
+			final Protocol protocol= new Protocol("",getString(R.string.app_statistical_quality_control), Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString(),signatureString);
+
 
 
 			Button dialogbuttonProtocol = (Button) dialog.findViewById(R.id.dialog_statistics_sqc_button_save);
@@ -2182,9 +2197,20 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 								scaleApplicationName = getString(R.string.app_statistical_quality_control).toUpperCase()+" " +getString(R.string.statistics);
 								break;
 						}
-						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
+                        String hash=ApplicationManager.getInstance().calculateSHA256(sb.toString());
+                        PrivateKey privateKey= ApplicationManager.getInstance().loadPrivateKey(Scale.getInstance().getUser().getPrivateKey());
 
-						db.insertProtocol(protocol);
+
+                        Signature signature = Signature.getInstance("NONEwithRSA");
+                        signature.initSign(privateKey);
+                        signature.update(hash.getBytes());
+                        byte[] signatureBytes = signature.sign();
+                        byte[] encryptedByteValue = Base64.encode(signatureBytes,Base64.DEFAULT);
+						String signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString(),signatureString);
+
+                        db.insertProtocol(protocol);
+
 					}catch (Exception e){
 						Toast.makeText(eContext, R.string.couldnt_save_statistics, Toast.LENGTH_LONG).show();
 					}
@@ -2348,7 +2374,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 								scaleApplicationName = getString(R.string.app_statistical_quality_control)+" " +getString(R.string.samples);
 								break;
 						}
-						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString());
+
+
+                        String hash=ApplicationManager.getInstance().calculateSHA256(sb.toString());
+                        PrivateKey privateKey= ApplicationManager.getInstance().loadPrivateKey(Scale.getInstance().getUser().getPrivateKey());
+
+
+                        Signature signature = Signature.getInstance("NONEwithRSA");
+                        signature.initSign(privateKey);
+                        signature.update(hash.getBytes());
+						byte[] signatureBytes = signature.sign();
+						String signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+
+						final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString(),signatureString);
 
 						db.insertProtocol(protocol);
 				}catch(Exception e){
@@ -2779,8 +2817,41 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 
+			String hash=ApplicationManager.getInstance().calculateSHA256(sb.toString());
+			PrivateKey privateKey = ApplicationManager.getInstance().loadPrivateKey(Scale.getInstance().getUser().getPrivateKey());
+			PublicKey publicKey = ApplicationManager.getInstance().loadPublicKey(Scale.getInstance().getUser().getPublicKey());
 
-			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString());
+
+
+
+
+
+            Signature signature = Signature.getInstance("NONEwithRSA");
+			signature.initSign(privateKey);
+            signature.update(hash.getBytes());
+			//signature.sign();
+
+            byte[] signatureBytes = signature.sign();
+			String signatureString= Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+
+
+			String encryptedByteValue = Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+			byte[] signaturetest=Base64.decode(signatureString,Base64.DEFAULT);
+
+
+
+
+
+			//signature.initVerify(publicKey);
+			//signature.update(hash.getBytes());
+			//Boolean test=signature.verify(signatureBytes);
+			//Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
+
+
+			signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
+			final Protocol protocol= new Protocol("",scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",sb.toString(),signatureString);
+			Boolean test=ApplicationManager.getInstance().verifyProtocol(protocol);
+			//Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
 
 			TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
 			textView.setText(protocol.getContent());
@@ -2801,10 +2872,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					escPos.printString(protocol.getContent());
 
-					//Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
+					Toast.makeText(eContext, R.string.protocol_printed, Toast.LENGTH_LONG).show();
 
-					//Toast.makeText(eContext,ApplicationManager.getInstance().calculateMD5("test"), Toast.LENGTH_LONG).show();
-					Toast.makeText(eContext,ApplicationManager.getInstance().calculateSHA256("test"),Toast.LENGTH_LONG).show();
 
 				}
 			});
@@ -2841,8 +2910,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			e.printStackTrace();
 		}
 	}
-
-
 
 
 

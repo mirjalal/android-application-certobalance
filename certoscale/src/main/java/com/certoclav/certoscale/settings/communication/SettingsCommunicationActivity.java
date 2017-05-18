@@ -1,14 +1,12 @@
 package com.certoclav.certoscale.settings.communication;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
-import com.certoclav.certoscale.settings.calibration.SettingsCalibrationFragment;
 
 
 public class SettingsCommunicationActivity extends FragmentActivity {
