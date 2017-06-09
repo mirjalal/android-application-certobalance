@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.Recipe;
 import com.certoclav.certoscale.model.RecipeEntry;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
 
@@ -95,7 +96,7 @@ public class RecipeAdapter extends ArrayAdapter<Recipe> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Formation: ");
 		for(RecipeEntry entry : getItem(position).getRecipeEntries()){
-			sb.append(entry.getWeight()).append(" g").append(" ").append(entry.getDescription()).append(", ");
+			sb.append(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(entry.getWeight())).append(", ");
 		}
 		secondLine.setText(sb.toString());
 

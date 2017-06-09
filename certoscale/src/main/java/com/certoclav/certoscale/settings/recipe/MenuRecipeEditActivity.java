@@ -19,6 +19,8 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.CertocloudConstants;
+import com.certoclav.library.certocloud.DeleteTask;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -165,6 +167,7 @@ public class MenuRecipeEditActivity extends Activity implements RecipeElementAda
                     dialog.dismiss();
                 }
             });
+
 
             dialog.show();
 

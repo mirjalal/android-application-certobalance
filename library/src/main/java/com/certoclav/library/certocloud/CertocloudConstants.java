@@ -35,6 +35,7 @@ public class CertocloudConstants {
 	public final static String REST_API_DELETE_PROFILE = "/api/programs/";// programs.delete);
 	public final static String REST_API_POST_ITEM = "/api/balanceitem/";
 	public final static String REST_API_DELETE_ITEM = "/api/balanceitem/";//+item_id;
+	public final static String REST_API_DELETE_RECIPE = "/api/balancerecipes/";//+item_id;
 	public final static String REST_API_DELETE_PROTOCOL = "/api/balanceprotocols/";//+item_id;
 	public final static String REST_API_GET_PROTOCOLS = "/api/balanceprotocols/"; //+safetykey
 
