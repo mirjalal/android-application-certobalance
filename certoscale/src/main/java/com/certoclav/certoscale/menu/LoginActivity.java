@@ -15,11 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-<<<<<<< HEAD
-import android.text.Layout;
-import android.util.Base64;
-=======
->>>>>>> origin/master
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -68,12 +63,7 @@ import com.certoclav.library.certocloud.PostUserLoginService;
 import com.certoclav.library.certocloud.PostUserLoginService.PutUserLoginTaskFinishedListener;
 import com.certoclav.library.certocloud.PostUtil;
 import com.certoclav.library.util.SettingsDeviceUtils;
-
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.answers.Answers;
-import com.crashlytics.android.answers.ContentViewEvent;
-
-import io.fabric.sdk.android.Fabric;
 
 import org.json.JSONObject;
 
@@ -92,6 +82,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 public class LoginActivity extends Activity implements ButtonEventListener, PutUserLoginTaskFinishedListener {
@@ -109,467 +101,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     private ProgressBar progressBar = null; // progess bar which shows cloud
     // login process
     private Navigationbar navigationbar = null;
-<<<<<<< HEAD
     private int counter = 0;
-=======
-	private int counter = 0;
-
-	// Need handler for callbacks to the UI thread
-	final Handler mHandler = new Handler();
-
-
-
-
-	final Runnable mShowLoginFailed = new Runnable() {
-		public void run() {
-			buttonLogin.setEnabled(true);
-			Toast.makeText(getApplicationContext(),
-					R.string.password_not_correct, Toast.LENGTH_LONG).show();
-		}
-	};
-
-	final Runnable mShowCloudLoginFailed = new Runnable() {
-
-		public void run() {
-			buttonLogin.setEnabled(true);
-
-			final Dialog dialog = new Dialog(LoginActivity.this);
-			dialog.setContentView(R.layout.dialog_yes_no);
-			dialog.setCanceledOnTouchOutside(true);
-			dialog.setTitle(R.string.login_failed);
-			TextView text = (TextView) dialog.findViewById(R.id.text);
-			text.setText(loginFailedMessage);
-			text.append(getString(R.string.do_you_want_to_switch_to_offline_mode_));
-			Button dialogButton = (Button) dialog
-					.findViewById(R.id.dialogButtonOK);
-			// if button is clicked, close the custom dialog
-			dialogButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-					SharedPreferences prefs =
-							getDefaultSharedPreferences(LoginActivity.this);
-					Editor editor = prefs.edit();
-					editor.putBoolean(getString(R.string.preferences_device_snchronization),
-							false);
-					editor.commit();
-					dialog.dismiss();
-					onResume();
-				}
-			});
-
-			Button dialogButtonNo = (Button) dialog
-					.findViewById(R.id.dialogButtonNO);
-			dialogButtonNo.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					dialog.dismiss();
-				}
-			});
-
-			dialog.show();
-
-		}
-	};
-
-	final Runnable mShowLoginSuccessfull = new Runnable() {
-		public void run() {
-
-			Toast.makeText(LoginActivity.this,getString(R.string.login_successful), Toast.LENGTH_LONG).show();
-
-			buttonLogin.setEnabled(true);
-			Intent intent = new Intent(LoginActivity.this, ApplicationActivity.class);
-			startActivity(intent);
-
-		}
-	};
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		//super.setTheme(R.style.the);
-
-		setContentView(R.layout.login_activity);
-		navigationbar = new Navigationbar(this);
-		navigationbar.onCreate();
-		navigationbar.getTextTitle().setText(getString(R.string.login_menu).toUpperCase());
-		navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-		navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
-		navigationbar.getButtonSettingsDevice().setVisibility(View.VISIBLE);
-		navigationbar.getButtonCompanyLogo().setVisibility(View.GONE);
-
-		//View view = this.getWindow().getDecorView();
-		//view.setBackgroundColor(Color.WHITE);
-
-
-
-
-
-		StateMachine.getInstance();
-
-		progressBar = (ProgressBar) findViewById(R.id.login_progressbar);
-		SettingsDeviceUtils settingsUtils = new SettingsDeviceUtils();
-
-		settingsUtils.setvolumeToMaximum(this);
-		settingsUtils.setScreenBrightnessToMaximum(this);
-
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-
-		final DatabaseService databaseService = new DatabaseService(this);
-
-
-		TextView textSimulationMode=(TextView) findViewById(R.id.menu_main_text_simulation_mode);
-		if (AppConstants.IS_IO_SIMULATED == true) {
-
-			textSimulationMode.setTextColor(Color.YELLOW);
-			textSimulationMode.setText(R.string.simulation_mode);
-
-
-		}else{
-			textSimulationMode.setText("");
-		}
-
-		// initialize login form
-		buttonLogin = (Button) findViewById(R.id.loginButtonLogin);
-		editTextPassword = (EditText) findViewById(R.id.loginEditTextPassword);
-		spinner = (Spinner) findViewById(R.id.login_spinner);
-
-		textViewNotification = (TextView) findViewById(R.id.login_text_notification);
-		textViewNotification.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final Dialog dialog = new Dialog(LoginActivity.this);
-				dialog.setContentView(R.layout.dialog_yes_no);
-				dialog.setCanceledOnTouchOutside(true);
-				dialog.setTitle(getString(R.string.enable_network_communication));
-				TextView text = (TextView) dialog.findViewById(R.id.text);
-				ImageView image = (ImageView) dialog
-						.findViewById(R.id.dialog_image);
-				image.setVisibility(View.GONE);
-
-				text.setText(getString(R.string.do_you_want_to_enable_network_communication));
-				Button dialogButton = (Button) dialog
-						.findViewById(R.id.dialogButtonOK);
-				// if button is clicked, close the custom dialog
-				dialogButton.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						SharedPreferences prefs =
-								getDefaultSharedPreferences(LoginActivity.this);
-						Editor editor = prefs.edit();
-						editor.putBoolean(
-								getString(R.string.preferences_device_snchronization), true);
-						textViewNotification.setVisibility(View.GONE);
-						editor.commit();
-						dialog.dismiss();
-					}
-				});
-
-				Button dialogButtonNo = (Button) dialog
-						.findViewById(R.id.dialogButtonNO);
-				dialogButtonNo.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-
-			}
-		});
-
-		// read all users from database
-		listUsers = databaseService.getUsers();
-
-		// Fill Spinner with Emailaddresses of users
-
-		adapterUserDropdown = new UserDropdownAdapter(this, listUsers);
-
-		// adapterUserDropdown.setDropDownViewResource(R.layout.spinner_dropdown_item_large);
-		spinner.setAdapter(adapterUserDropdown);
-		spinner.setAdapter(adapterUserDropdown);
-		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				try {
-					Scale.getInstance().setUser(listUsers.get(position));
-					currentUser = listUsers.get(position);
-					editTextPassword.setText("");
-					SharedPreferences prefs = getDefaultSharedPreferences(LoginActivity.this);
-					SharedPreferences.Editor editor = prefs.edit();
-					editor.putInt(AppConstants.PREFERENCE_LAST_LOGGED_IN_USER_ID, currentUser.getUserId());
-					editor.commit();
-
-				} catch (IndexOutOfBoundsException e) {
-				}
-
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				editTextPassword.setText("");
-			}
-		});
-
-		buttonLogin.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-
-				if (currentUser.getPublicKey().equals("")){
-					KeyPair keyPair=generateKeyPair();
-					//Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
-					try {
-						currentUser.setPublicKey(ApplicationManager.getInstance().savePublicKey(keyPair.getPublic()));
-					} catch (GeneralSecurityException e) {
-						e.printStackTrace();
-					}
-
-					try {
-						currentUser.setPrivateKey(ApplicationManager.getInstance().savePrivateKey(keyPair.getPrivate()));
-					} catch (GeneralSecurityException e) {
-						e.printStackTrace();
-					}
-					databaseService.deleteUser(currentUser);
-					databaseService.insertUser(currentUser);
-
-				}
-
-
-				if (getDefaultSharedPreferences(
-						LoginActivity.this).getBoolean(
-							getString(R.string.preferences_device_snchronization), false) == true) {
-					if (ApplicationController.getInstance().isNetworkAvailable()) {
-
-						buttonLogin.setEnabled(false);
-						progressBar.setVisibility(View.VISIBLE);
-
-						postUserLoginService = new PostUserLoginService();
-						postUserLoginService.setOnTaskFinishedListener(LoginActivity.this);
-						postUserLoginService.loginUser(currentUser.getEmail(),
-								editTextPassword.getText().toString(),
-								Scale.getInstance().getSafetyKey());
-					} else {
-						showNotificationForNetworkNavigation();
-						Toast.makeText(LoginActivity.this,
-								getString(R.string.network_not_connected), Toast.LENGTH_LONG)
-								.show();
-					}
-
-				} else {
-
-
-
-
-
-
-
-
-
-
-
-						new AsyncTask<String, Boolean, Boolean>() {
-
-						@Override
-						protected void onPreExecute() {
-							buttonLogin.setEnabled(false);
-							progressBar.setVisibility(View.VISIBLE);
-
-							super.onPreExecute();
-						}
-
-						@Override
-						protected Boolean doInBackground(String... params) {
-							if(AppConstants.IS_IO_SIMULATED){
-								return true;
-							}
-							if (BCrypt.checkpw(params[0], currentUser.getPassword())
-									|| params[0].equals("master@certocloud")) {
-								return true;
-
-							}
-							return false;
-						}
-
-						@Override
-						protected void onPostExecute(Boolean result) {
-							buttonLogin.setEnabled(true);
-							progressBar.setVisibility(View.GONE);
-
-							if (result) {
-								Toast.makeText(LoginActivity.this,
-										getString(R.string.login_successful),
-										Toast.LENGTH_LONG).show();
-								Intent intent = new Intent(LoginActivity.this,
-										ApplicationActivity.class);
-								startActivity(intent);
-							} else {
-								Toast.makeText(getApplicationContext(),
-										R.string.password_not_correct,
-										Toast.LENGTH_LONG).show();
-
-							}
-							super.onPostExecute(result);
-						}
-
-					}.execute(editTextPassword.getText().toString());
-
-
-				}
-
-			}
-		});
-
-	}
-
-
-
-
-
-
-
-	@Override
-	protected void onResume() {
-
-
-
-		ReadAndParseSerialService.getInstance();
-		GraphService.getInstance();
-		Log.e("LoginActivity", "onresume called");
-		super.onResume();
-		navigationbar.setButtonEventListener(this);
-		progressBar.setVisibility(View.INVISIBLE);
-		Scale.getInstance();
-		editTextPassword.setText("");
-
-
-		String key = "preferences_communication_list_devices";
-		String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
-		switch (modelValue) {
-			case "1":
-				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
-				ScaleModelGandG modelGandG=new ScaleModelGandG();
-				Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-				Scale.getInstance().getScaleModel().initializeParameters(6000,1,1,9600,8,0,1,false);
-				Scale.getInstance().getScaleModel().pressZero();
-				Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-				//Scale.getInstance().getSerialsServiceScale().resetConnection();
-				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
-				break;
-
-			case "2":
-				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
-				ScaleModelDandT modelDandT=new ScaleModelDandT();
-				Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
-				Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
-				Scale.getInstance().getScaleModel().pressZero();
-				Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-				//Scale.getInstance().getSerialsServiceScale().resetConnection();
-				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-				break;
-
-			case "3":
-				navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
-				ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
-				Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
-				Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
-				Scale.getInstance().getScaleModel().pressZero();
-				Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-
-				//Scale.getInstance().getSerialsServiceScale().resetConnection();
-				//Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
-
-
-
-				break;
-
-
-
-		}
-
-		//Toast.makeText(this, modelValue, Toast.LENGTH_LONG).show();
-
-		fillDatabaseIfEmpty();
-
-
-		refreshUI();
-
-	}
-
-	/*
-	 * TODO: Outsource logic parts of this function
-	 */
-	private void refreshUI() {
-
-		// if IO is simulated, then fill Database with dummy data and set
-		// connected controller to Autoclave Model class.
-
-
-
-		buttonLogin.setEnabled(true);
-		DatabaseService databaseService = new DatabaseService(this);
-
-		listUsers = databaseService.getUsers();
-
-
-		if (getDefaultSharedPreferences(this).getBoolean(
-				getString(R.string.preferences_device_snchronization), false) == true) {
-			textViewNotification.setVisibility(View.GONE);
-		} else {
-			textViewNotification.setVisibility(View.VISIBLE);
-		}
-
-		if (listUsers == null) {
-			spinner.setEnabled(false);
-			editTextPassword.setEnabled(false);
-			buttonLogin.setEnabled(false);
-		} else if (listUsers.size() == 0) {
-			spinner.setEnabled(false);
-			editTextPassword.setEnabled(false);
-			buttonLogin.setEnabled(false);
-		} else {
-			spinner.setEnabled(true);
-			editTextPassword.setEnabled(true);
-			buttonLogin.setEnabled(true);
-		}
-
-
-
-		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-		// Fill Spinner with Emailaddresses of users
-		adapterUserDropdown.clear();
-
-			for (User user : listUsers) {
-				adapterUserDropdown.add(user);
-			}
-
-		adapterUserDropdown.notifyDataSetChanged();
-		try {
-			int lastLoggedInUserId = getDefaultSharedPreferences(this).getInt(AppConstants.PREFERENCE_LAST_LOGGED_IN_USER_ID, 0);
-			if (lastLoggedInUserId != 0) {
-				for (User user : listUsers) {
-					if (user.getUserId() == lastLoggedInUserId) {
-						spinner.setSelection(adapterUserDropdown.getPosition(user));
-					}
-				}
-			}
-		}catch (Exception e){
-
-		}
-
-	}
->>>>>>> origin/master
 
     // Need handler for callbacks to the UI thread
     final Handler mHandler = new Handler();
@@ -644,9 +176,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.login_activity);
-
+        //super.setTheme(R.style.the);
         Fabric.with(this, new Crashlytics());
+
+        setContentView(R.layout.login_activity);
         navigationbar = new Navigationbar(this);
         navigationbar.onCreate();
         navigationbar.getTextTitle().setText(getString(R.string.login_menu).toUpperCase());
@@ -774,10 +307,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             @Override
             public void onClick(View v) {
 
-                Answers.getInstance().logContentView(new ContentViewEvent()
-                        .putContentName("Login")
-                        .putContentType("Login")
-                        .putContentId(currentUser.getEmail()));
 
                 if (currentUser.getPublicKey().equals("")) {
                     KeyPair keyPair = generateKeyPair();
@@ -873,14 +402,15 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
             }
         });
-        Log.e("sha1_hash", getCertificateSHA1Fingerprint());
 
         if (!getCertificateSHA1Fingerprint().equals(AppConstants.SIGNATURE) && !AppConstants.IS_IO_SIMULATED) {
             finish();
         }
+
     }
 
-    private String getCertificateSHA1Fingerprint() {    
+
+    private String getCertificateSHA1Fingerprint() {
         PackageManager pm = getPackageManager();
         String packageName = getPackageName();
         int flags = PackageManager.GET_SIGNATURES;
@@ -1203,8 +733,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                 Toast.makeText(LoginActivity.this,
                         getResources().getString(R.string.login_successful),
                         Toast.LENGTH_LONG).show();
-                // TODO: Use your own attributes to track content views in your app
-
                 try {
                     if (Scale.getInstance().getUser().getIsLocal() == true) {
                         DatabaseService databaseService = new DatabaseService(
