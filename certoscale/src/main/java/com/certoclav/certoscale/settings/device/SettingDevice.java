@@ -39,15 +39,15 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class SettingDevice extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener{
-private SharedPreferences prefs = null;
+public class SettingDevice extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private SharedPreferences prefs = null;
 
     @Override
     public void onPause() {
         //unregister listeners
 
         prefs.unregisterOnSharedPreferenceChangeListener(this);
-     //  Scale.getInstance().removeOnWifiListener(this);
+        //  Scale.getInstance().removeOnWifiListener(this);
         super.onPause();
     }
 
@@ -103,9 +103,9 @@ private SharedPreferences prefs = null;
                 if (ApplicationController.getInstance().isNetworkAvailable()) {
                     List<String> downloadUrls = new ArrayList<String>();
                     downloadUrls.add(AppConstants.DOWNLOAD_LINK);
-                    DownloadUtils downloadUtils= new DownloadUtils(getActivity());
+                    DownloadUtils downloadUtils = new DownloadUtils(getActivity());
                     downloadUtils.Download(downloadUrls);
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "Please connect to internet", Toast.LENGTH_LONG).show();
                 }
 
@@ -120,19 +120,19 @@ private SharedPreferences prefs = null;
             public boolean onPreferenceClick(Preference preference) {
                 preference.setEnabled(false);
                 ExportUtils exportUtils = new ExportUtils();
-                if(exportUtils.checkExternalMedia() == false){
+                if (exportUtils.checkExternalMedia() == false) {
                     Toast.makeText(getActivity(), getActivity().getString(R.string.can_not_read_usb_flash_disk), Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     boolean success = false;
-                    try{
+                    try {
                         UpdateUtils updateUtils = new UpdateUtils(getActivity());
                         success = updateUtils.installUpdateZip(UpdateUtils.SOURCE_USB);
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         success = false;
                     }
-                    if(success){
+                    if (success) {
                         Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -140,7 +140,6 @@ private SharedPreferences prefs = null;
                 return false;
             }
         });
-
 
 
         //Install update from SDCARD
@@ -150,19 +149,19 @@ private SharedPreferences prefs = null;
             public boolean onPreferenceClick(Preference preference) {
                 preference.setEnabled(false);
                 ExportUtils exportUtils = new ExportUtils();
-                if(exportUtils.checkExternalSDCard() == false){
+                if (exportUtils.checkExternalSDCard() == false) {
                     Toast.makeText(getActivity(), getActivity().getString(R.string.can_not_read_from_sd_card), Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     boolean success = false;
-                    try{
+                    try {
                         UpdateUtils updateUtils = new UpdateUtils(getActivity());
                         success = updateUtils.installUpdateZip(UpdateUtils.SOURCE_SDCARD);
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         success = false;
                     }
-                    if(success){
+                    if (success) {
                         Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
-                    }else{
+                    } else {
                         Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -172,15 +171,12 @@ private SharedPreferences prefs = null;
         });
 
 
-
 //Factory Reset
         ((Preference) findPreference(getString(R.string.preferences_device_reset))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                try
-                {
-
+                try {
 
 
                     final Dialog dialog = new Dialog(getActivity());
@@ -189,7 +185,7 @@ private SharedPreferences prefs = null;
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText(getString(R.string.warning).toUpperCase()+":" + " "+ getString(R.string.do_you_really_want_to) +" "+ getString(R.string.delete_all_data_));
+                    text.setText(getString(R.string.warning).toUpperCase() + ":" + " " + getString(R.string.do_you_really_want_to) + " " + getString(R.string.delete_all_data_));
                     ImageView image = (ImageView) dialog.findViewById(R.id.dialog_image);
                     image.setVisibility(View.GONE);
                     Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
@@ -219,15 +215,11 @@ private SharedPreferences prefs = null;
 
                             //User will be logged out to avoid bugs
                             Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
-                            Intent intent = new Intent( getContext() ,LoginActivity.class);
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
                             startActivity(intent);
 
                             getActivity().finish();
                             android.os.Process.killProcess(android.os.Process.myPid());
-
-
-
-
 
 
                         }
@@ -235,9 +227,7 @@ private SharedPreferences prefs = null;
 
                     dialog.show();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -246,13 +236,12 @@ private SharedPreferences prefs = null;
             }
         });
 
-        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_factory_reset), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_factory_reset))==true) {
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_factory_reset), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_factory_reset)) == true) {
 
             getPreferenceScreen().findPreference(getString(R.string.preferences_device_reset)).setEnabled(false);
-        }else{
+        } else {
             getPreferenceScreen().findPreference(getString(R.string.preferences_device_reset)).setEnabled(true);
         }
-
 
 
 //Date and Time
@@ -298,17 +287,13 @@ private SharedPreferences prefs = null;
     }
 
 
-
-
-
-
     @Override
     public void onResume() {
 
-        if(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_balance_setup), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_balance_setup))==true) {
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_balance_setup), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_balance_setup)) == true) {
             Toast.makeText(getContext(), R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
             getPreferenceScreen().setEnabled(false);
-        }else{
+        } else {
             getPreferenceScreen().setEnabled(true);
         }
 
@@ -336,7 +321,7 @@ private SharedPreferences prefs = null;
         int mHour = c.get(Calendar.HOUR_OF_DAY);
         int mMinute = c.get(Calendar.MINUTE);
 
-        ((Preference) findPreference(getString(R.string.preferences_device_date))).setSummary(  new StringBuilder()
+        ((Preference) findPreference(getString(R.string.preferences_device_date))).setSummary(new StringBuilder()
                 .append(mMonth + 1)                // Month is 0 based so add 1
                 .append("/")
                 .append(mDay)
@@ -350,7 +335,7 @@ private SharedPreferences prefs = null;
 
         //Storage
         ((Preference) findPreference(getString(R.string.preferences_device_storage)))
-                .setSummary(getString(R.string.free_memory)+": "
+                .setSummary(getString(R.string.free_memory) + ": "
                         + Long.toString(FreeMemory())
                         + " MB");
         //Software Version
@@ -389,18 +374,8 @@ private SharedPreferences prefs = null;
         }
 
 
-
-
-
-
         //register Listeners
         prefs.registerOnSharedPreferenceChangeListener(this);
-
-
-
-
-
-
 
 
         super.onResume();
@@ -409,10 +384,9 @@ private SharedPreferences prefs = null;
     }
 
     @SuppressWarnings("deprecation")
-    public long FreeMemory()
-    {
+    public long FreeMemory() {
         StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
-        long   Free   = (statFs.getAvailableBlocks() * statFs.getBlockSize()) / 1048576; //Long() is not supported on android 2.3.4
+        long Free = (statFs.getAvailableBlocks() * statFs.getBlockSize()) / 1048576; //Long() is not supported on android 2.3.4
         return Free;
     }
 
@@ -424,19 +398,12 @@ private SharedPreferences prefs = null;
     }
 
 
-
-
-
-
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if(preference.hasKey()){
-            if(preference.getKey().equals(getString(R.string.preferences_device_wlan_manage))){
+        if (preference.hasKey()) {
+            if (preference.getKey().equals(getString(R.string.preferences_device_wlan_manage))) {
                 startWifiPicker();
             }
-
-
 
 
         }
@@ -452,48 +419,43 @@ private SharedPreferences prefs = null;
     }
 
 
-
-
-
-
-
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(getString(R.string.preferences_device_wlan))){
-            WifiManager wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
+        if (key.equals(getString(R.string.preferences_device_wlan))) {
+            WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
-            if(wifiManager !=null){
+            if (wifiManager != null) {
                 SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 wifiManager.setWifiEnabled(sharedPrefs.getBoolean(getString(R.string.preferences_device_wlan), false));
             }
         }
 
 
-
-        if(key.equals(getString(R.string.preferences_device_volume))){
-            AudioManager  audioManager= (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-            if(audioManager !=null){
+        if (key.equals(getString(R.string.preferences_device_volume))) {
+            AudioManager audioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            if (audioManager != null) {
                 SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
             }
 
         }
 
-        if(key.equals(getString(R.string.preferences_device_theme))){
+        if (key.equals(getString(R.string.preferences_device_theme))) {
             String theme = prefs.getString(getString(R.string.preferences_device_theme), "1");
-            if (theme.equals("1")){
+            if (theme.equals("1")) {
                 //Toast.makeText(getActivity(), "1", Toast.LENGTH_LONG).show();
 
             }
-            if (theme.equals("2")){
+            if (theme.equals("2")) {
                 //Toast.makeText(getActivity(), "2", Toast.LENGTH_LONG).show();
 
             }
 
             //Toast.makeText(getActivity(),"3",Toast.LENGTH_LONG).show();
         }
-    };
+    }
+
+    ;
 
     private static String toTitleCase(String s) {
         if (s.length() == 0) {

@@ -43,7 +43,6 @@ public class StateMachine implements WeightListener {
 
     public static synchronized StateMachine getInstance(){
         return instance;
-
     }
 
 
