@@ -27,6 +27,8 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncRecipesService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.CertocloudConstants;
+import com.certoclav.library.certocloud.DeleteTask;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -191,6 +193,11 @@ public class MenuRecipeActivity extends Activity implements ButtonEventListener,
                         db.deleteRecipe(recipe);
                         adapter.remove(recipe);
                         adapter.notifyDataSetChanged();
+                        if(recipe.getCloudId().isEmpty() == false){
+                            DeleteTask deleteTask = new DeleteTask();
+                            deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_RECIPE + recipe.getCloudId());
+                        }
+
                         dialog.dismiss();
                     }
                 });
