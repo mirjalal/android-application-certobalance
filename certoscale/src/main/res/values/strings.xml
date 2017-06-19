@@ -531,7 +531,7 @@
     <string name="please_enter_normal_pipette">Please enter the nominal pipette capacity in ml</string>
     <string name="please_enter_the_pressure">Please enter the pressure</string>
     <string name="imprecision">Imprecision</string>
-    <string name="inaccuracy">Inacurracy</string>
+    <string name="inaccuracy">Inaccuracy</string>
     <string name="water_temp">Water Temperature</string>
     <string name="pressure">Pressure</string>
     <string name="pipette_name">Pipette Name</string>

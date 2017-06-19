@@ -16,6 +16,8 @@
 
 package android_serialport_api;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -24,15 +26,33 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.util.Log;
-
 public class SerialPort {
+
+	public static final int DATABITS_7 = 7;
+	public static final int DATABITS_8 = 8;
+
+	public static final int PARITY_NONE = 0;
+	public static final int PARITY_ODD = 1;
+	public static final int PARITIY_EVEN = 2;
+
+	public static final int STOPBITS_1 = 1;
+	public static final int STOPBITS_2 = 2;
+
+	public static final int FLOW_CONTROL_NONE = 0;
+	public static final int FLOW_CONTROL_XON_XOFF = 1;
+	public static final int FLOW_CONTROL_CRTSCTS = 2;
+
+	public static final String COM4 = "/dev/ttymxc3";
+	public static final String COM3 = "/dev/ttymxc2";
+	public static final String COM2 = "/dev/ttymxc1";
+	public static final String COM1 = "/dev/ttymxc0";
 
 	private static final String TAG = "SerialPort";
 
-	/*
-	 * Do not remove or rename the field mFd: it is used by native method close();
-	 */
+
+    /*
+     * Do not remove or rename the field mFd: it is used by native method close();
+     */
 	private FileDescriptor mFd;
 	private FileInputStream mFileInputStream;
 	private FileOutputStream mFileOutputStream;

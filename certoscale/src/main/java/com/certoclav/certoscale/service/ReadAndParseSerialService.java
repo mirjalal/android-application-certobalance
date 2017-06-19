@@ -155,6 +155,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 
+
 	private ReadAndParseSerialService() {
 		Log.e("ReadAndParseSerialServ", "constructor");
 
@@ -165,6 +166,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 			if(AppConstants.IS_IO_SIMULATED == false) {
+
 				Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 				Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 			}

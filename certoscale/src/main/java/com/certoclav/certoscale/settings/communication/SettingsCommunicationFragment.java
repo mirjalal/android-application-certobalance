@@ -13,6 +13,7 @@ import com.certoclav.certoscale.model.ScaleModel;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.certoscale.model.ScaleModelDandT;
 import com.certoclav.certoscale.model.ScaleModelGandG;
+import com.certoclav.certoscale.model.ScaleModelSartoriusCP64;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.library.application.ApplicationController;
 
@@ -154,8 +155,11 @@ private SharedPreferences prefs = null;
                         //Scale.getInstance().getSerialsServiceScale().resetConnection();
                         //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 
+                        break;
 
-
+                    case "4":
+                        ScaleModelSartoriusCP64 modelSartoriusCP64=new ScaleModelSartoriusCP64();
+                        Scale.getInstance().setScaleModel((ScaleModel)modelSartoriusCP64);
 
                         break;
                 }

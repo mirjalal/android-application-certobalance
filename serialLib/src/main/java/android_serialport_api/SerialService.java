@@ -16,13 +16,13 @@
 
 package android_serialport_api;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import android.util.Log;
 
 
 public class SerialService  {
@@ -90,28 +90,6 @@ public class SerialService  {
     
     
     
-    public SerialService(String deviceName, int baudrate) {
-		mApplication = new SerialApplication();
-		try {
-
-			mDeviceName = deviceName;
-			mBaudrate = baudrate;
-
-			mDatabits=8;
-			mParity=0;
-			mStopbits=1;
-			mFlowControl=0;
-
-			mSerialPort = mApplication.getSerialPort(deviceName,baudrate,mDatabits,mStopbits,mParity,mFlowControl);
-			mOutputStream = mSerialPort.getOutputStream();
-			mInputStream = mSerialPort.getInputStream();
-
-		} catch (Exception e){
-			Log.e("SerialService", e.toString());
-		}
-	}
-
-
 
 	public SerialService(String deviceName, int baudrate,int databits,int stopbits,int parity, int flowcontrol) {
 		mApplication = new SerialApplication();
@@ -159,8 +137,9 @@ public class SerialService  {
 	}
    }
   
-   private void resetConnection() {
+   public void resetConnection() {
 	   try {
+
 	   
 		   if(mSerialPort != null){
 			   mSerialPort.close();
@@ -177,7 +156,7 @@ public class SerialService  {
 	} catch (Exception e) {
 		Log.e("SerialService", e.toString());
 	}
-		// TODO Auto-generated catch block
+
 		
 	
 }

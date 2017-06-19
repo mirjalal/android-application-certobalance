@@ -12,7 +12,8 @@ import org.json.JSONObject;
 public class Protocol {
 
 
-	private static final String JSON_CONTENT = "content";
+	private static final String JSON_CONTENT_STRING = "content";
+	private final static String JSON_CONTENT_JSON = "content_json";
 	private final static String JSON_DEVICE_KEY = "devicekey";
 	private final static String JSON_DATE = "date";
 	private final static String JSON_VISIBILITY = "visibility";
@@ -23,6 +24,7 @@ public class Protocol {
 
 
 
+
 	private String name = "";
 	private String userEmail = "";
 	private String deviceKey = "";
@@ -30,6 +32,7 @@ public class Protocol {
 	private String content = "";
 	private String date = "";
 	private String cloudId = "";
+	private String contentJson = "";
 
 	@DatabaseField(columnName = JSON_SIGNATURE,dataType = DataType.STRING_BYTES)
 	private String signature;
@@ -126,7 +129,7 @@ public class Protocol {
 		}
 
 		try {
-			content = jsonObject.getString(JSON_CONTENT);
+			content = jsonObject.getString(JSON_CONTENT_STRING);
 		}catch (Exception e){
 			content = "";
 		}
@@ -136,6 +139,8 @@ public class Protocol {
 		}catch (Exception e){
 
 		}
+
+
 		protocolJson = jsonObject.toString();
 
 	}
@@ -235,7 +240,7 @@ public class Protocol {
 					.put(JSON_DATE,date)
 					.put(JSON_USER_EMAIL, userEmail)
 					.put(JSON_VISIBILITY,visibility)
-					.put(JSON_CONTENT,content)
+					.put(JSON_CONTENT_STRING,content)
 					.put(JSON_SIGNATURE,signature);
 		}catch (Exception e){
 			e.printStackTrace();

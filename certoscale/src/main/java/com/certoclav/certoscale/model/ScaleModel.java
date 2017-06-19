@@ -52,7 +52,9 @@ public abstract class ScaleModel {
 	public int getComParity() {return comParity;}
 	public void setComParity(int comParity) {this.comParity = comParity;}
 
-
+	int comFlowControl;
+	public int getComFlowControl() {return comFlowControl;}
+	public void setComFlowControl(int flowControl) {this.comFlowControl = flowControl;}
 
 	String endLineCommand;
 
