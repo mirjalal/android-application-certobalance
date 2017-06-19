@@ -16,7 +16,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -310,7 +309,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             public void onClick(View v) {
 
 
-                if (currentUser.getPublicKey().equals("")) {
+          /*      if (currentUser.getPublicKey().equals("")) {
                     KeyPair keyPair = generateKeyPair();
                     //Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
                     try {
@@ -327,7 +326,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                     databaseService.deleteUser(currentUser);
                     databaseService.insertUser(currentUser);
 
-                }
+                }*/
 
 
                 if (getDefaultSharedPreferences(
@@ -408,9 +407,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wInfo = wifiManager.getConnectionInfo();
         String macAddress = wInfo.getMacAddress();
-        if (!getCertificateSHA1Fingerprint().equals(AppConstants.SIGNATURE) && !AppConstants.IS_IO_SIMULATED && !macAddress.equals("a0:2c:36:85:48:45")) {
+      /*  if (!getCertificateSHA1Fingerprint().equals(AppConstants.SIGNATURE) && !AppConstants.IS_IO_SIMULATED *//*&& !macAddress.equals("a0:2c:36:85:48:45")*//*) {
             finish();
-        }
+        }*/
 
     }
 

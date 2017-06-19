@@ -6,10 +6,10 @@ package com.certoclav.certoscale.constants;
  */
 public class AppConstants {
 
-	public static final Boolean IS_IO_SIMULATED = false;
+	public static final Boolean IS_IO_SIMULATED = true;
 	public static final Boolean INTERNAL_TARA_ZERO_BUTTON = true;
 
-	public static final String DOWNLOAD_LINK = "http://lvps46-163-113-210.dedicated.hosteurope.de:80/files/public-docs/certoscale/kern/lilliput/update.zip";
+	public static final String DOWNLOAD_LINK = "http://lvps46-163-113-210.dedicated.hosteurope.de:80/files/public-docs/certoscale/gg/lilliput/update.zip";
 	
 	public static final String INTENT_EXTRA_USER_ID = "user_id";
 	public static final String INTENT_EXTRA_CHECKBOX_VISIBLE = "checkbox_visible";
