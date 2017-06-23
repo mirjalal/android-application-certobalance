@@ -48,6 +48,7 @@ public class SyncRecipesThread extends Thread {
 				try {
 				
 					if(CloudUser.getInstance().isLoggedIn() ==false){
+						Log.e("SyncRecipesThread", "Clouduser is not logged in");
 						return;//continue; //sleep for another 60 seconds
 					}
 
