@@ -130,6 +130,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 							} else {
 								if(Scale.getInstance().getScaleModel().isCommandResponse() == true) {
 									if(Scale.getInstance().getScaleModel().isPeriodicMessagingEnabled()) {
+										Log.e("ReadAndpParceSerialS", "sendPrint");
 										Scale.getInstance().getScaleModel().sendPrintCommand(); //send print command every 300ms
 									}
 								}
@@ -166,7 +167,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 
 
 			if(AppConstants.IS_IO_SIMULATED == false) {
-
+				Log.e("ReadAndParseService", "setOnMessageReceivedListener");
 				Scale.getInstance().getSerialsServiceScale().setOnMessageReceivedListener(this);
 				Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
 			}

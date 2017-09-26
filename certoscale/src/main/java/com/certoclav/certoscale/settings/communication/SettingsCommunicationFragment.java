@@ -9,11 +9,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.model.ScaleModel;
-import com.certoclav.certoscale.model.ScaleModelAEAdam;
-import com.certoclav.certoscale.model.ScaleModelDandT;
-import com.certoclav.certoscale.model.ScaleModelGandG;
-import com.certoclav.certoscale.model.ScaleModelSartoriusCP64;
+import com.certoclav.certoscale.model.ScaleModelManager;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.library.application.ApplicationController;
 
@@ -105,7 +101,7 @@ private SharedPreferences prefs = null;
         ((Preference) findPreference(getString(R.string.preferences_communication_labelprinter))).setSummary(getString(R.string.assigned_to_com) +" 3, "+Scale.getInstance().getSerialsServiceLabelPrinter().getBaudrate()+" baud, "+ Scale.getInstance().getSerialsServiceLabelPrinter().getmDatabits()+ " data bits, parity: "+getParityString(Scale.getInstance().getSerialsServiceLabelPrinter().getmParity())+" , "+Scale.getInstance().getSerialsServiceLabelPrinter().getmStopbits()+" stop bit, flow control: "+ getFlowControlString(Scale.getInstance().getSerialsServiceLabelPrinter().getmFlowControl()));
 
         ((Preference) findPreference(getString(R.string.preferences_communication_scanner))).setSummary(getString(R.string.assigned_to) +" USB host");
-
+        ((Preference) findPreference(getString(R.string.preferences_communication_balance))).setSummary(getString(R.string.assigned_to_com) +" 4, "+Scale.getInstance().getSerialsServiceScale().getBaudrate()+" baud, "+ Scale.getInstance().getSerialsServiceScale().getmDatabits()+ " data bits, parity: "+getParityString(Scale.getInstance().getSerialsServiceScale().getmParity())+" , "+Scale.getInstance().getSerialsServiceScale().getmStopbits()+" stop bit, flow control: "+ getFlowControlString(Scale.getInstance().getSerialsServiceScale().getmFlowControl()));
 
         //Toast.makeText(getContext(), String.valueOf(Scale.getInstance().getSerialsServiceSics().getBaudrate()), Toast.LENGTH_SHORT).show();
 
@@ -121,51 +117,8 @@ private SharedPreferences prefs = null;
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         switch (key){
             case "preferences_communication_list_devices":
-
-                Preference devicePref = findPreference(key);
-                devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(sharedPreferences.getString(key, "1"))-1]);
-
-
-                String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
-                switch (modelValue) {
-                    case "1":
-                        ScaleModelGandG modelGandG=new ScaleModelGandG();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelGandG);
-                        Scale.getInstance().getScaleModel().initializeParameters(600,1,1,9600,8,0,1,false);
-                      //  Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                        break;
-
-                    case "2":
-                        ScaleModelDandT modelDandT=new ScaleModelDandT();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelDandT);
-                        Scale.getInstance().getScaleModel().initializeParameters(120,4,2,9600,8,0,1,true);
-                        Scale.getInstance().getScaleModel().pressZero();
-                        Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                        //Scale.getInstance().getSerialsServiceScale().resetConnection();
-                        //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-                        break;
-
-                    case "3":
-                        ScaleModelAEAdam modelAEAdam=new ScaleModelAEAdam();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelAEAdam);
-                        Scale.getInstance().getScaleModel().initializeParameters(600,2,2,4800,8,0,1,false);
-                        Scale.getInstance().getScaleModel().pressZero();
-                        Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-
-                        //Scale.getInstance().getSerialsServiceScale().resetConnection();
-                        //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
-                        break;
-
-                    case "4":
-                        ScaleModelSartoriusCP64 modelSartoriusCP64=new ScaleModelSartoriusCP64();
-                        Scale.getInstance().setScaleModel((ScaleModel)modelSartoriusCP64);
-
-                        break;
-                }
-
-
-
+                ScaleModelManager scaleModelManager = new ScaleModelManager();
+                scaleModelManager.changeScaleModelAndRefreshComport();
         }
     }
 

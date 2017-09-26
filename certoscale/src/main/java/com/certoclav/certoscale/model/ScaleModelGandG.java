@@ -11,6 +11,8 @@ import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 
+import android_serialport_api.SerialPort;
+
 /**
  * Created by Enrico on 22.03.2017.
  */
@@ -30,40 +32,21 @@ public class ScaleModelGandG extends ScaleModel {
 
 
 
-    public void ScaleModelGandG(){
-        maximumCapazity=5000;
-        decimalPlaces=1;
-        stabilisationTime=1;
-        setPeriodicMessagingEnabled(true);
+    public ScaleModelGandG(){
+        super(2,//stabilisationTime,
+                5000,// maximumCapazity,
+                1,// decimalPlaces,
+                false,// stable,
+                9600,// comBaudrate,
+                SerialPort.DATABITS_8,// comDataBits,
+                SerialPort.STOPBITS_1,// comStopBits,
+                SerialPort.PARITY_NONE,// comParity,
+                true,// isPeriodicMessagingEnabled,
+                SerialPort.FLOW_CONTROL_NONE,// comFlowControl,
+                true);// hasZerobutton);
     }
 
-    /*
-    @Override
-    public int initializeParameters() {
-        maximumCapazity=5000;
-        decimalPlaces=1;
 
-        hasZerobutton=false;
-        return 1;
-    }
-    */
-
-    @Override
-    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
-        this.maximumCapazity=maximumCapazity;
-        this.decimalPlaces=decimalPlaces;
-        this.stabilisationTime=stabilisationTime;
-
-        setPeriodicMessagingEnabled(true);
-        this.comBaudrate=comBaudrate;
-        this.comDataBits=comDataBits;
-        this.comParity=comParity;
-        this.comStopBits=comStopBits;
-        this.hasZerobutton=hasZerobutton;
-
-
-        return 0;
-    }
 
     @Override
     public int sendOnOffCommand() {

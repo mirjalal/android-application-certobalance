@@ -3,52 +3,46 @@ package com.certoclav.certoscale.model;
 import android.content.Context;
 import android.util.Log;
 
-import com.certoclav.certoscale.service.ReadAndParseSerialService;
-
 import android_serialport_api.SerialPort;
 
 
 public class ScaleModelSartoriusCP64 extends ScaleModel {
 
-    public void ScaleModelSartoriusCP64(){
-        maximumCapazity=64;
-        decimalPlaces=4;
-        stabilisationTime = 2;
-        comBaudrate = 1200;
-        comDataBits = SerialPort.DATABITS_7;
-        comParity = SerialPort.PARITY_ODD;
-        comStopBits = SerialPort.STOPBITS_1;
-        comFlowControl = SerialPort.FLOW_CONTROL_CRTSCTS;
-        hasZerobutton = false;
 
+    public ScaleModelSartoriusCP64(){
+        super(2,//stabilisationTime,
+               64,// maximumCapazity,
+               4,// decimalPlaces,
+               false,// stable,
+               1200,// comBaudrate,
+               SerialPort.DATABITS_7,// comDataBits,
+               SerialPort.STOPBITS_1,// comStopBits,
+               SerialPort.PARITY_ODD,// comParity,
+               false,// isPeriodicMessagingEnabled,
+               SerialPort.FLOW_CONTROL_NONE,// comFlowControl,
+               false);// hasZerobutton);
     }
 
-
-
-    @Override
-    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
-        return 0;
-    }
 
 
     @Override
     public int sendOnOffCommand() {
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("O\r\n");
+     //   ReadAndParseSerialService.getInstance().getCommandQueue().add("O\r\n");
         return 0;
     }
 
     @Override
     public int sendModeCommand() {
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
+     //   ReadAndParseSerialService.getInstance().getCommandQueue().add("M\r\n");
         return 0;
     }
 
     @Override
     public int sendPrintCommand() {
-
-        byte[] byteEsc = new byte[1];
-        byteEsc[0] = (byte)0x1B;
-        Scale.getInstance().getSerialsServiceScale().sendMessage(new String(byteEsc) + "P\r\n");
+        Log.e("ScaleModelSartorius", "SendPrint() called, but is deactiviated");
+      //  byte[] byteEsc = new byte[1];
+      //  byteEsc[0] = (byte)0x1B;
+      //  Scale.getInstance().getSerialsServiceScale().sendMessage(new String(byteEsc) + "P\r\n");
 
         return 0;
     }
@@ -60,7 +54,7 @@ public class ScaleModelSartoriusCP64 extends ScaleModel {
 
     @Override
     public boolean isCommandResponse() {
-        return true;
+        return false;
     }
 
     @Override
@@ -81,25 +75,31 @@ public class ScaleModelSartoriusCP64 extends ScaleModel {
     public double parseRecievedMessage(String message) {
         int sign=1;
         double value=0;
+        stable = false;
         if(message.length()>5) {
-            Log.e("ReadAndParse", "received: " + message);
             String[] arguments = message.split(" ");
             if (arguments.length != 0) {
                 for (String arg : arguments) {
 
-                    if (arg.equals("-")){
+                    if (arg.contains("-")){
                         sign=-1;
                     }
 
 
-                    if (arg.length() > 2 && arg.contains(".")) {
+
+                    if(arg.contains("g")){
+                        stable = true;
+                    }
+
+                    if (arg.length() > 2 && arg.contains(".") && arg.matches("[0-9.]*") ) {
                         try {
                             value = Double.parseDouble(arg);
                         } catch (Exception e) {
                             value = 0d;
-                            Log.e("ReadAndParseSerialServ", "Error parsing Double");
+                            Log.e("ReadAndParseSerialServ", "Error parsing following Double: " + arg);
                         }
                     }
+
                 }
                 value=value*sign;
             }else{

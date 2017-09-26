@@ -5,46 +5,31 @@ import android.util.Log;
 
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 
+import android_serialport_api.SerialPort;
+
 /**
  * Created by Enrico on 22.03.2017.
  */
 
 public class ScaleModelDandT extends ScaleModel {
 
-    public void ScaleModelDandT(){
-        maximumCapazity=120;
-        decimalPlaces=4;
+    public ScaleModelDandT(){
+        super(2,//stabilisationTime,
+                120,// maximumCapazity,
+                4,// decimalPlaces,
+                false,// stable,
+                9600,// comBaudrate,
+                SerialPort.DATABITS_8,// comDataBits,
+                SerialPort.STOPBITS_1,// comStopBits,
+                SerialPort.PARITY_NONE,// comParity,
+                true,// isPeriodicMessagingEnabled,
+                SerialPort.FLOW_CONTROL_NONE,// comFlowControl,
+                true);// hasZerobutton);
     }
 
-    /*
-    @Override
-    public int initializeParameters() {
-        maximumCapazity=120;
-        decimalPlaces=4;
-        stabilisationTime=2;
-
-        hasZerobutton=true;
-
-        return 1;
-    }*/
-
-    @Override
-    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
-        this.maximumCapazity=maximumCapazity;
-        this.decimalPlaces=decimalPlaces;
-        this.stabilisationTime=stabilisationTime;
-
-        this.comBaudrate=comBaudrate;
-        this.comDataBits=comDataBits;
-        this.comParity=comParity;
-        this.comStopBits=comStopBits;
-        setPeriodicMessagingEnabled(true);
-
-        this.hasZerobutton=hasZerobutton;
 
 
-        return 0;
-    }
+
 
 
     @Override

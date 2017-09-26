@@ -13,19 +13,107 @@ import com.certoclav.library.application.ApplicationController;
 public abstract class ScaleModel {
 
 	double stabilisationTime;
+	double maximumCapazity;
+	int decimalPlaces;
+	boolean stable;
+
+    public int getComBaudrate() {
+        return comBaudrate;
+    }
+
+    int comBaudrate;
+	int comDataBits;
+	int comStopBits;
+	int comParity;
+	private boolean isPeriodicMessagingEnabled = false;
+	int comFlowControl;
+
+	public double getMaximumCapazity() {
+		return maximumCapazity;
+	}
+
+	public void setComBaudrate(int comBaudrate) {
+		this.comBaudrate = comBaudrate;
+	}
+
+	public boolean isHasZerobutton() {
+		return hasZerobutton;
+	}
+
+	public void setHasZerobutton(boolean hasZerobutton) {
+		this.hasZerobutton = hasZerobutton;
+	}
+
+	boolean hasZerobutton;
+
+public ScaleModel(	double stabilisationTime,
+					  double maximumCapazity,
+					  int decimalPlaces,
+					  boolean stable,
+					  int comBaudrate,
+					  int comDataBits,
+					  int comStopBits,
+					  int comParity,
+					  boolean isPeriodicMessagingEnabled,
+					  int comFlowControl,
+					  boolean hasZerobutton){
+
+	setValues(stabilisationTime,
+	maximumCapazity,
+	decimalPlaces,
+	stable,
+	comBaudrate,
+	comDataBits,
+	comStopBits,
+	comParity,
+	isPeriodicMessagingEnabled,
+	comFlowControl,
+	hasZerobutton
+			);
+}
+
+private void setValues(double stabilisationTime,
+					   double maximumCapazity,
+					   int decimalPlaces,
+					   boolean stable,
+					   int comBaudrate,
+					   int comDataBits,
+					   int comStopBits,
+					   int comParity,
+					   boolean isPeriodicMessagingEnabled,
+					   int comFlowControl,
+					   boolean hasZerobutton){
+	setStabilisationTime(stabilisationTime);
+	setMaximumCapazity(maximumCapazity);
+	setDecimalPlaces(decimalPlaces);
+	setStable(stable);
+	setComBaudrate(comBaudrate);
+	setComDataBits(comDataBits);
+	setComStopBits(comStopBits);
+	setComParity(comParity);
+	setPeriodicMessagingEnabled(isPeriodicMessagingEnabled);
+	setComFlowControl(comFlowControl);
+	setHasZerobutton(hasZerobutton);
+}
+
+
+
+
+
+
 	public double getStabilisationTime() {return stabilisationTime;}
 	public void setStabilisationTime(double stabilisationTime) {this.stabilisationTime = stabilisationTime;}
 
-	double maximumCapazity;
+
 	public double getMaximumCapazityInGram() {return maximumCapazity;}
 	public void setMaximumCapazity(double maximumCapazity) {this.maximumCapazity = maximumCapazity;}
 
-	int decimalPlaces;
+
 	public int getDecimalPlaces() {return decimalPlaces;}
 	public void setDecimalPlaces(int decimalPlaces) {this.decimalPlaces = decimalPlaces;}
 
 
-	boolean sendsPeriodical;
+
 
 	public boolean isStable() {
 		return stable;
@@ -35,32 +123,24 @@ public abstract class ScaleModel {
 		this.stable = stable;
 	}
 
-	boolean stable;
-	int comBaudrate;
-	public int getComBaudrate() {return comBaudrate;}
-	public void setComBaudrate(int comBaudrate) {this.comBaudrate = comBaudrate;}
 
-	int comDataBits;
 	public int getComDataBits() {return comDataBits;}
 	public void setComDataBits(int comDataBits) {this.comDataBits = comDataBits;}
 
-	int comStopBits;
+
 	public int getComStopBits() {return comStopBits;}
 	public void setComStopBits(int comStopBits) {this.comStopBits = comStopBits;}
 
-	int comParity;
+
 	public int getComParity() {return comParity;}
 	public void setComParity(int comParity) {this.comParity = comParity;}
 
-	int comFlowControl;
+
 	public int getComFlowControl() {return comFlowControl;}
 	public void setComFlowControl(int flowControl) {this.comFlowControl = flowControl;}
 
-	String endLineCommand;
 
 
-
-	boolean hasZerobutton;
 	public boolean isPeriodicMessagingEnabled() {
 		return isPeriodicMessagingEnabled;
 	}
@@ -69,10 +149,7 @@ public abstract class ScaleModel {
 		isPeriodicMessagingEnabled = periodicMessagingEnabled;
 	}
 
-	private boolean isPeriodicMessagingEnabled = false;
 
-
-	abstract public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime,  int comBaudrate, int comDataBits,int comParity,int comStopBits,boolean hasZerobutton);
 
 	abstract public int sendOnOffCommand();
 	abstract public int sendModeCommand();

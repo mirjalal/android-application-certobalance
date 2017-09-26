@@ -343,6 +343,7 @@
         <item>G&amp;G PLC-6000</item>
         <item>KERN AET Series</item>
         <item>AE ADAM HCB 602</item>
+        <item>Sartorius CP64</item>
     </string-array>
 
     <string-array name="preferences_communication_string_array_transmission_standard">
@@ -409,6 +410,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+            <item>4</item>
     </string-array>
 
     <string-array name="preferences_communication_list_transmission_standard_values">

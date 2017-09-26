@@ -49,10 +49,6 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
-import com.certoclav.certoscale.model.ScaleModel;
-import com.certoclav.certoscale.model.ScaleModelAEAdam;
-import com.certoclav.certoscale.model.ScaleModelDandT;
-import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
@@ -309,7 +305,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             public void onClick(View v) {
 
 
-          /*      if (currentUser.getPublicKey().equals("")) {
+                if (currentUser.getPublicKey().equals("")) {
                     KeyPair keyPair = generateKeyPair();
                     //Toast.makeText(ApplicationController.getContext(),keyPair.getPublic().toString(), Toast.LENGTH_LONG).show();
                     try {
@@ -326,7 +322,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                     databaseService.deleteUser(currentUser);
                     databaseService.insertUser(currentUser);
 
-                }*/
+                }
 
 
                 if (getDefaultSharedPreferences(
@@ -479,51 +475,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         Scale.getInstance();
         editTextPassword.setText("");
 
-
-        String key = "preferences_communication_list_devices";
-        String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
-        switch (modelValue) {
-            case "1":
-                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_gandg);
-                ScaleModelGandG modelGandG = new ScaleModelGandG();
-                Scale.getInstance().setScaleModel((ScaleModel) modelGandG);
-                Scale.getInstance().getScaleModel().initializeParameters(6000, 1, 1, 9600, 8, 0, 1, false);
-                Scale.getInstance().getScaleModel().pressZero();
-                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                //Scale.getInstance().getSerialsServiceScale().resetConnection();
-                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
-                break;
-
-            case "2":
-                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_kern);
-                ScaleModelDandT modelDandT = new ScaleModelDandT();
-                Scale.getInstance().setScaleModel((ScaleModel) modelDandT);
-                Scale.getInstance().getScaleModel().initializeParameters(120, 4, 2, 9600, 8, 0, 1, true);
-                Scale.getInstance().getScaleModel().pressZero();
-                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-                //Scale.getInstance().getSerialsServiceScale().resetConnection();
-                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-                break;
-
-            case "3":
-                navigationbar.getButtonCompanyLogo().setImageResource(R.drawable.logo_ae_adam_small);
-                ScaleModelAEAdam modelAEAdam = new ScaleModelAEAdam();
-                Scale.getInstance().setScaleModel((ScaleModel) modelAEAdam);
-                Scale.getInstance().getScaleModel().initializeParameters(600, 2, 2, 4800, 8, 0, 1, false);
-                Scale.getInstance().getScaleModel().pressZero();
-                Scale.getInstance().getSerialsServiceScale().setBaudrate(Scale.getInstance().getScaleModel().getComBaudrate());
-
-                //Scale.getInstance().getSerialsServiceScale().resetConnection();
-                //Scale.getInstance().getSerialsServiceScale().startReadSerialThread();
-
-
-                break;
-
-
-        }
-
-        //Toast.makeText(this, modelValue, Toast.LENGTH_LONG).show();
 
         fillDatabaseIfEmpty();
 

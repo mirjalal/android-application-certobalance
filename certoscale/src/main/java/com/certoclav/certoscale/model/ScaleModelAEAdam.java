@@ -3,52 +3,30 @@ package com.certoclav.certoscale.model;
 import android.content.Context;
 import android.util.Log;
 
+import android_serialport_api.SerialPort;
+
 /**
  * Created by Enrico on 22.03.2017.
  */
 
 public class ScaleModelAEAdam extends ScaleModel{
 
-    public void ScaleModelAEAdam(){
-        maximumCapazity=600;
-        decimalPlaces=2;
-        stabilisationTime=2;
+
+    public ScaleModelAEAdam(){
+        super(2,//stabilisationTime,
+                600,// maximumCapazity,
+                2,// decimalPlaces,
+                false,// stable,
+                9600,// comBaudrate,
+                SerialPort.DATABITS_8,// comDataBits,
+                SerialPort.STOPBITS_1,// comStopBits,
+                SerialPort.PARITY_NONE,// comParity,
+                false,// isPeriodicMessagingEnabled,
+                SerialPort.FLOW_CONTROL_NONE,// comFlowControl,
+                true);// hasZerobutton);
     }
 
 
-
-    /*
-    public int initializeParameters() {
-        maximumCapazity=600;
-        decimalPlaces=2;
-        comBaudrate=4800;
-        stable = false;
-        comDataBits=8;
-        comStopBits=1;
-        Scale.getInstance().getSerialsServiceScale().setStringTerminatin("\r\n\r\n\r\n");
-
-        hasZerobutton=true;
-
-        return 0;
-    }*/
-
-
-    @Override
-    public int initializeParameters(int maximumCapazity, int decimalPlaces, int stabilisationTime, int comBaudrate, int comDataBits, int comParity, int comStopBits,boolean hasZerobutton) {
-        this.maximumCapazity=maximumCapazity;
-        this.decimalPlaces=decimalPlaces;
-        this.stabilisationTime=stabilisationTime;
-
-        this.comBaudrate=comBaudrate;
-        this.comDataBits=comDataBits;
-        this.comParity=comParity;
-        this.comStopBits=comStopBits;
-
-        this.hasZerobutton=hasZerobutton;
-
-
-        return 0;
-    }
 
     @Override
     public int sendOnOffCommand() {

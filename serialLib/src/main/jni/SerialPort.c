@@ -23,6 +23,7 @@
 #include <jni.h>
 
 #include "SerialPort.h"
+#include "../../../../../../../../android-sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/termios.h"
 
 #include <android/log.h>
 static const char *TAG="serial_port";
@@ -110,7 +111,8 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 	/* Configure device */
 	{
 		struct termios cfg;
-		LOGD("Configuring serial port");
+
+		LOGD("Configuring serial port now");
 		if (tcgetattr(fd, &cfg))
 		{
 			LOGE("tcgetattr() failed");
@@ -120,9 +122,16 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 		}
 
 
-
+        cfmakeraw(&cfg);
         cfsetispeed(&cfg, speed);
         cfsetospeed(&cfg, speed);
+
+
+        cfg.c_cflag |= PARENB;
+        cfg.c_cflag |= PARODD;
+
+
+
 
         switch (databits){
             case 7:
@@ -132,7 +141,7 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
                 break;
 
         }
-
+/*
         switch (parity){
             case 0:
                 // no parity
@@ -165,12 +174,12 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
                 cfg.c_iflag |= (IXON | IXOFF | IXANY);  //XON - XOFF flow control
                 break;
             case 2:
-                cfg.c_cflag |= CRTSCTS;    /* Also called CRTSCTS */
+                cfg.c_cflag |= CRTSCTS;    // Also called CRTSCTS
                 break;
         }
 
 
-
+    */
 
 		cfmakeraw(&cfg);
 

@@ -350,6 +350,7 @@
         <item>G&amp;G PLC-6000</item>
         <item>KERN AET Serie</item>
         <item>AE ADAM HCB 602</item>
+        <item>Sartorius CP64</item>
     </string-array>
 
     <string-array name="preferences_device_themes_string_array">
@@ -389,6 +390,8 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
+
     </string-array>
 
     <string-array name="preferences_device_themes_values">

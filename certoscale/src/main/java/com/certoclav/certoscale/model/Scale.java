@@ -40,28 +40,20 @@ public class Scale extends Observable {
 
 
 
-	//private ScaleModel scaleModel=null;
-	//ScaleModelDandT modelDandT =new ScaleModelDandT();
-	//scaleModel=(ScaleModel) modelDandT;
-	private  ScaleModel scaleModel =(ScaleModel) new ScaleModelAEAdam();
+	private  ScaleModel scaleModel = null;
 
 
 
 	public ScaleModel getScaleModel() {
+		if(scaleModel == null){
+			ScaleModelManager scaleModelManager = new ScaleModelManager();
+			scaleModel = scaleModelManager.getScaleModelAccordingToPreferences();
+		}
 		return scaleModel;
 	}
 
 	public void setScaleModel(ScaleModel scaleModel) {
 		this.scaleModel = scaleModel;
-
-		//reset balance serial service
-		getSerialsServiceScale().setBaudrate(scaleModel.getComBaudrate());
-		getSerialsServiceScale().setmParity(scaleModel.getComParity());
-		getSerialsServiceScale().setmDatabits(scaleModel.getComDataBits());
-		getSerialsServiceScale().setmFlowControl(scaleModel.getComFlowControl());
-		getSerialsServiceScale().setmStopbits(scaleModel.getComStopBits());
-		//getSerialsServiceScale().resetConnection();
-
 	}
 
 
@@ -224,6 +216,9 @@ public class Scale extends Observable {
 
 	public SerialService getSerialsServiceScale() {
 		if(serialServiceScale == null){
+			ScaleModel scaleModel = getScaleModel();
+			Log.e("Scale", "serialServiceScale == null, generate new with " +getScaleModel().getComBaudrate());
+
 			serialServiceScale = new SerialService(SerialPort.COM4,
 													getScaleModel().getComBaudrate(),
 													getScaleModel().getComDataBits(),
