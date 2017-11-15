@@ -118,7 +118,7 @@ public class ScaleModelDandT extends ScaleModel {
 
     @Override
     public int externelCalibration(Context context) {
-
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("C\r\n");
         return 0;
     }
 }

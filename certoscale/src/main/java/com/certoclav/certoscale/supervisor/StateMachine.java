@@ -14,6 +14,7 @@ import com.certoclav.certoscale.service.ReadAndParseSerialSicsService;
 import com.certoclav.library.application.ApplicationController;
 
 import static com.certoclav.certoscale.model.ScaleState.CABLE_NOT_CONNECTED;
+import static com.certoclav.certoscale.model.ScaleState.ON_AND_CALIBRATING;
 import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_GRAM;
 import static com.certoclav.certoscale.model.ScaleState.ON_AND_MODE_NOT_GRAM;
 
@@ -98,10 +99,13 @@ public class StateMachine implements WeightListener {
                 Scale.getInstance().setScaleState(ON_AND_MODE_GRAM);
             }else {
 
+
                 if ((System.nanoTime() - nanoTimeAtLastMessageReceived) > (1000000000L * 30)) {
                     Scale.getInstance().setScaleState(CABLE_NOT_CONNECTED);
                 } else {
-                    if (rawResponseTransformed.contains("lb") ||
+                    if(rawResponseTransformed.contains("???????")){
+                        Scale.getInstance().setScaleState(ON_AND_CALIBRATING);
+                    } else if (rawResponseTransformed.contains("lb") ||
                             rawResponseTransformed.contains("ct") ||
                             rawResponseTransformed.contains("dwt") ||
                             rawResponseTransformed.contains("oz") ||

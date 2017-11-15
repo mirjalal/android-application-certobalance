@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.model;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -355,6 +357,16 @@ public class Navigationbar {
 				for (ButtonEventListener listener : navigationbarListeners) {
 					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_MORE, false);
 				}
+			}
+		});
+		buttonMore.setOnLongClickListener(new OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				String url = "http://www.google.com";
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				mActivity.startActivity(i);
+				return false;
 			}
 		});
 		

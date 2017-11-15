@@ -112,7 +112,7 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 	{
 		struct termios cfg;
 
-		LOGD("Configuring serial port now");
+		LOGD("Configuring serial port now2");
 		if (tcgetattr(fd, &cfg))
 		{
 			LOGE("tcgetattr() failed");
@@ -122,13 +122,13 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
 		}
 
 
-        cfmakeraw(&cfg);
+        //cfmakeraw(&cfg);
         cfsetispeed(&cfg, speed);
         cfsetospeed(&cfg, speed);
+       // tcsetattr()
 
-
-        cfg.c_cflag |= PARENB;
-        cfg.c_cflag |= PARODD;
+       // cfg.c_cflag |= PARENB;
+       // cfg.c_cflag |= PARODD;
 
 
 
@@ -136,12 +136,13 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
         switch (databits){
             case 7:
                 cfg.c_cflag |= CS7;
+                cfg.c_cflag &= ~CS8;
+                cfg.c_cflag |= CS7;
                 break;
             case 8:cfg.c_cflag |= CS8;
                 break;
-
         }
-/*
+
         switch (parity){
             case 0:
                 // no parity
@@ -179,9 +180,9 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
         }
 
 
-    */
 
-		cfmakeraw(&cfg);
+
+		//cfmakeraw(&cfg);
 
 
 		if (tcsetattr(fd, TCSANOW, &cfg))
