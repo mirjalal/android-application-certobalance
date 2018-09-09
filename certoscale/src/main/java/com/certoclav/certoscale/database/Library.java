@@ -57,6 +57,8 @@ public class Library {
 	public static final String FIELD_LIBRARY_PIPETTE_IMPRECISION="Pipette Imprecision";
 	public static final String FIELD_LIBRARY_PIPETTE_PRESSURE="Pipette Pressure";
 	public static final String FIELD_LIBRARY_PIPETTE_NUMBEROFSAMPLES="Number of Samples";
+	public static final String FIELD_LIBRARY_ASH_DETERMINATION_WEIGHT_BEAKER = "weight beaker";
+	public static final String FIELD_LIBRARY_ASH_DETERMINATION_WEIGHT_DELTA = "weight delta";
 
 
 
@@ -192,6 +194,9 @@ public class Library {
 
 
 
+
+	private double ashWeightBeaker;
+   private double ashDeltaWeight;
 
 
 
@@ -593,6 +598,23 @@ public class Library {
 	public int getPipetteNumberofSamples() {return pipetteNumberofSamples;}
 
 	public void setPipetteNumberofSamples(int pipetteNumberofSamples) {this.pipetteNumberofSamples = pipetteNumberofSamples;}
+
+
+	public double getAshWeightBeaker() {
+		return ashWeightBeaker;
+	}
+
+	public void setAshWeightBeaker(double ashWeightBeaker) {
+		this.ashWeightBeaker = ashWeightBeaker;
+	}
+
+	public double getAshDeltaWeight() {
+		return ashDeltaWeight;
+	}
+
+	public void setAshDeltaWeight(double ashDeltaWeight) {
+		this.ashDeltaWeight = ashDeltaWeight;
+	}
 }
 
 

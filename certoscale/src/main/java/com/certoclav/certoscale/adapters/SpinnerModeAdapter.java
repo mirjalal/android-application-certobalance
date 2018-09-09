@@ -111,6 +111,10 @@ public class SpinnerModeAdapter extends ArrayAdapter<ScaleApplication> {
 				textMail.setText(R.string.app_statistical_quality_control);
 				imageApp.setImageResource(R.drawable.application_icon_statistic2);
 				break;
+			case ASH_DETERMINATION_1_HOME:
+				textMail.setText(R.string.app_ash_determination);
+				imageApp.setImageResource(R.drawable.application_icon_differential);
+				break;
 
 			default:
 				textMail.setText(R.string.app_not_weighing);

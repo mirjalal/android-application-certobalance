@@ -125,6 +125,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int pipetteLiquidDensity=3;
     int pipetteWaterTemp=5;
 
+    //Ash determination
+    int indexAshDeterminationWeightBeaker = 0;
+    int indexAshDeterminationDeltaWeight = 1;
+    int indexAshDeterminationBatchName = 2;
+
 
 
     @Override
@@ -998,7 +1003,27 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
+            case ASH_DETERMINATION_1_HOME:
+            case ASH_DETERMINATION_2_BATCH_STARTED:
+            case ASH_DETERMINATION_3_TARE_BEAKER:
+            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_8_BATCH_FINISHED:
 
+
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(ApplicationManager.getInstance().getWeightBeakerAsStringWithUnit());
+
+                    listReferenceFields.get(indexAshDeterminationBatchName).getTextName().setText("Probennummer");
+                    listReferenceFields.get(indexAshDeterminationBatchName).getTextValue().setText(ApplicationManager.getInstance().getBatchName());
+
+                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Letze Differenz");
+                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(ApplicationManager.getInstance().getAshDifferenceAsStringWithUnit());
+
+
+            break;
 
         }
 

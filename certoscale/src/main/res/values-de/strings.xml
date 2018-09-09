@@ -275,6 +275,7 @@
         <item>Kostenberechnung der Zutaten</item>
         <item>Pipettenabgleich</item>
         <item>Statischtische Qualitätskontrolle</item>
+        <item>Asche Bestimmung</item>
     </string-array>
     <string-array name="array_menu_main">
         <item>Kalibrierung</item>

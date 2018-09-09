@@ -248,6 +248,7 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
+		    getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_1_HOME);
 
 		int index = 0;
 		switch (Scale.getInstance().getScaleApplication()){
@@ -295,6 +296,17 @@ public class Navigationbar {
 			case STATISTICAL_QUALITY_CONTROL_1_HOME: index = 13; break;
 			case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:index=13;break;
 			case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:index=13;break;
+
+			case ASH_DETERMINATION_1_HOME:
+			case ASH_DETERMINATION_2_BATCH_STARTED:
+			case ASH_DETERMINATION_3_TARE_BEAKER:
+			case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+			case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+			case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+			case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+			case ASH_DETERMINATION_8_BATCH_FINISHED:
+				index = 14;
+				break;
 
 
 		}

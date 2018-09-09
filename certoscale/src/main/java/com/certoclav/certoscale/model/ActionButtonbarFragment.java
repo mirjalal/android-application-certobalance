@@ -49,6 +49,8 @@ import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_1_HOME;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -295,7 +297,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 				}
 
-
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME){
+					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
+					ApplicationManager.getInstance().setBatchName("");
+				}
 
 
 				for(ButtonEventListener listener : navigationbarListeners){
@@ -340,6 +347,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 					if (Scale.getInstance().getScaleApplication()==FORMULATION_RUNNING){
 						Scale.getInstance().setScaleApplication(FORMULATION);
+					}
+					if (Scale.getInstance().getScaleApplication()!=ASH_DETERMINATION_1_HOME){
+
+						Scale.getInstance().setScaleApplication(ASH_DETERMINATION_1_HOME);
+
 					}
 
 
@@ -1590,13 +1602,69 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 
 
-
-
-
-
-
 				break;
 
+			case ASH_DETERMINATION_1_HOME:
+
+
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(true);
+				buttonEnd.setVisibility(View.VISIBLE);
+				buttonEnd.setEnabled(false);
+
+				//unused Buttons
+				buttonAppSettings.setVisibility(View.GONE);
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonShowBatch.setVisibility(View.GONE);
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonProtocol.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
+break;
+			case ASH_DETERMINATION_2_BATCH_STARTED:
+
+
+
+				buttonTara.setVisibility(View.VISIBLE);
+				buttonZero.setVisibility(View.VISIBLE);
+				buttonStart.setVisibility(View.VISIBLE);
+				buttonStart.setEnabled(false);
+				buttonEnd.setVisibility(View.VISIBLE);
+				buttonEnd.setEnabled(true);
+				buttonAppSettings.setVisibility(View.GONE);
+				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
+
+				buttonNewBatch.setVisibility(View.GONE);
+				buttonNewBatch.setText(getString(R.string.new_batch).toUpperCase());
+				buttonShowBatch.setVisibility(View.GONE);
+
+
+				//unused Buttons
+				buttonAccumulate.setVisibility(View.GONE);
+				buttonProtocol.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonEnd.setVisibility(View.GONE);
+				buttonIngrediantList.setVisibility(View.GONE);
+				buttonAccept.setVisibility(View.GONE);
+
+				buttonEndBatch.setVisibility(View.GONE);
+				buttonStatistics.setVisibility(View.GONE);
+				buttonResult.setVisibility(View.GONE);
+				break;
+			case ASH_DETERMINATION_3_TARE_BEAKER:
+			case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+			case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+			case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+			case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+			case ASH_DETERMINATION_8_BATCH_FINISHED:
+			break;
 
 
 			default:

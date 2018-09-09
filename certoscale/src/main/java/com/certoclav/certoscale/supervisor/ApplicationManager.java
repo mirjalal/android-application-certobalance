@@ -26,7 +26,6 @@ import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
-import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -46,7 +45,6 @@ import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.DIFFERENTIAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.FILLING_CALC_TARGET;
-import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_FREE_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION_RUNNING;
 import static com.certoclav.certoscale.model.ScaleApplication.PART_COUNTING_CALC_AWP;
@@ -439,6 +437,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return currentLibrary.getTara();
     }
 
+    public Double getWeightBeakerInGram() {
+        return currentLibrary.getAshWeightBeaker();
+    }
+    public Double getAshDifferenceInGram() {
+        return currentLibrary.getAshDeltaWeight();
+    }
+
     public int getTareInPieces() {
         return (int) Math.round(currentLibrary.getTara() / currentLibrary.getAveragePieceWeight());
     }
@@ -486,6 +491,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             }
 
     }
+
+    public String getAshDifferenceAsStringWithUnit(){
+        return getTransformedWeightAsStringWithUnit(getAshDifferenceInGram());
+    }
+
+    public String getWeightBeakerAsStringWithUnit(){
+        return getTransformedWeightAsStringWithUnit(getWeightBeakerInGram());
+    }
+
 
 
     public String getTareAsStringWithUnit() {

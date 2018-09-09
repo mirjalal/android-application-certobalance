@@ -267,7 +267,8 @@
         <item>Peak Hold</item>
         <item>Ingredient Costing</item>
         <item>Pipette Adjustment</item>
-        <item>Statistical Quality Control</item>    
+        <item>Statistical Quality Control</item>
+        <item>Asche Bestimmung</item>
     </string-array>
     <string-array name="array_menu_main">
         <item>Calibration</item>
@@ -669,6 +670,7 @@
     <string name="app_ingrediant_costing">Ingredient Costing</string>
     <string name="app_pipette_adjustment">Pipette Adjustment</string>
     <string name="app_statistical_quality_control">Statistical Quality Control</string>
+    <string name="app_ash_determination">Asche Bestimmung</string>
     <string name="app_not_weighing">Not weighing</string>
     <string name="please_enter_the_average_piece_weight">Please enter the average piece weight</string>
     <string name="averaging_time">averaging time</string>

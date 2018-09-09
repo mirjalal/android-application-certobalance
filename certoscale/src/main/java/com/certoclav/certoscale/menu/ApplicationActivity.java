@@ -233,6 +233,12 @@ protected void onPause() {
 
 				}
 
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED ||) {
+
+					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAshDetermination()).commit();
+
+				}
+
 				if(Scale.getInstance().getScaleApplication() == ScaleApplication.FORMULATION_FREE){
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentFormulationFree()).commit();
 
@@ -383,6 +389,15 @@ protected void onPause() {
 						case PIPETTE_ADJUSTMENT_3_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
+						case ASH_DETERMINATION_1_HOME:
+						case ASH_DETERMINATION_2_BATCH_STARTED:
+						case ASH_DETERMINATION_3_TARE_BEAKER:
+						case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+						case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+						case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+						case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+						case ASH_DETERMINATION_8_BATCH_FINISHED:
+							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAshDetermination()).commit();
 
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
@@ -556,6 +571,7 @@ protected void onPause() {
 		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
+		navigationbar.getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_1_HOME);
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
 		try {

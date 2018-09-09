@@ -73,8 +73,8 @@ public class SerialPort {
 					throw new SecurityException();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
-				throw new SecurityException();
+			//	e.printStackTrace();
+			//	throw new SecurityException();
 			}
 		}
 

@@ -23,8 +23,8 @@
 #include <jni.h>
 
 #include "SerialPort.h"
-#include "../../../../../../../../android-sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/termios.h"
-
+//#include "../../../../../../../../android-sdk/ndk-bundle/platforms/android-9/arch-x86/usr/include/termios.h"
+//#include "../../../../../../../../android-sdk/ndk-bundle/platforms/android-14/arch-x86/usr/include/termios.h"
 #include <android/log.h>
 static const char *TAG="serial_port";
 #define LOGI(fmt, args...) __android_log_print(ANDROID_LOG_INFO,  TAG, fmt, ##args)

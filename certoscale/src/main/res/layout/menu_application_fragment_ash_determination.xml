@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<TextView
+    android:id="@+id/application_fragment_ash_determination_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:text="Bitte stellen Sie den Tiegel auf die Waegeflaeche und druecken Sie WEITER"
+    style="@style/text_default"/>
+
+    <Button
+        android:id="@+id/application_fragment_ash_determination_button_next"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="@string/next"
+        android:textAllCaps="true"
+        style="@style/button_default"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>

@@ -16,13 +16,16 @@ repositories {
 
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.certoclav.certoscale"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 22
+    }
+    dataBinding{
+        enabled = true
     }
 
     buildTypes {
@@ -34,10 +37,11 @@ android {
     }
 }
 
+
 dependencies {
+    compile 'com.android.support:support-v4:27.1.1'
     compile project(':library')
-    compile 'com.android.support:support-v4:22.2.1'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
     compile files('libs/ormlite-core-4.48.jar')
     compile files('libs/ormlite-android-4.48.jar')
     compile files('libs/commons-math3-3.6.1.jar')
