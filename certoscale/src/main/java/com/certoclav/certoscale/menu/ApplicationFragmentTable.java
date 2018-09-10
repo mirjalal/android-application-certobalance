@@ -126,9 +126,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int pipetteWaterTemp=5;
 
     //Ash determination
-    int indexAshDeterminationWeightBeaker = 0;
-    int indexAshDeterminationDeltaWeight = 1;
-    int indexAshDeterminationBatchName = 2;
+    int indexAshDeterminationWeightBeaker = 1;
+    int indexAshDeterminationWeightAsh = 3;
+    int indexAshDeterminationDeltaWeight = 5;
+
+    int indexAshDeterminationBatchName = 0;
 
 
 
@@ -1021,6 +1023,10 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Letze Differenz");
                 listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(ApplicationManager.getInstance().getAshDifferenceAsStringWithUnit());
+
+                listReferenceFields.get(indexAshDeterminationWeightAsh).getTextName().setText("Gewicht Asche");
+                listReferenceFields.get(indexAshDeterminationWeightAsh).getTextValue().setText(ApplicationManager.getInstance().getAshWeightAsStringWithUnit());
+
 
 
             break;

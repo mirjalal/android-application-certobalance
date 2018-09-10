@@ -51,6 +51,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_1_HOME;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_8_BATCH_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -297,7 +298,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 				}
 
-				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME){
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
 					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
 					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
 					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
@@ -845,6 +846,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAppSettings.setText(buttonAppSettings.getText().toString().toUpperCase());
 		buttonResult.setText(buttonResult.getText().toString().toUpperCase());
 		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
+
 
 
 		switch (Scale.getInstance().getScaleApplication()){
@@ -1608,7 +1610,9 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 
 				buttonTara.setVisibility(View.VISIBLE);
+				buttonTara.setEnabled(true);
 				buttonZero.setVisibility(View.VISIBLE);
+				buttonZero.setEnabled(true);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
 				buttonEnd.setVisibility(View.VISIBLE);
@@ -1628,7 +1632,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonEndBatch.setVisibility(View.GONE);
 				buttonStatistics.setVisibility(View.GONE);
 				buttonResult.setVisibility(View.GONE);
-break;
+				break;
 			case ASH_DETERMINATION_2_BATCH_STARTED:
             case ASH_DETERMINATION_3_WEIGH_BEAKER:
             case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
@@ -1638,7 +1642,9 @@ break;
 
 
 				buttonTara.setVisibility(View.VISIBLE);
+				buttonTara.setEnabled(false);
 				buttonZero.setVisibility(View.VISIBLE);
+				buttonZero.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(false);
 				buttonEnd.setVisibility(View.VISIBLE);
@@ -1669,9 +1675,11 @@ break;
 			case ASH_DETERMINATION_8_BATCH_FINISHED:
 
                 buttonTara.setVisibility(View.VISIBLE);
+                buttonTara.setEnabled(true);
                 buttonZero.setVisibility(View.VISIBLE);
+                buttonZero.setEnabled(true);
                 buttonStart.setVisibility(View.VISIBLE);
-                buttonStart.setEnabled(false);
+                buttonStart.setEnabled(true);
                 buttonEnd.setVisibility(View.VISIBLE);
                 buttonEnd.setEnabled(true);
                 buttonProtocol.setVisibility(View.VISIBLE);
