@@ -24,4 +24,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 
+    <Button
+        android:id="@+id/application_fragment_ash_determination_button_back"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="@string/back"
+        android:textAllCaps="true"
+        style="@style/button_default"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
+
     </RelativeLayout>

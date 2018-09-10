@@ -196,6 +196,16 @@ public class Library {
 
 
 	private double ashWeightBeaker;
+
+	public double getAshWeightBeakerWithSample() {
+		return ashWeightBeakerWithSample;
+	}
+
+	public void setAshWeightBeakerWithSample(double ashWeightBeakerWithSample) {
+		this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
+	}
+
+	private double ashWeightBeakerWithSample;
    private double ashDeltaWeight;
 
 

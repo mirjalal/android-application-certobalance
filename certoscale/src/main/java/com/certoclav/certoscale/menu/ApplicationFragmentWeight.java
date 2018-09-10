@@ -636,7 +636,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 break;
             case ASH_DETERMINATION_2_BATCH_STARTED:
-            case ASH_DETERMINATION_3_TARE_BEAKER:
+            case ASH_DETERMINATION_3_WEIGH_BEAKER:
             case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
             case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
             case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:

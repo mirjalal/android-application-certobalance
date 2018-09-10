@@ -36,8 +36,12 @@
     <Preference
         android:key="@string/preferences_device_storage"
         android:title="@string/settings_storage" />
-
-
+    <Preference
+        android:key="preference_ftp"
+        android:title="Reset FTP" />
+    <Preference
+        android:key="preference_ftp_manage"
+        android:title="Manage FTP" />
     <Preference
     android:key="@string/preferences_device_wlan_manage"
     android:title="@string/manage_wifi_connections"/>

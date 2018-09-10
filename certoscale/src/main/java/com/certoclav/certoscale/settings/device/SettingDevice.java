@@ -2,6 +2,7 @@ package com.certoclav.certoscale.settings.device;
 
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -90,6 +91,38 @@ public class SettingDevice extends PreferenceFragment implements SharedPreferenc
                 return false;
             }
         });
+
+
+        //FTP START
+        ((Preference) findPreference("preference_ftp")).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(new ComponentName("com.estrongs.android.pop","com.estrongs.android.pop.ftp.ESFtpShortcut"));
+                startActivity(intent);
+
+                return false;
+            }
+        });
+
+        //FTP MANAGE
+        ((Preference) findPreference("preference_ftp_manage")).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setComponent(new ComponentName("com.estrongs.android.pop","com.estrongs.android.pop.view.FileExplorerActivity"));
+                startActivity(intent);
+
+                return false;
+            }
+        });
+
+
+
 
         //Device Key
         ((Preference) findPreference(getString(R.string.preferences_device_key))).setSummary(Scale.getInstance().getSafetyKey());

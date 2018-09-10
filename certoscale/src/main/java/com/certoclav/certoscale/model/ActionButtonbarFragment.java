@@ -1613,13 +1613,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStart.setEnabled(true);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(false);
+                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setEnabled(false);
 
 				//unused Buttons
 				buttonAppSettings.setVisibility(View.GONE);
 				buttonNewBatch.setVisibility(View.GONE);
 				buttonShowBatch.setVisibility(View.GONE);
 				buttonAccumulate.setVisibility(View.GONE);
-				buttonProtocol.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
@@ -1629,7 +1630,11 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonResult.setVisibility(View.GONE);
 break;
 			case ASH_DETERMINATION_2_BATCH_STARTED:
-
+            case ASH_DETERMINATION_3_WEIGH_BEAKER:
+            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
 
 
 				buttonTara.setVisibility(View.VISIBLE);
@@ -1638,6 +1643,9 @@ break;
 				buttonStart.setEnabled(false);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(true);
+                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setEnabled(false);
+
 				buttonAppSettings.setVisibility(View.GONE);
 				buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
 
@@ -1648,7 +1656,6 @@ break;
 
 				//unused Buttons
 				buttonAccumulate.setVisibility(View.GONE);
-				buttonProtocol.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
 				buttonEnd.setVisibility(View.GONE);
 				buttonIngrediantList.setVisibility(View.GONE);
@@ -1658,13 +1665,38 @@ break;
 				buttonStatistics.setVisibility(View.GONE);
 				buttonResult.setVisibility(View.GONE);
 				break;
-			case ASH_DETERMINATION_3_TARE_BEAKER:
-			case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-			case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-			case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-			case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+
 			case ASH_DETERMINATION_8_BATCH_FINISHED:
-			break;
+
+                buttonTara.setVisibility(View.VISIBLE);
+                buttonZero.setVisibility(View.VISIBLE);
+                buttonStart.setVisibility(View.VISIBLE);
+                buttonStart.setEnabled(false);
+                buttonEnd.setVisibility(View.VISIBLE);
+                buttonEnd.setEnabled(true);
+                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setEnabled(true);
+
+                buttonAppSettings.setVisibility(View.GONE);
+                buttonAppSettings.setText(getString(R.string.settings_button).toUpperCase());
+
+                buttonNewBatch.setVisibility(View.GONE);
+                buttonNewBatch.setText(getString(R.string.new_batch).toUpperCase());
+                buttonShowBatch.setVisibility(View.GONE);
+
+
+                //unused Buttons
+                buttonAccumulate.setVisibility(View.GONE);
+                buttonIngrediantList.setVisibility(View.GONE);
+                buttonEnd.setVisibility(View.GONE);
+                buttonIngrediantList.setVisibility(View.GONE);
+                buttonAccept.setVisibility(View.GONE);
+
+                buttonEndBatch.setVisibility(View.GONE);
+                buttonStatistics.setVisibility(View.GONE);
+                buttonResult.setVisibility(View.GONE);
+                break;
+
 
 
 			default:
@@ -2800,6 +2832,8 @@ break;
  }
 
 
+
+
 	public void showProtocol(final Context eContext, final DialogInterface.OnDismissListener listener) {
 		try {
 			final Dialog dialog = new Dialog(eContext);
@@ -2877,6 +2911,17 @@ break;
 				case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
 				case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
 					scaleApplicationName = getString(R.string.app_statistical_quality_control);
+					break;
+
+				case ASH_DETERMINATION_1_HOME:
+				case ASH_DETERMINATION_2_BATCH_STARTED:
+				case ASH_DETERMINATION_3_WEIGH_BEAKER:
+				case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
+				case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
+				case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
+				case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+				case ASH_DETERMINATION_8_BATCH_FINISHED:
+					scaleApplicationName = getString(R.string.ash_determination);
 					break;
 			}
 

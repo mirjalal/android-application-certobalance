@@ -1,13 +1,16 @@
 package com.certoclav.library.util;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import android.util.Log;
+import java.util.Date;
 
 
 public class ExportUtils {
@@ -124,10 +127,50 @@ public class ExportUtils {
 	    return true;
 	}
 
-	
 
-	
-	
+	public boolean writeCSVFileToInternalSD(String data){
+
+		// Find the root of the external storage.
+		// See http://developer.android.com/guide/topics/data/data-  storage.html#filesExternal
+
+		File root = new File(android.os.Environment.getExternalStorageDirectory().getPath());
+		Log.e("Export Utils", "\nExternal file system root: "+root);
+
+		// See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
+
+		File dir = new File (root.getAbsolutePath() + "/IFP");
+		dir.mkdirs();
+
+		DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		String sdt = df.format(new Date(System.currentTimeMillis()));
+
+
+		File file = new File(dir, sdt + "." + "csv"); // for example protocol123.txt
+
+		try {
+			FileOutputStream f = new FileOutputStream(file);
+			PrintWriter pw = new PrintWriter(f);
+			pw.print(data);
+			pw.flush();
+			pw.close();
+			f.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			Log.e("ExportUtils", "******* File not found. Did you" +
+					" add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
+			return false;
+		} catch (IOException e) {
+			e.printStackTrace();
+			Log.e("Export Utils","io exception: " +  e.toString());
+			return false;
+		}
+		Log.e("Export Utils","\n\nFile written to "+file);
+		return true;
+	}
+
+
+
+
 	public boolean writeToExtSDFile(String subfolder, String filename, String filetype, String data){
 
 	    // Find the root of the external storage.

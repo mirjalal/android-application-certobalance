@@ -496,6 +496,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return getTransformedWeightAsStringWithUnit(getAshDifferenceInGram());
     }
 
+    public String getAshWeightAsStringWithUnit(){
+        return getTransformedWeightAsStringWithUnit(currentLibrary.getAshWeightBeakerWithSample() - getCurrentLibrary().getAshWeightBeaker());
+    }
+
+    public String getAshWeightBeakerAsStringWithUnit(){
+        return getTransformedWeightAsStringWithUnit(getCurrentLibrary().getAshWeightBeaker());
+    }
+
     public String getWeightBeakerAsStringWithUnit(){
         return getTransformedWeightAsStringWithUnit(getWeightBeakerInGram());
     }

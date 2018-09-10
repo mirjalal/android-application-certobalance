@@ -2,6 +2,7 @@ package com.certoclav.certoscale.menu;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -172,6 +173,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         //super.setTheme(R.style.the);
         Fabric.with(this, new Crashlytics());

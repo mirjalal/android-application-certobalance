@@ -39,6 +39,12 @@ import java.util.List;
 import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTON;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_3_WEIGH_BEAKER;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_4_WEIGHING_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_5_WAIT_FOR_GLOWING;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT;
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
@@ -75,8 +81,16 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.menu_application_activity);
 		super.onCreate(savedInstanceState);
+
+
+
+		Intent intent = new Intent(Intent.ACTION_MAIN);
+		intent.setComponent(new ComponentName("com.estrongs.android.pop","com.estrongs.android.pop.ftp.ESFtpShortcut"));
+		startActivity(intent);
+
+		setContentView(R.layout.menu_application_activity);
+
 		navigationbar.onCreate();
 	    actionButtonbarFragment = new ActionButtonbarFragment();
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_actionbar, actionButtonbarFragment).commit();
@@ -233,7 +247,7 @@ protected void onPause() {
 
 				}
 
-				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED ||) {
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED ) {
 
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAshDetermination()).commit();
 
@@ -391,14 +405,14 @@ protected void onPause() {
 							break;
 						case ASH_DETERMINATION_1_HOME:
 						case ASH_DETERMINATION_2_BATCH_STARTED:
-						case ASH_DETERMINATION_3_TARE_BEAKER:
+						case ASH_DETERMINATION_3_WEIGH_BEAKER:
 						case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
 						case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
 						case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
 						case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
 						case ASH_DETERMINATION_8_BATCH_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAshDetermination()).commit();
-
+						break;
 						default:
 							Toast.makeText(this,"TODO: Implement Actions",Toast.LENGTH_SHORT).show();
 					}
@@ -498,7 +512,13 @@ protected void onPause() {
 				application == ANIMAL_WEIGHING_CALCULATING ||
 				application == FILLING_CALC_TARGET ||
 				application == FORMULATION_RUNNING ||
-				application == FORMULATION_FREE_RUNNING){
+				application == FORMULATION_FREE_RUNNING ||
+				application == ASH_DETERMINATION_2_BATCH_STARTED ||
+				application == ASH_DETERMINATION_3_WEIGH_BEAKER ||
+				application == ASH_DETERMINATION_4_WEIGHING_SAMPLE||
+				application == ASH_DETERMINATION_5_WAIT_FOR_GLOWING||
+				application == ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE||
+				application == ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT){
 			return;
 		}
 
