@@ -90,6 +90,27 @@
          />
 
      <Button
+         android:id="@+id/actionbar_button_measuremt_pending"
+         android:text="OFFENE MESSUNG"
+
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
+
+     <Button
+         android:id="@+id/actionbar_button_measurement_new"
+         android:text="NEUE MESSUNG"
+
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_weight="1"
+         style="@style/button_actionbar"
+         />
+
+
+     <Button
          android:id="@+id/actionbar_button_results"
          android:text="@string/result"
          android:layout_width="match_parent"

@@ -257,7 +257,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         this.currentItem = currentItem;
     }
 
+    public void setCurrentProtocol(Protocol currentProtocol) {
+        this.currentProtocol = currentProtocol;
+    }
+
+    public Protocol getCurrentProtocol() {
+        return this.currentProtocol;
+    }
+
     private Item currentItem = null;
+    private Protocol currentProtocol = null;
 
     ArrayList<StatisticListener> statisticListeners = new ArrayList<StatisticListener>();
 

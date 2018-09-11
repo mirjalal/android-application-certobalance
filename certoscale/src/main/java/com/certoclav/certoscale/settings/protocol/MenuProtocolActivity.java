@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ProtocolAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -22,6 +23,7 @@ import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.service.SyncProtocolsService;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -79,6 +81,20 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
             }
         });
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
+                try {
+                    if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
+                        finish();
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
 
 
         /*

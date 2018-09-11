@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -30,6 +31,7 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.settings.application.SettingsActivity;
+import com.certoclav.certoscale.settings.item.MenuItemActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.library.application.ApplicationController;
@@ -230,13 +232,22 @@ protected void onPause() {
 
 
 
-
+//MANAGING CONTENT OF TABLE FRAGMENT
 	@SuppressLint("NewApi")
 	@Override
 	public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 		Log.e("ApplicationActivity", "onclickhome");
 
 		switch (buttonId){
+
+			case ActionButtonbarFragment.BUTTON_MEASUREMENT_EXISTING:
+
+				break;
+
+			case ActionButtonbarFragment.BUTTON_MEASUREMENT_NEW:
+
+				break;
+
 			case ActionButtonbarFragment.BUTTON_START:
 				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ANIMAL_WEIGHING) {
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAnimalWeighing()).commit();

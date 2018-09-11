@@ -22,6 +22,17 @@ public class Protocol {
 	private final static String JSON_USER_EMAIL = "email";
 	private final static String JSON_SIGNATURE ="signature";
 
+	//additional for ash_determinatin_ticket_system
+	private final static String JSON_ASH_SAMPLE_NAME = "ash_name_sample";
+	private final static String JSON_ASH_BEAKER_NAME = "ash_name_beaker";
+	private final static String JSON_ASH_ARRAY_GLOW_WEIGHTS = "ash_array_glow_weights";
+	private final static String JSON_ASH_RESULT_PERCENTAGE = "ash_result_percentage";
+	private final static String JSON_ASH_RESULT_GRAM = "ash_result_gram";
+	private final static String JSON_ASH_WEIGHT_BEAKER = "ash_weight_beaker";
+	private final static String JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE = "ash_weight_beaker_with_sample";
+	private final static String JSON_IS_PENDING = "ispending";
+
+
 
 
 
@@ -33,6 +44,82 @@ public class Protocol {
 	private String date = "";
 	private String cloudId = "";
 	private String contentJson = "";
+
+
+	public String getAshSampleName() {
+		return ashSampleName;
+	}
+
+	public void setAshSampleName(String ashSampleName) {
+		this.ashSampleName = ashSampleName;
+	}
+
+	public String getAshBeakerName() {
+		return ashBeakerName;
+	}
+
+	public void setAshBeakerName(String ashBeakerName) {
+		this.ashBeakerName = ashBeakerName;
+	}
+
+	public String getAshArrayGlowWeights() {
+		return ashArrayGlowWeights;
+	}
+
+	public void setAshArrayGlowWeights(String ashArrayGlowWeights) {
+		this.ashArrayGlowWeights = ashArrayGlowWeights;
+	}
+
+	public String getAshResultPercentage() {
+		return ashResultPercentage;
+	}
+
+	public void setAshResultPercentage(String ashResultPercentage) {
+		this.ashResultPercentage = ashResultPercentage;
+	}
+
+	public String getAshResultGram() {
+		return ashResultGram;
+	}
+
+	public void setAshResultGram(String ashResultGram) {
+		this.ashResultGram = ashResultGram;
+	}
+
+	public String getAshWeightBeaker() {
+		return ashWeightBeaker;
+	}
+
+	public void setAshWeightBeaker(String ashWeightBeaker) {
+		this.ashWeightBeaker = ashWeightBeaker;
+	}
+
+	public String getAshWeightBeakerWithSample() {
+		return ashWeightBeakerWithSample;
+	}
+
+	public void setAshWeightBeakerWithSample(String ashWeightBeakerWithSample) {
+		this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
+	}
+
+	private String ashSampleName = "";
+	private String ashBeakerName = "";
+	private String ashArrayGlowWeights = "";
+	private String ashResultPercentage = "";
+	private String ashResultGram = "";
+	private String ashWeightBeaker = "";
+	private String ashWeightBeakerWithSample = "";
+
+    public String getIsPending() {
+        return isPending;
+    }
+
+    public void setIsPending(String isPending) {
+        this.isPending = isPending;
+    }
+
+    private String isPending = "";
+
 
 	@DatabaseField(columnName = JSON_SIGNATURE,dataType = DataType.STRING_BYTES)
 	private String signature;
@@ -137,8 +224,64 @@ public class Protocol {
 			signature=jsonObject.getString(JSON_SIGNATURE);
 
 		}catch (Exception e){
-
+			signature = "";
 		}
+
+		try {
+			content = jsonObject.getString(JSON_CONTENT_STRING);
+		}catch (Exception e){
+			content = "";
+		}
+
+
+		try {
+			ashSampleName = jsonObject.getString(JSON_ASH_SAMPLE_NAME);
+		}catch (Exception e){
+			ashSampleName = "";
+		}
+
+		try {
+			ashBeakerName = jsonObject.getString(JSON_ASH_BEAKER_NAME);
+		}catch (Exception e){
+			ashBeakerName = "";
+		}
+
+		try {
+			ashArrayGlowWeights = jsonObject.getString(JSON_ASH_ARRAY_GLOW_WEIGHTS);
+		}catch (Exception e){
+			ashArrayGlowWeights = "";
+		}
+
+		try {
+			ashResultPercentage = jsonObject.getString(JSON_ASH_RESULT_PERCENTAGE);
+		}catch (Exception e){
+			ashResultPercentage = "";
+		}
+
+		try {
+			ashResultGram = jsonObject.getString(JSON_ASH_RESULT_GRAM);
+		}catch (Exception e){
+			ashResultGram = "";
+		}
+
+		try {
+			ashWeightBeaker = jsonObject.getString(JSON_ASH_WEIGHT_BEAKER);
+		}catch (Exception e){
+			ashWeightBeaker = "";
+		}
+
+		try {
+			ashWeightBeakerWithSample = jsonObject.getString(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE);
+		}catch (Exception e){
+			ashWeightBeakerWithSample = "";
+		}
+
+        try {
+            isPending = jsonObject.getString(JSON_IS_PENDING);
+        }catch (Exception e){
+            isPending = "";
+        }
+
 
 
 		protocolJson = jsonObject.toString();
@@ -241,7 +384,16 @@ public class Protocol {
 					.put(JSON_USER_EMAIL, userEmail)
 					.put(JSON_VISIBILITY,visibility)
 					.put(JSON_CONTENT_STRING,content)
-					.put(JSON_SIGNATURE,signature);
+					.put(JSON_SIGNATURE,signature)
+					.put(JSON_ASH_SAMPLE_NAME,ashSampleName)
+					.put(JSON_ASH_BEAKER_NAME,ashBeakerName)
+					.put(JSON_ASH_ARRAY_GLOW_WEIGHTS,ashArrayGlowWeights)
+					.put(JSON_ASH_RESULT_PERCENTAGE,ashResultPercentage)
+					.put(JSON_ASH_RESULT_GRAM,ashResultGram)
+					.put(JSON_ASH_WEIGHT_BEAKER,ashWeightBeaker)
+					.put(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE,ashWeightBeakerWithSample)
+			        .put(JSON_IS_PENDING,isPending);
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -250,9 +402,6 @@ public class Protocol {
 
 
 }
-
-
-
 
 
 

@@ -633,7 +633,6 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case ASH_DETERMINATION_1_HOME:
                 textInstruction.setText("Drücken Sie START um die Anwendung zu starten");
-                break;
             case ASH_DETERMINATION_2_BATCH_STARTED:
             case ASH_DETERMINATION_3_WEIGH_BEAKER:
             case ASH_DETERMINATION_4_WEIGHING_SAMPLE:

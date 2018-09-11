@@ -26,6 +26,7 @@ import com.certoclav.certoscale.adapters.RecipeFreeFormulationElementAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
 import com.certoclav.certoscale.adapters.SamplesAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.Protocol;
@@ -33,6 +34,7 @@ import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.WeightListener;
+import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
 import com.certoclav.certoscale.settings.recipe.MenuRecipeEditActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.ESCPos;
@@ -103,6 +105,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	public static final int BUTTON_DELETE=24;
 	public static final int BUTTON_NEWBATCH=30;
 	public static final int BUTTON_SHOWBATCH=31;
+	public static final int BUTTON_MEASUREMENT_NEW = 32;
+	public static final int BUTTON_MEASUREMENT_EXISTING = 33;
 
 
 
@@ -125,6 +129,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 	private Button buttonNewBatch = null;
 	private Button buttonShowBatch = null;
 	private Button buttonResult=null;
+	private Button buttonMeasurementNew = null;
+	private Button buttonMeasurementExisting = null;
 
 
 
@@ -252,11 +258,56 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 		final View rootView = inflater.inflate(R.layout.actionbar,container, false);
 
+
+		buttonMeasurementNew = (Button) rootView.findViewById(R.id.actionbar_button_measurement_new);
+		buttonMeasurementNew.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
+					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
+					ApplicationManager.getInstance().setBatchName("");
+				}
+
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_MEASUREMENT_NEW,false);
+				}
+			}
+		});
+
+		//do a logical action after pressing the button
+		buttonMeasurementExisting = (Button) rootView.findViewById(R.id.actionbar_button_measuremt_pending);
+		buttonMeasurementExisting.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_1_HOME ) {
+
+					Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
+					intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK,true);
+					startActivity(intent);
+				}
+				for(ButtonEventListener listener : navigationbarListeners){
+					listener.onClickNavigationbarButton(BUTTON_MEASUREMENT_EXISTING,false);
+				}
+			}
+		});
+
 		buttonStart = (Button) rootView.findViewById(R.id.actionbar_button_start);
 		buttonStart.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+
+
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
+					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
+					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
+					ApplicationManager.getInstance().setBatchName("");
+				}
+
 
 				if (Scale.getInstance().getScaleApplication()==DENSITY_DETERMINATION) {
 
@@ -298,12 +349,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					}
 				}
 
-				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
-					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
-					ApplicationManager.getInstance().setBatchName("");
-				}
+
 
 
 				for(ButtonEventListener listener : navigationbarListeners){
@@ -846,6 +892,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonAppSettings.setText(buttonAppSettings.getText().toString().toUpperCase());
 		buttonResult.setText(buttonResult.getText().toString().toUpperCase());
 		buttonAccept.setText(buttonAccept.getText().toString().toUpperCase());
+
 
 
 
@@ -1615,6 +1662,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setEnabled(true);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(true);
+				buttonMeasurementExisting.setVisibility(View.VISIBLE);
+				buttonMeasurementExisting.setEnabled(true);
+				buttonMeasurementNew.setVisibility(View.VISIBLE);
+				buttonMeasurementNew.setEnabled(true);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(false);
                 buttonProtocol.setVisibility(View.VISIBLE);
@@ -1647,6 +1698,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonZero.setEnabled(false);
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(false);
+				buttonMeasurementExisting.setVisibility(View.VISIBLE);
+				buttonMeasurementExisting.setEnabled(false);
+				buttonMeasurementNew.setVisibility(View.VISIBLE);
+				buttonMeasurementNew.setEnabled(false);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(true);
                 buttonProtocol.setVisibility(View.VISIBLE);
@@ -1680,6 +1735,10 @@ public void removeButtonEventListener(ButtonEventListener listener) {
                 buttonZero.setEnabled(true);
                 buttonStart.setVisibility(View.VISIBLE);
                 buttonStart.setEnabled(true);
+				buttonMeasurementExisting.setVisibility(View.VISIBLE);
+				buttonMeasurementExisting.setEnabled(true);
+				buttonMeasurementNew.setVisibility(View.VISIBLE);
+				buttonMeasurementNew.setEnabled(true);
                 buttonEnd.setVisibility(View.VISIBLE);
                 buttonEnd.setEnabled(true);
                 buttonProtocol.setVisibility(View.VISIBLE);
@@ -1699,7 +1758,6 @@ public void removeButtonEventListener(ButtonEventListener listener) {
                 buttonEnd.setVisibility(View.GONE);
                 buttonIngrediantList.setVisibility(View.GONE);
                 buttonAccept.setVisibility(View.GONE);
-
                 buttonEndBatch.setVisibility(View.GONE);
                 buttonStatistics.setVisibility(View.GONE);
                 buttonResult.setVisibility(View.GONE);

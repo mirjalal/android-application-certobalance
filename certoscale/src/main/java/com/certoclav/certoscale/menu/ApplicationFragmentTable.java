@@ -130,7 +130,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexAshDeterminationWeightAsh = 3;
     int indexAshDeterminationDeltaWeight = 5;
 
-    int indexAshDeterminationBatchName = 0;
+    int indexAshDeterminationSampleName = 0;
+    int indexAshDeterminationBeakerName = 2;
 
 
 
@@ -1018,8 +1019,24 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(ApplicationManager.getInstance().getWeightBeakerAsStringWithUnit());
 
-                    listReferenceFields.get(indexAshDeterminationBatchName).getTextName().setText("Probennummer");
-                    listReferenceFields.get(indexAshDeterminationBatchName).getTextValue().setText(ApplicationManager.getInstance().getBatchName());
+
+
+                    listReferenceFields.get(indexAshDeterminationSampleName).getTextName().setText("Probennummer");
+                    try {
+                       listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
+                    }catch (Exception e){
+                       listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText("Nicht selektiert");
+                    }
+
+
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tigelnummer");
+                    try {
+                        listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
+                    }catch (Exception e){
+                        listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText("Nicht selektiert");
+                    }
+
+
 
                 listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Letze Differenz");
                 listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(ApplicationManager.getInstance().getAshDifferenceAsStringWithUnit());
