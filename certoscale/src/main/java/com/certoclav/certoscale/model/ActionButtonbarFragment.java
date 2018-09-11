@@ -52,8 +52,9 @@ import java.util.List;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_1_HOME;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_BATCH_STARTED;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_8_BATCH_FINISHED;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_9_BATCH_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -263,11 +264,12 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 		buttonMeasurementNew.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
-					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
-					ApplicationManager.getInstance().setBatchName("");
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_9_BATCH_FINISHED){
+					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
+
+					Protocol protocol = new Protocol("", "", Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", "","");
+
+					ApplicationManager.getInstance().setCurrentProtocol(protocol);
 				}
 
 				for(ButtonEventListener listener : navigationbarListeners){
@@ -301,11 +303,8 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 			public void onClick(View v) {
 
 
-				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_8_BATCH_FINISHED){
-					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_BATCH_STARTED);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshWeightBeaker(0d);
-					ApplicationManager.getInstance().getCurrentLibrary().setAshDeltaWeight(0d);
-					ApplicationManager.getInstance().setBatchName("");
+				if(Scale.getInstance().getScaleApplication()==ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_9_BATCH_FINISHED){
+					Scale.getInstance().setScaleApplication(ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE);
 				}
 
 
@@ -1660,8 +1659,19 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonTara.setEnabled(true);
 				buttonZero.setVisibility(View.VISIBLE);
 				buttonZero.setEnabled(true);
+
 				buttonStart.setVisibility(View.VISIBLE);
-				buttonStart.setEnabled(true);
+				buttonStart.setEnabled(false);
+
+				try{
+					if(ApplicationManager.getInstance().getCurrentProtocol().getIsPending() == true){
+						buttonStart.setEnabled(true);
+					}
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+
+
 				buttonMeasurementExisting.setVisibility(View.VISIBLE);
 				buttonMeasurementExisting.setEnabled(true);
 				buttonMeasurementNew.setVisibility(View.VISIBLE);
@@ -1684,12 +1694,13 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonStatistics.setVisibility(View.GONE);
 				buttonResult.setVisibility(View.GONE);
 				break;
-			case ASH_DETERMINATION_2_BATCH_STARTED:
-            case ASH_DETERMINATION_3_WEIGH_BEAKER:
-            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
+			case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+			case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
 
 
 				buttonTara.setVisibility(View.VISIBLE);
@@ -1727,7 +1738,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonResult.setVisibility(View.GONE);
 				break;
 
-			case ASH_DETERMINATION_8_BATCH_FINISHED:
+			case ASH_DETERMINATION_9_BATCH_FINISHED:
 
                 buttonTara.setVisibility(View.VISIBLE);
                 buttonTara.setEnabled(true);
@@ -2980,13 +2991,14 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 					break;
 
 				case ASH_DETERMINATION_1_HOME:
-				case ASH_DETERMINATION_2_BATCH_STARTED:
-				case ASH_DETERMINATION_3_WEIGH_BEAKER:
-				case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-				case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-				case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-				case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
-				case ASH_DETERMINATION_8_BATCH_FINISHED:
+				case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+				case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
+				case ASH_DETERMINATION_4_WEIGH_BEAKER:
+				case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+				case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+				case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+				case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+				case ASH_DETERMINATION_9_BATCH_FINISHED:
 					scaleApplicationName = getString(R.string.ash_determination);
 					break;
 			}

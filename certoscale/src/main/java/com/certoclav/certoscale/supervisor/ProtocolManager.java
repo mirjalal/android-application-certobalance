@@ -715,18 +715,24 @@ public class ProtocolManager implements ScaleApplicationListener {
 
                 break;
             case ASH_DETERMINATION_1_HOME:
-            case ASH_DETERMINATION_2_BATCH_STARTED:
-            case ASH_DETERMINATION_3_WEIGH_BEAKER:
-            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
-            case ASH_DETERMINATION_8_BATCH_FINISHED:
+            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_9_BATCH_FINISHED:
                 sb.append("\n");
-                sb.append("Probennummer" +  ": "+ ApplicationManager.getInstance().getBatchName() + "\n");
-                sb.append("Probe" + ": " + ApplicationManager.getInstance().getAshWeightBeakerAsStringWithUnit() + "\n");
-                sb.append("Asche" +  ": "+ ApplicationManager.getInstance().getAshWeightAsStringWithUnit() + "\n");
-                sb.append("\n");
+                sb.append("Probennummer" +  ": "+ ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
+                try {
+                    for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
+                        sb.append((i + 1) + ". Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                sb.append("Asche Gewicht" +  ": "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
+                sb.append("Asche Prozent" +  ": "+ ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent() + "\n");
                 break;
 
 

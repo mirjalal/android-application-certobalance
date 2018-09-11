@@ -120,12 +120,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
 
 
 
@@ -166,7 +161,20 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
        if(protocols != null) {
            for (Protocol protocol : protocolList) {
-               adapter.add(protocol);
+
+               try {
+                   if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
+                       if(protocol.getIsPending() == true){
+                           adapter.add(protocol);
+                       }
+                   }else{
+                       adapter.add(protocol);
+                   }
+               }catch (Exception e){
+                    e.printStackTrace();
+               }
+
+
 
 
 

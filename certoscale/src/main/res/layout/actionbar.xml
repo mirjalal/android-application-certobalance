@@ -91,7 +91,7 @@
 
      <Button
          android:id="@+id/actionbar_button_measuremt_pending"
-         android:text="OFFENE MESSUNG"
+         android:text="VORHANDENE PROBE"
 
          android:layout_width="match_parent"
          android:layout_height="match_parent"
@@ -101,7 +101,7 @@
 
      <Button
          android:id="@+id/actionbar_button_measurement_new"
-         android:text="NEUE MESSUNG"
+         android:text="NEUE PROBE"
 
          android:layout_width="match_parent"
          android:layout_height="match_parent"

@@ -633,13 +633,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case ASH_DETERMINATION_1_HOME:
                 textInstruction.setText("Drücken Sie START um die Anwendung zu starten");
-            case ASH_DETERMINATION_2_BATCH_STARTED:
-            case ASH_DETERMINATION_3_WEIGH_BEAKER:
-            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
-            case ASH_DETERMINATION_8_BATCH_FINISHED:
+            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_9_BATCH_FINISHED:
                 textInstruction.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);

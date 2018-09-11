@@ -202,16 +202,16 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 	private void simulateMessage(){
 		 	counter++;
 
-			if ((counter%100)==0){
+			if ((counter%200)==0){
 
 				counter--;
 				counter2++;
 				Scale.getInstance().getScaleModel().setStable(true);
 			}
-			if (counter2>25){
+			if (counter2>85){
 				counter++;
 				counter2=0;
-				Scale.getInstance().getScaleModel().setStable(false);
+			//	Scale.getInstance().getScaleModel().setStable(false);
 			}
 
 

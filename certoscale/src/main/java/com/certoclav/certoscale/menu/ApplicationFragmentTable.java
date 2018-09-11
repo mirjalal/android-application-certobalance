@@ -127,7 +127,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     //Ash determination
     int indexAshDeterminationWeightBeaker = 1;
-    int indexAshDeterminationWeightAsh = 3;
+    int indexAshDeterminationWeightBeakerWithSample= 3;
     int indexAshDeterminationDeltaWeight = 5;
 
     int indexAshDeterminationSampleName = 0;
@@ -1007,17 +1007,35 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
             case ASH_DETERMINATION_1_HOME:
-            case ASH_DETERMINATION_2_BATCH_STARTED:
-            case ASH_DETERMINATION_3_WEIGH_BEAKER:
-            case ASH_DETERMINATION_4_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_5_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_6_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_7_CHECK_DELTA_WEIGHT:
-            case ASH_DETERMINATION_8_BATCH_FINISHED:
+            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_9_BATCH_FINISHED:
 
 
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
-                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(ApplicationManager.getInstance().getWeightBeakerAsStringWithUnit());
+                try {
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
+
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText("");
+                }
+
+                listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextName().setText("Gewicht Tiegel mit Probe");
+                try {
+                    listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText(
+
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample())
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText("");
+                }
 
 
 
@@ -1038,11 +1056,15 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
 
-                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Letze Differenz");
-                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(ApplicationManager.getInstance().getAshDifferenceAsStringWithUnit());
+                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Anzahl Glühungen");
+try {
+    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(
+            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size() + "x");
+}catch (Exception e){
+    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
+}
 
-                listReferenceFields.get(indexAshDeterminationWeightAsh).getTextName().setText("Gewicht Asche");
-                listReferenceFields.get(indexAshDeterminationWeightAsh).getTextValue().setText(ApplicationManager.getInstance().getAshWeightAsStringWithUnit());
+
 
 
 

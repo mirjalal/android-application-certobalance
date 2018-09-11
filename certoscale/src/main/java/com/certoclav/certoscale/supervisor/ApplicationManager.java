@@ -446,12 +446,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return currentLibrary.getTara();
     }
 
-    public Double getWeightBeakerInGram() {
-        return currentLibrary.getAshWeightBeaker();
-    }
-    public Double getAshDifferenceInGram() {
-        return currentLibrary.getAshDeltaWeight();
-    }
+
 
     public int getTareInPieces() {
         return (int) Math.round(currentLibrary.getTara() / currentLibrary.getAveragePieceWeight());
@@ -501,21 +496,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
-    public String getAshDifferenceAsStringWithUnit(){
-        return getTransformedWeightAsStringWithUnit(getAshDifferenceInGram());
-    }
 
-    public String getAshWeightAsStringWithUnit(){
-        return getTransformedWeightAsStringWithUnit(currentLibrary.getAshWeightBeakerWithSample() - getCurrentLibrary().getAshWeightBeaker());
-    }
 
-    public String getAshWeightBeakerAsStringWithUnit(){
-        return getTransformedWeightAsStringWithUnit(getCurrentLibrary().getAshWeightBeaker());
-    }
 
-    public String getWeightBeakerAsStringWithUnit(){
-        return getTransformedWeightAsStringWithUnit(getWeightBeakerInGram());
-    }
+
+
+
 
 
 

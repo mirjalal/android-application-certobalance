@@ -34,8 +34,8 @@ public class ScaleModelGandG extends ScaleModel {
 
     public ScaleModelGandG(){
         super(2,//stabilisationTime,
-                5000,// maximumCapazity,
-                1,// decimalPlaces,
+                220,// maximumCapazity,
+                4,// decimalPlaces,
                 false,// stable,
                 9600,// comBaudrate,
                 SerialPort.DATABITS_8,// comDataBits,
@@ -55,13 +55,13 @@ public class ScaleModelGandG extends ScaleModel {
 
     @Override
     public int sendModeCommand() {
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
         return 0;
     }
 
     @Override
     public int sendPrintCommand() {
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bp");
+        Scale.getInstance().getSerialsServiceScale().sendMessage("PRT\r\n");
         return 0;
     }
 
@@ -79,7 +79,7 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int pressTara() {
 
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("T\r\n");
         return 0;
     }
 
@@ -89,25 +89,27 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
     public void pressCalibrationButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
     }
 
     public void pressUnitButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
     }
 
     public void pressCountingButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Br");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Br");
     }
 
 
     public void pressLightButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bu");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bu");
     }
     @Override
     public double parseRecievedMessage(String message) {
         int sign=1;
         double value=lastValue;
+        message.replace("(", "");
+        message.replace(")", "");
         if(message.length()>5) {
             try {
 
@@ -157,7 +159,7 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int  internalCalibration() {
 
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
         return 0;
     }
 
