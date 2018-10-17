@@ -3,6 +3,7 @@ package com.certoclav.certoscale.model;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -110,6 +111,7 @@ public class ScaleModelGandG extends ScaleModel {
         double value=lastValue;
         message.replace("(", "");
         message.replace(")", "");
+        message.replace("o", "");
         if(message.length()>5) {
             try {
 
@@ -138,6 +140,9 @@ public class ScaleModelGandG extends ScaleModel {
 
                     if (arg.length() > 2 && arg.contains(".")) {
                         try {
+                            Log.e("PARSE ARG", arg);
+                            arg = arg.replace("(","");
+                            arg = arg.replace(")","");
                             value = Double.parseDouble(arg);
                             break;
                         } catch (Exception e) {

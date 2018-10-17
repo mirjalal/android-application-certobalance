@@ -159,15 +159,11 @@ public class SettingDevice extends PreferenceFragment implements SharedPreferenc
                     boolean success = false;
                     try {
                         UpdateUtils updateUtils = new UpdateUtils(getActivity());
-                        success = updateUtils.installUpdateZip(UpdateUtils.SOURCE_USB);
+                        updateUtils.installUpdateZip(UpdateUtils.SOURCE_USB);
                     } catch (Exception e) {
                         success = false;
                     }
-                    if (success) {
-                        Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
-                    }
+
                 }
                 preference.setEnabled(true);
                 return false;
@@ -188,15 +184,11 @@ public class SettingDevice extends PreferenceFragment implements SharedPreferenc
                     boolean success = false;
                     try {
                         UpdateUtils updateUtils = new UpdateUtils(getActivity());
-                        success = updateUtils.installUpdateZip(UpdateUtils.SOURCE_SDCARD);
+                        updateUtils.installUpdateZip(UpdateUtils.SOURCE_SDCARD);
                     } catch (Exception e) {
                         success = false;
                     }
-                    if (success) {
-                        Toast.makeText(getActivity(), getString(R.string.update_successfull), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getActivity(), getString(R.string.update_failed), Toast.LENGTH_LONG).show();
-                    }
+
                 }
                 preference.setEnabled(true);
                 return false;

@@ -60,7 +60,7 @@
         <string name="register_new_user">REGISTERE NEUEN BENUTZER</string>
         <string name="first_name">Vorname</string>
         <string name="last_name">Nachname</string>
-        <string name="email">Email</string>
+        <string name="email">Email oder Kürzel</string>
         <string name="password">Passwort</string>
         <string name="account_created">Benutzerkonto erstellt</string>
         <string name="please_enter_valid_data">Bitte valide Daten eingeben</string>

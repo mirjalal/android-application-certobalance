@@ -1047,7 +1047,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
 
 
-                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tigelnummer");
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tiegelnummer");
                     try {
                         listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
                     }catch (Exception e){

@@ -1662,6 +1662,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 
 				buttonStart.setVisibility(View.VISIBLE);
 				buttonStart.setEnabled(false);
+				buttonStart.setText("FORTSETZEN");
 
 				try{
 					if(ApplicationManager.getInstance().getCurrentProtocol().getIsPending() == true){
@@ -1678,7 +1679,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonMeasurementNew.setEnabled(true);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(false);
-                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setVisibility(View.GONE);
                 buttonProtocol.setEnabled(false);
 
 				//unused Buttons
@@ -1715,7 +1716,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonMeasurementNew.setEnabled(false);
 				buttonEnd.setVisibility(View.VISIBLE);
 				buttonEnd.setEnabled(true);
-                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setVisibility(View.GONE);
                 buttonProtocol.setEnabled(false);
 
 				buttonAppSettings.setVisibility(View.GONE);
@@ -1752,7 +1753,7 @@ public void removeButtonEventListener(ButtonEventListener listener) {
 				buttonMeasurementNew.setEnabled(true);
                 buttonEnd.setVisibility(View.VISIBLE);
                 buttonEnd.setEnabled(true);
-                buttonProtocol.setVisibility(View.VISIBLE);
+                buttonProtocol.setVisibility(View.GONE);
                 buttonProtocol.setEnabled(true);
 
                 buttonAppSettings.setVisibility(View.GONE);

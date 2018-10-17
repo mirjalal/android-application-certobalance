@@ -3,6 +3,7 @@ package com.certoclav.certoscale.menu;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -190,7 +191,7 @@ private TextView textInstruction = null;
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
                 textInstruction.setText("Entnehmen Sie den Tiegel zur Glühung");
-                buttonNext.setText("OK");
+                buttonNext.setText("SPEICHERN");
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
                 textInstruction.setText("Legen Sie Tiegel "+ ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() +" auf die Waage");
@@ -199,10 +200,10 @@ private TextView textInstruction = null;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
                 if(Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
                     textInstruction.setText("Die Probe muss noch einmal nachgeglüht werden");
-                    buttonNext.setText("OK");
+                    buttonNext.setText("SPEICHERN");
                 }else{
                     textInstruction.setText("Aschebestimmung abgeschlossen");
-                    buttonNext.setText("BEENDEN");
+                    buttonNext.setText("SPEICHERN");
                 }
                 break;
             case ASH_DETERMINATION_9_BATCH_FINISHED:
@@ -278,6 +279,7 @@ private TextView textInstruction = null;
             dialog.setTitle("Geben Sie die Tiegelnummer ein");
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
+            editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             // set the custom dialog components - text, image and button
 
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);

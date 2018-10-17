@@ -1,5 +1,6 @@
 package com.certoclav.library.util;
 
+import android.os.Build;
 import android.util.Log;
 
 import java.io.File;
@@ -16,7 +17,19 @@ import java.util.Date;
 public class ExportUtils {
 
 
-		
+	private String rootFolder = "/storage";
+	private static File sdFolder;
+	public static final String[] SD_FOLDERS = new String[]{"extsd", "sdcard1"};
+
+
+	public ExportUtils() {
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			// Do something for lollipop and above versions
+			rootFolder = "/storage";
+		} else {
+			rootFolder = android.os.Environment.getExternalStorageDirectory().getPath();
+		}
+	}
 		
 		
 		/** Method to check whether external sdcard available and writable. This is adapted from
@@ -51,43 +64,43 @@ public class ExportUtils {
 		  return true;
 		  
 		 }
-		 
-		
-		
-		
-	/** Method to check whether external media available and writable. This is adapted from
-	   http://developer.android.com/guide/topics/data/data-storage.html#filesExternal */
 
-	 public boolean checkExternalMedia(){ //ckeck external usb storage
-		
 
-		 
-	  try{
-		  File root = new File(android.os.Environment.getExternalStorageDirectory().getPath() + "/udisk/");
-		    Log.e("Export Utils", "\nExternal file system root: "+root);
 
-		    // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
-		    File dir = new File (root.getAbsolutePath() + "/Certoclav_protocols");
-		    dir.delete();
-		    dir.mkdir();
-		    File file = new File(dir, "log.txt"); // for example protocol123.txt
-		    
-		   
-		        FileOutputStream f = new FileOutputStream(file);
-		        PrintWriter pw = new PrintWriter(f);
-		        pw.print("Folder last modified: " + Calendar.getInstance().getTime().toString());
-		        pw.flush();
-		        pw.close();
-		        f.close();
-		    } catch (Exception e) {
-		        return false;
-		    }
-	  
-	 
-	
-	  return true;
-	 }
+	/**
+	 * Method to check whether external media available and writable. This is adapted from
+	 * http://developer.android.com/guide/topics/data/data-storage.html#filesExternal
+	 */
+
+	public boolean checkExternalMedia() { //ckeck external usb storage
+
+
+		try {
+			File root = new File(rootFolder + "/udisk/");
+			Log.e("Export Utils", "\nExternal file system root: " + root);
+
+			// See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
+
+			File dir = new File(root.getAbsolutePath() + "/Certoclav_protocols");
+			dir.delete();
+			dir.mkdir();
+			File file = new File(dir, "log.txt"); // for example protocol123.txt
+
+
+			FileOutputStream f = new FileOutputStream(file);
+			PrintWriter pw = new PrintWriter(f);
+			pw.print("Folder last modified: " + Calendar.getInstance().getTime().toString());
+			pw.flush();
+			pw.close();
+			f.close();
+		} catch (Exception e) {
+			return false;
+		}
+
+
+		return true;
+	}
 	/** Method to write ascii text characters to file on SD card. Note that you must add a 
 	   WRITE_EXTERNAL_STORAGE permission to the manifest file or this method will throw
 	   a FileNotFound Exception because you won't have write permission. */

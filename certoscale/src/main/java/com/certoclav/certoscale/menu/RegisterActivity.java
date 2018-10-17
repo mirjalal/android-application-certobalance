@@ -73,7 +73,7 @@ private EditTextItem editLastName;
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if(s.toString().contains("@") && s.toString().contains("."))
+				if(s.toString().isEmpty() == false)
 					editEmailItem.setHasValidString(true);
 			}
 			

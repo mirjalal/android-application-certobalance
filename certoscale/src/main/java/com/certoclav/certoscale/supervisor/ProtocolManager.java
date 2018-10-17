@@ -716,6 +716,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 break;
             case ASH_DETERMINATION_1_HOME:
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
@@ -732,7 +733,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                     e.printStackTrace();
                 }
                 sb.append("Asche Gewicht" +  ": "+ ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                sb.append("Asche Prozent" +  ": "+ ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent() + "\n");
+                sb.append("Asche Prozent" +  ": "+ String.format(Locale.US,"%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
                 break;
 
 

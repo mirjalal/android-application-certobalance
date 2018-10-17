@@ -49,6 +49,7 @@
         android:layout_height="60dp" 
         android:layout_width="match_parent"
         android:inputType="textPassword"
+       android:visibility="gone"
        style="@style/edit_text_default"/>
 
     <Button

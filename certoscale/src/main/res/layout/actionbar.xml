@@ -91,7 +91,7 @@
 
      <Button
          android:id="@+id/actionbar_button_measuremt_pending"
-         android:text="VORHANDENE PROBE"
+         android:text="PROBE WÄHLEN"
 
          android:layout_width="match_parent"
          android:layout_height="match_parent"

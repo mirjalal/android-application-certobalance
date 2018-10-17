@@ -54,6 +54,7 @@
         android:layout_margin="10dp"
         android:src="@drawable/cloud_ok_white"
         android:layout_toLeftOf="@+id/container_button"
+        android:visibility="gone"
         android:layout_centerVertical="true">
     </ImageView>
 
