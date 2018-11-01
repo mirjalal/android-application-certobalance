@@ -6,33 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<TextView
-    android:id="@+id/application_fragment_ash_determination_text"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:text="Bitte stellen Sie den Tiegel auf die Waegeflaeche und druecken Sie WEITER"
-    style="@style/text_default"/>
+    <TextView
+        android:id="@+id/application_fragment_ash_determination_text"
+        style="@style/text_default"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Bitte stellen Sie den Tiegel auf die Waegeflaeche und druecken Sie WEITER" />
 
     <Button
         android:id="@+id/application_fragment_ash_determination_button_next"
+        style="@style/button_default"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:text="@string/next"
-        android:textAllCaps="true"
-        style="@style/button_default"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:text="@string/next"
+        android:textAllCaps="true" />
 
     <Button
         android:id="@+id/application_fragment_ash_determination_button_back"
+        style="@style/button_default"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:text="@string/back"
         android:textAllCaps="true"
-        style="@style/button_default"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:visibility="gone" />
 
-    </RelativeLayout>
+</RelativeLayout>

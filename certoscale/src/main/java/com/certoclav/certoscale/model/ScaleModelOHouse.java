@@ -18,7 +18,7 @@ import android_serialport_api.SerialPort;
  * Created by Enrico on 22.03.2017.
  */
 
-public class ScaleModelGandG extends ScaleModel {
+public class ScaleModelOHouse extends ScaleModel {
 
     private static double chosenValue = 0;
     private double lastValue = 0;
@@ -32,7 +32,7 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
 
-    public ScaleModelGandG() {
+    public ScaleModelOHouse() {
         super(2,//stabilisationTime,
                 220,// maximumCapazity,
                 4,// decimalPlaces,
@@ -54,13 +54,13 @@ public class ScaleModelGandG extends ScaleModel {
 
     @Override
     public int sendModeCommand() {
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
         return 0;
     }
 
     @Override
     public int sendPrintCommand() {
-        Scale.getInstance().getSerialsServiceScale().sendMessage("\u001Bp");
+        Scale.getInstance().getSerialsServiceScale().sendMessage("PRT\r\n");
         return 0;
     }
 
@@ -78,7 +78,7 @@ public class ScaleModelGandG extends ScaleModel {
     @Override
     public int pressTara() {
 
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bt");
+        ReadAndParseSerialService.getInstance().getCommandQueue().add("T\r\n");
         return 0;
     }
 
@@ -87,27 +87,31 @@ public class ScaleModelGandG extends ScaleModel {
         return 0;
     }
 
-    public void pressCalibrationButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+    public void pressCalibrationButton() {
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
     }
 
-    public void pressUnitButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
+    public void pressUnitButton() {
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bs");
     }
 
-    public void pressCountingButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Br");
+    public void pressCountingButton() {
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Br");
     }
 
 
-    public void pressLightButton(){
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bu");
+    public void pressLightButton() {
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bu");
     }
+
     @Override
     public double parseRecievedMessage(String message) {
-        int sign=1;
-        double value=lastValue;
-        if(message.length()>5) {
+        int sign = 1;
+        double value = lastValue;
+        message.replace("(", "");
+        message.replace(")", "");
+        message.replace("o", "");
+        if (message.length() > 5) {
             try {
 
                 if (message.contains("-.H")) { //overweight
@@ -123,7 +127,7 @@ public class ScaleModelGandG extends ScaleModel {
                 } else {
                     stable = false;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
 
@@ -132,9 +136,11 @@ public class ScaleModelGandG extends ScaleModel {
                 for (String arg : arguments) {
 
 
-
                     if (arg.length() > 2 && arg.contains(".")) {
                         try {
+                            Log.e("PARSE ARG", arg);
+                            arg = arg.replace("(", "");
+                            arg = arg.replace(")", "");
                             value = Double.parseDouble(arg);
                             break;
                         } catch (Exception e) {
@@ -142,8 +148,8 @@ public class ScaleModelGandG extends ScaleModel {
                         }
                     }
                 }
-                value=value*sign;
-            }else{
+                value = value * sign;
+            } else {
                 value = lastValue;
             }
 
@@ -154,9 +160,9 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
     @Override
-    public int  internalCalibration() {
+    public int internalCalibration() {
 
-        ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
+        //ReadAndParseSerialService.getInstance().getCommandQueue().add("\u001Bq");
         return 0;
     }
 
@@ -164,35 +170,20 @@ public class ScaleModelGandG extends ScaleModel {
     public int externelCalibration(final Context context) {
 
         setPeriodicMessagingEnabled(false);
-
-
-        try{
-
-
+        
+        try {
             showChooseCalibrationWeightDialog(context);
-
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
         return 0;
     }
 
 
-    public class PutCalibrationWeightDialog extends Dialog
-    {
+    public class PutCalibrationWeightDialog extends Dialog {
         private StableListener listener = null;
-        public PutCalibrationWeightDialog(final Context context)
-        {
+
+        public PutCalibrationWeightDialog(final Context context) {
             // Set your theme here
             super(context, android.R.style.Theme_Dialog);
 
@@ -200,14 +191,14 @@ public class ScaleModelGandG extends ScaleModel {
             // this.setContentView(R.layout.myDialogLayout);
         }
 
-        public void setOnStableListener(StableListener listener){
+        public void setOnStableListener(StableListener listener) {
             Scale.getInstance().setOnStableListener(listener);
         }
 
 
         @Override
         protected void onStop() {
-            if(listener != null) {
+            if (listener != null) {
                 Scale.getInstance().removeOnStableListener(listener);
             }
             super.onStop();
@@ -217,12 +208,11 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
 
-
-    public void showChooseCalibrationWeightDialog(final Context context){
+    public void showChooseCalibrationWeightDialog(final Context context) {
         final Dialog dialogChooseCalibrationWeight = new Dialog(context);
         dialogChooseCalibrationWeight.setContentView(R.layout.dialog_instruction);
         dialogChooseCalibrationWeight.setTitle(R.string.please_choose_calibration_weight);
-        ((TextView)dialogChooseCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(R.string.please_choose_calibration_weight);
+        ((TextView) dialogChooseCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(R.string.please_choose_calibration_weight);
         dialogChooseCalibrationWeight.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -248,7 +238,7 @@ public class ScaleModelGandG extends ScaleModel {
                 dialogChooseCalibrationWeight.dismiss();
                 try {
                     showPutCalibrationWeightDialog(context);
-                }catch(Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -267,9 +257,9 @@ public class ScaleModelGandG extends ScaleModel {
                 pressTara();
                 pressCalibrationButton();
                 dialogChooseCalibrationWeight.dismiss();
-                try{
+                try {
                     showPutCalibrationWeightDialog(context);
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -279,14 +269,13 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
 
-    public void showTareDialog(Context context){
-
+    public void showTareDialog(Context context) {
 
 
         final Dialog dialogTareBalance = new Dialog(context);
         dialogTareBalance.setContentView(R.layout.dialog_instruction);
         dialogTareBalance.setTitle(context.getString(R.string.external_calibration));
-        ((TextView)dialogTareBalance.findViewById(R.id.dialog_instruction_text)).setText(R.string.remove_the_calibration_weight_from_the_pan);
+        ((TextView) dialogTareBalance.findViewById(R.id.dialog_instruction_text)).setText(R.string.remove_the_calibration_weight_from_the_pan);
         dialogTareBalance.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -326,13 +315,12 @@ public class ScaleModelGandG extends ScaleModel {
     }
 
 
-
-    public void showPutCalibrationWeightDialog(final Context context){
+    public void showPutCalibrationWeightDialog(final Context context) {
 
         final PutCalibrationWeightDialog dialogPutCalibrationWeight = new PutCalibrationWeightDialog(context);
         dialogPutCalibrationWeight.setContentView(R.layout.dialog_instruction);
         dialogPutCalibrationWeight.setTitle(context.getString(R.string.external_calibration));
-        ((TextView)dialogPutCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(context.getString(R.string.place) + " "+ getChosenValue() + " g " +context.getString(R.string.on_the_pan));
+        ((TextView) dialogPutCalibrationWeight.findViewById(R.id.dialog_instruction_text)).setText(context.getString(R.string.place) + " " + getChosenValue() + " g " + context.getString(R.string.on_the_pan));
         // set the custom dialog components - text, image and button
         // set the custom dialog components - text, image and button
         dialogPutCalibrationWeight.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -372,11 +360,9 @@ public class ScaleModelGandG extends ScaleModel {
                 try {
                     showTareDialog(context);
 
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
-
-
 
 
             }

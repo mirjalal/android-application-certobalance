@@ -22,26 +22,24 @@ import com.certoclav.library.util.ExportUtils;
 
 public class ApplicationFragmentAshDetermination extends Fragment implements ScaleApplicationListener {
 
-private TextView textInstruction = null;
+    private TextView textInstruction = null;
     private Button buttonNext = null;
     private Button buttonBack = null;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.menu_application_fragment_ash_determination,container, false);
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.menu_application_fragment_ash_determination, container, false);
         textInstruction = (TextView) rootView.findViewById(R.id.application_fragment_ash_determination_text);
         buttonNext = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
         buttonBack = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_back);
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                switch(Scale.getInstance().getScaleApplication()) {
+                switch (Scale.getInstance().getScaleApplication()) {
                     case ASH_DETERMINATION_1_HOME:
-                       // Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
+                        // Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
                         //ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
                         break;
                     case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
@@ -51,66 +49,62 @@ private TextView textInstruction = null;
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_4_WEIGH_BEAKER);
                         break;
                     case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                        if(Scale.getInstance().isStable()) {
+                        if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().setAshWeightBeaker(currentWeight);
                             updateUIAccordingToApplicationState();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_5_WEIGHING_SAMPLE);
-                        }else {
-                            Toast.makeText(getActivity(),"Bitte warten Sie bis das Gewicht stabil ist",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                        if(Scale.getInstance().isStable()) {
+                        if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().setAshWeightBeakerWithSample(currentWeight);
                             saveProtocolContent();
                             updateUIAccordingToApplicationState();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
-                        }else {
-                            Toast.makeText(getActivity(),"Bitte warten Sie bis das Gewicht stabil ist",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
                         break;
                     case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                        if(Scale.getInstance().isStable()) {
+                        if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
                             saveProtocolContent();
                             updateUIAccordingToApplicationState();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT);
-                        }else {
-                            Toast.makeText(getActivity(),"Bitte warten Sie bis das Gewicht stabil ist",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                        if(Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
+                        if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
-                        }else{
+                        } else {
                             saveAshDeterminationProtocols();
                             ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                             saveProtocolContent();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
-                            Toast.makeText(getActivity(),"Protokoll gespeichert",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                         }
                         break;
                     case ASH_DETERMINATION_9_BATCH_FINISHED:
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
                         break;
                 }
-
-
             }
         });
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                switch(Scale.getInstance().getScaleApplication()) {
+                switch (Scale.getInstance().getScaleApplication()) {
                     case ASH_DETERMINATION_1_HOME:
                         break;
                     case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
@@ -139,50 +133,39 @@ private TextView textInstruction = null;
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT);
                         break;
                 }
-
-
             }
         });
-
-
-
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
     }
 
 
     @Override
     public void onResume() {
-
         Scale.getInstance().setOnApplicationListener(this);
         updateUIAccordingToApplicationState();
-
         super.onResume();
-
-
-
     }
 
     private void updateUIAccordingToApplicationState() {
-
-        switch(Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case ASH_DETERMINATION_1_HOME:
                 textInstruction.setText("Drücken Sie START um die Aschewertbestimmung zu starten");
                 buttonNext.setText("");
                 break;
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-                if(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName().isEmpty())
+                if (ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName().isEmpty())
                     showBatchNameEditor();
                 textInstruction.setText("Geben Sie die Probennummer an. Bestätigen Sie mit WEITER");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-                if(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName().isEmpty())
+                if (ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName().isEmpty())
                     showBeakerNameEditor();
                 textInstruction.setText("Geben Sie die Tiegelnummer an. Bestätigen Sie mit WEITER");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName()+" auf die Waage");
+                textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
@@ -194,14 +177,14 @@ private TextView textInstruction = null;
                 buttonNext.setText("SPEICHERN");
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                textInstruction.setText("Legen Sie Tiegel "+ ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() +" auf die Waage");
+                textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                if(Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
+                if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
                     textInstruction.setText("Die Probe muss noch einmal nachgeglüht werden");
                     buttonNext.setText("SPEICHERN");
-                }else{
+                } else {
                     textInstruction.setText("Aschebestimmung abgeschlossen");
                     buttonNext.setText("SPEICHERN");
                 }
@@ -224,7 +207,7 @@ private TextView textInstruction = null;
     }
 
 
-    private void showBatchNameEditor(){
+    private void showBatchNameEditor() {
         try {
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
@@ -249,15 +232,13 @@ private TextView textInstruction = null;
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
 
 
-                        if(editText.getText().toString().isEmpty() == false) {
-                            ApplicationManager.getInstance().getCurrentProtocol().setAshSampleName((editText.getText().toString()));
-                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER);
-                        }
-
+                    if (editText.getText().toString().isEmpty() == false) {
+                        ApplicationManager.getInstance().getCurrentProtocol().setAshSampleName((editText.getText().toString()));
+                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER);
+                    }
 
 
                     dialog.dismiss();
-
 
 
                 }
@@ -272,7 +253,7 @@ private TextView textInstruction = null;
     }
 
 
-    private void showBeakerNameEditor(){
+    private void showBeakerNameEditor() {
         try {
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
@@ -297,9 +278,9 @@ private TextView textInstruction = null;
                 public void onClick(View v) {
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
 
-                    try{
+                    try {
 
-                        if(editText.getText().toString().isEmpty() == false) {
+                        if (editText.getText().toString().isEmpty() == false) {
                             ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
                             StringBuilder sb = new StringBuilder();
                             sb.append("Tiegel Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
@@ -308,12 +289,11 @@ private TextView textInstruction = null;
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_4_WEIGH_BEAKER);
                         }
 
-                    }catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName("");
                     }
 
                     dialog.dismiss();
-
 
 
                 }
@@ -327,12 +307,12 @@ private TextView textInstruction = null;
 
     }
 
-    public void saveAshDeterminationProtocols(){
+    public void saveAshDeterminationProtocols() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("samplenumber" +  ","+ ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
+        sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
         sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample()) + "\r\n");
-        sb.append("ash_percent" +  ","+ ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
+        sb.append("ash_percent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
 
         ExportUtils exportUtils = new ExportUtils();
         exportUtils.writeCSVFileToInternalSD(sb.toString());
@@ -345,7 +325,7 @@ private TextView textInstruction = null;
         updateUIAccordingToApplicationState();
     }
 
-    private void saveProtocolContent(){
+    private void saveProtocolContent() {
         //
         StringBuilder sb = new StringBuilder();
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
@@ -354,7 +334,7 @@ private TextView textInstruction = null;
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
 
         String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
-        switch (Scale.getInstance().getScaleApplication()){
+        switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
                 scaleApplicationName = getString(R.string.app_weighing);
                 break;
