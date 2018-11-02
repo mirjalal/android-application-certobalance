@@ -48,8 +48,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             public void onClick(View v) {
                 switch (Scale.getInstance().getScaleApplication()) {
                     case ASH_DETERMINATION_1_HOME:
-                        // Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
-                        //ApplicationManager.getInstance().setTareInGram(Scale.getInstance().getWeightInGram());
                         break;
                     case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER);

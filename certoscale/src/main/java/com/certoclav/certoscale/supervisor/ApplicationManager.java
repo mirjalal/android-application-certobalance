@@ -54,62 +54,100 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
  * Created by Michael on 12/6/2016.
  */
 
-public class ApplicationManager implements WeightListener , ScaleApplicationListener {
+public class ApplicationManager implements WeightListener, ScaleApplicationListener {
+    long nanoTimeSinceStable = 1000000000;
+
+    boolean returnFromSubMenu = false;
+
+    public boolean isReturnFromSubMenu() {
+        return returnFromSubMenu;
+    }
+
+    public void setReturnFromSubMenu(boolean returnFromSubMenu) {
+        this.returnFromSubMenu = returnFromSubMenu;
+    }
 
 
+    private String Currency = "€";
+
+    public String getCurrency() {
+        return Currency;
+    }
+
+    public void setCurrency(String currency) {
+        Currency = currency;
+    }
+
+    private Unit currentUnit = new Unit(0d, 1d, "gram", Unit.UNIT_GRAM, "", true, false);
+
+    public Unit getCurrentUnit() {
+        return currentUnit;
+    }
+
+    public void setCurrentUnit(Unit currentUnit) {
+        this.currentUnit = currentUnit;
+    }
 
 
-    long nanoTimeSinceStable=1000000000;
+    public ProtocolManager getProtocolPrinter() {
+        return protocolPrinter;
+    }
 
-    boolean returnFromSubMenu=false;
-    public boolean isReturnFromSubMenu() {return returnFromSubMenu;}
-    public void setReturnFromSubMenu(boolean returnFromSubMenu) {this.returnFromSubMenu = returnFromSubMenu;}
+    public void setProtocolPrinter(ProtocolManager protocolPrinter) {
+        this.protocolPrinter = protocolPrinter;
+    }
 
-
-    private String Currency="€";
-    public String getCurrency() {return Currency;}
-    public void setCurrency(String currency) {Currency = currency;}
-
-    private Unit currentUnit=new Unit(0d,1d,"gram",Unit.UNIT_GRAM,"",true,false);
-    public Unit getCurrentUnit() {return currentUnit;}
-    public void setCurrentUnit(Unit currentUnit) {this.currentUnit = currentUnit;}
+    private ProtocolManager protocolPrinter = new ProtocolManager();
 
 
-    public ProtocolManager getProtocolPrinter() {return protocolPrinter;}
-    public void setProtocolPrinter(ProtocolManager protocolPrinter) {this.protocolPrinter = protocolPrinter;}
-    private ProtocolManager protocolPrinter=new ProtocolManager();
+    private double scalingFactor = 1;
+
+    public double getScalingFactor() {
+        return scalingFactor;
+    }
+
+    public void setScalingFactor(double scalingFactor) {
+        this.scalingFactor = scalingFactor;
+    }
 
 
-    private double scalingFactor=1;
-    public double getScalingFactor() {return scalingFactor;}
-    public void setScalingFactor(double scalingFactor) {this.scalingFactor = scalingFactor;}
+    private double PeakHoldMaximum = 0;
 
+    public double getPeakHoldMaximum() {
+        return PeakHoldMaximum;
+    }
 
-    private double PeakHoldMaximum=0;
-    public double getPeakHoldMaximum() {return PeakHoldMaximum;}
-    public void setPeakHoldMaximum(double peakHoldMaximum) {PeakHoldMaximum = peakHoldMaximum;}
+    public void setPeakHoldMaximum(double peakHoldMaximum) {
+        PeakHoldMaximum = peakHoldMaximum;
+    }
 
 
     //Density Determination Variables
-    private int density_step_counter=0;
+    private int density_step_counter = 0;
+
     public int getDensity_step_counter() {
         return density_step_counter;
     }
-    public void setDensity_step_counter(int density_step_counter) {this.density_step_counter = density_step_counter;}
 
-    private double density=0;
-    public double getDensity() {return density;}
-    public void setDensity(double density) {this.density = density;}
+    public void setDensity_step_counter(int density_step_counter) {
+        this.density_step_counter = density_step_counter;
+    }
 
+    private double density = 0;
 
+    public double getDensity() {
+        return density;
+    }
 
-
-
+    public void setDensity(double density) {
+        this.density = density;
+    }
 
 
     private Recipe currentRecipe = null;
     private RecipeEntry currentRecipeEntry = null;
     ArrayList<RecipeEntryListener> recipeEntryListeners = new ArrayList<RecipeEntryListener>();
+
     public Recipe getCurrentRecipe() {
         return currentRecipe;
     }
@@ -119,10 +157,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
-    public void setOnRecipeEntryListener (RecipeEntryListener listener){
+    public void setOnRecipeEntryListener(RecipeEntryListener listener) {
         this.recipeEntryListeners.add(listener);
     }
-    public void removeOnRecipeEntryListener (RecipeEntryListener listener){
+
+    public void removeOnRecipeEntryListener(RecipeEntryListener listener) {
         this.recipeEntryListeners.remove(listener);
     }
 
@@ -132,19 +171,24 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public void setCurrentRecipeEntry(RecipeEntry currentRecipeEntry) {
         this.currentRecipeEntry = currentRecipeEntry;
-        for(RecipeEntryListener listener : recipeEntryListeners){
+        for (RecipeEntryListener listener : recipeEntryListeners) {
             listener.onRecipeEntryChanged(currentRecipeEntry);
         }
     }
 
 
-    private double density_weight_air=0;
+    private double density_weight_air = 0;
+
     public double getDensity_weight_air() {
         return density_weight_air;
     }
-    public void setDensity_weight_air(double density_weight_air) {this.density_weight_air = density_weight_air;}
 
-    private double density_weight_liquid=0;
+    public void setDensity_weight_air(double density_weight_air) {
+        this.density_weight_air = density_weight_air;
+    }
+
+    private double density_weight_liquid = 0;
+
     public double getDensity_weight_liquid() {
         return density_weight_liquid;
     }
@@ -154,82 +198,139 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
+    private double pholdWeight = 0;
+
+    public double getPholdWeight() {
+        return pholdWeight;
+    }
+
+    public void setPholdWeight(double pholdWeight) {
+        this.pholdWeight = pholdWeight;
+    }
 
 
-    private double pholdWeight=0;
-    public double getPholdWeight() {return pholdWeight;}
-    public void setPholdWeight(double pholdWeight) {this.pholdWeight = pholdWeight;}
-
-
-
-    private boolean  peakholdactivated=false;
+    private boolean peakholdactivated = false;
 
     //Ingrediant Costing variable
-    private double Ingrediant_Unit_Cost=0;
-    private double Ingrediant_Total_Weight=0;
-    private double Ingrediant_Total_Cost=0;
+    private double Ingrediant_Unit_Cost = 0;
+    private double Ingrediant_Total_Weight = 0;
+    private double Ingrediant_Total_Cost = 0;
 
 
     //Pipette Adjustment variables
-    private String pipette_name="";
-    private int pipette_number=0;
+    private String pipette_name = "";
+    private int pipette_number = 0;
 
 
+    private double pipetteCalculatedML = 0;
 
-    private double pipetteCalculatedML=0;
-    public double getPipetteCalculatedML() {return pipetteCalculatedML;}
-    public void setPipetteCalculatedML(double pipetteCalculatedML) {this.pipetteCalculatedML = pipetteCalculatedML;}
+    public double getPipetteCalculatedML() {
+        return pipetteCalculatedML;
+    }
+
+    public void setPipetteCalculatedML(double pipetteCalculatedML) {
+        this.pipetteCalculatedML = pipetteCalculatedML;
+    }
 
 
+    private int pipette_current_sample = 0;
 
-    private int pipette_current_sample=0;
-    public int getPipette_current_sample() {return pipette_current_sample;}
-    public void setPipette_current_sample(int pipette_current_sample) {this.pipette_current_sample = pipette_current_sample;}
+    public int getPipette_current_sample() {
+        return pipette_current_sample;
+    }
+
+    public void setPipette_current_sample(int pipette_current_sample) {
+        this.pipette_current_sample = pipette_current_sample;
+    }
 
 
-    public String getPipette_name() {return pipette_name;}
-    public void setPipette_name(String pipette_name) {this.pipette_name = pipette_name;}
-    public int getPipette_number() {return pipette_number;}
-    public void setPipette_number(int pipette_number) {this.pipette_number = pipette_number;}
+    public String getPipette_name() {
+        return pipette_name;
+    }
 
+    public void setPipette_name(String pipette_name) {
+        this.pipette_name = pipette_name;
+    }
+
+    public int getPipette_number() {
+        return pipette_number;
+    }
+
+    public void setPipette_number(int pipette_number) {
+        this.pipette_number = pipette_number;
+    }
 
 
     //SQC variables
-    private int sqcPT1=0;
-    private int sqcPT2=0;
-    private int sqcNT1=0;
-    private int sqcNT2=0;
+    private int sqcPT1 = 0;
+    private int sqcPT2 = 0;
+    private int sqcNT1 = 0;
+    private int sqcNT2 = 0;
 
 
-    public int getSqcPT1() {return sqcPT1;}
-    public void setSqcPT1(int sqcPT1) {this.sqcPT1 = sqcPT1;}
+    public int getSqcPT1() {
+        return sqcPT1;
+    }
 
-    public int getSqcPT2() {return sqcPT2;}
-    public void setSqcPT2(int sqcPT2) {this.sqcPT2 = sqcPT2;}
+    public void setSqcPT1(int sqcPT1) {
+        this.sqcPT1 = sqcPT1;
+    }
 
-    public int getSqcNT1() {return sqcNT1;}
-    public void setSqcNT1(int sqcNT1) {this.sqcNT1 = sqcNT1;}
+    public int getSqcPT2() {
+        return sqcPT2;
+    }
 
-    public int getSqcNT2() {return sqcNT2;}
-    public void setSqcNT2(int sqcNT2) {this.sqcNT2 = sqcNT2;}
+    public void setSqcPT2(int sqcPT2) {
+        this.sqcPT2 = sqcPT2;
+    }
+
+    public int getSqcNT1() {
+        return sqcNT1;
+    }
+
+    public void setSqcNT1(int sqcNT1) {
+        this.sqcNT1 = sqcNT1;
+    }
+
+    public int getSqcNT2() {
+        return sqcNT2;
+    }
+
+    public void setSqcNT2(int sqcNT2) {
+        this.sqcNT2 = sqcNT2;
+    }
 
 
+    private String batchName = "";
 
+    public String getBatchName() {
+        return batchName;
+    }
 
-    private String batchName="";
-    public String getBatchName() {return batchName;}
-    public void setBatchName(String batchName) {this.batchName = batchName;}
+    public void setBatchName(String batchName) {
+        this.batchName = batchName;
+    }
 
     private SQC currentBatch = null;
-    public SQC getCurrentBatch() {return currentBatch;}
-    public void setCurrentBatch(SQC currentBatch) {this.currentBatch = currentBatch;}
+
+    public SQC getCurrentBatch() {
+        return currentBatch;
+    }
+
+    public void setCurrentBatch(SQC currentBatch) {
+        this.currentBatch = currentBatch;
+    }
 
 
-    public List<SQC> batchList= new ArrayList<SQC>();
-    public List<SQC> getBatchList() {return batchList;}
-    public void setBatchList(List<SQC> batchList) {this.batchList = batchList;}
+    public List<SQC> batchList = new ArrayList<SQC>();
 
+    public List<SQC> getBatchList() {
+        return batchList;
+    }
 
+    public void setBatchList(List<SQC> batchList) {
+        this.batchList = batchList;
+    }
 
 
     public List<Item> getIngrediantCostList() {
@@ -244,9 +345,9 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private List<Item> ingrediantCostList = new ArrayList<Item>();
 
     //Variables for isStable calculation
-    private double lastStableweight=0;
+    private double lastStableweight = 0;
     private Double weighOld = 0d;
-    private int stableCounter=0;
+    private int stableCounter = 0;
 
 
     public Item getCurrentItem() {
@@ -270,10 +371,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     ArrayList<StatisticListener> statisticListeners = new ArrayList<StatisticListener>();
 
-    public void setOnStatisticListener (StatisticListener listener){
+    public void setOnStatisticListener(StatisticListener listener) {
         this.statisticListeners.add(listener);
     }
-    public void removeOnStatisticListener (StatisticListener listener){
+
+    public void removeOnStatisticListener(StatisticListener listener) {
         this.statisticListeners.remove(listener);
     }
 
@@ -282,19 +384,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     }
 
-    /*public SummaryStatistics getStatistic() {
-        return statistic;
+    public Statistics getStats() {
+        return stats;
     }
-    */
 
+    public void setStats(Statistics stats) {
+        this.stats = stats;
+    }
 
-    //private SummaryStatistics statistic = new SummaryStatistics();
-
-    public Statistics getStats() {return stats;}
-
-    public void setStats(Statistics stats) {this.stats = stats;}
-
-    private Statistics stats=new Statistics();
+    private Statistics stats = new Statistics();
 
     private static ApplicationManager instance = new ApplicationManager();
 
@@ -309,7 +407,6 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     private Library currentLibrary = null;
 
 
-
     public String getAnimalWeightAsStringWithUnit() {
 
         return getTransformedWeightAsStringWithUnit(animalWeight);
@@ -321,6 +418,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return animalWeight;
 
     }
+
     public void setAnimalWeight(Double animalWeight) {
 
         this.animalWeight = animalWeight;
@@ -328,7 +426,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     private Double animalWeight = 0d;
 
-     public Double getAwpCalcSampleSize() {
+    public Double getAwpCalcSampleSize() {
         return currentLibrary.getSampleSize();
     }
 
@@ -337,7 +435,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public Double transformCurrentUnitToGram(Double value) {
-         return value /(currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent()));
+        return value / (currentUnit.getFactor() * Math.pow(10, currentUnit.getExponent()));
     }
 
 
@@ -353,22 +451,23 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         currentLibrary.setUnderLimitCheckWeighing(underLimit);
     }
 
-    public void setCheckNominal(double nominal){
+    public void setCheckNominal(double nominal) {
         currentLibrary.setCheckNominal(nominal);
     }
 
-    public void setCheckNominalToleranceUnder(double NominalToleranceUnder){
+    public void setCheckNominalToleranceUnder(double NominalToleranceUnder) {
         currentLibrary.setCheckNominalToleranceUnder(NominalToleranceUnder);
     }
 
-    public void setCheckNominalToleranceUnderPercent(double NominalToleranceUnderPercent){
+    public void setCheckNominalToleranceUnderPercent(double NominalToleranceUnderPercent) {
         currentLibrary.setCheckNominalToleranceUnderPercent(NominalToleranceUnderPercent);
     }
 
-    public void setCheckNominalToleranceOverPercent(double NominalToleranceOverPercent){
+    public void setCheckNominalToleranceOverPercent(double NominalToleranceOverPercent) {
         currentLibrary.setCheckNominalToleranceOverPercent(NominalToleranceOverPercent);
     }
-    public void setCheckNominalToleranceOver(double NominalToleranceOver){
+
+    public void setCheckNominalToleranceOver(double NominalToleranceOver) {
         currentLibrary.setCheckNominalToleranceOver(NominalToleranceOver);
     }
 
@@ -411,11 +510,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-
     public String getUnitAsString() {
         switch (Scale.getInstance().getScaleApplication()) {
-           // case PART_COUNTING:
-           //     return "pcs";
+            // case PART_COUNTING:
+            //     return "pcs";
 
             case PERCENT_WEIGHING:
                 return "%";
@@ -438,14 +536,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return (int) Math.round(Scale.getInstance().getWeightInGram() / currentLibrary.getAveragePieceWeight());
     }
 
-    public Double getTareInCurrentUnit(){
+    public Double getTareInCurrentUnit() {
         return transformGramToCurrentUnit(getTareInGram());
     }
 
     public Double getTareInGram() {
         return currentLibrary.getTara();
     }
-
 
 
     public int getTareInPieces() {
@@ -458,25 +555,21 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public String getSumAsStringWithUnit() {
-
-
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
                 return String.format("%d", getSumInPieces()) + " " + "pcs";
             default:
-                if (INTERNAL_TARA_ZERO_BUTTON){
+                if (INTERNAL_TARA_ZERO_BUTTON) {
                     return getTransformedWeightAsStringWithUnit(getSumInGram());
-                }else {
+                } else {
                     return getTransformedWeightAsStringWithUnit(getSumInGram() + getTareInGram());
                 }
         }
-
-
     }
+
     public double getSum() {
-        return getSumInGram()+getTareInGram();
+        return getSumInGram() + getTareInGram();
     }
-
 
 
     public String getSumAsString() {
@@ -485,24 +578,13 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public String getTaredValueAsStringWithUnit() {
-
-            switch (Scale.getInstance().getScaleApplication()) {
-                case PART_COUNTING:
-                    return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
-                default:
-                    return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
-
-            }
-
+        switch (Scale.getInstance().getScaleApplication()) {
+            case PART_COUNTING:
+                return String.format("%d", getSumInPieces() - getTareInPieces()) + " " + "pcs";
+            default:
+                return getTransformedWeightAsStringWithUnit(getTaredValueInGram());
+        }
     }
-
-
-
-
-
-
-
-
 
 
     public String getTareAsStringWithUnit() {
@@ -523,8 +605,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         Scale.getInstance().setOnWeightListener(this);
         Scale.getInstance().setOnApplicationListener(this);
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
-        currentUnit = new Unit(0d,1d,"gram","g","",true,false);
-        currentLibrary = new Library("",0,"",0,"default",0d,0d,0d,0d,0d,0d,0d,0d,0d,100,0d,0,new Date(),true,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,1);
+        currentUnit = new Unit(0d, 1d, "gram", "g", "", true, false);
+        currentLibrary = new Library("", 0, "", 0, "default", 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 100, 0d, 0, new Date(), true, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 1);
     }
 
 
@@ -533,66 +615,70 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
     public Double getTaredValueInGram() {
-
         if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
             return getSumInGram() - getTareInGram();
-        }else{
+        } else {
             return getSumInGram();
         }
 
     }
 
-    public boolean getPeakHoldActivated(){
+    public boolean getPeakHoldActivated() {
         return peakholdactivated;
     }
 
-    public boolean setPeakHoldActivated( boolean status){
-        peakholdactivated=status;
+    public boolean setPeakHoldActivated(boolean status) {
+        peakholdactivated = status;
         return true;
     }
 
-    public double getIngrediantUnitCost(){
+    public double getIngrediantUnitCost() {
         return Ingrediant_Unit_Cost;
     }
 
-    public double setIngrediantUnitCost(double unitcost){
-        Ingrediant_Unit_Cost=unitcost;
+    public double setIngrediantUnitCost(double unitcost) {
+        Ingrediant_Unit_Cost = unitcost;
         return 0;
     }
 
 
-
-    public double getIngrediantTotalCost(){
+    public double getIngrediantTotalCost() {
         return Ingrediant_Total_Cost;
     }
 
-    public double setIngrediantTotalCost(double totalcost){
-        Ingrediant_Total_Cost=totalcost;
+    public double setIngrediantTotalCost(double totalcost) {
+        Ingrediant_Total_Cost = totalcost;
         return 0;
     }
 
-    public double getIngrediantTotalWeight(){
+    public double getIngrediantTotalWeight() {
         return Ingrediant_Total_Weight;
     }
-    public double setIngrediantTotalWeight(double totalweight){
-        Ingrediant_Total_Weight=totalweight;
+
+    public double setIngrediantTotalWeight(double totalweight) {
+        Ingrediant_Total_Weight = totalweight;
         return 0;
     }
 
 
-    public double getUnderLimitCheckWeighing(){return currentLibrary.getUnderLimitCheckWeighing();}
-    public double getOverLimitCheckWeighing(){return currentLibrary.getOverLimitCheckWeighing();}
+    public double getUnderLimitCheckWeighing() {
+        return currentLibrary.getUnderLimitCheckWeighing();
+    }
+
+    public double getOverLimitCheckWeighing() {
+        return currentLibrary.getOverLimitCheckWeighing();
+    }
 
     public String getSumAsStringInGram() {
         return String.format("%.4f", getSumInGram()) + " g";
     }
 
     public String getTaredValueAsStringInGram() {
-       // switch (Scale.getInstance().getScaleApplication()) {
-       //     case PART_COUNTING:
-       //         return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
-       //     default:
-                return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
+        // switch (Scale.getInstance().getScaleApplication()) {
+        //     case PART_COUNTING:
+        //         return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
+        //     default:
+        return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
         //}
     }
 
@@ -604,7 +690,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 stats.getSamples().add((double) (getSumInPieces() - getTareInPieces()));
                 break;
             case ANIMAL_WEIGHING:
-                stats.getStatistic().addValue( animalWeight);
+                stats.getStatistic().addValue(animalWeight);
                 stats.getSamples().add(animalWeight);
                 break;
             case PIPETTE_ADJUSTMENT_1_HOME:
@@ -613,13 +699,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
                 break;
 
 
-
             default:
                 stats.getStatistic().addValue(getTaredValueInGram());
                 stats.getSamples().add(getTaredValueInGram());
                 break;
         }
-        for (StatisticListener listener : statisticListeners){
+        for (StatisticListener listener : statisticListeners) {
             listener.onStatisticChanged(stats.getStatistic());
         }
 
@@ -629,7 +714,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public void clearStatistics() {
         stats.getSamples().clear();
         stats.getStatistic().clear();
-        for(StatisticListener listener : statisticListeners){
+        for (StatisticListener listener : statisticListeners) {
             listener.onStatisticChanged(stats.getStatistic());
         }
     }
@@ -654,25 +739,24 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-
     public Double transformGramToCurrentUnit(double gram) {
-        return gram * currentUnit.getFactor()* Math.pow(10,currentUnit.getExponent());
+        return gram * currentUnit.getFactor() * Math.pow(10, currentUnit.getExponent());
     }
 
 
     public String getTransformedWeightAsString(double gram) {
         String retVal = "";
         try {
-            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+            if (Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING) {
                 retVal = String.format("%.0f", gram);
-            }else {
+            } else {
                 int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
-                if(numDezimalPlaces < 0){
+                if (numDezimalPlaces < 0) {
                     numDezimalPlaces = 0;
                 }
-                retVal = String.format(Locale.US,"%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram));
+                retVal = String.format(Locale.US, "%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram));
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
         return retVal;
@@ -683,16 +767,16 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getTransformedWeightAsStringWithUnit(double gram) {
         String retVal = "";
         try {
-            if(Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING){
+            if (Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING) {
                 retVal = String.format("%.0f", gram) + " pcs";
-            }else {
+            } else {
                 int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
-                if(numDezimalPlaces < 0){
+                if (numDezimalPlaces < 0) {
                     numDezimalPlaces = 0;
                 }
                 retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram)) + " " + getCurrentUnit().getName();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
         return retVal;
@@ -719,10 +803,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-
-
     public double getCheckNominaldouble() {
-       return currentLibrary.getCheckNominal();
+        return currentLibrary.getCheckNominal();
     }
 
     public String getCheckNominalToleranceOverAsStringWithUnit() {
@@ -733,9 +815,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     public String getCheckNominalToleranceOverPercent() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceOverPercent());
     }
+
     public String getCheckNominalToleranceUnderPercent() {
         return String.format("%.4f", currentLibrary.getCheckNominalToleranceUnderPercent());
     }
+
     public double getCheckNominalToleranceOverdouble() {
         return currentLibrary.getCheckNominalToleranceOver();
     }
@@ -746,7 +830,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public double getCheckNominalToleranceUnderdouble() {
-        return  currentLibrary.getCheckNominalToleranceUnder();
+        return currentLibrary.getCheckNominalToleranceUnder();
     }
 
 
@@ -798,13 +882,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         return getTransformedWeightAsStringWithUnit(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
     }
 
-   public String getReferenceWeightAsStringWithUnit() {
+    public String getReferenceWeightAsStringWithUnit() {
         return getTransformedWeightAsStringWithUnit(getCurrentLibrary().getReferenceWeight());
     }
+
     public Double getDifferenceInGram() {
 
         Double retval = 0d;
-        if(Scale.getInstance().getScaleApplication() == DIFFERENTIAL_WEIGHING) {
+        if (Scale.getInstance().getScaleApplication() == DIFFERENTIAL_WEIGHING) {
             try {
                 Double targetWeight = getCurrentItem().getWeight();
                 Double taredWeight = getTaredValueInGram();
@@ -813,7 +898,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             } catch (Exception e) {
                 retval = 0d;
             }
-        }else{
+        } else {
             try {
                 Double targetWeight = getTarget();
                 Double taredWeight = getTaredValueInGram();
@@ -828,15 +913,11 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-
-
-
-
     public Double getDifferenceToInitialWeightInGram() {
         Double retval = 0d;
         try {
             retval = getTaredValueInGram() - getCurrentItem().getWeight();
-        }catch (Exception e){
+        } catch (Exception e) {
             retval = 0d;
         }
         return retval;
@@ -845,15 +926,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getDifferenceInPercent() {
 
-        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+        double ref = (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
 
-        if (ref==0){
+        if (ref == 0) {
             return String.format("%.4f", (ref));
-        }else {
+        } else {
 
             double netto = (getSumInGram() - getTareInGram());
 
-            double percent = ((netto/ref)*100)-100;
+            double percent = ((netto / ref) * 100) - 100;
 
 
             return String.format("%.4f", percent);
@@ -862,15 +943,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getFillingDifferenceInPercent() {
 
-        double ref=currentLibrary.getTarget();
+        double ref = currentLibrary.getTarget();
         double netto = getTaredValueInGram();
 
-        double diff=netto-ref;
+        double diff = netto - ref;
 
-        if (ref==0){
+        if (ref == 0) {
             return String.format("%.4f", (ref));
-        }
-        else {
+        } else {
             double percent = (diff / ref) * 100;
             return String.format("%.4f", percent);
         }
@@ -878,35 +958,33 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-    public String getDifferenceFillingAsStringWithUnit(){
+    public String getDifferenceFillingAsStringWithUnit() {
 
-        return getTransformedWeightAsStringWithUnit(getTaredValueInGram()-currentLibrary.getTarget());
+        return getTransformedWeightAsStringWithUnit(getTaredValueInGram() - currentLibrary.getTarget());
     }
 
 
-
-
-    public String getTargetAsStringWithUnit(){
+    public String getTargetAsStringWithUnit() {
 
         return getTransformedWeightAsStringWithUnit(currentLibrary.getTarget());
     }
 
-    public double getTarget(){
+    public double getTarget() {
         return currentLibrary.getTarget();
     }
 
 
     public String getPercent() {
 
-        double ref=(currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
+        double ref = (currentLibrary.getReferenceWeight() * currentLibrary.getReferenceweightAdjustment() / 100);
 
-        if (ref==0){
+        if (ref == 0) {
             return String.format("%.4f", (ref));
-        }else {
+        } else {
 
             double netto = (getSumInGram() - getTareInGram());
 
-            double percent = (netto/ref)*100;
+            double percent = (netto / ref) * 100;
 
 
             return String.format("%.4f", percent);
@@ -915,15 +993,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
     public String getPercentFilling() {
 
-        double ref=currentLibrary.getTarget();
+        double ref = currentLibrary.getTarget();
 
-        if (ref==0){
+        if (ref == 0) {
             return String.format("%.4f", (ref));
-        }else {
+        } else {
 
             double netto = (getSumInGram() - getTareInGram());
 
-            double percent = (netto/ref)*100;
+            double percent = (netto / ref) * 100;
 
 
             return String.format("%.4f", percent);
@@ -931,28 +1009,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
-
     public String getDifferenceToInitialInPercentAsString() {
         String retVal = "";
 
         try {
             retVal = String.format("%.4f", getDifferenceToInitialWeightInGram() / currentItem.getWeight() * 100.0) + " %";
-        }catch (Exception e){
-            retVal = "";
-        }
-
-        return retVal;
-        }
-
-
-
-
-    public String getStatisticsCurrentAsStringWithUnit() {
-        String retVal = "";
-
-        try {
-            retVal = getTransformedWeightAsStringWithUnit(  getStats().getSamples().get(getStats().getSamples().size() - 1));
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -960,13 +1022,25 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     }
 
 
+    public String getStatisticsCurrentAsStringWithUnit() {
+        String retVal = "";
+
+        try {
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getSamples().get(getStats().getSamples().size() - 1));
+        } catch (Exception e) {
+            retVal = "";
+        }
+
+        return retVal;
+    }
+
 
     public String getStatisticsRangeAsStringWithUnit() {
         String retVal = "";
 
         try {
-            retVal = getTransformedWeightAsStringWithUnit(   getStats().getStatistic().getMax() - getStats().getStatistic().getMin()  );
-        }catch (Exception e){
+            retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMax() - getStats().getStatistic().getMin());
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -978,7 +1052,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         try {
             retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMax());
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -990,7 +1064,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         try {
             retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMin());
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -1002,7 +1076,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         try {
             retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getStandardDeviation());
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -1014,7 +1088,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         try {
             retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getMean());
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
@@ -1026,14 +1100,14 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
         try {
             retVal = getTransformedWeightAsStringWithUnit(getStats().getStatistic().getSum());
-        }catch (Exception e){
+        } catch (Exception e) {
             retVal = "";
         }
 
         return retVal;
     }
 
-    public double WaterTempInDensity(double temp){
+    public double WaterTempInDensity(double temp) {
 
         //This Code was adapted from view-source:http://antoine.frostburg.edu/chem/senese/javascript/water-density.html
 
@@ -1061,23 +1135,10 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         double p2m1 = p * p - 1.0;
         double p2m4 = p2m1 - 3.0;
         i += 10;
-        return p2m1*p*(p-2)*table[i-2]/24.0 - (p-1)*p*p2m4*table[i-1]/6.0 + p2m1*p2m4*table[i]/4.0 - (p+1)*p*p2m4*table[i+1]/6.0 + p2m1*p*(p+2)*table[i+2]/24.0;
+        return p2m1 * p * (p - 2) * table[i - 2] / 24.0 - (p - 1) * p * p2m4 * table[i - 1] / 6.0 + p2m1 * p2m4 * table[i] / 4.0 - (p + 1) * p * p2m4 * table[i + 1] / 6.0 + p2m1 * p * (p + 2) * table[i + 2] / 24.0;
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -1108,12 +1169,12 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
     @Override
     public void onApplicationChange(ScaleApplication application) {
         //do not react on subApplications
-        if(application == PART_COUNTING_CALC_AWP ||
+        if (application == PART_COUNTING_CALC_AWP ||
                 application == PERCENT_WEIGHING_CALC_REFERENCE ||
                 application == ANIMAL_WEIGHING_CALCULATING ||
                 application == FILLING_CALC_TARGET ||
                 application == FORMULATION_RUNNING ||
-                application == FORMULATION_FREE_RUNNING ){
+                application == FORMULATION_FREE_RUNNING) {
             return;
         }
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
@@ -1121,50 +1182,44 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         ProtocolManager protocolPrinterUtils = new ProtocolManager();
 
 
-
         ApplicationManager.getInstance().setIngrediantTotalCost(0);
         ApplicationManager.getInstance().setIngrediantTotalWeight(0);
         getIngrediantCostList().clear();
-        lastStableweight=0;
-        stableCounter=0;
+        lastStableweight = 0;
+        stableCounter = 0;
 
 
-        pholdWeight=0;
+        pholdWeight = 0;
         setPeakHoldMaximum(0);
 
 
-       // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
+        // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
     }
 
 
     // Calculate the MD5 Hash of the protocol string
-    public static String calculateMD5(String s)
-    {
+    public static String calculateMD5(String s) {
         MessageDigest digest;
-        try
-        {
+        try {
             digest = MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+            digest.update(s.getBytes(Charset.forName("US-ASCII")), 0, s.length());
             byte[] magnitude = digest.digest();
             BigInteger bi = new BigInteger(1, magnitude);
             String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
             return hash;
-        }
-        catch (NoSuchAlgorithmException e)
-        {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return "";
     }
 
 
-    public static String calculateSHA256(String s){
+    public static String calculateSHA256(String s) {
 
-        try
-        {
+        try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
 
-            md.update(s.getBytes(Charset.forName("US-ASCII")),0,s.length());
+            md.update(s.getBytes(Charset.forName("US-ASCII")), 0, s.length());
 
             byte[] digest = md.digest();
 
@@ -1173,16 +1228,15 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             return hash;
 
 
-        }
-        catch (NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
 
         }
-       return "";
+        return "";
     }
 
-    public static Boolean verifyProtocol (Protocol protocol){
+    public static Boolean verifyProtocol(Protocol protocol) {
 
-        String hash=ApplicationManager.getInstance().calculateSHA256(protocol.getContent());
+        String hash = ApplicationManager.getInstance().calculateSHA256(protocol.getContent());
 
         try {
 
@@ -1194,8 +1248,8 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
             signature.update(hash.getBytes());
 
 
-            byte[] signatureBytes=Base64.decode(protocol.getSignature(),Base64.DEFAULT);
-            Boolean test=signature.verify(signatureBytes);
+            byte[] signatureBytes = Base64.decode(protocol.getSignature(), Base64.DEFAULT);
+            Boolean test = signature.verify(signatureBytes);
 
 
             return test;
@@ -1216,7 +1270,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public static PrivateKey loadPrivateKey(String key64) throws GeneralSecurityException {
-        byte[] clear = Base64.decode(key64,Base64.DEFAULT);
+        byte[] clear = Base64.decode(key64, Base64.DEFAULT);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(clear);
         KeyFactory fact = KeyFactory.getInstance("RSA");
         PrivateKey priv = fact.generatePrivate(keySpec);
@@ -1227,7 +1281,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
 
 
     public static PublicKey loadPublicKey(String stored) throws GeneralSecurityException {
-        byte[] data = Base64.decode(stored,Base64.DEFAULT);
+        byte[] data = Base64.decode(stored, Base64.DEFAULT);
         X509EncodedKeySpec spec = new X509EncodedKeySpec(data);
         KeyFactory fact = KeyFactory.getInstance("RSA");
         return fact.generatePublic(spec);
@@ -1238,7 +1292,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         PKCS8EncodedKeySpec spec = fact.getKeySpec(priv,
                 PKCS8EncodedKeySpec.class);
         byte[] packed = spec.getEncoded();
-        String key64 = Base64.encodeToString(packed,Base64.DEFAULT);
+        String key64 = Base64.encodeToString(packed, Base64.DEFAULT);
 
         Arrays.fill(packed, (byte) 0);
         return key64;
@@ -1249,7 +1303,7 @@ public class ApplicationManager implements WeightListener , ScaleApplicationList
         KeyFactory fact = KeyFactory.getInstance("RSA");
         X509EncodedKeySpec spec = fact.getKeySpec(publ,
                 X509EncodedKeySpec.class);
-        return Base64.encodeToString(spec.getEncoded(),Base64.DEFAULT);
+        return Base64.encodeToString(spec.getEncoded(), Base64.DEFAULT);
     }
 
 }

@@ -42,26 +42,19 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private TextView textSum = null;
     private TextView textValue = null;
     private ImageView imageStable = null;
-
     private static final int WIDTH_LOADING_BAR_TOTAL = 700;
+    private long ctime_first = 0;
 
 
-
-
-    //Peak Hold Variables
-
-    private long ctime_first=0;
-    //private boolean PHfirst=false;
-
-
+    private double ashBeakerWeight = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.menu_application_fragment_weight_display,container, false);
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.menu_application_fragment_weight_display, container, false);
         //Access to views from menu_main xml file
         barload = (FrameLayout) rootView.findViewById(R.id.menu_main_bar_load);
-        barloadbackground =(FrameLayout) rootView.findViewById(R.id.menu_main_countdown_bar_background);
+        barloadbackground = (FrameLayout) rootView.findViewById(R.id.menu_main_countdown_bar_background);
 
 
         textInstruction = (TextView) rootView.findViewById(R.id.menu_main_text_instruction);
@@ -73,17 +66,17 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             @Override
             public void onClick(View v) {
 
-                try{
+                try {
                     final Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.dialog_pick_unit);
                     dialog.setTitle(R.string.pick_a_unit);
                     ListView listView = (ListView) dialog.findViewById(R.id.dialog_pick_unit_list);
-                    final UnitAdapter adapter = new UnitAdapter(getActivity(),new ArrayList<Unit>());
+                    final UnitAdapter adapter = new UnitAdapter(getActivity(), new ArrayList<Unit>());
                     listView.setAdapter(adapter);
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            if(adapter.getItem(position).getEnabled()) {
+                            if (adapter.getItem(position).getEnabled()) {
                                 ApplicationManager.getInstance().setCurrentUnit(adapter.getItem(position));
                                 dialog.dismiss();
                             }
@@ -93,7 +86,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                     List<Unit> units = db.getUnits();
 
                     adapter.clear();
-                    if (units != null){
+                    if (units != null) {
                         Collections.sort(units, new Comparator<Unit>() {
                             @Override
                             public int compare(Unit unit1, Unit unit2) {
@@ -101,10 +94,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                             }
                         });
                         for (Unit unit : units) {
-                                if(unit.getEnabled()){
-                                    adapter.add(unit);
-                                    adapter.setHideCheckbox(true);
-                                }
+                            if (unit.getEnabled()) {
+                                adapter.add(unit);
+                                adapter.setHideCheckbox(true);
+                            }
                             Log.e("SettingsUnitFragment", "added unit");
                         }
                     }
@@ -116,26 +109,21 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
                     buttonClose.setOnClickListener(new View.OnClickListener() {
 
-                           @Override
-                           public void onClick(View v) {
+                        @Override
+                        public void onClick(View v) {
                             dialog.dismiss();
-                           }
-                       });
+                        }
+                    });
 
                     dialog.show();
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
-
             }
         });
-
-
 
 
         return rootView;//inflater.inflate(R.layout.article_view, container, false);
@@ -145,9 +133,9 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     @Override
     public void onResume() {
         super.onResume();
-        if(Scale.getInstance().isStable()){
+        if (Scale.getInstance().isStable()) {
             imageStable.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             imageStable.setVisibility(View.INVISIBLE);
         }
         Scale.getInstance().setOnWeightListener(this);
@@ -158,22 +146,16 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     @Override
     public void onPause() {
         super.onPause();
-
         Scale.getInstance().removeOnWeightListener(this);
         Scale.getInstance().removeOnStableListener(this);
     }
 
 
-
-
-
     @Override
     public void onWeightChanged(Double weight, String unit) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-
-        boolean loadingbarnormal=true;
-        switch (Scale.getInstance().getScaleApplication()){
+        boolean loadingbarnormal = true;
+        switch (Scale.getInstance().getScaleApplication()) {
             case ANIMAL_WEIGHING_CALCULATING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
@@ -183,7 +165,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case PERCENT_WEIGHING_CALC_REFERENCE:
                 textValue.setTextColor(Color.WHITE);
-                textValue.setText( ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case ANIMAL_WEIGHING:
                 textInstruction.setText(R.string.press_start_for_a_new_measuremnt);
@@ -195,19 +177,19 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getAwpCalcSampleSize() + " pcs");
-                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase() + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
             case PART_COUNTING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase()+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.tared_weight).toString().toUpperCase() + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
             case FORMULATION:
-                if(ApplicationManager.getInstance().getCurrentRecipe()==null){
-                textInstruction.setText(R.string.click_settings_and_choose_a_recipe);
-                }else {
+                if (ApplicationManager.getInstance().getCurrentRecipe() == null) {
+                    textInstruction.setText(R.string.click_settings_and_choose_a_recipe);
+                } else {
                     textInstruction.setText(R.string.press_start_to_begin_recipe);
                 }
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
@@ -242,140 +224,130 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
 
-                if (ApplicationManager.getInstance().getTaredValueInGram()<ApplicationManager.getInstance().getUnderLimitValueInGram() ) {
+                if (ApplicationManager.getInstance().getTaredValueInGram() < ApplicationManager.getInstance().getUnderLimitValueInGram()) {
                     if (prefs.getBoolean(getString(R.string.preferences_weigh_minimum), getResources().getBoolean(R.bool.preferences_weigh_minimum)) == true) {
                         textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                         textValue.setTextColor(Color.YELLOW);
                     }
                 }
 
-                textSum.setText("SUM: " +  ApplicationManager.getInstance().getSumAsStringWithUnit());
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case PERCENT_WEIGHING:
                 textInstruction.setText("");
                 textValue.setTextColor(Color.WHITE);
 
-                textValue.setText(ApplicationManager.getInstance().getPercent()+ " %");
+                textValue.setText(ApplicationManager.getInstance().getPercent() + " %");
                 textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
 
             case CHECK_WEIGHING:
                 textInstruction.setText("");
 
-                String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions),"");
-                String checklimitmode = prefs.getString(getString(R.string.preferences_check_limitmode),"");
+                String cmode = prefs.getString(getString(R.string.preferences_check_displayoptions), "");
+                String checklimitmode = prefs.getString(getString(R.string.preferences_check_limitmode), "");
                 double current = ApplicationManager.getInstance().getTaredValueInGram();
                 double under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
                 double over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
 
 
-                if(checklimitmode.equals("1")) {
+                if (checklimitmode.equals("1")) {
                     current = ApplicationManager.getInstance().getTaredValueInGram();
                     under = ApplicationManager.getInstance().getUnderLimitCheckWeighing();
-                     over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
+                    over = ApplicationManager.getInstance().getOverLimitCheckWeighing();
                 }
-                if(checklimitmode.equals("2") || checklimitmode.equals("3")) {
+                if (checklimitmode.equals("2") || checklimitmode.equals("3")) {
                     current = ApplicationManager.getInstance().getTaredValueInGram();
-                    under = ApplicationManager.getInstance().getCheckNominaldouble()-ApplicationManager.getInstance().getCheckNominalToleranceUnderdouble();
-                    over = ApplicationManager.getInstance().getCheckNominaldouble()+ApplicationManager.getInstance().getCheckNominalToleranceOverdouble();
+                    under = ApplicationManager.getInstance().getCheckNominaldouble() - ApplicationManager.getInstance().getCheckNominalToleranceUnderdouble();
+                    over = ApplicationManager.getInstance().getCheckNominaldouble() + ApplicationManager.getInstance().getCheckNominalToleranceOverdouble();
                 }
-
-
 
 
                 //if(cmode.equals("1")) {
+                textInstruction.setText("");
+                textValue.setTextColor(Color.WHITE);
+
+
+                if (current < under) {
+                    textValue.setTextColor(Color.RED);
+                    textValue.setText("↓   " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
+
+                if (current > over) {
+                    textValue.setTextColor(Color.RED);
+                    textValue.setText("↑   " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
+
+                if (current >= under && current <= over) {
+                    textValue.setTextColor(Color.GREEN);
+                    textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                }
+
+
+                textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                if (cmode.equals("2")) {
                     textInstruction.setText("");
-                    textValue.setTextColor(Color.WHITE);
-
-
-                    if (current<under){
-                        textValue.setTextColor(Color.RED);
-                        textValue.setText("↓   "+ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    }
-
-                    if (current>over){
-                        textValue.setTextColor(Color.RED);
-                        textValue.setText("↑   "+ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    }
-
-                    if (current>=under && current<=over){
-                        textValue.setTextColor(Color.GREEN);
-                        textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());;
-                    }
-
-
-                    textSum.setText("SUM: "+ ApplicationManager.getInstance().getSumAsStringWithUnit());
-                //}
-                if(cmode.equals("2")) { //Nominal +- weight tolerance
-
-                    textInstruction.setText("");
-
-
-                    if (current<under){
+                    if (current < under) {
                         textValue.setTextColor(Color.RED);
                         textValue.setText(R.string.value_too_low);
                     }
 
-                    if (current>over){
+                    if (current > over) {
                         textValue.setTextColor(Color.RED);
                         textValue.setText(R.string.value_too_high);
                     }
 
-                    if (current>=under && current<=over){
+                    if (current >= under && current <= over) {
                         textValue.setTextColor(Color.GREEN);
                         textValue.setText("OK");
                     }
-
-
-                    textSum.setText(getString(R.string.net_weight).toUpperCase() +": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    textSum.setText(getString(R.string.net_weight).toUpperCase() + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 }
                 break;
             case DENSITY_DETERMINATION_STARTED:
             case DENSITY_DETERMINATION:
                 textInstruction.setText("");
 
-                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp),"");
-                String densitymode = prefs.getString(getString(R.string.preferences_density_mode),"");
+                String densityliquidtype = prefs.getString(getString(R.string.preferences_density_liquidtyp), "");
+                String densitymode = prefs.getString(getString(R.string.preferences_density_mode), "");
 
-                if (densityliquidtype.isEmpty()){
-                    densityliquidtype="1";
+                if (densityliquidtype.isEmpty()) {
+                    densityliquidtype = "1";
                 }
 
-                if (densitymode.isEmpty()){
-                    densitymode="1";
+                if (densitymode.isEmpty()) {
+                    densitymode = "1";
                 }
 
-                if (ApplicationManager.getInstance().getDensity_step_counter()==0){
+                if (ApplicationManager.getInstance().getDensity_step_counter() == 0) {
                     textValue.setTextColor(Color.WHITE);
                     textValue.setText(R.string.press_start);
 
                 }
-                if(ApplicationManager.getInstance().getDensity_step_counter()==1) {
+                if (ApplicationManager.getInstance().getDensity_step_counter() == 1) {
                     textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                    //textSum.setTextColor(Color.YELLOW);
-
                     textInstruction.setText(R.string.weigh_sample_in_air);
-                    if (densitymode.equals("2") || densitymode.equals("3")){
+                    if (densitymode.equals("2") || densitymode.equals("3")) {
                         textInstruction.setText(R.string.weigh_sinker_in_air);
                     }
                 }
 
-                if(ApplicationManager.getInstance().getDensity_step_counter()==2) {
+                if (ApplicationManager.getInstance().getDensity_step_counter() == 2) {
                     textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     //textSum.setTextColor(Color.YELLOW);
                     textInstruction.setText(R.string.weigh_sample_in_liquid);
-                    if (densitymode.equals("2")){
+                    if (densitymode.equals("2")) {
                         textInstruction.setText(R.string.weigh_sample_in_liquid_push);
                     }
 
-                    if(densitymode.equals("3")){
+                    if (densitymode.equals("3")) {
                         textInstruction.setText(R.string.weigh_sinker_in_liquid);
                     }
                 }
-                if (ApplicationManager.getInstance().getDensity_step_counter()==4){
+                if (ApplicationManager.getInstance().getDensity_step_counter() == 4) {
                     textSum.setText("");
                     textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                     textInstruction.setText(R.string.weigh_sinker_in_liquid_and);
@@ -383,29 +355,25 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 }
 
 
-                if(ApplicationManager.getInstance().getDensity_step_counter()==3) {
-
-
-                    double Sinkervolume=ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume();
-
-
+                if (ApplicationManager.getInstance().getDensity_step_counter() == 3) {
+                    double Sinkervolume = ApplicationManager.getInstance().getCurrentLibrary().getSinkerVolume();
                     textSum.setText("");
 
                     //Equation according to http://www.hs-lausitz.de/fileadmin/user_upload/public/fak/fak2/pdf/Physiklabor/M01_Dichtebestimmung.pdf
-                    double density=0;
-                    double mk=ApplicationManager.getInstance().getDensity_weight_air();
-                    double pf=0;
-                    double dm=ApplicationManager.getInstance().getDensity_weight_liquid();
+                    double density = 0;
+                    double mk = ApplicationManager.getInstance().getDensity_weight_air();
+                    double pf = 0;
+                    double dm = ApplicationManager.getInstance().getDensity_weight_liquid();
                     if (densitymode.equals("1")) {
                         if (densityliquidtype.equals("1")) {
                             pf = ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getWaterTemp());
                         } else {
                             pf = ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity();
                         }
-                        density=(mk*pf)/(mk-dm);
+                        density = (mk * pf) / (mk - dm);
                     }
 
-                    if (densitymode.equals("2")){
+                    if (densitymode.equals("2")) {
 
                         //Equations according to Page 3 from http://www.hs-lausitz.de/fileadmin/user_upload/public/fak/fak2/pdf/Physiklabor/M01_Dichtebestimmung.pdf
                         if (densityliquidtype.equals("1")) {
@@ -413,18 +381,18 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         } else {
                             pf = ApplicationManager.getInstance().getCurrentLibrary().getLiquidDensity();
                         }
-                        double Vk=dm/pf;
-                        density=mk/Vk;
+                        double Vk = dm / pf;
+                        density = mk / Vk;
                     }
 
                     if (densitymode.equals("3")) {
 
                         //Equations according http://www.kern-sohn.com/manuals/files/German/ABT-A01-BA-d-0710.pdf  Seite 9
-                        density= (mk-dm)/Sinkervolume+0.0012;
+                        density = (mk - dm) / Sinkervolume + 0.0012;
 
                     }
 
-                    textValue.setText(String.format("%.4f",density)+" g/cm³");
+                    textValue.setText(String.format("%.4f", density) + " g/cm³");
                     ApplicationManager.getInstance().setDensity(density);
                     //textSum.setTextColor(Color.YELLOW);
                     if (densitymode.equals("1")) {
@@ -438,30 +406,30 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case FILLING:
                 textInstruction.setText("");
-                textSum.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
+                textSum.setText(getString(R.string.fill_status) + " " + ApplicationManager.getInstance().getPercentFilling() + " %");
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 //textInstruction.setText(getString(R.string.fill_status)+" "+ ApplicationManager.getInstance().getPercentFilling()+" %");
 
-                loadingbarnormal=false;
+                loadingbarnormal = false;
                 FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
                 FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
-                params.height=15;
-                params2.height=15;
+                params.height = 15;
+                params2.height = 15;
 
-                double filling_width=(ApplicationManager.getInstance().getTaredValueInGram()/ApplicationManager.getInstance().getTarget())*WIDTH_LOADING_BAR_TOTAL;
+                double filling_width = (ApplicationManager.getInstance().getTaredValueInGram() / ApplicationManager.getInstance().getTarget()) * WIDTH_LOADING_BAR_TOTAL;
 
                 //double filling_width=(ApplicationManager.getInstance().getTarget()/ApplicationManager.getInstance().getTaredValueInGram())*700;
 
-                if(filling_width<0){
+                if (filling_width < 0) {
                     filling_width = 0;
                 }
-                if(filling_width > 700){
+                if (filling_width > 700) {
                     filling_width = 700;
                 }
 
-                params.width= (int) filling_width;
+                params.width = (int) filling_width;
                 barload.setLayoutParams(params);
                 barloadbackground.setLayoutParams(params2);
                 barload.setBackgroundColor(Color.CYAN);
@@ -477,10 +445,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case TOTALIZATION:
-                Boolean isAutoSampleMode = prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode),getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode));
-                if(isAutoSampleMode){
+                Boolean isAutoSampleMode = prefs.getBoolean(getString(R.string.preferences_totalization_AutoSampleMode), getResources().getBoolean(R.bool.preferences_totalization_AutoSampleMode));
+                if (isAutoSampleMode) {
                     textInstruction.setText(R.string.automatic_sample_mode_on);
-                }else{
+                } else {
                     textInstruction.setText(R.string.manual_mode_on);
                 }
 
@@ -491,46 +459,41 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case PEAK_HOLD_STARTED:
 
                 textValue.setText("");
-                String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode),"");
-                double PHcurrentvalue=ApplicationManager.getInstance().getTaredValueInGram();
+                String PeakHoldMode = prefs.getString(getString(R.string.preferences_peak_mode), "");
+                double PHcurrentvalue = ApplicationManager.getInstance().getTaredValueInGram();
 
-                boolean stableonly=false;
-                if  (prefs.getBoolean(getString(R.string.preferences_peak_stableonly),getResources().getBoolean(R.bool.preferences_peak_stableonly))==true) {
-                    stableonly=true;
+                boolean stableonly = false;
+                if (prefs.getBoolean(getString(R.string.preferences_peak_stableonly), getResources().getBoolean(R.bool.preferences_peak_stableonly)) == true) {
+                    stableonly = true;
                 }
 
                 if (PeakHoldMode.equals("3")) {
                     textInstruction.setText(R.string.automatic_moce);
-                }else if (PeakHoldMode.equals("2")) {
+                } else if (PeakHoldMode.equals("2")) {
                     textInstruction.setText(R.string.semi_automatic_mode);
-                }else{
+                } else {
                     textInstruction.setText(R.string.manual_mode);
                 }
-                if(stableonly){
+                if (stableonly) {
                     textInstruction.append(getString(R.string.apply_stable_weights));
-                }else{
+                } else {
                     textInstruction.append(getString(R.string.apply_higher_weights));
                 }
 
 
-                boolean PHstable= Scale.getInstance().isStable();
-
-
-
-
+                boolean PHstable = Scale.getInstance().isStable();
 
 
                 if (PeakHoldMode.equals("3")) {
-                    if (ApplicationManager.getInstance().getSumInGram()<0.02f && ApplicationManager.getInstance().getPholdWeight()>0.02f){
+                    if (ApplicationManager.getInstance().getSumInGram() < 0.02f && ApplicationManager.getInstance().getPholdWeight() > 0.02f) {
                         ctime_first = System.nanoTime();
 
                     }
                     // final String TAG = getClass().getSimpleName();
                     // Log.e(TAG, String.format("%d",(System.nanoTime() - ctime_first)));
 
-                    if(ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l){
+                    if (ApplicationManager.getInstance().getTaredValueInGram() < 0.02f && (System.nanoTime() - ctime_first) >= 10000000000l) {
                         ApplicationManager.getInstance().setPeakHoldMaximum(0);
-
 
 
                     }
@@ -539,14 +502,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 ApplicationManager.getInstance().setPholdWeight(ApplicationManager.getInstance().getTaredValueInGram());
 
 
-               //if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
-                    if (PHcurrentvalue>=ApplicationManager.getInstance().getPeakHoldMaximum() && (stableonly==false || PHstable==true)  ){
-                        ApplicationManager.getInstance().setPeakHoldMaximum(PHcurrentvalue);
-                    }
+                //if (ApplicationManager.getInstance().getPeakHoldActivated()==true){
+                if (PHcurrentvalue >= ApplicationManager.getInstance().getPeakHoldMaximum() && (stableonly == false || PHstable == true)) {
+                    ApplicationManager.getInstance().setPeakHoldMaximum(PHcurrentvalue);
+                }
 
-                    textValue.setTextColor(Color.WHITE);
-                    textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
-                    textSum.setText(getString(R.string.netto)+": "+  ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                textValue.setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getPeakHoldMaximum()));
+                textSum.setText(getString(R.string.netto) + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
 
                 break;
 
@@ -555,7 +518,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textValue.setText(R.string.press_start);
 
                 //textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textSum.setText(getString(R.string.netto)+": "+ ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textSum.setText(getString(R.string.netto) + ": " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 ApplicationManager.getInstance().setPeakHoldMaximum(0);
 
 
@@ -606,8 +569,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
             case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
 
-                textInstruction.setText(getString(R.string.dispense_sample_number) + " " + ApplicationManager.getInstance().getPipette_current_sample() + " "+getString(R.string.and_press_accept));
-
+                textInstruction.setText(getString(R.string.dispense_sample_number) + " " + ApplicationManager.getInstance().getPipette_current_sample() + " " + getString(R.string.and_press_accept));
 
 
                 //Equation according to http://www.wissenschaft-technik-ethik.de/wasser_dichte.html
@@ -616,8 +578,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 double pipetteML = ApplicationManager.getInstance().getTaredValueInGram() / pipetteDensity;
 
 
-
-                textValue.setText(String.format("%.4f",pipetteML)+ " ml");
+                textValue.setText(String.format("%.4f", pipetteML) + " ml");
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
@@ -626,7 +587,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textInstruction.setText(R.string.pipette_adjustment_finisihed);
 
 
-                textValue.setText(String.format("%.4f",ApplicationManager.getInstance().getPipetteCalculatedML())+ " ml");
+                textValue.setText(String.format("%.4f", ApplicationManager.getInstance().getPipetteCalculatedML()) + " ml");
                 textValue.setTextColor(Color.WHITE);
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
@@ -642,11 +603,15 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
             case ASH_DETERMINATION_9_BATCH_FINISHED:
                 textInstruction.setText("");
+                textSum.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
-                textSum.setText("SUM: " +  ApplicationManager.getInstance().getSumAsStringWithUnit());
-            break;
-
+                if (ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() != 0){
+                    textSum.setText("MATERIAL WEIGHT: " + String.valueOf(Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())));
+                }
+               // textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
+                break;
             default:
                 textValue.setTextColor(Color.WHITE);
                 textValue.setText("not implemented");
@@ -654,35 +619,35 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
         }
 
-    if (loadingbarnormal==true){
-        //Update Loading bar
+        if (loadingbarnormal) {
+            //Update Loading bar
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
             FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
             //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
-            int fwidth=0;
+            int fwidth = 0;
             if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
                 fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
-            }else{
+            } else {
                 fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
             }
-            if(fwidth<0){
+            if (fwidth < 0) {
                 fwidth = 0;
             }
-            if(fwidth > WIDTH_LOADING_BAR_TOTAL){
+            if (fwidth > WIDTH_LOADING_BAR_TOTAL) {
                 fwidth = WIDTH_LOADING_BAR_TOTAL;
             }
             params.width = fwidth;
-            params.height=15;
+            params.height = 15;
             barload.setLayoutParams(params);
 
-            params2.height=15;
+            params2.height = 15;
             barloadbackground.setLayoutParams(params2);
 
 
-            if(ApplicationManager.getInstance().getSumInGram() > (0.8*Scale.getInstance().getScaleModel().getMaximumCapazityInGram())){
+            if (ApplicationManager.getInstance().getSumInGram() > (0.8 * Scale.getInstance().getScaleModel().getMaximumCapazityInGram())) {
                 barload.setBackgroundColor(Color.RED);
 
-            }else{
+            } else {
                 barload.setBackgroundColor(Color.GREEN);
             }
 
@@ -691,14 +656,11 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
 
 
     @Override
-    public void onStableChanged(boolean isStable)
-    {
+    public void onStableChanged(boolean isStable) {
         Log.e("ApplicationFragmentWe", "onStable called " + isStable);
-        if(isStable){
+        if (isStable) {
             imageStable.setVisibility(View.VISIBLE);
-
-
-        }else {
+        } else {
             imageStable.setVisibility(View.INVISIBLE);
         }
     }

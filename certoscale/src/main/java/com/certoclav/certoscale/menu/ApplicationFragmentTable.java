@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ApplicationFragmentTable extends Fragment implements WeightListener, StatisticListener {
 
 
@@ -33,55 +32,55 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     private List<ReferenceField> listReferenceFields = new ArrayList<ReferenceField>();
 
 
-    int indexTableTara=2;
-    int brutto=0;
-    int netto=4;
-    int loadp=1;
+    int indexTableTara = 2;
+    int brutto = 0;
+    int netto = 4;
+    int loadp = 1;
 
     // Weighing
-    int minweight=3;
+    int minweight = 3;
 
     //Part Counting
-    int apw=3;
-    int underlimit=5;
-    int overlimit=7;
+    int apw = 3;
+    int underlimit = 5;
+    int overlimit = 7;
 
     //Percent Weighing
-    int reference_weight=1;
-    int difference_weight=3;
-    int difference_percent=5;
+    int reference_weight = 1;
+    int difference_weight = 3;
+    int difference_percent = 5;
 
     //Check Weighing
-    int checkunderlimit=1;
-    int checkoverlimit=3;
-    int nominal=1;
-    int checkundertolerance=3;
-    int checkovertolerance=5;
+    int checkunderlimit = 1;
+    int checkoverlimit = 3;
+    int nominal = 1;
+    int checkundertolerance = 3;
+    int checkovertolerance = 5;
 
     //Animal Weighing
-    int measuringTime=1;
+    int measuringTime = 1;
 
     //Filling
-    int FillingTarget=1;
-    int FillingDifference=3;
-    int FillingDifferencePercent=5;
+    int FillingTarget = 1;
+    int FillingDifference = 3;
+    int FillingDifferencePercent = 5;
 
 
     //Totalization
     int indexTableNumberOfSamples = 0;
     int indexTableTotal = 1;
-    int indextableaverage= 2;
-    int standarddeviation=4;
-    int minimum=3;
-    int maximum=5;
-    int range=6;
-    int totalizationCurrrent=7;
+    int indextableaverage = 2;
+    int standarddeviation = 4;
+    int minimum = 3;
+    int maximum = 5;
+    int range = 6;
+    int totalizationCurrrent = 7;
 
     //Formulation
     int indexTableRecipeName = 0;
-    int indexFormulationTotal=3;
-    int indexFormulationTotalTarget=1;
-    int indexFormulationTotalDifference=5;
+    int indexFormulationTotal = 3;
+    int indexFormulationTotalTarget = 1;
+    int indexFormulationTotalDifference = 5;
 
     //Differential Weighing
     int indexTableItemName = 0;
@@ -93,53 +92,52 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Peak Hold
 
     //Ingrediant Costing
-    int indexTableIngrediantUnitCost=1;
-    int indexTableIngrediantTotalWeight=3;
-    int indexTableIngrediantTotalCost=5;
-    int indexTableIngrediantArticlename=7;
+    int indexTableIngrediantUnitCost = 1;
+    int indexTableIngrediantTotalWeight = 3;
+    int indexTableIngrediantTotalCost = 5;
+    int indexTableIngrediantArticlename = 7;
 
     //Density Determination
-    int DensityWaterTemp=0;
-    int DensityLiquidDensity=2;
-    int DensityOilDensity=4;
+    int DensityWaterTemp = 0;
+    int DensityLiquidDensity = 2;
+    int DensityOilDensity = 4;
 
-    int DensityWeightAir=1;
-    int DensityWeightLiquid=3;
-    int DensityOiledWeight=5;
+    int DensityWeightAir = 1;
+    int DensityWeightLiquid = 3;
+    int DensityOiledWeight = 5;
 
     //Statistical Quality Control
-    int SQCnumberofSamples=0;
-    int SQCaverage=2;
-    int SQCsum=4;
+    int SQCnumberofSamples = 0;
+    int SQCaverage = 2;
+    int SQCsum = 4;
 
-    int SQCminimum=1;
-    int SQCmaximum=3;
-    int SQCrange=5;
+    int SQCminimum = 1;
+    int SQCmaximum = 3;
+    int SQCrange = 5;
 
     //Pipette Adjustment
-    int pipetteNominal=0;
-    int pipetteInaccuracy=2;
-    int pipetteImprecison=4;
+    int pipetteNominal = 0;
+    int pipetteInaccuracy = 2;
+    int pipetteImprecison = 4;
 
-    int pipetteBarometric=1;
-    int pipetteLiquidDensity=3;
-    int pipetteWaterTemp=5;
+    int pipetteBarometric = 1;
+    int pipetteLiquidDensity = 3;
+    int pipetteWaterTemp = 5;
 
     //Ash determination
     int indexAshDeterminationWeightBeaker = 1;
-    int indexAshDeterminationWeightBeakerWithSample= 3;
+    int indexAshDeterminationWeightBeakerWithSample = 3;
     int indexAshDeterminationDeltaWeight = 5;
 
     int indexAshDeterminationSampleName = 0;
     int indexAshDeterminationBeakerName = 2;
 
 
-
     @Override
     public void onResume() {
         super.onResume();
-        if (listReferenceFields.isEmpty()==false){
-            for(ReferenceField refField : listReferenceFields){
+        if (listReferenceFields.isEmpty() == false) {
+            for (ReferenceField refField : listReferenceFields) {
                 refField.getTextName().setText("");
                 refField.getTextValue().setText("");
             }
@@ -158,20 +156,20 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-        Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.menu_application_fragment_table,container, false);
+        View rootView = inflater.inflate(R.layout.menu_application_fragment_table, container, false);
 
         //8 Textfields for showing data of interest
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_1),(TextView) rootView.findViewById(R.id.reference_val_1)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_2),(TextView) rootView.findViewById(R.id.reference_val_2)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_3),(TextView) rootView.findViewById(R.id.reference_val_3)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_4),(TextView) rootView.findViewById(R.id.reference_val_4)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_5),(TextView) rootView.findViewById(R.id.reference_val_5)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_6),(TextView) rootView.findViewById(R.id.reference_val_6)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_7),(TextView) rootView.findViewById(R.id.reference_val_7)));
-        listReferenceFields.add(new ReferenceField((TextView)rootView.findViewById(R.id.reference_text_8),(TextView) rootView.findViewById(R.id.reference_val_8)));
-        for(ReferenceField refField : listReferenceFields){
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_1), (TextView) rootView.findViewById(R.id.reference_val_1)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_2), (TextView) rootView.findViewById(R.id.reference_val_2)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_3), (TextView) rootView.findViewById(R.id.reference_val_3)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_4), (TextView) rootView.findViewById(R.id.reference_val_4)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_5), (TextView) rootView.findViewById(R.id.reference_val_5)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_6), (TextView) rootView.findViewById(R.id.reference_val_6)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_7), (TextView) rootView.findViewById(R.id.reference_val_7)));
+        listReferenceFields.add(new ReferenceField((TextView) rootView.findViewById(R.id.reference_text_8), (TextView) rootView.findViewById(R.id.reference_val_8)));
+        for (ReferenceField refField : listReferenceFields) {
             refField.getTextName().setText("");
             refField.getTextValue().setText("");
         }
@@ -300,11 +298,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_visible), getResources().getBoolean(R.bool.preferences_percent_difference_visible)) == true) {
-                    listReferenceFields.get(difference_weight).getTextName().setText(getString(R.string.difference).toUpperCase()+" "+"[" +ApplicationManager.getInstance().getCurrentUnit().getName() + "]");
+                    listReferenceFields.get(difference_weight).getTextName().setText(getString(R.string.difference).toUpperCase() + " " + "[" + ApplicationManager.getInstance().getCurrentUnit().getName() + "]");
                     listReferenceFields.get(difference_weight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDifferenceInGram()));
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_percent_difference_percent_visible), getResources().getBoolean(R.bool.preferences_percent_difference_percent_visible)) == true) {
-                    listReferenceFields.get(difference_percent).getTextName().setText(getString(R.string.difference).toUpperCase()+" [%]");
+                    listReferenceFields.get(difference_percent).getTextName().setText(getString(R.string.difference).toUpperCase() + " [%]");
                     listReferenceFields.get(difference_percent).getTextValue().setText(ApplicationManager.getInstance().getDifferenceInPercent() + " %");
                 }
                 break;
@@ -417,11 +415,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(FillingTarget).getTextValue().setText(ApplicationManager.getInstance().getTargetAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencew_visible), getResources().getBoolean(R.bool.preferences_filling_differencew_visible)) == true) {
-                    listReferenceFields.get(FillingDifference).getTextName().setText(getString(R.string.difference).toUpperCase()+": ");
+                    listReferenceFields.get(FillingDifference).getTextName().setText(getString(R.string.difference).toUpperCase() + ": ");
                     listReferenceFields.get(FillingDifference).getTextValue().setText(ApplicationManager.getInstance().getDifferenceFillingAsStringWithUnit());
                 }
                 if (prefs.getBoolean(getString(R.string.preferences_filling_differencep_visible), getResources().getBoolean(R.bool.preferences_filling_differencep_visible)) == true) {
-                    listReferenceFields.get(FillingDifferencePercent).getTextName().setText(getString(R.string.difference).toUpperCase()+"%: ");
+                    listReferenceFields.get(FillingDifferencePercent).getTextName().setText(getString(R.string.difference).toUpperCase() + "%: ");
                     listReferenceFields.get(FillingDifferencePercent).getTextValue().setText(ApplicationManager.getInstance().getFillingDifferenceInPercent() + " %");
                 }
 
@@ -477,7 +475,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_unitcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_unitcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantUnitCost).getTextName().setText(getString(R.string.unit_cost).toUpperCase());
-                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost())+ " " +ApplicationManager.getInstance().getCurrency());
+                    listReferenceFields.get(indexTableIngrediantUnitCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantUnitCost()) + " " + ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalweight_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalweight_visible)) == true) {
@@ -487,7 +485,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 if (prefs.getBoolean(getString(R.string.preferences_ingrediant_totalcost_visible), getResources().getBoolean(R.bool.preferences_ingrediant_totalcost_visible)) == true) {
                     listReferenceFields.get(indexTableIngrediantTotalCost).getTextName().setText(getString(R.string.total_cost).toUpperCase());
-                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost())+ " " + ApplicationManager.getInstance().getCurrency());
+                    listReferenceFields.get(indexTableIngrediantTotalCost).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getIngrediantTotalCost()) + " " + ApplicationManager.getInstance().getCurrency());
                 }
 
                 if (ApplicationManager.getInstance().getCurrentItem() != null) {
@@ -560,120 +558,119 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case TOTALIZATION:
 
                 // PLACE NO CODE HERE - TABLE WILL BE FILLED BY onStatisticChanged() callback function below in this code Why? Whats the benefit? Visibility options are easier to use if the table is filled here
-                   if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
-                        listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText(getString(R.string.samples).toUpperCase());
-                        try {
-                            listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN()));
-                        } catch (Exception e) {
+                if (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples), getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples)) == true) {
+                    listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText(getString(R.string.samples).toUpperCase());
+                    try {
+                        listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN()));
+                    } catch (Exception e) {
+                    }
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_total_visible), getResources().getBoolean(R.bool.preferences_totalization_total_visible)) == true) {
+                    listReferenceFields.get(indexTableTotal).getTextName().setText(getString(R.string.total).toUpperCase());
+                    try {
+                        if (ApplicationManager.getInstance().getStats().getStatistic().getSum() == 0) {
+                            listReferenceFields.get(indexTableTotal).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(indexTableTotal).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                         }
+                    } catch (Exception e) {
+                    }
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_average_visible), getResources().getBoolean(R.bool.preferences_totalization_average_visible)) == true) {
+                    listReferenceFields.get(indextableaverage).getTextName().setText(getString(R.string.average).toUpperCase());
+                    try {
+                        if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMean())) {
+                            listReferenceFields.get(indextableaverage).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(indextableaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
+                        }
+                    } catch (Exception e) {
                     }
 
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_total_visible),getResources().getBoolean(R.bool.preferences_totalization_total_visible))==true) {
-                        listReferenceFields.get(indexTableTotal).getTextName().setText(getString(R.string.total).toUpperCase());
-                        try {
-                            if (ApplicationManager.getInstance().getStats().getStatistic().getSum()==0){
-                                listReferenceFields.get(indexTableTotal).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-                                listReferenceFields.get(indexTableTotal).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_standarddeviation_visible), getResources().getBoolean(R.bool.preferences_totalization_standarddeviation_visible)) == true) {
+                    listReferenceFields.get(standarddeviation).getTextName().setText(getString(R.string.standard_dev).toUpperCase());
+                    try {
+                        if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())) {
+                            listReferenceFields.get(standarddeviation).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(standarddeviation).getTextValue().setText(ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit());
                         }
+                    } catch (Exception e) {
+                    }
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_minimum_visible), getResources().getBoolean(R.bool.preferences_totalization_minimum_visible)) == true) {
+                    listReferenceFields.get(minimum).getTextName().setText(getString(R.string.minimum).toUpperCase());
+                    try {
+                        if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMin())) {
+                            listReferenceFields.get(minimum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(minimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_maximum_visible), getResources().getBoolean(R.bool.preferences_totalization_maximum_visible)) == true) {
+
+                    listReferenceFields.get(maximum).getTextName().setText(getString(R.string.maximum).toUpperCase());
+                    try {
+                        if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax())) {
+                            listReferenceFields.get(maximum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(maximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible), getResources().getBoolean(R.bool.preferences_totalization_range_visible)) == true) {
+
+                    listReferenceFields.get(range).getTextName().setText(getString(R.string.range).toUpperCase());
+                    try {
+                        if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax() - ApplicationManager.getInstance().getStats().getStatistic().getMin())) {
+                            listReferenceFields.get(range).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+                            listReferenceFields.get(range).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+
+
+                if (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible), getResources().getBoolean(R.bool.preferences_totalization_range_visible)) == true) {
+
+                    listReferenceFields.get(totalizationCurrrent).getTextName().setText(getString(R.string.current).toUpperCase());
+                    try {
+
+                        if (ApplicationManager.getInstance().getStats().getSamples().isEmpty() == true) {
+
+                            listReferenceFields.get(totalizationCurrrent).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
+                        } else {
+
+                            //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
+                            listReferenceFields.get(totalizationCurrrent).getTextValue().setText(ApplicationManager.getInstance().getStatisticsCurrentAsStringWithUnit());
+                        }
+                    } catch (Exception e) {
                     }
 
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_average_visible),getResources().getBoolean(R.bool.preferences_totalization_average_visible))==true) {
-                        listReferenceFields.get(indextableaverage).getTextName().setText(getString(R.string.average).toUpperCase());
-                        try {
-                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMean())){
-                                listReferenceFields.get(indextableaverage).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-                                listReferenceFields.get(indextableaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-
-                    }
-
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_standarddeviation_visible),getResources().getBoolean(R.bool.preferences_totalization_standarddeviation_visible))==true) {
-                        listReferenceFields.get(standarddeviation).getTextName().setText(getString(R.string.standard_dev).toUpperCase());
-                        try {
-                            if (Double.isNaN( ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation())){
-                                listReferenceFields.get(standarddeviation).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-                                listReferenceFields.get(standarddeviation).getTextValue().setText(ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_minimum_visible),getResources().getBoolean(R.bool.preferences_totalization_minimum_visible))==true) {
-                        listReferenceFields.get(minimum).getTextName().setText(getString(R.string.minimum).toUpperCase());
-                        try {
-                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMin())){
-                                listReferenceFields.get(minimum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-                                listReferenceFields.get(minimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-
-
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_maximum_visible),getResources().getBoolean(R.bool.preferences_totalization_maximum_visible))==true) {
-
-                        listReferenceFields.get(maximum).getTextName().setText(getString(R.string.maximum).toUpperCase());
-                        try {
-                            if(Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax())){
-                                listReferenceFields.get(maximum).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            } else {
-                                listReferenceFields.get(maximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible),getResources().getBoolean(R.bool.preferences_totalization_range_visible))==true) {
-
-                        listReferenceFields.get(range).getTextName().setText(getString(R.string.range).toUpperCase());
-                        try {
-                            if (Double.isNaN(ApplicationManager.getInstance().getStats().getStatistic().getMax()-ApplicationManager.getInstance().getStats().getStatistic().getMin())){
-                                listReferenceFields.get(range).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-                                listReferenceFields.get(range).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-                    }
-
-
-                    if  (prefs.getBoolean(getString(R.string.preferences_totalization_range_visible),getResources().getBoolean(R.bool.preferences_totalization_range_visible))==true) {
-
-                        listReferenceFields.get(totalizationCurrrent).getTextName().setText(getString(R.string.current).toUpperCase());
-                        try {
-
-                            if (ApplicationManager.getInstance().getStats().getSamples().isEmpty()==true){
-
-                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText("0 " + ApplicationManager.getInstance().getCurrentUnit().getName());
-                            }else {
-
-                                //ApplicationManager.getInstance().getStats().getSamples().get(ApplicationManager.getInstance().getStats().getSamples().size()-1)
-                                listReferenceFields.get(totalizationCurrrent).getTextValue().setText(ApplicationManager.getInstance().getStatisticsCurrentAsStringWithUnit());
-                            }
-                        } catch (Exception e) {
-                        }
-
-                    }
-
+                }
 
 
                 break;
             case FORMULATION:
                 listReferenceFields.get(indexTableRecipeName).getTextName().setText(getString(R.string.recipe).toUpperCase());
-                    if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
-                        listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
-                    } else {
-                        listReferenceFields.get(indexTableRecipeName).getTextValue().setText(getString(R.string.no_recipe).toUpperCase());
-                    }
-                    if(ApplicationManager.getInstance().getCurrentRecipe()!= null){
+                if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentRecipe().getRecipeName());
+                } else {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(getString(R.string.no_recipe).toUpperCase());
+                }
+                if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
                     double formulationTotal = 0;
                     double formulationTotalTarget = 0;
                     double formulationTotalDifference = 0;
@@ -681,7 +678,6 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
                         formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight();
                         formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
-
                         formulationcounter++;
                     }
 
@@ -689,37 +685,23 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
                         listReferenceFields.get(indexFormulationTotalTarget).getTextName().setText(getString(R.string.total_target).toUpperCase());
                         listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotalTarget));
-
-
                     }
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
                         listReferenceFields.get(indexFormulationTotal).getTextName().setText(getString(R.string.total_actual).toUpperCase());
-                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal) );
-
-
+                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal));
                     }
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
                         formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
                         formulationTotalDifference = formulationTotalDifference * 100;
-
-
-
                         listReferenceFields.get(indexFormulationTotalDifference).getTextName().setText(getString(R.string.total_diff).toUpperCase());
-                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference)+" %"  );
-
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference) + " %");
                     }
-
-
-                        listReferenceFields.get(2).getTextName().setText(getString(R.string.scaling_factor).toUpperCase());
-                        listReferenceFields.get(2).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getScalingFactor()) );
-
-
-                    }
-
-                    break;
-
+                    listReferenceFields.get(2).getTextName().setText(getString(R.string.scaling_factor).toUpperCase());
+                    listReferenceFields.get(2).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getScalingFactor()));
+                }
+                break;
 
 
             case FORMULATION_FREE:
@@ -729,7 +711,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 } else {
                     listReferenceFields.get(indexTableRecipeName).getTextValue().setText(getString(R.string.no_recipe).toUpperCase());
                 }
-                if(ApplicationManager.getInstance().getCurrentRecipe()!= null){
+                if (ApplicationManager.getInstance().getCurrentRecipe() != null) {
                     double formulationTotal = 0;
                     double formulationTotalTarget = 0;
                     double formulationTotalDifference = 0;
@@ -737,7 +719,6 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     while (formulationcounter < ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().size()) {
                         formulationTotalTarget = formulationTotalTarget + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getScaledWeight();
                         formulationTotal = formulationTotal + ApplicationManager.getInstance().getCurrentRecipe().getRecipeEntries().get(formulationcounter).getMeasuredWeight();
-
                         formulationcounter++;
                     }
 
@@ -745,48 +726,36 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_target), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_target)) == true) {
                         listReferenceFields.get(indexFormulationTotalTarget).getTextName().setText(getString(R.string.total_target).toUpperCase());
                         listReferenceFields.get(indexFormulationTotalTarget).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotalTarget));
-
-
                     }
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
                         listReferenceFields.get(indexFormulationTotal).getTextName().setText(getString(R.string.total_actual).toUpperCase());
-                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal) );
-
-
+                        listReferenceFields.get(indexFormulationTotal).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(formulationTotal));
                     }
 
                     if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_formulation_print_total), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_formulation_print_total)) == true) {
                         formulationTotalDifference = Math.abs(formulationTotal - formulationTotalTarget) / Math.abs(formulationTotalTarget);
                         formulationTotalDifference = formulationTotalDifference * 100;
-
-
-
                         listReferenceFields.get(indexFormulationTotalDifference).getTextName().setText(getString(R.string.total_diff).toUpperCase());
-                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference)+" %"  );
-
+                        listReferenceFields.get(indexFormulationTotalDifference).getTextValue().setText(String.format("%.2f", formulationTotalDifference) + " %");
                     }
-
-
-
-
                 }
 
                 break;
 
             case DIFFERENTIAL_WEIGHING:
                 listReferenceFields.get(indexTableItemName).getTextName().setText(getString(R.string.item).toUpperCase());
-                if(ApplicationManager.getInstance().getCurrentItem() != null) {
-                   listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
-                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText(getString(R.string.difference).toUpperCase()+" "+ "[" + ApplicationManager.getInstance().getCurrentUnit().getName() +"]");
-                   listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDifferenceInGram()));
-                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText(getString(R.string.difference).toUpperCase()+" [%]");
-                   listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentAsString());
-                   listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText(getString(R.string.final_weight).toUpperCase());
-                   listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                   listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText(getString(R.string.initial_weight).toUpperCase());
-                   listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentItem().getWeight()));
-                }else{
+                if (ApplicationManager.getInstance().getCurrentItem() != null) {
+                    listReferenceFields.get(indexTableRecipeName).getTextValue().setText(ApplicationManager.getInstance().getCurrentItem().getName());
+                    listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText(getString(R.string.difference).toUpperCase() + " " + "[" + ApplicationManager.getInstance().getCurrentUnit().getName() + "]");
+                    listReferenceFields.get(indexTableItemDifferenceWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getDifferenceInGram()));
+                    listReferenceFields.get(indexTableItemDifferencePercentage).getTextName().setText(getString(R.string.difference).toUpperCase() + " [%]");
+                    listReferenceFields.get(indexTableItemDifferencePercentage).getTextValue().setText(ApplicationManager.getInstance().getDifferenceToInitialInPercentAsString());
+                    listReferenceFields.get(indexTableItemFinalWeight).getTextName().setText(getString(R.string.final_weight).toUpperCase());
+                    listReferenceFields.get(indexTableItemFinalWeight).getTextValue().setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                    listReferenceFields.get(indexTableItemInitialWeight).getTextName().setText(getString(R.string.initial_weight).toUpperCase());
+                    listReferenceFields.get(indexTableItemInitialWeight).getTextValue().setText(ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentItem().getWeight()));
+                } else {
                     listReferenceFields.get(indexTableItemName).getTextValue().setText("-");
                     listReferenceFields.get(indexTableRecipeName).getTextValue().setText("");
                     listReferenceFields.get(indexTableItemDifferenceWeight).getTextName().setText("");
@@ -805,34 +774,34 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case PIPETTE_ADJUSTMENT_1_HOME:
             case PIPETTE_ADJUSTMENT_2_ACCEPT_ALL_SAMPLES:
             case PIPETTE_ADJUSTMENT_3_FINISHED:
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible),getResources().getBoolean(R.bool.preferences_pipette_nominal_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_nominal_visible), getResources().getBoolean(R.bool.preferences_pipette_nominal_visible)) == true) {
                     listReferenceFields.get(pipetteNominal).getTextName().setText(getString(R.string.nominal).toUpperCase());
-                    listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal())+" ml");
+                    listReferenceFields.get(pipetteNominal).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getPipetteNominal()) + " ml");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_inacc_visible),getResources().getBoolean(R.bool.preferences_pipette_inacc_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_inacc_visible), getResources().getBoolean(R.bool.preferences_pipette_inacc_visible)) == true) {
                     listReferenceFields.get(pipetteInaccuracy).getTextName().setText(getString(R.string.incaccuracy).toUpperCase());
-                    listReferenceFields.get(pipetteInaccuracy).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy())+" %");
+                    listReferenceFields.get(pipetteInaccuracy).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getPipetteInaccuracy()) + " %");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_imprec_visible),getResources().getBoolean(R.bool.preferences_pipette_imprec_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_imprec_visible), getResources().getBoolean(R.bool.preferences_pipette_imprec_visible)) == true) {
                     listReferenceFields.get(pipetteImprecison).getTextName().setText(getString(R.string.imprecision).toUpperCase());
-                    listReferenceFields.get(pipetteImprecison).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision())+" %");
+                    listReferenceFields.get(pipetteImprecison).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getPipetteImprecision()) + " %");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_barounit_visible),getResources().getBoolean(R.bool.preferences_pipette_barounit_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_barounit_visible), getResources().getBoolean(R.bool.preferences_pipette_barounit_visible)) == true) {
                     listReferenceFields.get(pipetteBarometric).getTextName().setText(getString(R.string.barometric_unit_capitalized).toUpperCase());
-                    listReferenceFields.get(pipetteBarometric).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure())+" ATM");
+                    listReferenceFields.get(pipetteBarometric).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getPipettePressure()) + " ATM");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_liquiddensity_visible),getResources().getBoolean(R.bool.preferences_pipette_liquiddensity_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_liquiddensity_visible), getResources().getBoolean(R.bool.preferences_pipette_liquiddensity_visible)) == true) {
                     listReferenceFields.get(pipetteLiquidDensity).getTextName().setText(getString(R.string.liquid_density).toUpperCase());
-                    listReferenceFields.get(pipetteLiquidDensity).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp()))+" g/cm³");
+                    listReferenceFields.get(pipetteLiquidDensity).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().WaterTempInDensity(ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())) + " g/cm³");
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_pipette_watertemp_visible),getResources().getBoolean(R.bool.preferences_pipette_watertemp_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_pipette_watertemp_visible), getResources().getBoolean(R.bool.preferences_pipette_watertemp_visible)) == true) {
                     listReferenceFields.get(pipetteWaterTemp).getTextName().setText(getString(R.string.water_temp).toUpperCase());
-                    listReferenceFields.get(pipetteWaterTemp).getTextValue().setText(String.format("%.4f",ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp())+" " + "°C");
+                    listReferenceFields.get(pipetteWaterTemp).getTextValue().setText(String.format("%.4f", ApplicationManager.getInstance().getCurrentLibrary().getPipetteWaterTemp()) + " " + "°C");
                 }
 
 
@@ -840,55 +809,55 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
             case STATISTICAL_QUALITY_CONTROL_1_HOME:
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible), getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible)) == true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText(getString(R.string.samples).toUpperCase());
 
-                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d",ApplicationManager.getInstance().getStats().getStatistic().getN()));
+                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()));
 
 
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible),getResources().getBoolean(R.bool.preferences_statistic_average_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible), getResources().getBoolean(R.bool.preferences_statistic_average_visible)) == true) {
                     listReferenceFields.get(SQCaverage).getTextName().setText(getString(R.string.average).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
-                    }else{
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible),getResources().getBoolean(R.bool.preferences_statistic_total_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible), getResources().getBoolean(R.bool.preferences_statistic_total_visible)) == true) {
                     listReferenceFields.get(SQCsum).getTextName().setText(getString(R.string.sum_).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible),getResources().getBoolean(R.bool.preferences_statistic_minimum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible), getResources().getBoolean(R.bool.preferences_statistic_minimum_visible)) == true) {
                     listReferenceFields.get(SQCminimum).getTextName().setText(getString(R.string.minimum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible),getResources().getBoolean(R.bool.preferences_statistic_maximum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible), getResources().getBoolean(R.bool.preferences_statistic_maximum_visible)) == true) {
                     listReferenceFields.get(SQCmaximum).getTextName().setText(getString(R.string.maximum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
-                    }else {
-                    listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d", 0));
+                    } else {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible),getResources().getBoolean(R.bool.preferences_statistic_range_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible), getResources().getBoolean(R.bool.preferences_statistic_range_visible)) == true) {
                     listReferenceFields.get(SQCrange).getTextName().setText(getString(R.string.range).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
                     }
                 }
@@ -896,55 +865,55 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
                 break;
             case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible), getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible)) == true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText(getString(R.string.samples).toUpperCase());
 
-                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d",ApplicationManager.getInstance().getStats().getStatistic().getN()));
+                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()));
 
 
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible),getResources().getBoolean(R.bool.preferences_statistic_average_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible), getResources().getBoolean(R.bool.preferences_statistic_average_visible)) == true) {
                     listReferenceFields.get(SQCaverage).getTextName().setText(getString(R.string.average).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
-                    }else{
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible),getResources().getBoolean(R.bool.preferences_statistic_total_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible), getResources().getBoolean(R.bool.preferences_statistic_total_visible)) == true) {
                     listReferenceFields.get(SQCsum).getTextName().setText(getString(R.string.sum_).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible),getResources().getBoolean(R.bool.preferences_statistic_minimum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible), getResources().getBoolean(R.bool.preferences_statistic_minimum_visible)) == true) {
                     listReferenceFields.get(SQCminimum).getTextName().setText(getString(R.string.minimum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible),getResources().getBoolean(R.bool.preferences_statistic_maximum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible), getResources().getBoolean(R.bool.preferences_statistic_maximum_visible)) == true) {
                     listReferenceFields.get(SQCmaximum).getTextName().setText(getString(R.string.maximum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible),getResources().getBoolean(R.bool.preferences_statistic_range_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible), getResources().getBoolean(R.bool.preferences_statistic_range_visible)) == true) {
                     listReferenceFields.get(SQCrange).getTextName().setText(getString(R.string.range).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
                     }
                 }
@@ -953,55 +922,55 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 break;
 
             case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible),getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_numsamples_visible), getResources().getBoolean(R.bool.preferences_statistic_numsamples_visible)) == true) {
                     listReferenceFields.get(SQCnumberofSamples).getTextName().setText(getString(R.string.samples).toUpperCase());
 
-                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d",ApplicationManager.getInstance().getStats().getStatistic().getN()));
+                    listReferenceFields.get(SQCnumberofSamples).getTextValue().setText(String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()));
 
 
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible),getResources().getBoolean(R.bool.preferences_statistic_average_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_average_visible), getResources().getBoolean(R.bool.preferences_statistic_average_visible)) == true) {
                     listReferenceFields.get(SQCaverage).getTextName().setText(getString(R.string.average).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d",0));
-                    }else{
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCaverage).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCaverage).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible),getResources().getBoolean(R.bool.preferences_statistic_total_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_total_visible), getResources().getBoolean(R.bool.preferences_statistic_total_visible)) == true) {
                     listReferenceFields.get(SQCsum).getTextName().setText(getString(R.string.sum_).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCsum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCsum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible),getResources().getBoolean(R.bool.preferences_statistic_minimum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_minimum_visible), getResources().getBoolean(R.bool.preferences_statistic_minimum_visible)) == true) {
                     listReferenceFields.get(SQCminimum).getTextName().setText(getString(R.string.minimum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCminimum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCminimum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible),getResources().getBoolean(R.bool.preferences_statistic_maximum_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_maximum_visible), getResources().getBoolean(R.bool.preferences_statistic_maximum_visible)) == true) {
                     listReferenceFields.get(SQCmaximum).getTextName().setText(getString(R.string.maximum).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCmaximum).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCmaximum).getTextValue().setText(ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit());
                     }
                 }
 
-                if  (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible),getResources().getBoolean(R.bool.preferences_statistic_range_visible))==true) {
+                if (prefs.getBoolean(getString(R.string.preferences_statistic_range_visible), getResources().getBoolean(R.bool.preferences_statistic_range_visible)) == true) {
                     listReferenceFields.get(SQCrange).getTextName().setText(getString(R.string.range).toUpperCase());
-                    if(ApplicationManager.getInstance().getStats().getStatistic().getN()==0){
-                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d",0));
-                    }else {
+                    if (ApplicationManager.getInstance().getStats().getStatistic().getN() == 0) {
+                        listReferenceFields.get(SQCrange).getTextValue().setText(String.format("%d", 0));
+                    } else {
                         listReferenceFields.get(SQCrange).getTextValue().setText(ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit());
                     }
                 }
@@ -1015,60 +984,49 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
             case ASH_DETERMINATION_9_BATCH_FINISHED:
-
-
-                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
+                listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
                 try {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
-
                             ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
                     );
-                }catch (Exception e){
+                } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText("");
                 }
 
                 listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextName().setText("Gewicht Tiegel mit Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText(
-
                             ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample())
                     );
-                }catch (Exception e){
+                } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText("");
                 }
 
 
+                listReferenceFields.get(indexAshDeterminationSampleName).getTextName().setText("Probennummer");
+                try {
+                    listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText("Nicht selektiert");
+                }
 
-                    listReferenceFields.get(indexAshDeterminationSampleName).getTextName().setText("Probennummer");
-                    try {
-                       listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
-                    }catch (Exception e){
-                       listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText("Nicht selektiert");
-                    }
 
-
-                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tiegelnummer");
-                    try {
-                        listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
-                    }catch (Exception e){
-                        listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText("Nicht selektiert");
-                    }
-
+                listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tiegelnummer");
+                try {
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText("Nicht selektiert");
+                }
 
 
                 listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Anzahl Glühungen");
-try {
-    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(
-            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size() + "x");
-}catch (Exception e){
-    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
-}
-
-
-
-
-
-            break;
+                try {
+                    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size() + "x");
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
+                }
+                break;
 
         }
 
@@ -1076,55 +1034,7 @@ try {
 
     @Override
     public void onStatisticChanged(SummaryStatistics statistic) {
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-       /*
-        if(Scale.getInstance().getScaleApplication() == ScaleApplication.TOTALIZATION){
-         //   if  (prefs.getBoolean(getString(R.string.preferences_totalizaion_NumberofSamples),getResources().getBoolean(R.bool.preferences_totalizaion_NumberofSamples))==true) {
-                listReferenceFields.get(indexTableNumberOfSamples).getTextName().setText("SAMPLES");
-                try {
-                    listReferenceFields.get(indexTableNumberOfSamples).getTextValue().setText(Long.toString(ApplicationManager.getInstance().getStats().getStatistic().getN()));
-                }catch (Exception e){
-                }
-
-                listReferenceFields.get(indexTableTotal).getTextName().setText("TOTAL");
-                try {
-                    listReferenceFields.get(indexTableTotal).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getSum()));
-                }catch (Exception e){
-                }
-                listReferenceFields.get(indextableaverage).getTextName().setText("AVERAGE");
-            try {
-                listReferenceFields.get(indextableaverage).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMean()));
-            }catch (Exception e){
-            }
-
-            listReferenceFields.get(standarddeviation).getTextName().setText("STANDARD DEV.");
-            try {
-                listReferenceFields.get(standarddeviation).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()));
-            }catch (Exception e){
-            }
-
-            listReferenceFields.get(minimum).getTextName().setText("MINIMUM");
-            try {
-                listReferenceFields.get(minimum).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMin()));
-            }catch (Exception e){
-            }
-
-            listReferenceFields.get(maximum).getTextName().setText("MAXIMUM");
-            try {
-                listReferenceFields.get(maximum).getTextValue().setText(String.format("%.4f g",ApplicationManager.getInstance().getStats().getStatistic().getMax()));
-            }catch (Exception e){
-            }
-
-            listReferenceFields.get(range).getTextName().setText("Range");
-            try {
-                listReferenceFields.get(range).getTextValue().setText(String.format("%.4f g",(ApplicationManager.getInstance().getStats().getStatistic().getMax())-ApplicationManager.getInstance().getStats().getStatistic().getMin()));
-            }catch (Exception e){
-            }
-
-
-            }
-*/
-        }
+    }
 
 
 }

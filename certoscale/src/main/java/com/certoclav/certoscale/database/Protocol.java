@@ -18,103 +18,99 @@ import java.util.List;
 public class Protocol {
 
 
-	private static final String JSON_CONTENT_STRING = "content";
-	private final static String JSON_CONTENT_JSON = "content_json";
-	private final static String JSON_DEVICE_KEY = "devicekey";
-	private final static String JSON_DATE = "date";
-	private final static String JSON_VISIBILITY = "visibility";
-	private final static String JSON_NAME = "name";
-	private final static String JSON_CLOUD_ID = "_id"; //user db id from MongoDb
-	private final static String JSON_USER_EMAIL = "email";
-	private final static String JSON_SIGNATURE ="signature";
+    private static final String JSON_CONTENT_STRING = "content";
+    private final static String JSON_CONTENT_JSON = "content_json";
+    private final static String JSON_DEVICE_KEY = "devicekey";
+    private final static String JSON_DATE = "date";
+    private final static String JSON_VISIBILITY = "visibility";
+    private final static String JSON_NAME = "name";
+    private final static String JSON_CLOUD_ID = "_id"; //user db id from MongoDb
+    private final static String JSON_USER_EMAIL = "email";
+    private final static String JSON_SIGNATURE = "signature";
 
-	//additional for ash_determinatin_ticket_system
-	private final static String JSON_ASH_SAMPLE_NAME = "ash_name_sample";
-	private final static String JSON_ASH_BEAKER_NAME = "ash_name_beaker";
-	private final static String JSON_ASH_ARRAY_GLOW_WEIGHTS = "ash_array_glow_weights";
-	private final static String JSON_ASH_WEIGHT_BEAKER = "ash_weight_beaker";
-	private final static String JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE = "ash_weight_beaker_with_sample";
-	private final static String JSON_IS_PENDING = "ispending";
-
-
+    //additional for ash_determinatin_ticket_system
+    private final static String JSON_ASH_SAMPLE_NAME = "ash_name_sample";
+    private final static String JSON_ASH_BEAKER_NAME = "ash_name_beaker";
+    private final static String JSON_ASH_ARRAY_GLOW_WEIGHTS = "ash_array_glow_weights";
+    private final static String JSON_ASH_WEIGHT_BEAKER = "ash_weight_beaker";
+    private final static String JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE = "ash_weight_beaker_with_sample";
+    private final static String JSON_IS_PENDING = "ispending";
 
 
-
-	private String name = "";
-	private String userEmail = "";
-	private String deviceKey = "";
-	private String visibility = "global";
-	private String content = "";
-	private String date = "";
-	private String cloudId = "";
-	private String contentJson = "";
-
-
-	public String getAshSampleName() {
-		return ashSampleName;
-	}
-
-	public void setAshSampleName(String ashSampleName) {
-		this.ashSampleName = ashSampleName;
-	}
-
-	public String getAshBeakerName() {
-		return ashBeakerName;
-	}
-
-	public void setAshBeakerName(String ashBeakerName) {
-
-		this.ashBeakerName = ashBeakerName;
-	}
+    private String name = "";
+    private String userEmail = "";
+    private String deviceKey = "";
+    private String visibility = "global";
+    private String content = "";
+    private String date = "";
+    private String cloudId = "";
+    private String contentJson = "";
 
 
-	public void saveIntoDb() {
-		DatabaseService db = new DatabaseService(ApplicationController.getContext());
-		db.deleteProtocol(this);
-		db.insertProtocol(this);
-	}
+    public String getAshSampleName() {
+        return ashSampleName;
+    }
 
-	public List<Double> getAshArrayGlowWeights() {
-		return ashArrayGlowWeights;
-	}
+    public void setAshSampleName(String ashSampleName) {
+        this.ashSampleName = ashSampleName;
+    }
 
-	public Double getAshArrayGlowWeightsDifference() {
+    public String getAshBeakerName() {
+        return ashBeakerName;
+    }
 
-		if(getAshArrayGlowWeights().size() >=2){
-			int lastIndex = getAshArrayGlowWeights().size()-1;
-			return getAshArrayGlowWeights().get(lastIndex) - getAshArrayGlowWeights().get(lastIndex-1);
-		}
-		return -1d;
-	}
+    public void setAshBeakerName(String ashBeakerName) {
+
+        this.ashBeakerName = ashBeakerName;
+    }
 
 
-	public void setAshArrayGlowWeights(List<Double> ashArrayGlowWeights) {
-		this.ashArrayGlowWeights = ashArrayGlowWeights;
-	}
+    public void saveIntoDb() {
+        DatabaseService db = new DatabaseService(ApplicationController.getContext());
+        db.deleteProtocol(this);
+        db.insertProtocol(this);
+    }
+
+    public List<Double> getAshArrayGlowWeights() {
+        return ashArrayGlowWeights;
+    }
+
+    public Double getAshArrayGlowWeightsDifference() {
+
+        if (getAshArrayGlowWeights().size() >= 2) {
+            int lastIndex = getAshArrayGlowWeights().size() - 1;
+            return getAshArrayGlowWeights().get(lastIndex) - getAshArrayGlowWeights().get(lastIndex - 1);
+        }
+        return -1d;
+    }
 
 
+    public void setAshArrayGlowWeights(List<Double> ashArrayGlowWeights) {
+        this.ashArrayGlowWeights = ashArrayGlowWeights;
+    }
 
-	public Double getAshWeightBeaker() {
-		return ashWeightBeaker;
-	}
 
-	public void setAshWeightBeaker(Double ashWeightBeaker) {
-		this.ashWeightBeaker = ashWeightBeaker;
-	}
+    public Double getAshWeightBeaker() {
+        return ashWeightBeaker;
+    }
 
-	public Double getAshWeightBeakerWithSample() {
-		return ashWeightBeakerWithSample;
-	}
+    public void setAshWeightBeaker(Double ashWeightBeaker) {
+        this.ashWeightBeaker = ashWeightBeaker;
+    }
 
-	public void setAshWeightBeakerWithSample(Double ashWeightBeakerWithSample) {
-		this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
-	}
+    public Double getAshWeightBeakerWithSample() {
+        return ashWeightBeakerWithSample;
+    }
 
-	private String ashSampleName = "";
-	private String ashBeakerName = "";
-	private List<Double> ashArrayGlowWeights = new ArrayList<Double>();
-	private Double ashWeightBeaker = 0d;
-	private Double ashWeightBeakerWithSample = 0d;
+    public void setAshWeightBeakerWithSample(Double ashWeightBeakerWithSample) {
+        this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
+    }
+
+    private String ashSampleName = "";
+    private String ashBeakerName = "";
+    private List<Double> ashArrayGlowWeights = new ArrayList<Double>();
+    private Double ashWeightBeaker = 0d;
+    private Double ashWeightBeakerWithSample = 0d;
 
     public Boolean getIsPending() {
         return isPending;
@@ -127,334 +123,324 @@ public class Protocol {
     private Boolean isPending = true;
 
 
-	@DatabaseField(columnName = JSON_SIGNATURE,dataType = DataType.STRING_BYTES)
-	private String signature;
+    @DatabaseField(columnName = JSON_SIGNATURE, dataType = DataType.STRING_BYTES)
+    private String signature;
 
 
-
-	public String getProtocolJson() {
-		generateJson();
-		return protocolJson;
-	}
-
-
-	@DatabaseField(generatedId = true, columnName = "protocol_id")
-	private int item_id;
-
-	@DatabaseField(columnName = "protocol_json")
-	private String protocolJson;
+    public String getProtocolJson() {
+        generateJson();
+        return protocolJson;
+    }
 
 
+    @DatabaseField(generatedId = true, columnName = "protocol_id")
+    private int item_id;
 
-	public String getDate() {
-		return this.date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+    @DatabaseField(columnName = "protocol_json")
+    private String protocolJson;
 
 
-	// id is generated by the database and set on the object automatically
+    public String getDate() {
+        return this.date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
 
-	public Protocol() {
-
-	}
-
-	public Protocol( String protocolJson) {
-		setProtocolJson(protocolJson);
-		this.protocolJson = protocolJson;
-	}
+    // id is generated by the database and set on the object automatically
 
 
-	public void setProtocolJson(String itemJson) {
-		this.protocolJson = itemJson;
-		parseJson();
-	}
+    public Protocol() {
 
-	public void parseJson(){
+    }
 
-		JSONObject jsonObject = null;
-		try {
-			jsonObject = new JSONObject(protocolJson);
-		}catch (Exception e){
-			return;
-		}
-
-		try {
-			name = jsonObject.getString(JSON_NAME);
-		}catch (Exception e){
-			name = "";
-		}
-		try {
-			userEmail = jsonObject.getString(JSON_USER_EMAIL);
-		}catch (Exception e){
-			userEmail = "";
-		}
-
-		try {
-			visibility = jsonObject.getString(JSON_VISIBILITY);
-		}catch (Exception e){
-			visibility = "private";
-		}
+    public Protocol(String protocolJson) {
+        setProtocolJson(protocolJson);
+        this.protocolJson = protocolJson;
+    }
 
 
+    public void setProtocolJson(String itemJson) {
+        this.protocolJson = itemJson;
+        parseJson();
+    }
 
-		try {
-			date = jsonObject.getString(JSON_DATE);
-		}catch (Exception e){
-			date = "";
-		}
+    public void parseJson() {
 
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(protocolJson);
+        } catch (Exception e) {
+            return;
+        }
 
-		try {
-			deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
-		}catch (Exception e){
-			deviceKey = "";
-		}
+        try {
+            name = jsonObject.getString(JSON_NAME);
+        } catch (Exception e) {
+            name = "";
+        }
+        try {
+            userEmail = jsonObject.getString(JSON_USER_EMAIL);
+        } catch (Exception e) {
+            userEmail = "";
+        }
 
-
-		try {
-			cloudId = jsonObject.getString(JSON_CLOUD_ID);
-		}catch (Exception e){
-			cloudId = "";
-		}
-
-		try {
-			content = jsonObject.getString(JSON_CONTENT_STRING);
-		}catch (Exception e){
-			content = "";
-		}
-		try {
-			signature=jsonObject.getString(JSON_SIGNATURE);
-
-		}catch (Exception e){
-			signature = "";
-		}
-
-		try {
-			content = jsonObject.getString(JSON_CONTENT_STRING);
-		}catch (Exception e){
-			content = "";
-		}
+        try {
+            visibility = jsonObject.getString(JSON_VISIBILITY);
+        } catch (Exception e) {
+            visibility = "private";
+        }
 
 
-		try {
-			ashSampleName = jsonObject.getString(JSON_ASH_SAMPLE_NAME);
-		}catch (Exception e){
-			ashSampleName = "";
-		}
-
-		try {
-			ashBeakerName = jsonObject.getString(JSON_ASH_BEAKER_NAME);
-		}catch (Exception e){
-			ashBeakerName = "";
-		}
-
-		ashArrayGlowWeights.clear();
-		JSONArray jsonArray = new JSONArray();
-
-		try {
-			jsonArray = jsonObject.getJSONArray(JSON_ASH_ARRAY_GLOW_WEIGHTS);
-		}catch (Exception e) {
-			jsonArray = new JSONArray();
-		}
+        try {
+            date = jsonObject.getString(JSON_DATE);
+        } catch (Exception e) {
+            date = "";
+        }
 
 
-		for(int i = 0; i< jsonArray.length();i++) {
-			JSONObject glowWeightsEntry = new JSONObject();
-			Double glowWeight = 0d;
-			try {
-				glowWeight = (Double) jsonArray.get(i);
-			} catch (Exception e) {
-				glowWeight = 0d;
-			}
-			ashArrayGlowWeights.add(glowWeight);
-		}
+        try {
+            deviceKey = jsonObject.getString(JSON_DEVICE_KEY);
+        } catch (Exception e) {
+            deviceKey = "";
+        }
 
 
+        try {
+            cloudId = jsonObject.getString(JSON_CLOUD_ID);
+        } catch (Exception e) {
+            cloudId = "";
+        }
 
-		try {
-			ashWeightBeaker = jsonObject.getDouble(JSON_ASH_WEIGHT_BEAKER);
-		}catch (Exception e){
-			ashWeightBeaker = 0d;
-		}
+        try {
+            content = jsonObject.getString(JSON_CONTENT_STRING);
+        } catch (Exception e) {
+            content = "";
+        }
+        try {
+            signature = jsonObject.getString(JSON_SIGNATURE);
 
-		try {
-			ashWeightBeakerWithSample = jsonObject.getDouble(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE);
-		}catch (Exception e){
-			ashWeightBeakerWithSample = 0d;
-		}
+        } catch (Exception e) {
+            signature = "";
+        }
+
+        try {
+            content = jsonObject.getString(JSON_CONTENT_STRING);
+        } catch (Exception e) {
+            content = "";
+        }
+
+
+        try {
+            ashSampleName = jsonObject.getString(JSON_ASH_SAMPLE_NAME);
+        } catch (Exception e) {
+            ashSampleName = "";
+        }
+
+        try {
+            ashBeakerName = jsonObject.getString(JSON_ASH_BEAKER_NAME);
+        } catch (Exception e) {
+            ashBeakerName = "";
+        }
+
+        ashArrayGlowWeights.clear();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            jsonArray = jsonObject.getJSONArray(JSON_ASH_ARRAY_GLOW_WEIGHTS);
+        } catch (Exception e) {
+            jsonArray = new JSONArray();
+        }
+
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject glowWeightsEntry = new JSONObject();
+            Double glowWeight = 0d;
+            try {
+                glowWeight = (Double) jsonArray.get(i);
+            } catch (Exception e) {
+                glowWeight = 0d;
+            }
+            ashArrayGlowWeights.add(glowWeight);
+        }
+
+
+        try {
+            ashWeightBeaker = jsonObject.getDouble(JSON_ASH_WEIGHT_BEAKER);
+        } catch (Exception e) {
+            ashWeightBeaker = 0d;
+        }
+
+        try {
+            ashWeightBeakerWithSample = jsonObject.getDouble(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE);
+        } catch (Exception e) {
+            ashWeightBeakerWithSample = 0d;
+        }
 
         try {
             isPending = jsonObject.getBoolean(JSON_IS_PENDING);
-        }catch (Exception e){
+        } catch (Exception e) {
             isPending = false;
         }
 
 
+        protocolJson = jsonObject.toString();
 
-		protocolJson = jsonObject.toString();
-
-	}
-
+    }
 
 
+    public Protocol(String cloudId, String protocolJson) {
+        this.cloudId = cloudId;
+        this.protocolJson = protocolJson;
+    }
+
+    public Protocol(String cloudId, String name, String userEmail, String deviceKey, String date, String visibility, String content, String signature) {
+        this.cloudId = cloudId;
+        this.name = name;
+        this.userEmail = userEmail;
+        this.deviceKey = deviceKey;
+        this.date = date;
+        this.visibility = visibility;
+        this.content = content;
+        this.signature = signature;
+    }
 
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getDeviceKey() {
+        return deviceKey;
+    }
+
+    public void setDeviceKey(String deviceKey) {
+        this.deviceKey = deviceKey;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setItem_id(int item_id) {
+        this.item_id = item_id;
+    }
+
+    public String getCloudId() {
+        return cloudId;
+    }
+
+    public void setCloudId(String cloudId) {
+        this.cloudId = cloudId;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
 
-	public Protocol(String cloudId, String protocolJson) {
-		this.cloudId = cloudId;
-		this.protocolJson = protocolJson;
-	}
+    public void generateJson() {
+        JSONObject jsonObject = new JSONObject();
 
-	public Protocol(String cloudId, String name, String userEmail, String deviceKey, String date, String visibility, String content,String signature) {
-		this.cloudId = cloudId;
-		this.name = name;
-		this.userEmail = userEmail;
-		this.deviceKey = deviceKey;
-		this.date = date;
-		this.visibility = visibility;
-		this.content = content;
-		this.signature = signature;
-	}
+        try {
+            jsonObject.put(JSON_CLOUD_ID, cloudId)
+                    .put(JSON_NAME, name)
+                    .put(JSON_DEVICE_KEY, deviceKey)
+                    .put(JSON_DATE, date)
+                    .put(JSON_USER_EMAIL, userEmail)
+                    .put(JSON_VISIBILITY, visibility)
+                    .put(JSON_CONTENT_STRING, content)
+                    .put(JSON_SIGNATURE, signature)
+                    .put(JSON_ASH_SAMPLE_NAME, ashSampleName)
+                    .put(JSON_ASH_BEAKER_NAME, ashBeakerName)
+                    .put(JSON_ASH_WEIGHT_BEAKER, ashWeightBeaker)
+                    .put(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE, ashWeightBeakerWithSample)
+                    .put(JSON_IS_PENDING, isPending);
 
+            JSONArray jsonArrayGlowWeights = new JSONArray();
+            for (Double value : ashArrayGlowWeights) {
+                jsonArrayGlowWeights.put(value);
+            }
+            jsonObject.put(JSON_ASH_ARRAY_GLOW_WEIGHTS, jsonArrayGlowWeights);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        protocolJson = jsonObject.toString();
+    }
 
+    public Double getLastGlowWeight() {
+        if (getAshArrayGlowWeights().size() > 0)
+            return ashArrayGlowWeights.get(ashArrayGlowWeights.size() - 1);
+        else
+            return -1d;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Double getAshResultInGram() {
+        try {
+            Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
+            Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+            return weightDrySample;
+        } catch (Exception e) {
+            return 0d;
+        }
 
-	public String getUserEmail() {
-		return userEmail;
-	}
+    }
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
+    public Double getAshResultInPercent() {
+        try {
+            Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
+            Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
+            Double result = (weightDrySample / weightWetSample) * 100.0;
+            return result;
+        } catch (Exception e) {
+            return 0d;
+        }
 
-	public String getDeviceKey() {
-		return deviceKey;
-	}
+    }
 
-	public void setDeviceKey(String deviceKey) {
-		this.deviceKey = deviceKey;
-	}
+    public String getAshResultPercentageAsString() {
+        try {
+            Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
+            Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
+            Double result = (weightDrySample / weightWetSample) * 100.0;
+            return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());
+        } catch (Exception e) {
+            return "";
+        }
 
-	public String getVisibility() {
-		return visibility;
-	}
-
-	public void setVisibility(String visibility) {
-		this.visibility = visibility;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
-	}
-
-	public String getCloudId() {
-		return cloudId;
-	}
-
-	public void setCloudId(String cloudId) {
-		this.cloudId = cloudId;
-	}
-
-	public String getSignature() {return signature;}
-
-	public void setSignature(String signature) {this.signature = signature;}
-
-
-
-
-
-	public void generateJson(){
-		JSONObject jsonObject = new JSONObject();
-
-		try {
-			jsonObject.put(JSON_CLOUD_ID,cloudId)
-					.put(JSON_NAME, name)
-					.put(JSON_DEVICE_KEY,deviceKey)
-					.put(JSON_DATE,date)
-					.put(JSON_USER_EMAIL, userEmail)
-					.put(JSON_VISIBILITY,visibility)
-					.put(JSON_CONTENT_STRING,content)
-					.put(JSON_SIGNATURE,signature)
-					.put(JSON_ASH_SAMPLE_NAME,ashSampleName)
-					.put(JSON_ASH_BEAKER_NAME,ashBeakerName)
-					.put(JSON_ASH_WEIGHT_BEAKER,ashWeightBeaker)
-					.put(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE,ashWeightBeakerWithSample)
-			        .put(JSON_IS_PENDING,isPending);
-
-			JSONArray jsonArrayGlowWeights = new JSONArray();
-			for(Double value :ashArrayGlowWeights){
-				jsonArrayGlowWeights.put(value);
-			}
-			jsonObject.put(JSON_ASH_ARRAY_GLOW_WEIGHTS,jsonArrayGlowWeights);
-
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		protocolJson = jsonObject.toString();
-	}
-
-	public Double getLastGlowWeight(){
-		if(getAshArrayGlowWeights().size()>0)
-			return ashArrayGlowWeights.get(ashArrayGlowWeights.size()-1);
-		else
-			return -1d;
-	}
-
-	public Double getAshResultInGram() {
-		try {
-			Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
-			Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-
-			return weightDrySample;
-		}catch (Exception e){
-			return 0d;
-		}
-
-	}
-	public Double getAshResultInPercent() {
-		try {
-			Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
-			Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-			Double result =  (weightDrySample/weightWetSample)*100.0;
-			return result;
-		}catch (Exception e){
-			return 0d;
-		}
-
-	}
-
-	public String getAshResultPercentageAsString() {
-		try {
-			Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
-			Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-			Double result =  (weightDrySample/weightWetSample)*100.0;
-			return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());
-		}catch (Exception e){
-			return "";
-		}
-
-	}
+    }
 }
 
 

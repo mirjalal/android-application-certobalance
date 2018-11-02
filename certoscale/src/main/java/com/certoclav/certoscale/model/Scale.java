@@ -118,25 +118,6 @@ public class Scale extends Observable {
 
     }
 
-    public boolean isWifiConnected() {
-        return wifiConnected;
-    }
-
-    public void setOnWifiListener(WifiListener listener) {
-        this.wifiListeners.add(listener);
-    }
-
-    public void removeOnWifiListener(WifiListener listener) {
-        this.wifiListeners.remove(listener);
-    }
-
-    public void setWifiConnected(boolean wifiConnected) {
-        this.wifiConnected = wifiConnected;
-        for (WifiListener listener : wifiListeners) {
-            listener.onWifiConnectionChange(wifiConnected);
-        }
-    }
-
     private boolean wifiConnected = false;
 
 
@@ -150,14 +131,6 @@ public class Scale extends Observable {
         for (ScaleStateListener listener : scaleStateListeners) {
             listener.onScaleStateChange(state);
         }
-    }
-
-    public boolean isMicrocontrollerReachable() {
-        return microcontrollerReachable;
-    }
-
-    public void setMicrocontrollerReachable(boolean microcontrollerReachable) {
-        this.microcontrollerReachable = microcontrollerReachable;
     }
 
     public void setOnWeightListener(WeightListener listener) {
@@ -219,13 +192,6 @@ public class Scale extends Observable {
         return serialServiceScale;
     }
 
-    public void getSerialsServiceScale(SerialService serialService) {
-
-        serialServiceScale = serialService;
-        serialServiceScale.setStringTerminatin("\n");
-
-
-    }
 
     public SerialService getSerialsServiceLabelPrinter() {
         if (serialServiceLabelPrinter == null) {
