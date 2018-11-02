@@ -25,15 +25,24 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     private TextView textInstruction = null;
     private Button buttonNext = null;
     private Button buttonBack = null;
-
+    private Button buttonCancel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_ash_determination, container, false);
-        textInstruction = (TextView) rootView.findViewById(R.id.application_fragment_ash_determination_text);
-        buttonNext = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
-        buttonBack = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_back);
+        textInstruction = rootView.findViewById(R.id.application_fragment_ash_determination_text);
+        buttonNext = rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
+        buttonBack = rootView.findViewById(R.id.application_fragment_ash_determination_button_back);
+        buttonCancel = rootView.findViewById(R.id.application_fragment_ash_determination_button_cancel);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
+            }
+        });
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +144,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 }
             }
         });
-        return rootView;//inflater.inflate(R.layout.article_view, container, false);
+        return rootView;
     }
 
 
@@ -199,11 +208,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     @Override
     public void onPause() {
-
         Scale.getInstance().removeOnApplicationListener(this);
         super.onPause();
-
-
     }
 
 
@@ -214,8 +220,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialog.setTitle("Geben Sie die Probennummer ein");
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
-            // set the custom dialog components - text, image and button
-
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -225,22 +229,15 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 }
             });
             Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
-            // if button is clicked, close the custom dialog
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
-
-
-                    if (editText.getText().toString().isEmpty() == false) {
+                    if (!editText.getText().toString().isEmpty()) {
                         ApplicationManager.getInstance().getCurrentProtocol().setAshSampleName((editText.getText().toString()));
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER);
                     }
-
-
                     dialog.dismiss();
-
-
                 }
             });
 
@@ -249,9 +246,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     private void showBeakerNameEditor() {
         try {
@@ -272,7 +267,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 }
             });
             Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
-            // if button is clicked, close the custom dialog
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -292,15 +286,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     } catch (NumberFormatException e) {
                         ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName("");
                     }
-
                     dialog.dismiss();
-
-
                 }
             });
-
             dialog.show();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -308,16 +297,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     }
 
     public void saveAshDeterminationProtocols() {
-
         StringBuilder sb = new StringBuilder();
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
         sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample()) + "\r\n");
         sb.append("ash_percent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
-
         ExportUtils exportUtils = new ExportUtils();
         exportUtils.writeCSVFileToInternalSD(sb.toString());
-
-
     }
 
     @Override
@@ -326,13 +311,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     }
 
     private void saveProtocolContent() {
-        //
         StringBuilder sb = new StringBuilder();
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolHeader());
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getApplicationData());
-
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
-
         String scaleApplicationName = Scale.getInstance().getScaleApplication().toString();
         switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
@@ -406,47 +388,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 scaleApplicationName = getString(R.string.ash_determination);
                 break;
         }
-
-        //Hash of the Protocol
-        //String md5Hash=ApplicationManager.getInstance().calculateMD5(sb.toString());
-/*
-//String signatureString = "";
-        byte[] signatureBytes = new byte[];
-try {
-    String hash = ApplicationManager.getInstance().calculateSHA256(sb.toString());
-    PrivateKey privateKey = ApplicationManager.getInstance().loadPrivateKey(Scale.getInstance().getUser().getPrivateKey());
-    PublicKey publicKey = ApplicationManager.getInstance().loadPublicKey(Scale.getInstance().getUser().getPublicKey());
-
-
-    Signature signature = Signature.getInstance("NONEwithRSA");
-    signature.initSign(privateKey);
-    signature.update(hash.getBytes());
-    //signature.sign();
-
-    signatureBytes = signature.sign();
-
-//    signatureString = Base64.encodeToString(signatureBytes, Base64.DEFAULT);
-
-
-    String encryptedByteValue = Base64.encodeToString(signatureBytes, Base64.DEFAULT);
-}catch (Exception e){
-            e.printStackTrace();
-            signatureString = "";
-}
-    //    byte[] signaturetest=Base64.decode(signatureString,Base64.DEFAULT);
-
-
-
-
-
-        //signature.initVerify(publicKey);
-        //signature.update(hash.getBytes());
-        //Boolean test=signature.verify(signatureBytes);
-        //Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
-
-        signatureString=Base64.encodeToString(signatureBytes,Base64.DEFAULT);
-        ApplicationManager.getInstance().getCurrentProtocol().setSignature(signatureString);
-        */
         ApplicationManager.getInstance().getCurrentProtocol().setContent(sb.toString());
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
     }

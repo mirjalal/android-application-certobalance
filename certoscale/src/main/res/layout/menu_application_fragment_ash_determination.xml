@@ -35,4 +35,15 @@
         android:textAllCaps="true"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/application_fragment_ash_determination_button_cancel"
+        style="@style/button_cancel"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/cancel"
+        android:textAllCaps="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

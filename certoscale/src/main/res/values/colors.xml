@@ -8,6 +8,8 @@
     <color name="bright_green">#02D8B0</color>
     <color name="orange">#FF8000</color>
     <color name="button_green">#10a54a</color>
+    <color name="red">#d50000</color>
+    <color name="dark_red">#971E05</color>
 
     <color name="button_ae_adam">#00aeef</color>
     <color name="button_kern">#00316f</color>
