@@ -156,6 +156,41 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     public void onWeightChanged(Double weight, String unit) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         boolean loadingbarnormal = true;
+
+        if (loadingbarnormal) {
+            //Update Loading bar
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
+            FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
+            //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
+            int fwidth = 0;
+            if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
+                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
+            } else {
+                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
+            }
+            if (fwidth < 0) {
+                fwidth = 0;
+            }
+            if (fwidth > WIDTH_LOADING_BAR_TOTAL) {
+                fwidth = WIDTH_LOADING_BAR_TOTAL;
+            }
+            params.width = fwidth;
+            params.height = 15;
+            barload.setLayoutParams(params);
+
+            params2.height = 15;
+            barloadbackground.setLayoutParams(params2);
+
+
+            if (ApplicationManager.getInstance().getSumInGram() > (0.8 * Scale.getInstance().getScaleModel().getMaximumCapazityInGram())) {
+                barload.setBackgroundColor(Color.RED);
+
+            } else {
+                barload.setBackgroundColor(Color.GREEN);
+            }
+
+        }
+
         switch (Scale.getInstance().getScaleApplication()) {
             case ANIMAL_WEIGHING_CALCULATING:
                 textInstruction.setText("");
@@ -597,71 +632,47 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
             case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textValue.setTextColor(Color.WHITE);
-                beakerWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                textSum.setText("");
+                enableField(textValue, String.valueOf(getTotalWeight()));
+                clearField(textSum);
                 break;
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textValue.setTextColor(Color.WHITE);
-                double materialWeight = (ApplicationManager.getInstance().getSumInGram() > beakerWeight) ? ApplicationManager.getInstance().getSumInGram() - beakerWeight : 0;
-                textSum.setText("PROBENMASSE: " +
-                        String.valueOf(NumberFormatUtils.roundNumber(materialWeight, 4)));
+                enableField(textValue, String.valueOf(getTotalWeight()));
+                enableField(textSum, String.valueOf(getProbeWeight()));
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-                textSum.setText("Wait for glowing");
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                textSum.setText("Weight glowed sample");
+                enableField(textValue, String.valueOf(getTotalWeight()));
+                enableField(textSum, String.valueOf(getProbeWeight()));
                 break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                textSum.setText("Check delat");
                 break;
             case ASH_DETERMINATION_9_BATCH_FINISHED:
-                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                textValue.setTextColor(Color.WHITE);
+                clearField(textSum);
                 break;
             default:
-                textValue.setTextColor(Color.WHITE);
-                textValue.setText("not implemented");
                 break;
-
         }
-
-        if (loadingbarnormal) {
-            //Update Loading bar
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) barload.getLayoutParams();
-            FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) barloadbackground.getLayoutParams();
-            //int fwidth = (int) (((Scale.getInstance().getWeightInGram()/ AppConstants.WEIGHT_MAX_IN_GRAM) * WIDTH_LOADING_BAR_TOTAL));
-            int fwidth = 0;
-            if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
-                fwidth = (int) (((Scale.getInstance().getWeightInGram() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
-            } else {
-                fwidth = (int) (((ApplicationManager.getInstance().getSum() / Scale.getInstance().getScaleModel().getMaximumCapazityInGram()) * WIDTH_LOADING_BAR_TOTAL));
-            }
-            if (fwidth < 0) {
-                fwidth = 0;
-            }
-            if (fwidth > WIDTH_LOADING_BAR_TOTAL) {
-                fwidth = WIDTH_LOADING_BAR_TOTAL;
-            }
-            params.width = fwidth;
-            params.height = 15;
-            barload.setLayoutParams(params);
-
-            params2.height = 15;
-            barloadbackground.setLayoutParams(params2);
+    }
 
 
-            if (ApplicationManager.getInstance().getSumInGram() > (0.8 * Scale.getInstance().getScaleModel().getMaximumCapazityInGram())) {
-                barload.setBackgroundColor(Color.RED);
+    public String getTotalWeight(){
+        return NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getTaredValueInGram(), 4);
+    }
 
-            } else {
-                barload.setBackgroundColor(Color.GREEN);
-            }
+    public String getProbeWeight(){
+        double totalWeight = ApplicationManager.getInstance().getTaredValueInGram();
+        double beakerWeight = ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker();
+        return (totalWeight - beakerWeight > 0) ? NumberFormatUtils.roundNumber(totalWeight - beakerWeight, 4) : "0";
+    }
 
-        }
+    public void enableField(TextView textView, String text){
+        textView.setTextColor(Color.WHITE);
+        textView.setText(text);
+    }
+
+    public void clearField(TextView textView){
+        textView.setText("");
     }
 
 

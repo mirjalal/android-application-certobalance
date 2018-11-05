@@ -125,18 +125,16 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int pipetteWaterTemp = 5;
 
     //Ash determination
+    int indexAshDeterminationSampleName = 0;
     int indexAshDeterminationWeightBeaker = 1;
+    int indexAshDeterminationBeakerName = 2;
     int indexAshDeterminationWeightBeakerWithSample = 3;
     int indexAshDeterminationDeltaWeight = 5;
-
-    int indexAshDeterminationSampleName = 0;
-    int indexAshDeterminationBeakerName = 2;
-
 
     @Override
     public void onResume() {
         super.onResume();
-        if (listReferenceFields.isEmpty() == false) {
+        if (!listReferenceFields.isEmpty()) {
             for (ReferenceField refField : listReferenceFields) {
                 refField.getTextName().setText("");
                 refField.getTextValue().setText("");
@@ -181,13 +179,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     @Override
     public void onWeightChanged(Double weight, String unit) {
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-
         switch (Scale.getInstance().getScaleApplication()) {
             case WEIGHING:
-
                 if (prefs.getBoolean(getString(R.string.preferences_weigh_tara_visible), getResources().getBoolean(R.bool.preferences_weigh_tara_visible)) == true) {
                     listReferenceFields.get(indexTableTara).getTextName().setText(getString(R.string.tara).toUpperCase());
                     listReferenceFields.get(indexTableTara).getTextValue().setText(ApplicationManager.getInstance().getTareAsStringWithUnit());
@@ -1026,6 +1020,9 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
                 }
+
+
+
                 break;
 
         }

@@ -47,7 +47,6 @@ public class ProtocolManager implements ScaleApplicationListener {
         sb.append("\n");
 
         return sb.toString();
-
     }
 
     public String getProtocolHeader() {
@@ -146,21 +145,15 @@ public class ProtocolManager implements ScaleApplicationListener {
                 case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:
                     sb.append(R.string.application + ":  " + R.string.app_statistical_quality_control + "\n");
                     break;
-
-
             }
 
         }
         return sb.toString();
-
-
     }
 
 
     public String getSQCBatch(SQC sqc) {
-
         StringBuilder sb = new StringBuilder();
-
         sb.append(ApplicationController.getContext().getString(R.string.statistics_of) + " " + sqc.getName() + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.samples) + " " + String.format("%d", sqc.getStatistics().getN()) + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.average) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMean()) + "\n");
@@ -170,14 +163,11 @@ public class ProtocolManager implements ScaleApplicationListener {
         sb.append(ApplicationController.getContext().getString(R.string.standard_deviation) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getStandardDeviation()) + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.total) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getSum()) + "\n");
         sb.append(("\n"));
-
         sb.append(ApplicationController.getContext().getString(R.string.nominal) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getNominal()) + "\n");
-
         sb.append(ApplicationController.getContext().getString(R.string.tolerance_plus_1) + " " + String.format("%d", sqc.getSqcPT1()) + "   " + String.format("%.1f", ((double) sqc.getSqcPT1() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.tolerance_plus_2) + " " + String.format("%d", sqc.getSqcPT2()) + "   " + String.format("%.1f", ((double) sqc.getSqcPT2() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.tolerance_minus_1) + " " + String.format("%d", sqc.getSqcNT1()) + "   " + String.format("%.1f", ((double) sqc.getSqcNT1() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
         sb.append(ApplicationController.getContext().getString(R.string.tolerance_minus_2) + " " + String.format("%d", sqc.getSqcNT2()) + "   " + String.format("%.1f", ((double) sqc.getSqcNT2() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
-
         return sb.toString();
     }
 

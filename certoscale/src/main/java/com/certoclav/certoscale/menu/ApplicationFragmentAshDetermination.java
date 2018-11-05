@@ -24,7 +24,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     private TextView textInstruction = null;
     private Button buttonNext = null;
-    private Button buttonBack = null;
     private Button buttonCancel;
 
     @Override
@@ -33,7 +32,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         View rootView = inflater.inflate(R.layout.menu_application_fragment_ash_determination, container, false);
         textInstruction = rootView.findViewById(R.id.application_fragment_ash_determination_text);
         buttonNext = rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
-        buttonBack = rootView.findViewById(R.id.application_fragment_ash_determination_button_back);
         buttonCancel = rootView.findViewById(R.id.application_fragment_ash_determination_button_cancel);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -108,40 +106,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             }
         });
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (Scale.getInstance().getScaleApplication()) {
-                    case ASH_DETERMINATION_1_HOME:
-                        break;
-                    case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
-                        break;
-                    case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
-                        break;
-                    case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                        ApplicationManager.getInstance().getCurrentProtocol().setAshSampleName("");
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER);
-                        break;
-                    case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_4_WEIGH_BEAKER);
-                        break;
-                    case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_5_WEIGHING_SAMPLE);
-                        break;
-                    case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
-                        break;
-                    case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE);
-                        break;
-                    case ASH_DETERMINATION_9_BATCH_FINISHED:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT);
-                        break;
-                }
-            }
-        });
         return rootView;
     }
 
