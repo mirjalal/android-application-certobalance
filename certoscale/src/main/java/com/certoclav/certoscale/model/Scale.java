@@ -39,6 +39,8 @@ public class Scale extends Observable {
 
     private ScaleModel scaleModel = null;
 
+    private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
+    private ScaleState state = ScaleState.OFF; //default init state is READY_AND_WAITING_FOR_LOGIN
 
     public ScaleModel getScaleModel() {
         if (scaleModel == null) {
@@ -82,9 +84,6 @@ public class Scale extends Observable {
 
     private String rawResponseFromBalance = "";
 
-
-    private ScaleApplication scaleApplication = ScaleApplication.WEIGHING;
-    private ScaleState state = ScaleState.OFF; //default init state is READY_AND_WAITING_FOR_LOGIN
 
     private Double weightInGram = 0d; //raw value reiceived from Serial port of the balance
 

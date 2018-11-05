@@ -571,12 +571,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         return getSumInGram() + getTareInGram();
     }
 
-
-    public String getSumAsString() {
-        return String.format("%.4f", getSumInGram());
-    }
-
-
     public String getTaredValueAsStringWithUnit() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
@@ -596,22 +590,12 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         }
     }
 
-
-    public String getTareAsString() {
-        return String.format("%d", getTareInPieces());
-    }
-
     private ApplicationManager() {
         Scale.getInstance().setOnWeightListener(this);
         Scale.getInstance().setOnApplicationListener(this);
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
         currentUnit = new Unit(0d, 1d, "gram", "g", "", true, false);
         currentLibrary = new Library("", 0, "", 0, "default", 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 100, 0d, 0, new Date(), true, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 1);
-    }
-
-
-    public String getLoadInGramAsStringWithUnit() {
-        return String.format("%.4f", getSumInGram()) + " g";
     }
 
     public Double getTaredValueInGram() {
@@ -621,10 +605,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
             return getSumInGram();
         }
 
-    }
-
-    public boolean getPeakHoldActivated() {
-        return peakholdactivated;
     }
 
     public boolean setPeakHoldActivated(boolean status) {

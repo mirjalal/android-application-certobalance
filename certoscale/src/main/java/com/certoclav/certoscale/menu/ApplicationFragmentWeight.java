@@ -25,6 +25,7 @@ import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.NumberFormatUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,8 +46,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     private static final int WIDTH_LOADING_BAR_TOTAL = 700;
     private long ctime_first = 0;
 
-
-    private double ashBeakerWeight = 0;
+    private double beakerWeight = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -593,24 +593,27 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
 
             case ASH_DETERMINATION_1_HOME:
-                textInstruction.setText("Drücken Sie START um die Anwendung zu starten");
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
             case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                beakerWeight = ApplicationManager.getInstance().getTaredValueInGram();
+                textSum.setText("");
+                break;
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+                textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
+                textValue.setTextColor(Color.WHITE);
+                double materialWeight = (ApplicationManager.getInstance().getSumInGram() > beakerWeight) ? ApplicationManager.getInstance().getSumInGram() - beakerWeight : 0;
+                textSum.setText("PROBENMASSE: " +
+                        String.valueOf(NumberFormatUtils.roundNumber(materialWeight, 4)));
+                break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
             case ASH_DETERMINATION_9_BATCH_FINISHED:
-                textInstruction.setText("");
-                textSum.setText("");
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
-                if (ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() != 0){
-                    textSum.setText("MATERIAL WEIGHT: " + String.valueOf(Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
-                            ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())));
-                }
-               // textSum.setText("SUM: " + ApplicationManager.getInstance().getSumAsStringWithUnit());
                 break;
             default:
                 textValue.setTextColor(Color.WHITE);
