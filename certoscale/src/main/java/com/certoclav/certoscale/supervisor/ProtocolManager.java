@@ -157,87 +157,6 @@ public class ProtocolManager implements ScaleApplicationListener {
     }
 
 
-    public void printHeader(String header) {
-
-        //Log.e("Print Header", header.getText().toString());
-
-        posPrinter.printString(header);
-
-    }
-
-    public void printDate() {
-        posPrinter.printString(Calendar.getInstance().getTime().toString() + "\n");
-    }
-
-    public void printBalanceId() {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.serialnumber) + ": " + Scale.getInstance().getSerialnumber() + "\n");
-    }
-
-    public void printBalanceName(String balanceName) {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.balance_name) + ":" + " " + balanceName + "\n");
-    }
-
-    public void printUserName() {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.user_name) + ":" + " " + Scale.getInstance().getUser().getFirstName() + " " + Scale.getInstance().getUser().getLastName() + "\n");
-    }
-
-    public void printProjectName(String projectName) {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.project_name) + ":" + projectName + "\n");
-    }
-
-    public void printApplicationName() {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.application) + ":" + " " + Scale.getInstance().getScaleApplication().toString().replace("_", " ") + "\n");
-    }
-
-    public void printResults() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
-
-
-        switch (Scale.getInstance().getScaleApplication()) {
-            case WEIGHING:
-
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.result) + ":" + " " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.brutto) + ":" + " " + ApplicationManager.getInstance().getSumAsStringWithUnit());
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.netto) + ":" + " " + ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.tara) + ":" + " " + ApplicationManager.getInstance().getTareAsStringWithUnit());
-
-                if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_weigh_tara_visible), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_weigh_tara_visible)) == true) {
-                    posPrinter.printString(ApplicationController.getContext().getString(R.string.minimum_weight) + ":" + " " + ApplicationManager.getInstance().getUnderLimitAsStringWithUnit());
-                }
-                break;
-            default:
-                posPrinter.printString("Todo: printResults()"); //TODO
-        }
-    }
-
-    public void printSignature() {
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.signature) + ":_______________" + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.verified_by) + ":_______________" + "\n");
-    }
-
-
-    public void printSQCBatch(SQC sqc) {
-
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.statistics_of) + " " + sqc.getName() + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.samples) + " " + String.format("%d", sqc.getStatistics().getN()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.average) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMean()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.maximum) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.minimum) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMin()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.range) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getMax() - sqc.getStatistics().getMin()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.standard_deviation) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getStandardDeviation()) + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.total) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getStatistics().getSum()) + "\n");
-        posPrinter.printString("\n");
-
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.nominal) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(sqc.getNominal()) + "\n");
-
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.tolerance_plus_1) + " " + String.format("%d", sqc.getSqcPT1()) + "   " + String.format("%.1f", ((double) sqc.getSqcPT1() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.tolerance_plus_2) + " " + String.format("%d", sqc.getSqcPT2()) + "   " + String.format("%.1f", ((double) sqc.getSqcPT2() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.tolerance_minus_1) + " " + String.format("%d", sqc.getSqcNT1()) + "   " + String.format("%.1f", ((double) sqc.getSqcNT1() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
-        posPrinter.printString(ApplicationController.getContext().getString(R.string.tolerance_minus_2) + " " + String.format("%d", sqc.getSqcNT2()) + "   " + String.format("%.1f", ((double) sqc.getSqcNT2() / (double) sqc.getStatistics().getN()) * 100) + "%" + "\n");
-
-
-    }
-
     public String getSQCBatch(SQC sqc) {
 
         StringBuilder sb = new StringBuilder();
@@ -262,41 +181,8 @@ public class ProtocolManager implements ScaleApplicationListener {
         return sb.toString();
     }
 
-    public void printStatistics() {
-
-
-        switch (Scale.getInstance().getScaleApplication()) {
-
-
-            case PART_COUNTING:
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.statistics) + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.samples) + " " + String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()) + " \n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.total) + " " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getSum()) + " PCS\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.average) + " " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMean()) + " PCS\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.standard_deviation) + " " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getStandardDeviation()) + " PCS\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.minimum) + " " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMin()) + " PCS\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.maximum) + " " + String.format("%.0f", ApplicationManager.getInstance().getStats().getStatistic().getMax()) + " PCS\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.range) + " " + String.format("%.0f", (ApplicationManager.getInstance().getStats().getStatistic().getMax() - ApplicationManager.getInstance().getStats().getStatistic().getMin())) + " PCS\n");
-
-                break;
-
-            default:
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.statistics) + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.samples) + " " + String.format("%d", ApplicationManager.getInstance().getStats().getStatistic().getN()) + " \n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.total) + " " + ApplicationManager.getInstance().getStatisticsSumAsStringWithUnit() + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.average) + " " + ApplicationManager.getInstance().getStatisticsMeanAsStringWithUnit() + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.standard_deviation) + " " + ApplicationManager.getInstance().getStatisticsStandardDeviationAsStringWithUnit() + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.minimum) + " " + ApplicationManager.getInstance().getStatisticsMinAsStringWithUnit() + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.maximum) + " " + ApplicationManager.getInstance().getStatisticsMaxAsStringWithUnit() + "\n");
-                posPrinter.printString(ApplicationController.getContext().getString(R.string.range) + " " + ApplicationManager.getInstance().getStatisticsRangeAsStringWithUnit() + "\n");
-                break;
-        }
-    }
-
 
     public String getApplicationData() {
-
-
         StringBuilder sb = new StringBuilder();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
         switch (Scale.getInstance().getScaleApplication()) {
@@ -692,22 +578,17 @@ public class ProtocolManager implements ScaleApplicationListener {
 
                     }
                 }
-
                 sb.append("> +2s: " + pstandard2 + "\n");
                 sb.append("> +2s: " + pstandard1 + "\n");
                 sb.append("*+1S > " + ApplicationController.getContext().getString(R.string.mean) + " > –1S: " + (ApplicationManager.getInstance().getStats().getSamples().size() - pstandard1 - pstandard2 - nstandard1 - nstandard2) + "\n");
                 sb.append("- +2s: " + nstandard1 + "\n");
                 sb.append("- +2s: " + nstandard2 + "\n");
-
                 sb.append("\n");
-
-
                 sb.append("---" + ApplicationController.getContext().getString(R.string.sample_data) + "---\n");
                 for (int i = 0; i < ApplicationManager.getInstance().getStats().getSamples().size(); i++) {
                     sb.append(ApplicationController.getContext().getString(R.string.item) + " " + String.format("%02d: ", i) + " " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getStats().getSamples().get(i)) + "\n");
 
                 }
-
                 break;
             case ASH_DETERMINATION_1_HOME:
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
@@ -730,36 +611,15 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
                 sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
                 break;
-
-
             default:
                 Toast.makeText(ApplicationController.getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show();
                 break;
-
-
         }
         return sb.toString();
     }
 
     @Override
-    public void onApplicationChange(ScaleApplication application) {
-        DatabaseService db = new DatabaseService(ApplicationController.getContext());
-        //DateFormat df = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
-        //String date = df.format(Calendar.getInstance().getTime());
-
-        switch (application) {
-            case WEIGHING:
-                break;
-
-            case PIPETTE_ADJUSTMENT_3_FINISHED:
-                //  db.insertProtocol(new Protocol("","PIPETTE ADJUSTMENT", Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(),"private",getPipetteAdjustmentProtocol()));
-
-                break;
-        }
-
-    }
-
-
+    public void onApplicationChange(ScaleApplication application) { }
 }
 
 

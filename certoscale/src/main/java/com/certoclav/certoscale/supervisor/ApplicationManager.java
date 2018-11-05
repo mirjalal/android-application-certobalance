@@ -55,6 +55,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.PERCENT_WEIGHING_C
  */
 
 public class ApplicationManager implements WeightListener, ScaleApplicationListener {
+
     long nanoTimeSinceStable = 1000000000;
 
     boolean returnFromSubMenu = false;
@@ -311,34 +312,15 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         this.batchName = batchName;
     }
 
-    private SQC currentBatch = null;
-
-    public SQC getCurrentBatch() {
-        return currentBatch;
-    }
-
-    public void setCurrentBatch(SQC currentBatch) {
-        this.currentBatch = currentBatch;
-    }
-
-
     public List<SQC> batchList = new ArrayList<SQC>();
 
     public List<SQC> getBatchList() {
         return batchList;
     }
 
-    public void setBatchList(List<SQC> batchList) {
-        this.batchList = batchList;
-    }
-
 
     public List<Item> getIngrediantCostList() {
         return ingrediantCostList;
-    }
-
-    public void setIngrediantCostList(List<Item> ingrediantCostList) {
-        this.ingrediantCostList = ingrediantCostList;
     }
 
     // Das ist das Stringarray dessen Elemente Zeile für Zeile angezeigt werden sollen
@@ -484,60 +466,23 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         currentLibrary.setTarget(target);
     }
 
-    public void setOverLimit(int overLimit) {
-        currentLibrary.setOverLimit(overLimit);
-    }
-
     public void setOverLimitPieces(int overLimitPieces) {
         currentLibrary.setOverLimitPieces(overLimitPieces);
     }
 
-
-    private static final int UNIT_GRAM = 1;
-    private static final int UNIT_PIECES = 2;
-
-
     public void setTareInGram(Double tareInGram) {
         currentLibrary.setTara(tareInGram);
     }
-
-    public Double getAveragePieceWeightInGram() {
-        return currentLibrary.getAveragePieceWeight();
-    }
-
     public void setAveragePieceWeightInGram(Double averagePieceWeight) {
         currentLibrary.setAveragePieceWeight(averagePieceWeight);
     }
-
-
-    public String getUnitAsString() {
-        switch (Scale.getInstance().getScaleApplication()) {
-            // case PART_COUNTING:
-            //     return "pcs";
-
-            case PERCENT_WEIGHING:
-                return "%";
-
-            default:
-                return currentUnit.getName();
-        }
-    }
-
 
     public Double getSumInGram() {
         return Scale.getInstance().getWeightInGram();
     }
 
-    public Double getSumInCurrentUnit() {
-        return transformGramToCurrentUnit(Scale.getInstance().getWeightInGram());
-    }
-
     public int getSumInPieces() {
         return (int) Math.round(Scale.getInstance().getWeightInGram() / currentLibrary.getAveragePieceWeight());
-    }
-
-    public Double getTareInCurrentUnit() {
-        return transformGramToCurrentUnit(getTareInGram());
     }
 
     public Double getTareInGram() {
@@ -649,19 +594,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         return currentLibrary.getOverLimitCheckWeighing();
     }
 
-    public String getSumAsStringInGram() {
-        return String.format("%.4f", getSumInGram()) + " g";
-    }
-
-    public String getTaredValueAsStringInGram() {
-        // switch (Scale.getInstance().getScaleApplication()) {
-        //     case PART_COUNTING:
-        //         return String.format("%d", getSumInPieces() - getTareInPieces()) + " PCS";
-        //     default:
-        return String.format("%.4f", getSumInGram() - getTareInGram()) + " g";
-        //}
-    }
-
     public void accumulateStatistics() {
         switch (Scale.getInstance().getScaleApplication()) {
             case PART_COUNTING:
@@ -710,15 +642,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
 
     }
 
-    public String getAveragePieceWeightAsStringInGram() {
-        return String.format("%.4f", currentLibrary.getAveragePieceWeight());
-    }
-
-    public String getUnderLimitAsStringInGram() {
-        return String.format("%.4f", currentLibrary.getUnderLimit());
-    }
-
-
     public Double transformGramToCurrentUnit(double gram) {
         return gram * currentUnit.getFactor() * Math.pow(10, currentUnit.getExponent());
     }
@@ -762,10 +685,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         return retVal;
 
 
-    }
-
-    public String getUnderLimitPiecesAsStringInGram() {
-        return String.format("%.1f", currentLibrary.getUnderLimitPieces());
     }
 
     public String getUnderLimitPiecesAsString() {
@@ -1174,23 +1093,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
 
 
         // your_array_list.add("Article No.          Name           Cost          Weight   Unit");
-    }
-
-
-    // Calculate the MD5 Hash of the protocol string
-    public static String calculateMD5(String s) {
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes(Charset.forName("US-ASCII")), 0, s.length());
-            byte[] magnitude = digest.digest();
-            BigInteger bi = new BigInteger(1, magnitude);
-            String hash = String.format("%0" + (magnitude.length << 1) + "x", bi);
-            return hash;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
 

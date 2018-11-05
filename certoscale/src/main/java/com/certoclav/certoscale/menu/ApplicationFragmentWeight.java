@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UnitAdapter;
@@ -57,10 +58,10 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
         barloadbackground = (FrameLayout) rootView.findViewById(R.id.menu_main_countdown_bar_background);
 
 
-        textInstruction = (TextView) rootView.findViewById(R.id.menu_main_text_instruction);
-        textSum = (TextView) rootView.findViewById(R.id.menu_main_text_information);
-        textValue = (TextView) rootView.findViewById(R.id.menu_main_text_value);
-        imageStable = (ImageView) rootView.findViewById(R.id.menu_main_image_stable);
+        textInstruction = rootView.findViewById(R.id.menu_main_text_instruction);
+        textSum = rootView.findViewById(R.id.menu_main_text_information);
+        textValue = rootView.findViewById(R.id.menu_main_text_value);
+        imageStable = rootView.findViewById(R.id.menu_main_image_stable);
 
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -609,8 +610,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                         String.valueOf(NumberFormatUtils.roundNumber(materialWeight, 4)));
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+                textSum.setText("Wait for glowing");
+                break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+                textSum.setText("Weight glowed sample");
+                break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+                textSum.setText("Check delat");
+                break;
             case ASH_DETERMINATION_9_BATCH_FINISHED:
                 textValue.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 textValue.setTextColor(Color.WHITE);
