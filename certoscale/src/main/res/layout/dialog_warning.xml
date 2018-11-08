@@ -24,7 +24,7 @@
                 style="@style/warning_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="AAXAX" />
+                android:text="AAXAasdasdsadasdasdasdasdasdasdasdasddsaX" />
         </LinearLayout>
 
         <LinearLayout

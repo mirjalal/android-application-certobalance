@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.UnitAdapter;
@@ -638,12 +637,14 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
+                updateProbeWeightField();
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
+                updateProbeWeightField();
                 break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
                 break;
@@ -656,19 +657,27 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
     }
 
 
-    public String getTotalWeight(){
+    private String getTotalWeight(){
         return NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getTaredValueInGram(), 4);
     }
 
-    public String getProbeWeight(){
+    private String getProbeWeight(){
         double totalWeight = ApplicationManager.getInstance().getTaredValueInGram();
-        double beakerWeight = ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker();
+        double beakerWeight = ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight();
         return (totalWeight - beakerWeight > 0) ? NumberFormatUtils.roundNumber(totalWeight - beakerWeight, 4) : "0";
     }
 
-    public void enableField(TextView textView, String text){
+    private void enableField(TextView textView, String text){
         textView.setTextColor(Color.WHITE);
         textView.setText(text);
+    }
+
+    private void updateProbeWeightField(){
+        if (Double.parseDouble(getProbeWeight()) < 0.5){
+            textSum.setTextColor(getResources().getColor(R.color.red));
+        }else{
+            textSum.setTextColor(getResources().getColor(R.color.light_green));
+        }
     }
 
     public void clearField(TextView textView){

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.StatisticListener;
@@ -976,7 +975,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
                             ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
-                                    ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                                    ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())
                     );
                 }catch (Exception e){
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText("");
@@ -984,7 +983,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
                 try {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
-                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())
                     );
                 } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText("");
@@ -1041,7 +1040,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
                             ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
-                                     ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                                     ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())
                     );
                 }catch (Exception e){
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText("");
@@ -1049,7 +1048,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
                 try {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
-                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())
                     );
                 } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText("");

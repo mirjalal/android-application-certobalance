@@ -7,6 +7,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,8 +57,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     case ASH_DETERMINATION_4_WEIGH_BEAKER:
                         if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                            ApplicationManager.getInstance().getCurrentProtocol().setAshWeightBeaker(currentWeight);
-                            updateUIAccordingToApplicationState();
+                            ApplicationManager.getInstance().getCurrentProtocol().saveBeakerWeight(currentWeight);
+                            updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_5_WEIGHING_SAMPLE);
                         } else {
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
@@ -67,9 +68,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         if (Scale.getInstance().isStable()) {
                             saveAshDeterminationProtocols();
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                            ApplicationManager.getInstance().getCurrentProtocol().setAshWeightBeakerWithSample(currentWeight);
+                            if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5){
+                                showErrorDialog("The sample is less than 0.5 grams!");
+                            }
+                            ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                             saveProtocolContent();
-                            updateUIAccordingToApplicationState();
+                            updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
                         } else {
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
@@ -84,7 +88,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
                             saveProtocolContent();
-                            updateUIAccordingToApplicationState();
+                            updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT);
                         } else {
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
@@ -118,11 +122,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     @Override
     public void onResume() {
         Scale.getInstance().setOnApplicationListener(this);
-        updateUIAccordingToApplicationState();
+        updateUI();
         super.onResume();
     }
 
-    private void updateUIAccordingToApplicationState() {
+    private void updateUI() {
         switch (Scale.getInstance().getScaleApplication()) {
             case ASH_DETERMINATION_1_HOME:
                 textInstruction.setText("Drücken Sie START um die Aschewertbestimmung zu starten");
@@ -189,6 +193,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     private void showErrorDialog(String message) {
         try {
             final Dialog dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.dialog_warning);
             TextView txtErrorMessage = dialog.findViewById(R.id.dialog_warning_txt_message);
             txtErrorMessage.setText(message);
@@ -308,7 +313,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     @Override
     public void onApplicationChange(ScaleApplication application) {
-        updateUIAccordingToApplicationState();
+        updateUI();
     }
 
     private void saveProtocolContent() {

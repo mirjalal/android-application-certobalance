@@ -88,11 +88,11 @@ public class Protocol {
     }
 
 
-    public Double getAshWeightBeaker() {
+    public Double getBeakerWeight() {
         return ashWeightBeaker;
     }
 
-    public void setAshWeightBeaker(Double ashWeightBeaker) {
+    public void saveBeakerWeight(Double ashWeightBeaker) {
         this.ashWeightBeaker = ashWeightBeaker;
     }
 
@@ -100,7 +100,7 @@ public class Protocol {
         return ashWeightBeakerWithSample;
     }
 
-    public void setAshWeightBeakerWithSample(Double ashWeightBeakerWithSample) {
+    public void saveBeakerAndSampleWeight(Double ashWeightBeakerWithSample) {
         this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
     }
 

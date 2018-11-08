@@ -60,6 +60,31 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
 
     boolean returnFromSubMenu = false;
 
+
+    private boolean peakholdactivated = false;
+
+    //Ingrediant Costing variable
+    private double Ingrediant_Unit_Cost = 0;
+    private double Ingrediant_Total_Weight = 0;
+    private double Ingrediant_Total_Cost = 0;
+    private double pholdWeight = 0;
+    private double scalingFactor = 1;
+
+    private double PeakHoldMaximum = 0;
+
+
+    private double density = 0;
+    //Pipette Adjustment variables
+    private String pipette_name = "";
+    private int pipette_number = 0;
+
+
+
+    private double density_weight_air = 0;
+
+    private double pipetteCalculatedML = 0;
+
+
     public boolean isReturnFromSubMenu() {
         return returnFromSubMenu;
     }
@@ -101,8 +126,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
     private ProtocolManager protocolPrinter = new ProtocolManager();
 
 
-    private double scalingFactor = 1;
-
     public double getScalingFactor() {
         return scalingFactor;
     }
@@ -111,8 +134,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         this.scalingFactor = scalingFactor;
     }
 
-
-    private double PeakHoldMaximum = 0;
 
     public double getPeakHoldMaximum() {
         return PeakHoldMaximum;
@@ -134,7 +155,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         this.density_step_counter = density_step_counter;
     }
 
-    private double density = 0;
 
     public double getDensity() {
         return density;
@@ -177,9 +197,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         }
     }
 
-
-    private double density_weight_air = 0;
-
     public double getDensity_weight_air() {
         return density_weight_air;
     }
@@ -199,7 +216,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
     }
 
 
-    private double pholdWeight = 0;
 
     public double getPholdWeight() {
         return pholdWeight;
@@ -208,22 +224,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
     public void setPholdWeight(double pholdWeight) {
         this.pholdWeight = pholdWeight;
     }
-
-
-    private boolean peakholdactivated = false;
-
-    //Ingrediant Costing variable
-    private double Ingrediant_Unit_Cost = 0;
-    private double Ingrediant_Total_Weight = 0;
-    private double Ingrediant_Total_Cost = 0;
-
-
-    //Pipette Adjustment variables
-    private String pipette_name = "";
-    private int pipette_number = 0;
-
-
-    private double pipetteCalculatedML = 0;
 
 
 
