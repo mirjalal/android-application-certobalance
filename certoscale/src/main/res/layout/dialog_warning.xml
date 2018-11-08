@@ -14,53 +14,41 @@
 
 
         <LinearLayout
-            android:id="@+id/dialog_container_text"
+            android:id="@+id/dialog_warning_ll_text_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-            <EditText
-                android:id="@+id/dialog_edit_text_edittext"
-                style="@style/edit_text_default"
+            <TextView
+                android:id="@+id/dialog_warning_txt_message"
+                style="@style/warning_text_default"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:hint="NAME"
-
-                />
-
-
+                android:layout_height="wrap_content"
+                android:text="AAXAX" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dialog_container_text"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/dialog_edit_text_button_cancel"
-                style="@style/button_default"
+                android:id="@+id/dialog_warning_btn_ignore"
+                style="@style/button_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="@string/cancel"
+                android:text="@string/ignore"
                 android:textAllCaps="true" />
 
-
             <Button
-                android:id="@+id/dialog_edit_text_button_save"
+                android:id="@+id/dialog_warning_btn_abort"
                 style="@style/button_default"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:text="@string/save"
-                android:textAllCaps="true"
-
-                />
-
-
+                android:text="@string/abort"
+                android:textAllCaps="true" />
         </LinearLayout>
     </LinearLayout>
 

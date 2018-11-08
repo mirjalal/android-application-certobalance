@@ -691,6 +691,8 @@
     <string name="create_new">Create new</string>
     <string name="brows_templates">Browse templates</string>
     <string name="unit">Unit</string>
+    <string name="abort">Abort</string>
+    <string name="ingore">Ignore</string>
     <string name="save">Save</string>
     <string name="print">Print</string>
     <string name="screen_sharing">Screen sharing</string>

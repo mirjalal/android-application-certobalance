@@ -76,6 +76,16 @@
         <item name="android:imeOptions">actionDone</item>
     </style>
 
+    <style name="warning_text_default">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/black_temp</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
 
     <style name="spinner_default">
         <item name="android:background">@drawable/spinner_background_white</item>

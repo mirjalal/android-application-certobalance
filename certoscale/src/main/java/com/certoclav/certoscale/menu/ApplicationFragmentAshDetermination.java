@@ -95,10 +95,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             saveAshDeterminationProtocols();
                             saveProtocolContent();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
+                            //show error dialog
                         } else {
                             saveAshDeterminationProtocols();
                             saveProtocolContent();
-                            ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
+                            //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
                             Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                         }
@@ -182,6 +183,34 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     public void onPause() {
         Scale.getInstance().removeOnApplicationListener(this);
         super.onPause();
+    }
+
+
+    private void showErrorDialog(String message) {
+        try {
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_warning);
+            TextView txtErrorMessage = dialog.findViewById(R.id.dialog_warning_txt_message);
+            txtErrorMessage.setText(message);
+            Button btnIgnore = dialog.findViewById(R.id.dialog_warning_btn_ignore);
+            btnIgnore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            Button btnAbort = dialog.findViewById(R.id.dialog_warning_btn_abort);
+            btnAbort.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
