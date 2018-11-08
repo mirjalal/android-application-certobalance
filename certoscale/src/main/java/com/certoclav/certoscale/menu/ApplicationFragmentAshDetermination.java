@@ -65,6 +65,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
                         if (Scale.getInstance().isStable()) {
+                            saveAshDeterminationProtocols();
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().setAshWeightBeakerWithSample(currentWeight);
                             saveProtocolContent();
@@ -79,6 +80,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
                         if (Scale.getInstance().isStable()) {
+                            saveAshDeterminationProtocols();
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
                             saveProtocolContent();
@@ -89,12 +91,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         }
                         break;
                     case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                        if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
+                        if (ApplicationManager.getInstance().getDelta() >= 0.002) {
+                            saveAshDeterminationProtocols();
+                            saveProtocolContent();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING);
                         } else {
                             saveAshDeterminationProtocols();
-                            ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                             saveProtocolContent();
+                            ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_1_HOME);
                             Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                         }
@@ -136,32 +140,38 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
+                //textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
+                textInstruction.setText("Place the beaker " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " on the scale");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                textInstruction.setText("Legen Sie die Probe in den Tiegel");
+                textInstruction.setText("Place the beaker with the probe on the scale");
+                //textInstruction.setText("Legen Sie die Probe in den Tiegel");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-                textInstruction.setText("Entnehmen Sie den Tiegel zur Glühung");
+                //textInstruction.setText("Entnehmen Sie den Tiegel zur Glühung");
+                textInstruction.setText("Remove the beaker for annealing");
                 buttonNext.setText("SPEICHERN");
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
+                //textInstruction.setText("Legen Sie Tiegel " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " auf die Waage");
+                textInstruction.setText("Place the beaker " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName() + " on the scales for after annealing weighting");
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsDifference()) >= 0.002) {
-                    textInstruction.setText("Die Probe muss noch einmal nachgeglüht werden");
-                    buttonNext.setText("SPEICHERN");
+                if (ApplicationManager.getInstance().getDelta() >= 0.002) {
+                    //textInstruction.setText("Die Probe muss noch einmal nachgeglüht werden");
+                    textInstruction.setText("The weight differs for more than 0.002 grams, it shouldn't be annealed");
                 } else {
-                    textInstruction.setText("Aschebestimmung abgeschlossen");
-                    buttonNext.setText("SPEICHERN");
+                    //textInstruction.setText("Aschebestimmung abgeschlossen");
+                    textInstruction.setText("Plausibility conditions are met!");
                 }
+                buttonNext.setText("SPEICHERN");
                 break;
             case ASH_DETERMINATION_9_BATCH_FINISHED:
-                textInstruction.setText("Die Messung wurde Beendet.");
+                //textInstruction.setText("Die Messung wurde Beendet.");
+                textInstruction.setText("The process is complete!");
                 buttonNext.setText("WEITER");
                 break;
         }

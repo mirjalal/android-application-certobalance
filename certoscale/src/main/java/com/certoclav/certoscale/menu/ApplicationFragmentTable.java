@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.listener.StatisticListener;
@@ -129,7 +130,8 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexAshDeterminationWeightBeaker = 1;
     int indexAshDeterminationBeakerName = 2;
     int indexAshDeterminationWeightBeakerWithSample = 3;
-    int indexAshDeterminationDeltaWeight = 5;
+    int indexAshDeterminationDeltaWeight = 7;
+    int indexAshDeterminationSampleWeight = 5;
 
     @Override
     public void onResume() {
@@ -970,14 +972,15 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
             case ASH_DETERMINATION_1_HOME:
-            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-            case ASH_DETERMINATION_4_WEIGH_BEAKER:
-            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-            case ASH_DETERMINATION_9_BATCH_FINISHED:
+                listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
+                try {
+                    listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
+                                    ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText("");
+                }
                 listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
                 try {
                     listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
@@ -1020,11 +1023,72 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 } catch (Exception e) {
                     listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
                 }
-
-
-
                 break;
+            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+                break;
+            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+                break;
+            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+                break;
+            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+                break;
+            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+                break;
+            case ASH_DETERMINATION_9_BATCH_FINISHED:
+                listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
+                try {
+                    listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() -
+                                     ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText("");
+                }
+                listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextName().setText("Gewicht Tiegel");
+                try {
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText(
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeaker())
+                    );
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationWeightBeaker).getTextValue().setText("");
+                }
 
+                listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextName().setText("Gewicht Tiegel mit Probe");
+                try {
+                    listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText(
+                            ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample())
+                    );
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationWeightBeakerWithSample).getTextValue().setText("");
+                }
+
+
+                listReferenceFields.get(indexAshDeterminationSampleName).getTextName().setText("Probennummer");
+                try {
+                    listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationSampleName).getTextValue().setText("Nicht selektiert");
+                }
+
+
+                listReferenceFields.get(indexAshDeterminationBeakerName).getTextName().setText("Tiegelnummer");
+                try {
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText(ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationBeakerName).getTextValue().setText("Nicht selektiert");
+                }
+
+
+                listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Anzahl Glühungen");
+                try {
+                    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size() + "x");
+                } catch (Exception e) {
+                    listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
+                }
+                break;
         }
 
     }

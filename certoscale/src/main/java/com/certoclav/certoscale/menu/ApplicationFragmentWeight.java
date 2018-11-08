@@ -632,18 +632,18 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
             case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
             case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                enableField(textValue, String.valueOf(getTotalWeight()));
+                enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 clearField(textSum);
                 break;
             case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                enableField(textValue, String.valueOf(getTotalWeight()));
-                enableField(textSum, String.valueOf(getProbeWeight()));
+                enableField(textValue, String.valueOf(getTotalWeight()) + "g");
+                enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
                 break;
             case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
                 break;
             case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                enableField(textValue, String.valueOf(getTotalWeight()));
-                enableField(textSum, String.valueOf(getProbeWeight()));
+                enableField(textValue, String.valueOf(getTotalWeight()) + "g");
+                enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
                 break;
             case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
                 break;

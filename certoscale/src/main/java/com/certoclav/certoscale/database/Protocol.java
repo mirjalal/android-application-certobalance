@@ -46,7 +46,6 @@ public class Protocol {
     private String cloudId = "";
     private String contentJson = "";
 
-
     public String getAshSampleName() {
         return ashSampleName;
     }
@@ -76,7 +75,6 @@ public class Protocol {
     }
 
     public Double getAshArrayGlowWeightsDifference() {
-
         if (getAshArrayGlowWeights().size() >= 2) {
             int lastIndex = getAshArrayGlowWeights().size() - 1;
             return getAshArrayGlowWeights().get(lastIndex) - getAshArrayGlowWeights().get(lastIndex - 1);

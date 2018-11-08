@@ -225,6 +225,15 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
 
     private double pipetteCalculatedML = 0;
 
+
+
+    //This particular method is created: 08.11.2018 by Vladimir Yugay
+    //The method returns the difference between current and previous glowing i.e. delat
+    //Instead of parsing that arraylist, we just measure current weight and subtract in from the previous measurment
+    public Double getDelta(){
+        return Math.abs(getTaredValueInGram() - getCurrentProtocol().getAshWeightBeakerWithSample());
+    }
+
     public double getPipetteCalculatedML() {
         return pipetteCalculatedML;
     }
@@ -357,13 +366,8 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         this.statisticListeners.add(listener);
     }
 
-    public void removeOnStatisticListener(StatisticListener listener) {
-        this.statisticListeners.remove(listener);
-    }
-
     public static synchronized ApplicationManager getInstance() {
         return instance;
-
     }
 
     public Statistics getStats() {
