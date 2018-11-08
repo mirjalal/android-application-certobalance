@@ -226,14 +226,6 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
     }
 
 
-
-    //This particular method is created: 08.11.2018 by Vladimir Yugay
-    //The method returns the difference between current and previous glowing i.e. delat
-    //Instead of parsing that arraylist, we just measure current weight and subtract in from the previous measurment
-    public Double getDelta(){
-        return Math.abs(getTaredValueInGram() - getCurrentProtocol().getAshWeightBeakerWithSample());
-    }
-
     public double getPipetteCalculatedML() {
         return pipetteCalculatedML;
     }
