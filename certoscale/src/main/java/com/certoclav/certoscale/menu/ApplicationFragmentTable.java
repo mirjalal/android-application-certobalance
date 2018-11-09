@@ -970,7 +970,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     }
                 }
 
-            case ASH_DETERMINATION_1_HOME:
+            case ASH_DETERMINATION_HOME:
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
@@ -1023,19 +1023,19 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                     listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
                 }
                 break;
-            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_WEIGH_BEAKER:
                 break;
-            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_WEIGHING_SAMPLE:
                 break;
-            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_WAIT_FOR_GLOWING:
                 break;
-            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
                 break;
-            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                 break;
-            case ASH_DETERMINATION_9_BATCH_FINISHED:
+            case ASH_DETERMINATION_BATCH_FINISHED:
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(

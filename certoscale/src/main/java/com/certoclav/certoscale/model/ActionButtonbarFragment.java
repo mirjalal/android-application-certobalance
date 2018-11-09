@@ -51,10 +51,10 @@ import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_1_HOME;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_9_BATCH_FINISHED;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_HOME;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -247,8 +247,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
         buttonMeasurementNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_9_BATCH_FINISHED) {
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_2_ENTER_NAME_SAMPLE);
+                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED) {
+                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_ENTER_NAME_SAMPLE);
 
                     Protocol protocol = new Protocol("", "", Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", "", "");
 
@@ -267,7 +267,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             @Override
             public void onClick(View view) {
 
-                if (Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_1_HOME) {
+                if (Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_HOME) {
 
                     Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
                     intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, true);
@@ -286,8 +286,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             public void onClick(View v) {
 
 
-                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_1_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_9_BATCH_FINISHED) {
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE);
+                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED) {
+                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
                 }
 
 
@@ -373,9 +373,9 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                     if (Scale.getInstance().getScaleApplication() == FORMULATION_RUNNING) {
                         Scale.getInstance().setScaleApplication(FORMULATION);
                     }
-                    if (Scale.getInstance().getScaleApplication() != ASH_DETERMINATION_1_HOME) {
+                    if (Scale.getInstance().getScaleApplication() != ASH_DETERMINATION_HOME) {
 
-                        Scale.getInstance().setScaleApplication(ASH_DETERMINATION_1_HOME);
+                        Scale.getInstance().setScaleApplication(ASH_DETERMINATION_HOME);
 
                     }
 
@@ -1581,7 +1581,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
                 break;
 
-            case ASH_DETERMINATION_1_HOME:
+            case ASH_DETERMINATION_HOME:
 
 
                 buttonTara.setVisibility(View.VISIBLE);
@@ -1624,13 +1624,13 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 buttonStatistics.setVisibility(View.GONE);
                 buttonResult.setVisibility(View.GONE);
                 break;
-            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-            case ASH_DETERMINATION_4_WEIGH_BEAKER:
-            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_WEIGH_BEAKER:
+            case ASH_DETERMINATION_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
 
 
                 buttonTara.setVisibility(View.VISIBLE);
@@ -1668,7 +1668,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 buttonResult.setVisibility(View.GONE);
                 break;
 
-            case ASH_DETERMINATION_9_BATCH_FINISHED:
+            case ASH_DETERMINATION_BATCH_FINISHED:
 
                 buttonTara.setVisibility(View.VISIBLE);
                 buttonTara.setEnabled(true);
@@ -2847,15 +2847,15 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                     scaleApplicationName = getString(R.string.app_statistical_quality_control);
                     break;
 
-                case ASH_DETERMINATION_1_HOME:
-                case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-                case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-                case ASH_DETERMINATION_4_WEIGH_BEAKER:
-                case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-                case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-                case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-                case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-                case ASH_DETERMINATION_9_BATCH_FINISHED:
+                case ASH_DETERMINATION_HOME:
+                case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+                case ASH_DETERMINATION_ENTER_NAME_BEAKER:
+                case ASH_DETERMINATION_WEIGH_BEAKER:
+                case ASH_DETERMINATION_WEIGHING_SAMPLE:
+                case ASH_DETERMINATION_WAIT_FOR_GLOWING:
+                case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
+                case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
+                case ASH_DETERMINATION_BATCH_FINISHED:
                     scaleApplicationName = getString(R.string.ash_determination);
                     break;
             }

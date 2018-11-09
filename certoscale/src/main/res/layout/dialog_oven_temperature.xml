@@ -16,15 +16,17 @@
             android:id="@+id/dialog_oven_temperature_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
 
             <EditText
-                android:id="@+id/dialog_edit_text_edittext"
+                android:id="@+id/dialog_oven_temperature_edt_temp"
                 style="@style/edit_text_default"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:hint="TEMPERATURE" />
+                android:hint="OVEN TEMPERATURE"
+                android:inputType="number"/>
 
         </LinearLayout>
 
@@ -37,7 +39,7 @@
                 android:id="@+id/dialog_oven_temperature_btn_550"
                 style="@style/button_default"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="550"
                 android:textAllCaps="true" />
@@ -47,7 +49,7 @@
                 android:id="@+id/dialog_oven_temperature_btn_600"
                 style="@style/button_default"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="600"
                 android:textAllCaps="true" />
@@ -56,10 +58,30 @@
                 android:id="@+id/dialog_oven_temperature_btn_900"
                 style="@style/button_default"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="900"
                 android:textAllCaps="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_container_text"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+
+
+            <Button
+                android:id="@+id/dialog_oven_temperature_btn_save"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:textAllCaps="true" />
+
 
         </LinearLayout>
     </LinearLayout>

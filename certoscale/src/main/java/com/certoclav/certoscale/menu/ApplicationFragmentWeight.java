@@ -627,28 +627,28 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 textSum.setText(ApplicationManager.getInstance().getTaredValueAsStringWithUnit());
                 break;
 
-            case ASH_DETERMINATION_1_HOME:
-            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-            case ASH_DETERMINATION_4_WEIGH_BEAKER:
+            case ASH_DETERMINATION_HOME:
+            case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_WEIGH_BEAKER:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 clearField(textSum);
                 break;
-            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_WEIGHING_SAMPLE:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
                 updateProbeWeightField();
                 break;
-            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_WAIT_FOR_GLOWING:
                 break;
-            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 enableField(textSum, "PROBEGEWICHT: " + String.valueOf(getProbeWeight()) + "g");
                 updateProbeWeightField();
                 break;
-            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                 break;
-            case ASH_DETERMINATION_9_BATCH_FINISHED:
+            case ASH_DETERMINATION_BATCH_FINISHED:
                 clearField(textSum);
                 break;
             default:

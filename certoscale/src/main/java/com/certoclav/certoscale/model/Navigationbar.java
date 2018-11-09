@@ -248,7 +248,7 @@ public class Navigationbar {
 		}if (prefs.getBoolean(mActivity.getString(R.string.preferences_statistic_activated),true)==true){
 			getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
-		    getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_1_HOME);
+		    getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_HOME);
 
 		int index = 0;
 		switch (Scale.getInstance().getScaleApplication()){
@@ -297,14 +297,14 @@ public class Navigationbar {
 			case STATISTICAL_QUALITY_CONTROL_2_BATCH_STARTED:index=13;break;
 			case STATISTICAL_QUALITY_CONTROL_3_BATCH_FINISHED:index=13;break;
 
-			case ASH_DETERMINATION_1_HOME:
-			case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-			case ASH_DETERMINATION_4_WEIGH_BEAKER:
-			case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-			case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-			case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-			case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-			case ASH_DETERMINATION_9_BATCH_FINISHED:
+			case ASH_DETERMINATION_HOME:
+			case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+			case ASH_DETERMINATION_WEIGH_BEAKER:
+			case ASH_DETERMINATION_WEIGHING_SAMPLE:
+			case ASH_DETERMINATION_WAIT_FOR_GLOWING:
+			case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
+			case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
+			case ASH_DETERMINATION_BATCH_FINISHED:
 				index = 14;
 				break;
 

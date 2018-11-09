@@ -5,7 +5,6 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Item;
 import com.certoclav.certoscale.database.SQC;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
@@ -580,15 +579,15 @@ public class ProtocolManager implements ScaleApplicationListener {
 
                 }
                 break;
-            case ASH_DETERMINATION_1_HOME:
-            case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-            case ASH_DETERMINATION_3_ENTER_NAME_BEAKER:
-            case ASH_DETERMINATION_4_WEIGH_BEAKER:
-            case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-            case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-            case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-            case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-            case ASH_DETERMINATION_9_BATCH_FINISHED:
+            case ASH_DETERMINATION_HOME:
+            case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+            case ASH_DETERMINATION_ENTER_NAME_BEAKER:
+            case ASH_DETERMINATION_WEIGH_BEAKER:
+            case ASH_DETERMINATION_WEIGHING_SAMPLE:
+            case ASH_DETERMINATION_WAIT_FOR_GLOWING:
+            case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
+            case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
+            case ASH_DETERMINATION_BATCH_FINISHED:
                 sb.append("\n");
                 sb.append("Probennummer" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
                 try {

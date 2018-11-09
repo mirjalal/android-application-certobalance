@@ -39,13 +39,13 @@ import java.util.List;
 import static com.certoclav.certoscale.constants.AppConstants.INTERNAL_TARA_ZERO_BUTTON;
 import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_3_ENTER_NAME_BEAKER;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_4_WEIGH_BEAKER;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_5_WEIGHING_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_6_WAIT_FOR_GLOWING;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_BEAKER;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT;
 import static com.certoclav.certoscale.model.ScaleApplication.CHECK_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
@@ -244,7 +244,7 @@ protected void onPause() {
 				break;
 
 			case ActionButtonbarFragment.BUTTON_MEASUREMENT_NEW:
-				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_2_ENTER_NAME_SAMPLE) {
+				if(Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE) {
 
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAshDetermination()).commit();
 
@@ -261,7 +261,7 @@ protected void onPause() {
 
 				}
 
-				if(Scale.getInstance().getScaleApplication() != ScaleApplication.ASH_DETERMINATION_1_HOME && Scale.getInstance().getScaleApplication() != ScaleApplication.ASH_DETERMINATION_9_BATCH_FINISHED) {
+				if(Scale.getInstance().getScaleApplication() != ScaleApplication.ASH_DETERMINATION_HOME && Scale.getInstance().getScaleApplication() != ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED) {
 
 					getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentAshDetermination()).commit();
 
@@ -417,14 +417,14 @@ protected void onPause() {
 						case PIPETTE_ADJUSTMENT_3_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsPipetteAdjustment()).commit();
 							break;
-						case ASH_DETERMINATION_1_HOME:
-						case ASH_DETERMINATION_2_ENTER_NAME_SAMPLE:
-						case ASH_DETERMINATION_4_WEIGH_BEAKER:
-						case ASH_DETERMINATION_5_WEIGHING_SAMPLE:
-						case ASH_DETERMINATION_6_WAIT_FOR_GLOWING:
-						case ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE:
-						case ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT:
-						case ASH_DETERMINATION_9_BATCH_FINISHED:
+						case ASH_DETERMINATION_HOME:
+						case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
+						case ASH_DETERMINATION_WEIGH_BEAKER:
+						case ASH_DETERMINATION_WEIGHING_SAMPLE:
+						case ASH_DETERMINATION_WAIT_FOR_GLOWING:
+						case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
+						case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
+						case ASH_DETERMINATION_BATCH_FINISHED:
 							getSupportFragmentManager().beginTransaction().replace(R.id.menu_application_container_table, new ApplicationFragmentSettingsAshDetermination()).commit();
 						break;
 						default:
@@ -527,13 +527,13 @@ protected void onPause() {
 				application == FILLING_CALC_TARGET ||
 				application == FORMULATION_RUNNING ||
 				application == FORMULATION_FREE_RUNNING ||
-				application == ASH_DETERMINATION_2_ENTER_NAME_SAMPLE ||
-				application == ASH_DETERMINATION_3_ENTER_NAME_BEAKER||
-				application == ASH_DETERMINATION_4_WEIGH_BEAKER ||
-				application == ASH_DETERMINATION_5_WEIGHING_SAMPLE ||
-				application == ASH_DETERMINATION_6_WAIT_FOR_GLOWING ||
-				application == ASH_DETERMINATION_7_WEIGHING_GLOWED_SAMPLE ||
-				application == ASH_DETERMINATION_8_CHECK_DELTA_WEIGHT){
+				application == ASH_DETERMINATION_ENTER_NAME_SAMPLE ||
+				application == ASH_DETERMINATION_ENTER_NAME_BEAKER ||
+				application == ASH_DETERMINATION_WEIGH_BEAKER ||
+				application == ASH_DETERMINATION_WEIGHING_SAMPLE ||
+				application == ASH_DETERMINATION_WAIT_FOR_GLOWING ||
+				application == ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE ||
+				application == ASH_DETERMINATION_CHECK_DELTA_WEIGHT){
 			return;
 		}
 
@@ -606,7 +606,7 @@ protected void onPause() {
 		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
-		navigationbar.getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_1_HOME);
+		navigationbar.getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_HOME);
 
 		navigationbar.getArrayAdapterMode().notifyDataSetChanged();
 		try {
