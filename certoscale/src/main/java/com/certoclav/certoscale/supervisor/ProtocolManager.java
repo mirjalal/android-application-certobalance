@@ -594,7 +594,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Probennummer" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
                 try {
                     for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
-                        sb.append((i + 1) + ". Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
+                        sb.append((i + 1) + ".Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

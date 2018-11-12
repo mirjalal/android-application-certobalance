@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
@@ -219,13 +221,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 buttonNext.setText("WEITER");
                 break;
             case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
-//                if (ApplicationManager.getInstance().getDelta() >= 0.002) {
-//                    //textInstruction.setText("Die Probe muss noch einmal nachgeglüht werden");
-//                    textInstruction.setText("The weight differs for more than 0.002 grams, it shouldn't be annealed");
-//                } else {
-//                    //textInstruction.setText("Aschebestimmung abgeschlossen");
-//                    textInstruction.setText("Plausibility conditions are met!");
-//                }
                 textInstruction.setText("Checking plausibility conditions");
                 buttonNext.setText("SPEICHERN");
                 break;
@@ -260,6 +255,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
             dialog.setTitle("Geben Sie die Probennummer ein");
+            dialog.setCancelable(false);
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
@@ -351,12 +347,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         try {
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
+            dialog.setCancelable(false);
             dialog.setTitle("Geben Sie die Tiegelnummer ein");
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
             editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            // set the custom dialog components - text, image and button
-
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -370,18 +365,19 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 @Override
                 public void onClick(View v) {
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
-
                     try {
-
                         if (!editText.getText().toString().isEmpty()) {
-                            ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
-                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
+                            if (!isInDatabase(editText.getText().toString())){
+                                ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
+                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
+                                dialog.dismiss();
+                            }else{
+                                Toast.makeText(getActivity(), "Der Becher mit diesem Namen existiert bereits!", Toast.LENGTH_SHORT).show();
+                            }
                         }
-
                     } catch (NumberFormatException e) {
                         ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName("");
                     }
-                    dialog.dismiss();
                 }
             });
             dialog.show();
@@ -390,6 +386,15 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         }
 
     }
+
+    private boolean isInDatabase(String name){
+        DatabaseService db = new DatabaseService(getActivity());
+        for (Protocol protocol : db.getProtocols()){
+            if (protocol.getAshBeakerName().equals(name)) return true;
+        }
+        return false;
+    }
+
 
     public void saveAshDeterminationProtocols() {
         StringBuilder sb = new StringBuilder();

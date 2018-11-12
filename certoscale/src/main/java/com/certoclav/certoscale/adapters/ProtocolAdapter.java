@@ -45,23 +45,12 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 	public ProtocolAdapter(Context context, List<Protocol> values) {
 		super(context, R.layout.list_element_user, values);
 		this.mContext = context;
-
-
 	}
-	
-
-	/**
-	 * Gets a View that displays the data at the specified position in the data
-	 * set.The View is inflated it from profile_list_row XML layout file
-	 * 
-	 * @see Adapter#getView(int, View, ViewGroup)
-	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		
 		
 		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
 
 			convertView = inflater.inflate(R.layout.list_element_protocol, parent, false);
 			LinearLayout containerItems =  (LinearLayout) convertView.findViewById(R.id.container_button);

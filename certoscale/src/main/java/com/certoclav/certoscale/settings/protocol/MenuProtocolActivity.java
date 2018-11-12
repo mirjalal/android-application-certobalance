@@ -39,15 +39,11 @@ import static com.certoclav.certoscale.R.string.protocols;
  * Created by Michael on 12/6/2016.
  */
 
-public class MenuProtocolActivity extends Activity implements ButtonEventListener,DatabaseListener {
+public class MenuProtocolActivity extends Activity implements ButtonEventListener, DatabaseListener {
 
     private Navigationbar navigationbar = new Navigationbar(this);
     private ListView listView = null;
     private ProtocolAdapter adapter = null;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
     private GoogleApiClient client;
 
 
@@ -61,22 +57,14 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setText(getString(protocols).toUpperCase());
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
-        //navigationbar.getButtonDelete().setVisibility(View.VISIBLE);
-
-
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
-
-
         DatabaseService db = new DatabaseService(this);
-
-        List<Protocol> protocols = db.getProtocols();
-
-        adapter = new ProtocolAdapter(this,new ArrayList<Protocol>());
+        adapter = new ProtocolAdapter(this, new ArrayList<Protocol>());
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
-                navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase()+":  " +adapter.getCount());
+                navigationbar.getTextTitle().setText(getString(R.string.protocols).toUpperCase() + ":  " + adapter.getCount());
                 navigationbar.getTextTitle().setVisibility(View.VISIBLE);
             }
         });
@@ -90,98 +78,48 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                     if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
                         finish();
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
         });
-
-
-        /*
-        List<Protocol> protocolList=db.getProtocols();
-        Collections.sort(protocolList, new Comparator<Protocol>(){
-            public int compare(Protocol emp1, Protocol emp2) {
-                // ## Ascending order
-
-
-
-                return emp1.getDate().compareTo(emp2.getDate()); // To compare string values
-
-            }
-        });
-
-
-        Toast.makeText(getApplicationContext(), protocolList.get(1).getName(), Toast.LENGTH_LONG).show();
-        adapter = new ProtocolAdapter(this, protocolList);
-        listView.setAdapter(adapter);
-        */
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
 
-
-
-
-
     }
-
 
 
     @Override
     protected void onResume() {
         super.onResume();
         DatabaseService db = new DatabaseService(this);
-
         adapter.clear();
         List<Protocol> protocols = db.getProtocols();
-
-
         Scale.getInstance().setOnDatabaseListener(this);
-
-
-        List<Protocol> protocolList=db.getProtocols();
-        Collections.sort(protocolList, new Comparator<Protocol>(){
+        List<Protocol> protocolList = db.getProtocols();
+        Collections.sort(protocolList, new Comparator<Protocol>() {
             public int compare(Protocol emp1, Protocol emp2) {
-                // ## Ascending order
-
-
-
                 return emp2.getDate().compareTo(emp1.getDate()); // To compare string values
-
             }
         });
+        if (protocols != null) {
+            for (Protocol protocol : protocolList) {
 
-
-        ;
-
-
-
-
-       if(protocols != null) {
-           for (Protocol protocol : protocolList) {
-
-               try {
-                   if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
-                       if(protocol.getIsPending() == true){
-                           adapter.add(protocol);
-                       }
-                   }else{
-                       adapter.add(protocol);
-                   }
-               }catch (Exception e){
+                try {
+                    if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
+                        if (protocol.getIsPending() == true) {
+                            adapter.add(protocol);
+                        }
+                    } else {
+                        adapter.add(protocol);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
-               }
+                }
 
 
-
-
-
-
-
-           }
-       }
+            }
+        }
         adapter.notifyDataSetChanged();
 
         Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
@@ -200,88 +138,78 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
 
-            switch (buttonId){
-                case ActionButtonbarFragment.BUTTON_DELETE:
-                    try{
-                        final Dialog dialog = new Dialog(this);
-                        dialog.setContentView(R.layout.dialog_yes_no);
-                        dialog.setTitle(getString(R.string.delete_all));
-                        ((TextView)dialog.findViewById(R.id.text)).setText(R.string.do_you_really_want_to_delete_all_protocols);
-                        // set the custom dialog components - text, image and button
+        switch (buttonId) {
+            case ActionButtonbarFragment.BUTTON_DELETE:
+                try {
+                    final Dialog dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.dialog_yes_no);
+                    dialog.setTitle(getString(R.string.delete_all));
+                    ((TextView) dialog.findViewById(R.id.text)).setText(R.string.do_you_really_want_to_delete_all_protocols);
+                    // set the custom dialog components - text, image and button
 
 
+                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
-                        Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
-                        dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                dialog.dismiss();
-                            }
-                        });
-                        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                        // if button is clicked, close the custom dialog
-                        dialogButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                final DatabaseService db = new DatabaseService(ApplicationController.getContext());
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final DatabaseService db = new DatabaseService(ApplicationController.getContext());
 
 
-                                //db.getProtocols().removeAll((Collection<Protocol>) db.getProtocols());
-                                List <Protocol> protocolList=db.getProtocols();
+                            //db.getProtocols().removeAll((Collection<Protocol>) db.getProtocols());
+                            List<Protocol> protocolList = db.getProtocols();
 
                                 /*for(int i=0; i<protocolList.size();i++) {
                                     db.deleteProtocol(protocolList.get(i));
                                 }*/
 
-                                for (Protocol protocol:protocolList){
-                                    db.deleteProtocol(protocol);
-
-                                }
-
-                                dialog.dismiss();
-                                onResume();
-
+                            for (Protocol protocol : protocolList) {
+                                db.deleteProtocol(protocol);
 
                             }
-                        });
 
-                        dialog.show();
+                            dialog.dismiss();
+                            onResume();
 
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                    break;
-            }
+
+                        }
+                    });
+
+                    dialog.show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
 
     }
 
     @Override
     public void onDatabaseChanged() {
-        Log.e("MenuProtocolActivity","onDatabaseChanged()");
+        Log.e("MenuProtocolActivity", "onDatabaseChanged()");
         DatabaseService db = new DatabaseService(this);
         List<Protocol> protocols = db.getProtocols();
 
 
-
-        Collections.sort(protocols, new Comparator<Protocol>(){
+        Collections.sort(protocols, new Comparator<Protocol>() {
             public int compare(Protocol emp1, Protocol emp2) {
-                // ## Ascending order
                 return emp2.getDate().compareTo(emp1.getDate()); // To compare string values
 
             }
         });
-
-
         adapter.clear();
-        if(protocols != null){
-            for(Protocol protocol : protocols){
-                adapter.add(protocol);
-            }
+        for (Protocol protocol : protocols) {
+            adapter.add(protocol);
         }
-
         adapter.notifyDataSetChanged();
 
     }
