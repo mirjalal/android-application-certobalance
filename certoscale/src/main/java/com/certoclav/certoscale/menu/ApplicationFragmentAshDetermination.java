@@ -42,6 +42,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
             }
         });
@@ -116,6 +117,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             saveAshDeterminationProtocols();
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
+                            ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight());
                             saveProtocolContent();
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);

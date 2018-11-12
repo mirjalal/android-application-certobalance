@@ -16,6 +16,7 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.NumberFormatUtils;
 import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -126,10 +127,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
     //Ash determination
     int indexAshDeterminationSampleName = 0;
-    int indexAshDeterminationWeightBeaker = 1;
     int indexAshDeterminationBeakerName = 2;
+    int indexAshDeterminationWeightBeaker = 1;
     int indexAshDeterminationWeightBeakerWithSample = 3;
-    int indexAshDeterminationDeltaWeight = 7;
+    int indexAshDeterminationDeltaWeight = 4;
+    int indexAshDeterminationCurrentWeight = 7;
     int indexAshDeterminationSampleWeight = 5;
 
     @Override
@@ -971,6 +973,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
             case ASH_DETERMINATION_HOME:
+                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
+                try {
+                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
+                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
+                }
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
@@ -1036,6 +1046,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                 break;
             case ASH_DETERMINATION_BATCH_FINISHED:
+                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
+                try {
+                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
+                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
+                    );
+                }catch (Exception e){
+                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
+                }
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
