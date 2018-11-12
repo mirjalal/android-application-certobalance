@@ -12,6 +12,7 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.util.ESCPos;
 import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.CloudUser;
 
 import java.util.Calendar;
 import java.util.List;
@@ -81,7 +82,7 @@ public class ProtocolManager implements ScaleApplicationListener {
 
         }*/
         sb.append(ApplicationController.getContext().getString(R.string.user_name) + ": " + " " + Scale.getInstance().getUser().getEmail() + "\n");
-
+        sb.append("Email: ").append(CloudUser.getInstance().getEmail()).append("\n");
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_project_name), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_project_name)) == true) {
             String projectName = prefs.getString("preferences_glp_project_name", "");
@@ -589,6 +590,7 @@ public class ProtocolManager implements ScaleApplicationListener {
             case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
             case ASH_DETERMINATION_BATCH_FINISHED:
                 sb.append("\n");
+                sb.append("Verantwortliche: ").append(ApplicationManager.getInstance().getCurrentProtocol().getUserEmail()).append("\n");
                 sb.append("Probennummer" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
                 try {
                     for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
@@ -599,6 +601,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 }
                 sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
                 sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
+                sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().getOvenTemperature());
                 break;
             default:
                 Toast.makeText(ApplicationController.getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show();
