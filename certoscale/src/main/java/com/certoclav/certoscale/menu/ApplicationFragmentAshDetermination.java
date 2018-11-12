@@ -299,11 +299,40 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
             final EditText ovenTemperature = dialog.findViewById(R.id.dialog_oven_temperature_edt_temp);
 
+            Button button550 = dialog.findViewById(R.id.dialog_oven_temperature_btn_550);
+            Button button600 = dialog.findViewById(R.id.dialog_oven_temperature_btn_600);
+            Button button900 = dialog.findViewById(R.id.dialog_oven_temperature_btn_900);
+
+            button550.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ovenTemperature.setText("550");
+                }
+            });
+            button600.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ovenTemperature.setText("600");
+                }
+            });
+            button900.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ovenTemperature.setText("900");
+                }
+            });
+
             Button buttonSave = dialog.findViewById(R.id.dialog_oven_temperature_btn_save);
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (ovenTemperature.getText().toString().length() > 0){
+                        ApplicationManager.getInstance().getCurrentProtocol().setOvenTemperature(Double.parseDouble(ovenTemperature.getText().toString()));
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Tiegel Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
+                        sb.append("     Probe Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
+                        sb.append("Oven Temperature: " + ovenTemperature.getText().toString());
+                        ApplicationManager.getInstance().getCurrentProtocol().setName(sb.toString());
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
                         dialog.dismiss();
                     }
@@ -344,12 +373,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
                     try {
 
-                        if (editText.getText().toString().isEmpty() == false) {
+                        if (!editText.getText().toString().isEmpty()) {
                             ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
-                            StringBuilder sb = new StringBuilder();
-                            sb.append("Tiegel Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
-                            sb.append("     Probe Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
-                            ApplicationManager.getInstance().getCurrentProtocol().setName(sb.toString());
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                         }
 

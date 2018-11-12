@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="550"
                 android:textAllCaps="true" />
 
@@ -51,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:textSize="20sp"
                 android:text="600"
                 android:textAllCaps="true" />
 
@@ -59,6 +61,7 @@
                 style="@style/button_default"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:textSize="20sp"
                 android:layout_weight="1"
                 android:text="900"
                 android:textAllCaps="true" />
@@ -77,8 +80,8 @@
                 android:id="@+id/dialog_oven_temperature_btn_save"
                 style="@style/button_default"
                 android:layout_width="match_parent"
+                android:textSize="20sp"
                 android:layout_height="40dp"
-                android:layout_weight="1"
                 android:text="@string/save"
                 android:textAllCaps="true" />
 

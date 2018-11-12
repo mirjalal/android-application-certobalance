@@ -41,6 +41,7 @@ import static com.certoclav.certoscale.constants.AppConstants.IS_IO_SIMULATED;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_BEAKER;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING;
@@ -420,6 +421,7 @@ protected void onPause() {
 						case ASH_DETERMINATION_HOME:
 						case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
 						case ASH_DETERMINATION_WEIGH_BEAKER:
+						case ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN:
 						case ASH_DETERMINATION_WEIGHING_SAMPLE:
 						case ASH_DETERMINATION_WAIT_FOR_GLOWING:
 						case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
@@ -528,6 +530,7 @@ protected void onPause() {
 				application == FORMULATION_RUNNING ||
 				application == FORMULATION_FREE_RUNNING ||
 				application == ASH_DETERMINATION_ENTER_NAME_SAMPLE ||
+				application == ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN ||
 				application == ASH_DETERMINATION_ENTER_NAME_BEAKER ||
 				application == ASH_DETERMINATION_WEIGH_BEAKER ||
 				application == ASH_DETERMINATION_WEIGHING_SAMPLE ||

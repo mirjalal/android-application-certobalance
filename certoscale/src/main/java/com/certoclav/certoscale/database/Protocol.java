@@ -45,6 +45,7 @@ public class Protocol {
     private String date = "";
     private String cloudId = "";
     private String contentJson = "";
+    private double ovenTemperature = 0;
 
     public String getAshSampleName() {
         return ashSampleName;
@@ -438,6 +439,14 @@ public class Protocol {
             return "";
         }
 
+    }
+
+    public double getOvenTemperature() {
+        return ovenTemperature;
+    }
+
+    public void setOvenTemperature(double ovenTemperature) {
+        this.ovenTemperature = ovenTemperature;
     }
 }
 
