@@ -128,11 +128,11 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     //Ash determination
     int indexAshDeterminationSampleName = 0;
     int indexAshDeterminationBeakerName = 2;
-    int indexAshDeterminationWeightBeaker = 1;
-    int indexAshDeterminationWeightBeakerWithSample = 3;
     int indexAshDeterminationDeltaWeight = 4;
-    int indexAshDeterminationCurrentWeight = 7;
+    int indexAshDeterminationWeightBeakerWithSample = 1;
+    int indexAshDeterminationWeightBeaker = 3;
     int indexAshDeterminationSampleWeight = 5;
+    int indexAshDeterminationCurrentWeight = 7;
 
     @Override
     public void onResume() {

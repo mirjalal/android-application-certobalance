@@ -127,8 +127,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                         if (Scale.getInstance().isStable()){
-                            if (ApplicationManager.getInstance().getTaredValueInGram() >
-                                    ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() + 0.005) {
+                            if (ApplicationManager.getInstance().getTaredValueInGram() > ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() + 0.005) {
                                 TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                 errorMessage.setText("The beaker with the material is heavier after glowing than before!");
                                 TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
@@ -136,10 +135,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        saveAshDeterminationProtocols();
-                                        saveProtocolContent();
                                         //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                                         warningDialog.dismiss();
                                     }
@@ -153,10 +150,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 });
                                 warningDialog.show();
                             } else {
-                                saveAshDeterminationProtocols();
-                                saveProtocolContent();
                                 //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
-                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                             }
                             break;
@@ -164,6 +159,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
                         }
                     case ASH_DETERMINATION_BATCH_FINISHED:
+                        saveAshDeterminationProtocols();
+                        saveProtocolContent();
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                         break;
                 }

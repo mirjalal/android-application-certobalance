@@ -55,6 +55,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -286,8 +287,10 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             public void onClick(View v) {
 
 
-                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED) {
+                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME) {
                     Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
+                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
+                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_SAMPLE);
                 }
 
 
