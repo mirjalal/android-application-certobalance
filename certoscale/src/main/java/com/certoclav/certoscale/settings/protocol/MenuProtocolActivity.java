@@ -22,6 +22,7 @@ import com.certoclav.certoscale.listener.DatabaseListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.SyncProtocolsService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
@@ -74,6 +75,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
+                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                 try {
                     if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false)) {
                         finish();

@@ -44,7 +44,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             public void onClick(View v) {
                 //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                 ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
             }
         });
 
@@ -58,7 +58,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_NAME_BEAKER);
                         break;
                     case ASH_DETERMINATION_ENTER_NAME_BEAKER:
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
+                          Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                         break;
                     case ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN:
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
@@ -95,7 +95,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 abortButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -136,7 +138,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                                         warningDialog.dismiss();
@@ -145,7 +146,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 abortButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -153,6 +155,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             } else {
                                 //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+                                updateUI();
                                 Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                             }
                             break;
@@ -162,12 +165,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     case ASH_DETERMINATION_BATCH_FINISHED:
                         saveAshDeterminationProtocols();
                         saveProtocolContent();
-                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                         break;
                 }
             }
         });
-
         return rootView;
     }
 
@@ -262,6 +263,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                     dialog.dismiss();
                 }
             });
@@ -346,11 +348,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
             editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+            Button dialogButtonNo = dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
+                    ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                     dialog.dismiss();
                 }
             });

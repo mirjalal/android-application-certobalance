@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -213,6 +215,10 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
     }
 
+    private boolean isEmptyObject(Protocol protocol){
+        return protocol.getAshBeakerName().equals("") && protocol.getAshSampleName().equals("");
+    }
+
     @Override
     public void onResume() {
 
@@ -268,7 +274,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             @Override
             public void onClick(View view) {
 
-                if (Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_HOME) {
+                if (Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED) {
 
                     Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
                     intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, true);
@@ -285,13 +291,15 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
             @Override
             public void onClick(View v) {
-
-                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_SAMPLE);
-                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME && ApplicationManager.getInstance().getCurrentProtocol().getOvenTemperature() == 0){
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_ENTER_NAME_SAMPLE);
-                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME) {
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
+//                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME && Scale.getInstance().getPrevState() == ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING){
+//                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
+//                }else if (!isEmptyObject(ApplicationManager.getInstance().getCurrentProtocol())){
+//                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGH_BEAKER);
+//                }
+                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
+                    if (!isEmptyObject(ApplicationManager.getInstance().getCurrentProtocol())){
+                        Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
+                    }
                 }
 
 
@@ -423,7 +431,6 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
             }
         });
-
 
         buttonStatistics = (Button) rootView.findViewById(R.id.actionbar_button_statistics);
         buttonStatistics.setOnClickListener(new View.OnClickListener() {

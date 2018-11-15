@@ -23,6 +23,7 @@ import android_serialport_api.SerialService;
  */
 public class Scale extends Observable {
 
+    private ScaleApplication prevState = ScaleApplication.ASH_DETERMINATION_HOME;
 
     ArrayList<WeightListener> weightListeners = new ArrayList<WeightListener>();
     ArrayList<ScaleApplicationListener> applicationListeners = new ArrayList<ScaleApplicationListener>();
@@ -282,6 +283,14 @@ public class Scale extends Observable {
         for (DatabaseListener listener : databaseListeners) {
             listener.onDatabaseChanged();
         }
+    }
+
+    public ScaleApplication getPrevState() {
+        return prevState;
+    }
+
+    public void setPrevState(ScaleApplication prevState) {
+        this.prevState = prevState;
     }
 }
 

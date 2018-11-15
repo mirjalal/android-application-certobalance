@@ -1,6 +1,7 @@
 package com.certoclav.certoscale.database;
 
 
+import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.j256.ormlite.field.DataType;
@@ -16,7 +17,6 @@ import java.util.List;
 
 @DatabaseTable(tableName = "protocol")
 public class Protocol {
-
 
     private static final String JSON_CONTENT_STRING = "content";
     private final static String JSON_CONTENT_JSON = "content_json";
@@ -457,6 +457,7 @@ public class Protocol {
     public void setRecentWeight(double recentWeight) {
         this.recentWeight = recentWeight;
     }
+
 }
 
 

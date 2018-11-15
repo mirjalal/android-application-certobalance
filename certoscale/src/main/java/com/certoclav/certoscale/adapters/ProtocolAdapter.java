@@ -58,8 +58,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 
 
         TextView firstLine = (TextView) convertView.findViewById(R.id.first_line);
-        firstLine.setText(getItem(position).getName());
-
+        firstLine.setText(getItem(position).getAshSampleName());
 
         TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
         secondLine.setText(getItem(position).getDate());
