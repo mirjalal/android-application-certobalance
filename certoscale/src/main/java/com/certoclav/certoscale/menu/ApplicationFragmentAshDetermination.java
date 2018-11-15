@@ -117,10 +117,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
                         if (Scale.getInstance().isStable()) {
-                            saveAshDeterminationProtocols();
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
+                            ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
+                            saveAshDeterminationProtocols();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
-                            ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight());
                             saveProtocolContent();
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);
@@ -130,7 +130,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                         if (Scale.getInstance().isStable()){
-                            if (ApplicationManager.getInstance().getTaredValueInGram() > ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() + 0.005) {
+                            if (ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight() > ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() + 0.005) {
                                 TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                 errorMessage.setText("The beaker with the material is heavier after glowing than before!");
                                 TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
@@ -140,6 +140,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     public void onClick(View v) {
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -153,7 +154,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 });
                                 warningDialog.show();
                             } else {
-                                //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
+                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 updateUI();
                                 Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();

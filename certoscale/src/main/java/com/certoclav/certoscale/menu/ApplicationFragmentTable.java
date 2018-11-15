@@ -973,14 +973,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
                 }
 
             case ASH_DETERMINATION_HOME:
-                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
-                try {
-                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
-                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
-                    );
-                }catch (Exception e){
-                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
-                }
+//                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
+//                try {
+//                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
+//                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
+//                    );
+//                }catch (Exception e){
+//                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
+//                }
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
@@ -1046,14 +1046,14 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
             case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                 break;
             case ASH_DETERMINATION_BATCH_FINISHED:
-                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
-                try {
-                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
-                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
-                    );
-                }catch (Exception e){
-                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
-                }
+//                listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextName().setText("Aktuelles Probe Gewicht");
+//                try {
+//                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText(
+//                            String.valueOf(NumberFormatUtils.roundNumber(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(), 4)) + "g"
+//                    );
+//                }catch (Exception e){
+//                    listReferenceFields.get(indexAshDeterminationCurrentWeight).getTextValue().setText("");
+//                }
                 listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
                 try {
                     listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(
