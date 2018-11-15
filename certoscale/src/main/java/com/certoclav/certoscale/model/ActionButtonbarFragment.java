@@ -286,11 +286,12 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             @Override
             public void onClick(View v) {
 
-
-                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME) {
-                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
-                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
+                if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
                     Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_SAMPLE);
+                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME && ApplicationManager.getInstance().getCurrentProtocol().getOvenTemperature() == 0){
+                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_ENTER_NAME_SAMPLE);
+                }else if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME) {
+                    Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
                 }
 
 

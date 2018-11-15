@@ -174,12 +174,9 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
         });
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols)) == true) {
-
+        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols))) {
             actionItemDelete.setEnabled(false);
-
         } else {
-
             actionItemDelete.setEnabled(true);
         }
 

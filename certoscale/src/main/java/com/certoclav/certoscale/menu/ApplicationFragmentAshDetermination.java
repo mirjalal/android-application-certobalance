@@ -42,7 +42,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
+                //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
+                ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
             }
         });
@@ -259,7 +260,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             editText.setSingleLine(true);
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
@@ -321,13 +321,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (ovenTemperature.getText().toString().length() > 0){
+                    if (ovenTemperature.getText().toString().length() > 0 && Double.parseDouble(ovenTemperature.getText().toString()) > 0){
                         ApplicationManager.getInstance().getCurrentProtocol().setOvenTemperature(Double.parseDouble(ovenTemperature.getText().toString()));
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("Tiegel Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshBeakerName());
-                        sb.append("     Probe Nr.: " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName());
-                        sb.append("Oven Temperature: " + ovenTemperature.getText().toString());
-                        ApplicationManager.getInstance().getCurrentProtocol().setName(sb.toString());
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
                         dialog.dismiss();
                     }
@@ -365,8 +360,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 public void onClick(View v) {
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
                     try {
+                        DatabaseService databaseService = new DatabaseService(getActivity());
                         if (!editText.getText().toString().isEmpty()) {
-                            if (!isInDatabase(editText.getText().toString())){
+                            if (!databaseService.isInDatabase(editText.getText().toString())){
                                 ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                                 dialog.dismiss();
@@ -383,16 +379,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    private boolean isInDatabase(String name){
-        DatabaseService db = new DatabaseService(getActivity());
-        for (Protocol protocol : db.getProtocols()){
-            if (protocol.getAshBeakerName().equals(name)) return true;
-        }
-        return false;
-    }
+
 
 
     public void saveAshDeterminationProtocols() {

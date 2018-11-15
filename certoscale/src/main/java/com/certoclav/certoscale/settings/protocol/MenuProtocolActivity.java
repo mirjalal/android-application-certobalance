@@ -75,7 +75,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
                 try {
-                    if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
+                    if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false)) {
                         finish();
                     }
                 } catch (Exception e) {

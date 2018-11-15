@@ -79,19 +79,9 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
     private int pipette_number = 0;
 
 
-
     private double density_weight_air = 0;
 
     private double pipetteCalculatedML = 0;
-
-
-    public boolean isReturnFromSubMenu() {
-        return returnFromSubMenu;
-    }
-
-    public void setReturnFromSubMenu(boolean returnFromSubMenu) {
-        this.returnFromSubMenu = returnFromSubMenu;
-    }
 
 
     private String Currency = "€";
