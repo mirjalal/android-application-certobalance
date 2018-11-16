@@ -59,6 +59,11 @@ public class DatabaseService {
     /**
      * Releases the helper when done.
      */
+    public boolean isEmpty(){
+        return getProtocols().size() == 0;
+    }
+
+
     public void close() {
         if (mDatabaseHelper != null) {
             OpenHelperManager.releaseHelper();

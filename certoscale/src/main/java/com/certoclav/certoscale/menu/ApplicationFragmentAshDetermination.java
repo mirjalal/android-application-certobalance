@@ -42,7 +42,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ApplicationManager.getInstance().getCurrentProtocol().setIsPending(false);
                 ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
             }
@@ -119,8 +118,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
-                            saveAshDeterminationProtocols();
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
+                            saveAshDeterminationProtocols();
                             saveProtocolContent();
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);
@@ -140,6 +139,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     public void onClick(View v) {
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                         warningDialog.dismiss();
                                     }

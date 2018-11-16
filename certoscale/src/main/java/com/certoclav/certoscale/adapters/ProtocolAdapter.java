@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
+import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
@@ -106,15 +107,17 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (getItem(position).getCloudId().isEmpty() == false) {
+                            if (!getItem(position).getCloudId().isEmpty()) {
                                 DeleteTask deleteTask = new DeleteTask();
                                 deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_PROTOCOL + getItem(position).getCloudId());
                             }
                             DatabaseService db = new DatabaseService(mContext);
-
                             db.deleteProtocol(getItem(position));
                             remove(getItem(position));
                             notifyDataSetChanged();
+                            if (new DatabaseService(getContext()).isEmpty()){
+                                ApplicationManager.getInstance().setCurrentProtocol(new Protocol());
+                            }
                             dialog.dismiss();
                         }
                     });
