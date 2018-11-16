@@ -79,10 +79,12 @@ public class DatabaseService {
     }
 
     public Protocol getRecentProtocol(){
-        if (getProtocols().size() > 0){
-            return getProtocols().get(getProtocols().size() - 1);
-        }
-        return new Protocol();
+//        if (getProtocols().size() > 0){
+//            for(Protocol protocol: getProtocols())
+//                if(protocol.getIsPending())
+//                    return protocol;
+//        }
+        return null;
     }
 
 

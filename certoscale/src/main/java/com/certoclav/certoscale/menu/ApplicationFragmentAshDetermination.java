@@ -3,7 +3,7 @@ package com.certoclav.certoscale.menu;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +15,17 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
+import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.library.application.ApplicationController;
+import com.certoclav.library.certocloud.CloudUser;
 import com.certoclav.library.util.ExportUtils;
 
 
-public class ApplicationFragmentAshDetermination extends Fragment implements ScaleApplicationListener {
+public class ApplicationFragmentAshDetermination extends Fragment implements ScaleApplicationListener, StableListener {
 
     private TextView textInstruction = null;
     private Button buttonNext = null;
@@ -43,7 +45,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             @Override
             public void onClick(View v) {
                 ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
             }
         });
 
@@ -78,9 +80,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             final Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5){
                                 TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
-                                errorMessage.setText("The probe's weight is less than 0.5 grams!");
+                                errorMessage.setText(R.string.weight_more_than_0_5);
                                 TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                ignoreButton.setText(R.string.continue_button);
                                 TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                abortButton.setText(R.string.close);
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -94,9 +98,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 abortButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -117,8 +118,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
                         if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                            ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
+                           // ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().
+                                    add(Scale.getInstance().getUser().getEmail());
                             saveAshDeterminationProtocols();
                             saveProtocolContent();
                             updateUI();
@@ -140,6 +143,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                         Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+                                        saveProtocolContent();
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -152,11 +156,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 });
                                 warningDialog.show();
                             } else {
+                                ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
                                 ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+                                saveProtocolContent();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 updateUI();
-                                Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Protokoll finished", Toast.LENGTH_LONG).show();
                             }
+
                             break;
                         }else{
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
@@ -175,7 +182,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     @Override
     public void onResume() {
         Scale.getInstance().setOnApplicationListener(this);
+        Scale.getInstance().setOnStableListener(this);
         updateUI();
+        buttonNext.setEnabled(Scale.getInstance().isStable());
         super.onResume();
     }
 
@@ -236,6 +245,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     @Override
     public void onPause() {
         Scale.getInstance().removeOnApplicationListener(this);
+        Scale.getInstance().removeOnStableListener(this);
         super.onPause();
     }
 
@@ -254,10 +264,18 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         try {
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
-            dialog.setTitle("Geben Sie die Probennummer ein");
+            dialog.setTitle(R.string.enter_the_sample_number);
             dialog.setCancelable(false);
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
+            editText.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    if(i== KeyEvent.KEYCODE_ENTER)
+                        return true;
+                    return false;
+                }
+            });
             Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -294,7 +312,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialog.setCancelable(false);
 
             final EditText ovenTemperature = dialog.findViewById(R.id.dialog_oven_temperature_edt_temp);
-
+            ovenTemperature.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    if(i== KeyEvent.KEYCODE_ENTER)
+                        return true;
+                    return false;
+                }
+            });
             Button button550 = dialog.findViewById(R.id.dialog_oven_temperature_btn_550);
             Button button600 = dialog.findViewById(R.id.dialog_oven_temperature_btn_600);
             Button button900 = dialog.findViewById(R.id.dialog_oven_temperature_btn_900);
@@ -346,7 +371,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialog.setTitle("Geben Sie die Tiegelnummer ein");
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
-            editText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            editText.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                    if(i== KeyEvent.KEYCODE_ENTER)
+                        return true;
+                    return false;
+                }
+            });
             Button dialogButtonNo = dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -406,5 +438,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
         ApplicationManager.getInstance().getCurrentProtocol().setContent(sb.toString());
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
+    }
+
+    @Override
+    public void onStableChanged(boolean isStable) {
+        buttonNext.setEnabled(isStable);
     }
 }

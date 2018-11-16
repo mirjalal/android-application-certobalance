@@ -179,7 +179,7 @@ JNIEXPORT jobject JNICALL Java_android_1serialport_1api_SerialPort_open
                 break;
         }
 
-
+		cfg.c_lflag &= ~(ECHO|ECHONL);
 
 
 		//cfmakeraw(&cfg);

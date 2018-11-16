@@ -698,4 +698,7 @@
     <string name="assigned_to">"Zugeordnet: "</string>
     <string name="do_you_really_want_to_delete_this_protocol">Möchten Sie diese Protokoll wirklich löschen?</string>
     <string name="ash_determination">Asche Ermittlung</string>
+    <string name="enter_the_sample_number">Geben Sie die Probennummer ein</string>
+    <string name="continue_button">WEITER</string>
+    <string name="weight_more_than_0_5">Das Gewicht der Sonde beträgt weniger als 0,5 Gramm!</string>
 </resources>

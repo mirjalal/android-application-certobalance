@@ -32,8 +32,10 @@ public class Protocol {
     private final static String JSON_ASH_SAMPLE_NAME = "ash_name_sample";
     private final static String JSON_ASH_BEAKER_NAME = "ash_name_beaker";
     private final static String JSON_ASH_ARRAY_GLOW_WEIGHTS = "ash_array_glow_weights";
+    private final static String JSON_ASH_ARRAY_GLOW_WEIGHTS_USERS = "ash_array_glow_weights_users";
     private final static String JSON_ASH_WEIGHT_BEAKER = "ash_weight_beaker";
     private final static String JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE = "ash_weight_beaker_with_sample";
+    private final static String JSON_OVEN_TEMPERATURE = "ash_oven_temperature";
     private final static String JSON_IS_PENDING = "ispending";
 
 
@@ -102,6 +104,10 @@ public class Protocol {
         return ashWeightBeakerWithSample;
     }
 
+    public Double getSampleWeight() {
+        return ashWeightBeakerWithSample-ashWeightBeaker;
+    }
+
     public void saveBeakerAndSampleWeight(Double ashWeightBeakerWithSample) {
         this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
     }
@@ -109,6 +115,7 @@ public class Protocol {
     private String ashSampleName = "";
     private String ashBeakerName = "";
     private List<Double> ashArrayGlowWeights = new ArrayList<Double>();
+    private List<String> ashArrayGlowWeightsUser = new ArrayList<String>();
     private Double ashWeightBeaker = 0d;
     private Double ashWeightBeakerWithSample = 0d;
 
@@ -116,7 +123,7 @@ public class Protocol {
         return isPending;
     }
 
-    public void setIsPending(Boolean isPending) {
+    public void setPending(Boolean isPending) {
         this.isPending = isPending;
     }
 
@@ -285,6 +292,33 @@ public class Protocol {
             isPending = false;
         }
 
+        try {
+            ovenTemperature = jsonObject.getDouble(JSON_OVEN_TEMPERATURE);
+        } catch (Exception e) {
+            ovenTemperature = 0d;
+        }
+
+
+        ashArrayGlowWeightsUser.clear();
+        jsonArray = new JSONArray();
+
+        try {
+            jsonArray = jsonObject.getJSONArray(JSON_ASH_ARRAY_GLOW_WEIGHTS_USERS);
+        } catch (Exception e) {
+            jsonArray = new JSONArray();
+        }
+
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject glowWeightsEntry = new JSONObject();
+            String username = "";
+            try {
+                username = (String) jsonArray.get(i);
+            } catch (Exception e) {
+                username = "";
+            }
+            ashArrayGlowWeightsUser.add(username);
+        }
 
         protocolJson = jsonObject.toString();
 
@@ -385,13 +419,22 @@ public class Protocol {
                     .put(JSON_ASH_BEAKER_NAME, ashBeakerName)
                     .put(JSON_ASH_WEIGHT_BEAKER, ashWeightBeaker)
                     .put(JSON_ASH_WEIGHT_BEAKER_WITH_SAMPLE, ashWeightBeakerWithSample)
-                    .put(JSON_IS_PENDING, isPending);
+                    .put(JSON_IS_PENDING, isPending)
+                    .put(JSON_OVEN_TEMPERATURE, ovenTemperature);
 
             JSONArray jsonArrayGlowWeights = new JSONArray();
             for (Double value : ashArrayGlowWeights) {
                 jsonArrayGlowWeights.put(value);
             }
             jsonObject.put(JSON_ASH_ARRAY_GLOW_WEIGHTS, jsonArrayGlowWeights);
+
+
+            JSONArray jsonArrayGlowWeightsUsers = new JSONArray();
+            for (String value : ashArrayGlowWeightsUser) {
+                jsonArrayGlowWeightsUsers.put(value);
+            }
+            jsonObject.put(JSON_ASH_ARRAY_GLOW_WEIGHTS_USERS, jsonArrayGlowWeightsUsers);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -451,13 +494,20 @@ public class Protocol {
     }
 
     public double getRecentWeight() {
-        return recentWeight;
+        List<Double> weights = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights();
+
+        if(weights.size()==0)
+            return ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample();
+        return weights.get(weights.size()-1);
     }
 
     public void setRecentWeight(double recentWeight) {
         this.recentWeight = recentWeight;
     }
 
+    public List<String> getAshArrayGlowWeightsUser() {
+        return ashArrayGlowWeightsUser;
+    }
 }
 
 

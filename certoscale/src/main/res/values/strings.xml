@@ -1050,6 +1050,10 @@
     <string name="assigned_to">Assigned to</string>
     <string name="do_you_really_want_to_delete_this_protocol">Do you really want to delete this protocol</string>
     <string name="ash_determination">Asche Ermittlung</string>
+    <string name="enter_the_sample_number">Enter the sample name</string>
+    <string name="celsius_simbol">\u2103</string>
+    <string name="continue_button">CONTINUE</string>
+    <string name="weight_more_than_0_5">The probe\'s weight is less than 0.5 grams!</string>
 
 
 </resources>

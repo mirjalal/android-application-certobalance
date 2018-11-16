@@ -1001,6 +1001,10 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
 
 
     public void fillFields() {
+
+        if(ApplicationManager.getInstance().getCurrentProtocol()!=null &&
+                !ApplicationManager.getInstance().getCurrentProtocol().getIsPending())
+            ApplicationManager.getInstance().setCurrentProtocol(null);
         listReferenceFields.get(indexAshDeterminationSampleWeight).getTextName().setText("Gewicht Probe");
         try {
             listReferenceFields.get(indexAshDeterminationSampleWeight).getTextValue().setText(

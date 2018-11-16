@@ -59,7 +59,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
 
 
         TextView firstLine = (TextView) convertView.findViewById(R.id.first_line);
-        firstLine.setText(getItem(position).getAshSampleName());
+        firstLine.setText(getItem(position).getAshBeakerName());
 
         TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
         secondLine.setText(getItem(position).getDate());
@@ -111,13 +111,18 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
                                 DeleteTask deleteTask = new DeleteTask();
                                 deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_PROTOCOL + getItem(position).getCloudId());
                             }
+                            try {
+                                if (ApplicationManager.getInstance().getCurrentProtocol() != null &&
+                                        getItem(position).getAshSampleName().equals(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName()))
+                                    ApplicationManager.getInstance().setCurrentProtocol(null);
+                            }catch (Exception e){
+                                ApplicationManager.getInstance().setCurrentProtocol(null);
+                            }
+
                             DatabaseService db = new DatabaseService(mContext);
                             db.deleteProtocol(getItem(position));
                             remove(getItem(position));
                             notifyDataSetChanged();
-                            if (new DatabaseService(getContext()).isEmpty()){
-                                ApplicationManager.getInstance().setCurrentProtocol(new Protocol());
-                            }
                             dialog.dismiss();
                         }
                     });

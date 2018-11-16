@@ -175,7 +175,6 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
                             for (Protocol protocol : protocolList) {
                                 db.deleteProtocol(protocol);
-
                             }
 
                             dialog.dismiss();

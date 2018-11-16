@@ -16,7 +16,7 @@
 
 package android_serialport_api;
 
-import android.util.Log;
+
 
 import java.io.IOException;
 import java.io.InputStream;

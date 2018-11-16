@@ -595,13 +595,27 @@ public class ProtocolManager implements ScaleApplicationListener {
                 try {
                     for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
                         sb.append((i + 1) + ".Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
+
+                        try {
+                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().get(0) + "\n");
+                        }catch (Exception e){
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
-                sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().getOvenTemperature());
+                sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
+                        getOvenTemperature()+" "+ApplicationController.getContext().getString(R.string.celsius_simbol)).append("\n");
+                sb.append("Beaker weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()));
+                sb.append("Sample weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight()));
+                if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
+                    sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
+                    sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
+                }else{
+                    sb.append("Messung noch nicht abgeschlossen\n");
+                }
                 break;
             default:
                 Toast.makeText(ApplicationController.getContext(), R.string.not_implemented, Toast.LENGTH_LONG).show();

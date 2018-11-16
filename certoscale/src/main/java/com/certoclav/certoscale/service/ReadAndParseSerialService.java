@@ -2,13 +2,13 @@ package com.certoclav.certoscale.service;
 
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModelAEAdam;
 import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.certoscale.supervisor.StateMachine;
+import com.certoclav.certoscale.util.Log;
 
 import java.util.ArrayList;
 
