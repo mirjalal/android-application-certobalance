@@ -597,7 +597,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                         sb.append((i + 1) + ".Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
 
                         try {
-                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().get(0) + "\n");
+                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().get(i) + "\n");
                         }catch (Exception e){
                         }
                     }
@@ -607,9 +607,9 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
                         getOvenTemperature()+" "+ApplicationController.getContext().getString(R.string.celsius_simbol)).append("\n");
                 sb.append("Beaker weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
-                        ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()));
+                        ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
                 sb.append("Sample weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
-                        ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight()));
+                        ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
                 if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
                     sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
                     sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");

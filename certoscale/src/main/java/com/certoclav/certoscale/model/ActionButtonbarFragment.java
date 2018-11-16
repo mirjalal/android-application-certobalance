@@ -216,7 +216,11 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
     }
 
     private boolean isEmptyObject(Protocol protocol){
-        return protocol.getAshBeakerName().equals("") && protocol.getAshSampleName().equals("");
+        try {
+            return protocol.getAshBeakerName().equals("") && protocol.getAshSampleName().equals("");
+        }catch (Exception e){
+            return false;
+        }
     }
 
     @Override
@@ -299,6 +303,9 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 if (Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ASH_DETERMINATION_BATCH_FINISHED){
                     if (!isEmptyObject(ApplicationManager.getInstance().getCurrentProtocol())){
                         Scale.getInstance().setScaleApplication(ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE);
+                    }else{
+                        buttonStart.setEnabled(false);
+                        return;
                     }
                 }
 
@@ -1713,6 +1720,10 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 buttonEndBatch.setVisibility(View.GONE);
                 buttonStatistics.setVisibility(View.GONE);
                 buttonResult.setVisibility(View.GONE);
+
+                if(ApplicationManager.getInstance().getCurrentProtocol()==null ||
+                        !ApplicationManager.getInstance().getCurrentProtocol().getIsPending())
+                    buttonStart.setEnabled(false);
                 break;
 
 

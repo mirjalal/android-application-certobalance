@@ -3,6 +3,7 @@ package com.certoclav.certoscale.database;
 
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.Log;
 import com.certoclav.library.application.ApplicationController;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -266,8 +267,10 @@ public class Protocol {
             JSONObject glowWeightsEntry = new JSONObject();
             Double glowWeight = 0d;
             try {
-                glowWeight = (Double) jsonArray.get(i);
+                glowWeight = Double.valueOf(jsonArray.get(i).toString());
             } catch (Exception e) {
+                e.printStackTrace();
+                android.util.Log.e("musaqil",i+"");
                 glowWeight = 0d;
             }
             ashArrayGlowWeights.add(glowWeight);
@@ -493,12 +496,31 @@ public class Protocol {
         this.ovenTemperature = ovenTemperature;
     }
 
-    public double getRecentWeight() {
+    public double getRecentWeight(boolean current) {
         List<Double> weights = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights();
 
-        if(weights.size()==0)
-            return ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample();
+        for(Double w:weights)
+            android.util.Log.e("weightash",w+"");
+
+        if(!current)
+            if( weights.size()==1)
+                return ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample();
+            else
+                return weights.get(weights.size()-2);
+
+
         return weights.get(weights.size()-1);
+    }
+
+    public void abortLastWeight() {
+        List<Double> weights = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights();
+        List<String> weightsUsers = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser();
+
+        if(weights.size()>0)
+            weights.remove(weights.size()-1);
+
+        if(weightsUsers.size()>0)
+            weightsUsers.remove(weightsUsers.size()-1);
     }
 
     public void setRecentWeight(double recentWeight) {

@@ -76,7 +76,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_WEIGHING_SAMPLE:
                         if (Scale.getInstance().isStable()) {
-                            saveAshDeterminationProtocols();
                             final Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5){
                                 TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
@@ -90,6 +89,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     public void onClick(View v) {
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                         saveProtocolContent();
+                                        saveAshDeterminationProtocols();
                                         updateUI();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                                         warningDialog.dismiss();
@@ -105,6 +105,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             }else{
                                 ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                 saveProtocolContent();
+                                saveAshDeterminationProtocols();
                                 updateUI();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                             }
@@ -122,8 +123,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().
                                     add(Scale.getInstance().getUser().getEmail());
-                            saveAshDeterminationProtocols();
-                            saveProtocolContent();
+//                            saveAshDeterminationProtocols();
+//                            saveProtocolContent();
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);
                         } else {
@@ -132,32 +133,44 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         break;
                     case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                         if (Scale.getInstance().isStable()){
-                            if (ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight() > ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample() + 0.005) {
-                                TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
-                                errorMessage.setText("The beaker with the material is heavier after glowing than before!");
-                                TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
-                                TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
-                                ignoreButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
-                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
-                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
-                                        saveProtocolContent();
-                                        warningDialog.dismiss();
-                                    }
-                                });
-                                abortButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                        warningDialog.dismiss();
-                                    }
-                                });
-                                warningDialog.show();
+                            if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
+                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true))> 0.005) {
+
+                                if(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false) -
+                                                ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)<-0.005) {
+                                    TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                                    errorMessage.setText("The beaker with the material is heavier after glowing than before!");
+                                    TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                    TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+//                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+//                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+                                            saveProtocolContent();
+                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                            warningDialog.dismiss();
+                                        }
+                                    });
+                                    abortButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                                            warningDialog.dismiss();
+                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                        }
+                                    });
+                                    warningDialog.show();
+                                }else{
+                                    saveProtocolContent();
+                                    Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                }
                             } else {
                                 ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
-                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+//                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                 saveProtocolContent();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 updateUI();
@@ -282,6 +295,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 public void onClick(View v) {
                     ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                     dialog.dismiss();
+                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                 }
             });
             Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
@@ -384,6 +398,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 @Override
                 public void onClick(View v) {
                     ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                     dialog.dismiss();
                 }
             });
