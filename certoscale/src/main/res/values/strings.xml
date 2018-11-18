@@ -885,8 +885,10 @@
     <string name="preferences_communication_protocolprinter">preferences_communication_protocolprinter</string>
     <string name="preferences_communication_labelprinter">preferences_communication_labelprinter</string>
     <string name="preferences_communication_lims">preferences_communication_lims</string>
+    <string name="preferences_communication_lims_ftp">preferences_communication_lims_ftp</string>
     <string name="assigned_to_com">Assigned to: COM</string>
     <string name="lims">LIMS</string>
+    <string name="lims_ftp">FTP</string>
     <string name="communication_config">Communication Config</string>
     <string name="baudrate">Baudrate</string>
     <string name="tab_to_choose_connected_model">Tab to choose connected model</string>
@@ -1054,6 +1056,11 @@
     <string name="celsius_simbol">\u2103</string>
     <string name="continue_button">CONTINUE</string>
     <string name="weight_more_than_0_5">The probe\'s weight is less than 0.5 grams!</string>
+    <string name="ftp_summary">Address: %1$s, Port: %2$d, User: %3$s</string>
+    <string name="ftp_server">SERVER</string>
+    <string name="ftp_raw_data_folder">Raw data folder</string>
+    <string name="ftp_ilims_folder">iLIMS Folder</string>
+    <string name="test">TEST</string>
 
 
 </resources>

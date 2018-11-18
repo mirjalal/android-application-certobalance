@@ -1,9 +1,7 @@
 package com.certoclav.certoscale.database;
 
 
-import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.util.Log;
 import com.certoclav.library.application.ApplicationController;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -443,6 +441,11 @@ public class Protocol {
             e.printStackTrace();
         }
         protocolJson = jsonObject.toString();
+    }
+
+    public String generateCSV() {
+        parseJson();
+        return content.replaceAll(": ",",").replaceAll(":",",");
     }
 
     public Double getLastGlowWeight() {

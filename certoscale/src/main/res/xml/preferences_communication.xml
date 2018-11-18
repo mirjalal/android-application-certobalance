@@ -1,5 +1,11 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+
+    <Preference
+        android:key="@string/preferences_communication_lims_ftp"
+        android:title="@string/lims_ftp"
+        android:summary="Assigned to: COM 1, 9600 baud, 8 data bits, parity: none, 1 stop bit, flow control: none" />
+
     <Preference
         android:key="@string/preferences_communication_lims"
         android:title="@string/lims"

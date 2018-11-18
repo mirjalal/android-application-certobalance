@@ -34,7 +34,7 @@ public class ApplicationController extends Application {
     }
 
 
-	   public static ApplicationController getInstance() {
+    public static ApplicationController getInstance() {
 	        return instance;
 	    }
 	

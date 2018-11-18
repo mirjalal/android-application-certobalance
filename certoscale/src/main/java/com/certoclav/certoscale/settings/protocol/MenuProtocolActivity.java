@@ -25,6 +25,7 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.SyncProtocolsService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
+import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -46,13 +47,14 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     private ListView listView = null;
     private ProtocolAdapter adapter = null;
     private GoogleApiClient client;
+    private FTPManager ftpManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_main_recipe_activity);
-
+        ftpManager = FTPManager.getInstance();
         navigationbar.onCreate();
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
@@ -125,8 +127,23 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         adapter.notifyDataSetChanged();
 
         Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
-
         startService(intent);
+        ftpManager.updateAll(new FTPManager.FTPListener() {
+            @Override
+            public void onConnection(boolean isConnected, String message) {
+                Log.d("FTP_SERVER","connection "+isConnected+" "+(message!=null?message:""));
+            }
+
+            @Override
+            public void onUpdated() {
+                Log.d("FTP_SERVER","updatedall");
+            }
+
+            @Override
+            public void onUploading(boolean isUploaded, String message) {
+                Log.d("FTP_SERVER","uploading "+isUploaded+" "+(message!=null?message:""));
+            }
+        });
     }
 
     @Override

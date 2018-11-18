@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\musaq\\Documents\\CertoClav\\Projects\\android-application-certobalance-androidstudio\\gaugelibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\musaq\\Documents\\CertoClav\\Projects\\android-application-certobalance-androidstudio\\gaugelibrary\\build\\intermediates\\packaged_res\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,9,17",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,258,1953",
+                        "endLines": "8,15,17",
+                        "endColumns": "19,19,49",
+                        "endOffsets": "253,428,1998"
+                    }
+                }
+            ]
+        }
+    ]
+}

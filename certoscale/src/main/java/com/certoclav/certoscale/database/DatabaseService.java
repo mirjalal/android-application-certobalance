@@ -7,8 +7,6 @@ import android.util.Log;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +71,7 @@ public class DatabaseService {
 
     public boolean isInDatabase(String name){
         for (Protocol protocol : getProtocols()){
-            if (protocol.getAshBeakerName().equals(name)) return true;
+            if (protocol.getAshBeakerName().equals(name) && protocol.getIsPending()) return true;
         }
         return false;
     }

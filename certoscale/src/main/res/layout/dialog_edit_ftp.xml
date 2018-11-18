@@ -1,0 +1,136 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_edit_number_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gadient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/dialog_container_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/dialog_container_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/dialog_edit_text_address"
+                    style="@style/edit_text_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:hint="@string/ftp_server" />
+
+                <EditText
+                    android:id="@+id/dialog_edit_text_port"
+                    style="@style/edit_text_default"
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:hint="21" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/dialog_edit_text_username"
+                style="@style/edit_text_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="@string/user_name" />
+
+            <EditText
+                android:id="@+id/dialog_edit_text_password"
+                style="@style/edit_text_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:inputType="textPassword"
+                android:hint="@string/password" />
+
+
+            <EditText
+                android:id="@+id/dialog_edit_text_raw_data_folder"
+                style="@style/edit_text_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="@string/ftp_raw_data_folder" />
+
+            <EditText
+                android:id="@+id/dialog_edit_text_ilims_folder"
+                style="@style/edit_text_default"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:hint="@string/ftp_ilims_folder" />
+
+
+            <TextView
+                android:id="@+id/dialog_text_view_test_result"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:text="Success"
+                android:textSize="40sp"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_container_text"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/dialog_edit_text_button_test"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/test"
+                android:textAllCaps="true" />
+            <Button
+                android:id="@+id/dialog_edit_text_button_cancel"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textAllCaps="true" />
+
+
+            <Button
+                android:id="@+id/dialog_edit_text_button_save"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:textAllCaps="true"
+
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

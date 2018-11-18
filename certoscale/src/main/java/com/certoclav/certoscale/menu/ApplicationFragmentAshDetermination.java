@@ -15,13 +15,13 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.library.application.ApplicationController;
-import com.certoclav.library.certocloud.CloudUser;
+import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.util.ExportUtils;
 
 
@@ -89,7 +89,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     public void onClick(View v) {
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                         saveProtocolContent();
-                                        saveAshDeterminationProtocols();
                                         updateUI();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                                         warningDialog.dismiss();
@@ -105,7 +104,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             }else{
                                 ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                 saveProtocolContent();
-                                saveAshDeterminationProtocols();
                                 updateUI();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                             }
@@ -182,7 +180,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
                         }
                     case ASH_DETERMINATION_BATCH_FINISHED:
-                        saveAshDeterminationProtocols();
                         saveProtocolContent();
                         break;
                 }
@@ -431,14 +428,21 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
 
 
-
-    public void saveAshDeterminationProtocols() {
+    public void saveAshDeterminationProtocol() {
         StringBuilder sb = new StringBuilder();
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
         sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample()) + "\r\n");
         sb.append("ash_percent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
         ExportUtils exportUtils = new ExportUtils();
         exportUtils.writeCSVFileToInternalSD(sb.toString());
+    }
+
+    public void saveAshDeterminationProtocols() {
+        ExportUtils exportUtils = new ExportUtils();
+        Protocol protocol = ApplicationManager.getInstance().getCurrentProtocol();
+        exportUtils.writeCSVFileToInternalSD(protocol.getAshBeakerName()+"-"+protocol.getAshSampleName(),
+                ApplicationManager.getInstance().getCurrentProtocol().generateCSV(),!protocol.getIsPending());
+        FTPManager.getInstance().updateAll(null);
     }
 
     @Override
@@ -453,6 +457,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
         ApplicationManager.getInstance().getCurrentProtocol().setContent(sb.toString());
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
+
+        saveAshDeterminationProtocol();
+        saveAshDeterminationProtocols();
     }
 
     @Override
