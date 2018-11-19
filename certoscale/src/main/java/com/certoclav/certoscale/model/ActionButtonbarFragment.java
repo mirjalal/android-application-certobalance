@@ -9,11 +9,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ItemMeasuredAdapter;
+import com.certoclav.certoscale.adapters.ProtocolAdapter;
 import com.certoclav.certoscale.adapters.RecipeFreeFormulationElementAdapter;
 import com.certoclav.certoscale.adapters.RecipeResultElementAdapter;
 import com.certoclav.certoscale.adapters.SQCAdapter;
@@ -52,12 +56,10 @@ import java.util.List;
 
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING;
 import static com.certoclav.certoscale.model.ScaleApplication.ANIMAL_WEIGHING_CALCULATING;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_HOME;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE;
-import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_ENTER_NAME_SAMPLE;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_HOME;
+import static com.certoclav.certoscale.model.ScaleApplication.ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION;
 import static com.certoclav.certoscale.model.ScaleApplication.DENSITY_DETERMINATION_STARTED;
 import static com.certoclav.certoscale.model.ScaleApplication.FORMULATION;
@@ -280,9 +282,10 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
                 if (Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_HOME || Scale.getInstance().getScaleApplication() == ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED) {
 
-                    Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
-                    intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, true);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
+//                    intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, true);
+//                    startActivity(intent);
+                    showChooseProtocolDialog();
                 }
                 for (ButtonEventListener listener : navigationbarListeners) {
                     listener.onClickNavigationbarButton(BUTTON_MEASUREMENT_EXISTING, false);
@@ -2965,6 +2968,78 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void showChooseProtocolDialog(){
+        {
+            try {
+                final Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.dialog_choose_protocol);
+                dialog.setTitle(R.string.click_to_choose_item);
+                dialog.setCancelable(false);
+                ListView listView = dialog.findViewById(R.id.dialog_listview_protocol);
+                DatabaseService db = new DatabaseService(getContext());
+                List<Protocol> protocols = db.getPengingProtocols();
+                final ProtocolAdapter adapter = new ProtocolAdapter(getContext(), protocols);
+                listView.setAdapter(adapter);
+                EditText editText = dialog.findViewById(R.id.dialog_edit_text_edittext);
+                editText.setSingleLine(true);
+                editText.setOnKeyListener(new View.OnKeyListener() {
+                    @Override
+                    public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                        if(i== KeyEvent.KEYCODE_ENTER)
+                            return true;
+                        return false;
+                    }
+                });
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
+                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+                        dialog.dismiss();
+                    }
+                });
+
+                editText.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                        // When user changed the Text
+                        adapter.getFilter().filter(cs);
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) { }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {}
+                });
+                Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+                dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
+                dialogButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), MenuProtocolActivity.class);
+                        intent.putExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, true);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

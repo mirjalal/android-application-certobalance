@@ -330,6 +330,32 @@ public class DatabaseService {
         return null;
     }
 
+    public List<Protocol> getPengingProtocols() {
+        try {
+            List<Protocol> protocols = protocolDao.queryForAll();
+            List<Protocol> protocolsPendings = new ArrayList<>();
+            try {
+                for (Protocol protocol : protocols) {
+                    if(protocol.getIsPending()) {
+                        protocol.parseJson();
+                        protocolsPendings.add(protocol);
+                    }
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return protocolsPendings;
+
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return null;
+    }
+
 
     public int insertUnit(Unit unit) {
 

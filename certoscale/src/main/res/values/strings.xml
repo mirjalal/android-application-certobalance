@@ -1061,6 +1061,7 @@
     <string name="ftp_raw_data_folder">Raw data folder</string>
     <string name="ftp_ilims_folder">iLIMS Folder</string>
     <string name="test">TEST</string>
+    <string name="more">MORE...</string>
 
 
 </resources>

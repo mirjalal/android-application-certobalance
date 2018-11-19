@@ -4,12 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,11 +23,13 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
+import com.certoclav.certoscale.util.Log;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.CertocloudConstants;
 import com.certoclav.library.certocloud.DeleteTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,7 +38,7 @@ import java.util.List;
  * ProfileAdapter is also responsible for making a view for each item in the
  * data set.
  */
-public class ProtocolAdapter extends ArrayAdapter<Protocol> {
+public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterable {
 
 
     private final Context mContext;
@@ -41,10 +46,25 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
     private QuickActionItem actionItemPrint;
     private QuickActionItem actionItemView;
     private QuickActionItem actionItemDelete;
+    private List<Protocol> protocols;
+    private List<Protocol> protocolsAll;
 
     public ProtocolAdapter(Context context, List<Protocol> values) {
         super(context, R.layout.list_element_user, values);
         this.mContext = context;
+        this.protocols = values;
+        this.protocolsAll = values;
+    }
+
+    @Override
+    public int getCount() {
+        return protocols.size();
+    }
+
+    @Nullable
+    @Override
+    public Protocol getItem(int position) {
+        return protocols.get(position);
     }
 
     @Override
@@ -188,5 +208,45 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> {
         }
 
         return convertView;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+
+        Filter filter = new Filter() {
+
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                protocols = (List<Protocol>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Protocol> filteredProtocols = new ArrayList<>();
+
+                // perform your search here using the searchConstraint String.
+
+                constraint = constraint.toString().toLowerCase();
+                for (Protocol protocol:protocolsAll) {
+                    if (protocol.getAshSampleName().toLowerCase().startsWith(constraint.toString()))  {
+                        filteredProtocols.add(protocol);
+                    }
+                }
+
+                results.count = filteredProtocols.size();
+                results.values = filteredProtocols;
+                Log.e("VALUES", results.values.toString());
+
+                return results;
+            }
+        };
+
+        return filter;
     }
 }

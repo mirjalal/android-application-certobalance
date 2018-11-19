@@ -87,9 +87,14 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 
 
 
-		Intent intent = new Intent(Intent.ACTION_MAIN);
-		intent.setComponent(new ComponentName("com.estrongs.android.pop","com.estrongs.android.pop.ftp.ESFtpShortcut"));
-		startActivity(intent);
+		try {
+			Intent intent = new Intent(Intent.ACTION_MAIN);
+			intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
+			startActivity(intent);
+		}catch (Exception e){
+			e.printStackTrace();
+			Toast.makeText(this,"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT).show();
+		}
 
 		setContentView(R.layout.menu_application_activity);
 
@@ -580,33 +585,33 @@ protected void onPause() {
 		String[] applicationNamesArray = getResources().getStringArray(R.array.navigationbar_entries);
 
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
-		if (prefs.getBoolean(getString(R.string.preferences_weigh_activated),true)==true){
+		if (prefs.getBoolean(getString(R.string.preferences_weigh_activated),getResources().getBoolean(R.bool.preferences_weigh_activated_default))==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_counting_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_counting_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PART_COUNTING);
-		}if (prefs.getBoolean(getString(R.string.preferences_percent_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_percent_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PERCENT_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_check_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_check_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.CHECK_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_animal_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_animal_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.ANIMAL_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_filling_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_filling_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.FILLING);
-		}if (prefs.getBoolean(getString(R.string.preferences_totalization_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_totalization_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.TOTALIZATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_formulation_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_formulation_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.FORMULATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_differential_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.DIFFERENTIAL_WEIGHING);
-		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_density_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.DENSITY_DETERMINATION);
-		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_peak_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PEAK_HOLD);
-		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_ingrediant_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.INGREDIENT_COSTING);
-		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_pipette_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.PIPETTE_ADJUSTMENT_1_HOME);
-		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),true)==true){
+		}if (prefs.getBoolean(getString(R.string.preferences_statistic_activated),false)==true){
 			navigationbar.getArrayAdapterMode().add(ScaleApplication.STATISTICAL_QUALITY_CONTROL_1_HOME);
 		}
 		navigationbar.getArrayAdapterMode().add(ScaleApplication.ASH_DETERMINATION_HOME);
