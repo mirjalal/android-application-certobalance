@@ -212,7 +212,7 @@ public class ExportUtils {
     }
 
 
-    public boolean writeCSVFileToInternalSD(String data) {
+    public boolean writeCSVFileToInternalSD(String name,String data) {
 
         // Find the root of the external storage.
         // See http://developer.android.com/guide/topics/data/data-  storage.html#filesExternal
@@ -229,7 +229,7 @@ public class ExportUtils {
         String sdt = df.format(new Date(System.currentTimeMillis()));
 
 
-        File file = new File(dir, sdt + "." + "csv"); // for example protocol123.txt
+        File file = new File(dir, name+"_"+sdt + "." + "csv"); // for example protocol123.txt
 
         try {
             FileOutputStream f = new FileOutputStream(file);

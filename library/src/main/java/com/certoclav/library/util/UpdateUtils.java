@@ -2,6 +2,7 @@ package com.certoclav.library.util;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -88,9 +89,9 @@ public class UpdateUtils {
 						dialogLocal.setTitle("New Update found");
 
 						Log.e("Update Utils", "CALL INTENT TO INSTALL APK");
-			//			Intent intent = new Intent(Intent.ACTION_VIEW);
-			//			intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-			//			context.startActivity(intent);
+						Intent intent = new Intent(Intent.ACTION_VIEW);
+						intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+						context.startActivity(intent);
 						dialogLocal.dismiss();
 
 						break;
