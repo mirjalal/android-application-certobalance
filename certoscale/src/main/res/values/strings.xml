@@ -1062,6 +1062,7 @@
     <string name="ftp_ilims_folder">iLIMS Folder</string>
     <string name="test">TEST</string>
     <string name="more">MORE...</string>
+    <string name="the_beaker_is_heavier_than_before_glowing">The beaker with the material is heavier after glowing than before!</string>
 
 
 </resources>

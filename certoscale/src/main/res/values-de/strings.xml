@@ -700,5 +700,13 @@
     <string name="ash_determination">Asche Ermittlung</string>
     <string name="enter_the_sample_number">Geben Sie die Probennummer ein</string>
     <string name="continue_button">WEITER</string>
-    <string name="weight_more_than_0_5">Das Gewicht der Sonde beträgt weniger als 0,5 Gramm!</string>
+    <string name="weight_more_than_0_5">Das Gewicht der Probe beträgt weniger als 0,5 Gramm</string>
+    <string name="celsius_simbol">\u2103</string>
+    <string name="ftp_summary">Addresse: %1$s, Port: %2$d, Benutzer: %3$s</string>
+    <string name="ftp_server">SERVER</string>
+    <string name="ftp_raw_data_folder">Rohdaten Ordner</string>
+    <string name="ftp_ilims_folder">iLIMS Ordner</string>
+    <string name="test">TEST</string>
+    <string name="more">MEHR...</string>
+    <string name="the_beaker_is_heavier_than_before_glowing">Der Tiegel ist um mehr als 5mg schwerer als vor dem Glühen</string>
 </resources>
