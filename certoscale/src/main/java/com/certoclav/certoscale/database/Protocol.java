@@ -467,7 +467,7 @@ public class Protocol {
 
     }
 
-    public Double getAshResultInPercent() {
+    public double getAshResultInPercent() {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
@@ -486,7 +486,7 @@ public class Protocol {
             Double result = (weightDrySample / weightWetSample) * 100.0;
             return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());
         } catch (Exception e) {
-            return "";
+            return "0.000";
         }
     }
 

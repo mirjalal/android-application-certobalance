@@ -1,8 +1,5 @@
 package com.certoclav.certoscale.util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Locale;
 
 //Created by Vladimir Yugay
@@ -11,6 +8,6 @@ import java.util.Locale;
 public class NumberFormatUtils {
 
     public static String roundNumber(double number, int decimalPlaces){
-        return new DecimalFormat("0.0000").format(number);
+        return String.format(Locale.US,"%.4f",number);
     }
 }

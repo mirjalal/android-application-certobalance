@@ -206,6 +206,7 @@
     <string name="screen_sharing">Bildschirm teilen</string>
     <string name="send_mail">E-Mail senden</string>
     <string name="unit">Einheit</string>
+    <string name="abort">Abbrechen</string>
     <string name="please_enter_the_nominal">Bitte geben Sie das Nominalgewicht ein</string>
     <string name="please_enter_the_over">Bitte geben Sie das obere Limit ein</string>
     <string name="please_enter_the_pressure">Bitte geben Sie den Druck ein</string>

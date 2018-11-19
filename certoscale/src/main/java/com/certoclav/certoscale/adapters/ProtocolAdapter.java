@@ -237,7 +237,8 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
 
                 constraint = constraint.toString().toLowerCase();
                 for (Protocol protocol:protocolsAll) {
-                    if (protocol.getAshSampleName().toLowerCase().startsWith(constraint.toString()))  {
+                    if (protocol.getAshSampleName().toLowerCase().startsWith(constraint.toString())||
+                            protocol.getAshBeakerName().toLowerCase().startsWith(constraint.toString()))  {
                         filteredProtocols.add(protocol);
                     }
                 }
