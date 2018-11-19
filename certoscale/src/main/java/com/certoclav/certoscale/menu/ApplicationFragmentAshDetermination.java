@@ -170,6 +170,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
 //                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
                                 saveProtocolContent();
+                                saveAshDeterminationProtocol();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 updateUI();
                                 Toast.makeText(getActivity(), "Protokoll finished", Toast.LENGTH_LONG).show();
@@ -431,10 +432,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     public void saveAshDeterminationProtocol() {
         StringBuilder sb = new StringBuilder();
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
-        sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample()) + "\r\n");
-        sb.append("ash_percent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
+        sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
+                ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight()
+        ) + "\r\n");
+        sb.append("ashweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
+                ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()) + "\r\n");
+        sb.append("ashpercent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
         ExportUtils exportUtils = new ExportUtils();
-        exportUtils.writeCSVFileToInternalSD(sb.toString());
+        exportUtils.writeCSVFileToInternalSD(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName(),sb.toString());
     }
 
     public void saveAshDeterminationProtocols() {
@@ -457,8 +462,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
         ApplicationManager.getInstance().getCurrentProtocol().setContent(sb.toString());
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
-
-        saveAshDeterminationProtocol();
         saveAshDeterminationProtocols();
     }
 

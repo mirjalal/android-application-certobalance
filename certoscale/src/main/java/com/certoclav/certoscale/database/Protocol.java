@@ -488,7 +488,10 @@ public class Protocol {
         } catch (Exception e) {
             return "";
         }
+    }
 
+    public double getLastAshWeight(){
+        return getLastGlowWeight() - ashWeightBeaker;
     }
 
     public double getOvenTemperature() {

@@ -48,12 +48,14 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
     private QuickActionItem actionItemDelete;
     private List<Protocol> protocols;
     private List<Protocol> protocolsAll;
+    private boolean isViewOnly;
 
-    public ProtocolAdapter(Context context, List<Protocol> values) {
+    public ProtocolAdapter(Context context, List<Protocol> values, boolean isViewOnly) {
         super(context, R.layout.list_element_user, values);
         this.mContext = context;
         this.protocols = values;
         this.protocolsAll = values;
+        this.isViewOnly = isViewOnly;
     }
 
     @Override
@@ -86,6 +88,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
 
         actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
         containerItems.addView(actionItemPrint);
+        actionItemPrint.setVisibility(isViewOnly?View.GONE:View.VISIBLE);
 
         actionItemView = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
         containerItems.addView(actionItemView);
@@ -100,7 +103,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         } else {
             imageCloud.setImageResource(R.drawable.cloud_ok_white);
         }
-
+        actionItemDelete.setVisibility(isViewOnly?View.GONE:View.VISIBLE);
         actionItemDelete.setChecked(false);
         actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
         actionItemDelete.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -2970,7 +2971,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
             e.printStackTrace();
         }
     }
-
+    Runnable runnableFilter = null;
     private void showChooseProtocolDialog(){
         {
             try {
@@ -2981,7 +2982,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 ListView listView = dialog.findViewById(R.id.dialog_listview_protocol);
                 DatabaseService db = new DatabaseService(getContext());
                 List<Protocol> protocols = db.getPengingProtocols();
-                final ProtocolAdapter adapter = new ProtocolAdapter(getContext(), protocols);
+                final ProtocolAdapter adapter = new ProtocolAdapter(getContext(), protocols,true);
                 listView.setAdapter(adapter);
                 EditText editText = dialog.findViewById(R.id.dialog_edit_text_edittext);
                 editText.setSingleLine(true);
@@ -3002,13 +3003,21 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                         dialog.dismiss();
                     }
                 });
+                final Handler handler = new Handler();
 
                 editText.addTextChangedListener(new TextWatcher() {
 
                     @Override
-                    public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                    public void onTextChanged(final CharSequence cs, int arg1, int arg2, int arg3) {
                         // When user changed the Text
-                        adapter.getFilter().filter(cs);
+                        handler.removeCallbacks(runnableFilter);
+                        handler.postDelayed(runnableFilter = new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.getFilter().filter(cs);
+                            }
+                        },500);
+
                     }
 
                     @Override

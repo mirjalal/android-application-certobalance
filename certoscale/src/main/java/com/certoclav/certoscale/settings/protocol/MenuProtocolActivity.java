@@ -62,7 +62,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
         DatabaseService db = new DatabaseService(this);
-        adapter = new ProtocolAdapter(this, new ArrayList<Protocol>());
+        adapter = new ProtocolAdapter(this, new ArrayList<Protocol>(),false);
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {

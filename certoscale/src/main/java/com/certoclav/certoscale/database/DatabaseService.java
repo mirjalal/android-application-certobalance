@@ -336,8 +336,8 @@ public class DatabaseService {
             List<Protocol> protocolsPendings = new ArrayList<>();
             try {
                 for (Protocol protocol : protocols) {
+                    protocol.parseJson();
                     if(protocol.getIsPending()) {
-                        protocol.parseJson();
                         protocolsPendings.add(protocol);
                     }
 
