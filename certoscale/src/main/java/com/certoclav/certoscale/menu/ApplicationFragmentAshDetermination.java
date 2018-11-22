@@ -126,16 +126,16 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);
                         } else {
-                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist",Toast .LENGTH_LONG).show();
                         }
                         break;
                     case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                         if (Scale.getInstance().isStable()){
                             if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
-                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true))> 0.005) {
+                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true))> 0.001) {
 
                                 if(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false) -
-                                                ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)<-0.005) {
+                                                ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)<-0.001) {
                                     TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                     errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
                                     TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
