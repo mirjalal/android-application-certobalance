@@ -32,7 +32,8 @@ public class ScaleModelManager {
         String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
         switch (modelValue) {
             case "1":
-                return new ScaleModelGandG();
+               // return new ScaleModelGandG();
+                return new ScaleModelOHouse();
             case "2":
                 return new ScaleModelDandT();
             case "3":
