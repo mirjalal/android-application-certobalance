@@ -62,7 +62,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         listView = (ListView) findViewById(R.id.menu_main_recipe_list);
         DatabaseService db = new DatabaseService(this);
-        adapter = new ProtocolAdapter(this, new ArrayList<Protocol>(),false);
+        adapter = new ProtocolAdapter(this, new ArrayList<Protocol>(), false);
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -76,6 +76,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                adapter.getItem(position).parseJson();
                 ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                 try {
@@ -98,32 +99,18 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         super.onResume();
         DatabaseService db = new DatabaseService(this);
         adapter.clear();
-        List<Protocol> protocols = db.getProtocols();
         Scale.getInstance().setOnDatabaseListener(this);
-        List<Protocol> protocolList = db.getProtocols();
+
+        List<Protocol> protocolList = getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) ?
+                db.getPengingProtocols() :
+                db.getProtocols();
         Collections.sort(protocolList, new Comparator<Protocol>() {
             public int compare(Protocol emp1, Protocol emp2) {
                 return emp2.getDate().compareTo(emp1.getDate()); // To compare string values
             }
         });
-        if (protocols != null) {
-            for (Protocol protocol : protocolList) {
 
-                try {
-                    if (getIntent().getBooleanExtra(AppConstants.INTENT_EXTRA_PICK_ON_CLICK, false) == true) {
-                        if (protocol.getIsPending() == true) {
-                            adapter.add(protocol);
-                        }
-                    } else {
-                        adapter.add(protocol);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }
+        adapter.addAll(protocolList);
         adapter.notifyDataSetChanged();
 
         Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
@@ -131,17 +118,17 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         ftpManager.updateAll(new FTPManager.FTPListener() {
             @Override
             public void onConnection(boolean isConnected, String message) {
-                Log.d("FTP_SERVER","connection "+isConnected+" "+(message!=null?message:""));
+                Log.d("FTP_SERVER", "connection " + isConnected + " " + (message != null ? message : ""));
             }
 
             @Override
             public void onUpdated() {
-                Log.d("FTP_SERVER","updatedall");
+                Log.d("FTP_SERVER", "updatedall");
             }
 
             @Override
             public void onUploading(boolean isUploaded, String message) {
-                Log.d("FTP_SERVER","uploading "+isUploaded+" "+(message!=null?message:""));
+                Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
             }
         });
     }

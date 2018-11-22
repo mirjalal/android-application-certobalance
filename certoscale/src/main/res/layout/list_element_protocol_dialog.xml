@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear"
+    android:layout_width="fill_parent"
+    android:layout_height="70dp"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical" xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_menu_protocol_2"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_toRightOf="@+id/imageView1"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/first_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="first line"
+            android:gravity="bottom"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/second_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:gravity="top"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+    <ImageView
+        android:id="@+id/list_element_protocol_image_cloud"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/cloud_ok_white"
+        android:layout_toLeftOf="@+id/container_button"
+        android:visibility="gone"
+        android:layout_centerVertical="true">
+    </ImageView>
+
+
+
+    <com.certoclav.certoscale.view.QuickActionItem
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/quickaction_item_base"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:focusable="true"
+        android:layout_margin="10dp"
+        android:layout_marginRight="20dp"
+        android:clickable="true"
+        style="@style/button_default">
+        <ImageView
+            android:id="@+id/quickaction_icon"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_menu_view"
+            android:antialias="true" />
+        <TextView
+            android:id="@+id/quickaction_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textSize="20dp"
+            android:textColor="#ff333333"/>
+    </com.certoclav.certoscale.view.QuickActionItem>
+
+</RelativeLayout>

@@ -2998,6 +2998,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                        adapter.getItem(position).parseJson();
                         ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                         dialog.dismiss();

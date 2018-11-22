@@ -311,14 +311,20 @@ public class DatabaseService {
 
     public List<Protocol> getProtocols() {
         try {
-            List<Protocol> protocols = protocolDao.queryForAll();
-            try {
-                for (Protocol protocol : protocols) {
-                    protocol.parseJson();
-                }
-            } catch (Exception e) {
+            return protocolDao.queryForAll();
 
-            }
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return new ArrayList<>();
+    }
+
+    public List<Protocol> getPengingProtocols() {
+        try {
+            List<Protocol> protocols = protocolDao.queryForEq("protocol_is_pending",true);
             return protocols;
 
         } catch (SQLException e) {
@@ -327,33 +333,7 @@ public class DatabaseService {
             Log.e(TAG, "Database exception", e);
         }
 
-        return null;
-    }
-
-    public List<Protocol> getPengingProtocols() {
-        try {
-            List<Protocol> protocols = protocolDao.queryForAll();
-            List<Protocol> protocolsPendings = new ArrayList<>();
-            try {
-                for (Protocol protocol : protocols) {
-                    protocol.parseJson();
-                    if(protocol.getIsPending()) {
-                        protocolsPendings.add(protocol);
-                    }
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return protocolsPendings;
-
-        } catch (SQLException e) {
-            Log.e(TAG, "Database exception", e);
-        } catch (Exception e) {
-            Log.e(TAG, "Database exception", e);
-        }
-
-        return null;
+        return new ArrayList<>();
     }
 
 

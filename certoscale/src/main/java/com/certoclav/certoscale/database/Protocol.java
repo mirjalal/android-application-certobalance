@@ -43,11 +43,15 @@ public class Protocol {
     private String deviceKey = "";
     private String visibility = "global";
     private String content = "";
+
+    @DatabaseField(columnName = "protocol_date")
     private String date = "";
     private String cloudId = "";
     private String contentJson = "";
     private double ovenTemperature = 0;
     private double recentWeight = 0;
+
+    private boolean isParsedCompletely;
 
     public String getAshSampleName() {
         return ashSampleName;
@@ -110,8 +114,9 @@ public class Protocol {
     public void saveBeakerAndSampleWeight(Double ashWeightBeakerWithSample) {
         this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
     }
-
+    @DatabaseField(columnName = "protocol_sample_name")
     private String ashSampleName = "";
+    @DatabaseField(columnName = "protocol_beaker_name")
     private String ashBeakerName = "";
     private List<Double> ashArrayGlowWeights = new ArrayList<Double>();
     private List<String> ashArrayGlowWeightsUser = new ArrayList<String>();
@@ -126,6 +131,7 @@ public class Protocol {
         this.isPending = isPending;
     }
 
+    @DatabaseField(columnName = "protocol_is_pending")
     private Boolean isPending = true;
 
 
@@ -173,9 +179,37 @@ public class Protocol {
         parseJson();
     }
 
+    public void parseJsonLight(){
+        isParsedCompletely = false;
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(protocolJson);
+        } catch (Exception e) {
+            return;
+        }
+
+        try {
+            ashSampleName = jsonObject.getString(JSON_ASH_SAMPLE_NAME);
+        } catch (Exception e) {
+            ashSampleName = "";
+        }
+
+        try {
+            ashBeakerName = jsonObject.getString(JSON_ASH_BEAKER_NAME);
+        } catch (Exception e) {
+            ashBeakerName = "";
+        }
+
+        try {
+            isPending = jsonObject.getBoolean(JSON_IS_PENDING);
+        } catch (Exception e) {
+            isPending = false;
+        }
+    }
+
     public void parseJson() {
 
-        JSONObject jsonObject = null;
+        JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(protocolJson);
         } catch (Exception e) {
@@ -268,7 +302,6 @@ public class Protocol {
                 glowWeight = Double.valueOf(jsonArray.get(i).toString());
             } catch (Exception e) {
                 e.printStackTrace();
-                android.util.Log.e("musaqil",i+"");
                 glowWeight = 0d;
             }
             ashArrayGlowWeights.add(glowWeight);
@@ -322,7 +355,7 @@ public class Protocol {
         }
 
         protocolJson = jsonObject.toString();
-
+        isParsedCompletely = true;
     }
 
 
@@ -527,6 +560,10 @@ public class Protocol {
 
         if(weightsUsers.size()>0)
             weightsUsers.remove(weightsUsers.size()-1);
+    }
+
+    public boolean isParsedCompletely() {
+        return isParsedCompletely;
     }
 
     public void setRecentWeight(double recentWeight) {

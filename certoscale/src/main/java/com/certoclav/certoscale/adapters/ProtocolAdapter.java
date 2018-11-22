@@ -69,145 +69,164 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         return protocols.get(position);
     }
 
+
+    public class MyViewHolder {
+        public TextView firstLine, secondLine;
+        public LinearLayout containerItems;
+        private LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        public QuickActionItem actionItemPrint;
+        public QuickActionItem actionItemView;
+        public QuickActionItem actionItemDelete;
+        public ImageView imageCloud;
+        private Protocol protocol;
+
+
+        public MyViewHolder(View view) {
+            firstLine = view.findViewById(R.id.first_line);
+            secondLine = view.findViewById(R.id.second_line);
+            containerItems = view.findViewById(R.id.container_button);
+            imageCloud = view.findViewById(R.id.list_element_protocol_image_cloud);
+
+            actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+            actionItemPrint.setImageResource(R.drawable.ic_menu_print);
+            if (!isViewOnly)
+                containerItems.addView(actionItemPrint);
+            actionItemView = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+            actionItemView.setImageResource(R.drawable.ic_menu_view);
+            containerItems.addView(actionItemView);
+
+            actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
+            actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
+            if (!isViewOnly)
+                containerItems.addView(actionItemDelete);
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+            actionItemDelete.setEnabled(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols),
+                    ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols)));
+
+            actionItemDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        final Dialog dialog = new Dialog(mContext);
+                        dialog.setContentView(R.layout.dialog_yes_no);
+                        dialog.setTitle("Confirm deletion");
+                        // set the custom dialog components - text, image and button
+                        TextView text = (TextView) dialog.findViewById(R.id.text);
+                        text.setText(mContext.getString(R.string.do_you_really_want_to_delete_this_protocol) + " " + protocol.getName());
+                        Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
+                        dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+                        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                        // if button is clicked, close the custom dialog
+                        dialogButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (!protocol.getCloudId().isEmpty()) {
+                                    DeleteTask deleteTask = new DeleteTask();
+                                    deleteTask.execute(CertocloudConstants.SERVER_URL +
+                                            CertocloudConstants.REST_API_DELETE_PROTOCOL + protocol.getCloudId());
+                                }
+                                try {
+                                    if (ApplicationManager.getInstance().getCurrentProtocol() != null &&
+                                            protocol.getAshSampleName().equals(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName()))
+                                        ApplicationManager.getInstance().setCurrentProtocol(null);
+                                } catch (Exception e) {
+                                    ApplicationManager.getInstance().setCurrentProtocol(null);
+                                }
+
+                                DatabaseService db = new DatabaseService(mContext);
+                                db.deleteProtocol(protocol);
+                                remove(protocol);
+                                notifyDataSetChanged();
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
+
+            actionItemPrint.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ProtocolManager protocolPrinterUtils = new ProtocolManager();
+                    protocolPrinterUtils.printText(protocol.getContent());
+                    Toast.makeText(mContext, "Protocol printed", Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+            actionItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        final Dialog dialog = new Dialog(mContext);
+                        dialog.setContentView(R.layout.dialog_protocol);
+                        protocol.parseJson();
+                        dialog.setTitle(getContext().getString(R.string.protocol) + protocol.getName());
+                        TextView textView = dialog.findViewById(R.id.dialog_protocol_text);
+                        textView.setText(protocol.getContent());
+
+                        Button dialogButtonClose = dialog.findViewById(R.id.dialog_button_close);
+                        dialogButtonClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                        dialog.show();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+        }
+
+        public void setProtocol(Protocol protocol) {
+            this.protocol = protocol;
+        }
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        MyViewHolder viewHolder;
 
-
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        convertView = inflater.inflate(R.layout.list_element_protocol, parent, false);
-        LinearLayout containerItems = (LinearLayout) convertView.findViewById(R.id.container_button);
-        containerItems.removeAllViews();
-
-
-        TextView firstLine = (TextView) convertView.findViewById(R.id.first_line);
-        firstLine.setText(getItem(position).getAshBeakerName());
-
-        TextView secondLine = (TextView) convertView.findViewById(R.id.second_line);
-        secondLine.setText(getItem(position).getDate());
-
-        actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-        containerItems.addView(actionItemPrint);
-        actionItemPrint.setVisibility(isViewOnly?View.GONE:View.VISIBLE);
-
-        actionItemView = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-        containerItems.addView(actionItemView);
-
-
-        actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-        containerItems.addView(actionItemDelete);
-
-        ImageView imageCloud = (ImageView) convertView.findViewById(R.id.list_element_protocol_image_cloud);
-        if (getItem(position).getCloudId().isEmpty()) {
-            imageCloud.setImageResource(R.drawable.cloud_no_white);
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.list_element_protocol, parent, false);
+            viewHolder = new MyViewHolder(convertView);
+            convertView.setTag(viewHolder);
         } else {
-            imageCloud.setImageResource(R.drawable.cloud_ok_white);
+            viewHolder = (MyViewHolder) convertView.getTag();
         }
-        actionItemDelete.setVisibility(isViewOnly?View.GONE:View.VISIBLE);
-        actionItemDelete.setChecked(false);
-        actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
-        actionItemDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    final Dialog dialog = new Dialog(mContext);
-                    dialog.setContentView(R.layout.dialog_yes_no);
-                    dialog.setTitle("Confirm deletion");
 
-                    // set the custom dialog components - text, image and button
-                    TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText(mContext.getString(R.string.do_you_really_want_to_delete_this_protocol) + " " + getItem(position).getName());
-                    Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
-                    dialogButtonNo.setOnClickListener(new View.OnClickListener() {
+        Protocol protocol = getItem(position);
+        viewHolder.setProtocol(protocol);
 
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-                    // if button is clicked, close the custom dialog
-                    dialogButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!getItem(position).getCloudId().isEmpty()) {
-                                DeleteTask deleteTask = new DeleteTask();
-                                deleteTask.execute(CertocloudConstants.SERVER_URL + CertocloudConstants.REST_API_DELETE_PROTOCOL + getItem(position).getCloudId());
-                            }
-                            try {
-                                if (ApplicationManager.getInstance().getCurrentProtocol() != null &&
-                                        getItem(position).getAshSampleName().equals(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName()))
-                                    ApplicationManager.getInstance().setCurrentProtocol(null);
-                            }catch (Exception e){
-                                ApplicationManager.getInstance().setCurrentProtocol(null);
-                            }
+        viewHolder.firstLine.setText(protocol.getAshBeakerName());
+        viewHolder.secondLine.setText(protocol.getDate());
 
-                            DatabaseService db = new DatabaseService(mContext);
-                            db.deleteProtocol(getItem(position));
-                            remove(getItem(position));
-                            notifyDataSetChanged();
-                            dialog.dismiss();
-                        }
-                    });
-
-                    dialog.show();
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        });
-
-        actionItemPrint.setChecked(false);
-        actionItemPrint.setImageResource(R.drawable.ic_menu_print);
-
-        //actionItemDelete.setText(getContext().getString(R.string.delete));
-        actionItemPrint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProtocolManager protocolPrinterUtils = new ProtocolManager();
-                protocolPrinterUtils.printText(getItem(position).getContent());
-                Toast.makeText(mContext, "Protocol printed", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        actionItemView.setChecked(false);
-        actionItemView.setImageResource(R.drawable.ic_menu_view);
-        actionItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    final Dialog dialog = new Dialog(mContext);
-                    dialog.setContentView(R.layout.dialog_protocol);
-                    dialog.setTitle("Protocol " + getItem(position).getName());
-                    TextView textView = (TextView) dialog.findViewById(R.id.dialog_protocol_text);
-                    textView.setText(getItem(position).getContent());
-
-
-                    Button dialogButtonClose = (Button) dialog.findViewById(R.id.dialog_button_close);
-                    dialogButtonClose.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    dialog.show();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols))) {
-            actionItemDelete.setEnabled(false);
+        if (protocol.getCloudId().isEmpty()) {
+            viewHolder.imageCloud.setImageResource(R.drawable.cloud_no_white);
         } else {
-            actionItemDelete.setEnabled(true);
+            viewHolder.imageCloud.setImageResource(R.drawable.cloud_ok_white);
         }
 
         return convertView;
@@ -231,14 +250,20 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 FilterResults results = new FilterResults();
+                if (constraint.length() == 0) {
+                    results.count = protocolsAll.size();
+                    results.values = protocolsAll;
+                    return results;
+                }
+
                 ArrayList<Protocol> filteredProtocols = new ArrayList<>();
 
                 // perform your search here using the searchConstraint String.
 
                 constraint = constraint.toString().toLowerCase();
-                for (Protocol protocol:protocolsAll) {
-                    if (protocol.getAshSampleName().toLowerCase().startsWith(constraint.toString())||
-                            protocol.getAshBeakerName().toLowerCase().startsWith(constraint.toString()))  {
+                for (Protocol protocol : protocolsAll) {
+                    if (protocol.getAshSampleName().toLowerCase().startsWith(constraint.toString()) ||
+                            protocol.getAshBeakerName().toLowerCase().startsWith(constraint.toString())) {
                         filteredProtocols.add(protocol);
                     }
                 }
