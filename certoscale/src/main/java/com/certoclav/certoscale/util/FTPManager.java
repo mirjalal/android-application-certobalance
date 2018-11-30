@@ -83,6 +83,27 @@ public class FTPManager {
     }
 
     public void saveFTPInformation(String address, int port, String username, String password, String folder, String folderILIMS) {
+
+        address = address.trim();
+        username = username.trim();
+        folder = folder.trim();
+        folderILIMS = folderILIMS.trim();
+        try {
+            if (folderILIMS.charAt(0) != '/')
+                folderILIMS = "/" + folderILIMS;
+        }catch (Exception e){
+            folderILIMS = "/IFP_ILIMS";
+            e.printStackTrace();
+        }
+
+        try {
+            if (folder.charAt(0) != '/')
+                folder = "/" + folder;
+        }catch (Exception e){
+            folder = "/IFP";
+            e.printStackTrace();
+        }
+
         SharedPreferences.Editor editor = preferences.edit();
         this.address = address;
         this.port = port;
@@ -90,6 +111,7 @@ public class FTPManager {
         this.password = password;
         this.folder = folder;
         this.folderILIMS = folderILIMS;
+
         editor.putString(ADDRESS, address);
         editor.putInt(PORT, port);
         editor.putString(USERNAME, username);
@@ -98,6 +120,7 @@ public class FTPManager {
         editor.putString(FOLDER_ILIMS, folderILIMS);
         editor.commit();
     }
+
 
     public void updateAll(final FTPListener listener) {
         Needle.onBackgroundThread().execute(new Runnable() {
@@ -113,14 +136,21 @@ public class FTPManager {
                                                         }
                                                         if (ftp.login(username, password)) {
                                                             try {
+                                                                ftp.makeDirectory(folder);
                                                                 ftp.changeWorkingDirectory(folder);
                                                                 FTPFile[] files = ftp.listFiles(folder, filter);
-                                                                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "/IFP");
+                                                                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_CERTO_CONTROL/RAW_DATA");
                                                                 dir.mkdirs();
                                                                 ftp.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
 
                                                                 for (File file : dir.listFiles(csvFilter)) {
                                                                     FileInputStream srcFileStream = new FileInputStream(file);
+                                                                    if(file.getName().contains("-deletemenow")){
+                                                                        ftp.deleteFile(file.getName().replace("-deletemenow",""));
+                                                                        file.delete();
+                                                                        srcFileStream.close();
+                                                                        continue;
+                                                                    }
                                                                     ftp.deleteFile(file.getName());
                                                                     ftp.storeFile(file.getName(), srcFileStream);
                                                                     srcFileStream.close();
@@ -129,13 +159,12 @@ public class FTPManager {
                                                                 for (File file : dir.listFiles(csvFilter)) {
                                                                     FileInputStream srcFileStream = new FileInputStream(file);
                                                                     ftp.deleteFile(file.getName());
-                                                                    ftp.deleteFile(file.getName().substring(0, file.getName().indexOf("_"))+".csv");
                                                                     if (ftp.storeFile(file.getName(), srcFileStream))
                                                                         file.delete();
                                                                     srcFileStream.close();
                                                                 }
 
-                                                                dir = new File(android.os.Environment.getExternalStorageDirectory(), "/IFP_ILIMS");
+                                                                dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_CERTO_CONTROL");
                                                                 ftp.makeDirectory(folderILIMS);
                                                                 ftp.changeWorkingDirectory(folderILIMS);
                                                                 FTPFile[] filesiLIMS = ftp.listFiles(folderILIMS, filter);
@@ -217,12 +246,28 @@ public class FTPManager {
     };
 
     private void updateFTPInformation() {
-        address = preferences.getString(ADDRESS, "192.168.0.105");
+        address = preferences.getString(ADDRESS, "localhost");
         port = preferences.getInt(PORT, 21);
         username = preferences.getString(USERNAME, "admin");
         password = preferences.getString(PASSWORD, "admin");
-        folder = preferences.getString(FOLDER, "/IFR");
-        folderILIMS = preferences.getString(FOLDER_ILIMS, " /ifp-fp2/Transfer/CertoClav_Output");
+        folder = preferences.getString(FOLDER, "/IFP");
+        folderILIMS = preferences.getString(FOLDER_ILIMS, "/IFP_ILIMS");
+
+        try {
+            if (folderILIMS.charAt(0) != '/')
+                folderILIMS = "/" + folderILIMS;
+        }catch (Exception e){
+            folderILIMS = "/IFP_ILIMS";
+            e.printStackTrace();
+        }
+
+        try {
+            if (folder.charAt(0) != '/')
+                folder = "/" + folder;
+        }catch (Exception e){
+            folder = "/IFP";
+            e.printStackTrace();
+        }
     }
 
     public static interface FTPListener {

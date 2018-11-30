@@ -86,16 +86,6 @@ private ProtocolManager protocolPrinter= new ProtocolManager();
 		super.onCreate(savedInstanceState);
 
 
-
-		try {
-			Intent intent = new Intent(Intent.ACTION_MAIN);
-			intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
-			startActivity(intent);
-		}catch (Exception e){
-			e.printStackTrace();
-			Toast.makeText(this,"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT).show();
-		}
-
 		setContentView(R.layout.menu_application_activity);
 
 		navigationbar.onCreate();

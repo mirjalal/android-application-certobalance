@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId "com.certoclav.certoscale"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 26
     }
     dataBinding{
         enabled = true

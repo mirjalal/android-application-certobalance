@@ -153,7 +153,7 @@ public class ExportUtils {
 
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
-        File dir = new File(root.getAbsolutePath() + "/IFP_ILIMS/RAW_DATA");
+        File dir = new File(root.getAbsolutePath() + "/IFP_CERTO_CONTROL/RAW_DATA");
         File dirUploaded = new File(dir, "/IFP_FINISHED");
         dir.mkdirs();
         dirUploaded.mkdirs();
@@ -161,14 +161,16 @@ public class ExportUtils {
 
         if (isFinished) {
             File file = new File(dir, protocolName+".csv");
+            File fileDeleted = new File(dir, protocolName+"-deletemenow.csv");
             if (file.exists())
-                file.delete();
+                file.renameTo(fileDeleted);
             dir = new File(dir, "IFP_UPLOADING");
             dir.mkdirs();
         }
 
-        DateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
-        String sdt = isFinished ? (protocolName + "_" + df.format(new Date(System.currentTimeMillis()))) : protocolName;
+        DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String sdt = isFinished ? (protocolName.substring( protocolName.indexOf("-")+1, protocolName.length())
+                + "_" + df.format(new Date(System.currentTimeMillis()))) : protocolName;
         sdt += ".csv";
 
         File file = new File(dir, sdt); // for example protocol123.txt
@@ -222,7 +224,7 @@ public class ExportUtils {
 
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
-        File dir = new File(root.getAbsolutePath() + "/IFP_ILIMS");
+        File dir = new File(root.getAbsolutePath() + "/IFP_CERTO_CONTROL");
         dir.mkdirs();
 
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
