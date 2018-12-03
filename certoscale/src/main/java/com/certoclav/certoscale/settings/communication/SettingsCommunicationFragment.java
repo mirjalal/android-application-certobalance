@@ -2,9 +2,12 @@ package com.certoclav.certoscale.settings.communication;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -89,6 +92,36 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         });
 
 
+        ((Preference) findPreference(getString(R.string.preferences_communication_local_ftp))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                try {
+//                    Intent shareIntent = new Intent(Intent.ACTION_VIEW);
+//                    shareIntent.setType("*/*");
+//                    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()
+//                            + "/IFP_ILIMS/")));
+//                    shareIntent.setPackage("com.estrongs.android.pop");
+//
+//                    startActivity(shareIntent);
+
+
+                    Uri selectedUri = Uri.parse(Environment.getExternalStorageDirectory() + "/IFP_ILIMS/");
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(selectedUri, "resource/folder");
+                    intent.setPackage("com.estrongs.android.pop");
+                    startActivity(intent);
+
+//            com.estrongs.android.ui.preference.FtpServerPreference
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+        });
+
     }
 
 
@@ -112,8 +145,9 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             editTextRawDataFolder.setText(FTPManager.getInstance().getFolder());
             editTextRawILIMSFolder.setText(FTPManager.getInstance().getFolderIlims());
 
+            final Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
 
-            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+            final Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -121,7 +155,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                 }
             });
 
-            Button dialogButtonTest = (Button) dialog.findViewById(R.id.dialog_edit_text_button_test);
+            final Button dialogButtonTest = (Button) dialog.findViewById(R.id.dialog_edit_text_button_test);
             dialogButtonTest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -131,6 +165,12 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                     } catch (Exception e) {
                         editTextPort.setText("");
                     }
+                    dialogButtonNo.setEnabled(false);
+                    dialogButtonTest.setEnabled(false);
+                    dialogButton.setEnabled(false);
+                    textViewResult.setVisibility(View.VISIBLE);
+                    textViewResult.setTextColor(Color.BLUE);
+                    textViewResult.setText(getString(R.string.connecting));
                     FTPManager.getInstance().testConnection(editTextServer.getText().toString(),
                             editTextPort.getText().length() == 0 ? 21 : Integer.valueOf(editTextPort.getText().toString()),
                             editTextUsername.getText().toString(),
@@ -141,6 +181,9 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                                         getActivity().runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
+                                                dialogButtonNo.setEnabled(true);
+                                                dialogButtonTest.setEnabled(true);
+                                                dialogButton.setEnabled(true);
                                                 textViewResult.setVisibility(View.VISIBLE);
                                                 if (isConnected) {
                                                     textViewResult.setTextColor(Color.GREEN);
@@ -171,7 +214,6 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                 }
             });
 
-            Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

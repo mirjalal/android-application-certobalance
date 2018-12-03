@@ -69,10 +69,10 @@ public class SettingsCommunicationActivity extends FragmentActivity {
 		int index = 0;
 		try{
 			index = getIntent().getIntExtra(INTENT_EXTRA_SUBMENU, 0);
+			getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsCommunicationFragment(),"MainFragment").commit();
 		}catch(Exception e){
-			
+
 		}
-		getSupportFragmentManager().beginTransaction().replace(R.id.settings_unit_container_fragment, new SettingsCommunicationFragment(),"MainFragment").commit();
 	}
 
 

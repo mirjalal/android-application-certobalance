@@ -886,9 +886,11 @@
     <string name="preferences_communication_labelprinter">preferences_communication_labelprinter</string>
     <string name="preferences_communication_lims">preferences_communication_lims</string>
     <string name="preferences_communication_lims_ftp">preferences_communication_lims_ftp</string>
+    <string name="preferences_communication_local_ftp">preferences_communication_local_ftp</string>
     <string name="assigned_to_com">Assigned to: COM</string>
     <string name="lims">LIMS</string>
     <string name="lims_ftp">FTP</string>
+    <string name="local_ftp">Local FTP Folder</string>
     <string name="communication_config">Communication Config</string>
     <string name="baudrate">Baudrate</string>
     <string name="tab_to_choose_connected_model">Tab to choose connected model</string>
@@ -1063,6 +1065,7 @@
     <string name="test">TEST</string>
     <string name="more">MORE...</string>
     <string name="the_beaker_is_heavier_than_before_glowing">The beaker with the material is heavier after glowing than before!</string>
+    <string name="connecting">Connecting...</string>
 
 
 </resources>

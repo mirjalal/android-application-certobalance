@@ -46,7 +46,6 @@ public class FTPManager {
 
     private FTPManager() {
         ftp = new FTPClient();
-        ftp.setControlEncoding("UTF-8");
         preferences = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
         updateFTPInformation();
     }
@@ -62,6 +61,7 @@ public class FTPManager {
             @Override
             public void run() {
                 try {
+                    ftp.setConnectTimeout(5000);
                     ftp.connect(address, port);
                     ftp.login(username, password);
                     if (!FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
@@ -136,10 +136,13 @@ public class FTPManager {
                                                         }
                                                         if (ftp.login(username, password)) {
                                                             try {
+
+                                                                ftp.setControlEncoding("UTF-8");
+                                                                ftp.setAutodetectUTF8(true);
                                                                 ftp.makeDirectory(folder);
                                                                 ftp.changeWorkingDirectory(folder);
                                                                 FTPFile[] files = ftp.listFiles(folder, filter);
-                                                                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_CERTO_CONTROL/RAW_DATA");
+                                                                File dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_ILIMS/RAW_DATA");
                                                                 dir.mkdirs();
                                                                 ftp.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
 
@@ -164,7 +167,7 @@ public class FTPManager {
                                                                     srcFileStream.close();
                                                                 }
 
-                                                                dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_CERTO_CONTROL");
+                                                                dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_ILIMS");
                                                                 ftp.makeDirectory(folderILIMS);
                                                                 ftp.changeWorkingDirectory(folderILIMS);
                                                                 FTPFile[] filesiLIMS = ftp.listFiles(folderILIMS, filter);

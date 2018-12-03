@@ -594,7 +594,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Probennummer" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
                 try {
                     for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
-                        sb.append((i + 1) + ".Glühen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
+                        sb.append((i + 1) + ".Gluehen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
 
                         try {
                             sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().get(i) + "\n");
@@ -605,7 +605,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                     e.printStackTrace();
                 }
                 sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
-                        getOvenTemperature()+" "+ApplicationController.getContext().getString(R.string.celsius_simbol)).append("\n");
+                        getOvenTemperature()+" °C").append("\n");
                 sb.append("Beaker weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
                 sb.append("Sample weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(

@@ -55,6 +55,13 @@ public class NotificationActivity extends Activity implements ScaleStateListener
 			}
 		});
 
+		videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+			@Override
+			public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
+				return true;
+			}
+		});
+
 		//notificationHeadContainer.setBackgroundResource(R.drawable.background_error);
 
 		final TextView tv = (TextView) findViewById(R.id.text_message);

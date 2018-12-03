@@ -153,7 +153,7 @@ public class ExportUtils {
 
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
-        File dir = new File(root.getAbsolutePath() + "/IFP_CERTO_CONTROL/RAW_DATA");
+        File dir = new File(root.getAbsolutePath() + "/IFP_ILIMS/RAW_DATA");
         File dirUploaded = new File(dir, "/IFP_FINISHED");
         dir.mkdirs();
         dirUploaded.mkdirs();
@@ -224,7 +224,7 @@ public class ExportUtils {
 
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
-        File dir = new File(root.getAbsolutePath() + "/IFP_CERTO_CONTROL");
+        File dir = new File(root.getAbsolutePath() + "/IFP_ILIMS");
         dir.mkdirs();
 
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");

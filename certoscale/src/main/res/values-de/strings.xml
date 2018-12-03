@@ -707,7 +707,10 @@
     <string name="ftp_server">SERVER</string>
     <string name="ftp_raw_data_folder">Rohdaten Ordner</string>
     <string name="ftp_ilims_folder">iLIMS Ordner</string>
+    <string name="local_ftp">Local FTP Folder</string>
     <string name="test">TEST</string>
     <string name="more">MEHR...</string>
     <string name="the_beaker_is_heavier_than_before_glowing">Der Tiegel ist um mehr als 5mg schwerer als vor dem Glühen</string>
+    <string name="connecting">Verbinden.....</string>
+
 </resources>
