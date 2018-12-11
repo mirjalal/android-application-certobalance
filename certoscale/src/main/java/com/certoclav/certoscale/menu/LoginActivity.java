@@ -11,7 +11,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Color;
-import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -67,7 +66,6 @@ import com.crashlytics.android.Crashlytics;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
 import java.security.KeyPair;
@@ -180,10 +178,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
-            File root = new File(android.os.Environment.getExternalStorageDirectory().getPath());
-            File dir = new File(root.getAbsolutePath() + "/IFP_CERTO_CONTROL");
-            dir.mkdirs();
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(dir));
             startActivity(intent);
         }catch (Exception e){
             e.printStackTrace();
