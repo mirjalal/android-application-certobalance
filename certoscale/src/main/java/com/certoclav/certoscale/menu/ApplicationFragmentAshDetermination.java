@@ -3,6 +3,7 @@ package com.certoclav.certoscale.menu;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,8 @@ import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.util.ExportUtils;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class ApplicationFragmentAshDetermination extends Fragment implements ScaleApplicationListener, StableListener {
 
@@ -40,6 +43,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonNext = rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
         buttonCancel = rootView.findViewById(R.id.application_fragment_ash_determination_button_cancel);
         initErrorDialog();
+
+        Toasty.Config.getInstance().setTextSize(24);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +64,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_NAME_BEAKER);
                         break;
                     case ASH_DETERMINATION_ENTER_NAME_BEAKER:
-                          Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
+                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                         break;
                     case ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN:
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
@@ -71,14 +76,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE);
                         } else {
-                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG,true).show();
                         }
                         break;
                     case ASH_DETERMINATION_WEIGHING_SAMPLE:
                         if (Scale.getInstance().isStable()) {
                             final Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                            if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5){
-                                TextView errorMessage= warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                            if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5) {
+                                TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                 errorMessage.setText(R.string.weight_more_than_0_5);
                                 TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
                                 ignoreButton.setText(R.string.continue_button);
@@ -89,9 +94,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     public void onClick(View v) {
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                         saveProtocolContent();
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                                         updateUI();
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                                         warningDialog.dismiss();
+                                        Toasty.info(getContext(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
                                     }
                                 });
                                 abortButton.setOnClickListener(new View.OnClickListener() {
@@ -101,14 +107,15 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     }
                                 });
                                 warningDialog.show();
-                            }else{
+                            } else {
+                                Toasty.info(getContext(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
                                 ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                 saveProtocolContent();
+                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                                 updateUI();
-                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WAIT_FOR_GLOWING);
                             }
                         } else {
-                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG, true).show();
                         }
                         break;
                     case ASH_DETERMINATION_WAIT_FOR_GLOWING:
@@ -117,7 +124,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     case ASH_DETERMINATION_WEIGHING_GLOWED_SAMPLE:
                         if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
-                           // ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
+                            // ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
                             ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().
                                     add(Scale.getInstance().getUser().getEmail());
@@ -126,59 +133,110 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_CHECK_DELTA_WEIGHT);
                         } else {
-                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist",Toast .LENGTH_LONG).show();
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG, true).show();
                         }
                         break;
                     case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
-                        if (Scale.getInstance().isStable()){
-                            if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
-                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true))> 0.001) {
-
-                                if(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false) -
-                                                ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)<-0.001) {
-                                    TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
-                                    errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
-                                    TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
-                                    TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
-                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
-//                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
-//                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
-                                            saveProtocolContent();
-                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                            warningDialog.dismiss();
-                                        }
-                                    });
-                                    abortButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                            warningDialog.dismiss();
-                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                        }
-                                    });
-                                    warningDialog.show();
-                                }else{
-                                    saveProtocolContent();
-                                    Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
-                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                }
-                            } else {
+                        if (Scale.getInstance().isStable()) {
+                            double delta = ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
+                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true);
+                            if (delta > 0.002) {
+                                //continue
+                                saveProtocolContent();
+                                Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                            } else if (delta <= 0.002 && delta >= -0.005) {
+                                //Finished successfully
                                 ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
-//                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+
+                                //Don't save the last weight
+                                if (delta < 0)
+                                    ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+
                                 saveProtocolContent();
                                 saveAshDeterminationProtocol();
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                 updateUI();
-                                Toast.makeText(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG).show();
+                                Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
+
+                            } else {
+                                TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                                errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
+                                TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                ignoreButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
+                                        //dont save the last value
+                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                        ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+                                        saveProtocolContent();
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+                                        warningDialog.dismiss();
+                                    }
+                                });
+                                abortButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                                        warningDialog.dismiss();
+                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                    }
+                                });
+                                warningDialog.show();
+
                             }
 
+//                            if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
+//                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)) > 0.002) {
+//
+//                                if (ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false) -
+//                                        ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true) < -0.005) {
+//                                    TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
+//                                    errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
+//                                    TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+//                                    TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+//                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+////                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+////                                        ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+//                                            saveProtocolContent();
+//                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                            warningDialog.dismiss();
+//                                        }
+//                                    });
+//                                    abortButton.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+//                                            warningDialog.dismiss();
+//                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                        }
+//                                    });
+//                                    warningDialog.show();
+//                                } else {
+//                                    saveProtocolContent();
+//                                    Toast.makeText(getActivity(), "Protokoll gespeichert", Toast.LENGTH_LONG).show();
+//                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                }
+//                            } else {
+//                                ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+////                                ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight());
+//                                saveProtocolContent();
+//                                saveAshDeterminationProtocol();
+//                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+//                                updateUI();
+//                                Toast.makeText(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG).show();
+//                            }
+
                             break;
-                        }else{
-                            Toast.makeText(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG,true).show();
                         }
                     case ASH_DETERMINATION_BATCH_FINISHED:
                         saveProtocolContent();
@@ -261,7 +319,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         super.onPause();
     }
 
-    private void initErrorDialog(){
+    private void initErrorDialog() {
         try {
             warningDialog = new Dialog(getActivity());
             warningDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -283,7 +341,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             editText.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                    if(i== KeyEvent.KEYCODE_ENTER)
+                    if (i == KeyEvent.KEYCODE_ENTER)
                         return true;
                     return false;
                 }
@@ -328,7 +386,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             ovenTemperature.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                    if(i== KeyEvent.KEYCODE_ENTER)
+                    if (i == KeyEvent.KEYCODE_ENTER)
                         return true;
                     return false;
                 }
@@ -360,7 +418,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (ovenTemperature.getText().toString().length() > 0 && Double.parseDouble(ovenTemperature.getText().toString()) > 0){
+                    if (ovenTemperature.getText().toString().length() > 0 && Double.parseDouble(ovenTemperature.getText().toString()) > 0) {
                         ApplicationManager.getInstance().getCurrentProtocol().setOvenTemperature(Double.parseDouble(ovenTemperature.getText().toString()));
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
                         dialog.dismiss();
@@ -384,10 +442,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialog.setTitle("Geben Sie die Tiegelnummer ein");
             EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
             editText.setSingleLine(true);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL); //for decimal numbers;
             editText.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                    if(i== KeyEvent.KEYCODE_ENTER)
+                    if (i == KeyEvent.KEYCODE_ENTER)
                         return true;
                     return false;
                 }
@@ -409,12 +468,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     try {
                         DatabaseService databaseService = new DatabaseService(getActivity());
                         if (!editText.getText().toString().isEmpty()) {
-                            if (!databaseService.isInDatabase(editText.getText().toString())){
+                            if (!databaseService.isInDatabase(editText.getText().toString())) {
                                 ApplicationManager.getInstance().getCurrentProtocol().setAshBeakerName((editText.getText().toString()));
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                                 dialog.dismiss();
-                            }else{
-                                Toast.makeText(getActivity(), "Der Becher mit diesem Namen existiert bereits!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toasty.warning(getActivity(), "Der Becher mit diesem Namen existiert bereits!", Toast.LENGTH_SHORT,true).show();
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -429,7 +488,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     }
 
 
-
     public void saveAshDeterminationProtocol() {
         StringBuilder sb = new StringBuilder();
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
@@ -440,14 +498,14 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()) + "\r\n");
         sb.append("ashpercent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
         ExportUtils exportUtils = new ExportUtils();
-        exportUtils.writeCSVFileToInternalSD(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName(),sb.toString());
+        exportUtils.writeCSVFileToInternalSD(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName(), sb.toString());
     }
 
     public void saveAshDeterminationProtocols() {
         ExportUtils exportUtils = new ExportUtils();
         Protocol protocol = ApplicationManager.getInstance().getCurrentProtocol();
-        exportUtils.writeCSVFileToInternalSD(protocol.getAshBeakerName()+"-"+protocol.getAshSampleName(),
-                ApplicationManager.getInstance().getCurrentProtocol().generateCSV(),!protocol.getIsPending());
+        exportUtils.writeCSVFileToInternalSD(protocol.getAshBeakerName() + "-" + protocol.getAshSampleName(),
+                ApplicationManager.getInstance().getCurrentProtocol().generateCSV(), !protocol.getIsPending());
         FTPManager.getInstance().updateAll(null);
     }
 

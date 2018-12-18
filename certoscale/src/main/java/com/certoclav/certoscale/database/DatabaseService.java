@@ -57,7 +57,7 @@ public class DatabaseService {
     /**
      * Releases the helper when done.
      */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return getProtocols().size() == 0;
     }
 
@@ -69,14 +69,14 @@ public class DatabaseService {
         }
     }
 
-    public boolean isInDatabase(String name){
-        for (Protocol protocol : getProtocols()){
+    public boolean isInDatabase(String name) {
+        for (Protocol protocol : getProtocols()) {
             if (protocol.getAshBeakerName().equals(name) && protocol.getIsPending()) return true;
         }
         return false;
     }
 
-    public Protocol getRecentProtocol(){
+    public Protocol getRecentProtocol() {
 //        if (getProtocols().size() > 0){
 //            for(Protocol protocol: getProtocols())
 //                if(protocol.getIsPending())
@@ -324,7 +324,7 @@ public class DatabaseService {
 
     public List<Protocol> getPengingProtocols() {
         try {
-            List<Protocol> protocols = protocolDao.queryForEq("protocol_is_pending",true);
+            List<Protocol> protocols = protocolDao.queryForEq("protocol_is_pending", true);
             return protocols;
 
         } catch (SQLException e) {
@@ -467,9 +467,28 @@ public class DatabaseService {
         return null;
     }
 
-    public List<User> getUserByCloudId(String userId) {
+    public User getUserByCloudId(String userId) {
         try {
-            return userDao.queryBuilder().where().eq(User.FIELD_USER_CLOUD_ID, userId).query();
+            List<User> users = userDao.queryBuilder().where().eq(User.FIELD_USER_CLOUD_ID, userId).query();
+
+            if (users.size() > 0)
+                return users.get(0);
+
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return null;
+    }
+
+
+    public User getUserByRFID(String rfid) {
+        try {
+            List<User> users = userDao.queryBuilder().where().eq("company_website", rfid).query();
+            if (users.size() > 0)
+                return users.get(0);
 
         } catch (SQLException e) {
             Log.e(TAG, "Database exception", e);

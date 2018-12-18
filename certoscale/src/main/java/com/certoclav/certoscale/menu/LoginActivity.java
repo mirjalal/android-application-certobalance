@@ -80,6 +80,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.fabric.sdk.android.Fabric;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
@@ -89,6 +90,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
     private Button buttonLogin;
     private EditText editTextPassword;
+    private EditText editTextRFID;
     private Spinner spinner;
     private List<User> listUsers;
     private User currentUser;
@@ -108,8 +110,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     final Runnable mShowLoginFailed = new Runnable() {
         public void run() {
             buttonLogin.setEnabled(true);
-            Toast.makeText(getApplicationContext(),
-                    R.string.password_not_correct, Toast.LENGTH_LONG).show();
+            Toasty.error(getApplicationContext(),
+                    R.string.password_not_correct, Toast.LENGTH_LONG,true).show();
         }
     };
 
@@ -161,7 +163,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     final Runnable mShowLoginSuccessfull = new Runnable() {
         public void run() {
 
-            Toast.makeText(LoginActivity.this, getString(R.string.login_successful), Toast.LENGTH_LONG).show();
+            Toasty.success(LoginActivity.this, getString(R.string.login_successful), Toast.LENGTH_LONG,true).show();
 
             buttonLogin.setEnabled(true);
             Intent intent = new Intent(LoginActivity.this, ApplicationActivity.class);
@@ -173,7 +175,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        final DatabaseService databaseService = new DatabaseService(this);
 
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -181,13 +183,55 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             startActivity(intent);
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(this,"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT).show();
+            Toasty.warning(this,"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT,true).show();
         }
 
         //super.setTheme(R.style.the);
         Fabric.with(this, new Crashlytics());
 
         setContentView(R.layout.login_activity);
+
+        editTextRFID = findViewById(R.id.loginEditTextRFID);
+        editTextRFID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                String text = editTextRFID.getText().toString();
+                if (text.length() > 0) {
+                    //check in database the user with the RFID exists
+                    User user = databaseService.getUserByRFID(text);
+
+                    if(user!=null){
+                        currentUser = user;
+                        Scale.getInstance().setUser(user);
+                        Toasty.success(LoginActivity.this,
+                                getString(R.string.login_successful),
+                                Toast.LENGTH_LONG,true).show();
+                        Intent intent = new Intent(LoginActivity.this,
+                                ApplicationActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered),Toast.LENGTH_LONG,true).show();
+                    }
+                }
+                editTextRFID.requestFocus();
+                editTextRFID.setText("");
+
+                return true;
+            }
+        });
+
+        editTextRFID.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    editTextRFID.requestFocus();
+                    editTextRFID.setText("");
+                }
+            }
+        });
         navigationbar = new Navigationbar(this);
         navigationbar.onCreate();
         navigationbar.getTextTitle().setText(getString(R.string.login_menu).toUpperCase());
@@ -209,8 +253,6 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         settingsUtils.setScreenBrightnessToMaximum(this);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-
-        final DatabaseService databaseService = new DatabaseService(this);
 
 
         TextView textSimulationMode = (TextView) findViewById(R.id.menu_main_text_simulation_mode);
@@ -351,8 +393,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                                 Scale.getInstance().getSafetyKey());
                     } else {
                         showNotificationForNetworkNavigation();
-                        Toast.makeText(LoginActivity.this,
-                                getString(R.string.network_not_connected), Toast.LENGTH_LONG)
+                        Toasty.warning(LoginActivity.this,
+                                getString(R.string.network_not_connected), Toast.LENGTH_LONG,true)
                                 .show();
                     }
 
@@ -388,16 +430,16 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                             progressBar.setVisibility(View.GONE);
 
                             if (result) {
-                                Toast.makeText(LoginActivity.this,
+                                Toasty.success(LoginActivity.this,
                                         getString(R.string.login_successful),
-                                        Toast.LENGTH_LONG).show();
+                                        Toast.LENGTH_LONG,true).show();
                                 Intent intent = new Intent(LoginActivity.this,
                                         ApplicationActivity.class);
                                 startActivity(intent);
                             } else {
-                                Toast.makeText(getApplicationContext(),
+                                Toasty.warning(getApplicationContext(),
                                         R.string.password_not_correct,
-                                        Toast.LENGTH_LONG).show();
+                                        Toast.LENGTH_LONG,true).show();
 
                             }
                             super.onPostExecute(result);
@@ -509,12 +551,12 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         listUsers = databaseService.getUsers();
 
 
-        if (getDefaultSharedPreferences(this).getBoolean(
-                getString(R.string.preferences_device_snchronization), false) == true) {
-            textViewNotification.setVisibility(View.GONE);
-        } else {
-            textViewNotification.setVisibility(View.VISIBLE);
-        }
+//        if (getDefaultSharedPreferences(this).getBoolean(
+//                getString(R.string.preferences_device_snchronization), false) == true) {
+//            textViewNotification.setVisibility(View.GONE);
+//        } else {
+//            textViewNotification.setVisibility(View.GONE);
+//        }
 
         if (listUsers == null) {
             spinner.setEnabled(false);
@@ -696,9 +738,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         buttonLogin.setEnabled(true);
         switch (responseCode) {
             case PostUtil.RETURN_OK:
-                Toast.makeText(LoginActivity.this,
+                Toasty.success(LoginActivity.this,
                         getResources().getString(R.string.login_successful),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_LONG,true).show();
                 try {
                     if (Scale.getInstance().getUser().getIsLocal() == true) {
                         DatabaseService databaseService = new DatabaseService(
@@ -775,8 +817,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                 .findViewById(R.id.dialogButtonCreateLocal);
         Button buttonAddExisting = (Button) dialog
                 .findViewById(R.id.dialogButtonAddExisting);
+        buttonAddExisting.setEnabled(false);
         Button buttonCreateCloud = (Button) dialog
                 .findViewById(R.id.dialogButtonCreateNew);
+        buttonCreateCloud.setEnabled(false);
 
         buttonCreateLocal.setOnClickListener(new OnClickListener() {
             @Override

@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_edit_number_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gadient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/dialog_container_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/dialog_edit_text_edittext"
+                style="@style/edit_text_default"
+                android:layout_width="0.01dp"
+                android:layout_height="0.01dp"
+                android:layout_weight="1"
+                android:background="@color/black_temp"
+                android:hint="NAME"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:text="@string/please_approach_rfid_tag_to_register" />
+
+            <ImageView
+                android:id="@+id/imageViewRFID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/rfid_scan" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_container_text"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dialog_edit_text_button_cancel"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textAllCaps="true" />
+
+
+            <Button
+                android:id="@+id/dialog_edit_text_button_save"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/save"
+                android:enabled="false"
+                android:textAllCaps="true" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

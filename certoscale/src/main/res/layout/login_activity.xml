@@ -1,95 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_rel_background"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@drawable/background_gadient"
-    >
-    
-    <RelativeLayout 
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gadient">
+
+    <RelativeLayout
+        android:id="@+id/login_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/navigationbar"
-        android:id="@+id/login_content"
-        >
-    
-        <TextView 
+        android:layout_below="@+id/navigationbar">
+
+        <TextView
             android:id="@+id/login_text_notification"
+            style="@style/text_default_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            style="@style/text_default_small"
-            android:text="@string/login_notification_offline"
-            />
+            android:visibility="gone"
+            android:text="@string/login_notification_offline" />
 
-<LinearLayout 
-    android:id="@+id/login_container_login"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="100dp"
-    android:layout_marginRight="100dp"
-    android:layout_centerInParent="true"
-    android:orientation="vertical"
-    >
-
-
-      
-
-    <Spinner
-        android:id="@+id/login_spinner"
-        android:layout_width="match_parent"
-        android:textSize="30sp"
-        android:layout_height="60dp"
-        style="@style/spinner_default"
-       />
-
-   <EditText
-        android:id="@+id/loginEditTextPassword"
-        android:hint="@string/password"
-        android:layout_height="60dp" 
-        android:layout_width="match_parent"
-        android:inputType="textPassword"
-       android:visibility="gone"
-       style="@style/edit_text_default"/>
-
-    <Button
-        android:id="@+id/loginButtonLogin"
-        android:maxWidth="600dp"
-        android:layout_height="60dp" 
-        android:layout_width="match_parent"
-        android:text="@string/login"
-        style="@style/button_default"
-         />
+        <LinearLayout
+            android:id="@+id/login_container_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:orientation="vertical">
 
 
+            <Spinner
+                android:id="@+id/login_spinner"
+                style="@style/spinner_default"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="60dp"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/loginEditTextPassword"
+                style="@style/edit_text_default"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/loginEditTextRFID"
+                android:background="@color/black_temp"
+                android:layout_width="0.01dp"
+                android:layout_height="0.01dp" />
+
+            <Button
+                android:id="@+id/loginButtonLogin"
+                style="@style/button_default"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:visibility="gone"
+                android:maxWidth="600dp"
+                android:text="@string/login" />
 
 
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
 
-<ProgressBar android:id="@+id/login_progressbar" 
-    style="?android:attr/progressBarStyleLarge" 
-    android:layout_alignBottom="@+id/login_container_login"
-    android:layout_centerHorizontal="true"
-    android:layout_width="60dp" 
-    android:layout_height="60dp"
-    android:layout_margin="5dp" 
-    android:visibility="visible"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/please_approach_rfid_tag_to_login"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/imageViewRFID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/rfid_scan" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/login_progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignBottom="@+id/login_container_login"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/menu_main_text_simulation_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/white"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Simulation Mode" />
+            android:text="Simulation Mode"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
 
-    <include layout="@layout/navigationbar"
-        android:id="@+id/navigationbar"/>
+    <include
+        android:id="@+id/navigationbar"
+        layout="@layout/navigationbar" />
 
 
 </RelativeLayout>

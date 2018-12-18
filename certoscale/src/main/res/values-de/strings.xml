@@ -712,5 +712,12 @@
     <string name="more">MEHR...</string>
     <string name="the_beaker_is_heavier_than_before_glowing">Der Tiegel ist um mehr als 5mg schwerer als vor dem Glühen</string>
     <string name="connecting">Verbinden.....</string>
+    <string name="ash_value_is_heavier">Der Aschewert ist höher als der Normalwert (0,5g)!</string>
+    <string name="continue_to_glow">Protokoll gespeichert. Glühen fortsetzen</string>
+    <string name="password_repeat">Wiederhole das Passwort</string>
+    <string name="please_approach_rfid_tag_to_register">Bitte wenden Sie sich an den RFID-Tag, um sich zu registrieren.</string>
+    <string name="please_approach_rfid_tag_to_login">Bitte wenden Sie sich zum Anmelden an den RFID-Tag.</string>
+    <string name="the_rfid_are_registered_already">Die RFID-Tags sind bereits registriert.</string>
+    <string name="the_rfid_are_not_registered">Die RFID-Tags sind nicht registriert.</string>
 
 </resources>

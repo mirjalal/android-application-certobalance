@@ -1066,6 +1066,13 @@
     <string name="more">MORE...</string>
     <string name="the_beaker_is_heavier_than_before_glowing">The beaker with the material is heavier after glowing than before!</string>
     <string name="connecting">Connecting...</string>
+    <string name="ash_value_is_heavier">The ash value is heavier than normal (0.5g)!</string>
+    <string name="continue_to_glow">Continue to glow.</string>
+    <string name="password_repeat">Repeat password</string>
+    <string name="please_approach_rfid_tag_to_register">Please approach RFID tag to register.</string>
+    <string name="please_approach_rfid_tag_to_login">Please approach RFID tag to login.</string>
+    <string name="the_rfid_are_registered_already">The RFID tag are registered already.</string>
+    <string name="the_rfid_are_not_registered">The RFID tag are not registered.</string>
 
 
 </resources>

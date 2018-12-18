@@ -6,7 +6,7 @@
     android:versionName="10.0 GG">
 
     <uses-sdk
-        android:targetSdkVersion="22"
+        android:targetSdkVersion="26"
         tools:overrideLibrary="com.teamviewer.sdk.screensharing"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
