@@ -2978,7 +2978,8 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                 final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.dialog_choose_protocol);
                 dialog.setTitle(R.string.click_to_choose_item);
-                dialog.setCancelable(false);
+                dialog.setCancelable(true);
+                dialog.setCanceledOnTouchOutside(false);
                 ListView listView = dialog.findViewById(R.id.dialog_listview_protocol);
                 DatabaseService db = new DatabaseService(getContext());
                 List<Protocol> protocols = db.getPengingProtocols();

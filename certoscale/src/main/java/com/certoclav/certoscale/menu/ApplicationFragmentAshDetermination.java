@@ -528,4 +528,6 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     public void onStableChanged(boolean isStable) {
         buttonNext.setEnabled(isStable);
     }
+
+
 }

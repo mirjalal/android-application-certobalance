@@ -312,6 +312,7 @@ public class RegisterActivity extends Activity {
 
                         if(db.getUserByRFID(text)!=null){
                             imageViewRFID.setImageResource(R.drawable.rfid_scan_wrong);
+                            dialogButton.setEnabled(false);
                             Toasty.error(RegisterActivity.this,
                                     getString(R.string.the_rfid_are_registered_already),Toast.LENGTH_LONG,true).show();
                         }else {
