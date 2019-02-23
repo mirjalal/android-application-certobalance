@@ -273,6 +273,7 @@
 
         <activity
             android:name=".menu.ApplicationActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustResize"
             android:screenOrientation="sensorLandscape">
         </activity>
 

@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.certoclav.certoscale.R;
-import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.listener.StatisticListener;
 import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.model.ReferenceField;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.util.NumberFormatUtils;
 import com.certoclav.library.application.ApplicationController;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -133,7 +131,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
     int indexAshDeterminationWeightBeakerWithSample = 1;
     int indexAshDeterminationWeightBeaker = 3;
     int indexAshDeterminationSampleWeight = 5;
-    int indexAshDeterminationCurrentWeight = 7;
+    int indexAshUserName = 6;
 
     @Override
     public void onResume() {
@@ -1056,6 +1054,24 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
         } catch (Exception e) {
             listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
         }
+
+
+        listReferenceFields.get(indexAshUserName).getTextName().setText("Benutzer");
+        try {
+            StringBuilder name = new StringBuilder();
+            if(Scale.getInstance().getUser().getFirstName()!=null)
+                name.append(Scale.getInstance().getUser().getFirstName());
+            if(Scale.getInstance().getUser().getLastName()!=null)
+                name.append(" ").append(Scale.getInstance().getUser().getLastName());
+
+            if(Scale.getInstance().getUser().getLastName() ==null
+                    && Scale.getInstance().getUser().getFirstName()==null)
+                name.append(Scale.getInstance().getUser().getEmail());
+            listReferenceFields.get(indexAshUserName).getTextValue().setText(name);
+        } catch (Exception e) {
+            listReferenceFields.get(indexAshUserName).getTextValue().setText("");
+        }
+
     }
 
     public void clearFields() {

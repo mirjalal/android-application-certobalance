@@ -9,7 +9,6 @@ import com.certoclav.certoscale.listener.WeightListener;
 import com.certoclav.certoscale.menu.AnimationCalibrationActivity;
 import com.certoclav.certoscale.menu.NotificationActivity;
 import com.certoclav.certoscale.model.Scale;
-import com.certoclav.certoscale.service.CloudSocketService;
 import com.certoclav.certoscale.service.ReadAndParseSerialSicsService;
 import com.certoclav.library.application.ApplicationController;
 
@@ -77,10 +76,10 @@ public class StateMachine implements WeightListener {
             nanoTimeAtLastServiceCheck = System.nanoTime();
 
             //restart service. Mabye it has been killed by Operating System
-            Intent intent = new Intent(ApplicationController.getContext(), CloudSocketService.class);
-            ApplicationController.getContext().startService(intent);
+//            Intent intent = new Intent(ApplicationController.getContext(), CloudSocketService.class);
+//            ApplicationController.getContext().startService(intent);
 
-            intent = new Intent(ApplicationController.getContext(), ReadAndParseSerialSicsService.class);
+            Intent intent = new Intent(ApplicationController.getContext(), ReadAndParseSerialSicsService.class);
             ApplicationController.getContext().startService(intent);
         }
 

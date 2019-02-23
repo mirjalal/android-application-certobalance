@@ -3003,6 +3003,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
                         ApplicationManager.getInstance().setCurrentProtocol(adapter.getItem(position));
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                         dialog.dismiss();
+
                     }
                 });
                 final Handler handler = new Handler();

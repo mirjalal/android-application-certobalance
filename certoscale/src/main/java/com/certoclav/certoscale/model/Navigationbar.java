@@ -53,6 +53,11 @@ public class Navigationbar {
 
 	private ImageButton buttonLogout = null;
 	private ImageButton buttonHome = null;
+	private ImageButton buttonLogoutHome;
+
+	public ImageButton getButtonLogoutHome() {
+		return buttonLogoutHome;
+	}
 
 	public ImageButton getButtonMore() {
 		return buttonMore;
@@ -478,6 +483,17 @@ public class Navigationbar {
 				}
 			}
 		});
+
+		buttonLogoutHome = mActivity.findViewById(R.id.naviagationbar_button_logout_home);
+		buttonLogoutHome.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				for (ButtonEventListener listener : navigationbarListeners) {
+					listener.onClickNavigationbarButton(ActionButtonbarFragment.BUTTON_LOGOUT, false);
+				}
+			}
+		});
+
 
 		buttonSave = (ImageButton) mActivity.findViewById(R.id.naviagationbar_button_save);
 		buttonSave.setOnClickListener(new OnClickListener() {

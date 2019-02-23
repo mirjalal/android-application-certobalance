@@ -4,156 +4,151 @@
     android:layout_height="80dp"
     android:background="@android:color/black">
 
- <TextView
-     android:id="@+id/naviagationbar_text_title"
-     android:text="TITLE"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:gravity="center"
-     android:textSize="24sp"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:textColor="@android:color/white"
-     android:textStyle="bold" />
+    <TextView
+        android:id="@+id/naviagationbar_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/quickaction_slider_btn_black"
+        android:gravity="center"
+        android:text="TITLE"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
+    <ImageButton
+        android:id="@+id/naviagationbar_button_home"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_menu_back"
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_home"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentLeft="true"
-     android:src="@drawable/ic_menu_back"
-     style="@style/button_navigationbar_default"
+        />
 
-     />
- <ImageButton
-     android:id="@+id/naviagationbar_button_back"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentLeft="true"
-     android:src="@drawable/ic_menu_back"
-     style="@style/button_navigationbar_default"
-     />
+    <ImageButton
+        android:id="@+id/naviagationbar_button_back"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_menu_back" />
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_logout"
-     android:src="@drawable/ic_menu_exit"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentLeft="true"
-     style="@style/button_navigationbar_default"
-
-     />
+    <ImageButton
+        android:id="@+id/naviagationbar_button_logout"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_menu_exit" />
 
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_company_logo"
-     android:layout_width="200dp"
-     android:layout_marginLeft="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentLeft="true"
-     android:src="@drawable/logo_ae_adam_small"
-     style="@style/button_navigationbar_default"
+    <ImageButton
+        android:id="@+id/naviagationbar_button_company_logo"
+        style="@style/button_navigationbar_default"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="80dp"
+        android:src="@drawable/logo_ae_adam_small"
 
-     />
-
-
+        />
 
 
- <LinearLayout 
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:layout_toRightOf="@+id/naviagationbar_button_home"
-     android:layout_toLeftOf="@+id/naviagationbar_button_save"
-     android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/naviagationbar_button_save"
+        android:layout_toRightOf="@+id/naviagationbar_button_home"
+        android:orientation="horizontal">
 
 
+        <Spinner
+            android:id="@+id/naviagationbar_spinner_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/quickaction_slider_btn_black"
+            android:entries="@array/navigationbar_entries"
+            android:visibility="invisible"
 
- <Spinner
-     android:id="@+id/naviagationbar_spinner_mode"
-     android:entries="@array/navigationbar_entries"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:layout_weight="1"
-     android:background="@drawable/quickaction_slider_btn_black"
-     android:visibility="invisible"
-
-     />
-
+            />
 
 
-  <ImageButton
-      android:id="@+id/naviagationbar_button_settings"
-      android:layout_width="80dp"
-      android:layout_height="match_parent"
-      android:src="@drawable/ic_menu_edit"
-      style="@style/button_navigationbar_default"
-      />
- 
-  <Spinner 
-     android:id="@+id/naviagationbar_spinner_lib"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-     android:layout_weight="1"
-      android:background="@drawable/quickaction_slider_btn_black"
-      android:visibility="invisible"
-     />
+        <ImageButton
+            android:id="@+id/naviagationbar_button_settings"
+            style="@style/button_navigationbar_default"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_menu_edit" />
+
+        <Spinner
+            android:id="@+id/naviagationbar_spinner_lib"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/quickaction_slider_btn_black"
+            android:visibility="invisible" />
 
 
-
- </LinearLayout>
-
+    </LinearLayout>
 
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_add"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentRight="true"
-     android:src="@drawable/ic_menu_add"
-     style="@style/button_navigationbar_default"
+    <ImageButton
+        android:id="@+id/naviagationbar_button_add"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_add"
 
-     />
+        />
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_settings_device"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:src="@drawable/ic_menu_launcher_settings"
-     android:layout_toLeftOf="@+id/naviagationbar_button_add"
-     style="@style/button_navigationbar_default"
-     />
- <ImageButton
-     android:id="@+id/naviagationbar_button_more"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_alignParentRight="true"
-     android:src="@drawable/application_icon3"
-     style="@style/button_navigationbar_default"
-     />
+    <ImageButton
+        android:id="@+id/naviagationbar_button_settings_device"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/naviagationbar_button_add"
+        android:src="@drawable/ic_menu_launcher_settings" />
 
- <ImageButton
-    android:id="@+id/naviagationbar_button_save"
-    android:layout_width="80dp"
-    android:layout_height="match_parent"
-    android:layout_toLeftOf="@+id/naviagationbar_button_more"
-    android:src="@drawable/ic_menu_save"
-    style="@style/button_navigationbar_default"
-    />
 
- <ImageButton
-     android:id="@+id/naviagationbar_button_delete"
-     android:layout_width="80dp"
-     android:layout_height="match_parent"
-     android:layout_toLeftOf="@+id/naviagationbar_button_more"
-     android:src="@drawable/ic_menu_bin"
-     style="@style/button_navigationbar_default"
-     />
- 
+    <ImageButton
+        android:id="@+id/naviagationbar_button_logout_home"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_logout" />
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="2px"
-    android:background="@drawable/seperator_white"
-    android:layout_alignParentBottom="true"></RelativeLayout>
+    <ImageButton
+        android:id="@+id/naviagationbar_button_more"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/naviagationbar_button_logout_home"
+        android:src="@drawable/application_icon3" />
+
+    <ImageButton
+        android:id="@+id/naviagationbar_button_save"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/naviagationbar_button_more"
+        android:src="@drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/naviagationbar_button_delete"
+        style="@style/button_navigationbar_default"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/naviagationbar_button_save"
+        android:src="@drawable/ic_menu_bin" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/seperator_white"></RelativeLayout>
 </RelativeLayout>

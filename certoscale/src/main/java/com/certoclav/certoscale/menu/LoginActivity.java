@@ -177,6 +177,23 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         super.onCreate(savedInstanceState);
         final DatabaseService databaseService = new DatabaseService(this);
 
+        if(getIntent()!=null && getIntent().hasExtra("userid") &&  getIntent().getStringExtra("userid")!=null){
+            User user = databaseService.getUserByRFID(getIntent().getStringExtra("userid"));
+            if(user!=null){
+                currentUser = user;
+                Scale.getInstance().setUser(user);
+                Toasty.success(LoginActivity.this,
+                        getString(R.string.login_successful),
+                        Toast.LENGTH_LONG,true).show();
+                Intent intent = new Intent(LoginActivity.this,
+                        ApplicationActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered),Toast.LENGTH_LONG,true).show();
+            }
+        }
+
         try {
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
@@ -197,7 +214,8 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                String text = editTextRFID.getText().toString();
+                String text = editTextRFID.getText().toString().trim();
+                Log.d("RFID TEXT",text);
                 if (text.length() > 0) {
                     //check in database the user with the RFID exists
                     User user = databaseService.getUserByRFID(text);
@@ -218,7 +236,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                 editTextRFID.requestFocus();
                 editTextRFID.setText("");
 
-                return true;
+                return false;
             }
         });
 

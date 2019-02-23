@@ -66,7 +66,8 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         navigationbar.setButtonEventListener(this);
         navigationbar.getTextTitle().setVisibility(View.VISIBLE);
         navigationbar.getTextTitle().setText(getString(R.string.main_menu).toUpperCase());
-        navigationbar.getButtonLogout().setVisibility(View.VISIBLE);
+        navigationbar.getButtonBack().setVisibility(View.VISIBLE);
+        navigationbar.getButtonLogoutHome().setVisibility(View.GONE);
         navigationbar.getButtonCompanyLogo().setVisibility(View.GONE);
         navigationbar.getButtonAdd().setVisibility(View.VISIBLE);
         navigationbar.getButtonAdd().setImageResource(R.drawable.ic_menu_help);
