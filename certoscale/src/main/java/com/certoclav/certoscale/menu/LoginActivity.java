@@ -267,9 +267,12 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         progressBar = (ProgressBar) findViewById(R.id.login_progressbar);
         SettingsDeviceUtils settingsUtils = new SettingsDeviceUtils();
 
-        settingsUtils.setvolumeToMaximum(this);
-        settingsUtils.setScreenBrightnessToMaximum(this);
-
+        try {
+            settingsUtils.setvolumeToMaximum(this);
+            settingsUtils.setScreenBrightnessToMaximum(this);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
 

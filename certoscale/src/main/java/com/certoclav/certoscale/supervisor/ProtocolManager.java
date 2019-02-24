@@ -14,6 +14,8 @@ import com.certoclav.certoscale.util.ESCPos;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.certocloud.CloudUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -61,7 +63,8 @@ public class ProtocolManager implements ScaleApplicationListener {
         }
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_date), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_date)) == true) {
-            sb.append(Calendar.getInstance().getTime().toGMTString() + "\n");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            sb.append(df.format(Calendar.getInstance().getTime())+ "\n");
         }
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_balance_id), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_balance_id)) == true) {
@@ -593,11 +596,14 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Verantwortliche: ").append(ApplicationManager.getInstance().getCurrentProtocol().getUserEmail()).append("\n");
                 sb.append("Probennummer" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\n");
                 try {
-                    for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size(); i++) {
-                        sb.append((i + 1) + ".Gluehen" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().get(i)) + "\n");
+                    for (int i = 0; i < ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size(); i++) {
+                        boolean isIgnored = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsIgnoredIndex().contains(i);
+                        sb.append((i + 1) + ".Gluehen [g]" + ": " + ApplicationManager.getInstance()
+                                .getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().
+                                        getCurrentProtocol().getAshArrayGlowWeights(false).get(i)) + (isIgnored?"*":"")+"\n");
 
                         try {
-                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().get(i) + "\n");
+                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).get(i) + "\n");
                         }catch (Exception e){
                         }
                     }
@@ -605,14 +611,14 @@ public class ProtocolManager implements ScaleApplicationListener {
                     e.printStackTrace();
                 }
                 sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
-                        getOvenTemperature()+" °C").append("\n");
-                sb.append("Beaker weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        getOvenTemperature()+" \u2103").append("\n");
+                sb.append("Beaker weight [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
-                sb.append("Sample weight: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                sb.append("Sample weight [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
                 if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
-                    sb.append("Asche Gewicht" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                    sb.append("Asche Prozent" + ": " + String.format(Locale.US, "%.3f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "%\n");
+                    sb.append("Aschegehalt [g]\n" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
+                    sb.append("Aschegehalt [g/100g]\n" + ": " + String.format(Locale.US, "%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
                 }else{
                     sb.append("Messung noch nicht abgeschlossen\n");
                 }

@@ -125,8 +125,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         if (Scale.getInstance().isStable()) {
                             Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             // ApplicationManager.getInstance().getCurrentProtocol().setRecentWeight(currentWeight);
-                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().add(currentWeight);
-                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser().
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false)
+                                    .add(currentWeight);
+                            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).
                                     add(Scale.getInstance().getUser().getEmail());
 //                            saveAshDeterminationProtocols();
 //                            saveProtocolContent();
@@ -523,6 +524,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
         saveAshDeterminationProtocols();
     }
+
 
     @Override
     public void onStableChanged(boolean isStable) {

@@ -1050,7 +1050,7 @@ public class ApplicationFragmentTable extends Fragment implements WeightListener
         listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextName().setText("Anzahl Glühungen");
         try {
             listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText(
-                    ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights().size() + "x");
+                    ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(true).size() + "x");
         } catch (Exception e) {
             listReferenceFields.get(indexAshDeterminationDeltaWeight).getTextValue().setText("");
         }

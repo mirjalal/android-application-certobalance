@@ -12,6 +12,7 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -136,6 +137,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             final EditText editTextPassword = dialog.findViewById(R.id.dialog_edit_text_password);
             final EditText editTextRawDataFolder = dialog.findViewById(R.id.dialog_edit_text_raw_data_folder);
             final EditText editTextRawILIMSFolder = dialog.findViewById(R.id.dialog_edit_text_ilims_folder);
+            final CheckBox checkboxIsFtpEnable = dialog.findViewById(R.id.switchFtpEnable);
             final TextView textViewResult = dialog.findViewById(R.id.dialog_text_view_test_result);
 
             editTextServer.setText(FTPManager.getInstance().getAddress());
@@ -228,7 +230,8 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                             editTextUsername.getText().toString(),
                             editTextPassword.getText().toString(),
                             editTextRawDataFolder.getText().toString(),
-                            editTextRawILIMSFolder.getText().toString());
+                            editTextRawILIMSFolder.getText().toString(),
+                            checkboxIsFtpEnable.isChecked());
                     dialog.dismiss();
                 }
             });

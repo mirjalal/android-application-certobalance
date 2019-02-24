@@ -36,6 +36,7 @@ public class FTPManager {
     private static final String PASSWORD = "ftp_password";
     private static final String FOLDER = "ftp_folder";
     private static final String FOLDER_ILIMS = "ftp_folder_ilims";
+    private static final String FTP_STATUS = "ftp_status";
     private FTPClient ftp;
     private String address;
     private int port;
@@ -43,6 +44,7 @@ public class FTPManager {
     private String password;
     private String folder;
     private String folderILIMS;
+    private boolean isEnabled;
 
     private FTPManager() {
         ftp = new FTPClient();
@@ -82,7 +84,7 @@ public class FTPManager {
         });
     }
 
-    public void saveFTPInformation(String address, int port, String username, String password, String folder, String folderILIMS) {
+    public void saveFTPInformation(String address, int port, String username, String password, String folder, String folderILIMS, Boolean isEnabled) {
 
         address = address.trim();
         username = username.trim();
@@ -111,6 +113,7 @@ public class FTPManager {
         this.password = password;
         this.folder = folder;
         this.folderILIMS = folderILIMS;
+        this.isEnabled = isEnabled;
 
         editor.putString(ADDRESS, address);
         editor.putInt(PORT, port);
@@ -118,11 +121,13 @@ public class FTPManager {
         editor.putString(PASSWORD, password);
         editor.putString(FOLDER, folder);
         editor.putString(FOLDER_ILIMS, folderILIMS);
+        editor.putBoolean(FTP_STATUS, isEnabled);
         editor.commit();
     }
 
 
     public void updateAll(final FTPListener listener) {
+        if(!isEnabled)return;
         Needle.onBackgroundThread().execute(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -255,6 +260,7 @@ public class FTPManager {
         password = preferences.getString(PASSWORD, "admin");
         folder = preferences.getString(FOLDER, "/IFP");
         folderILIMS = preferences.getString(FOLDER_ILIMS, "/IFP_ILIMS");
+        isEnabled = preferences.getBoolean(FTP_STATUS,true);
 
         try {
             if (folderILIMS.charAt(0) != '/')
