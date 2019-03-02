@@ -617,8 +617,8 @@ public class ProtocolManager implements ScaleApplicationListener {
                 sb.append("Sample weight [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
                 if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
-                    sb.append("Aschegehalt [g]\n" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                    sb.append("Aschegehalt [g/100g]\n" + ": " + String.format(Locale.US, "%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
+                    sb.append("Aschegehalt [g]" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
+                    sb.append("Aschegehalt [g/100g]" + ": " + String.format(Locale.US, "%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
                 }else{
                     sb.append("Messung noch nicht abgeschlossen\n");
                 }

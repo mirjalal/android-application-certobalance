@@ -173,6 +173,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
                                         ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
                                         saveProtocolContent();
+                                        saveAshDeterminationProtocol();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
                                         warningDialog.dismiss();
                                     }
@@ -181,6 +182,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     @Override
                                     public void onClick(View v) {
                                         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                        saveProtocolContent();
                                         ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                                         warningDialog.dismiss();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);

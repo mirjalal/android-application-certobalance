@@ -1,6 +1,8 @@
 package com.certoclav.certoscale.database;
 
 
+import android.util.Log;
+
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.j256.ormlite.field.DataType;
@@ -79,10 +81,10 @@ public class Protocol {
     }
 
     public List<Double> getAshArrayGlowWeights(boolean isValidOnly) {
-        if(isValidOnly){
+        if (isValidOnly) {
             List<Double> validWeights = new ArrayList<>();
-            for(int i=0;i<ashArrayGlowWeights.size();i++){
-                if(ashArrayGlowWeightsIgnoredIndex.contains(i))continue;
+            for (int i = 0; i < ashArrayGlowWeights.size(); i++) {
+                if (ashArrayGlowWeightsIgnoredIndex.contains(i)) continue;
                 validWeights.add(ashArrayGlowWeights.get(i));
             }
             return validWeights;
@@ -121,12 +123,13 @@ public class Protocol {
     }
 
     public Double getSampleWeight() {
-        return ashWeightBeakerWithSample-ashWeightBeaker;
+        return ashWeightBeakerWithSample - ashWeightBeaker;
     }
 
     public void saveBeakerAndSampleWeight(Double ashWeightBeakerWithSample) {
         this.ashWeightBeakerWithSample = ashWeightBeakerWithSample;
     }
+
     @DatabaseField(columnName = "protocol_sample_name")
     private String ashSampleName = "";
     @DatabaseField(columnName = "protocol_beaker_name")
@@ -193,7 +196,7 @@ public class Protocol {
         parseJson();
     }
 
-    public void parseJsonLight(){
+    public void parseJsonLight() {
         isParsedCompletely = false;
         JSONObject jsonObject;
         try {
@@ -519,12 +522,13 @@ public class Protocol {
 
     public String generateCSV() {
         parseJson();
-        return content.replaceAll(": ",",").replaceAll(":",",");
+        return content.replaceAll(": ", ",").replaceAll(":", ",");
     }
 
     public Double getLastGlowWeight() {
-        if (getAshArrayGlowWeights(true).size() > 0)
-            return ashArrayGlowWeights.get(ashArrayGlowWeights.size() - 1);
+        List<Double> weights = getAshArrayGlowWeights(true);
+        if (weights.size() > 0)
+            return weights.get(weights.size() - 1);
         else
             return -1d;
     }
@@ -545,7 +549,8 @@ public class Protocol {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-            Double result = (weightDrySample / weightWetSample) * 100.0;
+            Log.d("result",weightDrySample+" "+weightWetSample+" "+ashWeightBeaker+" "+ashWeightBeakerWithSample);
+            Double result = (weightDrySample * 100 / weightWetSample);
             return result;
         } catch (Exception e) {
             return 0d;
@@ -557,14 +562,14 @@ public class Protocol {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-            Double result = (weightDrySample / weightWetSample) * 100.0;
+            Double result = (weightDrySample* 100.0 / weightWetSample) ;
             return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());
         } catch (Exception e) {
-            return "0.000";
+            return "0.0000";
         }
     }
 
-    public double getLastAshWeight(){
+    public double getLastAshWeight() {
         return getLastGlowWeight() - ashWeightBeaker;
     }
 
@@ -579,23 +584,23 @@ public class Protocol {
     public double getRecentWeight(boolean current) {
         List<Double> weights = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(true);
 
-        for(Double w:weights)
-            android.util.Log.e("weightash",w+"");
+        for (Double w : weights)
+            android.util.Log.e("weightash", w + "");
 
-        if(!current)
-            if( weights.size()==1)
+        if (!current)
+            if (weights.size() == 1)
                 return ApplicationManager.getInstance().getCurrentProtocol().getAshWeightBeakerWithSample();
             else
-                return weights.get(weights.size()-2);
+                return weights.get(weights.size() - 2);
 
 
-        return weights.get(weights.size()-1);
+        return weights.get(weights.size() - 1);
     }
 
     public void abortLastWeight() {
 
         ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsIgnoredIndex()
-                .add(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size()-1);
+                .add(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size() - 1);
 
 //        if(weights.size()>0)
 //            weights.remove(weights.size()-1);
@@ -613,10 +618,10 @@ public class Protocol {
     }
 
     public List<String> getAshArrayGlowWeightsUser(boolean isValidOnly) {
-        if(isValidOnly){
+        if (isValidOnly) {
             List<String> validWeightsUser = new ArrayList<>();
-            for(int i=0;i<ashArrayGlowWeightsUser.size();i++){
-                if(ashArrayGlowWeightsIgnoredIndex.contains(i))continue;
+            for (int i = 0; i < ashArrayGlowWeightsUser.size(); i++) {
+                if (ashArrayGlowWeightsIgnoredIndex.contains(i)) continue;
                 validWeightsUser.add(ashArrayGlowWeightsUser.get(i));
             }
             return validWeightsUser;
