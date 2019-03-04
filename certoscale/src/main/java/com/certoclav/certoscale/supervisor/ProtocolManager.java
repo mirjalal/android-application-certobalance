@@ -603,7 +603,7 @@ public class ProtocolManager implements ScaleApplicationListener {
                                         getCurrentProtocol().getAshArrayGlowWeights(false).get(i)) + (isIgnored?"*":"")+"\n");
 
                         try {
-                            sb.append("User: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).get(i) + "\n");
+                            sb.append("Benutzer: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).get(i) + "\n");
                         }catch (Exception e){
                         }
                     }
@@ -611,10 +611,10 @@ public class ProtocolManager implements ScaleApplicationListener {
                     e.printStackTrace();
                 }
                 sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
-                        getOvenTemperature()+" \u2103").append("\n");
-                sb.append("Beaker weight [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        getOvenTemperature()+" C").append("\n");
+                sb.append("Tiegelgewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
-                sb.append("Sample weight [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                sb.append("Probengewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
                 if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
                     sb.append("Aschegehalt [g]" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");

@@ -208,7 +208,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
         setContentView(R.layout.login_activity);
 
-        editTextRFID = findViewById(R.id.loginEditTextRFID);
+        editTextRFID = (EditText) findViewById(R.id.loginEditTextRFID);
         editTextRFID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override

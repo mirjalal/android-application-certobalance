@@ -190,7 +190,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
             }
         });
 
-        editTextRFID = findViewById(R.id.loginEditTextRFID);
+        editTextRFID = (EditText) findViewById(R.id.loginEditTextRFID);
         editTextRFID.requestFocus();
         editTextRFID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 

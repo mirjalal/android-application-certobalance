@@ -39,9 +39,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.menu_application_fragment_ash_determination, container, false);
-        textInstruction = rootView.findViewById(R.id.application_fragment_ash_determination_text);
-        buttonNext = rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
-        buttonCancel = rootView.findViewById(R.id.application_fragment_ash_determination_button_cancel);
+        textInstruction = (TextView) rootView.findViewById(R.id.application_fragment_ash_determination_text);
+        buttonNext = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_next);
+        buttonCancel = (Button) rootView.findViewById(R.id.application_fragment_ash_determination_button_cancel);
         initErrorDialog();
 
         Toasty.Config.getInstance().setTextSize(24);
@@ -83,11 +83,11 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         if (Scale.getInstance().isStable()) {
                             final Double currentWeight = ApplicationManager.getInstance().getTaredValueInGram();
                             if (currentWeight - ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight() < 0.5) {
-                                TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                                TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                 errorMessage.setText(R.string.weight_more_than_0_5);
-                                TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
                                 ignoreButton.setText(R.string.continue_button);
-                                TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
                                 abortButton.setText(R.string.close);
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -161,10 +161,10 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
 
                             } else {
-                                TextView errorMessage = warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                                TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
                                 errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
-                                TextView ignoreButton = warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
-                                TextView abortButton = warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -385,7 +385,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             //dialog.setTitle("Select oven temperature");
             dialog.setCancelable(false);
 
-            final EditText ovenTemperature = dialog.findViewById(R.id.dialog_oven_temperature_edt_temp);
+            final EditText ovenTemperature = (EditText) dialog.findViewById(R.id.dialog_oven_temperature_edt_temp);
             ovenTemperature.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -394,9 +394,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     return false;
                 }
             });
-            Button button550 = dialog.findViewById(R.id.dialog_oven_temperature_btn_550);
-            Button button600 = dialog.findViewById(R.id.dialog_oven_temperature_btn_600);
-            Button button900 = dialog.findViewById(R.id.dialog_oven_temperature_btn_900);
+            Button button550 = (Button) dialog.findViewById(R.id.dialog_oven_temperature_btn_550);
+            Button button600 = (Button) dialog.findViewById(R.id.dialog_oven_temperature_btn_600);
+            Button button900 = (Button) dialog.findViewById(R.id.dialog_oven_temperature_btn_900);
 
             button550.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -417,7 +417,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 }
             });
 
-            Button buttonSave = dialog.findViewById(R.id.dialog_oven_temperature_btn_save);
+            Button buttonSave = (Button) dialog.findViewById(R.id.dialog_oven_temperature_btn_save);
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -454,7 +454,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                     return false;
                 }
             });
-            Button dialogButtonNo = dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

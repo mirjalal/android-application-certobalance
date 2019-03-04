@@ -123,6 +123,8 @@ public class FTPManager {
         editor.putString(FOLDER_ILIMS, folderILIMS);
         editor.putBoolean(FTP_STATUS, isEnabled);
         editor.commit();
+
+        updateAll(null);
     }
 
 
@@ -301,6 +303,10 @@ public class FTPManager {
 
     public String getFolderIlims() {
         return folderILIMS;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     public String getPassword() {

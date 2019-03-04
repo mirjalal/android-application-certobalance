@@ -131,14 +131,14 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_ftp);
             dialog.setCancelable(false);
-            final EditText editTextServer = dialog.findViewById(R.id.dialog_edit_text_address);
-            final EditText editTextPort = dialog.findViewById(R.id.dialog_edit_text_port);
-            final EditText editTextUsername = dialog.findViewById(R.id.dialog_edit_text_username);
-            final EditText editTextPassword = dialog.findViewById(R.id.dialog_edit_text_password);
-            final EditText editTextRawDataFolder = dialog.findViewById(R.id.dialog_edit_text_raw_data_folder);
-            final EditText editTextRawILIMSFolder = dialog.findViewById(R.id.dialog_edit_text_ilims_folder);
-            final CheckBox checkboxIsFtpEnable = dialog.findViewById(R.id.switchFtpEnable);
-            final TextView textViewResult = dialog.findViewById(R.id.dialog_text_view_test_result);
+            final EditText editTextServer = (EditText) dialog.findViewById(R.id.dialog_edit_text_address);
+            final EditText editTextPort = (EditText) dialog.findViewById(R.id.dialog_edit_text_port);
+            final EditText editTextUsername = (EditText) dialog.findViewById(R.id.dialog_edit_text_username);
+            final EditText editTextPassword = (EditText) dialog.findViewById(R.id.dialog_edit_text_password);
+            final EditText editTextRawDataFolder = (EditText) dialog.findViewById(R.id.dialog_edit_text_raw_data_folder);
+            final EditText editTextRawILIMSFolder = (EditText) dialog.findViewById(R.id.dialog_edit_text_ilims_folder);
+            final CheckBox checkboxIsFtpEnable = (CheckBox) dialog.findViewById(R.id.switchFtpEnable);
+            final TextView textViewResult = (TextView) dialog.findViewById(R.id.dialog_text_view_test_result);
 
             editTextServer.setText(FTPManager.getInstance().getAddress());
             editTextPort.setText(FTPManager.getInstance().getPort() + "");
@@ -146,6 +146,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             editTextPassword.setText(FTPManager.getInstance().getPassword());
             editTextRawDataFolder.setText(FTPManager.getInstance().getFolder());
             editTextRawILIMSFolder.setText(FTPManager.getInstance().getFolderIlims());
+            checkboxIsFtpEnable.setChecked(FTPManager.getInstance().isEnabled());
 
             final Button dialogButton = (Button) dialog.findViewById(R.id.dialog_edit_text_button_save);
 
