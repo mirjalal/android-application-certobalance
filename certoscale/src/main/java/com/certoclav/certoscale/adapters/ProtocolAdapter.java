@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
+import com.certoclav.certoscale.menu.ApplicationActivity;
+import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
 import com.certoclav.certoscale.util.Log;
@@ -108,6 +111,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                 @Override
                 public void onClick(View v) {
                     try {
+                        actionDetected();
                         final Dialog dialog = new Dialog(mContext);
                         dialog.setContentView(R.layout.dialog_yes_no);
                         dialog.setTitle("Confirm deletion");
@@ -119,6 +123,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
 
                             @Override
                             public void onClick(View v) {
+                                actionDetected();
                                 dialog.dismiss();
                             }
                         });
@@ -127,6 +132,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                         dialogButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                actionDetected();
                                 if (!protocol.getCloudId().isEmpty()) {
                                     DeleteTask deleteTask = new DeleteTask();
                                     deleteTask.execute(CertocloudConstants.SERVER_URL +
@@ -162,6 +168,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
             actionItemPrint.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     ProtocolManager protocolPrinterUtils = new ProtocolManager();
                     protocolPrinterUtils.printText(protocol.getContent());
                     Toast.makeText(mContext, "Protocol printed", Toast.LENGTH_LONG).show();
@@ -173,6 +180,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                 @Override
                 public void onClick(View v) {
                     try {
+                        actionDetected();
                         final Dialog dialog = new Dialog(mContext);
                         dialog.setContentView(R.layout.dialog_protocol);
                         protocol.parseJson();
@@ -180,10 +188,19 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                         TextView textView = dialog.findViewById(R.id.dialog_protocol_text);
                         textView.setText(protocol.getContent());
 
+                        textView.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View v, MotionEvent event) {
+                                actionDetected();
+                                return true;
+                            }
+                        });
+
                         Button dialogButtonClose = dialog.findViewById(R.id.dialog_button_close);
                         dialogButtonClose.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                actionDetected();
                                 dialog.dismiss();
                             }
                         });
@@ -277,5 +294,11 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         };
 
         return filter;
+    }
+
+    private void actionDetected(){
+        if(mContext instanceof MenuProtocolActivity){
+            ((MenuProtocolActivity)mContext).actionDetected();
+        }
     }
 }

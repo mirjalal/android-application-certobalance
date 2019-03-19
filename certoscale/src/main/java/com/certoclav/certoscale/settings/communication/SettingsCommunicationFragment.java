@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -18,8 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.menu.LoginActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModelManager;
+import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.application.ApplicationController;
@@ -28,10 +32,30 @@ import com.certoclav.library.application.ApplicationController;
 public class SettingsCommunicationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private SharedPreferences prefs = null;
 
+
+    Handler handler = new Handler();
+
+    Runnable runnableLogout = new Runnable() {
+        @Override
+        public void run() {
+            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    public void actionDetected() {
+        if (handler != null && runnableLogout != null) {
+            handler.removeCallbacks(runnableLogout);
+            handler.postDelayed(runnableLogout, AppConstants.SESSION_TIMEOUT);
+        }
+    }
+
     @Override
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-
+        if(handler!=null)
+            handler.removeCallbacks(runnableLogout);
         super.onPause();
     }
 
@@ -82,7 +106,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         });
 
         ((Preference) findPreference(getString(R.string.preferences_communication_lims_ftp))).setSummary(
-                getString(R.string.ftp_summary, FTPManager.getInstance().getAddress(),FTPManager.getInstance().getPort(), FTPManager.getInstance().getUsername()));
+                getString(R.string.ftp_summary, FTPManager.getInstance().getAddress(), FTPManager.getInstance().getPort(), FTPManager.getInstance().getUsername()));
         ((Preference) findPreference(getString(R.string.preferences_communication_lims_ftp))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
@@ -115,9 +139,9 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                     startActivity(intent);
 
 //            com.estrongs.android.ui.preference.FtpServerPreference
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(),"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Please install ES FTP to use FTP features", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -154,6 +178,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     dialog.dismiss();
                 }
             });
@@ -162,7 +187,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             dialogButtonTest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    actionDetected();
                     try {
                         Integer.valueOf(editTextPort.getText().toString());
                     } catch (Exception e) {
@@ -199,7 +224,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                                                 }
                                             }
                                         });
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
                                         dialog.dismiss();
                                     }
                                 }
@@ -220,7 +245,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    actionDetected();
                     try {
                         Integer.valueOf(editTextPort.getText().toString());
                     } catch (Exception e) {
@@ -244,6 +269,12 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(handler!=null)
+            handler.removeCallbacks(runnableLogout);
+    }
 
     @Override
     public void onResume() {
@@ -255,7 +286,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         } else {
             getPreferenceScreen().setEnabled(true);
         }
-
+        actionDetected();
 
         Preference devicePref = findPreference("preferences_communication_list_devices");
         devicePref.setSummary(getResources().getStringArray(R.array.preferences_communication_string_array_devices)[Integer.parseInt(prefs.getString("preferences_communication_list_devices", "1")) - 1]);

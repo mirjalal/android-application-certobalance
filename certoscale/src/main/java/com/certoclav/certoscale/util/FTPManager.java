@@ -126,7 +126,12 @@ public class FTPManager {
 
         updateAll(null);
     }
-
+/*
+*  Uploading to other folder read upload from the folder if the uploading is success remove from the folder.
+*   There are two folder
+*   IFP_UPLOADING are used for raw data
+*   IFP_ILIMS_UPLOADING are used for ash data for iLims
+ */
 
     public void updateAll(final FTPListener listener) {
         if(!isEnabled)return;
@@ -174,13 +179,15 @@ public class FTPManager {
                                                                     srcFileStream.close();
                                                                 }
 
-                                                                dir = new File(android.os.Environment.getExternalStorageDirectory(), "IFP_ILIMS");
+                                                                dir = new File(new File(android.os.Environment.getExternalStorageDirectory(), "IFP_ILIMS/RAW_DATA"),
+                                                                        "/IFP_ILIMS_UPLOADING");
                                                                 ftp.makeDirectory(folderILIMS);
                                                                 ftp.changeWorkingDirectory(folderILIMS);
-                                                                FTPFile[] filesiLIMS = ftp.listFiles(folderILIMS, filter);
-                                                                for (CustomFile file : findNotUploadedFiles(filesiLIMS, dir.listFiles(csvFilter))) {
+                                                                for (File file : dir.listFiles(csvFilter)) {
                                                                     FileInputStream srcFileStream = new FileInputStream(file);
-                                                                    ftp.storeFile(file.getName(), srcFileStream);
+                                                                    if(ftp.storeFile(file.getName(), srcFileStream)){
+                                                                        file.delete();
+                                                                    }
                                                                     srcFileStream.close();
                                                                 }
                                                                 if (listener != null)

@@ -19,4 +19,6 @@ public class AppConstants {
 	public static final String PREFERENCE_LAST_LOGGED_IN_USER_ID = "last_user_id";
 	public static final String SIGNATURE = "41:4C:EA:DC:75:FB:DA:3B:C8:2E:62:DF:4B:82:44:52:01:DB:F5:25";
 
+	public static final long SESSION_TIMEOUT = 5*60*1000;
+
 }

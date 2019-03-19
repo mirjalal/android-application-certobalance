@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.MenuElementAdapter;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.MenuElement;
@@ -50,8 +52,23 @@ public class MenuActivity extends Activity implements ButtonEventListener {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    Handler handler = new Handler();
 
+    Runnable runnableLogout = new Runnable() {
+        @Override
+        public void run() {
+            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+            Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    };
 
+    public void actionDetected() {
+        if (handler != null && runnableLogout != null) {
+            handler.removeCallbacks(runnableLogout);
+            handler.postDelayed(runnableLogout, AppConstants.SESSION_TIMEOUT);
+        }
+    }
 
 
 
@@ -103,7 +120,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
     @Override
     protected void onResume() {
-
+        actionDetected();
         String key = "preferences_communication_list_devices";
         String modelValue = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext()).getString(key, "1");
         switch (modelValue) {
@@ -124,6 +141,9 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
     @Override
     protected void onPause() {
+        if(handler!=null){
+            handler.removeCallbacks(runnableLogout);
+        }
         super.onPause();
     }
 
@@ -131,6 +151,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
+        actionDetected();
         switch (buttonId){
             case ActionButtonbarFragment.BUTTON_ADD:
                 try {

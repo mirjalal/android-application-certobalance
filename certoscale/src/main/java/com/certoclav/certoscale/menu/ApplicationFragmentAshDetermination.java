@@ -49,6 +49,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionDetected();
                 ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
             }
@@ -57,6 +58,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionDetected();
                 switch (Scale.getInstance().getScaleApplication()) {
                     case ASH_DETERMINATION_HOME:
                         break;
@@ -92,6 +94,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        actionDetected();
                                         ApplicationManager.getInstance().getCurrentProtocol().saveBeakerAndSampleWeight(currentWeight);
                                         saveProtocolContent();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
@@ -103,6 +106,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 abortButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        actionDetected();
                                         warningDialog.dismiss();
                                     }
                                 });
@@ -142,10 +146,47 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             double delta = ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
                                     - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true);
                             if (delta > 0.002) {
-                                //continue
-                                saveProtocolContent();
-                                Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
-                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+
+                                if(ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()
+                                        >ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)){
+
+                                    TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
+                                    errorMessage.setText(R.string.the_beaker_is_heavier_than_beaker_before);
+                                    TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+                                    TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            actionDetected();
+                                            Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
+                                            //dont save the last value
+                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                            ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+                                            saveProtocolContent();
+                                            saveAshDeterminationProtocol();
+                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+                                            warningDialog.dismiss();
+                                        }
+                                    });
+                                    abortButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            actionDetected();
+                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                            saveProtocolContent();
+                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                                            warningDialog.dismiss();
+                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                        }
+                                    });
+                                    warningDialog.show();
+
+                                }else {
+                                    //continue
+                                    saveProtocolContent();
+                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                }
                             } else if (delta <= 0.002 && delta >= -0.005) {
                                 //Finished successfully
                                 ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
@@ -168,6 +209,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 ignoreButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        actionDetected();
                                         Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
                                         //dont save the last value
                                         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
@@ -181,6 +223,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 abortButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        actionDetected();
                                         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
                                         saveProtocolContent();
                                         ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
@@ -261,6 +304,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     }
 
     private void updateUI() {
+        actionDetected();
         switch (Scale.getInstance().getScaleApplication()) {
             case ASH_DETERMINATION_HOME:
                 textInstruction.setText("Drücken Sie START um die Aschewertbestimmung zu starten");
@@ -335,6 +379,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     private void showBatchNameEditor() {
         try {
+            actionDetected();
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
             dialog.setTitle(R.string.enter_the_sample_number);
@@ -353,6 +398,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                     dialog.dismiss();
                     Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
@@ -362,6 +408,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
                     if (!editText.getText().toString().isEmpty()) {
                         ApplicationManager.getInstance().getCurrentProtocol().setAshSampleName((editText.getText().toString()));
@@ -380,6 +427,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     private void showOvenTemperatureDialog() {
         try {
+            actionDetected();
             final Dialog dialog = new Dialog(getActivity(), R.style.TemperatureDialog);
             dialog.setContentView(R.layout.dialog_oven_temperature);
             //dialog.setTitle("Select oven temperature");
@@ -401,18 +449,21 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             button550.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    actionDetected();
                     ovenTemperature.setText("550");
                 }
             });
             button600.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    actionDetected();
                     ovenTemperature.setText("600");
                 }
             });
             button900.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    actionDetected();
                     ovenTemperature.setText("900");
                 }
             });
@@ -421,6 +472,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             buttonSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    actionDetected();
                     if (ovenTemperature.getText().toString().length() > 0 && Double.parseDouble(ovenTemperature.getText().toString()) > 0) {
                         ApplicationManager.getInstance().getCurrentProtocol().setOvenTemperature(Double.parseDouble(ovenTemperature.getText().toString()));
                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGH_BEAKER);
@@ -439,6 +491,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     private void showBeakerNameEditor() {
         try {
+            actionDetected();
             final Dialog dialog = new Dialog(getActivity());
             dialog.setContentView(R.layout.dialog_edit_text);
             dialog.setCancelable(false);
@@ -458,6 +511,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
                     Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                     dialog.dismiss();
@@ -467,6 +521,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             dialogButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    actionDetected();
                     EditText editText = (EditText) dialog.findViewById(R.id.dialog_edit_text_edittext);
                     try {
                         DatabaseService databaseService = new DatabaseService(getActivity());
@@ -531,7 +586,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     @Override
     public void onStableChanged(boolean isStable) {
         buttonNext.setEnabled(isStable);
+        actionDetected();
     }
 
-
+    private void actionDetected(){
+       if(getActivity() instanceof  ApplicationActivity){
+           ((ApplicationActivity)getActivity()).actionDetected();
+       }
+    }
 }

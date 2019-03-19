@@ -711,6 +711,7 @@
     <string name="test">TEST</string>
     <string name="more">MEHR...</string>
     <string name="the_beaker_is_heavier_than_before_glowing">Der Tiegel ist um mehr als 5mg schwerer als vor dem Glühen</string>
+    <string name="the_beaker_is_heavier_than_beaker_before">Der Tiegel mit Asche hat weniger Gewicht als der Tiegel selbst!</string>
     <string name="connecting">Verbinden.....</string>
     <string name="ash_value_is_heavier">Der Aschewert ist höher als der Normalwert (0,5g)!</string>
     <string name="continue_to_glow">Protokoll gespeichert. Glühen fortsetzen</string>

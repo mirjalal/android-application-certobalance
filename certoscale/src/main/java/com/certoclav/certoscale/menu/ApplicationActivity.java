@@ -3,9 +3,11 @@ package com.certoclav.certoscale.menu;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
+import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Library;
 import com.certoclav.certoscale.listener.ButtonEventListener;
@@ -91,11 +94,46 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
     private Toast toast = null;
     private EditText editTextRFID;
 
+    Runnable runnableLogout = new Runnable() {
+        @Override
+        public void run() {
+            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+            Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    };
+    Handler handler = new Handler();
+    private ScreenReceiver mReceiver;
+
+
+    private class ScreenReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+                // do whatever you need to do here
+
+                Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+                Intent i = new Intent(ApplicationActivity.this, LoginActivity.class);
+                startActivity(i);
+            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+                // and do whatever you need to do here
+
+            }
+        }
+
+    }
+
+    public void actionDetected() {
+        if (handler != null && runnableLogout != null) {
+            handler.removeCallbacks(runnableLogout);
+            handler.postDelayed(runnableLogout, AppConstants.SESSION_TIMEOUT);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.menu_application_activity);
 
         navigationbar.onCreate();
@@ -111,6 +149,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
             @Override
             public void onClick(View v) {
                 try {
+                    actionDetected();
                     Intent intent = new Intent();
                     intent.setComponent(new ComponentName("com.moblynx.calculatorjb", "com.android.calculator2.Calculator"));
                     startActivity(intent);
@@ -127,6 +166,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
         imageButtonVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionDetected();
                 imageButtonSidebarBack.performClick();
                 Intent intent = new Intent(ApplicationActivity.this, VideoActivity.class);
                 startActivity(intent);
@@ -137,6 +177,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
         imageButtonCalibration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionDetected();
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this);
                 if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_calibration), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_calibration)) == true) {
                     Toast.makeText(ApplicationActivity.this, R.string.the_calibration_has_been_locked_by_the_admin, Toast.LENGTH_SHORT).show();
@@ -152,6 +193,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
         imageButtonTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionDetected();
                 try {
                     Intent intent = new Intent();
                     intent.setComponent(new ComponentName("org.ilumbo.ovo", "org.ilumbo.ovo.TimerActivity"));
@@ -167,7 +209,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
             @Override
             public void onClick(View v) {
 
-
+                actionDetected();
                 Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(ApplicationActivity.this, R.anim.righttoleft);
                 hyperspaceJumpAnimation.setAnimationListener(new Animation.AnimationListener() {
                     @Override
@@ -214,7 +256,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Toast.makeText(ApplicationActivity.this,"focused "+hasFocus,Toast.LENGTH_SHORT).show();
+                Toast.makeText(ApplicationActivity.this, "focused " + hasFocus, Toast.LENGTH_SHORT).show();
                 if (!hasFocus) {
                     editTextRFID.requestFocus();
                     editTextRFID.setText("");
@@ -222,12 +264,19 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
             }
         });
 
+        // initialize receiver
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        mReceiver = new ScreenReceiver();
+        registerReceiver(mReceiver, filter);
 
     }
 
 
     @Override
     protected void onResume() {
+
+        actionDetected();
         Scale.getInstance().setOnStableListener(this);
 
 
@@ -260,12 +309,27 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
 
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mReceiver != null) {
+            unregisterReceiver(mReceiver);
+            mReceiver = null;
+        }
+    }
+
+    @Override
     protected void onPause() {
         PreferenceManager.getDefaultSharedPreferences(ApplicationActivity.this).unregisterOnSharedPreferenceChangeListener(this);
         navigationbar.removeNavigationbarListener(this);
         actionButtonbarFragment.removeButtonEventListener(this);
         Scale.getInstance().removeOnApplicationListener(this);
         Scale.getInstance().removeOnStableListener(this);
+
+        if(handler!=null){
+            handler.removeCallbacks(runnableLogout);
+        }
+
         super.onPause();
     }
 
@@ -301,7 +365,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
         Log.e("ApplicationActivity", "onclickhome");
-
+        actionDetected();
         switch (buttonId) {
 
             case ActionButtonbarFragment.BUTTON_MEASUREMENT_EXISTING:
@@ -530,6 +594,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
 
                         @Override
                         public void onClick(View v) {
+                            actionDetected();
                             dialog.dismiss();
                         }
                     });
@@ -538,6 +603,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
                     dialogButtonSave.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            actionDetected();
                             String name = ((EditText) dialog.findViewById(R.id.dialog_edit_text_edittext)).getText().toString();
                             DatabaseService db = new DatabaseService(ApplicationActivity.this);
 
@@ -587,6 +653,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
 
                         @Override
                         public void onClick(View v) {
+                            actionDetected();
                             dialog.dismiss();
                         }
                     });
@@ -595,6 +662,7 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
                     dialogButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            actionDetected();
                             dialog.dismiss();
                             Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
                             Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);
@@ -732,28 +800,14 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
         actionButtonbarFragment.updateStatsButtonUI();
     }
 
-    Handler handler = new Handler();
-    Runnable runnableLogout = new Runnable() {
-        @Override
-        public void run() {
-            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
-            Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);
-            startActivity(intent);
-        }
-    };
-
 
     @Override
     public void onStableChanged(boolean isStable) {
 
-
-        handler.removeCallbacks(runnableLogout);
-        handler.postDelayed(runnableLogout,5*60*1000);
-
         Log.e("ApplicationActivity", "onStableChanged");
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
+        actionDetected();
 
         if (isStable == true) {
             if (actionButtonbarFragment.getButtonAccumulate().isEnabled() == true) {

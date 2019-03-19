@@ -4,10 +4,12 @@ import android.os.Build;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -225,13 +227,16 @@ public class ExportUtils {
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
 
         File dir = new File(root.getAbsolutePath() + "/IFP_ILIMS");
+        File dirUploading = new File(root.getAbsolutePath() + "/IFP_ILIMS/RAW_DATA/IFP_ILIMS_UPLOADING");
         dir.mkdirs();
+        dirUploading.mkdirs();
 
         DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String sdt = df.format(new Date(System.currentTimeMillis()));
 
 
         File file = new File(dir, name+"_"+sdt + "." + "csv"); // for example protocol123.txt
+        File fileUploading = new File(dirUploading, name+"_"+sdt + "." + "csv"); // for example protocol123.txt
 
         try {
             FileOutputStream f = new FileOutputStream(file);
@@ -240,6 +245,8 @@ public class ExportUtils {
             pw.flush();
             pw.close();
             f.close();
+
+            copyFile(file,fileUploading);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.e("ExportUtils", "******* File not found. Did you" +
@@ -252,6 +259,31 @@ public class ExportUtils {
         }
         Log.e("Export Utils", "\n\nFile written to " + file);
         return true;
+    }
+
+    public static void copyFile(File sourceFile, File destFile) throws IOException {
+        if (!destFile.getParentFile().exists())
+            destFile.getParentFile().mkdirs();
+
+        if (!destFile.exists()) {
+            destFile.createNewFile();
+        }
+
+        FileChannel source = null;
+        FileChannel destination = null;
+
+        try {
+            source = new FileInputStream(sourceFile).getChannel();
+            destination = new FileOutputStream(destFile).getChannel();
+            destination.transferFrom(source, 0, source.size());
+        } finally {
+            if (source != null) {
+                source.close();
+            }
+            if (destination != null) {
+                destination.close();
+            }
+        }
     }
 
 

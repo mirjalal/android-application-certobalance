@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,10 +20,12 @@ import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.listener.DatabaseListener;
+import com.certoclav.certoscale.menu.LoginActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
+import com.certoclav.certoscale.model.ScaleState;
 import com.certoclav.certoscale.service.SyncProtocolsService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.FTPManager;
@@ -48,6 +51,24 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     private ProtocolAdapter adapter = null;
     private GoogleApiClient client;
     private FTPManager ftpManager;
+
+    Handler handler = new Handler();
+
+    Runnable runnableLogout = new Runnable() {
+        @Override
+        public void run() {
+            Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+            Intent intent = new Intent(MenuProtocolActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    public void actionDetected() {
+        if (handler != null && runnableLogout != null) {
+            handler.removeCallbacks(runnableLogout);
+            handler.postDelayed(runnableLogout, AppConstants.SESSION_TIMEOUT);
+        }
+    }
 
 
     @Override
@@ -131,19 +152,30 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                 Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
             }
         });
+        actionDetected();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if(handler!=null){
+            handler.removeCallbacks(runnableLogout);
+        }
         //Scale.getInstance().removeOnDatabaseListener(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(handler!=null){
+            handler.removeCallbacks(runnableLogout);
+        }
+    }
 
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
-
+        actionDetected();
         switch (buttonId) {
             case ActionButtonbarFragment.BUTTON_DELETE:
                 try {
@@ -159,6 +191,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
 
                         @Override
                         public void onClick(View v) {
+                            actionDetected();
                             dialog.dismiss();
                         }
                     });
@@ -168,7 +201,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
                         @Override
                         public void onClick(View v) {
                             final DatabaseService db = new DatabaseService(ApplicationController.getContext());
-
+                            actionDetected();
 
                             //db.getProtocols().removeAll((Collection<Protocol>) db.getProtocols());
                             List<Protocol> protocolList = db.getProtocols();

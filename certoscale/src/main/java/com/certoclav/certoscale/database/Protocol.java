@@ -522,7 +522,7 @@ public class Protocol {
 
     public String generateCSV() {
         parseJson();
-        return content.replaceAll(": ", ",").replaceAll(":", ",");
+        return content.replaceAll(": ", ";").replaceAll(":", ";");
     }
 
     public Double getLastGlowWeight() {
