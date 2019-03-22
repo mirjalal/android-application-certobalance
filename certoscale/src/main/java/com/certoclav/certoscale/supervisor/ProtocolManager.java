@@ -610,15 +610,15 @@ public class ProtocolManager implements ScaleApplicationListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                sb.append("Ofentemperatur: ").append(ApplicationManager.getInstance().getCurrentProtocol().
-                        getOvenTemperature()+" C").append("\n");
+                sb.append("Ofentemperatur: ").append(String.format("%.1f",ApplicationManager.getInstance().getCurrentProtocol().
+                        getOvenTemperature())+" C").append("\n");
                 sb.append("Tiegelgewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
                 sb.append("Probengewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
                         ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
                 if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
                     sb.append("Aschegehalt [g]" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                    sb.append("Aschegehalt [g/100g]" + ": " + String.format(Locale.US, "%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
+                    sb.append("Aschegehalt [g/100g]" + ": " + String.format("%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
                 }else{
                     sb.append("Messung noch nicht abgeschlossen\n");
                 }

@@ -550,7 +550,7 @@ public class Protocol {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
             Log.d("result",weightDrySample+" "+weightWetSample+" "+ashWeightBeaker+" "+ashWeightBeakerWithSample);
-            Double result = (weightDrySample * 100 / weightWetSample);
+            Double result = (weightDrySample * 100d / weightWetSample);
             return result;
         } catch (Exception e) {
             return 0d;
