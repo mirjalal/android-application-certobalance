@@ -27,6 +27,7 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.view.EditTextItem;
 import com.certoclav.library.bcrypt.BCrypt;
 
@@ -269,17 +270,40 @@ public class RegisterActivity extends Activity {
 
 
                 Boolean isLocal = true;
-
+                User lastUser = null;
                 if (getIntent().hasExtra(AppConstants.INTENT_EXTRA_USER_ID)) {
                     DatabaseService db = new DatabaseService(RegisterActivity.this);
-                    int retval = db.deleteUser(db.getUserById(getIntent().getExtras().getInt(AppConstants.INTENT_EXTRA_USER_ID)));
-                    if (retval != 1) {
-                        Toast.makeText(RegisterActivity.this, R.string.failed_to_apply_changes, Toast.LENGTH_LONG).show();
-                        return;
+                    lastUser = db.getUserById(getIntent().getExtras().getInt(AppConstants.INTENT_EXTRA_USER_ID));
+
+                    if (lastUser.getIsAdmin()) {
+                        int retval = db.deleteUser(lastUser);
+                        if (retval != 1) {
+                            Toast.makeText(RegisterActivity.this, R.string.failed_to_apply_changes, Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+                            User user = new User(
+                                    editFirstName.getText(),
+                                    "",
+                                    editLastName.getText(),
+                                    "Admin",
+                                    editMobile.getText(),
+                                    "",
+                                    "",
+                                    "",
+                                    "adminkalaryigini",
+                                    BCrypt.hashpw(editPasswordItem.getText(), BCrypt.gensalt()),
+                                    new Date(),
+                                    true,
+                                    true);
+                            db.insertUser(user);
+                            Toasty.success(RegisterActivity.this, R.string.changes_successfully_saved, Toast.LENGTH_SHORT, true).show();
+                            finish();
+                        }
                     }
                 }
 
-                askForRFIDCard();
+                if (lastUser == null || !lastUser.getIsAdmin())
+                    askForRFIDCard(lastUser);
 
             }
         });
@@ -289,7 +313,8 @@ public class RegisterActivity extends Activity {
 
 
     private String textLastRFID = "";
-    private void askForRFIDCard() {
+
+    private void askForRFIDCard(final User lastUser) {
         try {
             final Dialog dialog = new Dialog(this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -310,12 +335,12 @@ public class RegisterActivity extends Activity {
                     String text = editText.getText().toString();
                     if (text.length() > 0) {
 
-                        if(db.getUserByRFID(text)!=null){
+                        if (db.getUserByRFID(text) != null && (lastUser==null || !db.getUserByRFID(text).getEmail().equals(lastUser.getEmail()))) {
                             imageViewRFID.setImageResource(R.drawable.rfid_scan_wrong);
                             dialogButton.setEnabled(false);
                             Toasty.error(RegisterActivity.this,
-                                    getString(R.string.the_rfid_are_registered_already),Toast.LENGTH_LONG,true).show();
-                        }else {
+                                    getString(R.string.the_rfid_are_registered_already), Toast.LENGTH_LONG, true).show();
+                        } else {
                             dialogButton.setEnabled(true);
                             imageViewRFID.setImageResource(R.drawable.rfid_scan_done);
                         }
@@ -341,7 +366,7 @@ public class RegisterActivity extends Activity {
                     }
                 }
             });
-            Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
+            final Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialog_edit_text_button_cancel);
             dialogButtonNo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -352,7 +377,13 @@ public class RegisterActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     //register user
-                    dialog.dismiss();
+                    dialogButton.setEnabled(false);
+                    dialogButton.setText(getString(R.string.saving));
+                    dialogButtonNo.setEnabled(false);
+                    buttonRegister.setEnabled(false);
+                    buttonRegister.setText(getString(R.string.saving));
+                    if (lastUser != null)
+                        db.deleteUser(lastUser);
                     User user = new User(
                             editFirstName.getText(),
                             "",
@@ -370,6 +401,7 @@ public class RegisterActivity extends Activity {
                     db.insertUser(user);
                     Toasty.success(getApplicationContext(), R.string.account_created,
                             Toast.LENGTH_LONG, true).show();
+                    dialog.dismiss();
                     finish();
                 }
             });
@@ -393,13 +425,14 @@ public class RegisterActivity extends Activity {
                 DatabaseService db = new DatabaseService(this);
                 User user = db.getUserById(getIntent().getExtras().getInt(AppConstants.INTENT_EXTRA_USER_ID));
                 editEmailItem.setText(user.getEmail());
-                editEmailItem.setEnabled(false);
+                editEmailItem.setVisibility(View.GONE);
                 editEmailItem.setFocusable(false);
-                if (user.getIsAdmin() == true) {
-                    editEmailItem.setVisibility(View.VISIBLE);
-                } else {
-                    editEmailItem.setVisibility(View.INVISIBLE);
-                }
+//                if (user.getIsAdmin() == true) {
+//                    editEmailItem.setVisibility(View.VISIBLE);
+//                    editEmailItem.set
+//                } else {
+//                    editEmailItem.setVisibility(View.INVISIBLE);
+//                }
                 navigationbar.getTextTitle().setText(user.getEmail());
                 editMobile.setText(user.getMobile());
                 editFirstName.setText(user.getFirstName());

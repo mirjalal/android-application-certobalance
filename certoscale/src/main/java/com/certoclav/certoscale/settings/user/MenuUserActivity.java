@@ -23,6 +23,7 @@ import com.certoclav.certoscale.listener.ButtonEventListener;
 import com.certoclav.certoscale.menu.RegisterActivity;
 import com.certoclav.certoscale.model.ActionButtonbarFragment;
 import com.certoclav.certoscale.model.Navigationbar;
+import com.certoclav.certoscale.model.Scale;
 import com.certoclav.library.application.ApplicationController;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -56,7 +57,7 @@ public class MenuUserActivity extends Activity implements ButtonEventListener, U
         navigationbar.setButtonEventListener(this);
         navigationbar.getButtonBack().setVisibility(View.VISIBLE);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
-        if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_user_settings), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_user_settings))==true) {
+        if (!Scale.getInstance().getUser().getIsAdmin()) {
             navigationbar.getButtonAdd().setVisibility(View.GONE);
         }else {
             navigationbar.getButtonAdd().setVisibility(View.VISIBLE);

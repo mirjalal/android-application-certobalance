@@ -9,6 +9,15 @@
     </CheckBoxPreference>
 
     <CheckBoxPreference
+        android:key="@string/preferences_lockout_device_settings"
+        android:defaultValue="@bool/preferences_lockout_device_settings"
+        android:title="@string/device_settings"
+        android:summary="@string/lock_the_device_settings"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+
+    <CheckBoxPreference
         android:key="@string/preferences_lockout_user_settings"
         android:defaultValue="@bool/preferences_lockout_user_settings"
         android:title="@string/user_settings"
@@ -16,13 +25,13 @@
         android:disableDependentsState="true">
     </CheckBoxPreference>
 
-    <CheckBoxPreference
-        android:key="@string/preferences_lockout_balance_setup"
-        android:defaultValue="@bool/preferences_lockout_balance_setup"
-        android:title="@string/balance_setup"
-        android:summary="@string/lock_the_balance_setup"
-        android:disableDependentsState="true">
-    </CheckBoxPreference>
+    <!--<CheckBoxPreference-->
+        <!--android:key="@string/preferences_lockout_balance_setup"-->
+        <!--android:defaultValue="@bool/preferences_lockout_balance_setup"-->
+        <!--android:title="@string/balance_setup"-->
+        <!--android:summary="@string/lock_the_balance_setup"-->
+        <!--android:disableDependentsState="true">-->
+    <!--</CheckBoxPreference>-->
 
     <CheckBoxPreference
         android:key="@string/preferences_lockout_application_modes"
@@ -93,6 +102,14 @@
         android:defaultValue="@bool/preferences_lockout_factory_reset"
         android:title="@string/factory_reset_menu"
         android:summary="@string/lock_the_factory_reset"
+        android:disableDependentsState="true">
+    </CheckBoxPreference>
+
+    <CheckBoxPreference
+        android:key="@string/preferences_lockout_labels"
+        android:defaultValue="@bool/preferences_lockout_labels"
+        android:title="@string/labels"
+        android:summary="@string/lock_the_labels"
         android:disableDependentsState="true">
     </CheckBoxPreference>
 

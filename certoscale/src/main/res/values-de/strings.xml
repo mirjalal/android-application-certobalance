@@ -680,6 +680,8 @@
     <string name="lock_the_application_modes">Die Applikationsauswahl sperren</string>
     <string name="lock_the_balance_setup">Die Geräteeinstellungen sperren</string>
     <string name="lock_the_calibration">Die Kalibrierung sperren</string>
+    <string name="lock_the_device_settings">Die Geräteeinstellungen sperren</string>
+    <string name="lock_the_labels">Die Labels sperren</string>
     <string name="lock_the_communication_settings">Die Kommunikationseinstellungen sperren</string>
     <string name="lock_the_weighing_units">Die Gewichtseinheiten sperren</string>
     <string name="lock_the_factory_reset">Werkszustand wiederherstellen sperren</string>
@@ -720,5 +722,11 @@
     <string name="please_approach_rfid_tag_to_login">Scannen Sie Ihre RFID Karte</string>
     <string name="the_rfid_are_registered_already">Die RFID Karte ist bereits registriert</string>
     <string name="the_rfid_are_not_registered">Die RFID Karte ist nicht registriert.</string>
+
+
+    <string name="please_enter_admin_password">Bitte geben Sie das Administratorkennwort ein</string>
+    <string name="checking">Überprüfung...</string>
+    <string name="saving">Speichern...</string>
+
 
 </resources>

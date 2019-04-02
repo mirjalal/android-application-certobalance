@@ -499,6 +499,21 @@ public class DatabaseService {
         return null;
     }
 
+    public User getUserByUsername(String username) {
+        try {
+            List<User> users = userDao.queryBuilder().where().eq("email", username).query();
+            if (users.size() > 0)
+                return users.get(0);
+
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return null;
+    }
+
     public int insertUser(User user) {
 
         try {

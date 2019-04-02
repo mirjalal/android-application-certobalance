@@ -3,6 +3,7 @@ package com.certoclav.certoscale.menu;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -71,8 +72,6 @@ public class MenuActivity extends Activity implements ButtonEventListener {
     }
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,24 +91,55 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
         //Set up menu items
         gridView = (GridView) findViewById(R.id.menu_main_grid);
-        menuMainElementAdapter = new MenuElementAdapter(this,new ArrayList<MenuElement>());
+        menuMainElementAdapter = new MenuElementAdapter(this, new ArrayList<MenuElement>());
         gridView.setAdapter(menuMainElementAdapter);
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.applications).toUpperCase(),R.drawable.ic_menu_weighing_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.calibration).toUpperCase(),R.drawable.ic_menu_calibration_orange, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.library).toUpperCase(),R.drawable.ic_menu_settings_bar_2, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.recipes).toUpperCase(),R.drawable.ic_menu_document_text, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.items).toUpperCase(),R.drawable.ic_menu_list_orange, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.protocols).toUpperCase(),R.drawable.ic_menu_protocol_2,MenuElement.MenuItemId.MENU_ITEM_PROTOCOLS));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.device_settings).toUpperCase(),R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.factory_reset).toUpperCase(),R.drawable.ic_menu_settings_reset, MenuElement.MenuItemId.MENU_ITEM_RESET));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.lockout_settings).toUpperCase(),R.drawable.ic_menu_lock2, MenuElement.MenuItemId.MENU_ITEM_LOCKOUT));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.application_settings).toUpperCase(),R.drawable.ic_menu_app_settings_applications_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.user_management).toUpperCase(),R.drawable.ic_menu_settings_user2, MenuElement.MenuItemId.MENU_ITEM_USER));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.glp_settings).toUpperCase(),R.drawable.ic_menu_settings_glp_2, MenuElement.MenuItemId.MENU_ITEM_GLP));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.unit_settings).toUpperCase(),R.drawable.ic_menu_unit_2, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.communicaton_settings).toUpperCase(),R.drawable.ic_menu_settings_communication, MenuElement.MenuItemId.MENU_ITEM_COMMUNICATION));
+        if (!Scale.getInstance().getUser().getIsAdmin())
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.applications).toUpperCase(), R.drawable.ic_menu_weighing_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATIONS));
+
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_calibration, R.bool.preferences_lockout_calibration))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.calibration).toUpperCase(), R.drawable.ic_menu_calibration_orange, MenuElement.MenuItemId.MENU_ITEM_CALIBRATION));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_library, R.bool.preferences_lockout_library))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.library).toUpperCase(), R.drawable.ic_menu_settings_bar_2, MenuElement.MenuItemId.MENU_ITEM_LIBRARY));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_recipes, R.bool.preferences_lockout_recipes))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.recipes).toUpperCase(), R.drawable.ic_menu_document_text, MenuElement.MenuItemId.MENU_ITEM_RECIPES));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_items, R.bool.preferences_lockout_items))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.items).toUpperCase(), R.drawable.ic_menu_list_orange, MenuElement.MenuItemId.MENU_ITEM_ITEMS));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_protocols, R.bool.preferences_lockout_protocols))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.protocols).toUpperCase(), R.drawable.ic_menu_protocol_2, MenuElement.MenuItemId.MENU_ITEM_PROTOCOLS));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_device_settings, R.bool.preferences_lockout_device_settings))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.device_settings).toUpperCase(), R.drawable.ic_menu_settings, MenuElement.MenuItemId.MENU_ITEM_DEVICE));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_factory_reset, R.bool.preferences_lockout_factory_reset))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.factory_reset).toUpperCase(), R.drawable.ic_menu_settings_reset, MenuElement.MenuItemId.MENU_ITEM_RESET));
+
+        if(Scale.getInstance().getUser().getIsAdmin())
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.lockout_settings).toUpperCase(), R.drawable.ic_menu_lock2, MenuElement.MenuItemId.MENU_ITEM_LOCKOUT));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_application_modes, R.bool.preferences_lockout_application_modes))
+        menuMainElementAdapter.add(new MenuElement(getString(R.string.application_settings).toUpperCase(), R.drawable.ic_menu_app_settings_applications_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_user_settings, R.bool.preferences_lockout_user_settings))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.user_management).toUpperCase(), R.drawable.ic_menu_settings_user2, MenuElement.MenuItemId.MENU_ITEM_USER));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_glp, R.bool.preferences_lockout_glp))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.glp_settings).toUpperCase(), R.drawable.ic_menu_settings_glp_2, MenuElement.MenuItemId.MENU_ITEM_GLP));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_weighing_units, R.bool.preferences_lockout_weighing_units))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.unit_settings).toUpperCase(), R.drawable.ic_menu_unit_2, MenuElement.MenuItemId.MENU_ITEM_WEIGHING_UNITS));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_communication, R.bool.preferences_lockout_communication))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.communicaton_settings).toUpperCase(), R.drawable.ic_menu_settings_communication, MenuElement.MenuItemId.MENU_ITEM_COMMUNICATION));
+
         menuMainElementAdapter.add(new MenuElement(getString(R.string.videos).toUpperCase(), R.drawable.ic_menu_video_orange, MenuElement.MenuItemId.MENU_ITEM_VIDEO));
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.labels).toUpperCase(),R.drawable.ic_menu_label, MenuElement.MenuItemId.MENU_ITEM_LABELS));
+
+        if (isSettingsNotLocked(R.string.preferences_lockout_labels, R.bool.preferences_lockout_labels))
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.labels).toUpperCase(), R.drawable.ic_menu_label, MenuElement.MenuItemId.MENU_ITEM_LABELS));
 
         ApplicationManager.getInstance();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -141,18 +171,24 @@ public class MenuActivity extends Activity implements ButtonEventListener {
 
     @Override
     protected void onPause() {
-        if(handler!=null){
+        if (handler != null) {
             handler.removeCallbacks(runnableLogout);
         }
         super.onPause();
     }
 
+    //R.string.preferences_lockout_balance_setup
+    //R.bool.preferences_lockout_balance_setup
+    private boolean isSettingsNotLocked(int id, int idDefault) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        return !prefs.getBoolean(ApplicationController.getContext().getString(id), getResources().getBoolean(idDefault)) || Scale.getInstance().getUser().getIsAdmin();
+    }
 
     @Override
     public void onClickNavigationbarButton(int buttonId, boolean isLongClick) {
 
         actionDetected();
-        switch (buttonId){
+        switch (buttonId) {
             case ActionButtonbarFragment.BUTTON_ADD:
                 try {
 
@@ -197,32 +233,31 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                                             .setServiceCaseDescription("DESCRIPTION_FOR_SERVICE_CASE")
                                             .build();
 
-                    TVSessionFactory.createTVSession(MenuActivity.this, appToken,
-                            new TVSessionCreationCallback() {
-                                @Override
-                                public void onTVSessionCreationSuccess(TVSession session) {
-                                    session.start(config);
-                                }
+                            TVSessionFactory.createTVSession(MenuActivity.this, appToken,
+                                    new TVSessionCreationCallback() {
+                                        @Override
+                                        public void onTVSessionCreationSuccess(TVSession session) {
+                                            session.start(config);
+                                        }
 
-                                @Override
-                                public void onTVSessionCreationFailed(TVCreationError error) {
-                                }
-                            });
+                                        @Override
+                                        public void onTVSessionCreationFailed(TVCreationError error) {
+                                        }
+                                    });
 
 
                             dialog.dismiss();
                         }
                     });
                     dialog.show();
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
 
 
                 break;
             case ActionButtonbarFragment.BUTTON_LOGOUT:
-                try
-                {
+                try {
 
                     final Dialog dialog = new Dialog(MenuActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
@@ -257,9 +292,7 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                     dialog.show();
 
 
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;

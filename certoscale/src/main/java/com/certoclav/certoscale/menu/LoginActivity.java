@@ -2,6 +2,7 @@ package com.certoclav.certoscale.menu;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -51,7 +52,6 @@ import com.certoclav.certoscale.model.RecipeEntry;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
-import com.certoclav.certoscale.settings.device.SettingsDeviceActivity;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.StateMachine;
 import com.certoclav.library.application.ApplicationController;
@@ -111,7 +111,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         public void run() {
             buttonLogin.setEnabled(true);
             Toasty.error(getApplicationContext(),
-                    R.string.password_not_correct, Toast.LENGTH_LONG,true).show();
+                    R.string.password_not_correct, Toast.LENGTH_LONG, true).show();
         }
     };
 
@@ -163,7 +163,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     final Runnable mShowLoginSuccessfull = new Runnable() {
         public void run() {
 
-            Toasty.success(LoginActivity.this, getString(R.string.login_successful), Toast.LENGTH_LONG,true).show();
+            Toasty.success(LoginActivity.this, getString(R.string.login_successful), Toast.LENGTH_LONG, true).show();
 
             buttonLogin.setEnabled(true);
             Intent intent = new Intent(LoginActivity.this, ApplicationActivity.class);
@@ -177,20 +177,20 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         super.onCreate(savedInstanceState);
         final DatabaseService databaseService = new DatabaseService(this);
 
-        if(getIntent()!=null && getIntent().hasExtra("userid") &&  getIntent().getStringExtra("userid")!=null){
+        if (getIntent() != null && getIntent().hasExtra("userid") && getIntent().getStringExtra("userid") != null) {
             User user = databaseService.getUserByRFID(getIntent().getStringExtra("userid"));
-            if(user!=null){
+            if (user != null) {
                 currentUser = user;
                 Scale.getInstance().setUser(user);
                 Toasty.success(LoginActivity.this,
                         getString(R.string.login_successful),
-                        Toast.LENGTH_LONG,true).show();
+                        Toast.LENGTH_LONG, true).show();
                 Intent intent = new Intent(LoginActivity.this,
                         ApplicationActivity.class);
                 startActivity(intent);
                 finish();
-            }else{
-                Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered),Toast.LENGTH_LONG,true).show();
+            } else {
+                Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered), Toast.LENGTH_LONG, true).show();
             }
         }
 
@@ -198,9 +198,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
             startActivity(intent);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            Toasty.warning(this,"Please install ES FTP to use FTP features",Toast.LENGTH_SHORT,true).show();
+            Toasty.warning(this, "Please install ES FTP to use FTP features", Toast.LENGTH_SHORT, true).show();
         }
 
         //super.setTheme(R.style.the);
@@ -215,22 +215,22 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
                 String text = editTextRFID.getText().toString().trim();
-                Log.d("RFID TEXT",text);
+                Log.d("RFID TEXT", text);
                 if (text.length() > 0) {
                     //check in database the user with the RFID exists
                     User user = databaseService.getUserByRFID(text);
 
-                    if(user!=null){
+                    if (user != null) {
                         currentUser = user;
                         Scale.getInstance().setUser(user);
                         Toasty.success(LoginActivity.this,
                                 getString(R.string.login_successful),
-                                Toast.LENGTH_LONG,true).show();
+                                Toast.LENGTH_LONG, true).show();
                         Intent intent = new Intent(LoginActivity.this,
                                 ApplicationActivity.class);
                         startActivity(intent);
-                    }else{
-                        Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered),Toast.LENGTH_LONG,true).show();
+                    } else {
+                        Toasty.error(LoginActivity.this, getString(R.string.the_rfid_are_not_registered), Toast.LENGTH_LONG, true).show();
                     }
                 }
                 editTextRFID.requestFocus();
@@ -270,7 +270,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         try {
             settingsUtils.setvolumeToMaximum(this);
             settingsUtils.setScreenBrightnessToMaximum(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -415,7 +415,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                     } else {
                         showNotificationForNetworkNavigation();
                         Toasty.warning(LoginActivity.this,
-                                getString(R.string.network_not_connected), Toast.LENGTH_LONG,true)
+                                getString(R.string.network_not_connected), Toast.LENGTH_LONG, true)
                                 .show();
                     }
 
@@ -437,9 +437,9 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                             if (AppConstants.IS_IO_SIMULATED) {
                                 return true;
                             }
-                          //  if (BCrypt.checkpw(params[0], currentUser.getPassword())
+                            //  if (BCrypt.checkpw(params[0], currentUser.getPassword())
                             //        || params[0].equals("master@certocloud")) {
-                                return true;
+                            return true;
 
                             //}
                             //return false;
@@ -453,14 +453,14 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
                             if (result) {
                                 Toasty.success(LoginActivity.this,
                                         getString(R.string.login_successful),
-                                        Toast.LENGTH_LONG,true).show();
+                                        Toast.LENGTH_LONG, true).show();
                                 Intent intent = new Intent(LoginActivity.this,
                                         ApplicationActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toasty.warning(getApplicationContext(),
                                         R.string.password_not_correct,
-                                        Toast.LENGTH_LONG,true).show();
+                                        Toast.LENGTH_LONG, true).show();
 
                             }
                             super.onPostExecute(result);
@@ -477,7 +477,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wInfo = wifiManager.getConnectionInfo();
         String macAddress = wInfo.getMacAddress();
-      /*  if (!getCertificateSHA1Fingerprint().equals(AppConstants.SIGNATURE) && !AppConstants.IS_IO_SIMULATED *//*&& !macAddress.equals("a0:2c:36:85:48:45")*//*) {
+        /*  if (!getCertificateSHA1Fingerprint().equals(AppConstants.SIGNATURE) && !AppConstants.IS_IO_SIMULATED *//*&& !macAddress.equals("a0:2c:36:85:48:45")*//*) {
             finish();
         }*/
 
@@ -627,6 +627,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             DatabaseService databaseService = new DatabaseService(this);
             if (databaseService.getUsers() != null) {
                 if (databaseService.getUsers().size() > 0) {
+                    if(databaseService.getUserByUsername("Admin")==null){
+                        User user1 = new User("", "", "", "Admin", "", "", "", "", "", BCrypt.hashpw("admin", BCrypt.gensalt()), new Date(), true, true);
+                        databaseService.insertUser(user1);
+                    }
                     return;
                 }
             }
@@ -761,7 +765,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             case PostUtil.RETURN_OK:
                 Toasty.success(LoginActivity.this,
                         getResources().getString(R.string.login_successful),
-                        Toast.LENGTH_LONG,true).show();
+                        Toast.LENGTH_LONG, true).show();
                 try {
                     if (Scale.getInstance().getUser().getIsLocal() == true) {
                         DatabaseService databaseService = new DatabaseService(
@@ -900,6 +904,143 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     }
 
 
+    Dialog dialogAdminLogin;
+    private class CheckAdminPassword extends AsyncTask<Object, Void, Boolean> {
+        private boolean isAdminLogin;
+        private ProgressDialog dialogProgress;
+
+        protected Boolean doInBackground(Object... params) {
+            User user = (User) params[0];
+            isAdminLogin = (boolean) params[2];
+            if(user!=null && BCrypt.checkpw(params[1].toString(),user.getPassword())){
+                Scale.getInstance().setUser(user);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialogProgress = ProgressDialog.show(LoginActivity.this, "",
+                    getString(R.string.checking), true);
+        }
+
+        protected void onPostExecute(Boolean result) {
+            dialogProgress.dismiss();
+            if (result) {
+                if(dialogAdminLogin!=null)
+                    dialogAdminLogin.dismiss();
+
+                if(isAdminLogin) {
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                }else{
+                    final Dialog dialog = new Dialog(LoginActivity.this);
+                    dialog.setContentView(R.layout.dialog_yes_no);
+                    dialog.setTitle(R.string.register_new_user);
+                    dialog.setCanceledOnTouchOutside(true);
+                    TextView text = (TextView) dialog.findViewById(R.id.text);
+                    ImageView image = (ImageView) dialog
+                            .findViewById(R.id.dialog_image);
+                    image.setVisibility(View.GONE);
+                    // set the custom dialog components - text, image and button
+
+                    text.setText(getText(R.string.do_you_really_want_to) + " "
+                            + getString(R.string.create_an_account_) + "\n");
+                    Button dialogButton = (Button) dialog
+                            .findViewById(R.id.dialogButtonOK);
+                    // if button is clicked, close the custom dialog
+                    dialogButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            showCreateAccountDialog();
+                        }
+                    });
+
+                    Button dialogButtonNo = (Button) dialog
+                            .findViewById(R.id.dialogButtonNO);
+                    dialogButtonNo.setOnClickListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                }
+            }else{
+                Toasty.error(getApplicationContext(),
+                        R.string.password_not_correct, Toast.LENGTH_LONG, true).show();
+            }
+        }
+    }
+
+    private void askForAdminLogin() {
+
+        dialogAdminLogin = new Dialog(LoginActivity.this);
+        dialogAdminLogin.setContentView(R.layout.dialog_admin_password);
+        dialogAdminLogin.setTitle(R.string.please_enter_admin_password);
+        dialogAdminLogin.setCanceledOnTouchOutside(true);
+
+        final EditText editTextPassword = (EditText) dialogAdminLogin.findViewById(R.id.editTextPassword);
+
+        dialogAdminLogin
+                .findViewById(R.id.dialogButtonLogin).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseService databaseService = new DatabaseService(LoginActivity.this);
+                User user = databaseService.getUserByUsername("Admin");
+                new CheckAdminPassword().execute(user,editTextPassword.getText().toString(), true);
+            }
+        });
+
+        dialogAdminLogin
+                .findViewById(R.id.dialogButtonCancel).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAdminLogin.dismiss();
+            }
+        });
+
+        dialogAdminLogin.show();
+
+    }
+
+    private void askForAdminLoginToRegisterANewUser() {
+
+        dialogAdminLogin = new Dialog(LoginActivity.this);
+        dialogAdminLogin.setContentView(R.layout.dialog_admin_password);
+        dialogAdminLogin.setTitle(R.string.please_enter_admin_password);
+        dialogAdminLogin.setCanceledOnTouchOutside(true);
+
+        final EditText editTextPassword = (EditText) dialogAdminLogin.findViewById(R.id.editTextPassword);
+
+        dialogAdminLogin
+                .findViewById(R.id.dialogButtonLogin).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseService databaseService = new DatabaseService(LoginActivity.this);
+                User user = databaseService.getUserByUsername("Admin");
+                new CheckAdminPassword().execute(user,editTextPassword.getText().toString(), false);
+            }
+        });
+
+        dialogAdminLogin
+                .findViewById(R.id.dialogButtonCancel).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAdminLogin.dismiss();
+            }
+        });
+
+        dialogAdminLogin.show();
+
+    }
+
+
     private void showNotificationForNetworkNavigation() {
         try {
             final Dialog dialog = new Dialog(LoginActivity.this);
@@ -953,45 +1094,10 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         switch (buttonId) {
 
             case ActionButtonbarFragment.BUTTON_ADD:
-                final Dialog dialog = new Dialog(LoginActivity.this);
-                dialog.setContentView(R.layout.dialog_yes_no);
-                dialog.setTitle(R.string.register_new_user);
-                dialog.setCanceledOnTouchOutside(true);
-                TextView text = (TextView) dialog.findViewById(R.id.text);
-                ImageView image = (ImageView) dialog
-                        .findViewById(R.id.dialog_image);
-                image.setVisibility(View.GONE);
-                // set the custom dialog components - text, image and button
-
-                text.setText(getText(R.string.do_you_really_want_to) + " "
-                        + getString(R.string.create_an_account_) + "\n");
-                Button dialogButton = (Button) dialog
-                        .findViewById(R.id.dialogButtonOK);
-                // if button is clicked, close the custom dialog
-                dialogButton.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                        showCreateAccountDialog();
-                    }
-                });
-
-                Button dialogButtonNo = (Button) dialog
-                        .findViewById(R.id.dialogButtonNO);
-                dialogButtonNo.setOnClickListener(new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-
+               askForAdminLoginToRegisterANewUser();
                 break;
             case ActionButtonbarFragment.BUTTON_SETTINGS_DEVICE:
-                Intent intent = new Intent(LoginActivity.this, SettingsDeviceActivity.class);
-                startActivity(intent);
+                askForAdminLogin();
 
 
         }

@@ -1015,9 +1015,13 @@
     <string name="preferences_lockout_recipes">preferences_lockout_recipes</string>
     <string name="preferences_lockout_protocols">preferences_lockout_protocols</string>
     <string name="preferences_lockout_factory_reset">preferences_lockout_factory_reset</string>
+    <string name="preferences_lockout_device_settings">preferences_lockout_device_settings</string>
+    <string name="preferences_lockout_labels">preferences_lockout_labels</string>
+
     <string name="lockout">Lockout</string>
     <string name="lockout_settings">Lockout settings</string>
     <string name="lock_the_calibration">Lock the calibration</string>
+    <string name="lock_the_device_settings">Lock the Device Settings</string>
     <string name="lock_the_user_settings">Lock the user settings</string>
     <string name="lock_the_balance_setup">Lock the balance setup</string>
     <string name="application_modes">Application modes</string>
@@ -1030,6 +1034,7 @@
     <string name="i_o_settings">I/O Settings</string>
     <string name="lock_the_i_o_settings">Lock the I/O settings</string>
     <string name="lock_the_factory_reset">Lock the factory reset</string>
+    <string name="lock_the_labels">Lock the labels</string>
     <string name="factory_reset_menu">Factory reset menu</string>
     <string name="only_the_admin_can_change_the_lockout_settings">Only the admin can change the lockout settings</string>
     <string name="preferences_glp_header">preferences_glp_header</string>
@@ -1074,6 +1079,11 @@
     <string name="please_approach_rfid_tag_to_login">Scan RFID tag to login.</string>
     <string name="the_rfid_are_registered_already">The RFID tag are registered already.</string>
     <string name="the_rfid_are_not_registered">The RFID tag are not registered.</string>
+
+
+    <string name="please_enter_admin_password">Please enter admin password</string>
+    <string name="checking">Checking...</string>
+    <string name="saving">Saving...</string>
 
 
 </resources>

@@ -337,4 +337,6 @@
     <string name="can_not_read_from_sd_card">Can not read from SD card</string>
 
     <string name="connected">Connected</string>
+
+
 </resources>
