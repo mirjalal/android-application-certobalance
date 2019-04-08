@@ -530,7 +530,7 @@ public class Protocol {
         if (weights.size() > 0)
             return weights.get(weights.size() - 1);
         else
-            return -1d;
+            return getSampleWeight()+getBeakerWeight();
     }
 
     public Double getAshResultInGram() {

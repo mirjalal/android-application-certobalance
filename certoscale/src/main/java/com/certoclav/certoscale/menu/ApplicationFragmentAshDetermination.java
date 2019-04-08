@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -145,7 +146,9 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                         if (Scale.getInstance().isStable()) {
                             double delta = ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
                                     - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true);
-                            if (delta > 0.002) {
+
+                            final boolean isFirstScaling = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size()<=1;
+                            if (delta > 0.0010001) {
 
                                 if(ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()
                                         >ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)){
@@ -157,7 +160,16 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     ignoreButton.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+
                                             actionDetected();
+                                            warningDialog.dismiss();
+                                            if(isFirstScaling){
+                                                //continue
+                                                saveProtocolContent();
+                                                Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+                                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                                return;
+                                            }
                                             Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
                                             //dont save the last value
                                             ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
@@ -165,7 +177,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                             saveProtocolContent();
                                             saveAshDeterminationProtocol();
                                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
-                                            warningDialog.dismiss();
+
                                         }
                                     });
                                     abortButton.setOnClickListener(new View.OnClickListener() {
@@ -175,8 +187,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                             ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
                                             saveProtocolContent();
                                             ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                            warningDialog.dismiss();
                                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                            warningDialog.dismiss();
                                         }
                                     });
                                     warningDialog.show();
@@ -187,13 +199,25 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
                                     Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                                 }
-                            } else if (delta <= 0.002 && delta >= -0.005) {
+                            } else if (delta <= 0.0010001 && delta >= -0.005) {
+
                                 //Finished successfully
                                 ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
 
+                                Log.d("delta",String.format("%.9f",delta));
                                 //Don't save the last weight
-                                if (delta < 0)
+                                if (delta < -0.00000009f)
                                     ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+
+                                if(isFirstScaling){
+                                    //continue
+                                    ApplicationManager.getInstance().getCurrentProtocol().setPending(true);
+                                    saveProtocolContent();
+                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                    return;
+                                }
+
 
                                 saveProtocolContent();
                                 saveAshDeterminationProtocol();
@@ -210,6 +234,16 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                     @Override
                                     public void onClick(View v) {
                                         actionDetected();
+                                        warningDialog.dismiss();
+                                        if(isFirstScaling){
+                                            //continue
+                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+                                            saveProtocolContent();
+                                            Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+                                            return;
+                                        }
+
                                         Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
                                         //dont save the last value
                                         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
@@ -217,7 +251,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                         saveProtocolContent();
                                         saveAshDeterminationProtocol();
                                         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
-                                        warningDialog.dismiss();
+
                                     }
                                 });
                                 abortButton.setOnClickListener(new View.OnClickListener() {
