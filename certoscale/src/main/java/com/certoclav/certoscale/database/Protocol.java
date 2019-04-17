@@ -12,6 +12,8 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -530,7 +532,7 @@ public class Protocol {
         if (weights.size() > 0)
             return weights.get(weights.size() - 1);
         else
-            return getSampleWeight()+getBeakerWeight();
+            return getSampleWeight() + getBeakerWeight();
     }
 
     public Double getAshResultInGram() {
@@ -545,11 +547,17 @@ public class Protocol {
 
     }
 
+    private Double roundDouble(Double value) {
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        return Double.valueOf(df.format(value));
+    }
+
     public double getAshResultInPercent() {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-            Log.d("result",weightDrySample+" "+weightWetSample+" "+ashWeightBeaker+" "+ashWeightBeakerWithSample);
+            Log.d("result", weightDrySample + " " + weightWetSample + " " + ashWeightBeaker + " " + ashWeightBeakerWithSample);
             Double result = (weightDrySample * 100d / weightWetSample);
             return result;
         } catch (Exception e) {
@@ -562,7 +570,7 @@ public class Protocol {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-            Double result = (weightDrySample* 100.0 / weightWetSample) ;
+            Double result = (weightDrySample * 100.0 / weightWetSample);
             return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());
         } catch (Exception e) {
             return "0.0000";

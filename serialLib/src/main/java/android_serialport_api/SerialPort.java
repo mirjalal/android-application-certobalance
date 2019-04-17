@@ -42,8 +42,8 @@ public class SerialPort {
 	public static final int FLOW_CONTROL_XON_XOFF = 1;
 	public static final int FLOW_CONTROL_CRTSCTS = 2;
 
-	public static final String COM4 = "/dev/ttymxc3";
-//	public static final String COM4 = "/dev/ttyS4";
+//	public static final String COM4 = "/dev/ttymxc3";
+	public static final String COM4 = "/dev/ttyS4";
 	public static final String COM3 = "/dev/ttymxc2";
 	public static final String COM2 = "/dev/ttymxc1";
 	public static final String COM1 = "/dev/ttymxc0";
