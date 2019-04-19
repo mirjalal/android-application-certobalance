@@ -22,6 +22,7 @@ import com.certoclav.certoscale.model.ScaleModelGandG;
 import com.certoclav.library.application.ApplicationController;
 
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -34,6 +35,7 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -529,11 +531,16 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         currentLibrary = new Library("", 0, "", 0, "default", 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 100, 0d, 0, new Date(), true, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 0d, 1);
     }
 
+    private Double roundDouble(Double value) {
+        DecimalFormat df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.FLOOR);
+        return Double.valueOf(df.format(value));
+    }
     public Double getTaredValueInGram() {
         if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
-            return getSumInGram() - getTareInGram();
+            return roundDouble(getSumInGram() - getTareInGram());
         } else {
-            return getSumInGram();
+            return roundDouble(getSumInGram());
         }
 
     }

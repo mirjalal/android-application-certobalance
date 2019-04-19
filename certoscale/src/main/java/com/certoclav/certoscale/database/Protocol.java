@@ -1,8 +1,6 @@
 package com.certoclav.certoscale.database;
 
 
-import android.util.Log;
-
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.library.application.ApplicationController;
 import com.j256.ormlite.field.DataType;
@@ -547,24 +545,28 @@ public class Protocol {
 
     }
 
-    private Double roundDouble(Double value) {
+    private float roundDouble(double value) {
         DecimalFormat df = new DecimalFormat("#.####");
-        df.setRoundingMode(RoundingMode.CEILING);
-        return Double.valueOf(df.format(value));
+        df.setRoundingMode(RoundingMode.HALF_EVEN);
+        return Float.valueOf(df.format(value));
     }
 
-    public double getAshResultInPercent() {
-        try {
-            Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
-            Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
-            Log.d("result", weightDrySample + " " + weightWetSample + " " + ashWeightBeaker + " " + ashWeightBeakerWithSample);
-            Double result = (weightDrySample * 100d / weightWetSample);
-            return result;
-        } catch (Exception e) {
-            return 0d;
-        }
-
-    }
+//    public float getAshResultInPercent() {
+//        try {
+//            float weightWetSample = ((roundDouble(roundDouble(ashWeightBeakerWithSample) - roundDouble(ashWeightBeaker))) * 10000) / 10000f;
+//            float weightDrySample = ((roundDouble(roundDouble(getLastGlowWeight()) - roundDouble(ashWeightBeaker))) * 10000) / 10000f;
+//            Log.d("result_1", roundDouble(getLastGlowWeight()) + " " + roundDouble(ashWeightBeaker));
+//            Log.d("result_2", ((roundDouble(getLastGlowWeight()) - roundDouble(ashWeightBeaker)) * 10000) + "");
+//            Log.d("result_2", (((roundDouble(getLastGlowWeight()) - roundDouble(ashWeightBeaker)) * 10000) / 10000) + "");
+//            Log.d("result", weightDrySample + " " + weightWetSample + " " +
+//                    weightDrySample / weightWetSample + " " + ashWeightBeakerWithSample + " " + ashWeightBeaker + " " + getLastGlowWeight());
+//            float result = (weightDrySample / weightWetSample) * 100f;
+//            return roundDouble(result);
+//        } catch (Exception e) {
+//            return 0f;
+//        }
+//
+//    }
 
     public String getAshResultPercentageAsString() {
         try {

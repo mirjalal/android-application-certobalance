@@ -64,7 +64,7 @@ public class ProtocolManager implements ScaleApplicationListener {
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_date), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_date)) == true) {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            sb.append(df.format(Calendar.getInstance().getTime())+ "\n");
+            sb.append(df.format(Calendar.getInstance().getTime()) + "\n");
         }
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_balance_id), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_balance_id)) == true) {
@@ -600,26 +600,26 @@ public class ProtocolManager implements ScaleApplicationListener {
                         boolean isIgnored = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsIgnoredIndex().contains(i);
                         sb.append((i + 1) + ".Gluehen [g]" + ": " + ApplicationManager.getInstance()
                                 .getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().
-                                        getCurrentProtocol().getAshArrayGlowWeights(false).get(i)) + (isIgnored?"*":"")+"\n");
+                                        getCurrentProtocol().getAshArrayGlowWeights(false).get(i)) + (isIgnored ? "*" : "") + "\n");
 
                         try {
                             sb.append("Benutzer: " + ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).get(i) + "\n");
-                        }catch (Exception e){
+                        } catch (Exception e) {
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                sb.append("Ofentemperatur: ").append(String.format("%.1f",ApplicationManager.getInstance().getCurrentProtocol().
-                        getOvenTemperature())+" C").append("\n");
-                sb.append("Tiegelgewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
-                        ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight())+"\n");
-                sb.append("Probengewicht [g]: "+ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
-                        ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())+"\n");
-                if(!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
+                sb.append("Ofentemperatur: ").append(String.format("%.1f", ApplicationManager.getInstance().getCurrentProtocol().
+                        getOvenTemperature()) + " C").append("\n");
+                sb.append("Tiegelgewicht [g]: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()) + "\n");
+                sb.append("Probengewicht [g]: " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(
+                        ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight()) + "\n");
+                if (!ApplicationManager.getInstance().getCurrentProtocol().getIsPending()) {
                     sb.append("Aschegehalt [g]" + ": " + ApplicationManager.getInstance().getTransformedWeightAsStringWithUnit(ApplicationManager.getInstance().getCurrentProtocol().getAshResultInGram()) + "\n");
-                    sb.append("Aschegehalt [g/100g]" + ": " + String.format("%.4f", ApplicationManager.getInstance().getCurrentProtocol().getAshResultInPercent()) + "\n");
-                }else{
+                    sb.append("Aschegehalt [g/100g]" + ": " + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\n");
+                } else {
                     sb.append("Messung noch nicht abgeschlossen\n");
                 }
                 break;
@@ -631,7 +631,8 @@ public class ProtocolManager implements ScaleApplicationListener {
     }
 
     @Override
-    public void onApplicationChange(ScaleApplication application) { }
+    public void onApplicationChange(ScaleApplication application) {
+    }
 }
 
 

@@ -172,7 +172,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                             }
                                             Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
                                             //dont save the last value
-                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
                                             ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
                                             saveProtocolContent();
                                             saveAshDeterminationProtocol();
