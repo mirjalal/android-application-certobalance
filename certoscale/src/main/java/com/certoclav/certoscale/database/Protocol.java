@@ -10,8 +10,6 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -543,12 +541,6 @@ public class Protocol {
             return 0d;
         }
 
-    }
-
-    private float roundDouble(double value) {
-        DecimalFormat df = new DecimalFormat("#.####");
-        df.setRoundingMode(RoundingMode.HALF_EVEN);
-        return Float.valueOf(df.format(value));
     }
 
 //    public float getAshResultInPercent() {
