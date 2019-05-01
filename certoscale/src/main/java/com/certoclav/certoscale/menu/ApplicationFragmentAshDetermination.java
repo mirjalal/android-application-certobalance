@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,7 +78,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             updateUI();
                             Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_WEIGHING_SAMPLE);
                         } else {
-                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG,true).show();
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG, true).show();
                         }
                         break;
                     case ASH_DETERMINATION_WEIGHING_SAMPLE:
@@ -147,127 +146,182 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                             double delta = ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
                                     - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true);
 
-                            final boolean isFirstScaling = ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size()<=1;
-                            if (delta > 0.0010001) {
+                            double previousWeight = ApplicationManager.getInstance().getCurrentProtocol()
+                                    .getRecentWeight(false);
+                            double currentWeight = ApplicationManager.getInstance().getCurrentProtocol()
+                                    .getRecentWeight(true);
+                            double tiegerWeight = ApplicationManager.getInstance().getCurrentProtocol()
+                                    .getBeakerWeight();
+                            double probeWeight = ApplicationManager.getInstance().getCurrentProtocol()
+                                    .getSampleWeight();
 
-                                if(ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()
-                                        >ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)){
+                            final boolean isFirstScaling = ApplicationManager.getInstance().getCurrentProtocol()
+                                    .getAshArrayGlowWeights(false).size() <= 1;
 
-                                    TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
-                                    errorMessage.setText(R.string.the_beaker_is_heavier_than_beaker_before);
-                                    TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
-                                    TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
-                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
+                            // Is it the first scaling
+                            if (isFirstScaling) {
+                                //Ja
+                                if (currentWeight >= tiegerWeight) {
+                                    // [n]>= Tiegel leer
+                                    if (currentWeight - (tiegerWeight + probeWeight) >= 0.005) {
+                                        //Ja
+                                        showWarningMessageMoreThan5mg(true);
+                                    } else {
+                                        continueToGlow();
+                                        //Nein
+                                    }
 
-                                            actionDetected();
-                                            warningDialog.dismiss();
-                                            if(isFirstScaling){
-                                                //continue
-                                                saveProtocolContent();
-                                                Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
-                                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                                return;
-                                            }
-                                            Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
-                                            //dont save the last value
-//                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                            ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
-                                            saveProtocolContent();
-                                            saveAshDeterminationProtocol();
-                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
-
-                                        }
-                                    });
-                                    abortButton.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            actionDetected();
-                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                            saveProtocolContent();
-                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                            warningDialog.dismiss();
-                                        }
-                                    });
-                                    warningDialog.show();
-
-                                }else {
-                                    //continue
-                                    saveProtocolContent();
-                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
-                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                }
-                            } else if (delta <= 0.0010001 && delta >= -0.005) {
-
-                                //Finished successfully
-                                ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
-
-                                Log.d("delta",String.format("%.9f",delta));
-                                //Don't save the last weight
-                                if (delta < -0.00000009f)
-                                    ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-
-                                if(isFirstScaling){
-                                    //continue
-                                    ApplicationManager.getInstance().getCurrentProtocol().setPending(true);
-                                    saveProtocolContent();
-                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
-                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                    return;
+                                } else {
+                                    //[n]<Tieger leer
+                                    if (currentWeight < tiegerWeight) {
+                                        showWarningTiegerIsMoreHeavier();
+                                    }
                                 }
 
-
-                                saveProtocolContent();
-                                saveAshDeterminationProtocol();
-                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
-                                updateUI();
-                                Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
 
                             } else {
-                                TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
-                                errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
-                                TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
-                                TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
-                                ignoreButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        actionDetected();
-                                        warningDialog.dismiss();
-                                        if(isFirstScaling){
-                                            //continue
-                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                            saveProtocolContent();
-                                            Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
-                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                            return;
-                                        }
-
-                                        Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG,true).show();
-                                        //dont save the last value
-                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                        ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
-                                        saveProtocolContent();
-                                        saveAshDeterminationProtocol();
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
-
+                                //Nein Erster Gluhvorgang
+                                if (currentWeight < tiegerWeight) {
+                                    //[n+1] < Tieger leer
+                                    showWarningTiegerIsMoreHeavier();
+                                } else {
+                                    // [n+1] >= Tieger leer
+                                    if (delta > 0.001) {
+                                        //delta > 0.001
+                                        continueToGlow();
+                                    } else if (delta >= 0 && delta <= 0.001) {
+                                        //delta>=0 && delta<=0.001
+                                        saveAndCloseProtocol();
+                                    } else if (delta >= -0.005 && delta < 0) {
+                                        //delta>=-0.005 && delta>0.001
+                                        ignoreAndCloseProtocol();
+                                    } else if (delta < -0.005) {
+                                        showWarningMessageMoreThan5mg(false);
                                     }
-                                });
-                                abortButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        actionDetected();
-                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
-                                        saveProtocolContent();
-                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
-                                        warningDialog.dismiss();
-                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
-                                    }
-                                });
-                                warningDialog.show();
-
+                                }
                             }
+
+
+//                            if (delta > 0.0010001) {
+//
+//                                if (ApplicationManager.getInstance().getCurrentProtocol().getBeakerWeight()
+//                                        > ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)) {
+//
+//                                    TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
+//                                    errorMessage.setText(R.string.the_beaker_is_heavier_than_beaker_before);
+//                                    TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+//                                    TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+//                                    ignoreButton.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//
+//                                            actionDetected();
+//                                            warningDialog.dismiss();
+//                                            if (isFirstScaling) {
+//                                                //continue
+//                                                saveProtocolContent();
+//                                                Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+//                                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                                return;
+//                                            }
+//                                            Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
+//                                            //dont save the last value
+////                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                            ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+//                                            saveProtocolContent();
+//                                            saveAshDeterminationProtocol();
+//                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+//
+//                                        }
+//                                    });
+//                                    abortButton.setOnClickListener(new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            actionDetected();
+//                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                            saveProtocolContent();
+//                                            ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+//                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                            warningDialog.dismiss();
+//                                        }
+//                                    });
+//                                    warningDialog.show();
+//
+//                                } else {
+//                                    //continue
+//                                    saveProtocolContent();
+//                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+//                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                }
+//                            } else if (delta <= 0.0010001 && delta >= -0.005) {
+//
+//                                //Finished successfully
+//                                ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+//
+//                                Log.d("delta", String.format("%.9f", delta));
+//                                //Don't save the last weight
+//                                if (delta < -0.00000009f)
+//                                    ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//
+//                                if (isFirstScaling) {
+//                                    //continue
+//                                    ApplicationManager.getInstance().getCurrentProtocol().setPending(true);
+//                                    saveProtocolContent();
+//                                    Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+//                                    Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                    return;
+//                                }
+//
+//
+//                                saveProtocolContent();
+//                                saveAshDeterminationProtocol();
+//                                Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+//                                updateUI();
+//                                Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
+//
+//                            } else {
+//                                TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
+//                                errorMessage.setText(R.string.the_beaker_is_heavier_than_before_glowing);
+//                                TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+//                                TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+//                                ignoreButton.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        actionDetected();
+//                                        warningDialog.dismiss();
+//                                        if (isFirstScaling) {
+//                                            //continue
+//                                            ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                            saveProtocolContent();
+//                                            Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+//                                            Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                            return;
+//                                        }
+//
+//                                        Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
+//                                        //dont save the last value
+//                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                        ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+//                                        saveProtocolContent();
+//                                        saveAshDeterminationProtocol();
+//                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+//
+//                                    }
+//                                });
+//                                abortButton.setOnClickListener(new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        actionDetected();
+//                                        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight();
+//                                        saveProtocolContent();
+//                                        ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+//                                        warningDialog.dismiss();
+//                                        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+//                                    }
+//                                });
+//                                warningDialog.show();
+//
+//                            }
 
 //                            if (Math.abs(ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(false)
 //                                    - ApplicationManager.getInstance().getCurrentProtocol().getRecentWeight(true)) > 0.002) {
@@ -316,7 +370,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
                             break;
                         } else {
-                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG,true).show();
+                            Toasty.warning(getActivity(), "Bitte warten Sie bis das Gewicht stabil ist", Toast.LENGTH_LONG, true).show();
                         }
                     case ASH_DETERMINATION_BATCH_FINISHED:
                         saveProtocolContent();
@@ -565,7 +619,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_ENTER_TEMPERATURE_OVEN);
                                 dialog.dismiss();
                             } else {
-                                Toasty.warning(getActivity(), "Der Becher mit diesem Namen existiert bereits!", Toast.LENGTH_SHORT,true).show();
+                                Toasty.warning(getActivity(), "Der Becher mit diesem Namen existiert bereits!", Toast.LENGTH_SHORT, true).show();
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -617,15 +671,96 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     }
 
 
+    private void continueToGlow() {
+        actionDetected();
+        saveProtocolContent();
+        Toasty.info(getActivity(), getString(R.string.continue_to_glow), Toast.LENGTH_LONG, true).show();
+        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+    }
+
+    private void abortScaling() {
+        actionDetected();
+        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight(false);
+        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
+    }
+
+    private void saveAndCloseProtocol() {
+        ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+        saveProtocolContent();
+        saveAshDeterminationProtocol();
+        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+        updateUI();
+        Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
+    }
+
+    private void ignoreAndCloseProtocol() {
+        ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight(true);
+        ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
+        saveProtocolContent();
+        saveAshDeterminationProtocol();
+        Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
+        updateUI();
+        Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
+    }
+
+    private void showWarningMessageMoreThan5mg(final boolean isFirstTime) {
+        TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
+        errorMessage.setText(R.string.ash_value_is_heavier);
+        final TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+        TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+        ignoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFirstTime)
+                    continueToGlow();
+                else
+                    ignoreAndCloseProtocol();
+                warningDialog.dismiss();
+
+            }
+        });
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abortScaling();
+                warningDialog.dismiss();
+            }
+        });
+        warningDialog.show();
+    }
+
+    private void showWarningTiegerIsMoreHeavier() {
+        TextView errorMessage = (TextView) warningDialog.findViewById(R.id.dialog_warning_txt_message);
+        errorMessage.setText(R.string.the_beaker_is_heavier_than_beaker_before);
+        TextView ignoreButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_ignore);
+        TextView abortButton = (TextView) warningDialog.findViewById(R.id.dialog_warning_btn_abort);
+        ignoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveAndCloseProtocol();
+                warningDialog.dismiss();
+
+            }
+        });
+        abortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abortScaling();
+                warningDialog.dismiss();
+            }
+        });
+        warningDialog.show();
+    }
+
     @Override
     public void onStableChanged(boolean isStable) {
         buttonNext.setEnabled(isStable);
         actionDetected();
     }
 
-    private void actionDetected(){
-       if(getActivity() instanceof  ApplicationActivity){
-           ((ApplicationActivity)getActivity()).actionDetected();
-       }
+    private void actionDetected() {
+        if (getActivity() instanceof ApplicationActivity) {
+            ((ApplicationActivity) getActivity()).actionDetected();
+        }
     }
 }

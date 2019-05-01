@@ -599,16 +599,21 @@ public class Protocol {
         return weights.get(weights.size() - 1);
     }
 
-    public void abortLastWeight() {
+    public void abortLastWeight(boolean isInRawData) {
 
-        ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsIgnoredIndex()
-                .add(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size() - 1);
+        if (isInRawData)
+            ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsIgnoredIndex()
+                    .add(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size() - 1);
+        else {
 
-//        if(weights.size()>0)
-//            weights.remove(weights.size()-1);
-//
-//        if(weightsUsers.size()>0)
-//            weightsUsers.remove(weightsUsers.size()-1);
+            if (ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size() > 0)
+                ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false)
+                        .remove(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeights(false).size() - 1);
+
+            if (ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).size() > 0)
+                ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false)
+                        .remove(ApplicationManager.getInstance().getCurrentProtocol().getAshArrayGlowWeightsUser(false).size() - 1);
+        }
     }
 
     public boolean isParsedCompletely() {
