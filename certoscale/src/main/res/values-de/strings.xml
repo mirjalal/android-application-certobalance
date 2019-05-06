@@ -505,7 +505,7 @@
     <string name="please_enter_the_desired_total_weight_of_the_recipe">Bitte geben Sie das gewünschte Gesamtgewicht des Rezepts an</string>
     <string name="support">Support</string>
     <string name="you_have_to_choose_a_recipe_first">Sie müssen zuerst ein Rezept auswählen</string>
-    <string name="ignore">Ingorieren</string>
+    <string name="ignore">Ignorieren</string>
     <string name="balance">Waage</string>
     <string name="balance_model">Waagenmodell</string>
     <string name="barcode_or_qr_code_scanner">Barcode oder QR-Code Scaner</string>

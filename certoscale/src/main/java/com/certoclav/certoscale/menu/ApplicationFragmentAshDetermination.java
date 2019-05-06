@@ -196,6 +196,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                                         //delta>=-0.005 && delta>0.001
                                         ignoreAndCloseProtocol();
                                     } else if (delta < -0.005) {
+                                        //delta -0.0004999999999999999999
                                         showWarningMessageMoreThan5mg(false);
                                     }
                                 }
@@ -638,11 +639,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         StringBuilder sb = new StringBuilder();
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
         sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
-                ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight()
-        ) + "\r\n");
+                ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())
+                .replaceAll(",",".") + "\r\n");
         sb.append("ashweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
-                ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()) + "\r\n");
-        sb.append("ashpercent" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshResultPercentageAsString() + "\r\n");
+                ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()).replaceAll(",",".") + "\r\n");
+        sb.append("ashpercent" + "," + ApplicationManager.getInstance().getCurrentProtocol()
+                .getAshResultPercentageAsString().replaceAll(",",".") + "\r\n");
         ExportUtils exportUtils = new ExportUtils();
         exportUtils.writeCSVFileToInternalSD(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName(), sb.toString());
     }

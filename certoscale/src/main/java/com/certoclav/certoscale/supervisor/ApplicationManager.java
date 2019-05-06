@@ -623,7 +623,7 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         String retVal = "";
 
         int numDezimalPlaces = 4 - (int) Math.round(getCurrentUnit().getExponent());
-        retVal = String.format("%." + numDezimalPlaces + "f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " " + getCurrentUnit().getName();
+        retVal = String.format(Locale.GERMAN, "%." + numDezimalPlaces + "f", transformGramToCurrentUnit(currentLibrary.getAveragePieceWeight())) + " " + getCurrentUnit().getName();
 
         return retVal;
 
@@ -638,13 +638,13 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         String retVal = "";
         try {
             if (Scale.getInstance().getScaleApplication() == ScaleApplication.PART_COUNTING) {
-                retVal = String.format("%.0f", gram);
+                retVal = String.format(Locale.GERMAN, "%.0f", gram);
             } else {
                 int numDezimalPlaces = Scale.getInstance().getScaleModel().getDecimalPlaces() - (int) Math.round(getCurrentUnit().getExponent());
                 if (numDezimalPlaces < 0) {
                     numDezimalPlaces = 0;
                 }
-                retVal = String.format(Locale.US, "%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram));
+                retVal = String.format(Locale.GERMAN, "%." + numDezimalPlaces + "f", transformGramToCurrentUnit(gram));
             }
         } catch (Exception e) {
             retVal = "";
