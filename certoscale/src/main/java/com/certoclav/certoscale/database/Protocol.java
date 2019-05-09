@@ -563,6 +563,8 @@ public class Protocol {
     public String getAshResultPercentageAsString() {
         try {
             Double weightWetSample = ashWeightBeakerWithSample - ashWeightBeaker;
+            weightWetSample = Double.valueOf(ApplicationManager.getInstance()
+                    .getTransformedWeightAsString(weightWetSample).replace(",", "."));
             Double weightDrySample = getLastGlowWeight() - ashWeightBeaker;
             Double result = (weightDrySample * 100.0 / weightWetSample);
             return ApplicationManager.getInstance().getTransformedWeightAsString(result.doubleValue());

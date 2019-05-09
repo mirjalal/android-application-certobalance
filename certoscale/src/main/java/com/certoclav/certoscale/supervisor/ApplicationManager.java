@@ -534,7 +534,7 @@ public class ApplicationManager implements WeightListener, ScaleApplicationListe
         if (IS_IO_SIMULATED || INTERNAL_TARA_ZERO_BUTTON) {
             return getSumInGram() - getTareInGram();
         } else {
-            return getSumInGram();
+            return Double.valueOf(getTransformedWeightAsString(getSumInGram()).replace(",", "."));
         }
 
     }
