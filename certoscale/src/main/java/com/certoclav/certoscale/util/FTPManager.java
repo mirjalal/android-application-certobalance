@@ -149,7 +149,7 @@ public class FTPManager {
                                                 @Override
                                                 public void run() {
                                                     try {
-                                                        ftp.connect(address);
+                                                        ftp.connect(address, port);
                                                         if (!FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
                                                             ftp.disconnect();
                                                             if (listener != null)
@@ -246,12 +246,12 @@ public class FTPManager {
 
         String[] contents = protocol.getContent().split("\n");
         String date = null;
-        if (contents!=null && contents.length > 2) {
+        if (contents != null && contents.length > 2) {
             Log.d("content", contents[1]);
             date = contents[1];
             date = date.replaceAll("-", "").replaceAll(":", "").trim().replaceAll(" ", "_");
         }
-        if(date==null){
+        if (date == null) {
             DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
             date = df.format(new Date(System.currentTimeMillis()));
         }
@@ -304,12 +304,12 @@ public class FTPManager {
 
         String[] contents = protocol.getContent().split("\n");
         String date = null;
-        if (contents!=null && contents.length > 2) {
+        if (contents != null && contents.length > 2) {
             Log.d("content", contents[1]);
             date = contents[1];
             date = date.replaceAll("-", "").replaceAll(":", "").trim().replaceAll(" ", "_");
         }
-        if(date==null){
+        if (date == null) {
             DateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
             date = df.format(new Date(System.currentTimeMillis()));
         }

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.certoclav.certoscale"
-    android:versionCode="23"
-    android:versionName="23.0 GG">
+    android:versionCode="24"
+    android:versionName="24.0 GG">
 
     <uses-sdk
         android:targetSdkVersion="26"
