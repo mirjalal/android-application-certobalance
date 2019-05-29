@@ -98,7 +98,7 @@ public class ReadAndParseSerialService implements MessageReceivedListener {
 					if (AppConstants.IS_IO_SIMULATED == true) {
 						simulateMessage();
 					} else {
-						handler.sendEmptyMessage(0); //update current weight
+						handler.sendEmptyMessage(0); //upload current weight
 					}
 
 					try {

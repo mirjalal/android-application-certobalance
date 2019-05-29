@@ -74,7 +74,7 @@ public class Protocol {
 
     public void saveIntoDb() {
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
-        db.deleteProtocol(this);
+        while (db.deleteProtocol(this) == -1);
         db.insertProtocol(this);
     }
 
@@ -455,6 +455,10 @@ public class Protocol {
         this.item_id = item_id;
     }
 
+    public int getId() {
+        return item_id;
+    }
+
     public String getCloudId() {
         return cloudId;
     }
@@ -636,6 +640,10 @@ public class Protocol {
             return validWeightsUser;
         }
         return ashArrayGlowWeightsUser;
+    }
+
+    public boolean isUploaded() {
+        return cloudId.equalsIgnoreCase("uploaded");
     }
 }
 

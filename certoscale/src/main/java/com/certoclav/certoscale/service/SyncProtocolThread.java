@@ -109,7 +109,7 @@ public class SyncProtocolThread extends Thread {
 					Log.e("SyncProfileTask", "exception: " + e.toString());
 					return;//continue;
 				}
-				Log.e("SyncProtocolTask", "all done -> send message to update ui");
+				Log.e("SyncProtocolTask", "all done -> send message to upload ui");
 			sendMessage();
 	}
 

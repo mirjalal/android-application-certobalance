@@ -194,14 +194,14 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             }
         }
 
-        try {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
-            startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toasty.warning(this, "Please install ES FTP to use FTP features", Toast.LENGTH_SHORT, true).show();
-        }
+//        try {
+//            Intent intent = new Intent(Intent.ACTION_MAIN);
+//            intent.setComponent(new ComponentName("com.estrongs.android.pop", "com.estrongs.android.pop.ftp.ESFtpShortcut"));
+//            startActivity(intent);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toasty.warning(this, "Please install ES FTP to use FTP features", Toast.LENGTH_SHORT, true).show();
+//        }
 
         //super.setTheme(R.style.the);
         Fabric.with(this, new Crashlytics());

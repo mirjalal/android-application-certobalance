@@ -633,10 +633,18 @@ public class DatabaseService {
 
     public int updateProtocolCloudId(Protocol protocol, String cloudId) {
         try {
-            protocol.setCloudId(cloudId);
-            deleteProtocol(protocol);
-            int r = insertProtocol(protocol);
-            return r;
+              try {
+                protocol.setCloudId(cloudId);
+                protocol.generateJson();
+                int x = protocolDao.update(protocol);
+                return x;
+
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                Log.e(TAG, "Database exception", e);
+            }
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

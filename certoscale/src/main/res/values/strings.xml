@@ -1084,6 +1084,10 @@
     <string name="please_enter_admin_password">Please enter admin password</string>
     <string name="checking">Checking...</string>
     <string name="saving">Saving...</string>
+    <string name="can_not_connect_to_ftp">Die Verbindung zum FTP-Server kann nicht hergestellt werden.</string>
+    <string name="can_not_uploaded">Eine Datei kann nicht auf den FTP-Server hochgeladen werden.</string>
+    <string name="do_you_really_want_to_upload_this_protocol">Möchten Sie das Protokoll hochladen</string>
+    <string name="uploaded_sucessfully">Erfolgreich hochgeladen</string>
 
 
 </resources>

@@ -146,7 +146,7 @@ public class SettingDevice extends PreferenceFragment implements SharedPreferenc
             }
         });
 
-        //Install update from USB
+        //Install upload from USB
         ((Preference) findPreference(getString(R.string.preferences_device_software_update_usb))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
@@ -171,7 +171,7 @@ public class SettingDevice extends PreferenceFragment implements SharedPreferenc
         });
 
 
-        //Install update from SDCARD
+        //Install upload from SDCARD
         ((Preference) findPreference(getString(R.string.preferences_device_software_update_sdcard))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override

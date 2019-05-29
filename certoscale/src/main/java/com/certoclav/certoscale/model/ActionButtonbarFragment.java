@@ -2909,7 +2909,7 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 
             //signature.initVerify(publicKey);
-            //signature.update(hash.getBytes());
+            //signature.upload(hash.getBytes());
             //Boolean test=signature.verify(signatureBytes);
             //Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
 

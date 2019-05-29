@@ -1,9 +1,12 @@
 package com.certoclav.certoscale.menu;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +26,10 @@ import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.FTPManager;
+import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.util.ExportUtils;
+
+import java.util.Calendar;
 
 import es.dmoral.toasty.Toasty;
 
@@ -34,6 +40,8 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     private Button buttonNext = null;
     private Button buttonCancel;
     private Dialog warningDialog;
+    private Context context;
+    private FragmentActivity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -640,21 +648,59 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         sb.append("samplenumber" + "," + ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName() + "\r\n");
         sb.append("sampleweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
                 ApplicationManager.getInstance().getCurrentProtocol().getSampleWeight())
-                .replaceAll(",",".") + "\r\n");
+                .replaceAll(",", ".") + "\r\n");
         sb.append("ashweight" + "," + ApplicationManager.getInstance().getTransformedWeightAsString(
-                ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()).replaceAll(",",".") + "\r\n");
+                ApplicationManager.getInstance().getCurrentProtocol().getLastAshWeight()).replaceAll(",", ".") + "\r\n");
         sb.append("ashpercent" + "," + ApplicationManager.getInstance().getCurrentProtocol()
-                .getAshResultPercentageAsString().replaceAll(",",".") + "\r\n");
+                .getAshResultPercentageAsString().replaceAll(",", ".") + "\r\n");
         ExportUtils exportUtils = new ExportUtils();
         exportUtils.writeCSVFileToInternalSD(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName(), sb.toString());
     }
 
+    long lastNotifiedTime;
+
     public void saveAshDeterminationProtocols() {
-        ExportUtils exportUtils = new ExportUtils();
-        Protocol protocol = ApplicationManager.getInstance().getCurrentProtocol();
-        exportUtils.writeCSVFileToInternalSD(protocol.getAshBeakerName() + "-" + protocol.getAshSampleName(),
-                ApplicationManager.getInstance().getCurrentProtocol().generateCSV(), !protocol.getIsPending());
-        FTPManager.getInstance().updateAll(null);
+        final DatabaseService databaseService = new DatabaseService(getActivity());
+        FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
+            @Override
+            public void onConnection(boolean isConnected, final String message) {
+                if (!isConnected) {
+
+                    if (activity != null) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                        ? message : getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onUploaded(Protocol protocol) {
+                if (databaseService != null)
+                    databaseService.updateProtocolCloudId(protocol, "uploaded");
+            }
+
+            @Override
+            public void onUploading(boolean isUploaded, final String message) {
+                //Wait for 10 seconds for the next notification
+                if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+                    if (activity != null) {
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                        ? message : getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+                            }
+                        });
+                    }
+                    lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
+                }
+            }
+        }, databaseService.getProtocols(), false);
     }
 
     @Override
@@ -669,6 +715,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         sb.append(ApplicationManager.getInstance().getProtocolPrinter().getProtocolFooter());
         ApplicationManager.getInstance().getCurrentProtocol().setContent(sb.toString());
         ApplicationManager.getInstance().getCurrentProtocol().saveIntoDb();
+        Log.d("saved","saved");
         saveAshDeterminationProtocols();
     }
 
@@ -689,7 +736,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
     private void saveAndCloseProtocol() {
         ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
         saveProtocolContent();
-        saveAshDeterminationProtocol();
+//        saveAshDeterminationProtocol();
         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
         updateUI();
         Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
@@ -699,7 +746,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         ApplicationManager.getInstance().getCurrentProtocol().abortLastWeight(true);
         ApplicationManager.getInstance().getCurrentProtocol().setPending(false);
         saveProtocolContent();
-        saveAshDeterminationProtocol();
+//        saveAshDeterminationProtocol();
         Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_BATCH_FINISHED);
         updateUI();
         Toasty.success(getActivity(), "Protokoll abgeschlossen", Toast.LENGTH_LONG, true).show();
@@ -752,6 +799,12 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             }
         });
         warningDialog.show();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = getActivity();
     }
 
     @Override

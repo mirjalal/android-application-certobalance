@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.adapters.ProtocolAdapter;
@@ -26,7 +27,6 @@ import com.certoclav.certoscale.model.Navigationbar;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.model.ScaleState;
-import com.certoclav.certoscale.service.SyncProtocolsService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.application.ApplicationController;
@@ -34,9 +34,12 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 import static com.certoclav.certoscale.R.string.protocols;
 
@@ -115,10 +118,12 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     }
 
 
+    long lastNotifiedTime;
+
     @Override
     protected void onResume() {
         super.onResume();
-        DatabaseService db = new DatabaseService(this);
+        final DatabaseService db = new DatabaseService(this);
         adapter.clear();
         Scale.getInstance().setOnDatabaseListener(this);
 
@@ -134,31 +139,54 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
         adapter.addAll(protocolList);
         adapter.notifyDataSetChanged();
 
-        Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
-        startService(intent);
-        ftpManager.updateAll(new FTPManager.FTPListener() {
+//        Intent intent = new Intent(ApplicationController.getContext(), SyncProtocolsService.class);
+//        startService(intent);
+        ftpManager.uploadProtocols(new FTPManager.FTPListener() {
             @Override
-            public void onConnection(boolean isConnected, String message) {
+            public void onConnection(boolean isConnected, final String message) {
                 Log.d("FTP_SERVER", "connection " + isConnected + " " + (message != null ? message : ""));
+                if (!isConnected) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                    ? message : getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
+                        }
+                    });
+
+                }
             }
 
             @Override
-            public void onUpdated() {
+            public void onUploaded(Protocol protocol) {
+                if (db != null)
+                    db.updateProtocolCloudId(protocol, "uploaded");
                 Log.d("FTP_SERVER", "updatedall");
             }
 
             @Override
-            public void onUploading(boolean isUploaded, String message) {
+            public void onUploading(boolean isUploaded, final String message) {
                 Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
+                if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                    ? message : getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+                        }
+                    });
+
+                    lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
+                }
             }
-        });
+        }, db.getProtocols(), false);
         actionDetected();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(handler!=null){
+        if (handler != null) {
             handler.removeCallbacks(runnableLogout);
         }
         //Scale.getInstance().removeOnDatabaseListener(this);
@@ -167,7 +195,7 @@ public class MenuProtocolActivity extends Activity implements ButtonEventListene
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(handler!=null){
+        if (handler != null) {
             handler.removeCallbacks(runnableLogout);
         }
     }

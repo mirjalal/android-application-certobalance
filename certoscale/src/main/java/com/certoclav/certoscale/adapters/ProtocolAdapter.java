@@ -1,9 +1,8 @@
 package com.certoclav.certoscale.adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -22,18 +21,19 @@ import android.widget.Toast;
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.Protocol;
-import com.certoclav.certoscale.menu.ApplicationActivity;
 import com.certoclav.certoscale.settings.protocol.MenuProtocolActivity;
-import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.ProtocolManager;
+import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.certoscale.util.Log;
 import com.certoclav.certoscale.view.QuickActionItem;
 import com.certoclav.library.application.ApplicationController;
-import com.certoclav.library.certocloud.CertocloudConstants;
-import com.certoclav.library.certocloud.DeleteTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 
 /**
@@ -52,6 +52,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
     private List<Protocol> protocols;
     private List<Protocol> protocolsAll;
     private boolean isViewOnly;
+    private DatabaseService db;
 
     public ProtocolAdapter(Context context, List<Protocol> values, boolean isViewOnly) {
         super(context, R.layout.list_element_user, values);
@@ -59,6 +60,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         this.protocols = values;
         this.protocolsAll = values;
         this.isViewOnly = isViewOnly;
+        db = new DatabaseService(context);
     }
 
     @Override
@@ -69,6 +71,7 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
     @Nullable
     @Override
     public Protocol getItem(int position) {
+        protocols.get(position).parseJson();
         return protocols.get(position);
     }
 
@@ -82,13 +85,14 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         public QuickActionItem actionItemDelete;
         public ImageView imageCloud;
         private Protocol protocol;
-
+        long lastNotifiedTime;
 
         public MyViewHolder(View view) {
             firstLine = view.findViewById(R.id.first_line);
             secondLine = view.findViewById(R.id.second_line);
             containerItems = view.findViewById(R.id.container_button);
             imageCloud = view.findViewById(R.id.list_element_protocol_image_cloud);
+
 
             actionItemPrint = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
             actionItemPrint.setImageResource(R.drawable.ic_menu_print);
@@ -99,13 +103,13 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
             containerItems.addView(actionItemView);
 
             actionItemDelete = (QuickActionItem) inflater.inflate(R.layout.quickaction_item, containerItems, false);
-            actionItemDelete.setImageResource(R.drawable.ic_menu_bin);
+            actionItemDelete.setImageResource(R.drawable.ic_menu_upload);
             if (!isViewOnly)
                 containerItems.addView(actionItemDelete);
 
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-            actionItemDelete.setEnabled(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols),
-                    ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols)));
+//            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+//            actionItemDelete.setEnabled(prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_protocols),
+//                    ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_protocols)));
 
             actionItemDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -114,10 +118,10 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                         actionDetected();
                         final Dialog dialog = new Dialog(mContext);
                         dialog.setContentView(R.layout.dialog_yes_no);
-                        dialog.setTitle("Confirm deletion");
+                        dialog.setTitle("Bestätigen Sie den Upload");
                         // set the custom dialog components - text, image and button
                         TextView text = (TextView) dialog.findViewById(R.id.text);
-                        text.setText(mContext.getString(R.string.do_you_really_want_to_delete_this_protocol) + " " + protocol.getName());
+                        text.setText(mContext.getString(R.string.do_you_really_want_to_upload_this_protocol) + " " + protocol.getName());
                         Button dialogButtonNo = (Button) dialog.findViewById(R.id.dialogButtonNO);
                         dialogButtonNo.setOnClickListener(new View.OnClickListener() {
 
@@ -133,24 +137,52 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                             @Override
                             public void onClick(View v) {
                                 actionDetected();
-                                if (!protocol.getCloudId().isEmpty()) {
-                                    DeleteTask deleteTask = new DeleteTask();
-                                    deleteTask.execute(CertocloudConstants.SERVER_URL +
-                                            CertocloudConstants.REST_API_DELETE_PROTOCOL + protocol.getCloudId());
-                                }
-                                try {
-                                    if (ApplicationManager.getInstance().getCurrentProtocol() != null &&
-                                            protocol.getAshSampleName().equals(ApplicationManager.getInstance().getCurrentProtocol().getAshSampleName()))
-                                        ApplicationManager.getInstance().setCurrentProtocol(null);
-                                } catch (Exception e) {
-                                    ApplicationManager.getInstance().setCurrentProtocol(null);
-                                }
-
-                                DatabaseService db = new DatabaseService(mContext);
-                                db.deleteProtocol(protocol);
-                                remove(protocol);
-                                notifyDataSetChanged();
                                 dialog.dismiss();
+                                FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
+                                    public void onConnection(boolean isConnected, final String message) {
+                                        android.util.Log.d("FTP_SERVER", "connection " + isConnected + " " + (message != null ? message : ""));
+                                        if (!isConnected) {
+                                            ((Activity) mContext).runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                                            ? message : mContext.getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
+                                                }
+                                            });
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onUploaded(Protocol protocol) {
+                                        if (db != null)
+                                            db.updateProtocolCloudId(protocol, "uploaded");
+                                        ((Activity) mContext).runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toasty.success(ApplicationController.getContext(),
+                                                        mContext.getString(R.string.uploaded_sucessfully), Toast.LENGTH_SHORT, true).show();
+                                                notifyDataSetChanged();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onUploading(boolean isUploaded, final String message) {
+                                        android.util.Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
+                                        if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+                                            ((Activity) mContext).runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                                            ? message : mContext.getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+                                                }
+                                            });
+
+                                            lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
+                                        }
+                                    }
+                                }, Arrays.asList(new Protocol[]{protocol}), true);
                             }
                         });
 
@@ -240,6 +272,9 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         viewHolder.firstLine.setText(protocol.getAshBeakerName());
         viewHolder.secondLine.setText(protocol.getDate());
 
+        viewHolder.imageCloud.setVisibility(protocol.getIsPending() ? View.GONE : View.VISIBLE);
+        viewHolder.actionItemDelete.setVisibility(protocol.getIsPending() ? View.GONE : View.VISIBLE);
+
         if (protocol.getCloudId().isEmpty()) {
             viewHolder.imageCloud.setImageResource(R.drawable.cloud_no_white);
         } else {
@@ -296,9 +331,9 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         return filter;
     }
 
-    private void actionDetected(){
-        if(mContext instanceof MenuProtocolActivity){
-            ((MenuProtocolActivity)mContext).actionDetected();
+    private void actionDetected() {
+        if (mContext instanceof MenuProtocolActivity) {
+            ((MenuProtocolActivity) mContext).actionDetected();
         }
     }
 }

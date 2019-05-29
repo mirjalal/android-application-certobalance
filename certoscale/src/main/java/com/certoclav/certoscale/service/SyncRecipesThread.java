@@ -111,7 +111,7 @@ public class SyncRecipesThread extends Thread {
 					Log.e("SyncProfileTask", "exception: " + e.toString());
 					return;//continue;
 				}
-				Log.e("SyncRecipeTask", "all done -> send message to update ui");
+				Log.e("SyncRecipeTask", "all done -> send message to upload ui");
 			sendMessage();
 	}
 

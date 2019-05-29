@@ -63,7 +63,7 @@ public class ProtocolManager implements ScaleApplicationListener {
         }
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_print_date), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_print_date)) == true) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             sb.append(df.format(Calendar.getInstance().getTime()) + "\n");
         }
 

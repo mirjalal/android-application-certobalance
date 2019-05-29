@@ -28,53 +28,63 @@
 
                 <EditText
                     android:id="@+id/dialog_edit_text_address"
-                    style="@style/edit_text_default"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:hint="@string/ftp_server" />
 
                 <EditText
                     android:id="@+id/dialog_edit_text_port"
-                    style="@style/edit_text_default"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:maxLines="1"
+                    android:lines="1"
                     android:inputType="number"
                     android:hint="21" />
             </LinearLayout>
 
             <EditText
                 android:id="@+id/dialog_edit_text_username"
-                style="@style/edit_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:lines="1"
+                android:inputType="text"
                 android:hint="@string/user_name" />
 
             <EditText
                 android:id="@+id/dialog_edit_text_password"
-                style="@style/edit_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:maxLines="1"
+                android:lines="1"
                 android:inputType="textPassword"
                 android:hint="@string/password" />
 
 
             <EditText
                 android:id="@+id/dialog_edit_text_raw_data_folder"
-                style="@style/edit_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLines="1"
                 android:hint="@string/ftp_raw_data_folder" />
 
             <EditText
                 android:id="@+id/dialog_edit_text_ilims_folder"
-                style="@style/edit_text_default"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:inputType="text"
                 android:layout_weight="1"
                 android:hint="@string/ftp_ilims_folder" />
 

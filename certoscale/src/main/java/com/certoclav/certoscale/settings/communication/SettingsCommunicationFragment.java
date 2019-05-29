@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.constants.AppConstants;
+import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.menu.LoginActivity;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleModelManager;
@@ -230,7 +231,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                                 }
 
                                 @Override
-                                public void onUpdated() {
+                                public void onUploaded(Protocol protocol) {
 
                                 }
 
