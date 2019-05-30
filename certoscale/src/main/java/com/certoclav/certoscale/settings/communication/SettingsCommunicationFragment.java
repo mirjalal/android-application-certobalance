@@ -1,7 +1,9 @@
 package com.certoclav.certoscale.settings.communication;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -29,9 +31,12 @@ import com.certoclav.certoscale.settings.application.PreferenceFragment;
 import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.application.ApplicationController;
 
+import es.dmoral.toasty.Toasty;
+
 
 public class SettingsCommunicationFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private SharedPreferences prefs = null;
+    private Activity activity;
 
 
     Handler handler = new Handler();
@@ -40,7 +45,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         @Override
         public void run() {
             Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            Intent intent = new Intent(activity, LoginActivity.class);
             startActivity(intent);
         }
     };
@@ -55,7 +60,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
     @Override
     public void onPause() {
         getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        if(handler!=null)
+        if (handler != null)
             handler.removeCallbacks(runnableLogout);
         super.onPause();
     }
@@ -199,7 +204,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                     dialogButton.setEnabled(false);
                     textViewResult.setVisibility(View.VISIBLE);
                     textViewResult.setTextColor(Color.BLUE);
-                    textViewResult.setText(getString(R.string.connecting));
+                    textViewResult.setText(activity.getString(R.string.connecting));
                     FTPManager.getInstance().testConnection(editTextServer.getText().toString(),
                             editTextPort.getText().length() == 0 ? 21 : Integer.valueOf(editTextPort.getText().toString()),
                             editTextUsername.getText().toString(),
@@ -207,7 +212,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                                 @Override
                                 public void onConnection(final boolean isConnected, final String message) {
                                     try {
-                                        getActivity().runOnUiThread(new Runnable() {
+                                        activity.runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {
                                                 dialogButtonNo.setEnabled(true);
@@ -216,12 +221,12 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
                                                 textViewResult.setVisibility(View.VISIBLE);
                                                 if (isConnected) {
                                                     textViewResult.setTextColor(Color.GREEN);
-                                                    textViewResult.setText(getString(R.string.success));
+                                                    textViewResult.setText(activity.getString(R.string.success));
                                                 } else {
                                                     textViewResult.setTextColor(Color.RED);
-                                                    textViewResult.setText(getString(R.string.fail));
+                                                    textViewResult.setText(activity.getString(R.string.fail));
                                                     if (message != null && message.length() > 0)
-                                                        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                                                        Toasty.error(activity, message, Toast.LENGTH_LONG, true).show();
                                                 }
                                             }
                                         });
@@ -273,8 +278,14 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(handler!=null)
+        if (handler != null)
             handler.removeCallbacks(runnableLogout);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.activity = getActivity();
     }
 
     @Override
