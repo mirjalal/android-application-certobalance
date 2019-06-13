@@ -10,8 +10,13 @@ import com.j256.ormlite.table.DatabaseTable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 @DatabaseTable(tableName = "protocol")
@@ -47,7 +52,12 @@ public class Protocol {
 
     @DatabaseField(columnName = "protocol_date")
     private String date = "";
-    private String cloudId = "";
+
+    @DatabaseField(columnName = "is_uploaded")
+    private int isUploaded;
+
+    private Date dateFortmated;
+    private String cloudId = "-1";
     private String contentJson = "";
     private double ovenTemperature = 0;
     private double recentWeight = 0;
@@ -74,7 +84,7 @@ public class Protocol {
 
     public void saveIntoDb() {
         DatabaseService db = new DatabaseService(ApplicationController.getContext());
-        while (db.deleteProtocol(this) == -1);
+        while (db.deleteProtocol(this) == -1) ;
         db.insertProtocol(this);
     }
 
@@ -170,6 +180,21 @@ public class Protocol {
     public String getDate() {
         return this.date;
     }
+
+    public Date getDateFormart() {
+        if (dateFortmated == null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.ENGLISH);
+            dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            try {
+                dateFortmated = dateFormat.parse(getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return new Date();
+            }
+        }
+        return dateFortmated;
+    }
+
 
     public void setDate(String date) {
         this.date = date;
@@ -643,7 +668,11 @@ public class Protocol {
     }
 
     public boolean isUploaded() {
-        return cloudId.equalsIgnoreCase("uploaded");
+        return isUploaded == 1;
+    }
+
+    public void setUploaded(boolean isUploaded) {
+        this.isUploaded = isUploaded ? 1 : 0;
     }
 }
 

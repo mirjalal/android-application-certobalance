@@ -118,11 +118,11 @@ public class MenuActivity extends Activity implements ButtonEventListener {
         if (isSettingsNotLocked(R.string.preferences_lockout_factory_reset, R.bool.preferences_lockout_factory_reset))
             menuMainElementAdapter.add(new MenuElement(getString(R.string.factory_reset).toUpperCase(), R.drawable.ic_menu_settings_reset, MenuElement.MenuItemId.MENU_ITEM_RESET));
 
-        if(Scale.getInstance().getUser().getIsAdmin())
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.lockout_settings).toUpperCase(), R.drawable.ic_menu_lock2, MenuElement.MenuItemId.MENU_ITEM_LOCKOUT));
+        if (Scale.getInstance().getUser().getIsAdmin())
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.lockout_settings).toUpperCase(), R.drawable.ic_menu_lock2, MenuElement.MenuItemId.MENU_ITEM_LOCKOUT));
 
         if (isSettingsNotLocked(R.string.preferences_lockout_application_modes, R.bool.preferences_lockout_application_modes))
-        menuMainElementAdapter.add(new MenuElement(getString(R.string.application_settings).toUpperCase(), R.drawable.ic_menu_app_settings_applications_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
+            menuMainElementAdapter.add(new MenuElement(getString(R.string.application_settings).toUpperCase(), R.drawable.ic_menu_app_settings_applications_orange, MenuElement.MenuItemId.MENU_ITEM_APPLICATION_SETTINGS));
 
         if (isSettingsNotLocked(R.string.preferences_lockout_user_settings, R.bool.preferences_lockout_user_settings))
             menuMainElementAdapter.add(new MenuElement(getString(R.string.user_management).toUpperCase(), R.drawable.ic_menu_settings_user2, MenuElement.MenuItemId.MENU_ITEM_USER));
@@ -284,7 +284,6 @@ public class MenuActivity extends Activity implements ButtonEventListener {
                             Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
-
 
                         }
                     });

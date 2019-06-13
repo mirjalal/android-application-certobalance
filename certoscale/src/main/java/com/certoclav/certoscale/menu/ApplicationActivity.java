@@ -98,8 +98,10 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
         @Override
         public void run() {
             Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+            ApplicationManager.getInstance().setCurrentProtocol(null);
             Intent intent = new Intent(ApplicationActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     };
     Handler handler = new Handler();
@@ -114,8 +116,10 @@ public class ApplicationActivity extends FragmentActivity implements ButtonEvent
                 // do whatever you need to do here
 
                 Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
+                ApplicationManager.getInstance().setCurrentProtocol(null);
                 Intent i = new Intent(ApplicationActivity.this, LoginActivity.class);
                 startActivity(i);
+                finish();
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 // and do whatever you need to do here
 

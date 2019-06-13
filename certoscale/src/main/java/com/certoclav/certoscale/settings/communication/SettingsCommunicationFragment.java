@@ -46,7 +46,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         public void run() {
             Scale.getInstance().setScaleState(ScaleState.ON_AND_MODE_GRAM);
             Intent intent = new Intent(activity, LoginActivity.class);
-            startActivity(intent);
+            activity.startActivity(intent);
         }
     };
 
@@ -70,7 +70,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences_communication);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
         ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setSummary(getString(R.string.assigned_to_com) + " 1, " + Scale.getInstance().getSerialsServiceProtocolPrinter().getBaudrate() + " baud, 8 data bits, parity: none, 1 stop bit, flow control: none");
         ((Preference) findPreference(getString(R.string.preferences_communication_protocolprinter))).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -158,7 +158,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
 
     private void showsFtpInfoDialog() {
         try {
-            final Dialog dialog = new Dialog(getActivity());
+            final Dialog dialog = new Dialog(activity);
             dialog.setContentView(R.layout.dialog_edit_ftp);
             dialog.setCancelable(false);
             final EditText editTextServer = (EditText) dialog.findViewById(R.id.dialog_edit_text_address);
@@ -293,7 +293,7 @@ public class SettingsCommunicationFragment extends PreferenceFragment implements
 
 
         if (prefs.getBoolean(ApplicationController.getContext().getString(R.string.preferences_lockout_communication), ApplicationController.getContext().getResources().getBoolean(R.bool.preferences_lockout_communication)) == true) {
-            Toast.makeText(getContext(), R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.these_settings_are_locked_by_the_admin, Toast.LENGTH_SHORT).show();
             getPreferenceScreen().setEnabled(false);
         } else {
             getPreferenceScreen().setEnabled(true);

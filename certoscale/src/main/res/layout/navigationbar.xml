@@ -142,8 +142,8 @@
         style="@style/button_navigationbar_default"
         android:layout_width="80dp"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@+id/naviagationbar_button_save"
-        android:src="@drawable/ic_menu_bin" />
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_delete" />
 
 
     <RelativeLayout

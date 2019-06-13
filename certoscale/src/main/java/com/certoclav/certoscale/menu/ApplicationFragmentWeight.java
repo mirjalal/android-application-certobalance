@@ -631,6 +631,7 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
             case ASH_DETERMINATION_ENTER_NAME_SAMPLE:
             case ASH_DETERMINATION_ENTER_NAME_BEAKER:
             case ASH_DETERMINATION_WEIGH_BEAKER:
+            case ASH_DETERMINATION_BATCH_FINISHED:
                 enableField(textValue, String.valueOf(getTotalWeight()) + "g");
                 clearField(textSum);
                 break;
@@ -648,9 +649,9 @@ public class ApplicationFragmentWeight extends Fragment implements WeightListene
                 break;
             case ASH_DETERMINATION_CHECK_DELTA_WEIGHT:
                 break;
-            case ASH_DETERMINATION_BATCH_FINISHED:
-                clearField(textSum);
-                break;
+//            case ASH_DETERMINATION_BATCH_FINISHED:
+//                clearField(textSum);
+//                break;
             default:
                 break;
         }

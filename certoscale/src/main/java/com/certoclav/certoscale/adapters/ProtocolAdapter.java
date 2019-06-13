@@ -138,51 +138,52 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
                             public void onClick(View v) {
                                 actionDetected();
                                 dialog.dismiss();
-                                FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
-                                    public void onConnection(boolean isConnected, final String message) {
-                                        android.util.Log.d("FTP_SERVER", "connection " + isConnected + " " + (message != null ? message : ""));
-                                        if (!isConnected) {
-                                            ((Activity) mContext).runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
-                                                            ? message : mContext.getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
-                                                }
-                                            });
+                                if (!FTPManager.getInstance().hasOnGoingUploading())
+                                    FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
+                                        public void onConnection(boolean isConnected, final String message) {
+                                            android.util.Log.d("FTP_SERVER", "connection " + isConnected + " " + (message != null ? message : ""));
+                                            if (!isConnected) {
+                                                ((Activity) mContext).runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                                                ? message : mContext.getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
+                                                    }
+                                                });
 
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onUploaded(Protocol protocol) {
-                                        if (db != null)
-                                            db.updateProtocolCloudId(protocol, "uploaded");
-                                        ((Activity) mContext).runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toasty.success(ApplicationController.getContext(),
-                                                        mContext.getString(R.string.uploaded_sucessfully), Toast.LENGTH_SHORT, true).show();
-                                                notifyDataSetChanged();
                                             }
-                                        });
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onUploading(boolean isUploaded, final String message) {
-                                        android.util.Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
-                                        if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+                                        @Override
+                                        public void onUploaded(Protocol protocol) {
+                                            if (db != null)
+                                                db.updateProtocolIsUploaded(protocol, true);
                                             ((Activity) mContext).runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
-                                                            ? message : mContext.getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+                                                    Toasty.success(ApplicationController.getContext(),
+                                                            mContext.getString(R.string.uploaded_sucessfully), Toast.LENGTH_SHORT, true).show();
+                                                    notifyDataSetChanged();
                                                 }
                                             });
-
-                                            lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
                                         }
-                                    }
-                                }, Arrays.asList(new Protocol[]{protocol}), true);
+
+                                        @Override
+                                        public void onUploading(boolean isUploaded, final String message) {
+                                            android.util.Log.d("FTP_SERVER", "uploading " + isUploaded + " " + (message != null ? message : ""));
+                                            if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+                                                ((Activity) mContext).runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+                                                                ? message : mContext.getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+                                                    }
+                                                });
+
+                                                lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
+                                            }
+                                        }
+                                    }, Arrays.asList(new Protocol[]{protocol}), true);
                             }
                         });
 
@@ -275,11 +276,9 @@ public class ProtocolAdapter extends ArrayAdapter<Protocol> implements Filterabl
         viewHolder.imageCloud.setVisibility(protocol.getIsPending() ? View.GONE : View.VISIBLE);
         viewHolder.actionItemDelete.setVisibility(protocol.getIsPending() ? View.GONE : View.VISIBLE);
 
-        if (protocol.getCloudId().isEmpty()) {
-            viewHolder.imageCloud.setImageResource(R.drawable.cloud_no_white);
-        } else {
-            viewHolder.imageCloud.setImageResource(R.drawable.cloud_ok_white);
-        }
+        viewHolder.imageCloud.setImageResource(protocol.isUploaded() ? R.drawable.cloud_ok_white :
+                R.drawable.cloud_no_white);
+
 
         return convertView;
     }

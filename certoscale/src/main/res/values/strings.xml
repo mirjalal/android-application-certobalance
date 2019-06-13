@@ -629,7 +629,7 @@
     <string name="confirm_operation">Confirm operation</string>
     <string name="do_you_really_want_to_save_the_itm">"Do you really want to save the item? "</string>
     <string name="protocols">Protocols</string>
-    <string name="do_you_really_want_to_delete_all_protocols">Do you really want to delete all protocols?</string>
+    <string name="do_you_really_want_to_delete_all_protocols">Do you really want to delete all uploaded protocols?</string>
     <string name="recipes">Recipes</string>
     <string name="confirm_deletion">Confirm deletion</string>
     <string name="edit_recipe">Edite recipe</string>
@@ -1088,6 +1088,9 @@
     <string name="can_not_uploaded">Eine Datei kann nicht auf den FTP-Server hochgeladen werden.</string>
     <string name="do_you_really_want_to_upload_this_protocol">Möchten Sie das Protokoll hochladen</string>
     <string name="uploaded_sucessfully">Erfolgreich hochgeladen</string>
+    <string name="passwords_is_short">Password too short - minimum length is 4 characters</string>
+    <string name="deleting">Deleting</string>
+    <string name="loading">Loading...</string>
 
 
 </resources>

@@ -322,6 +322,33 @@ public class DatabaseService {
         return new ArrayList<>();
     }
 
+    public List<Protocol> getNotUploadedProtocols() {
+        try {
+            return protocolDao.queryForEq("is_uploaded", 0);
+
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return new ArrayList<>();
+    }
+
+
+    public List<Protocol> getUploadedProtocols() {
+        try {
+            return protocolDao.queryForEq("is_uploaded", 1);
+
+        } catch (SQLException e) {
+            Log.e(TAG, "Database exception", e);
+        } catch (Exception e) {
+            Log.e(TAG, "Database exception", e);
+        }
+
+        return new ArrayList<>();
+    }
+
     public List<Protocol> getPengingProtocols() {
         try {
             List<Protocol> protocols = protocolDao.queryForEq("protocol_is_pending", true);
@@ -633,9 +660,30 @@ public class DatabaseService {
 
     public int updateProtocolCloudId(Protocol protocol, String cloudId) {
         try {
-              try {
+            try {
                 protocol.setCloudId(cloudId);
                 protocol.generateJson();
+                int x = protocolDao.update(protocol);
+                return x;
+
+            } catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                Log.e(TAG, "Database exception", e);
+            }
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return -1;
+
+    }
+
+    public int updateProtocolIsUploaded(Protocol protocol, boolean isUploaded) {
+        try {
+            try {
+                protocol.setUploaded(isUploaded);
                 int x = protocolDao.update(protocol);
                 return x;
 

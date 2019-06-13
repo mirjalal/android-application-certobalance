@@ -27,7 +27,6 @@ import com.certoclav.certoscale.constants.AppConstants;
 import com.certoclav.certoscale.database.DatabaseService;
 import com.certoclav.certoscale.database.User;
 import com.certoclav.certoscale.model.Navigationbar;
-import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.view.EditTextItem;
 import com.certoclav.library.bcrypt.BCrypt;
 
@@ -76,8 +75,7 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().isEmpty() == false)
-                    editEmailItem.setHasValidString(true);
+                editEmailItem.setHasValidString(android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches());
             }
 
             @Override
@@ -181,8 +179,7 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().length() > 3)
-                    editPasswordItem.setHasValidString(true);
+                editPasswordItem.setHasValidString(s.toString().length() > 3);
             }
 
             @Override
@@ -253,7 +250,12 @@ public class RegisterActivity extends Activity {
 
                 Log.e("RegisterActivity", "onclickRegisterButton");
                 if (editPasswordItem.getVisibility() == View.VISIBLE) {
-                    if (!editPasswordItem.hasValidString() || !editPasswordItemConfirm.hasValidString()) {
+
+                    if (!editPasswordItem.hasValidString()) {
+                        Toast.makeText(RegisterActivity.this, getString(R.string.passwords_is_short), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if (!editPasswordItemConfirm.hasValidString()) {
                         Toast.makeText(RegisterActivity.this, getString(R.string.passwords_do_not_match), Toast.LENGTH_LONG).show();
                         return;
                     }
@@ -335,7 +337,7 @@ public class RegisterActivity extends Activity {
                     String text = editText.getText().toString();
                     if (text.length() > 0) {
 
-                        if (db.getUserByRFID(text) != null && (lastUser==null || !db.getUserByRFID(text).getEmail().equals(lastUser.getEmail()))) {
+                        if (db.getUserByRFID(text) != null && (lastUser == null || !db.getUserByRFID(text).getEmail().equals(lastUser.getEmail()))) {
                             imageViewRFID.setImageResource(R.drawable.rfid_scan_wrong);
                             dialogButton.setEnabled(false);
                             Toasty.error(RegisterActivity.this,

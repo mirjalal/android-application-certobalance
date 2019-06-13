@@ -1,94 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@drawable/background_gadient">
- 
-    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gadient"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:id="@+id/dialog_container_text"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:orientation="horizontal"  
-        >
+        android:orientation="horizontal">
 
- 
-    <TextView
-        android:id="@+id/dialog_cloud_local_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
-        android:text=""
-        style="@style/text_default"/>
-    
-    <View
-    android:layout_height="match_parent"
-    android:layout_width="1dp"
-    android:background="@android:color/darker_gray"/>
-    
-    
-    <TextView
-        android:id="@+id/dialog_cloud_local_local"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
-        android:text="Create a new program manually"
-        style="@style/text_default"
-/>
-      <View
-    android:layout_height="match_parent"
-    android:layout_width="1dp"
-    android:background="@android:color/darker_gray"/>
-        
-     <TextView
-        android:id="@+id/dialog_cloud_local_cloud"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|bottom"
-        android:text="Create a new program from template"
-         style="@style/text_default"
-/>
+
+        <TextView
+            android:id="@+id/dialog_cloud_local_cancel"
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:text="" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray" />
+
+
+        <TextView
+            android:id="@+id/dialog_cloud_local_local"
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:text="Create a new program manually" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/dialog_cloud_local_cloud"
+            style="@style/text_default"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:text="Create a new program from template" />
     </LinearLayout>
-    
- <LinearLayout 
-          android:layout_width="match_parent"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"   
         android:layout_below="@+id/dialog_container_text"
-     >
-         <Button
-        android:id="@+id/dialogButtonNO"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:text="@string/cancel"
-             style="@style/button_default"
-        />
-         
-     <Button
-        android:id="@+id/dialogButtonLocal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:text="@string/create_new"
-         style="@style/button_default"
+        android:orientation="horizontal">
 
-        />
-     
-          <Button
-        android:id="@+id/dialogButtonCloud"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:text="@string/brows_templates"
-              style="@style/button_default"
+        <Button
+            android:id="@+id/dialogButtonNO"
+            style="@style/button_default"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
 
-        />
-          
+        <Button
+            android:id="@+id/dialogButtonLocal"
+            style="@style/button_default"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/create_new"
 
- </LinearLayout>
+            />
+
+        <Button
+            android:id="@+id/dialogButtonCloud"
+            style="@style/button_default"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="@string/brows_templates"
+
+            />
+
+
+    </LinearLayout>
 </LinearLayout>

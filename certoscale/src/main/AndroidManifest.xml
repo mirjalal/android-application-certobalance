@@ -7,7 +7,8 @@
 
     <uses-sdk
         android:targetSdkVersion="26"
-        tools:overrideLibrary="com.teamviewer.sdk.screensharing"/>
+        tools:overrideLibrary="com.teamviewer.sdk.screensharing" />
+
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -143,160 +144,170 @@
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
 
     <application
+        android:name="com.certoclav.library.application.ApplicationController"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.certoclav.library.application.ApplicationController"
-        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
 
-        <activity android:name=".menu.NotificationActivity"
-            android:screenOrientation="sensorLandscape"
-            android:launchMode="singleInstance">
-        </activity>
-
-        <activity android:name=".settings.calibration.SettingsCalibrationActivity"
-            android:screenOrientation="sensorLandscape"
-            ></activity>
-        <activity android:name=".menu.AddCloudAccountActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
-        <activity android:name=".menu.SpeechToTextActivity"
+        <activity
+            android:name=".menu.NotificationActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".menu.LoginActivity"
-            android:screenOrientation="sensorLandscape"
-            android:label="@string/app_name" >
+
+
+        <activity
+            android:name=".settings.calibration.SettingsCalibrationActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".menu.AddCloudAccountActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".menu.SpeechToTextActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".menu.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
+        <service android:name="com.certoclav.certoscale.service.CloudSocketService"></service>
 
-        <activity android:name=".settings.unit.SettingsUnitActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
-        <activity android:name=".settings.glp.SettingsGlpActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.unit.SettingsUnitActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".settings.glp.SettingsGlpActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.lockout.SettingsLockoutActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.lockout.SettingsLockoutActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.reset.SettingsFactoryResetActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.reset.SettingsFactoryResetActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".menu.SettingsEmailActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
-        <activity android:name=".settings.library.MenuLibraryActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
-        <activity android:name=".settings.device.SettingsLanguagePickerActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".menu.SettingsEmailActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".settings.library.MenuLibraryActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+        <activity
+            android:name=".settings.device.SettingsLanguagePickerActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.communication.SettingsCommunicationActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.communication.SettingsCommunicationActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
         <service android:name=".service.SyncItemsService"></service>
         <service android:name=".service.SyncRecipesService"></service>
         <service android:name=".service.SyncProtocolsService"></service>
 
-        <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
+        <service android:name="com.certoclav.certoscale.service.CloudSocketService"></service>
         <service android:name="com.certoclav.certoscale.service.ReadAndParseSerialSicsService"></service>
 
-        <activity android:name=".settings.protocol.MenuProtocolActivity"
+        <activity
+            android:name=".settings.protocol.MenuProtocolActivity"
             android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".settings.labels.MenuLabelPrinterActivity"
+        <activity
+            android:name=".settings.labels.MenuLabelPrinterActivity"
             android:screenOrientation="sensorLandscape"
-            android:windowSoftInputMode="adjustResize"
-            ></activity>
+            android:windowSoftInputMode="adjustResize"></activity>
 
-        <activity android:name=".menu.VideoActivity"
-        android:screenOrientation="sensorLandscape"
-        android:launchMode="singleInstance">
-    </activity>
-
-    <activity android:name=".menu.VideoFullscreenActivity"
-        android:screenOrientation="sensorLandscape"
-        android:launchMode="singleInstance">
-    </activity>
-
-
-
-        <activity android:name=".settings.recipe.MenuRecipeEditActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-        <activity android:name=".settings.recipe.MenuRecipeActivity"
+        <activity
+            android:name=".menu.VideoActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.item.MenuItemEditActivity"
-            android:screenOrientation="sensorLandscape"></activity>
-
-        <activity android:name=".settings.item.MenuItemActivity"
+        <activity
+            android:name=".menu.VideoFullscreenActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="sensorLandscape"></activity>
 
 
-
-
-        <activity android:name=".settings.unit.SettingsUnitEditActivity"
+        <activity
+            android:name=".settings.recipe.MenuRecipeEditActivity"
             android:screenOrientation="sensorLandscape"></activity>
-            
+        <activity
+            android:name=".settings.recipe.MenuRecipeActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+
+        <activity
+            android:name=".settings.item.MenuItemEditActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+
+        <activity
+            android:name=".settings.item.MenuItemActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+
+
+        <activity
+            android:name=".settings.unit.SettingsUnitEditActivity"
+            android:screenOrientation="sensorLandscape"></activity>
+
 
         <service android:name=".service.SyncItemsService"></service>
         <service android:name=".service.SyncRecipesService"></service>
         <service android:name=".service.SyncProtocolsService"></service>
 
-        <service android:name="com.certoclav.certoscale.service.CloudSocketService" ></service>
+        <service android:name="com.certoclav.certoscale.service.CloudSocketService"></service>
 
 
-        <activity android:name=".menu.RegisterActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".menu.RegisterActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.device.SettingsDeviceActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.device.SettingsDeviceActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".menu.RegisterCloudAccountActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".menu.RegisterCloudAccountActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".menu.ActivateCloudAccountActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".menu.ActivateCloudAccountActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
         <activity
             android:name=".menu.ApplicationActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustResize"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan|adjustResize"></activity>
 
-        <activity android:name=".menu.MenuActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".menu.MenuActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.application.SettingsActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.application.SettingsActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".settings.user.MenuUserActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+        <activity
+            android:name=".settings.user.MenuUserActivity"
+            android:screenOrientation="sensorLandscape"></activity>
 
-        <activity android:name=".menu.AnimationCalibrationActivity"
-            android:screenOrientation="sensorLandscape">
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity
+            android:name=".menu.AnimationCalibrationActivity"
+            android:screenOrientation="sensorLandscape"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
 
         App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <receiver
+            android:name=".util.AlarmReceiver"
+            android:enabled="true" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -3,7 +3,6 @@ package com.certoclav.certoscale.menu;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +53,7 @@ import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.service.ReadAndParseSerialService;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
 import com.certoclav.certoscale.supervisor.StateMachine;
+import com.certoclav.certoscale.util.FTPManager;
 import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.bcrypt.BCrypt;
 import com.certoclav.library.certocloud.CertocloudConstants;
@@ -176,6 +176,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final DatabaseService databaseService = new DatabaseService(this);
+        FTPManager.getInstance();
 
         if (getIntent() != null && getIntent().hasExtra("userid") && getIntent().getStringExtra("userid") != null) {
             User user = databaseService.getUserByRFID(getIntent().getStringExtra("userid"));
@@ -627,7 +628,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             DatabaseService databaseService = new DatabaseService(this);
             if (databaseService.getUsers() != null) {
                 if (databaseService.getUsers().size() > 0) {
-                    if(databaseService.getUserByUsername("Admin")==null){
+                    if (databaseService.getUserByUsername("Admin") == null) {
                         User user1 = new User("", "", "", "Admin", "", "", "", "", "", BCrypt.hashpw("admin", BCrypt.gensalt()), new Date(), true, true);
                         databaseService.insertUser(user1);
                     }
@@ -905,6 +906,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
 
     Dialog dialogAdminLogin;
+
     private class CheckAdminPassword extends AsyncTask<Object, Void, Boolean> {
         private boolean isAdminLogin;
         private ProgressDialog dialogProgress;
@@ -912,7 +914,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         protected Boolean doInBackground(Object... params) {
             User user = (User) params[0];
             isAdminLogin = (boolean) params[2];
-            if(user!=null && BCrypt.checkpw(params[1].toString(),user.getPassword())){
+            if (user != null && BCrypt.checkpw(params[1].toString(), user.getPassword())) {
                 Scale.getInstance().setUser(user);
                 return true;
             }
@@ -929,13 +931,13 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         protected void onPostExecute(Boolean result) {
             dialogProgress.dismiss();
             if (result) {
-                if(dialogAdminLogin!=null)
+                if (dialogAdminLogin != null)
                     dialogAdminLogin.dismiss();
 
-                if(isAdminLogin) {
+                if (isAdminLogin) {
                     Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                     startActivity(intent);
-                }else{
+                } else {
                     final Dialog dialog = new Dialog(LoginActivity.this);
                     dialog.setContentView(R.layout.dialog_yes_no);
                     dialog.setTitle(R.string.register_new_user);
@@ -971,7 +973,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 
                     dialog.show();
                 }
-            }else{
+            } else {
                 Toasty.error(getApplicationContext(),
                         R.string.password_not_correct, Toast.LENGTH_LONG, true).show();
             }
@@ -993,7 +995,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             public void onClick(View v) {
                 DatabaseService databaseService = new DatabaseService(LoginActivity.this);
                 User user = databaseService.getUserByUsername("Admin");
-                new CheckAdminPassword().execute(user,editTextPassword.getText().toString(), true);
+                new CheckAdminPassword().execute(user, editTextPassword.getText().toString(), true);
             }
         });
 
@@ -1024,7 +1026,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
             public void onClick(View v) {
                 DatabaseService databaseService = new DatabaseService(LoginActivity.this);
                 User user = databaseService.getUserByUsername("Admin");
-                new CheckAdminPassword().execute(user,editTextPassword.getText().toString(), false);
+                new CheckAdminPassword().execute(user, editTextPassword.getText().toString(), false);
             }
         });
 
@@ -1094,7 +1096,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
         switch (buttonId) {
 
             case ActionButtonbarFragment.BUTTON_ADD:
-               askForAdminLoginToRegisterANewUser();
+                askForAdminLoginToRegisterANewUser();
                 break;
             case ActionButtonbarFragment.BUTTON_SETTINGS_DEVICE:
                 askForAdminLogin();

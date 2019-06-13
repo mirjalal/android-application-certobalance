@@ -46,7 +46,7 @@
     <string name="density_of_liquid_calculated">Dichte berechnet</string>
 
     <string name="dispense_sample_number">Geben sie die Probe ab</string>
-    <string name="do_you_really_want_to_delete_all_protocols">Möchten Sie wirklich allle Protokolle löschen?</string>
+    <string name="do_you_really_want_to_delete_all_protocols">Möchten Sie wirklich alle hochgeladenen Protokolle löschen?</string>
     <string name="do_you_really_want_to_go_back">Möchten Sie wirklich zurück gehen ohne das aktuelle Item zu speichern</string>
     <string name="do_you_really_want_to_go_back_without_saving_recipe">MöchtenSie wirklich zurück gehen ohne das aktuelle Rezept zu speichern</string>
     <string name="do_you_really_want_to_go_back_without_saving_unit">Möchten Sie wirklich zurück gehen ohne die aktuelle Einheit zu speichern</string>
@@ -730,6 +730,9 @@
     <string name="can_not_connect_to_ftp">Die Verbindung zum FTP-Server kann nicht hergestellt werden.</string>
     <string name="can_not_uploaded">Eine Datei kann nicht auf den FTP-Server hochgeladen werden.</string>
     <string name="do_you_really_want_to_upload_this_protocol">Möchten Sie das Protokoll hochladen</string>
+    <string name="passwords_is_short">Passwort zu kurz - Mindestlänge beträgt 4 Zeichen</string>
+    <string name="deleting">Löschen...</string>
+    <string name="loading">Laden....</string>
 
 
 </resources>

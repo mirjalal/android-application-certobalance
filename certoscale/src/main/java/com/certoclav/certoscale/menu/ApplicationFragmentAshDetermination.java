@@ -19,17 +19,12 @@ import android.widget.Toast;
 
 import com.certoclav.certoscale.R;
 import com.certoclav.certoscale.database.DatabaseService;
-import com.certoclav.certoscale.database.Protocol;
 import com.certoclav.certoscale.listener.ScaleApplicationListener;
 import com.certoclav.certoscale.listener.StableListener;
 import com.certoclav.certoscale.model.Scale;
 import com.certoclav.certoscale.model.ScaleApplication;
 import com.certoclav.certoscale.supervisor.ApplicationManager;
-import com.certoclav.certoscale.util.FTPManager;
-import com.certoclav.library.application.ApplicationController;
 import com.certoclav.library.util.ExportUtils;
-
-import java.util.Calendar;
 
 import es.dmoral.toasty.Toasty;
 
@@ -58,7 +53,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
             @Override
             public void onClick(View v) {
                 actionDetected();
-                ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                ApplicationManager.getInstance().setCurrentProtocol(null);
                 Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
             }
         });
@@ -396,7 +391,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
         Scale.getInstance().setOnApplicationListener(this);
         Scale.getInstance().setOnStableListener(this);
         updateUI();
-        buttonNext.setEnabled(Scale.getInstance().isStable());
+//        buttonNext.setEnabled(Scale.getInstance().isStable());
         super.onResume();
     }
 
@@ -496,7 +491,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 @Override
                 public void onClick(View v) {
                     actionDetected();
-                    ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                    ApplicationManager.getInstance().setCurrentProtocol(null);
                     dialog.dismiss();
                     Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                 }
@@ -609,7 +604,7 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
                 @Override
                 public void onClick(View v) {
                     actionDetected();
-                    ApplicationManager.getInstance().setCurrentProtocol(new DatabaseService(getActivity()).getRecentProtocol());
+                    ApplicationManager.getInstance().setCurrentProtocol(null);
                     Scale.getInstance().setScaleApplication(ScaleApplication.ASH_DETERMINATION_HOME);
                     dialog.dismiss();
                 }
@@ -661,46 +656,46 @@ public class ApplicationFragmentAshDetermination extends Fragment implements Sca
 
     public void saveAshDeterminationProtocols() {
         final DatabaseService databaseService = new DatabaseService(getActivity());
-        FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
-            @Override
-            public void onConnection(boolean isConnected, final String message) {
-                if (!isConnected) {
-
-                    if (activity != null) {
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
-                                        ? message : getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onUploaded(Protocol protocol) {
-                if (databaseService != null)
-                    databaseService.updateProtocolCloudId(protocol, "uploaded");
-            }
-
-            @Override
-            public void onUploading(boolean isUploaded, final String message) {
-                //Wait for 10 seconds for the next notification
-                if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
-                    if (activity != null) {
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
-                                        ? message : getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
-                            }
-                        });
-                    }
-                    lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
-                }
-            }
-        }, databaseService.getProtocols(), false);
+//        FTPManager.getInstance().uploadProtocols(new FTPManager.FTPListener() {
+//            @Override
+//            public void onConnection(boolean isConnected, final String message) {
+//                if (!isConnected) {
+//
+//                    if (activity != null) {
+//                        activity.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+//                                        ? message : getString(R.string.can_not_connect_to_ftp), Toast.LENGTH_LONG, true).show();
+//                            }
+//                        });
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onUploaded(Protocol protocol) {
+//                if (databaseService != null)
+//                    databaseService.updateProtocolCloudId(protocol, "uploaded");
+//            }
+//
+//            @Override
+//            public void onUploading(boolean isUploaded, final String message) {
+//                //Wait for 10 seconds for the next notification
+//                if (!isUploaded && lastNotifiedTime + 10 * 1000 < Calendar.getInstance().getTimeInMillis()) {
+//                    if (activity != null) {
+//                        activity.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toasty.error(ApplicationController.getContext(), (message != null && !message.isEmpty())
+//                                        ? message : getString(R.string.can_not_uploaded), Toast.LENGTH_SHORT, true).show();
+//                            }
+//                        });
+//                    }
+//                    lastNotifiedTime = Calendar.getInstance().getTimeInMillis();
+//                }
+//            }
+//        }, databaseService.getProtocols(), false);
     }
 
     @Override

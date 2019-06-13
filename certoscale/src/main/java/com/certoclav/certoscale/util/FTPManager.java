@@ -1,7 +1,12 @@
 package com.certoclav.certoscale.util;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -58,10 +63,22 @@ public class FTPManager {
     private String folderILIMS;
     private boolean isEnabled;
 
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
+    private boolean hasOnGoingUploading;
+
     private FTPManager() {
         ftp = new FTPClient();
         preferences = PreferenceManager.getDefaultSharedPreferences(ApplicationController.getContext());
         updateFTPInformation();
+
+        alarmMgr = (AlarmManager) ApplicationController.getContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(ApplicationController.getContext(), AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(ApplicationController.getContext(), 0, intent, 0);
+
+        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime(),
+                1000, alarmIntent);
     }
 
     public static FTPManager getInstance() {
@@ -99,7 +116,6 @@ public class FTPManager {
     public void saveFTPInformation(String address, int port, String username, String password, String folder, String folderILIMS, Boolean isEnabled) {
 
         address = address.trim();
-        username = username.trim();
         folder = folder.trim();
         folderILIMS = folderILIMS.trim();
         try {
@@ -145,98 +161,128 @@ public class FTPManager {
 
     public void uploadProtocols(final FTPListener listener, final List<Protocol> protocols, final boolean isForce) {
         if (!isEnabled) return;
-        Needle.onBackgroundThread().execute(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try {
-                                                        ftp.connect(address, port);
-                                                        if (!FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
-                                                            ftp.disconnect();
-                                                            if (listener != null)
-                                                                listener.onConnection(false, "FTP server refused connection.");
-                                                            return;
-                                                        }
-                                                        if (ftp.login(username, password)) {
-                                                            try {
 
-                                                                ftp.setControlEncoding("UTF-8");
-                                                                ftp.setAutodetectUTF8(true);
-                                                                ftp.makeDirectory(folder);
-                                                                if (!ftp.changeWorkingDirectory(folder)) {
-                                                                    if (listener != null)
-                                                                        listener.onUploading(false, "Es gibt ein Problem mit " + folder + " Ordner!");
-                                                                    return;
-                                                                }
-                                                                ftp.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
-
-                                                                boolean isUploaded;
-                                                                for (Protocol protocol : protocols) {
-                                                                    protocol.generateCSV();
-                                                                    isUploaded = protocol.isUploaded();
-                                                                    if ((!isForce && isUploaded) || protocol.getIsPending())
-                                                                        continue;
-                                                                    isUploaded = false;
-                                                                    //Uploading not uploaded protocols
-                                                                    File file = createTempProtocolFile(protocol);
-                                                                    if (file == null)
-                                                                        continue;
-                                                                    FileInputStream srcFileStream = new FileInputStream(file);
-                                                                    ftp.deleteFile(file.getName());
-                                                                    if (ftp.storeFile(file.getName(), srcFileStream)) {
-                                                                        file.delete();
-                                                                        isUploaded = true;
-                                                                    } else {
-                                                                        if (listener != null)
-                                                                            listener.onUploading(false, null);
-                                                                    }
-                                                                    srcFileStream.close();
-
-
-                                                                    //Uploading iLIMS protocols
-                                                                    ftp.makeDirectory(folderILIMS);
-                                                                    ftp.changeWorkingDirectory(folderILIMS);
-                                                                    file = createTempProtocolFileForIlims(protocol);
-                                                                    if (file == null) {
-                                                                        Log.e("nuuuuuuuuuul", "nuuuuuuuuuuuuul");
-                                                                        continue;
-                                                                    }
-                                                                    srcFileStream = new FileInputStream(file);
-                                                                    ftp.deleteFile(file.getName());
-                                                                    if (ftp.storeFile(file.getName(), srcFileStream)) {
-                                                                        file.delete();
-                                                                    } else {
-                                                                        isUploaded = false;
-                                                                        if (listener != null)
-                                                                            listener.onUploading(false, null);
-                                                                    }
-                                                                    srcFileStream.close();
-
-                                                                    if (isUploaded) {
-                                                                        if (listener != null)
-                                                                            listener.onUploaded(protocol);
-                                                                    } else {
-                                                                        if (listener != null)
-                                                                            listener.onUploading(false, "Das Hochladen ist fehlgeschlagen!");
-                                                                    }
-                                                                }
-
-                                                            } catch (Exception e) {
+        if (!hasOnGoingUploading)
+            Needle.onBackgroundThread().execute(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            hasOnGoingUploading = true;
+                                                            ftp.connect(address, port);
+                                                            if (!FTPReply.isPositiveCompletion(ftp.getReplyCode())) {
+                                                                ftp.disconnect();
                                                                 if (listener != null)
-                                                                    listener.onUploading(false, e.getMessage());
-                                                                throw e;
+                                                                    listener.onConnection(false, "FTP server refused connection.");
+                                                                hasOnGoingUploading = false;
+                                                                return;
                                                             }
-                                                        } else {
+
+                                                            if (ftp.login(username, password)) {
+                                                                try {
+                                                                    ftp.setControlEncoding("UTF-8");
+                                                                    ftp.setAutodetectUTF8(true);
+                                                                    ftp.makeDirectory(folder);
+
+                                                                    ftp.setFileType(org.apache.commons.net.ftp.FTP.BINARY_FILE_TYPE);
+
+                                                                    boolean isUploaded;
+                                                                    for (Protocol protocol : protocols) {
+
+                                                                        if (!ftp.changeWorkingDirectory(folder)) {
+                                                                            if (listener != null)
+                                                                                listener.onUploading(false, "Es gibt ein Problem mit " + folder + " Ordner!");
+                                                                            hasOnGoingUploading = false;
+                                                                            return;
+                                                                        }
+
+
+                                                                        protocol.generateCSV();
+                                                                        isUploaded = protocol.isUploaded();
+                                                                        if ((!isForce && isUploaded) || protocol.getIsPending())
+                                                                            continue;
+                                                                        isUploaded = false;
+                                                                        //Uploading not uploaded protocols
+                                                                        File file = createTempProtocolFile(protocol);
+                                                                        if (file == null)
+                                                                            continue;
+                                                                        FileInputStream srcFileStream = new FileInputStream(file);
+
+                                                                        //Try 10 times if the uploading failed
+                                                                        for (int i = 0; i < 10; i++) {
+                                                                            ftp.deleteFile(file.getName());
+                                                                            if (ftp.storeFile(file.getName(), srcFileStream)) {
+                                                                                file.delete();
+                                                                                isUploaded = true;
+                                                                                break;
+                                                                            } else {
+                                                                                continue;
+                                                                            }
+                                                                        }
+                                                                        srcFileStream.close();
+
+                                                                        //If after 10 times try still not uploaded
+                                                                        if (!isUploaded) {
+                                                                            if (listener != null)
+                                                                                listener.onUploading(false, "Das Hochladen ist fehlgeschlagen!");
+                                                                            continue;
+                                                                        }
+
+
+                                                                        //Uploading iLIMS protocols
+                                                                        ftp.makeDirectory(folderILIMS);
+                                                                        ftp.changeWorkingDirectory(folderILIMS);
+                                                                        file = createTempProtocolFileForIlims(protocol);
+                                                                        if (file == null) {
+                                                                            continue;
+                                                                        }
+                                                                        srcFileStream = new FileInputStream(file);
+
+                                                                        for (int i = 0; i < 10; i++) {
+                                                                            ftp.deleteFile(file.getName());
+                                                                            if (ftp.storeFile(file.getName(), srcFileStream)) {
+                                                                                file.delete();
+                                                                                break;
+                                                                            } else {
+                                                                                isUploaded = false;
+                                                                            }
+                                                                        }
+                                                                        srcFileStream.close();
+
+                                                                        //If after 10 times try still not uploaded
+                                                                        if (!isUploaded) {
+                                                                            if (listener != null)
+                                                                                listener.onUploading(false, "Das Hochladen ist fehlgeschlagen!");
+                                                                            continue;
+                                                                        }
+
+                                                                        if (isUploaded) {
+                                                                            if (listener != null)
+                                                                                listener.onUploaded(protocol);
+                                                                        } else {
+                                                                            if (listener != null)
+                                                                                listener.onUploading(false, "Das Hochladen ist fehlgeschlagen!");
+                                                                        }
+                                                                    }
+
+                                                                } catch (Exception e) {
+                                                                    if (listener != null)
+                                                                        listener.onUploading(false, e.getMessage());
+                                                                    throw e;
+                                                                }
+                                                            } else {
+                                                                if (listener != null)
+                                                                    listener.onConnection(false, "Login Error");
+                                                            }
+                                                        } catch (Exception e) {
                                                             if (listener != null)
-                                                                listener.onConnection(false, "Login Error");
+                                                                listener.onConnection(false, e.getMessage());
+                                                            e.printStackTrace();
+                                                        } finally {
+                                                            hasOnGoingUploading = false;
                                                         }
-                                                    } catch (Exception e) {
-                                                        if (listener != null)
-                                                            listener.onConnection(false, e.getMessage());
-                                                        e.printStackTrace();
                                                     }
                                                 }
-                                            }
-        );
+            );
     }
 
     private File createTempProtocolFile(Protocol protocol) {
@@ -305,7 +351,6 @@ public class FTPManager {
         String[] contents = protocol.getContent().split("\n");
         String date = null;
         if (contents != null && contents.length > 2) {
-            Log.d("content", contents[1]);
             date = contents[1];
             date = date.replaceAll("-", "").replaceAll(":", "").trim().replaceAll(" ", "_");
         }
@@ -314,14 +359,11 @@ public class FTPManager {
             date = df.format(new Date(System.currentTimeMillis()));
         }
 
-
         String protocolName = protocol.getAshSampleName()
                 + "_" + date;
         file = new File(ApplicationController.getContext().getCacheDir(), protocolName + ".csv");
 
-
         if (file == null) {
-            Log.e("3", "333333333333");
             return null;
         }
         try {
@@ -347,14 +389,11 @@ public class FTPManager {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            android.util.Log.e("ExportUtils", "******* File not found. Did you" +
-                    " add a WRITE_EXTERNAL_STORAGE permission to the   manifest?");
             Toasty.error(ApplicationController.getContext(), "Can't write to storage",
                     Toast.LENGTH_SHORT, true).show();
             return null;
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("Export Utils", "io exception: " + e.toString());
             return null;
         }
     }
@@ -472,5 +511,9 @@ public class FTPManager {
 
     public String getUsername() {
         return username;
+    }
+
+    public boolean hasOnGoingUploading() {
+        return hasOnGoingUploading;
     }
 }
