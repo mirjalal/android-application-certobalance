@@ -281,7 +281,6 @@ public class DatabaseService {
 
     public int insertProtocol(Protocol protocol) {
 
-        protocol.generateJson();
         try {
             protocol.generateJson();
             int x = protocolDao.create(protocol);
