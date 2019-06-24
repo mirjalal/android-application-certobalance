@@ -600,7 +600,7 @@
     <string name="account_activation_failed">Accountaktivierung fehlgeschlagen</string>
     <string name="account_successfully_activated">Account erfolgreich aktiviert</string>
     <string name="entered_code_is_not_valid">Der eingegebene Code ist nicht gültig</string>
-    <string name="email_already_exists">E-Mail existiert bereits</string>
+    <string name="email_already_exists">Kürzel existiert bereits</string>
     <string name="failed_to_apply_changes">Änderungen konnten nicht übernommen werde</string>
     <string name="first_name">Vorname</string>
     <string name="last_name">Nachname</string>

@@ -60,7 +60,7 @@
         <string name="register_new_user">REGISTERE NEUEN BENUTZER</string>
         <string name="first_name">Vorname</string>
         <string name="last_name">Nachname</string>
-        <string name="email">Email oder Kürzel</string>
+        <string name="email">Kürzel</string>
         <string name="password">Passwort</string>
         <string name="account_created">Benutzerkonto erstellt</string>
         <string name="please_enter_valid_data">Bitte valide Daten eingeben</string>
@@ -195,7 +195,7 @@
     <string name="last_name_must_be_at_least_3_characters_long">Der Nachname muss mindestens 3 Zeichen lang sein</string>
     <string name="passwords_do_not_match">Die Passwörter stimmen nicht überein</string>
     <string name="please_enter_a_valid_email_address">Die Email-Adresse ist falsch formatiert</string>
-    <string name="email_already_exists">Die angegebene Email existiert bereits</string>
+    <string name="email_already_exists">Die angegebene Kürzel existiert bereits</string>
     
     
     

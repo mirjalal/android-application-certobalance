@@ -43,7 +43,7 @@ public class RegisterActivity extends Activity {
     private EditTextItem editEmailItem;
     private EditTextItem editPasswordItem;
     private EditTextItem editPasswordItemConfirm;
-    private EditTextItem editMobile;
+//    private EditTextItem editMobile;
     private EditTextItem editFirstName;
     private EditTextItem editLastName;
     private Navigationbar navigationbar = null;
@@ -75,7 +75,7 @@ public class RegisterActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                editEmailItem.setHasValidString(android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches());
+    //                editEmailItem.setHasValidString(android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches());
             }
 
             @Override
@@ -146,30 +146,30 @@ public class RegisterActivity extends Activity {
         linEditTextItemContainer.addView(editLastName);
 
 
-        editMobile = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
-        editMobile.setHint(getString(R.string.mobile));
-        editMobile.addTextChangedListner(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().isEmpty() == false)
-                    editMobile.setHasValidString(true);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
-        linEditTextItemContainer.addView(editMobile);
+//        editMobile = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
+//        editMobile.setHint(getString(R.string.mobile));
+//        editMobile.addTextChangedListner(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (s.toString().isEmpty() == false)
+//                    editMobile.setHasValidString(true);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                // TODO Auto-generated method stub
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//
+//            }
+//        });
+//        linEditTextItemContainer.addView(editMobile);
 
 
         editPasswordItem = (EditTextItem) getLayoutInflater().inflate(R.layout.edit_text_item, linEditTextItemContainer, false);
@@ -259,11 +259,11 @@ public class RegisterActivity extends Activity {
                         Toast.makeText(RegisterActivity.this, getString(R.string.passwords_do_not_match), Toast.LENGTH_LONG).show();
                         return;
                     }
-
-                    if (!editEmailItem.hasValidString()) {
-                        Toast.makeText(RegisterActivity.this, getString(R.string.please_enter_a_valid_email_address), Toast.LENGTH_LONG).show();
-                        return;
-                    }
+//
+//                    if (!editEmailItem.hasValidString()) {
+//                        Toast.makeText(RegisterActivity.this, getString(R.string.please_enter_a_valid_email_address), Toast.LENGTH_LONG).show();
+//                        return;
+//                    }
                 }
                 if (isEmailAlreadyExists) {
                     Toasty.error(RegisterActivity.this, getString(R.string.email_already_exists), Toast.LENGTH_LONG, true).show();
@@ -288,7 +288,7 @@ public class RegisterActivity extends Activity {
                                     "",
                                     editLastName.getText(),
                                     "Admin",
-                                    editMobile.getText(),
+                                    "",
                                     "",
                                     "",
                                     "",
@@ -391,7 +391,7 @@ public class RegisterActivity extends Activity {
                             "",
                             editLastName.getText(),
                             editEmailItem.getText(),
-                            editMobile.getText(),
+                            "",
                             "",
                             "",
                             "",
@@ -436,7 +436,6 @@ public class RegisterActivity extends Activity {
 //                    editEmailItem.setVisibility(View.INVISIBLE);
 //                }
                 navigationbar.getTextTitle().setText(user.getEmail());
-                editMobile.setText(user.getMobile());
                 editFirstName.setText(user.getFirstName());
                 editLastName.setText(user.getLastName());
                 buttonRegister.setText(R.string.apply_changes);
