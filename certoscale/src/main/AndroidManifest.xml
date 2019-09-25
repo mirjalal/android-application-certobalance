@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.certoclav.certoscale"
-    android:versionCode="26"
-    android:versionName="26.0 GG">
+    android:versionCode="27"
+    android:versionName="27.0 GG">
 
     <uses-sdk
         android:targetSdkVersion="26"
@@ -309,9 +309,9 @@
             android:name=".util.AlarmReceiver"
             android:enabled="true" />
 
-        <meta-data
+ <!--       <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="0e8d486e3f12f90c374d72e9854c12ebe4fe950e" />
+            android:value="0e8d486e3f12f90c374d72e9854c12ebe4fe950e" />-->
     </application>
 
 </manifest>

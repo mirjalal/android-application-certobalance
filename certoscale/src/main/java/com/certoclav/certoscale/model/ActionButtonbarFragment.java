@@ -2915,7 +2915,11 @@ public class ActionButtonbarFragment extends Fragment implements ScaleApplicatio
 
 
             signatureString = Base64.encodeToString(signatureBytes, Base64.DEFAULT);
-            final Protocol protocol = new Protocol("", scaleApplicationName, Scale.getInstance().getUser().getEmail(), Scale.getInstance().getSafetyKey(), Calendar.getInstance().getTime().toGMTString(), "private", sb.toString(), signatureString);
+            final Protocol protocol = new Protocol("", scaleApplicationName,
+                    Scale.getInstance().getUser().getEmail(),
+                    Scale.getInstance().getSafetyKey(),
+                    Calendar.getInstance().getTime().toGMTString(),
+                    "private", sb.toString(), signatureString);
             Boolean test = ApplicationManager.getInstance().verifyProtocol(protocol);
             //Toast.makeText(eContext,test.toString(),Toast.LENGTH_LONG).show();
 

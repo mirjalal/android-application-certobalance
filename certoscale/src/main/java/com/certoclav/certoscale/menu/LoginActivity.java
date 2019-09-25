@@ -61,7 +61,6 @@ import com.certoclav.library.certocloud.PostUserLoginService;
 import com.certoclav.library.certocloud.PostUserLoginService.PutUserLoginTaskFinishedListener;
 import com.certoclav.library.certocloud.PostUtil;
 import com.certoclav.library.util.SettingsDeviceUtils;
-import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONObject;
 
@@ -81,9 +80,10 @@ import java.util.Date;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
-import io.fabric.sdk.android.Fabric;
 
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
+//import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends Activity implements ButtonEventListener, PutUserLoginTaskFinishedListener {
 
@@ -205,7 +205,7 @@ public class LoginActivity extends Activity implements ButtonEventListener, PutU
 //        }
 
         //super.setTheme(R.style.the);
-        Fabric.with(this, new Crashlytics());
+//        Fabric.with(this, new Crashlytics());
 
         setContentView(R.layout.login_activity);
 
